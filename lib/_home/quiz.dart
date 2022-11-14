@@ -165,7 +165,7 @@ class Quiz {
 
   manageQuizzes(uuid) async {
     final prefs = await SharedPreferences.getInstance();
-    uuids = prefs.getStringList("uuids") ?? ["", "", "", "", ""];
+    uuids = prefs.getStringList("uuids") ?? ["", "", "", "", "", ""];
     if (uuids.contains(uuid)) {
       final i = uuids.indexOf(uuid);
       if (i != 0) {

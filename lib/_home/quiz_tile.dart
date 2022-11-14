@@ -35,21 +35,32 @@ class _QuizTileState extends State<QuizTile> {
     final color6 = darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
         : const Color.fromARGB(255, 235, 235, 235);
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool mobileLayout = shortestSide < 600;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         onTap();
       },
       child: Container(
-        height: expanded ? height / 30 * 4.5 + 15 : height / 30 * 2.5 + 15,
+        height: mobileLayout
+            ? expanded
+                ? height / 30 * 4.5 + 15
+                : height / 30 * 2.5 + 15
+            : expanded
+                ? height / 30 * 4.5 + 35
+                : height / 30 * 2.5 + 35,
         width: width - 20,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(height / 100),
           color: color6,
         ),
         child: Padding(
-          padding: const EdgeInsets.only(
-              left: 10.0, right: 10.0, bottom: 10.0, top: 5.0),
+          padding: mobileLayout
+              ? const EdgeInsets.only(
+                  left: 10.0, right: 10.0, bottom: 10.0, top: 5.0)
+              : const EdgeInsets.only(
+                  left: 20.0, right: 20.0, bottom: 20.0, top: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -70,42 +81,42 @@ class _QuizTileState extends State<QuizTile> {
                 ),
               ),
               Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: expanded ? height / 15 : height / 30,
-                      child: Text(
-                        expanded
-                            ? widget.data['description']
-                            : trim(widget.data['description']),
-                        style: TextStyle(
-                            fontSize: widget.data['description'].length > 50
-                                ? height / 60
-                                : height / 50),
-                      ),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: expanded ? height / 15 : height / 30,
+                    child: Text(
+                      expanded
+                          ? widget.data['description']
+                          : trim(widget.data['description']),
+                      style: TextStyle(
+                          fontSize: widget.data['description'].length > 50
+                              ? height / 60
+                              : height / 50),
                     ),
-                    widget.expanded
-                        ? const SizedBox(
-                            height: 0,
-                            width: 0,
-                          )
-                        : SizedBox(
-                            height: height / 30,
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  expanded = !expanded;
-                                });
-                              },
-                              child: Text(
-                                expanded ? language["Less"] : language["More"],
-                                style: TextStyle(
-                                    color: color1, fontSize: height / 50),
-                              ),
+                  ),
+                  widget.expanded
+                      ? const SizedBox(
+                          height: 0,
+                          width: 0,
+                        )
+                      : SizedBox(
+                          height: height / 30,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                expanded = !expanded;
+                              });
+                            },
+                            child: Text(
+                              expanded ? language["Less"] : language["More"],
+                              style: TextStyle(
+                                  color: color1, fontSize: height / 50),
                             ),
                           ),
-                  ],
-                ),
+                        ),
+                ],
+              ),
               expanded
                   ? SizedBox(
                       height: height / 30,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/quiz_tile.dart';
-import 'package:freequiz/api/api.dart';
-import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/_home/subviews/list_quiz.dart';
 import 'package:freequiz/others/language.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -27,8 +25,10 @@ class _HomePageState extends State<HomePage> {
     final backgroundColor = darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
         : const Color.fromARGB(255, 235, 235, 235);
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool mobileLayout = shortestSide < 600;
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(mobileLayout ? 10 : 30),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
@@ -37,19 +37,19 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Container(
-              height: height / 20 + 20,
-              width: width - 20,
+              height: mobileLayout ? height / 20 + 20 : 60,
+              width: mobileLayout ? width - 20 : width / 2,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(height / 100),
+                borderRadius: BorderRadius.circular(10.0),
                 color: backgroundColor,
               ),
               child: Padding(
-                padding: EdgeInsets.all(height / 100),
+                padding: const EdgeInsets.all(10.0),
                 child: Row(
                   children: [
                     Flexible(
                       child: SizedBox(
-                        height: height / 20,
+                        height: mobileLayout ? height / 20 : 40,
                         child: TextField(
                           keyboardAppearance:
                               darkMode ? Brightness.dark : Brightness.light,
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                       width: 5,
                     ),
                     SizedBox(
-                      height: height / 20,
+                      height: mobileLayout ? height / 20 : 40,
                       child: TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: color1,
@@ -94,35 +94,31 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(
-              height: height / 60,
+              height: mobileLayout ? 10 : 30,
             ),
-            Expanded(
-              child: ListView.separated(
-                itemCount: Quiz().amountUuids(),
-                itemBuilder: (BuildContext context, int i) {
-                  futureMap = getQuiz(Quiz.uuids[i]);
-                  return FutureBuilder<Map>(
-                    future: futureMap,
-                    builder: (context, quiz) {
-                      if (quiz.hasData) {
-                        Quiz.title = quiz.data!['data']['title'];
-                        return QuizTile(
-                          data: quiz.data!['data'],
-                        );
-                      } else if (quiz.hasError) {
-                        return Drawer(child: Text('${quiz.error}'));
-                      }
-                      return const CircularProgressIndicator();
-                    },
-                  );
-                },
-                separatorBuilder: (BuildContext context, int i) {
-                  return SizedBox(
-                    height: height / 60,
-                  );
-                },
-              ),
-            ),
+            mobileLayout
+                ? const Expanded(
+                    child: ListQuiz(),
+                  )
+                : Expanded(
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child: ListQuiz(
+                            physics: NeverScrollableScrollPhysics(),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Expanded(
+                          child: ListQuiz(
+                            physics: NeverScrollableScrollPhysics(),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),

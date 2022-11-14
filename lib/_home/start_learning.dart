@@ -201,6 +201,7 @@ class _StartLearningState extends State<StartLearning> {
                       i: i,
                       color: color[widget.i],
                       scrollPhysics: const NeverScrollableScrollPhysics(),
+                      width: width,
                     ),
                     SizedBox(
                       height: arrays[i].isNotEmpty ? height / 30 : 0,

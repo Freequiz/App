@@ -9,6 +9,7 @@ class WordList extends StatefulWidget {
   final int i;
   final Color color;
   final ScrollPhysics scrollPhysics;
+  final double width;
   const WordList(
       {super.key,
       required this.definitions,
@@ -17,7 +18,8 @@ class WordList extends StatefulWidget {
       required this.markWord,
       required this.i,
       required this.color,
-      required this.scrollPhysics});
+      required this.scrollPhysics,
+      required this.width});
 
   @override
   State<WordList> createState() => _WordListState();
@@ -26,7 +28,6 @@ class WordList extends StatefulWidget {
 class _WordListState extends State<WordList> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
@@ -44,13 +45,13 @@ class _WordListState extends State<WordList> {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                topLeft: i == 0 ? Radius.circular(width / 30.4) : Radius.zero,
-                topRight: i == 0 ? Radius.circular(width / 30.4) : Radius.zero,
+                topLeft: i == 0 ? Radius.circular(widget.width / 30.4) : Radius.zero,
+                topRight: i == 0 ? Radius.circular(widget.width / 30.4) : Radius.zero,
                 bottomLeft: i == widget.definitions.length - 1
-                    ? Radius.circular(width / 30.4)
+                    ? Radius.circular(widget.width / 30.4)
                     : Radius.zero,
                 bottomRight: i == widget.definitions.length - 1
-                    ? Radius.circular(width / 30.4)
+                    ? Radius.circular(widget.width / 30.4)
                     : Radius.zero),
             color: i.remainder(2) == 0 ? color5 : color6,
           ),
@@ -59,7 +60,7 @@ class _WordListState extends State<WordList> {
             children: [
               const SizedBox(width: 5.0),
               Container(
-                width: (width - 30) / 2 - height / 30,
+                width: (widget.width - 30) / 2 - height / 30,
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8),
@@ -70,7 +71,7 @@ class _WordListState extends State<WordList> {
                 ),
               ),
               Container(
-                width: (width - 30) / 2 - height / 30,
+                width: (widget.width - 30) / 2 - height / 30,
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8),
