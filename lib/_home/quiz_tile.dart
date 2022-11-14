@@ -70,42 +70,42 @@ class _QuizTileState extends State<QuizTile> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: expanded ? height / 15 : height / 30,
-                    child: Text(
-                      expanded
-                          ? widget.data['description']
-                          : trim(widget.data['description']),
-                      style: TextStyle(
-                          fontSize: widget.data['description'].length > 50
-                              ? height / 60
-                              : height / 50),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: expanded ? height / 15 : height / 30,
+                      child: Text(
+                        expanded
+                            ? widget.data['description']
+                            : trim(widget.data['description']),
+                        style: TextStyle(
+                            fontSize: widget.data['description'].length > 50
+                                ? height / 60
+                                : height / 50),
+                      ),
                     ),
-                  ),
-                  widget.expanded
-                      ? const SizedBox(
-                          height: 0,
-                          width: 0,
-                        )
-                      : SizedBox(
-                          height: height / 30,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                expanded = !expanded;
-                              });
-                            },
-                            child: Text(
-                              expanded ? language["Less"] : language["More"],
-                              style: TextStyle(
-                                  color: color1, fontSize: height / 50),
+                    widget.expanded
+                        ? const SizedBox(
+                            height: 0,
+                            width: 0,
+                          )
+                        : SizedBox(
+                            height: height / 30,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  expanded = !expanded;
+                                });
+                              },
+                              child: Text(
+                                expanded ? language["Less"] : language["More"],
+                                style: TextStyle(
+                                    color: color1, fontSize: height / 50),
+                              ),
                             ),
                           ),
-                        ),
-                ],
-              ),
+                  ],
+                ),
               expanded
                   ? SizedBox(
                       height: height / 30,
@@ -148,7 +148,7 @@ class _QuizTileState extends State<QuizTile> {
                     )
                   : const SizedBox(
                       height: 0,
-                    )
+                    ),
             ],
           ),
         ),

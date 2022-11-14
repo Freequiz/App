@@ -67,7 +67,9 @@ class _HomePageState extends State<HomePage> {
                               onPressed: () {
                                 textController.clear();
                               },
-                              icon: const Icon(Icons.clear,),
+                              icon: const Icon(
+                                Icons.clear,
+                              ),
                             ),
                           ),
                         ),
@@ -104,7 +106,9 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, quiz) {
                       if (quiz.hasData) {
                         Quiz.title = quiz.data!['data']['title'];
-                        return QuizTile(data: quiz.data!['data'], expanded: false,);
+                        return QuizTile(
+                          data: quiz.data!['data'],
+                        );
                       } else if (quiz.hasError) {
                         return Drawer(child: Text('${quiz.error}'));
                       }
