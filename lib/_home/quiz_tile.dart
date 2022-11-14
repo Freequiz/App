@@ -132,7 +132,6 @@ class _QuizTileState extends State<QuizTile> {
                     actions: const [
                       ShareButton(
                         url: "https://shadowcrafter.org/api/quiz/example/data",
-                        color: Colors.white,
                       ),
                     ],
                   ),

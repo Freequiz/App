@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
     final hintColor = darkMode ? Colors.white : textGray;
-    final color5 = darkMode
+    final backgroundColor = darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
         : const Color.fromARGB(255, 235, 235, 235);
     return Padding(
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               width: width - 20,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(height / 100),
-                color: color5,
+                color: backgroundColor,
               ),
               child: Padding(
                 padding: EdgeInsets.all(height / 100),
