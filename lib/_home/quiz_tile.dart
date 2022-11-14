@@ -9,7 +9,8 @@ import 'package:freequiz/others/style.dart';
 
 class QuizTile extends StatefulWidget {
   final Map data;
-  const QuizTile({super.key, required this.data});
+  final bool expanded;
+  const QuizTile({super.key, required this.data, this.expanded = true});
 
   @override
   State<QuizTile> createState() => _QuizTileState();
@@ -17,6 +18,13 @@ class QuizTile extends StatefulWidget {
 
 class _QuizTileState extends State<QuizTile> {
   final arrow = '\u279C';
+  bool expanded = true;
+
+  @override
+  void initState() {
+    super.initState();
+    expanded = widget.expanded;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +41,7 @@ class _QuizTileState extends State<QuizTile> {
         onTap();
       },
       child: Container(
-        height: height / 30 * 4.5 + 15,
+        height: expanded ? height / 30 * 4.5 + 15 : height / 30 * 2.5 + 15,
         width: width - 20,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(height / 100),
@@ -61,56 +69,100 @@ class _QuizTileState extends State<QuizTile> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: height / 15,
-                child: Text(
-                  widget.data['description'],
-                  style: TextStyle(
-                      fontSize: widget.data['description'].length > 50
-                          ? height / 60
-                          : height / 50),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: expanded ? height / 15 : height / 30,
+                    child: Text(
+                      expanded
+                          ? widget.data['description']
+                          : trim(widget.data['description']),
+                      style: TextStyle(
+                          fontSize: widget.data['description'].length > 50
+                              ? height / 60
+                              : height / 50),
+                    ),
+                  ),
+                  widget.expanded
+                      ? const SizedBox(
+                          height: 0,
+                          width: 0,
+                        )
+                      : SizedBox(
+                          height: height / 30,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                expanded = !expanded;
+                              });
+                            },
+                            child: Text(
+                              expanded ? language["Less"] : language["More"],
+                              style: TextStyle(
+                                  color: color1, fontSize: height / 50),
+                            ),
+                          ),
+                        ),
+                ],
               ),
-              SizedBox(
-                height: height / 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
+              expanded
+                  ? SizedBox(
                       height: height / 30,
-                      decoration: BoxDecoration(
-                          color: color2,
-                          borderRadius: BorderRadius.circular(height / 60)),
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: height / 60),
-                        child: Text(
-                            "${language["Questions"]} ${Quiz.answer.length.toString()}"),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: height / 30,
+                            decoration: BoxDecoration(
+                                color: color2,
+                                borderRadius:
+                                    BorderRadius.circular(height / 60)),
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: height / 60),
+                              child: Text(
+                                  "${language["Questions"]} ${Quiz.answer.length.toString()}"),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Container(
+                            height: height / 30,
+                            decoration: BoxDecoration(
+                                color: color5,
+                                borderRadius:
+                                    BorderRadius.circular(height / 60)),
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: height / 60),
+                              child: Text(
+                                  "${language[widget.data['from']]} $arrow ${language[widget.data['to']]}"),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Container(
-                      height: height / 30,
-                      decoration: BoxDecoration(
-                          color: color5,
-                          borderRadius: BorderRadius.circular(height / 60)),
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: height / 60),
-                        child: Text(
-                            "${language[widget.data['from']]} $arrow ${language[widget.data['to']]}"),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+                    )
+                  : const SizedBox(
+                      height: 0,
+                    )
             ],
           ),
         ),
       ),
     );
+  }
+
+  trim(String description) {
+    final String trimmedDescription =
+        description.characters.take(32).toString();
+    if (trimmedDescription.length == widget.data['description'].length) {
+      return trimmedDescription;
+    }
+    return '$trimmedDescription...';
   }
 
   onTap() {

@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, quiz) {
                       if (quiz.hasData) {
                         Quiz.title = quiz.data!['data']['title'];
-                        return QuizTile(data: quiz.data!['data']);
+                        return QuizTile(data: quiz.data!['data'], expanded: false,);
                       } else if (quiz.hasError) {
                         return Drawer(child: Text('${quiz.error}'));
                       }
