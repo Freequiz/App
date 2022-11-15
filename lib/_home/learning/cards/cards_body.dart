@@ -27,6 +27,8 @@ class CardsBody extends StatelessWidget {
         ? const Color.fromARGB(255, 50, 50, 50)
         : const Color.fromARGB(255, 246, 246, 246);
     final foregroundColor = darkMode ? Colors.white : Colors.black;
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool mobileLayout = shortestSide < 600;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -45,7 +47,7 @@ class CardsBody extends StatelessWidget {
               children: [
                 SizedBox(
                   width: width / 1.25,
-                  height: height / 4,
+                  height: mobileLayout ? height / 4 : width / 2.5,
                   child: ElevatedButton(
                     style: TextButton.styleFrom(
                       backgroundColor: backgroundColor,
@@ -71,8 +73,8 @@ class CardsBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: width / 5,
-                        height: width / 5,
+                        width: mobileLayout ? width / 5 : width / 10,
+                        height: mobileLayout ? width / 5 : width / 10,
                         child: FloatingActionButton(
                           heroTag: "wrong",
                           onPressed: () {
@@ -83,8 +85,8 @@ class CardsBody extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: width / 5,
-                        height: width / 5,
+                        width: mobileLayout ? width / 5 : width / 10,
+                        height: mobileLayout ? width / 5 : width / 10,
                         child: FloatingActionButton(
                           heroTag: "right",
                           onPressed: () {

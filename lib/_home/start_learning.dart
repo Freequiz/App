@@ -98,7 +98,7 @@ class _StartLearningState extends State<StartLearning> {
                   height: height / 10 - 20,
                   width: Quiz.marked ? (width - 50) / 2 : width - 40,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(width / 30.4),
+                    borderRadius: BorderRadius.circular(width / 40),
                     color: color[widget.i],
                   ),
                   child: Center(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/subviews/list_quiz.dart';
 import 'package:freequiz/others/language.dart';
 import 'package:freequiz/others/style.dart';
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               height: mobileLayout ? height / 20 + 20 : 60,
@@ -100,25 +102,44 @@ class _HomePageState extends State<HomePage> {
                 ? const Expanded(
                     child: ListQuiz(),
                   )
-                : Expanded(
-                    child: Row(
-                      children: const [
-                        Expanded(
-                          child: ListQuiz(
-                            physics: NeverScrollableScrollPhysics(),
-                          ),
+                : Quiz().amountUuids() > 1
+                    ? Expanded(
+                        child: Row(
+                          children: const [
+                            Expanded(
+                              child: ListQuiz(
+                                physics: NeverScrollableScrollPhysics(),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            Expanded(
+                              child: ListQuiz(
+                                physics: NeverScrollableScrollPhysics(),
+                                n: 1,
+                              ),
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          width: 30,
+                      )
+                    : Expanded(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: (width - 30) / 4 + 15,
+                            ),
+                            const Expanded(
+                              child: ListQuiz(
+                                physics: NeverScrollableScrollPhysics(),
+                              ),
+                            ),
+                            SizedBox(
+                              width: (width - 30) / 4 + 15,
+                            ),
+                          ],
                         ),
-                        Expanded(
-                          child: ListQuiz(
-                            physics: NeverScrollableScrollPhysics(),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                      ),
           ],
         ),
       ),

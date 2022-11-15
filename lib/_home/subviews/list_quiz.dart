@@ -5,7 +5,8 @@ import 'package:freequiz/api/api.dart';
 
 class ListQuiz extends StatefulWidget {
   final ScrollPhysics physics;
-  const ListQuiz({super.key, this.physics = const ScrollPhysics()});
+  final int n;
+  const ListQuiz({super.key, this.physics = const ScrollPhysics(), this.n = 0});
 
   @override
   State<ListQuiz> createState() => _ListQuizState();
@@ -20,9 +21,9 @@ class _ListQuizState extends State<ListQuiz> {
     final bool mobileLayout = shortestSide < 600;
     return ListView.separated(
       physics: widget.physics,
-      itemCount: Quiz().amountUuids(),
+      itemCount: mobileLayout ? Quiz().amountUuids() : half(),
       itemBuilder: (BuildContext context, int i) {
-        futureMap = getQuiz(Quiz.uuids[i]);
+        futureMap = getQuiz(Quiz.uuids[mobileLayout ? i : i * 2 + widget.n]);
         return FutureBuilder<Map>(
           future: futureMap,
           builder: (context, quiz) {
@@ -44,5 +45,15 @@ class _ListQuizState extends State<ListQuiz> {
         );
       },
     );
+  }
+  half() {
+  double half = Quiz().amountUuids() / 2;
+    if (half.remainder(1) != 0) {
+      if (widget.n == 0) {
+        return (half + 0.5).toInt();
+      }
+      return (half - 0.5).toInt();
+    }
+    return half.toInt();
   }
 }

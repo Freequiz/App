@@ -31,6 +31,8 @@ class _WordListState extends State<WordList> {
     double height = MediaQuery.of(context).size.height;
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool mobileLayout = shortestSide < 600;
     final color5 = darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
         : const Color.fromARGB(255, 225, 225, 225);
@@ -45,8 +47,10 @@ class _WordListState extends State<WordList> {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                topLeft: i == 0 ? Radius.circular(widget.width / 30.4) : Radius.zero,
-                topRight: i == 0 ? Radius.circular(widget.width / 30.4) : Radius.zero,
+                topLeft:
+                    i == 0 ? Radius.circular(widget.width / 30.4) : Radius.zero,
+                topRight:
+                    i == 0 ? Radius.circular(widget.width / 30.4) : Radius.zero,
                 bottomLeft: i == widget.definitions.length - 1
                     ? Radius.circular(widget.width / 30.4)
                     : Radius.zero,
@@ -55,52 +59,59 @@ class _WordListState extends State<WordList> {
                     : Radius.zero),
             color: i.remainder(2) == 0 ? color5 : color6,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(width: 5.0),
-              Container(
-                width: (widget.width - 30) / 2 - height / 30,
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    widget.definitions[i],
-                    style: TextStyle(fontSize: height / 50),
+          child: Padding(
+            padding: EdgeInsets.all(mobileLayout ? 0 : height / 80),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(width: 5.0),
+                Container(
+                  width: mobileLayout
+                      ? (widget.width - 30) / 2 - height / 30
+                      : (widget.width - 30) / 2 - height / 20 - height / 80,
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text(
+                      widget.definitions[i],
+                      style: TextStyle(fontSize: mobileLayout ? height / 50 : height / 45),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                width: (widget.width - 30) / 2 - height / 30,
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    widget.answers[i],
-                    style: TextStyle(fontSize: height / 50),
+                Container(
+                  width: mobileLayout
+                      ? (widget.width - 30) / 2 - height / 30
+                      : (widget.width - 30) / 2 - height / 20 - height / 80,
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text(
+                      widget.answers[i],
+                      style: TextStyle(fontSize: mobileLayout ? height / 50 : height / 45),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: height / 20,
-                child: TextButton(
-                  onPressed: () {
-                    widget.markWord(widget.i, i);
-                  },
-                  child: Quiz.markedWords[
-                          widget.marked.isEmpty ? i : widget.marked[i]]
-                      ? Icon(
-                          Icons.star,
-                          color: widget.color,
-                        )
-                      : Icon(
-                          Icons.star_border,
-                          color: widget.color,
-                        ),
+                SizedBox(
+                  width: height / 20,
+                  child: TextButton(
+                    onPressed: () {
+                      widget.markWord(widget.i, i);
+                    },
+                    child: Quiz.markedWords[
+                            widget.marked.isEmpty ? i : widget.marked[i]]
+                        ? Icon(
+                            Icons.star,
+                            color: widget.color, size: mobileLayout ? height / 50 : height / 45,
+                          )
+                        : Icon(
+                            Icons.star_border,
+                            color: widget.color,  size: mobileLayout ? height / 50 : height / 45,
+                          ),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 5.0),
-            ],
+                const SizedBox(width: 5.0),
+              ],
+            ),
           ),
         );
       },

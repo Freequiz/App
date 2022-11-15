@@ -21,6 +21,8 @@ class WritingBody extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool mobileLayout = shortestSide < 600;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -49,7 +51,7 @@ class WritingBody extends StatelessWidget {
                   children: [
                     Flexible(
                       child: SizedBox(
-                        height: height / 20,
+                        height: mobileLayout ? height / 20 : height / 30,
                         child: TextField(
                           autocorrect: false,
                           enableSuggestions: false,
@@ -84,7 +86,7 @@ class WritingBody extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     SizedBox(
-                      height: height / 20,
+                      height: mobileLayout ? height / 20 : height / 30,
                       child: TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: answerRight ? Colors.green : color,

@@ -201,7 +201,7 @@ class Quiz {
     }
   }
 
-  amountUuids() {
+  int amountUuids() {
     int amountUuids = 0;
     for (var i = 0; i < uuids.length; i++) {
       if (uuids[i] != "") {

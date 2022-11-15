@@ -12,7 +12,7 @@ Future<void> loadLanguage() async {
   String defaultLocale = Platform.localeName; 
   String chosenLanguage = "english";
   final prefs = await SharedPreferences.getInstance();
-  Quiz.uuids = prefs.getStringList("uuids") ?? ["hello", "", "", "", ""];
+  Quiz.uuids = prefs.getStringList("uuids") ?? ["example", "", "", "", ""];
   defaultLocale = defaultLocale.substring(0, defaultLocale.length - 3);
   if (defaultLocale == "de") {
     chosenLanguage = "german";

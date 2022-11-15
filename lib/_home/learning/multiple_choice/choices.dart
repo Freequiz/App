@@ -42,6 +42,7 @@ class Choices extends StatelessWidget {
           choice,
           style: TextStyle(
             color: color,
+            fontSize: height / 70,
           ),
         ),
       ),
