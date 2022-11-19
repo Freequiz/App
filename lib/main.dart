@@ -1,5 +1,5 @@
 import 'package:freequiz/1_edit/edit_page.dart';
-import 'package:freequiz/_home/home_page.dart';
+import 'package:freequiz/_home/home_page/home_page.dart';
 import 'package:freequiz/others/language.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/2_profile/profile_page.dart';

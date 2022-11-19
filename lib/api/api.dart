@@ -6,8 +6,10 @@ import 'package:freequiz/api/convert_json.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<Map> getQuiz(String uuid) async {
-  Quiz().manageQuizzes(uuid);
+Future<Map> getQuiz(String uuid, bool manageQuizzes) async {
+  if (manageQuizzes) {
+    Quiz().manageQuizzes(uuid);
+  }
   final prefs = await SharedPreferences.getInstance();
   Map map = await json.decode(prefs.getString(uuid) ?? "{}");
   if (map.isNotEmpty) {
@@ -235,4 +237,9 @@ Future<Map> httpPutAccount(String username, String email, String password,
   } else {
     throw Exception('Error');
   }
+}
+
+Future<Map> search() async {
+  await Future.delayed(const Duration(milliseconds: 1000));
+  return {"0": "example", "1": "example", "2": "example",  "3": "example", "4": "example", "5": "example", "6": "example", "7": "example", "8": "example"};
 }
