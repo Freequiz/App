@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page.dart';
+import 'package:freequiz/api/api.dart';
 import 'package:freequiz/others/language.dart';
 import 'package:freequiz/others/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
@@ -41,7 +42,7 @@ class _SearchBarState extends State<SearchBar> {
               child: SizedBox(
                 height: mobileLayout ? height / 20 : 40,
                 child: TextField(
-                  onEditingComplete: () {
+                  onSubmitted: (value) {
                     search();
                   },
                   keyboardAppearance:
@@ -79,13 +80,13 @@ class _SearchBarState extends State<SearchBar> {
       MaterialPageRoute(
         builder: (BuildContext context) {
           return FutureBuilder<Map>(
-            future: search(),
+            future: httpSearch(textController.text),
             builder: (context, searchResults) {
               if (searchResults.hasData) {
                 return LoadingScreen(
                   message: "Loading Search Results",
                   finishedLoading: true,
-                  widget: SearchPage(uuids: searchResults.data!),
+                  widget: SearchPage(uuids: searchResults.data!, searchTerm: textController.text,),
                   appBar: AppBar(
                     title: Text(language["Search"]),
                   ),
@@ -96,7 +97,7 @@ class _SearchBarState extends State<SearchBar> {
               return LoadingScreen(
                 message: "Loading Search Results",
                 finishedLoading: false,
-                widget: const SearchPage(uuids: {}),
+                widget: const SearchPage(uuids: {}, searchTerm: "",),
                 appBar: AppBar(
                   title: Text(language["Loading"]),
                 ),

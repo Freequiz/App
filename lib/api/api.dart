@@ -239,7 +239,7 @@ Future<Map> httpPutAccount(String username, String email, String password,
   }
 }
 
-Future<Map> search() async {
+Future<Map> httpSearch(String searchTerm) async {
   await Future.delayed(const Duration(milliseconds: 1000));
   return {"0": "example", "1": "example", "2": "example",  "3": "example", "4": "example", "5": "example", "6": "example", "7": "example", "8": "example"};
 }
