@@ -60,8 +60,8 @@ class _SearchPageState extends State<SearchPage> {
                     }
                     return Container(
                       height: mobileLayout
-                          ? height / 30 * 4.5 + 15
-                          : height / 30 * 4.5 + 35,
+                          ? height / 30 * 2.5 + 15
+                          : height / 30 * 2.5 + 35,
                       width: width - 20,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(height / 100),
