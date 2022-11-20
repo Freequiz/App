@@ -69,6 +69,22 @@ class _SearchBarState extends State<SearchBar> {
                 ),
               ),
             ),
+            const SizedBox(
+              width: 5,
+            ),
+            SizedBox(
+              height: mobileLayout ? height / 20 : 40,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: color1,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {
+                  search();
+                },
+                child: const Icon(Icons.search_rounded),
+              ),
+            ),
           ],
         ),
       ),
@@ -86,7 +102,10 @@ class _SearchBarState extends State<SearchBar> {
                 return LoadingScreen(
                   message: "Loading Search Results",
                   finishedLoading: true,
-                  widget: SearchPage(uuids: searchResults.data!, searchTerm: textController.text,),
+                  widget: SearchPage(
+                    uuids: searchResults.data!,
+                    searchTerm: textController.text,
+                  ),
                   appBar: AppBar(
                     title: Text(language["Search"]),
                   ),
@@ -97,7 +116,10 @@ class _SearchBarState extends State<SearchBar> {
               return LoadingScreen(
                 message: "Loading Search Results",
                 finishedLoading: false,
-                widget: const SearchPage(uuids: {}, searchTerm: "",),
+                widget: const SearchPage(
+                  uuids: {},
+                  searchTerm: "",
+                ),
                 appBar: AppBar(
                   title: Text(language["Loading"]),
                 ),

@@ -11,7 +11,11 @@ class QuizTile extends StatefulWidget {
   final Map data;
   final bool expanded;
   final String uuid;
-  const QuizTile({super.key, required this.data, required this.uuid,this.expanded = true});
+  const QuizTile(
+      {super.key,
+      required this.data,
+      required this.uuid,
+      this.expanded = true});
 
   @override
   State<QuizTile> createState() => _QuizTileState();

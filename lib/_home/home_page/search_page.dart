@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
+import 'package:freequiz/_home/home_page/search_filter.dart';
 import 'package:freequiz/api/api.dart';
 import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/style.dart';
 
 class SearchPage extends StatefulWidget {
   final ScrollPhysics physics;
@@ -12,13 +14,18 @@ class SearchPage extends StatefulWidget {
       {super.key,
       this.physics = const ScrollPhysics(),
       this.n = 0,
-      required this.uuids, required this.searchTerm});
+      required this.uuids,
+      required this.searchTerm});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
+  List<String> languages = ["Any", "Any"];
+  final arrow = '\u279C';
+  bool showFilters = false;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -34,48 +41,155 @@ class _SearchPageState extends State<SearchPage> {
       padding: EdgeInsets.all(mobileLayout ? 10 : 30),
       child: Column(
         children: [
-          Text("${language["Results for"]} \"${widget.searchTerm}\"", style: TextStyle(fontSize: height / 45),),
+          SizedBox(
+            height: height / 20,
+            child: Row(
+              mainAxisAlignment: showFilters
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.center,
+              children: [
+                SearchFilter(
+                  color: color1,
+                  child: Text(
+                    "${language["Results for"]} \"${trim(widget.searchTerm)}\"",
+                    style: TextStyle(fontSize: height / 50),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      showFilters = !showFilters;
+                    });
+                  },
+                  child: SearchFilter(
+                    color: color2,
+                    child: Icon(
+                      showFilters
+                          ? Icons.menu_open_rounded
+                          : Icons.menu_rounded,
+                      color: darkMode ? Colors.white : textGray,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 150),
+            child: showFilters
+                ? SizedBox(
+                    height: mobileLayout ? 10 : 30,
+                  )
+                : const SizedBox(
+                    height: 0,
+                  ),
+          ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 150),
+            child: showFilters
+                ? SizedBox(
+                    height: height / 20,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: SearchFilter(
+                            color: color3,
+                            child: Text(
+                              languages[0] == "Any" && languages[1] == "Any"
+                                  ? language["Language"]
+                                  : "${language["English"]} $arrow ${language["German"]}",
+                              style: TextStyle(fontSize: height / 50),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: SearchFilter(
+                            color: color4,
+                            child: Text(
+                              language["Amount of questions"],
+                              style: TextStyle(fontSize: height / 50),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : const SizedBox(
+                    height: 0,
+                  ),
+          ),
           SizedBox(
             height: mobileLayout ? 10 : 30,
           ),
           Expanded(
-            child: ListView.separated(
-              physics: widget.physics,
-              itemCount: widget.uuids.length,
-              itemBuilder: (BuildContext context, int i) {
-                String uuid = widget
-                    .uuids[(mobileLayout ? i : i * 2 + widget.n).toString()]!;
-                return FutureBuilder<Map>(
-                  future: getQuiz(uuid, false),
-                  builder: (context, quiz) {
-                    if (quiz.hasData) {
-                      quiz.data!['data']['title'];
-                      return QuizTile(
-                        data: quiz.data!['data'],
-                        uuid: uuid,
-                        expanded: false,
-                      );
-                    } else if (quiz.hasError) {
-                      return Drawer(child: Text('${quiz.error}'));
-                    }
-                    return Container(
-                      height: mobileLayout
-                          ? height / 30 * 2.5 + 15
-                          : height / 30 * 2.5 + 35,
-                      width: width - 20,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(height / 100),
-                        color: color6,
-                      ),
+            child: ListView(
+              children: [
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: widget.physics,
+                  itemCount: widget.uuids.length,
+                  itemBuilder: (BuildContext context, int i) {
+                    String uuid = widget.uuids[
+                        (mobileLayout ? i : i * 2 + widget.n).toString()]!;
+                    return FutureBuilder<Map>(
+                      future: getQuiz(uuid, false),
+                      builder: (context, quiz) {
+                        if (quiz.hasData) {
+                          quiz.data!['data']['title'];
+                          return QuizTile(
+                            data: quiz.data!['data'],
+                            uuid: uuid,
+                            expanded: false,
+                          );
+                        } else if (quiz.hasError) {
+                          return Drawer(child: Text('${quiz.error}'));
+                        }
+                        return Container(
+                          height: mobileLayout
+                              ? height / 30 * 2.5 + 15
+                              : height / 30 * 2.5 + 35,
+                          width: width - 20,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(height / 100),
+                            color: color6,
+                          ),
+                        );
+                      },
                     );
                   },
-                );
-              },
-              separatorBuilder: (BuildContext context, int i) {
-                return SizedBox(
-                  height: mobileLayout ? 10 : 30,
-                );
-              },
+                  separatorBuilder: (BuildContext context, int i) {
+                    return SizedBox(
+                      height: mobileLayout ? 10 : 30,
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: mobileLayout ? 5 : 15,
+                ),
+                Align(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: color1,
+                      foregroundColor: Colors.white,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      language["Load more"],
+                      style:
+                          TextStyle(color: Colors.white, fontSize: height / 55),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -92,5 +206,14 @@ class _SearchPageState extends State<SearchPage> {
       return (half - 0.5).toInt();
     }
     return half.toInt();
+  }
+
+  trim(String searchTerm) {
+    final String trimmedSearchTerm =
+        searchTerm.characters.take(16).toString();
+    if (trimmedSearchTerm.length == searchTerm.length) {
+      return trimmedSearchTerm;
+    }
+    return '$trimmedSearchTerm...';
   }
 }
