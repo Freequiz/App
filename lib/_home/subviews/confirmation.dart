@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 
 class Confirmation extends StatelessWidget {
   final Function reset;

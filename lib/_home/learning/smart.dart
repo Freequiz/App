@@ -4,7 +4,7 @@ import 'package:freequiz/_home/learning/multiple_choice/multiple_choice.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
 import 'package:freequiz/_home/quiz.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class Smart extends StatefulWidget {

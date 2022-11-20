@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/convert_json.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class CreateQuiz extends StatefulWidget {

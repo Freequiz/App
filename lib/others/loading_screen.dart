@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingScreen extends StatefulWidget {

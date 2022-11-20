@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/learning/start_learning.dart';
 import 'package:freequiz/_home/subviews/confirmation.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
 

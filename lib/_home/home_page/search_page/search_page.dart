@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
-import 'package:freequiz/_home/home_page/search_filter.dart';
+import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
+import 'package:freequiz/_home/home_page/search_page/search.dart';
+import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
 import 'package:freequiz/api/api.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchPage extends StatefulWidget {
@@ -22,9 +24,11 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  List<String> languages = ["Any", "Any"];
   final arrow = '\u279C';
-  bool showFilters = false;
+
+  refresh() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +47,15 @@ class _SearchPageState extends State<SearchPage> {
         children: [
           SizedBox(
             height: height / 20,
-            child: Row(
-              mainAxisAlignment: showFilters
-                  ? MainAxisAlignment.start
-                  : MainAxisAlignment.center,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
               children: [
                 SearchFilter(
-                  color: color1,
+                  color: color2,
                   child: Text(
                     "${language["Results for"]} \"${trim(widget.searchTerm)}\"",
-                    style: TextStyle(fontSize: height / 50),
+                    style:
+                        TextStyle(fontSize: height / 50, color: Colors.white),
                   ),
                 ),
                 const SizedBox(
@@ -60,72 +63,21 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      showFilters = !showFilters;
-                    });
+                    onTap("Language");
                   },
                   child: SearchFilter(
-                    color: color2,
-                    child: Icon(
-                      showFilters
-                          ? Icons.menu_open_rounded
-                          : Icons.menu_rounded,
-                      color: darkMode ? Colors.white : textGray,
+                    color: color5,
+                    child: Text(
+                      Search.from == "Any" && Search.to == "Any"
+                          ? language["Language"]
+                          : "${language[Search.from]} $arrow ${language[Search.to]}",
+                      style:
+                          TextStyle(fontSize: height / 50, color: Colors.white),
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-          AnimatedSize(
-            duration: const Duration(milliseconds: 150),
-            child: showFilters
-                ? SizedBox(
-                    height: mobileLayout ? 10 : 30,
-                  )
-                : const SizedBox(
-                    height: 0,
-                  ),
-          ),
-          AnimatedSize(
-            duration: const Duration(milliseconds: 150),
-            child: showFilters
-                ? SizedBox(
-                    height: height / 20,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: SearchFilter(
-                            color: color3,
-                            child: Text(
-                              languages[0] == "Any" && languages[1] == "Any"
-                                  ? language["Language"]
-                                  : "${language["English"]} $arrow ${language["German"]}",
-                              style: TextStyle(fontSize: height / 50),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: SearchFilter(
-                            color: color4,
-                            child: Text(
-                              language["Amount of questions"],
-                              style: TextStyle(fontSize: height / 50),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : const SizedBox(
-                    height: 0,
-                  ),
           ),
           SizedBox(
             height: mobileLayout ? 10 : 30,
@@ -209,11 +161,21 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   trim(String searchTerm) {
-    final String trimmedSearchTerm =
-        searchTerm.characters.take(16).toString();
+    final String trimmedSearchTerm = searchTerm.characters.take(20).toString();
     if (trimmedSearchTerm.length == searchTerm.length) {
       return trimmedSearchTerm;
     }
     return '$trimmedSearchTerm...';
+  }
+
+  onTap(String filter) {
+    if (filter == "Language") {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => LanguageSelector(
+          refresh: refresh,
+        ),
+      );
+    }
   }
 }

@@ -41,8 +41,7 @@
     "Logout": "Ausloggen",
     "Confirm Password": "Passwort bestätigen",
     "Passwords don't match": "Passwörter stimmen nicht überein",
-    "At least 8 characters long, capital letter,": 
-    "Mindestens 8 Zeichen, Grossbuchstabe,",
+    "At least 8 characters long, capital letter,": "Mindestens 8 Zeichen, Grossbuchstabe,",
     "lowercase letter and number": "Kleinbuchstabe und Ziffer",
     "E-Mail changed succesfully": "E-Mail erfolgreich geändert",
     "Invalid E-Mail": "E-Mail ist nicht gültig",
@@ -70,5 +69,7 @@
     "Results for": "Resultate für",
     "Load more": "Lade mehr",
     "Language": "Sprache",
-    "Amount of questions": "Anzahl Fragen"
+    "Amount of questions": "Anzahl Fragen",
+    "Any": "Alle",
+    "Choose the desired languages": "Wählen Sie die gewünschten Sprachen"
 }

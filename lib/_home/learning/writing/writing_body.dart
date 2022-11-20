@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/subviews/progress_bar.dart';
 import 'package:freequiz/_home/quiz.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 
 class WritingBody extends StatelessWidget {
   final Function onPressed;

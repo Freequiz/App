@@ -3,7 +3,7 @@ import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/share.dart';
 import 'package:freequiz/api/api.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -139,7 +139,9 @@ class _QuizTileState extends State<QuizTile> {
                               padding:
                                   EdgeInsets.symmetric(horizontal: height / 60),
                               child: Text(
-                                  "${language["Questions"]} ${Quiz.answer.length.toString()}"),
+                                "${language["Questions"]} ${Quiz.answer.length.toString()}",
+                                style: const TextStyle(color: Colors.white),
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -156,7 +158,9 @@ class _QuizTileState extends State<QuizTile> {
                               padding:
                                   EdgeInsets.symmetric(horizontal: height / 60),
                               child: Text(
-                                  "${language[widget.data['from']]} $arrow ${language[widget.data['to']]}"),
+                                "${language[widget.data['from']]} $arrow ${language[widget.data['to']]}",
+                                style: const TextStyle(color: Colors.white),
+                              ),
                             ),
                           ),
                         ],

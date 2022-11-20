@@ -3,7 +3,7 @@ import 'package:freequiz/_home/subviews/correction.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'dart:math';
 import 'package:freequiz/_home/quiz.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class MultipleChoice extends StatefulWidget {

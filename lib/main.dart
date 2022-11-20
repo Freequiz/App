@@ -1,6 +1,6 @@
 import 'package:freequiz/1_edit/edit_page.dart';
 import 'package:freequiz/_home/home_page/home_page.dart';
-import 'package:freequiz/others/language.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/2_profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Profile().loadData;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -75,7 +74,7 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'Quicksand',
       ),
       home: FutureBuilder<void>(
-          future: loadLanguage(),
+          future: initialLoading(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return const RootPage();

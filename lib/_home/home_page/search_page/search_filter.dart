@@ -16,7 +16,7 @@ class _SearchFilterState extends State<SearchFilter> {
     bool darkMode = brightness == Brightness.dark;
     final color6 = darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
-        : const Color.fromARGB(255, 235, 235, 235);
+        : widget.color;
     return Container(
       decoration: BoxDecoration(
           color: color6,
