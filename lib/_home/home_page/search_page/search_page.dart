@@ -63,7 +63,7 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    onTap("Language");
+                    onTap();
                   },
                   child: SearchFilter(
                     color: color5,
@@ -168,14 +168,12 @@ class _SearchPageState extends State<SearchPage> {
     return '$trimmedSearchTerm...';
   }
 
-  onTap(String filter) {
-    if (filter == "Language") {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => LanguageSelector(
-          refresh: refresh,
-        ),
-      );
-    }
+  onTap() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => LanguageSelector(
+        refresh: refresh,
+      ),
+    );
   }
 }

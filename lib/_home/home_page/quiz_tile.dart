@@ -6,6 +6,7 @@ import 'package:freequiz/api/api.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:share_plus/share_plus.dart';
 
 class QuizTile extends StatefulWidget {
   final Map data;
@@ -78,9 +79,14 @@ class _QuizTileState extends State<QuizTile> {
                       widget.data['title'],
                       style: TextStyle(fontSize: height / 30),
                     ),
-                    ShareButton(
-                      url: "https://shadowcrafter.org/api/quiz/example/data",
-                      color: darkMode ? Colors.white : textGray,
+                    GestureDetector(
+                      onTap: () {
+                        Share.share("https://shadowcloud.ch");
+                      },
+                      child: Icon(
+                        Icons.ios_share,
+                        color: darkMode ? Colors.white : textGray,
+                      ),
                     ),
                   ],
                 ),

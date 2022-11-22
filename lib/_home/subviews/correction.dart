@@ -13,7 +13,10 @@ class Correction extends StatelessWidget {
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
     return AlertDialog(
-      title: Text(language["Your answer was wrong"], style: TextStyle(color: darkMode ? Colors.white : Colors.black),),
+      title: Text(
+        language["Your answer was wrong"],
+        style: TextStyle(color: darkMode ? Colors.white : Colors.black),
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,12 +34,25 @@ class Correction extends StatelessWidget {
           ),
         ],
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(language["Close"]),
+      actions: [
+        Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text(
+                language["My answer was right"],
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text(language["Close"]),
+            ),
+          ],
         ),
       ],
     );

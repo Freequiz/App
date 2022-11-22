@@ -35,6 +35,16 @@ class _LanguageSelectorState extends State<LanguageSelector> {
     ),
   ];
 
+  String from = "Any";
+  String to = "Any";
+
+  @override
+  void initState() {
+    from = Search.from;
+    to = Search.to;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
@@ -51,55 +61,70 @@ class _LanguageSelectorState extends State<LanguageSelector> {
       ),
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
-        DropdownButton(
-          value: Search.from,
-          icon: Icon(
-            Icons.arrow_drop_down_rounded,
-            color: color1,
-          ),
-          underline: Container(
-            height: 2,
-            color: color1,
-          ),
-          dropdownColor: darkMode
-              ? const Color.fromARGB(255, 40, 40, 40)
-              : const Color.fromARGB(255, 229, 242, 250),
-          items: languages,
-          onChanged: (value) {
-            widget.refresh();
-            setState(() {
-              Search.from = value!;
-            });
-          },
-          style: TextStyle(color: hintColor),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            DropdownButton(
+              value: from,
+              icon: Icon(
+                Icons.arrow_drop_down_rounded,
+                color: color1,
+              ),
+              underline: Container(
+                height: 2,
+                color: color1,
+              ),
+              dropdownColor: darkMode
+                  ? const Color.fromARGB(255, 40, 40, 40)
+                  : const Color.fromARGB(255, 229, 242, 250),
+              items: languages,
+              onChanged: (value) {
+                setState(() {
+                  from = value!;
+                });
+              },
+              style: TextStyle(color: hintColor),
+            ),
+            Icon(
+              Icons.arrow_forward_rounded,
+              color: color1,
+            ),
+            DropdownButton(
+              value: to,
+              icon: Icon(
+                Icons.arrow_drop_down_rounded,
+                color: color1,
+              ),
+              underline: Container(
+                height: 2,
+                color: color1,
+              ),
+              dropdownColor: darkMode
+                  ? const Color.fromARGB(255, 40, 40, 40)
+                  : const Color.fromARGB(255, 229, 242, 250),
+              items: languages,
+              onChanged: (value) {
+                setState(() {
+                  to = value!;
+                });
+              },
+              style: TextStyle(color: hintColor),
+            ),
+          ],
         ),
-        Icon(
-          Icons.arrow_forward_rounded,
-          color: color1,
-        ),
-        DropdownButton(
-          value: Search.to,
-          icon: Icon(
-            Icons.arrow_drop_down_rounded,
-            color: color1,
-          ),
-          underline: Container(
-            height: 2,
-            color: color1,
-          ),
-          dropdownColor: darkMode
-              ? const Color.fromARGB(255, 40, 40, 40)
-              : const Color.fromARGB(255, 229, 242, 250),
-          items: languages,
-          onChanged: (value) {
+        TextButton(
+          onPressed: () {
+            Search.to = to;
+            Search.from = from;
+            Navigator.of(context).pop();
             widget.refresh();
-            setState(() {
-              Search.to = value!;
-            });
           },
-          style: TextStyle(color: hintColor),
+          child: Text(
+            language["Done"],
+          ),
         ),
       ],
+      
     );
   }
 }

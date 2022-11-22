@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                           width: width / 1.25,
                           child: Image.asset(
                             "images/icon_transparent.png",
-                            color: opacityColor.withOpacity(0.3),
+                            color: opacityColor.withOpacity(0.4),
                             colorBlendMode: BlendMode.modulate,
                           ),
                         ),
