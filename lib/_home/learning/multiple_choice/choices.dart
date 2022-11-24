@@ -33,7 +33,7 @@ class Choices extends StatelessWidget {
         ),
         onPressed: () {
           if (choice != Quiz.answer[Quiz.indexArray[0]]) {
-            wrongAnswer(choice);
+            wrongAnswer(choice, i);
           } else {
             rightAnswer(i);
           }

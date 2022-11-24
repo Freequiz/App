@@ -90,14 +90,6 @@ class _SmartState extends State<Smart> {
   }
 
   wrongAnswerW() {
-    answeredWrong = true;
-    if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-      Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-      Quiz.newDefinitions.add(Quiz.indexArray[0]);
-    } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
-      Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
-      Quiz.newDefinitions.add(Quiz.indexArray[0]);
-    }
     final givenAnswer = _textController.text;
     showDialog(
       context: context,
@@ -105,7 +97,20 @@ class _SmartState extends State<Smart> {
         givenAnswer: givenAnswer,
         rightAnswer: Quiz.answer[Quiz.indexArray[0]],
       ),
-    );
+    ).then((answerRight) {
+      if (!answerRight) {
+        answeredWrong = true;
+        if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
+          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
+          Quiz.newDefinitions.add(Quiz.indexArray[0]);
+        } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
+          Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
+          Quiz.newDefinitions.add(Quiz.indexArray[0]);
+        }
+      } else {
+        rightAnswerW();
+      }
+    });
     setState(() {
       _textController.clear();
     });
@@ -165,22 +170,27 @@ class _SmartState extends State<Smart> {
     });
   }
 
-  wrongAnswerMC(String choice) {
-    answeredWrong = true;
-    if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-      Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-      Quiz.newDefinitions.add(Quiz.indexArray[0]);
-    } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
-      Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
-      Quiz.newDefinitions.add(Quiz.indexArray[0]);
-    }
+  wrongAnswerMC(String choice, int i) {
     showDialog(
       context: context,
       builder: (BuildContext context) => Correction(
         givenAnswer: choice,
         rightAnswer: Quiz.answer[Quiz.indexArray[0]],
       ),
-    );
+    ).then((answerRight) {
+      if (!answerRight) {
+        answeredWrong = true;
+        if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
+          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
+          Quiz.newDefinitions.add(Quiz.indexArray[0]);
+        } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
+          Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
+          Quiz.newDefinitions.add(Quiz.indexArray[0]);
+        }
+      } else {
+        rightAnswerMC(i);
+      }
+    });
   }
 
   int indexMode() {

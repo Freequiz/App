@@ -78,22 +78,27 @@ class _MultipleChoiceState extends State<MultipleChoice> {
     });
   }
 
-  wrongAnswer(String choice) {
-    answeredWrong = true;
-    if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-      Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-      Quiz.newDefinitions.add(Quiz.indexArray[0]);
-    } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
-      Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
-      Quiz.newDefinitions.add(Quiz.indexArray[0]);
-    }
+  wrongAnswer(String choice, int i) {
     showDialog(
       context: context,
       builder: (BuildContext context) => Correction(
         givenAnswer: choice,
         rightAnswer: Quiz.answer[Quiz.indexArray[0]],
       ),
-    );
+    ).then((answerRight) {
+      if (!answerRight) {
+        answeredWrong = true;
+        if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
+          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
+          Quiz.newDefinitions.add(Quiz.indexArray[0]);
+        } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
+          Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
+          Quiz.newDefinitions.add(Quiz.indexArray[0]);
+        }
+      } else {
+        rightAnswer(i);
+      }
+    });
   }
 
   close() {
