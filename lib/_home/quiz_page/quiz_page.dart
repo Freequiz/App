@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/learning_modes.dart';
+import 'package:freequiz/_home/quiz_page/nothing_found.dart';
 import 'package:freequiz/_home/quiz_page/word_list.dart';
+import 'package:freequiz/_home/quiz_page/word_list_taskbar.dart';
 import 'package:freequiz/others/style.dart';
 
 class QuizPage extends StatefulWidget {
@@ -30,6 +32,9 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {});
   }
 
+  List shownDefinition = Quiz.definition;
+  List shownAnswer = Quiz.answer;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -44,6 +49,7 @@ class _QuizPageState extends State<QuizPage> {
               top: 20.0, bottom: 20.0, left: 20.0, right: 20.0),
       child: height > width
           ? Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: mobileLayout ? (width - 50) / 4 : (width - 100) / 4,
@@ -53,18 +59,21 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 SizedBox(height: mobileLayout ? 15 : 30),
-                Expanded(
-                  child: WordList(
-                    definitions: Quiz.definition,
-                    answers: Quiz.answer,
-                    marked: const [],
-                    markWord: markWord,
-                    i: 0,
-                    color: color2,
-                    scrollPhysics: const ScrollPhysics(),
-                    width: width,
-                  ),
+                WordListTaskbar(
+                  search: search,
                 ),
+                shownDefinition.isEmpty
+                    ? const NothingFound()
+                    : Expanded(
+                        child: WordList(
+                          definitions: shownDefinition,
+                          answers: shownAnswer,
+                          markWord: markWord,
+                          color: color2,
+                          width: width,
+                          roundedCornersTop: false,
+                        ),
+                      ),
               ],
             )
           : Row(
@@ -78,19 +87,33 @@ class _QuizPageState extends State<QuizPage> {
                 const SizedBox(width: 20),
                 Expanded(
                   child: WordList(
-                    definitions: Quiz.definition,
-                    answers: Quiz.answer,
-                    marked: const [],
+                    definitions: shownDefinition,
+                    answers: shownAnswer,
                     markWord: markWord,
-                    i: 0,
                     color: color2,
-                    scrollPhysics: const ScrollPhysics(),
                     width: width - (height - 190) / 4 - 60,
                   ),
                 ),
               ],
             ),
     );
+  }
+
+  search(String searchTerm) {
+    shownDefinition = [];
+    shownAnswer = [];
+    for (var i = 0; i < Quiz.definition.length; i++) {
+      final definition = Quiz.definition[i];
+      final answer = Quiz.answer[i];
+      if (definition.contains(searchTerm)) {
+        shownDefinition.add(definition);
+        shownAnswer.add(answer);
+      } else if (answer.contains(searchTerm)) {
+        shownDefinition.add(definition);
+        shownAnswer.add(answer);
+      }
+    }
+    setState(() {});
   }
 
   reset(i) {

@@ -86,7 +86,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
         rightAnswer: Quiz.answer[Quiz.indexArray[0]],
       ),
     ).then((answerRight) {
-      if (!answerRight) {
+      if (answerRight == null || !answerRight) {
         answeredWrong = true;
         if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
           Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
