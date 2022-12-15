@@ -53,6 +53,7 @@
     "Already have an Account?": "Already have an Account?",
     "Log in": "Log in",
     "Username is taken": "Username is taken",
+    "Username is not valid": "Username is not valid",
     "Create a New Quiz": "Create a new Quiz",
     "Loading Quiz": "Loading Quiz",
     "Loading Profile": "Loading Profile",
@@ -73,5 +74,10 @@
     "Any": "Any",
     "Choose the desired languages": "Choose the desired languages",
     "My answer was right": "My answer\nwas right",
-    "Nothing found": "Nothing found"
+    "Nothing found": "Nothing found",
+    "Username changed successfully" : "Username changed succesfully",
+    "Invalid Username": "Invalid Username",
+    "Old Password": "Old Password",
+    "Password changed": "Password changed",
+    "successfully": "successfully"
 }
