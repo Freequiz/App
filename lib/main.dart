@@ -1,10 +1,12 @@
 import 'package:freequiz/1_edit/edit_page.dart';
+import 'package:freequiz/2_profile/profile.dart';
+import 'package:freequiz/2_profile/signup.dart';
 import 'package:freequiz/_home/home_page/home_page.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'api/api_account.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -107,93 +108,44 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(namePages[currentPage]),
-        actions: [
-          TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.white,
-            ),
-            onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              prefs.remove("example");
-            },
-            child: const Icon(Icons.refresh_rounded),
-          ),
-        ],
-      ),
-      body: pages[currentPage],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 152, 141, 145),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
-        ],
-        currentIndex: currentPage,
-        onTap: (int index) {
-          setState(() {
-            currentPage = index;
-          });
-        },
-      ),
-    );
-    /*return FutureBuilder<void>(
-      future: loadLanguage(),
-      builder: (context, quiz) {
-        if (language.isEmpty) {
+    return FutureBuilder<void>(
+        future: Profile().loadData(),
+        builder: (context, quiz) {
+          if (Profile.accessToken != "") {
+            httpPostRefresh();
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(namePages[currentPage]),
+              ),
+              body: pages[currentPage],
+              bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: const Color.fromARGB(255, 152, 141, 145),
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                selectedItemColor: Colors.white,
+                items: const [
+                  BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+                  BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
+                  BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+                ],
+                currentIndex: currentPage,
+                onTap: (int index) {
+                  setState(() {
+                    currentPage = index;
+                  });
+                },
+              ),
+            );
+          } else if (Profile.loaded) {
+            return Drawer(
+              child: SignUp(refresh: refresh),
+            );
+          }
           return Drawer(
             child: Image.asset(
-                    "images/icon_transparent.png",
-                  ),
+              "images/icon_transparent.png",
+            ),
           );
-        }
-        return FutureBuilder<void>(
-            future: Profile().loadData(),
-            builder: (context, quiz) {
-              if (Profile.sessionToken != "") {
-                return Scaffold(
-                  appBar: AppBar(
-                    title: Text(namePages[currentPage]),
-                  ),
-                  body: pages[currentPage],
-                  bottomNavigationBar: BottomNavigationBar(
-                    backgroundColor: const Color.fromARGB(255, 152, 141, 145),
-                    showSelectedLabels: false,
-                    showUnselectedLabels: false,
-                    selectedItemColor: Colors.white,
-                    items: const [
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.home), label: ""),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.edit), label: ""),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.person), label: ""),
-                    ],
-                    currentIndex: currentPage,
-                    onTap: (int index) {
-                      setState(() {
-                        currentPage = index;
-                      });
-                    },
-                  ),
-                );
-              } else if (Profile.loaded) {
-                return Drawer(
-                  child: SignUp(refresh: refresh),
-                );
-              }
-              return Drawer(
-                child: Image.asset(
-                    "images/icon_transparent.png",
-                  ),
-              );
-            });
-      },
-    );*/
+        });
   }
 }

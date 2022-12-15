@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/api/api.dart';
+import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/profile.dart';
@@ -275,8 +275,7 @@ class _SignUpState extends State<SignUp> {
     final Map map = await httpPutAccount(username.text, email.text,
         password.text, passwordConfirmation.text, true);
     if (map["success"] == true) {
-      Profile.sessionToken = map["session"]["token"];
-      Profile.date = map["session"]["expire"];
+      Profile.accessToken = map["session"]["access_token"];
       Profile().saveData();
       widget.refresh();
     } else if (map["message"] == "Username is already taken") {

@@ -3,7 +3,7 @@ import 'package:freequiz/_home/home_page/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
-import 'package:freequiz/api/api.dart';
+import 'package:freequiz/api/api_quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 

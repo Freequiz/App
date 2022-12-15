@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/share.dart';
-import 'package:freequiz/api/api.dart';
+import 'package:freequiz/api/api_quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/loading_screen.dart';
 import 'package:freequiz/others/style.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
-import 'package:freequiz/api/api.dart';
+import 'package:freequiz/api/api_quiz.dart';
 
 class LastQuizzes extends StatefulWidget {
   final ScrollPhysics physics;

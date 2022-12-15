@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/api/api.dart';
+import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
@@ -170,8 +170,7 @@ class _LoginState extends State<Login> {
   onPressed() async {
     mapLogin = await httpPostSession(
       username.text.trim(),
-      password.text.trim(),
-      true,
+      password.text.trim()
     );
     if (mapLogin.isNotEmpty) {
       if (mapLogin["message"] == "User not found") {
@@ -185,11 +184,10 @@ class _LoginState extends State<Login> {
           password.clear();
         });
       } else {
-        Profile.sessionToken = mapLogin["session_token"];
-        Profile.date = mapLogin["expire"];
+        Profile.accessToken = mapLogin["access_token"];
         Profile().saveData();
         // ignore: use_build_context_synchronously
-        Navigator.pop(context);
+        Navigator.of(context).pop();
         widget.refresh();
       }
     }
