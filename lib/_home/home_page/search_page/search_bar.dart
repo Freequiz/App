@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search_page.dart';
 import 'package:freequiz/api/api_quiz.dart';
+import 'package:freequiz/others/error_loading.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
@@ -99,19 +100,26 @@ class _SearchBarState extends State<SearchBar> {
             future: httpSearch(textController.text),
             builder: (context, searchResults) {
               if (searchResults.hasData) {
-                return LoadingScreen(
-                  message: "Loading Search Results",
-                  finishedLoading: true,
-                  widget: SearchPage(
-                    uuids: searchResults.data!,
-                    searchTerm: textController.text,
-                  ),
-                  appBar: AppBar(
-                    title: Text(language["Search"]),
-                  ),
+                if (searchResults.data!["success"]) {
+                  return LoadingScreen(
+                    message: "Loading Search Results",
+                    finishedLoading: true,
+                    widget: SearchPage(
+                      uuids: searchResults.data!["data"],
+                      searchTerm: textController.text,
+                    ),
+                    appBar: AppBar(
+                      title: Text(language["Search"]),
+                    ),
+                  );
+                }
+                return ErrorLoading(
+                  error: searchResults.data!["message"],
                 );
               } else if (searchResults.hasError) {
-                return Drawer(child: Text('${searchResults.error}'));
+                return const ErrorLoading(
+                  error: "other error",
+                );
               }
               return LoadingScreen(
                 message: "Loading Search Results",

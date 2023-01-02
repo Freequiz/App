@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/2_profile/profile_info/confirmation.dart';
 import 'package:freequiz/2_profile/profile_info/email.dart';
 import 'package:freequiz/2_profile/profile_info/password.dart';
 import 'package:freequiz/2_profile/profile_info/username.dart';
-import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
@@ -17,11 +17,9 @@ class ProfileInfo extends StatefulWidget {
 }
 
 class _ProfileInfoState extends State<ProfileInfo> {
-  late Future<Map> futureMapInfo;
 
   @override
   Widget build(BuildContext context) {
-    futureMapInfo = httpGetProfile();
     double height = MediaQuery.of(context).size.height;
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
@@ -59,6 +57,20 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       Profile().deleteData();
                     },
                     child: Text(language["Logout"]),
+                  ),
+                ),
+                const SizedBox(height: 20.0,),
+                Align(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white),
+                    onPressed: () async {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => Confirmation(refresh: widget.refresh));
+                    },
+                    child: Text(language["Delete Account"]),
                   ),
                 ),
               ],

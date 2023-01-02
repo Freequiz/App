@@ -78,5 +78,15 @@
     "Username changed successfully" : "Nom d'utilisateur modifié avec succès",
     "Old Password": "Ancien mot de passe",
     "Password changed": "mot de passe changé",
-    "successfully": "avec succès"
+    "successfully": "avec succès",
+    "Can't be blank": "Ne peut pas être vide",
+    "Delete Account": "Supprimer le compte",
+    "Are you sure you want to delete your account. It's not reversible": "Êtes-vous sûr de vouloir supprimer votre compte. Ce n'est pas réversible",
+    "Invalid bearer token title": "Une erreur inconnue s'est produite",
+    "Invalid bearer token description": "Réessayez plus tard. Si cette erreur persiste, veuillez la signaler en utilisant le rapport de bugs",
+    "Access token is invalid title": "Erreur d'authentification",
+    "Access token is invalid description": "Une erreur s'est produite et vous avez été déconnecté. Si cette erreur persiste, veuillez utiliser le rapport de bug",
+    "other error title": "Une erreur inconnue s'est produite",
+    "other error description": "Réessayez plus tard. Si cette erreur persiste, veuillez la signaler en utilisant le rapportde bugs",
+    "Try again": "Réessayer"
 }

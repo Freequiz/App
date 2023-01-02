@@ -87,7 +87,8 @@ class _MyAppState extends State<MyApp> {
 }
 
 class RootPage extends StatefulWidget {
-  const RootPage({super.key});
+  final i;
+  const RootPage({super.key, this.i = 0});
 
   @override
   State<RootPage> createState() => _RootPageState();
@@ -107,45 +108,52 @@ class _RootPageState extends State<RootPage> {
   }
 
   @override
+  void initState() {
+    currentPage = widget.i;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-        future: Profile().loadData(),
-        builder: (context, quiz) {
-          if (Profile.accessToken != "") {
-            httpPostRefresh();
-            return Scaffold(
-              appBar: AppBar(
-                title: Text(namePages[currentPage]),
-              ),
-              body: pages[currentPage],
-              bottomNavigationBar: BottomNavigationBar(
-                backgroundColor: const Color.fromARGB(255, 152, 141, 145),
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                selectedItemColor: Colors.white,
-                items: const [
-                  BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-                  BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
-                  BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
-                ],
-                currentIndex: currentPage,
-                onTap: (int index) {
-                  setState(() {
-                    currentPage = index;
-                  });
-                },
-              ),
-            );
-          } else if (Profile.loaded) {
-            return Drawer(
-              child: SignUp(refresh: refresh),
-            );
-          }
-          return Drawer(
-            child: Image.asset(
-              "images/icon_transparent.png",
+      future: Profile().loadData(),
+      builder: (context, quiz) {
+        if (Profile.accessToken != "") {
+          httpPostRefresh();
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(namePages[currentPage]),
+            ),
+            body: pages[currentPage],
+            bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: const Color.fromARGB(255, 152, 141, 145),
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              selectedItemColor: Colors.white,
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+                BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
+                BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+              ],
+              currentIndex: currentPage,
+              onTap: (int index) {
+                setState(() {
+                  currentPage = index;
+                });
+              },
             ),
           );
-        });
+        } else if (Profile.loaded) {
+          return Drawer(
+            child: SignUp(refresh: refresh),
+          );
+        }
+        return Drawer(
+          child: Image.asset(
+            "images/icon_transparent.png",
+          ),
+        );
+      },
+    );
   }
 }

@@ -35,6 +35,7 @@ Future<Map> getQuiz(String uuid, bool manageQuizzes) async {
 Future<Map> httpGetQuiz(String uuid) async {
   await Future.delayed(const Duration(milliseconds: 1000), () {});
   final map = {
+    "success": true,
     "data": {
       "title": "Hello",
       "description": "Just a simple test quiz!",
@@ -94,18 +95,21 @@ Future<Map> httpGetQuiz(String uuid) async {
   }*/
 }
 
-
 Future<Map> httpSearch(String searchTerm) async {
   await Future.delayed(const Duration(milliseconds: 1000));
   return {
-    "0": "example",
-    "1": "example",
-    "2": "example",
-    "3": "example",
-    "4": "example",
-    "5": "example",
-    "6": "example",
-    "7": "example",
-    "8": "example"
+    "success": true,
+    "message": "Access token is invalid",
+    "data": {
+      "0": "example",
+      "1": "example",
+      "2": "example",
+      "3": "example",
+      "4": "example",
+      "5": "example",
+      "6": "example",
+      "7": "example",
+      "8": "example"
+    }
   };
 }

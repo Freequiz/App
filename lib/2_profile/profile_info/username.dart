@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/2_profile/textfield_data.dart';
 import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
@@ -16,11 +17,7 @@ class _UsernameState extends State<Username> {
   final color5 = const Color.fromARGB(255, 50, 50, 50);
   final color6 = color3;
   bool edit = false;
-  final newUsername = TextEditingController();
-  String usernameHint = language["Username"];
-  bool errorUsername = false;
-  Color usernameTextfieldColor = color1;
-  bool successUsername = false;
+  TextFieldData newUsername = TextFieldData(hint: language["Username"]);
 
   @override
   Widget build(BuildContext context) {
@@ -78,25 +75,25 @@ class _UsernameState extends State<Username> {
                                 darkMode ? Brightness.dark : Brightness.light,
                             keyboardType: TextInputType.emailAddress,
                             autocorrect: false,
-                            controller: newUsername,
+                            controller: newUsername.input,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: darkMode
                                   ? const Color.fromARGB(255, 45, 45, 45)
                                   : const Color.fromARGB(255, 255, 231, 218),
                               contentPadding: const EdgeInsets.all(10.0),
-                              hintText: usernameHint,
+                              hintText: newUsername.hint,
                               hintStyle: TextStyle(
-                                color: errorUsername
+                                color: newUsername.error
                                     ? Colors.red
-                                    : (successUsername
+                                    : (newUsername.changed
                                         ? Colors.green
                                         : textColor),
                               ),
                               border: const OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: usernameTextfieldColor,
+                                  color: newUsername.color,
                                   width: 2.0,
                                 ),
                               ),
@@ -132,31 +129,31 @@ class _UsernameState extends State<Username> {
   }
 
   changeUsername() async {
-    final Map map = await httpPatchAccount(username: newUsername.text);
+    final Map map = await httpPatchAccount(username: newUsername.input.text);
     if (map["success"] == true) {
       setState(() {
-        newUsername.clear();
-        usernameHint = language["Username changed successfully"];
-        usernameTextfieldColor = Colors.green;
-        errorUsername = false;
-        successUsername = true;
+        newUsername.input.clear();
+        newUsername.hint = language["Username changed successfully"];
+        newUsername.color = Colors.green;
+        newUsername.error = false;
+        newUsername.changed = true;
       });
       widget.refresh();
     } else if (map["message"] == "Invalid Username") {
       setState(() {
-        newUsername.clear();
-        usernameHint = language["Username is not valid"];
-        usernameTextfieldColor = Colors.red;
-        errorUsername = true;
-        successUsername = false;
+        newUsername.input.clear();
+        newUsername.hint = language["Username is not valid"];
+        newUsername.color = Colors.red;
+        newUsername.error = true;
+        newUsername.changed = false;
       });
     } else if (map["message"] == "Username is taken") {
       setState(() {
-        newUsername.clear();
-        usernameHint = language["Username is taken"];
-        usernameTextfieldColor = Colors.red;
-        errorUsername = true;
-        successUsername = false;
+        newUsername.input.clear();
+        newUsername.hint = language["Username is taken"];
+        newUsername.color = Colors.red;
+        newUsername.error = true;
+        newUsername.changed = false;
       });
     }
   }

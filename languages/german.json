@@ -77,5 +77,15 @@
     "Username changed successfully" : "Benutzername erfolgreich geändert",
     "Old Password": "Altes Passwort",
     "Password changed": "Passwort erfolgreich",
-    "successfully": "geändert"
+    "successfully": "geändert",
+    "Can't be blank": "Darf nicht leer sein",
+    "Delete Account": "Account löschen",
+    "Are you sure you want to delete your account. It's not reversible": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten. Dies kann nicht rückgängig gemacht werden",
+    "Invalid bearer token title": "Ein unbekannter Fehler ist aufgetreten",
+    "Invalid bearer token description": "Versuchen Sie es später noch einmal. Wenn dieser Fehler weiterhin auftritt, melden Sie ihn bitte über den Bugreporter",
+    "Access token is invalid title": "Authentifizierungsfehler",
+    "Access token is invalid description": "Es ist ein Fehler aufgetreten und Sie wurden abgemeldet. Wenn dieser Fehler weiterhin auftritt, verwenden Sie bitte den Bug-Reporter",
+    "other error title": "Es ist ein unbekannter Fehler aufgetreten",
+    "other error description": "Versuchen Sie es später noch einmal. Wenn dieser Fehler weiterhin besteht, melden Sie ihn bitte über den Bugreporter",
+    "Try again": "Nochmal versuchen"
 }

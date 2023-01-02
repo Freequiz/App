@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/2_profile/textfield_data.dart';
 import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/login.dart';
@@ -14,19 +15,10 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final username = TextEditingController();
-  final email = TextEditingController();
-  final password = TextEditingController();
-  final passwordConfirmation = TextEditingController();
-  bool showPassword = false;
-  bool showPasswordConfirmation = false;
-  String usernameHint = language["Username"];
-  String emailHint = language["E-Mail"];
-  String passwordHint = language["Password"];
-  String passwordConfirmationHint = language["Confirm Password"];
-  bool errorUsername = false;
-  bool errorEmail = false;
-  bool errorPassword = false;
+  TextFieldData username = TextFieldData(hint: language["Username"]);
+  TextFieldData email = TextFieldData(hint: language["E-Mail"]);
+  TextFieldData password = TextFieldData(hint: language["Password"], shown: false);
+  TextFieldData passwordConfirmation= TextFieldData(hint: language["Confirm Password"], shown: false);
 
   @override
   Widget build(BuildContext context) {
@@ -76,19 +68,19 @@ class _SignUpState extends State<SignUp> {
                 },
                 textInputAction: TextInputAction.next,
                 keyboardAppearance:
-                              darkMode ? Brightness.dark : Brightness.light,
+                    darkMode ? Brightness.dark : Brightness.light,
                 keyboardType: TextInputType.name,
-                controller: username,
+                controller: username.input,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(10.0),
-                  hintText: usernameHint,
+                  hintText: username.hint,
                   hintStyle: TextStyle(
-                    color: errorUsername ? Colors.red : hintColor,
+                    color: username.error ? Colors.red : hintColor,
                   ),
                   border: const OutlineInputBorder(),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: errorUsername ? Colors.red : color1,
+                      color: username.error ? Colors.red : color1,
                       width: 2.0,
                     ),
                   ),
@@ -105,21 +97,21 @@ class _SignUpState extends State<SignUp> {
                   FocusScope.of(context).nextFocus();
                 },
                 keyboardAppearance:
-                              darkMode ? Brightness.dark : Brightness.light,
+                    darkMode ? Brightness.dark : Brightness.light,
                 textInputAction: TextInputAction.next,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
-                controller: email,
+                controller: email.input,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(10.0),
-                  hintText: emailHint,
+                  hintText: email.hint,
                   hintStyle: TextStyle(
-                    color: errorEmail ? Colors.red : hintColor,
+                    color: email.error ? Colors.red : hintColor,
                   ),
                   border: const OutlineInputBorder(),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: errorEmail ? Colors.red : color1,
+                      color: email.error ? Colors.red : color1,
                       width: 2.0,
                     ),
                   ),
@@ -136,34 +128,34 @@ class _SignUpState extends State<SignUp> {
                   FocusScope.of(context).nextFocus();
                 },
                 keyboardAppearance:
-                              darkMode ? Brightness.dark : Brightness.light,
+                    darkMode ? Brightness.dark : Brightness.light,
                 textInputAction: TextInputAction.next,
                 autocorrect: false,
                 enableSuggestions: false,
-                obscureText: !showPassword,
+                obscureText: !password.shown,
                 keyboardType: TextInputType.visiblePassword,
-                controller: password,
+                controller: password.input,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(10.0),
-                  hintText: passwordHint,
+                  hintText: password.hint,
                   hintStyle: TextStyle(
-                    color: errorPassword ? Colors.red : hintColor,
+                    color: password.error ? Colors.red : hintColor,
                   ),
                   border: const OutlineInputBorder(),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: errorPassword ? Colors.red : color1,
+                      color: password.error ? Colors.red : color1,
                       width: 2.0,
                     ),
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      showPassword ? Icons.visibility : Icons.visibility_off,
+                      password.shown ? Icons.visibility : Icons.visibility_off,
                       color: color1,
                     ),
                     onPressed: () {
                       setState(() {
-                        showPassword = !showPassword;
+                        password.shown = !password.shown;
                       });
                     },
                   ),
@@ -183,36 +175,36 @@ class _SignUpState extends State<SignUp> {
                         onPressed();
                       },
                       keyboardAppearance:
-                              darkMode ? Brightness.dark : Brightness.light,
+                          darkMode ? Brightness.dark : Brightness.light,
                       autocorrect: false,
                       enableSuggestions: false,
-                      obscureText: !showPasswordConfirmation,
+                      obscureText: !passwordConfirmation.shown,
                       keyboardType: TextInputType.visiblePassword,
-                      controller: passwordConfirmation,
+                      controller: passwordConfirmation.input,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
-                        hintText: passwordConfirmationHint,
+                        hintText: passwordConfirmation.hint,
                         hintStyle: TextStyle(
-                          color: errorPassword ? Colors.red : hintColor,
+                          color: password.error ? Colors.red : hintColor,
                         ),
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: errorPassword ? Colors.red : color1,
+                            color: password.error ? Colors.red : color1,
                             width: 2.0,
                           ),
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            showPasswordConfirmation
+                            passwordConfirmation.shown
                                 ? Icons.visibility
                                 : Icons.visibility_off,
                             color: color1,
                           ),
                           onPressed: () {
                             setState(() {
-                              showPasswordConfirmation =
-                                  !showPasswordConfirmation;
+                              passwordConfirmation.shown =
+                                  !passwordConfirmation.shown;
                             });
                           },
                         ),
@@ -272,52 +264,70 @@ class _SignUpState extends State<SignUp> {
   }
 
   onPressed() async {
-    final Map map = await httpPutAccount(username.text, email.text,
-        password.text, passwordConfirmation.text, true);
-    if (map["success"] == true) {
-      Profile.accessToken = map["session"]["access_token"];
-      Profile().saveData();
-      widget.refresh();
-    } else if (map["message"] == "Username is already taken") {
+    if (password.input.text != passwordConfirmation.input.text) {
       setState(() {
-        username.clear();
-        usernameHint = language["Username is taken"];
-        errorUsername = true;
+        password.input.clear();
+        passwordConfirmation.input.clear();
+        password.hint = language["Passwords don't match"];
+        passwordConfirmation.hint = "";
+        password.error = true;
       });
-    } else if (map["message"] == "Username doesn't meet requirements") {
+    } else if (username.input.text.isEmpty) {
       setState(() {
-        username.clear();
-        usernameHint = language["Username is not valid"];
-        errorUsername = true;
+        username.hint = language["Can't be blank"];
+        username.error = true;
       });
-    } else if (map["message"] == "Email is already taken") {
+    } else if (email.input.text.isEmpty) {
       setState(() {
-        email.clear();
-        emailHint = language["E-Mail is taken"];
-        errorEmail = true;
+        email.hint = language["Can't be blank"];
+        email.error = true;
       });
-    } else if (map["message"] == "Email doesn't meet requirements") {
+    } else if (password.input.text.isEmpty) {
       setState(() {
-        email.clear();
-        emailHint = language["E-Mail is invalid"];
-        errorEmail = true;
+        password.hint = language["Can't be blank"];
+        passwordConfirmation.hint = "";
       });
-    } else if (map["message"] == "Password don't match") {
-      setState(() {
-        password.clear();
-        passwordConfirmation.clear();
-        passwordHint = language["Passwords don't match"];
-        passwordConfirmationHint = "";
-        errorPassword = true;
-      });
-    } else if (map["message"] == "Password doesn't meet requirements") {
-      setState(() {
-        password.clear();
-        passwordConfirmation.clear();
-        passwordHint = language["At least 8 characters long, capital letter,"];
-        passwordConfirmationHint = language["lowercase letter and number"];
-        errorPassword = true;
-      });
+    } else {
+      final Map map = await httpPutAccount(username.input.text, email.input.text,
+          password.input.text, passwordConfirmation.input.text, true);
+      if (map["success"] == true) {
+        Profile.accessToken = map["access_token"];
+        Profile().saveData();
+        widget.refresh();
+      } else if (map["message"] == "Username is already taken") {
+        setState(() {
+          username.input.clear();
+          username.hint = language["Username is taken"];
+          username.error = true;
+        });
+      } else if (map["message"] == "Username doesn't meet requirements") {
+        setState(() {
+          username.input.clear();
+          username.hint= language["Username is not valid"];
+          username.error = true;
+        });
+      } else if (map["message"] == "Email is already taken") {
+        setState(() {
+          email.input.clear();
+          email.hint = language["E-Mail is taken"];
+          email.error = true;
+        });
+      } else if (map["message"] == "Email doesn't meet requirements") {
+        setState(() {
+          email.input.clear();
+          email.hint = language["E-Mail is invalid"];
+          email.error = true;
+        });
+      } else if (map["message"] == "Password doesn't meet requirements") {
+        setState(() {
+          password.input.clear();
+          passwordConfirmation.input.clear();
+          password.hint =
+              language["At least 8 characters long, capital letter,"];
+          passwordConfirmation.hint = language["lowercase letter and number"];
+          password.error = true;
+        });
+      }
     }
   }
 }

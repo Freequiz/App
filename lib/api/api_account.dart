@@ -34,7 +34,7 @@ Future<Map> httpPostSession(String username, String password) async {
 }
 
 //get account data
-Future<Map> httpGetProfile() async {
+Future<Map> httpGetData() async {
   final response = await http.get(
     Uri.parse('https://freequiz.herokuapp.com/api/v1/user/data'),
     headers: {
@@ -49,6 +49,26 @@ Future<Map> httpGetProfile() async {
   } else if (response.statusCode == 401) {
     Profile.accessToken = "";
     Profile().deleteData();
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Error');
+  }
+}
+
+//get delete token to delete the account
+Future<Map> httpGetDeleteToken() async {
+  final response = await http.get(
+    Uri.parse('https://freequiz.herokuapp.com/api/v1/user/delete_token'),
+    headers: {
+      "Authorization":
+          "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+      "Access-token": Profile.accessToken
+    },
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else if (response.statusCode == 401) {
     return jsonDecode(response.body);
   } else {
     throw Exception('Error');
@@ -74,6 +94,8 @@ httpPostRefresh() async {
         Profile.accessToken = decodedResponse["access_token"];
         Profile().saveData();
         newAccessToken = true;
+      } else if (response.statusCode == 401) {
+        return jsonDecode(response.body);
       } else {
         throw Exception('Error');
       }
@@ -146,6 +168,27 @@ Future<Map> httpPutAccount(String username, String email, String password,
     newAccessToken = true;
     return jsonDecode(response.body);
   } else if (response.statusCode == 400) {
+    return jsonDecode(response.body);
+  } else if (response.statusCode == 401) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Error');
+  }
+}
+
+//delete account
+Future<Map> httpDeleteAccount(deleteToken) async {
+  final response = await http.delete(
+    Uri.parse('https://freequiz.herokuapp.com/api/v1/user/delete/$deleteToken'),
+    headers: {
+      "Authorization":
+          "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+      "Access-token": Profile.accessToken,
+    },
+  );
+  if (response.statusCode == 200) {
+    Profile.accessToken = "";
+    Profile().deleteData();
     return jsonDecode(response.body);
   } else if (response.statusCode == 401) {
     return jsonDecode(response.body);

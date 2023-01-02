@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/2_profile/textfield_data.dart';
 import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
@@ -13,12 +14,7 @@ class EMail extends StatefulWidget {
 }
 
 class _EMailState extends State<EMail> {
-  bool eMailChanged = false;
-  final newEmail = TextEditingController();
-  String emailHint = language["E-Mail"];
-  bool errorEmail = false;
-  Color emailTextfieldColor = color1;
-  bool successEmail = false;
+  TextFieldData newEmail = TextFieldData(hint: language["E-Mail"]);
   final color5 = const Color.fromARGB(255, 50, 50, 50);
   final color6 = color3;
   bool edit = false;
@@ -79,23 +75,23 @@ class _EMailState extends State<EMail> {
                                 darkMode ? Brightness.dark : Brightness.light,
                             keyboardType: TextInputType.emailAddress,
                             autocorrect: false,
-                            controller: newEmail,
+                            controller: newEmail.input,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: darkMode
                                   ? const Color.fromARGB(255, 45, 45, 45)
                                   : const Color.fromARGB(255, 255, 231, 218),
                               contentPadding: const EdgeInsets.all(10.0),
-                              hintText: emailHint,
+                              hintText: newEmail.hint,
                               hintStyle: TextStyle(
-                                color: errorEmail
+                                color: newEmail.error
                                     ? Colors.red
-                                    : (successEmail ? Colors.green : textColor),
+                                    : (newEmail.changed? Colors.green : textColor),
                               ),
                               border: const OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: emailTextfieldColor,
+                                  color: newEmail.color,
                                   width: 2.0,
                                 ),
                               ),
@@ -131,32 +127,37 @@ class _EMailState extends State<EMail> {
   }
 
   changeEmail() async {
-    final Map map = await httpPatchAccount(email: newEmail.text);
-    if (map["success"] == true) {
-      setState(() {
-        newEmail.clear();
-        emailHint = language["E-Mail changed succesfully"];
-        emailTextfieldColor = Colors.green;
-        errorEmail = false;
-        successEmail = true;
-      });
-      widget.refresh();
-    } else if (map["message"] == "Invalid email") {
-      setState(() {
-        newEmail.clear();
-        emailHint = language["Invalid E-Mail"];
-        emailTextfieldColor = Colors.red;
-        errorEmail = true;
-        successEmail = false;
-      });
-    } else if (map["message"] == "Email is taken") {
-      setState(() {
-        newEmail.clear();
-        emailHint = language["Email is taken"];
-        emailTextfieldColor = Colors.red;
-        errorEmail = true;
-        successEmail = false;
-      });
+    if (newEmail.input.text.isEmpty) {
+      newEmail.hint = language["Can't be blank"];
+    }
+    else {
+      final Map map = await httpPatchAccount(email: newEmail.input.text);
+      if (map["success"] == true) {
+        setState(() {
+          newEmail.input.clear();
+          newEmail.hint = language["E-Mail changed succesfully"];
+          newEmail.color = Colors.green;
+          newEmail.error = false;
+          newEmail.changed= true;
+        });
+        widget.refresh();
+      } else if (map["message"] == "Invalid email") {
+        setState(() {
+          newEmail.input.clear();
+          newEmail.hint = language["Invalid E-Mail"];
+          newEmail.color = Colors.red;
+          newEmail.error = true;
+          newEmail.changed= false;
+        });
+      } else if (map["message"] == "Email is taken") {
+        setState(() {
+          newEmail.input.clear();
+          newEmail.hint = language["Email is taken"];
+          newEmail.color = Colors.red;
+          newEmail.error = true;
+          newEmail.changed= false;
+        });
+      }
     }
   }
 }

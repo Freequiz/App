@@ -79,5 +79,15 @@
     "Invalid Username": "Invalid Username",
     "Old Password": "Old Password",
     "Password changed": "Password changed",
-    "successfully": "successfully"
+    "successfully": "successfully",
+    "Can't be blank": "Can't be blank",
+    "Delete Account": "Delete Account",
+    "Are you sure you want to delete your account. It's not reversible": "Are you sure you want to delete your account. This cannot be undone",
+    "Invalid bearer token title": "An unknown error has occurred",
+    "Invalid bearer token description": "Try again later. If this error persists, please report it using the bug reporter.",
+    "Access token is invalid title": "Authentication error",
+    "Access token is invalid description": "An error occured and you were logged out. If this error persists, please use the bug reporter",
+    "other error title": "An unknown error has occurred",
+    "other error description": "Try again later. If this error persists, please report it using the bug reporter.",
+    "Try again": "Try again"
 }

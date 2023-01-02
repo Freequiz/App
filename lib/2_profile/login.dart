@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/2_profile/textfield_data.dart';
 import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
@@ -13,11 +14,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final username = TextEditingController();
-  final password = TextEditingController();
-  bool wrongUsername = false;
-  bool wrongPassword = false;
-  bool showPassword = false;
+  TextFieldData username = TextFieldData(hint: "");
+  final password = TextFieldData(hint: "", shown: false);
 
   late Map mapLogin;
   late FocusNode myFocusNode;
@@ -70,26 +68,26 @@ class _LoginState extends State<Login> {
                   onSubmitted: (value) {
                     setState(() {
                       myFocusNode.requestFocus();
-                      wrongUsername = false;
+                      username.error = false;
                     });
                   },
                   keyboardAppearance:
                               darkMode ? Brightness.dark : Brightness.light,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.emailAddress,
-                  controller: username,
+                  controller: username.input,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(10.0),
                     hintStyle: TextStyle(
-                      color: wrongUsername ? Colors.red : hintColor,
+                      color: username.error ? Colors.red : hintColor,
                     ),
-                    hintText: wrongUsername
+                    hintText: username.error
                         ? language["Username not found"]
                         : language["Username"],
                     border: const OutlineInputBorder(),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: wrongUsername ? Colors.red : color1,
+                        color: username.error ? Colors.red : color1,
                         width: 2.0,
                       ),
                     ),
@@ -109,32 +107,32 @@ class _LoginState extends State<Login> {
                         keyboardAppearance:
                               darkMode ? Brightness.dark : Brightness.light,
                         focusNode: myFocusNode,
-                        controller: password,
-                        obscureText: !showPassword,
+                        controller: password.input,
+                        obscureText: !password.shown,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(10.0),
                           hintStyle: TextStyle(
-                            color: wrongPassword ? Colors.red : hintColor,
+                            color: password.error ? Colors.red : hintColor,
                           ),
                           hintText:
-                              wrongPassword ? language["Wrong Password"] : language["Password"],
+                              password.error ? language["Wrong Password"] : language["Password"],
                           suffixIcon: IconButton(
                             icon: Icon(
-                              showPassword
+                              password.shown
                                   ? Icons.visibility
                                   : Icons.visibility_off,
                               color: color1,
                             ),
                             onPressed: () {
                               setState(() {
-                                showPassword = !showPassword;
+                                password.shown = !password.shown;
                               });
                             },
                           ),
                           border: const OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: wrongPassword ? Colors.red : color1,
+                              color: password.error ? Colors.red : color1,
                               width: 2.0,
                             ),
                           ),
@@ -168,20 +166,30 @@ class _LoginState extends State<Login> {
   }
 
   onPressed() async {
+    if (password.input.text.isEmpty) {
+      setState(() {
+        password.error = true;
+      });
+    }
+    else if (username.input.text.isEmpty) {
+      setState(() {
+        username.error = true;
+      });
+    }
     mapLogin = await httpPostSession(
-      username.text.trim(),
-      password.text.trim()
+      username.input.text.trim(),
+      password.input.text.trim()
     );
     if (mapLogin.isNotEmpty) {
-      if (mapLogin["message"] == "User not found") {
+      if (mapLogin["message"] == "User doesn't exist") {
         setState(() {
-          wrongUsername = true;
-          username.clear();
+          username.error = true;
+          username.input.clear();
         });
       } else if (mapLogin["message"] == "Wrong password") {
         setState(() {
-          wrongPassword = true;
-          password.clear();
+          password.error = true;
+          password.input.clear();
         });
       } else {
         Profile.accessToken = mapLogin["access_token"];

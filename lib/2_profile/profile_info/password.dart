@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/2_profile/textfield_data.dart';
 import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
@@ -12,18 +13,9 @@ class Password extends StatefulWidget {
 }
 
 class _PasswordState extends State<Password> {
-  final newPassword = TextEditingController();
-  final newPasswordConfirmation = TextEditingController();
-  final oldPassword = TextEditingController();
-  String passwordHint = language["Password"];
-  Color passwordTextfieldColor = color1;
-  String passwordConfirmationHint = language["Confirm Password"];
-  String oldPasswordHint = language["Old Password"];
-  bool passwordChanged = false;
-  bool showOldPassword = false;
-  bool showPassword = false;
-  bool showPasswordConfirmation = false;
-  bool errorPassword = false;
+  TextFieldData newPassword = TextFieldData(hint: language["Password"], shown: false);
+  TextFieldData newPasswordConfirmation = TextFieldData(hint: language["Confirm Password"], shown: false);
+  TextFieldData oldPassword = TextFieldData(hint: language["Old Password"], shown: false);
   final color5 = const Color.fromARGB(255, 50, 50, 50);
   final color6 = color3;
   bool edit = false;
@@ -82,36 +74,36 @@ class _PasswordState extends State<Password> {
                       textInputAction: TextInputAction.next,
                       autocorrect: false,
                       enableSuggestions: false,
-                      obscureText: !showOldPassword,
+                      obscureText: !oldPassword.shown,
                       keyboardType: TextInputType.visiblePassword,
-                      controller: oldPassword,
+                      controller: oldPassword.input,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 255, 231, 218),
                         contentPadding: const EdgeInsets.all(10.0),
-                        hintText: oldPasswordHint,
+                        hintText: oldPassword.hint,
                         hintStyle: TextStyle(
-                          color: errorPassword ? Colors.red : textColor,
+                          color: newPassword.error ? Colors.red : textColor,
                         ),
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: passwordTextfieldColor,
+                            color: newPassword.color,
                             width: 2.0,
                           ),
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            showOldPassword
+                            oldPassword.shown
                                 ? Icons.visibility
                                 : Icons.visibility_off,
                             color: color1,
                           ),
                           onPressed: () {
                             setState(() {
-                              showOldPassword = !showOldPassword;
+                              oldPassword.shown = !oldPassword.shown;
                             });
                           },
                         ),
@@ -140,36 +132,36 @@ class _PasswordState extends State<Password> {
                       textInputAction: TextInputAction.next,
                       autocorrect: false,
                       enableSuggestions: false,
-                      obscureText: !showPassword,
+                      obscureText: !newPassword.shown,
                       keyboardType: TextInputType.visiblePassword,
-                      controller: newPassword,
+                      controller: newPassword.input,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 255, 231, 218),
                         contentPadding: const EdgeInsets.all(10.0),
-                        hintText: passwordHint,
+                        hintText: newPassword.hint,
                         hintStyle: TextStyle(
-                          color: errorPassword ? Colors.red : textColor,
+                          color: newPassword.error ? Colors.red : textColor,
                         ),
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: passwordTextfieldColor,
+                            color: newPassword.color,
                             width: 2.0,
                           ),
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            showPassword
+                            newPassword.shown
                                 ? Icons.visibility
                                 : Icons.visibility_off,
                             color: color1,
                           ),
                           onPressed: () {
                             setState(() {
-                              showPassword = !showPassword;
+                              newPassword.shown = !newPassword.shown;
                             });
                           },
                         ),
@@ -200,37 +192,37 @@ class _PasswordState extends State<Password> {
                                 darkMode ? Brightness.dark : Brightness.light,
                             autocorrect: false,
                             enableSuggestions: false,
-                            obscureText: !showPasswordConfirmation,
+                            obscureText: !newPasswordConfirmation.shown,
                             keyboardType: TextInputType.visiblePassword,
-                            controller: newPasswordConfirmation,
+                            controller: newPasswordConfirmation.input,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: darkMode
                                   ? const Color.fromARGB(255, 45, 45, 45)
                                   : const Color.fromARGB(255, 255, 231, 218),
                               contentPadding: const EdgeInsets.all(10.0),
-                              hintText: passwordConfirmationHint,
+                              hintText: newPasswordConfirmation.hint,
                               hintStyle: TextStyle(
-                                color: errorPassword ? Colors.red : textColor,
+                                color: newPassword.error ? Colors.red : textColor,
                               ),
                               border: const OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: passwordTextfieldColor,
+                                  color: newPassword.color,
                                   width: 2.0,
                                 ),
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  showPasswordConfirmation
+                                  newPasswordConfirmation.shown
                                       ? Icons.visibility
                                       : Icons.visibility_off,
                                   color: color1,
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    showPasswordConfirmation =
-                                        !showPasswordConfirmation;
+                                    newPasswordConfirmation.shown =
+                                        !newPasswordConfirmation.shown;
                                   });
                                 },
                               ),
@@ -267,36 +259,36 @@ class _PasswordState extends State<Password> {
 
   changePassword() async {
     final Map map = await httpPatchAccount(
-        password: newPassword.text,
-        passwordConfirmation: newPasswordConfirmation.text,
-        oldPassword: oldPassword.text);
+        password: newPassword.input.text,
+        passwordConfirmation: newPasswordConfirmation.input.text,
+        oldPassword: oldPassword.input.text);
     if (map["success"] == true) {
       setState(() {
-        newPassword.clear();
-        newPasswordConfirmation.clear();
-        oldPassword.clear();
-        oldPasswordHint = language["Password changed"];
-        passwordHint = language["successfully"];
-        passwordConfirmationHint = language[""];
-        passwordTextfieldColor = Colors.green;
+        newPassword.input.clear();
+        newPasswordConfirmation.input.clear();
+        oldPassword.input.clear();
+        oldPassword.hint = language["Password changed"];
+        newPassword.hint = language["successfully"];
+        newPasswordConfirmation.hint = language[""];
+        newPassword.color = Colors.green;
       });
     } else if (map["message"] == "Passwords don't match") {
       setState(() {
-        newPassword.clear();
-        newPasswordConfirmation.clear();
-        passwordHint = language["Passwords don't match"];
-        passwordConfirmationHint = "";
-        passwordTextfieldColor = Colors.red;
-        errorPassword = true;
+        newPassword.input.clear();
+        newPasswordConfirmation.input.clear();
+        newPassword.hint = language["Passwords don't match"];
+        newPasswordConfirmation.hint = "";
+        newPassword.color = Colors.red;
+        newPassword.error = true;
       });
     } else if (map["message"] == "New password doesn't meet requirements") {
       setState(() {
-        newPassword.clear();
-        newPasswordConfirmation.clear();
-        passwordHint = language["At least 8 characters long, capital letter,"];
-        passwordConfirmationHint = language["lowercase letter and number"];
-        passwordTextfieldColor = Colors.red;
-        errorPassword = true;
+        newPassword.input.clear();
+        newPasswordConfirmation.input.clear();
+        newPassword.hint = language["At least 8 characters long, capital letter,"];
+        newPasswordConfirmation.hint = language["lowercase letter and number"];
+        newPassword.color = Colors.red;
+        newPassword.error = true;
       });
     }
   }
