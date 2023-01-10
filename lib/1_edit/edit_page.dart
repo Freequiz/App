@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/create_quiz.dart';
+import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class EditPage extends StatefulWidget {
@@ -30,7 +31,7 @@ class _EditPageState extends State<EditPage> {
               ),
             );
           },
-          child: Text("Create a New Quiz", style: TextStyle(fontSize: height / 40),),
+          child: Text(language["Create a New Quiz"], style: TextStyle(fontSize: height / 40),),
         ),
       ),
     );

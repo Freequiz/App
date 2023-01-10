@@ -19,6 +19,9 @@ Future<void> initialLoading() async {
   else if (defaultLocale == "fr") {
     chosenLanguage = "french";
   }
+  else if (defaultLocale == "it") {
+    chosenLanguage = "italian";
+  }
   final String response =
       await rootBundle.loadString('languages/$chosenLanguage.json');
   language = json.decode(response);

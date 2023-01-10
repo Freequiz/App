@@ -48,7 +48,7 @@
     "Invalid E-Mail": "L'e-mail n'est pas valide",
     "Email is taken": "L'e-mail est pris",
     "Sign up": "Enregistrement",
-    "By signing up you accept the": "En vous inscrivant, vous acceptez les",
+    "By signing up you accept the ": "En vous inscrivant, vous acceptez les ",
     "terms and conditions": "conditions générales",
     "Already have an Account?": "Déjà un compte?",
     "Log in": "Connexion",
@@ -87,6 +87,11 @@
     "Access token is invalid title": "Erreur d'authentification",
     "Access token is invalid description": "Une erreur s'est produite et vous avez été déconnecté. Si cette erreur persiste, veuillez utiliser le rapport de bug",
     "other error title": "Une erreur inconnue s'est produite",
-    "other error description": "Réessayez plus tard. Si cette erreur persiste, veuillez la signaler en utilisant le rapportde bugs",
-    "Try again": "Réessayer"
+    "other error description": "Réessayez plus tard. Si cette erreur persiste, veuillez la signaler en utilisant le rapport de bugs",
+    "Bug Reporter": "Rapport de bugs",
+    "Try again": "Réessayer",
+    "Platform": "Plate-forme",
+    "Platform can't be blank": "La plate-forme ne peut pas être vide",
+    "Submit": "Soumettre",
+    "Report Bug": "Soumettre un bug"
 }

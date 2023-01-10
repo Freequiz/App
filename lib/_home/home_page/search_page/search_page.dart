@@ -91,7 +91,7 @@ class _SearchPageState extends State<SearchPage> {
                   itemCount: widget.uuids.length,
                   itemBuilder: (BuildContext context, int i) {
                     String uuid = widget.uuids[
-                        (mobileLayout ? i : i * 2 + widget.n).toString()]!;
+                        i.toString()]!;
                     return FutureBuilder<Map>(
                       future: getQuiz(uuid, false),
                       builder: (context, quiz) {
@@ -148,18 +148,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-
-  half() {
-    double half = widget.uuids.length / 2;
-    if (half.remainder(1) != 0) {
-      if (widget.n == 0) {
-        return (half + 0.5).toInt();
-      }
-      return (half - 0.5).toInt();
-    }
-    return half.toInt();
-  }
-
+  
   trim(String searchTerm) {
     final String trimmedSearchTerm = searchTerm.characters.take(20).toString();
     if (trimmedSearchTerm.length == searchTerm.length) {

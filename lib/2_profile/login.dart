@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/2_profile/textfield_data.dart';
+import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
@@ -16,6 +16,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextFieldData username = TextFieldData(hint: "");
   final password = TextFieldData(hint: "", shown: false);
+  bool pressed = false;
 
   late Map mapLogin;
   late FocusNode myFocusNode;
@@ -35,9 +36,12 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
     final hintColor = darkMode ? Colors.white : Colors.black;
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool mobileLayout = shortestSide < 600;
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Sign up"]),
@@ -48,7 +52,9 @@ class _LoginState extends State<Login> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: mobileLayout
+              ? const EdgeInsets.all(10.0)
+              : EdgeInsets.symmetric(horizontal: width / 5.5, vertical: 10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -63,7 +69,7 @@ class _LoginState extends State<Login> {
                 height: height / 60,
               ),
               SizedBox(
-                height: height / 20,
+                height: mobileLayout ? height / 20 : 40,
                 child: TextField(
                   onSubmitted: (value) {
                     setState(() {
@@ -72,7 +78,7 @@ class _LoginState extends State<Login> {
                     });
                   },
                   keyboardAppearance:
-                              darkMode ? Brightness.dark : Brightness.light,
+                      darkMode ? Brightness.dark : Brightness.light,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.emailAddress,
                   controller: username.input,
@@ -99,13 +105,13 @@ class _LoginState extends State<Login> {
                 children: [
                   Flexible(
                     child: SizedBox(
-                      height: height / 20,
+                      height: mobileLayout ? height / 20 : 40,
                       child: TextField(
                         onSubmitted: (value) {
                           onPressed();
                         },
                         keyboardAppearance:
-                              darkMode ? Brightness.dark : Brightness.light,
+                            darkMode ? Brightness.dark : Brightness.light,
                         focusNode: myFocusNode,
                         controller: password.input,
                         obscureText: !password.shown,
@@ -114,8 +120,9 @@ class _LoginState extends State<Login> {
                           hintStyle: TextStyle(
                             color: password.error ? Colors.red : hintColor,
                           ),
-                          hintText:
-                              password.error ? language["Wrong Password"] : language["Password"],
+                          hintText: password.error
+                              ? language["Wrong Password"]
+                              : language["Password"],
                           suffixIcon: IconButton(
                             icon: Icon(
                               password.shown
@@ -144,16 +151,24 @@ class _LoginState extends State<Login> {
                     width: 5,
                   ),
                   SizedBox(
-                    height: height / 20,
+                    height: mobileLayout ? height / 20 : 40,
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: color1,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {
-                        onPressed();
+                        pressed ? () {} : onPressed();
                       },
-                      child: const Icon(Icons.arrow_forward_ios),
+                      child: pressed
+                          ? SizedBox(
+                              width: mobileLayout ? height / 30 : 30,
+                              height: mobileLayout ? height / 30 : 30,
+                              child: const CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : const Icon(Icons.arrow_forward_ios),
                     ),
                   ),
                 ],
@@ -170,33 +185,36 @@ class _LoginState extends State<Login> {
       setState(() {
         password.error = true;
       });
-    }
-    else if (username.input.text.isEmpty) {
+    } else if (username.input.text.isEmpty) {
       setState(() {
         username.error = true;
       });
-    }
-    mapLogin = await httpPostSession(
-      username.input.text.trim(),
-      password.input.text.trim()
-    );
-    if (mapLogin.isNotEmpty) {
-      if (mapLogin["message"] == "User doesn't exist") {
-        setState(() {
-          username.error = true;
-          username.input.clear();
-        });
-      } else if (mapLogin["message"] == "Wrong password") {
-        setState(() {
-          password.error = true;
-          password.input.clear();
-        });
-      } else {
-        Profile.accessToken = mapLogin["access_token"];
-        Profile().saveData();
-        // ignore: use_build_context_synchronously
-        Navigator.of(context).pop();
-        widget.refresh();
+    } else {
+      setState(() {
+        pressed = true;
+      });
+      mapLogin = await httpPostSession(
+          username.input.text.trim(), password.input.text.trim());
+      if (mapLogin.isNotEmpty) {
+        if (mapLogin["message"] == "User doesn't exist") {
+          setState(() {
+            username.error = true;
+            pressed = false;
+            username.input.clear();
+          });
+        } else if (mapLogin["message"] == "Wrong password") {
+          setState(() {
+            password.error = true;
+            pressed = false;
+            password.input.clear();
+          });
+        } else {
+          Profile.accessToken = mapLogin["access_token"];
+          Profile().saveData();
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pop();
+          widget.refresh();
+        }
       }
     }
   }

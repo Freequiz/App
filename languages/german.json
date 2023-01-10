@@ -47,7 +47,7 @@
     "Invalid E-Mail": "E-Mail ist nicht gültig",
     "Email is taken": "E-Mail ist vergeben",
     "Sign up": "Registrierung",
-    "By signing up you accept the": "Mit der Registrierung akzeptieren Sie die",
+    "By signing up you accept the ": "Mit der Registrierung akzeptieren Sie die ",
     "terms and conditions": "AGBs",
     "Already have an Account?": "Schon ein Konto?",
     "Log in": "Anmeldung",
@@ -87,5 +87,10 @@
     "Access token is invalid description": "Es ist ein Fehler aufgetreten und Sie wurden abgemeldet. Wenn dieser Fehler weiterhin auftritt, verwenden Sie bitte den Bug-Reporter",
     "other error title": "Es ist ein unbekannter Fehler aufgetreten",
     "other error description": "Versuchen Sie es später noch einmal. Wenn dieser Fehler weiterhin besteht, melden Sie ihn bitte über den Bugreporter",
-    "Try again": "Nochmal versuchen"
+    "Bug Reporter": "Bugreporter", 
+    "Try again": "Nochmal versuchen",
+    "Platform": "Plattform",
+    "Platform can't be blank": "Plattform darf nicht leer sein",
+    "Submit": "Senden",
+    "Report Bug": "Fehler melden"
 }

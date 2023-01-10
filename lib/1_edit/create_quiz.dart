@@ -52,10 +52,13 @@ class _CreateQuizState extends State<CreateQuiz> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
     final hintColor =
         darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool mobileLayout = shortestSide < 600;
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Create Quiz"]),
@@ -80,7 +83,7 @@ class _CreateQuizState extends State<CreateQuiz> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: mobileLayout ? const EdgeInsets.all(10.0) : EdgeInsets.symmetric(horizontal: width / 5.5, vertical: 10.0),
           child: ListView(
             children: [
               SizedBox(
@@ -107,7 +110,6 @@ class _CreateQuizState extends State<CreateQuiz> {
                         },
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () {},
-                        keyboardType: TextInputType.multiline,
                         controller: title,
                         decoration: InputDecoration(
                           filled: true,
@@ -148,7 +150,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                         textInputAction: TextInputAction.newline,
                         onEditingComplete: () {},
                         controller: description,
-                        maxLines: null,
+                        maxLines: 6,
+                        keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: darkMode

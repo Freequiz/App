@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/3_bug_report/bug_reporter.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
 class ErrorLoading2 extends StatelessWidget {
@@ -18,6 +19,18 @@ class ErrorLoading2 extends StatelessWidget {
       ),
       content: Text(language["$error description"]),
       actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return const BugReporter();
+                },
+              ),
+            );
+          },
+          child: Text(language["Bug Reporter"]),
+        ),
         TextButton(
           onPressed: () {
             Navigator.of(context).push(

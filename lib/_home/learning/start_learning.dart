@@ -73,7 +73,7 @@ class _StartLearningState extends State<StartLearning> {
         ),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(width / 30.4),
+            borderRadius: BorderRadius.circular(width / 30 + 10),
             color: color5,
           ),
           height: height / 10,
@@ -96,9 +96,9 @@ class _StartLearningState extends State<StartLearning> {
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
                   height: height / 10 - 20,
-                  width: Quiz.marked ? (width - 50) / 2 : width - 40,
+                  width: widthStartButton(width),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(width / 40),
+                    borderRadius: BorderRadius.circular(width / 30),
                     color: color[widget.i],
                   ),
                   child: Center(
@@ -133,9 +133,9 @@ class _StartLearningState extends State<StartLearning> {
                       child: Container(
                         padding: const EdgeInsets.all(10.0),
                         height: height / 10 - 20,
-                        width: (width - 50) / 2,
+                        width: widthStartButton(width),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(width / 30.4),
+                          borderRadius: BorderRadius.circular(width / 30),
                           color: color[widget.i],
                         ),
                         child: Row(
@@ -214,6 +214,10 @@ class _StartLearningState extends State<StartLearning> {
         ),
       ],
     );
+  }
+
+  widthStartButton(width) {
+    return Quiz.marked ? (width - 50) / 2 : width - 40;
   }
 
   markWord(i, i2) {

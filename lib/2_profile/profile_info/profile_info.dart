@@ -32,7 +32,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
       },
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: DefaultTextStyle(
             style: TextStyle(
               fontSize: height / 50,

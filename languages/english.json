@@ -48,7 +48,7 @@
     "Invalid E-Mail": "E-Mail ist not valid",
     "Email is taken": "E-Mail is taken",
     "Sign up": "Sign up",
-    "By signing up you accept the": "By signing up you accept the",
+    "By signing up you accept the ": "By signing up you accept the ",
     "terms and conditions": "terms and conditions",
     "Already have an Account?": "Already have an Account?",
     "Log in": "Log in",
@@ -89,5 +89,10 @@
     "Access token is invalid description": "An error occured and you were logged out. If this error persists, please use the bug reporter",
     "other error title": "An unknown error has occurred",
     "other error description": "Try again later. If this error persists, please report it using the bug reporter.",
-    "Try again": "Try again"
+    "Bug Reporter": "Bug Reporter",
+    "Try again": "Try again",
+    "Platform": "Platform",
+    "Platform can't be blank": "Platform can't be blank",
+    "Submit": "Submit",
+    "Report Bug": "Report Bug"
 }

@@ -3,9 +3,8 @@ import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/2_profile/profile_info/profile_info.dart';
 import 'package:freequiz/2_profile/signup.dart';
 import 'package:freequiz/api/api_account.dart';
-import 'package:freequiz/main.dart';
-import 'package:freequiz/others/error_loading2.dart';
-import 'package:freequiz/others/loading_screen2.dart';
+import 'package:freequiz/others/error_loading/error_loading2.dart';
+import 'package:freequiz/others/loading_screen/loading_screen2.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -55,8 +54,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
                 return const LoadingScreen2(
                   message: "Loading Profile",
-                  finishedLoading: false,
-                  widget: Drawer(),
                 );
               },
             ),

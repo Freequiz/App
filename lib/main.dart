@@ -1,7 +1,9 @@
 import 'package:freequiz/1_edit/edit_page.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/2_profile/signup.dart';
+import 'package:freequiz/3_bug_report/bug_report_page.dart';
 import 'package:freequiz/_home/home_page/home_page.dart';
+import 'package:freequiz/main_app_bar.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +89,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class RootPage extends StatefulWidget {
-  final i;
+  final int i;
   const RootPage({super.key, this.i = 0});
 
   @override
@@ -99,9 +101,9 @@ class _RootPageState extends State<RootPage> {
   List<Widget> pages = const [
     HomePage(),
     EditPage(),
+    BugReportPage(),
     ProfilePage(),
   ];
-  late List<String> namePages = ["Freequiz", "Freequiz", "Freequiz"];
 
   refresh() {
     setState(() {});
@@ -122,10 +124,11 @@ class _RootPageState extends State<RootPage> {
           httpPostRefresh();
           return Scaffold(
             appBar: AppBar(
-              title: Text(namePages[currentPage]),
+              title: const MainAppBar(),
             ),
             body: pages[currentPage],
             bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               backgroundColor: const Color.fromARGB(255, 152, 141, 145),
               showSelectedLabels: false,
               showUnselectedLabels: false,
@@ -133,6 +136,8 @@ class _RootPageState extends State<RootPage> {
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
                 BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.bug_report), label: ""),
                 BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
               ],
               currentIndex: currentPage,

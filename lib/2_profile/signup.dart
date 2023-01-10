@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/2_profile/textfield_data.dart';
+import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/api_account.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/login.dart';
@@ -17,22 +17,30 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextFieldData username = TextFieldData(hint: language["Username"]);
   TextFieldData email = TextFieldData(hint: language["E-Mail"]);
-  TextFieldData password = TextFieldData(hint: language["Password"], shown: false);
-  TextFieldData passwordConfirmation= TextFieldData(hint: language["Confirm Password"], shown: false);
+  TextFieldData password =
+      TextFieldData(hint: language["Password"], shown: false);
+  TextFieldData passwordConfirmation =
+      TextFieldData(hint: language["Confirm Password"], shown: false);
+  bool pressed = false;
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     final brightness = MediaQuery.of(context).platformBrightness;
     bool darkMode = brightness == Brightness.dark;
     final hintColor = darkMode ? Colors.white : Colors.black;
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool mobileLayout = shortestSide < 600;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: mobileLayout
+            ? const EdgeInsets.all(10.0)
+            : EdgeInsets.symmetric(horizontal: width / 5.5, vertical: 10.0),
         child: ListView(
           children: [
             SizedBox(
@@ -48,20 +56,24 @@ class _SignUpState extends State<SignUp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  language["By signing up you accept the"],
+                  language["By signing up you accept the "],
                   style: TextStyle(fontSize: height / 65),
                 ),
-                TextButton(
-                  onPressed: () {},
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {},
                   child: Text(
                     language["terms and conditions"],
-                    style: TextStyle(fontSize: height / 65),
+                    style: TextStyle(fontSize: height / 65, color: Colors.blue),
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(
-              height: height / 20,
+              height: height / 40.0,
+            ),
+            SizedBox(
+              height: mobileLayout ? height / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
@@ -91,7 +103,7 @@ class _SignUpState extends State<SignUp> {
               height: 5.0,
             ),
             SizedBox(
-              height: height / 20,
+              height: mobileLayout ? height / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
@@ -122,7 +134,7 @@ class _SignUpState extends State<SignUp> {
               height: 5.0,
             ),
             SizedBox(
-              height: height / 20,
+              height: mobileLayout ? height / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
@@ -169,7 +181,7 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Flexible(
                   child: SizedBox(
-                    height: height / 20,
+                    height: mobileLayout ? height / 20 : 40,
                     child: TextField(
                       onSubmitted: (value) {
                         onPressed();
@@ -216,16 +228,24 @@ class _SignUpState extends State<SignUp> {
                   width: 5,
                 ),
                 SizedBox(
-                  height: height / 20,
+                  height: mobileLayout ? height / 20 : 40,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: color1,
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {
-                      onPressed();
+                      pressed ? (){} : onPressed();
                     },
-                    child: const Icon(Icons.arrow_forward_ios),
+                    child: pressed
+                        ? SizedBox(
+                            width: mobileLayout ? height / 30 : 30,
+                            height: mobileLayout ? height / 30 : 30,
+                            child: const CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : const Icon(Icons.arrow_forward_ios),
                   ),
                 ),
               ],
@@ -288,8 +308,15 @@ class _SignUpState extends State<SignUp> {
         passwordConfirmation.hint = "";
       });
     } else {
-      final Map map = await httpPutAccount(username.input.text, email.input.text,
-          password.input.text, passwordConfirmation.input.text, true);
+      setState(() {
+        pressed = true;
+      });
+      final Map map = await httpPutAccount(
+          username.input.text,
+          email.input.text,
+          password.input.text,
+          passwordConfirmation.input.text,
+          true);
       if (map["success"] == true) {
         Profile.accessToken = map["access_token"];
         Profile().saveData();
@@ -299,24 +326,28 @@ class _SignUpState extends State<SignUp> {
           username.input.clear();
           username.hint = language["Username is taken"];
           username.error = true;
+          pressed = false;
         });
       } else if (map["message"] == "Username doesn't meet requirements") {
         setState(() {
           username.input.clear();
-          username.hint= language["Username is not valid"];
+          username.hint = language["Username is not valid"];
           username.error = true;
+          pressed = false;
         });
       } else if (map["message"] == "Email is already taken") {
         setState(() {
           email.input.clear();
           email.hint = language["E-Mail is taken"];
           email.error = true;
+          pressed = false;
         });
       } else if (map["message"] == "Email doesn't meet requirements") {
         setState(() {
           email.input.clear();
           email.hint = language["E-Mail is invalid"];
           email.error = true;
+          pressed = false;
         });
       } else if (map["message"] == "Password doesn't meet requirements") {
         setState(() {
@@ -326,6 +357,7 @@ class _SignUpState extends State<SignUp> {
               language["At least 8 characters long, capital letter,"];
           passwordConfirmation.hint = language["lowercase letter and number"];
           password.error = true;
+          pressed = false;
         });
       }
     }

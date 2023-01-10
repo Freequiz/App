@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search_page.dart';
 import 'package:freequiz/api/api_quiz.dart';
-import 'package:freequiz/others/error_loading.dart';
+import 'package:freequiz/others/error_loading/error_loading.dart';
 import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/loading_screen.dart';
+import 'package:freequiz/others/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchBar extends StatefulWidget {

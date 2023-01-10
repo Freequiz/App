@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SearchBar(),
+            const Center(child: SearchBar()),
             SizedBox(
               height: mobileLayout ? 10 : 30,
             ),
