@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/api/api_bugs.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class BugReporter extends StatefulWidget {
   const BugReporter({super.key});
@@ -13,7 +15,6 @@ class BugReporter extends StatefulWidget {
 class _BugReporterState extends State<BugReporter> {
   TextFieldData title = TextFieldData(hint: "");
   TextFieldData description = TextFieldData(hint: "");
-  TextFieldData platform = TextFieldData(hint: "");
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class _BugReporterState extends State<BugReporter> {
                           fontWeight: FontWeight.w500,
                         ),
                         hintText: title.error
-                            ? language["Title can't be blank"]
+                            ? language["Title at least 3 characters"]
                             : language["Title"],
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
@@ -101,7 +102,7 @@ class _BugReporterState extends State<BugReporter> {
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
                         hintText: description.error
-                            ? language["Description can't be blank"]
+                            ? language["Description at least 10 characters"]
                             : language["Description"],
                         hintStyle: TextStyle(
                           color: description.error ? Colors.red : hintColor,
@@ -118,39 +119,6 @@ class _BugReporterState extends State<BugReporter> {
                     const SizedBox(
                       height: 5,
                     ),
-                    TextField(
-                      onSubmitted: (value) {
-                        FocusScope.of(context).nextFocus();
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          platform.error = false;
-                        });
-                      },
-                      textInputAction: TextInputAction.newline,
-                      onEditingComplete: () {},
-                      controller: platform.input,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: darkMode
-                            ? const Color.fromARGB(255, 45, 45, 45)
-                            : const Color.fromARGB(255, 234, 247, 255),
-                        contentPadding: const EdgeInsets.all(10.0),
-                        hintText: platform.error
-                            ? language["Platform can't be blank"]
-                            : language["Platform"],
-                        hintStyle: TextStyle(
-                          color: platform.error ? Colors.red : hintColor,
-                        ),
-                        border: const OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: platform.error ? Colors.red : color1,
-                            width: 2.0,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -162,7 +130,9 @@ class _BugReporterState extends State<BugReporter> {
               child: TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: color1, foregroundColor: Colors.white),
-                onPressed: () {},
+                onPressed: () {
+                  submit();
+                },
                 child: Text(
                   language["Submit"],
                   style: const TextStyle(color: Colors.white),
@@ -173,5 +143,33 @@ class _BugReporterState extends State<BugReporter> {
         ),
       ),
     );
+  }
+
+  submit() async {
+    if (title.input.text.length < 3) {
+      setState(() {
+        title.input.clear();
+        title.error = true;
+      });
+    } else if (description.input.text.length < 10) {
+      setState(() {
+        description.input.clear();
+        description.error = true;
+      });
+    } else {
+      var currentPlatform = Theme.of(context).platform;
+      String platform = "_Unknown";
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      if (currentPlatform == TargetPlatform.iOS) {
+        IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+        platform = iosInfo.toString();
+      } else if (currentPlatform == TargetPlatform.android) {
+        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+        platform = androidInfo.toString();
+      }
+      httpPutBug(title.input.text, description.input.text, platform);
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
+    }
   }
 }

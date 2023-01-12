@@ -135,6 +135,7 @@ class _SmartState extends State<Smart> {
           answeredWrong = false;
           Quiz.indexArray.removeAt(0);
           _textController.clear();
+          newChoices();
         });
       } else {
         widget.refresh();

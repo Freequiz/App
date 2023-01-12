@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/1_edit/create_quiz/basic_textfield.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/textfield_data.dart';
 
 class CreateQuiz extends StatefulWidget {
   const CreateQuiz({super.key});
@@ -12,21 +14,17 @@ class CreateQuiz extends StatefulWidget {
 
 class _CreateQuizState extends State<CreateQuiz> {
   int wordCount = 3;
-  List errorDefinitions = [false, false, false];
-  List errorAnswers = [false, false, false];
   String definitionLanguage = "German";
   String answerLanguage = "English";
-  bool errorTitle = false;
-  bool errorDescription = false;
-  final List definitions = [
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController()
+  List<TextFieldData> definitions = [
+    TextFieldData(hint: language["Definition"]),
+    TextFieldData(hint: language["Definition"]),
+    TextFieldData(hint: language["Definition"])
   ];
-  final List answers = [
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController()
+  List<TextFieldData> answers = [
+    TextFieldData(hint: language["Answer"]),
+    TextFieldData(hint: language["Answer"]),
+    TextFieldData(hint: language["Answer"])
   ];
   final List<DropdownMenuItem<String>> languages = [
     DropdownMenuItem(
@@ -46,8 +44,8 @@ class _CreateQuizState extends State<CreateQuiz> {
       child: Text(language["Italian"]),
     ),
   ];
-  final title = TextEditingController();
-  final description = TextEditingController();
+  final title = TextFieldData(hint: language["Title"]);
+  final description = TextFieldData(hint: language["Description"]);
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +61,16 @@ class _CreateQuizState extends State<CreateQuiz> {
       appBar: AppBar(
         title: Text(language["Create Quiz"]),
         backgroundColor: darkMode ? color1 : color4,
+        leading: TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+        ),
+        automaticallyImplyLeading: false,
         actions: [
           TextButton(
             style: TextButton.styleFrom(
@@ -83,7 +91,9 @@ class _CreateQuizState extends State<CreateQuiz> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Padding(
-          padding: mobileLayout ? const EdgeInsets.all(10.0) : EdgeInsets.symmetric(horizontal: width / 5.5, vertical: 10.0),
+          padding: mobileLayout
+              ? const EdgeInsets.all(10.0)
+              : EdgeInsets.symmetric(horizontal: width / 5.5, vertical: 10.0),
           child: ListView(
             children: [
               SizedBox(
@@ -99,79 +109,22 @@ class _CreateQuizState extends State<CreateQuiz> {
                   padding: EdgeInsets.all(height / 100),
                   child: Column(
                     children: [
-                      TextField(
-                        onSubmitted: (value) {
-                          FocusScope.of(context).nextFocus();
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            errorTitle = false;
-                          });
-                        },
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () {},
-                        controller: title,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: darkMode
-                              ? const Color.fromARGB(255, 45, 45, 45)
-                              : const Color.fromARGB(255, 234, 247, 255),
-                          contentPadding: const EdgeInsets.all(10.0),
-                          hintStyle: TextStyle(
-                            color: errorTitle ? Colors.red : hintColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          hintText: errorTitle
-                              ? language["Title can't be blank"]
-                              : language["Title"],
-                          border: const OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: errorTitle
-                                  ? Colors.red
-                                  : (darkMode ? color3 : color1),
-                              width: 3.0,
-                            ),
-                          ),
-                        ),
+                      BasicTextField(
+                        textFieldData: title,
+                        hintError: language["Title can't be blank"],
+                        colorBorder: (darkMode ? color3 : color1),
+                        widthBorder: 3.0,
                       ),
                       const SizedBox(
                         height: 5,
                       ),
-                      TextField(
-                        onSubmitted: (value) {
-                          FocusScope.of(context).nextFocus();
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            errorDescription = false;
-                          });
-                        },
-                        textInputAction: TextInputAction.newline,
-                        onEditingComplete: () {},
-                        controller: description,
+                      BasicTextField(
+                        textFieldData: description,
+                        hintError: language["Description can't be blank"],
+                        colorBorder: color1,
                         maxLines: 6,
                         keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: darkMode
-                              ? const Color.fromARGB(255, 45, 45, 45)
-                              : const Color.fromARGB(255, 234, 247, 255),
-                          contentPadding: const EdgeInsets.all(10.0),
-                          hintText: errorDescription
-                              ? language["Description can't be blank"]
-                              : language["Description"],
-                          hintStyle: TextStyle(
-                            color: errorDescription ? Colors.red : hintColor,
-                          ),
-                          border: const OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: errorDescription ? Colors.red : color1,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
+                        textInputAction: TextInputAction.newline,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -252,42 +205,10 @@ class _CreateQuizState extends State<CreateQuiz> {
                       padding: EdgeInsets.all(height / 100),
                       child: Column(
                         children: [
-                          TextField(
-                            onSubmitted: (value) {
-                              FocusScope.of(context).nextFocus();
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                errorDefinitions[i] = false;
-                              });
-                            },
-                            textInputAction: TextInputAction.next,
-                            onEditingComplete: () {},
-                            autocorrect: false,
-                            controller: definitions[i],
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: darkMode
-                                  ? const Color.fromARGB(255, 45, 45, 45)
-                                  : const Color.fromARGB(255, 234, 247, 255),
-                              contentPadding: const EdgeInsets.all(10.0),
-                              hintStyle: TextStyle(
-                                color: errorDefinitions[i]
-                                    ? Colors.red
-                                    : hintColor,
-                              ),
-                              hintText: errorDefinitions[i]
-                                  ? language["Definition can't be blank"]
-                                  : language["Definition"],
-                              border: const OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color:
-                                      errorDefinitions[i] ? Colors.red : color1,
-                                  width: 2.0,
-                                ),
-                              ),
-                            ),
+                          BasicTextField(
+                            textFieldData: definitions[i],
+                            hintError: language["Definition can't be blank"],
+                            colorBorder: color1,
                           ),
                           const SizedBox(
                             height: 5,
@@ -295,14 +216,12 @@ class _CreateQuizState extends State<CreateQuiz> {
                           TextField(
                             onSubmitted: (value) {
                               setState(() {
-                                if (definitions[i].text != "" &&
-                                    answers[i].text != "") {
+                                if (definitions[i].input.text != "" &&
+                                    answers[i].input.text != "") {
                                   if (i + 2 >= wordCount) {
                                     wordCount++;
-                                    definitions.add(TextEditingController());
-                                    answers.add(TextEditingController());
-                                    errorAnswers.add(false);
-                                    errorDefinitions.add(false);
+                                    definitions.add(TextFieldData(hint: language["Definition"]));
+                                    answers.add(TextFieldData(hint: language["Answer"]));
                                   }
                                   FocusScope.of(context).nextFocus();
                                 }
@@ -310,13 +229,13 @@ class _CreateQuizState extends State<CreateQuiz> {
                             },
                             onChanged: (value) {
                               setState(() {
-                                errorAnswers[i] = false;
+                                answers[i].error = false;
                               });
                             },
                             textInputAction: TextInputAction.next,
                             onEditingComplete: () {},
                             autocorrect: false,
-                            controller: answers[i],
+                            controller: answers[i].input,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: darkMode
@@ -324,15 +243,15 @@ class _CreateQuizState extends State<CreateQuiz> {
                                   : const Color.fromARGB(255, 234, 247, 255),
                               contentPadding: const EdgeInsets.all(10.0),
                               hintStyle: TextStyle(
-                                color: errorAnswers[i] ? Colors.red : hintColor,
+                                color: answers[i].error ? Colors.red : hintColor,
                               ),
-                              hintText: errorAnswers[i]
+                              hintText: answers[i].error
                                   ? language["Answer can't be blank"]
                                   : language["Answer"],
                               border: const OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: errorAnswers[i] ? Colors.red : color1,
+                                  color: answers[i].error ? Colors.red : color1,
                                   width: 2.0,
                                 ),
                               ),
@@ -354,10 +273,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                   onPressed: () {
                     setState(() {
                       wordCount++;
-                      definitions.add(TextEditingController());
-                      answers.add(TextEditingController());
-                      errorAnswers.add(false);
-                      errorDefinitions.add(false);
+                      definitions.add(TextFieldData(hint: "Description"));
+                      answers.add(TextFieldData(hint: "Answer"));
                     });
                   },
                   child: const Icon(
@@ -376,37 +293,41 @@ class _CreateQuizState extends State<CreateQuiz> {
   onPressed() {
     bool error = false;
     for (var i = 0; i < definitions.length; i++) {
-      if (definitions[i].text.replaceAll(' ', '') == "") {
-        if (answers[i].text.replaceAll(' ', '') != "") {
+      if (definitions[i].input.text.replaceAll(' ', '') == "") {
+        if (answers[i].input.text.replaceAll(' ', '') != "") {
           setState(() {
-            errorDefinitions[i] = true;
-            definitions[i].clear();
+            definitions[i].error = true;
+            definitions[i].input.clear();
             error = true;
           });
         }
-      } else if (answers[i].text.replaceAll(' ', '') == "") {
-        if (definitions[i].text.replaceAll(' ', '') != "") {
+      } else if (answers[i].input.text.replaceAll(' ', '') == "") {
+        if (definitions[i].input.text.replaceAll(' ', '') != "") {
           setState(() {
-            errorAnswers[i] = true;
-            answers[i].clear();
+            answers[i].error = true;
+            answers[i].input.clear();
             error = true;
           });
         }
       }
     }
-    if (title.text.replaceAll(' ', '') == "") {
-      errorTitle = true;
-      error = true;
-      title.clear();
+    if (title.input.text.replaceAll(' ', '') == "") {
+      setState(() {
+        title.error = true;
+        error = true;
+        title.input.clear();
+      });
     }
-    if (description.text.replaceAll(' ', '') == "") {
-      errorDescription = true;
-      error = true;
-      description.clear();
+    if (description.input.text.replaceAll(' ', '') == "") {
+      setState(() {
+        description.error = true;
+        error = true;
+        description.input.clear();
+      });
     }
     if (!error) {
-      map(title.text, description.text, definitionLanguage, answerLanguage,
-          definitions, answers);
+      map(title.input.text, description.input.text, definitionLanguage,
+          answerLanguage, definitions, answers);
     }
   }
 }

@@ -9,7 +9,7 @@ bool newAccessToken = false;
 //log in
 Future<Map> httpPostSession(String username, String password) async {
   final response = await http.post(
-    Uri.parse('https://freequiz.herokuapp.com/api/v1/user/login'),
+    Uri.parse('https://freequiz.herokuapp.com/api/user/login'),
     headers: {
       "Authorization":
           "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
@@ -36,7 +36,7 @@ Future<Map> httpPostSession(String username, String password) async {
 //get account data
 Future<Map> httpGetData() async {
   final response = await http.get(
-    Uri.parse('https://freequiz.herokuapp.com/api/v1/user/data'),
+    Uri.parse('https://freequiz.herokuapp.com/api/user/data'),
     headers: {
       "Authorization":
           "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
@@ -58,7 +58,7 @@ Future<Map> httpGetData() async {
 //get delete token to delete the account
 Future<Map> httpGetDeleteToken() async {
   final response = await http.get(
-    Uri.parse('https://freequiz.herokuapp.com/api/v1/user/delete_token'),
+    Uri.parse('https://freequiz.herokuapp.com/api/user/delete_token'),
     headers: {
       "Authorization":
           "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
@@ -82,7 +82,7 @@ httpPostRefresh() async {
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       final response = await http.post(
-        Uri.parse('https://freequiz.herokuapp.com/api/v1/user/refresh'),
+        Uri.parse('https://freequiz.herokuapp.com/api/user/refresh'),
         headers: {
           "Authorization":
               "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
@@ -111,7 +111,7 @@ Future<Map> httpPatchAccount(
     String passwordConfirmation = "",
     String oldPassword = ""}) async {
   final response = await http.patch(
-      Uri.parse('https://freequiz.herokuapp.com/api/v1/user/update'),
+      Uri.parse('https://freequiz.herokuapp.com/api/user/update'),
       headers: {
         "Authorization":
             "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
@@ -149,7 +149,7 @@ Future<Map> httpPatchAccount(
 Future<Map> httpPutAccount(String username, String email, String password,
     String passwordConfirmation, bool agb) async {
   final response = await http.put(
-    Uri.parse('https://freequiz.herokuapp.com/api/v1/user/create'),
+    Uri.parse('https://freequiz.herokuapp.com/api/user/create'),
     headers: {
       "Authorization":
           "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
@@ -179,7 +179,7 @@ Future<Map> httpPutAccount(String username, String email, String password,
 //delete account
 Future<Map> httpDeleteAccount(deleteToken) async {
   final response = await http.delete(
-    Uri.parse('https://freequiz.herokuapp.com/api/v1/user/delete/$deleteToken'),
+    Uri.parse('https://freequiz.herokuapp.com/api/user/delete/$deleteToken'),
     headers: {
       "Authorization":
           "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",

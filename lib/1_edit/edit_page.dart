@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/1_edit/create_quiz.dart';
+import 'package:freequiz/1_edit/create_quiz/create_quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 

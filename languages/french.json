@@ -93,5 +93,7 @@
     "Platform": "Plate-forme",
     "Platform can't be blank": "La plate-forme ne peut pas être vide",
     "Submit": "Soumettre",
-    "Report Bug": "Soumettre un bug"
+    "Report Bug": "Soumettre un bug",
+    "Title at least 3 characters": "Titre au moins 3 caractères",
+    "Description at least 10 characters": "Description au moins 10 caractères"
 }

@@ -94,7 +94,8 @@
     "Platform can't be blank": 
     "La piattaforma non può essere vuota",
     "Submit": "Invia",
-    "Report Bug": "Segnala un errore"
-
+    "Report Bug": "Segnala un errore",
+    "Title at least 3 characters": "Titolo di almeno 3 caratteri",
+    "Description at least 10 characters": "Descrizione di almeno 10 caratteri"
   }
 

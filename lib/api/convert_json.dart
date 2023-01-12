@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/textfield_data.dart';
 
 definitionArray(quiz) {
   List<String> definition = [];
@@ -16,11 +17,11 @@ answerArray(quiz) {
   return answer;
 }
 
-map(String title, String description, String from, String to, List definition, List answer) {
+map(String title, String description, String from, String to, List<TextFieldData> definition, List<TextFieldData> answer) {
   Map translations = {};
   for (var i = 0; i < definition.length; i++) {
-    if (definition[i].text != "") {
-      translations.addAll({i.toString(): {'word': definition[i].text,'translation': answer[i].text}});
+    if (definition[i].input.text != "") {
+      translations.addAll({i.toString(): {'word': definition[i].input.text,'translation': answer[i].input.text}});
     }
     else {
       definition.removeAt(i);

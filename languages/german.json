@@ -92,5 +92,7 @@
     "Platform": "Plattform",
     "Platform can't be blank": "Plattform darf nicht leer sein",
     "Submit": "Senden",
-    "Report Bug": "Fehler melden"
+    "Report Bug": "Fehler melden",
+    "Title at least 3 characters": "Titel mindestens 3 Zeichen",
+    "Description at least 10 characters": "Beschreibung mindestens 10 Zeichen"
 }

@@ -94,5 +94,7 @@
     "Platform": "Platform",
     "Platform can't be blank": "Platform can't be blank",
     "Submit": "Submit",
-    "Report Bug": "Report Bug"
+    "Report Bug": "Report Bug",
+    "Title at least 3 characters": "Title at least 3 characters",
+    "Description at least 10 characters": "Description at least 10 characters"
 }
