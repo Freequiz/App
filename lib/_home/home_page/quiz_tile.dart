@@ -3,6 +3,7 @@ import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/share.dart';
 import 'package:freequiz/api/api_quiz.dart';
+import 'package:freequiz/others/error_loading/error_loading.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
@@ -81,7 +82,7 @@ class _QuizTileState extends State<QuizTile> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Share.share("https://shadowcloud.ch");
+                        Share.share("https://freequiz.herokuapp.com");
                       },
                       child: Icon(
                         Icons.ios_share,
@@ -116,11 +117,11 @@ class _QuizTileState extends State<QuizTile> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                expanded = !expanded;
+                                expanded = true;
                               });
                             },
                             child: Text(
-                              expanded ? language["Less"] : language["More"],
+                              expanded ? "" : language["More"],
                               style: TextStyle(
                                   color: color1, fontSize: height / 50),
                             ),
@@ -145,7 +146,7 @@ class _QuizTileState extends State<QuizTile> {
                               padding:
                                   EdgeInsets.symmetric(horizontal: height / 60),
                               child: Text(
-                                "${language["Questions"]} ${Quiz.answer.length.toString()}",
+                                "${language["Questions"]} ${widget.data['translations'] ?? widget.data['data'].length}",
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),
@@ -164,7 +165,7 @@ class _QuizTileState extends State<QuizTile> {
                               padding:
                                   EdgeInsets.symmetric(horizontal: height / 60),
                               child: Text(
-                                "${language[widget.data['from']]} $arrow ${language[widget.data['to']]}",
+                                "${language[widget.data['from']['name']]} $arrow ${language[widget.data['to']['name']]}",
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),
@@ -192,7 +193,7 @@ class _QuizTileState extends State<QuizTile> {
   }
 
   onTap() {
-    final futureMap = getQuiz(widget.uuid, true);
+    final futureMap = getQuiz(widget.uuid, false);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
@@ -200,27 +201,38 @@ class _QuizTileState extends State<QuizTile> {
             future: futureMap,
             builder: (context, quiz) {
               if (quiz.hasData) {
-                Quiz.title = quiz.data!['data']['title'];
-                return LoadingScreen(
-                  message: "Loading Quiz",
-                  finishedLoading: true,
-                  widget: const QuizPage(),
-                  appBar: AppBar(
-                    title: Text(Quiz.title),
-                    actions: const [
-                      ShareButton(
-                        url: "https://shadowcrafter.org/api/quiz/example/data",
-                      ),
-                    ],
-                  ),
+                if (quiz.data!['success']) {
+                  Quiz.title = quiz.data!['quiz_data']['title'];
+                  return LoadingScreen(
+                    message: "Loading Quiz",
+                    finishedLoading: true,
+                    widget: QuizPage(
+                      uuid: widget.uuid,
+                    ),
+                    appBar: AppBar(
+                      title: Text(Quiz.title),
+                      actions: [
+                        ShareButton(
+                          url:
+                              "https://freequiz.herokuapp.com/quiz/${widget.uuid}",
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                else {
+                  return ErrorLoading(
+                  error: quiz.data!["message"],
                 );
+                }
               } else if (quiz.hasError) {
-                return Drawer(child: Text('${quiz.error}'));
+                return const ErrorLoading(
+                  error: "other error",
+                );
               }
               return LoadingScreen(
                 message: "Loading Quiz",
                 finishedLoading: false,
-                widget: const QuizPage(),
                 appBar: AppBar(
                   title: Text(language["Loading"]),
                 ),

@@ -31,12 +31,11 @@ class _LastQuizzesState extends State<LastQuizzes> {
       itemBuilder: (BuildContext context, int i) {
         String uuid = Quiz.uuids[mobileLayout ? i : i * 2 + widget.n];
         return FutureBuilder<Map>(
-          future: getQuiz(uuid, false),
+          future: getQuiz(uuid, true),
           builder: (context, quiz) {
             if (quiz.hasData) {
-              quiz.data!['data']['title'];
               return QuizTile(
-                data: quiz.data!['data'],
+                data: quiz.data!['quiz_data'],
                 uuid: uuid,
               );
             } else if (quiz.hasError) {

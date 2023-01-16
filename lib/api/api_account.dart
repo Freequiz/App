@@ -157,11 +157,13 @@ Future<Map> httpPutAccount(String username, String email, String password,
     },
     encoding: Encoding.getByName('utf-8'),
     body: jsonEncode({
-      "username": username,
-      "email": email,
-      "password": password,
-      "password_confirmation": passwordConfirmation,
-      "agb": agb
+      "user": {
+        "username": username,
+        "email": email,
+        "password": password,
+        "password_confirmation": passwordConfirmation,
+        "agb": agb
+      }
     }),
   );
   if (response.statusCode == 201) {
@@ -189,6 +191,25 @@ Future<Map> httpDeleteAccount(deleteToken) async {
   if (response.statusCode == 200) {
     Profile.accessToken = "";
     Profile().deleteData();
+    return jsonDecode(response.body);
+  } else if (response.statusCode == 401) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Error');
+  }
+}
+
+Future<Map> httpGetCreatedQuizzes(String page) async {
+  final response = await http.get(
+    Uri.parse('https://freequiz.herokuapp.com/api/user/quizzes/$page'),
+    headers: {
+      "Authorization":
+          "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+      "Access-token": Profile.accessToken
+    },
+  );
+
+  if (response.statusCode == 200) {
     return jsonDecode(response.body);
   } else if (response.statusCode == 401) {
     return jsonDecode(response.body);

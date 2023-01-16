@@ -16,10 +16,10 @@ class ErrorLoading extends StatelessWidget {
       ),
       body: AlertDialog(
         title: Text(
-          language["$error title"],
+          language["$error title"] ?? language["other error title"],
           style: TextStyle(color: darkMode ? Colors.white : Colors.black),
         ),
-        content: Text(language["$error description"]),
+        content: Text(language["$error description"] ?? language["other error description"]),
         actions: [
           TextButton(
             onPressed: () {

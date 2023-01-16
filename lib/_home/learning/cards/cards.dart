@@ -48,13 +48,7 @@ class _CardsState extends State<Cards> {
 
   wrong() {
     answeredWrong = true;
-    if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-      Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-      Quiz.newDefinitions.add(Quiz.indexArray[0]);
-    } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
-      Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
-      Quiz.newDefinitions.add(Quiz.indexArray[0]);
-    }
+    Quiz().answeredWrong();
     if (Quiz.indexArray.length > 1) {
       setState(() {
         Quiz.indexArray.removeAt(0);
@@ -69,13 +63,7 @@ class _CardsState extends State<Cards> {
 
   right() {
     if (!answeredWrong) {
-      if (Quiz.newDefinitions.contains(Quiz.indexArray[0])) {
-        Quiz.newDefinitions.remove(Quiz.indexArray[0]);
-        Quiz.learnedDefinitions.add(Quiz.indexArray[0]);
-      } else if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-        Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-        Quiz.masteredDefinitions.add(Quiz.indexArray[0]);
-      }
+      Quiz().answeredRight("Cards");
     }
     if (Quiz.indexArray.length > 1) {
       setState(() {

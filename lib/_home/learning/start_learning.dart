@@ -12,7 +12,14 @@ import 'package:freequiz/others/style.dart';
 class StartLearning extends StatefulWidget {
   final int i;
   final Function refresh;
-  const StartLearning({super.key, required this.i, required this.refresh});
+  final List<String> levels;
+  final String uuid;
+  const StartLearning(
+      {super.key,
+      required this.i,
+      required this.refresh,
+      required this.levels,
+      required this.uuid});
 
   @override
   State<StartLearning> createState() => _StartLearningState();
@@ -38,19 +45,9 @@ class _StartLearningState extends State<StartLearning> {
     "MultipleChoice",
     "Cards",
   ];
-  final List<List> arrays = [
-    Quiz.newDefinitions,
-    Quiz.learnedDefinitions,
-    Quiz.masteredDefinitions
-  ];
-  final List<String> levels = [
-    language["New"],
-    language["Learned"],
-    language["Mastered"],
-  ];
 
   refresh() {
-    Quiz().calculateProgress();
+    Quiz().calculateProgress(widget.i);
     setState(() {});
   }
 
@@ -66,11 +63,10 @@ class _StartLearningState extends State<StartLearning> {
     return Column(
       children: [
         ProgressBar(
-            amountLeft: Quiz.answer.length * 2 - Quiz.amountProgress,
-            amount: Quiz.answer.length * 2),
-        const SizedBox(
-          height: 15
-        ),
+            amountLeft: Quiz.answer.length * (widget.i == 0 ? 4 : 2) -
+                Quiz.amountProgress,
+            amount: Quiz.answer.length * (widget.i == 0 ? 4 : 2)),
+        const SizedBox(height: 15),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(width / 30 + 10),
@@ -104,8 +100,10 @@ class _StartLearningState extends State<StartLearning> {
                   child: Center(
                     child: Text(
                       language["Learn"],
-                      style:
-                          TextStyle(fontSize: height / 36, color: Colors.white, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: height / 36,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -144,7 +142,9 @@ class _StartLearningState extends State<StartLearning> {
                             Text(
                               language["Learn only"],
                               style: TextStyle(
-                                  fontSize: height / 36, color: Colors.white, fontWeight: FontWeight.w600),
+                                  fontSize: height / 36,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(
                               width: 5.0,
@@ -172,12 +172,14 @@ class _StartLearningState extends State<StartLearning> {
             padding:
                 const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 30.0),
             child: ListView.builder(
-              itemCount: 3,
+              itemCount: widget.i == 0 ? 5 : 3,
               itemBuilder: (BuildContext context, int i) {
+                debugPrint(i.toString());
+                debugPrint(widget.levels[i]);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    arrays[i].isNotEmpty
+                    progressArray(widget.i, i).isNotEmpty
                         ? Container(
                             width: (width - 20),
                             height: height / 30,
@@ -185,7 +187,7 @@ class _StartLearningState extends State<StartLearning> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 8),
                               child: Text(
-                                levels[i],
+                                widget.levels[i],
                                 style: TextStyle(fontSize: height / 40),
                               ),
                             ),
@@ -194,9 +196,9 @@ class _StartLearningState extends State<StartLearning> {
                             height: 0,
                           ),
                     WordList(
-                      definitions: Quiz().definitionArray(arrays[i]),
-                      answers: Quiz().answerArray(arrays[i]),
-                      marked: arrays[i],
+                      definitions: defintions(widget.i, i),
+                      answers: answers(widget.i, i),
+                      marked: progressArray(widget.i, i),
                       markWord: markWord,
                       i: i,
                       color: color[widget.i],
@@ -204,7 +206,9 @@ class _StartLearningState extends State<StartLearning> {
                       width: width,
                     ),
                     SizedBox(
-                      height: arrays[i].isNotEmpty ? height / 30 : 0,
+                      height: progressArray(widget.i, i).isNotEmpty
+                          ? height / 30
+                          : 0,
                     ),
                   ],
                 );
@@ -221,11 +225,43 @@ class _StartLearningState extends State<StartLearning> {
   }
 
   markWord(i, i2) {
-    Quiz.markedWords[arrays[i][i2]] = !Quiz.markedWords[arrays[i][i2]];
-    Quiz().checkedIfMarkedWords();
-    setState(() {
-      Quiz().saveMarked("example");
-    });
+    if (Quiz.markedWords[Quiz.progressArray[i][i2]]) {
+      Quiz.markedWords[Quiz.progressArray[i][i2]] =
+          !Quiz.markedWords[Quiz.progressArray[i][i2]];
+      Quiz().checkedIfMarkedWords();
+      setState(() {
+        Quiz().saveMarked(widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][i]['hash']);
+      });
+    } else {
+      Quiz.markedWords[Quiz.progressArray[i][i2]] =
+          !Quiz.markedWords[Quiz.progressArray[i][i2]];
+      Quiz().checkedIfMarkedWords();
+      setState(() {
+        Quiz().saveMarked(widget.uuid, Quiz.mapQuiz['quiz_data']['data'][i]['hash'], "");
+      });
+    }
     widget.refresh();
+  }
+
+  defintions(int mode, int i) {
+    return Quiz().definitionArray(progressArray(mode, i));
+  }
+
+  answers(int mode, int i) {
+    return Quiz().answerArray(progressArray(mode, i));
+  }
+
+  progressArray(int mode, int i) {
+    if (mode == 0) {
+      if (i == 4) {
+        var progressArray = [];
+        for (var n = 4; n < Quiz.progressArray.length; n++) {
+          progressArray += Quiz.progressArray[n];
+        }
+        return progressArray;
+      }
+      return Quiz.progressArray[i];
+    }
+    return Quiz.progressArray[i];
   }
 }

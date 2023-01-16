@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:http/http.dart' as http;
 
-Future<Map> httpPutBug(String title, String description, String platform) async {
+Future<Map> httpPutBug(String title, String description, String platform, String userAgent) async {
  final response = await http.put(
     Uri.parse('https://freequiz.herokuapp.com/api/bug/create'),
     headers: {
@@ -16,7 +16,8 @@ Future<Map> httpPutBug(String title, String description, String platform) async 
     body: jsonEncode({
     "title": title,
     "body": description,
-    "platform": platform
+    "platform": platform,
+    "user_   agent": userAgent
   }),
   );
   if (response.statusCode == 201) {

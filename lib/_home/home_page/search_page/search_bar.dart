@@ -15,6 +15,7 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   final textController = TextEditingController();
+  int page = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +98,7 @@ class _SearchBarState extends State<SearchBar> {
       MaterialPageRoute(
         builder: (BuildContext context) {
           return FutureBuilder<Map>(
-            future: httpSearch(textController.text),
+            future: httpGetSearch(textController.text, page),
             builder: (context, searchResults) {
               if (searchResults.hasData) {
                 if (searchResults.data!["success"]) {
@@ -105,7 +106,7 @@ class _SearchBarState extends State<SearchBar> {
                     message: "Loading Search Results",
                     finishedLoading: true,
                     widget: SearchPage(
-                      uuids: searchResults.data!["data"],
+                      data: searchResults.data!["data"],
                       searchTerm: textController.text,
                     ),
                     appBar: AppBar(
@@ -125,7 +126,7 @@ class _SearchBarState extends State<SearchBar> {
                 message: "Loading Search Results",
                 finishedLoading: false,
                 widget: const SearchPage(
-                  uuids: {},
+                  data: [],
                   searchTerm: "",
                 ),
                 appBar: AppBar(

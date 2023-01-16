@@ -3,20 +3,19 @@ import 'package:freequiz/_home/home_page/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
-import 'package:freequiz/api/api_quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchPage extends StatefulWidget {
   final ScrollPhysics physics;
   final int n;
-  final Map uuids;
+  final List data;
   final String searchTerm;
   const SearchPage(
       {super.key,
       this.physics = const ScrollPhysics(),
       this.n = 0,
-      required this.uuids,
+      required this.data,
       required this.searchTerm});
 
   @override
@@ -33,12 +32,6 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final color6 = darkMode
-        ? const Color.fromARGB(255, 55, 55, 55)
-        : const Color.fromARGB(255, 235, 235, 235);
     var shortestSide = MediaQuery.of(context).size.shortestSide;
     final bool mobileLayout = shortestSide < 600;
     return Padding(
@@ -88,34 +81,12 @@ class _SearchPageState extends State<SearchPage> {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: widget.physics,
-                  itemCount: widget.uuids.length,
+                  itemCount: widget.data.length,
                   itemBuilder: (BuildContext context, int i) {
-                    String uuid = widget.uuids[
-                        i.toString()]!;
-                    return FutureBuilder<Map>(
-                      future: getQuiz(uuid, false),
-                      builder: (context, quiz) {
-                        if (quiz.hasData) {
-                          quiz.data!['data']['title'];
-                          return QuizTile(
-                            data: quiz.data!['data'],
-                            uuid: uuid,
-                            expanded: false,
-                          );
-                        } else if (quiz.hasError) {
-                          return Drawer(child: Text('${quiz.error}'));
-                        }
-                        return Container(
-                          height: mobileLayout
-                              ? height / 30 * 2.5 + 15
-                              : height / 30 * 2.5 + 35,
-                          width: width - 20,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(height / 100),
-                            color: color6,
-                          ),
-                        );
-                      },
+                    return QuizTile(
+                      data: widget.data[i],
+                      uuid: widget.data[i]['id'],
+                      expanded: false,
                     );
                   },
                   separatorBuilder: (BuildContext context, int i) {
@@ -148,7 +119,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-  
+
   trim(String searchTerm) {
     final String trimmedSearchTerm = searchTerm.characters.take(20).toString();
     if (trimmedSearchTerm.length == searchTerm.length) {

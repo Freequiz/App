@@ -3,32 +3,39 @@ import 'package:freequiz/others/textfield_data.dart';
 
 definitionArray(quiz) {
   List<String> definition = [];
-  quiz['data']['data'].forEach((i, pair) {
-    definition.add(pair['word']);
-  });
+  final List list = quiz['quiz_data']['data'];
+  for (var i = 0; i < list.length; i++) {
+    definition.add(list[i]['w']);
+  }
   return definition;
 }
 
 answerArray(quiz) {
   List<String> answer = [];
-  quiz['data']['data'].forEach((i, pair) {
-    answer.add(pair['translation']);
-  });
+  final List list = quiz['quiz_data']['data'];
+  for (var i = 0; i < list.length; i++) {
+    answer.add(list[i]['t']);
+  }
   return answer;
 }
 
-map(String title, String description, String from, String to, List<TextFieldData> definition, List<TextFieldData> answer) {
-  Map translations = {};
+map(String title, String description, String visibility, String from, String to,
+    List<TextFieldData> definition, List<TextFieldData> answer) {
+  List translations = [];
   for (var i = 0; i < definition.length; i++) {
     if (definition[i].input.text != "") {
-      translations.addAll({i.toString(): {'word': definition[i].input.text,'translation': answer[i].input.text}});
-    }
-    else {
-      definition.removeAt(i);
-      i--;
-    }
+      translations
+          .add({'w': definition[i].input.text, 't': answer[i].input.text});
+    } 
   }
-  Map map = {'title': title, 'description': description, 'from': from, 'to': to,'data': translations};
+  Map map = {
+    'title': title,
+    'description': description,
+    'visibility': visibility,
+    'from': from,
+    'to': to,
+    'data': translations
+  };
   debugPrint(map.toString());
   return map;
 }

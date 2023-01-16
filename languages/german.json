@@ -21,6 +21,17 @@
     "English": "Englisch",
     "French": "Französisch",
     "Italian": "Italienisch",
+    "german": "Deutsch",
+    "english": "Englisch",
+    "french": "Französisch",
+    "italian": "Italienisch",
+    "spanish": "Spanisch",
+    "latin": "Latein",
+    "greek": "Griechisch",
+    "romansh": "Rätoromanisch",
+    "japanese": "Japanisch",
+    "korean": "Koreanisch",
+    "chinese": "Chinesisch",
     "Create Quiz": "Quiz kreieren",
     "Done": "Fertig",
     "Search": "Suche",
@@ -94,5 +105,7 @@
     "Submit": "Senden",
     "Report Bug": "Fehler melden",
     "Title at least 3 characters": "Titel mindestens 3 Zeichen",
-    "Description at least 10 characters": "Beschreibung mindestens 10 Zeichen"
+    "Description at least 10 characters": "Beschreibung mindestens 10 Zeichen",
+    "Memorized": "Eingeprägt",
+    "Seen": "Gesehen"
 }

@@ -9,7 +9,9 @@ import 'package:freequiz/others/style.dart';
 class LearningModes extends StatefulWidget {
   final Axis scrollDirection;
   final double width;
-  const LearningModes({super.key, this.scrollDirection = Axis.vertical, required this.width});
+  final String uuid;
+  const LearningModes(
+      {super.key, this.scrollDirection = Axis.vertical, required this.width, required this.uuid});
 
   @override
   State<LearningModes> createState() => _LearningModesState();
@@ -28,6 +30,19 @@ class _LearningModesState extends State<LearningModes> {
     "Writing",
     "MultipleChoice",
     "Cards",
+  ];
+  final List<String> levelsNormal = [
+    language["New"],
+    language["Learned"],
+    language["Mastered"],
+  ];
+
+  final List<String> levelsSmart = [
+    language["New"],
+    language["Seen"],
+    language["Memorized"],
+    language["Learned"],
+    language["Mastered"]
   ];
 
   refresh() {
@@ -57,7 +72,7 @@ class _LearningModesState extends State<LearningModes> {
                 MaterialPageRoute(
                   builder: (BuildContext context) {
                     return FutureBuilder<void>(
-                      future: Quiz().loadData(modes[i], "example"),
+                      future: Quiz().loadData(i, widget.uuid),
                       builder: (context, done) {
                         if (done.connectionState == ConnectionState.done) {
                           return LoadingScreen(
@@ -66,6 +81,8 @@ class _LearningModesState extends State<LearningModes> {
                             widget: StartLearning(
                               i: i,
                               refresh: refresh,
+                              levels: i == 0 ? levelsSmart : levelsNormal,
+                              uuid: widget.uuid,
                             ),
                             appBar: AppBar(
                               backgroundColor: color[i],
@@ -94,10 +111,6 @@ class _LearningModesState extends State<LearningModes> {
                         return LoadingScreen(
                           message: "Loading Progress",
                           finishedLoading: false,
-                          widget: StartLearning(
-                            i: i,
-                            refresh: refresh,
-                          ),
                           appBar: AppBar(
                             title: Text(language["Loading"]),
                           ),
@@ -125,11 +138,9 @@ class _LearningModesState extends State<LearningModes> {
   reset(i) {
     setState(() {
       Quiz().deleteData(modes[i], "example");
-      Quiz.newDefinitions.clear();
-      Quiz.learnedDefinitions.clear();
-      Quiz.masteredDefinitions.clear();
+      Quiz.progressArray = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
       for (var i = 0; i < Quiz.definition.length; i++) {
-        Quiz.newDefinitions.add(i);
+        Quiz.progressArray[0].add(i);
       }
     });
   }

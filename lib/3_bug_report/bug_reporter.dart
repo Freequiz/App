@@ -13,8 +13,9 @@ class BugReporter extends StatefulWidget {
 }
 
 class _BugReporterState extends State<BugReporter> {
-  TextFieldData title = TextFieldData(hint: "");
-  TextFieldData description = TextFieldData(hint: "");
+  TextFieldData title = TextFieldData(hint: language["Title"]);
+  TextFieldData description = TextFieldData(hint: language["Description"]);
+  TextFieldData platform = TextFieldData(hint: language["Platform"]);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,7 @@ class _BugReporterState extends State<BugReporter> {
                         ),
                         hintText: title.error
                             ? language["Title at least 3 characters"]
-                            : language["Title"],
+                            : title.hint,
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -103,7 +104,7 @@ class _BugReporterState extends State<BugReporter> {
                         contentPadding: const EdgeInsets.all(10.0),
                         hintText: description.error
                             ? language["Description at least 10 characters"]
-                            : language["Description"],
+                            : description.hint,
                         hintStyle: TextStyle(
                           color: description.error ? Colors.red : hintColor,
                         ),
@@ -118,6 +119,31 @@ class _BugReporterState extends State<BugReporter> {
                     ),
                     const SizedBox(
                       height: 5,
+                    ),
+                    TextField(
+                      onSubmitted: (value) {
+                        FocusScope.of(context).nextFocus();
+                      },
+                      onEditingComplete: () {},
+                      controller: platform.input,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: darkMode
+                            ? const Color.fromARGB(255, 45, 45, 45)
+                            : const Color.fromARGB(255, 234, 247, 255),
+                        contentPadding: const EdgeInsets.all(10.0),
+                        hintText: platform.hint,
+                        hintStyle: TextStyle(
+                          color: hintColor,
+                        ),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: color1,
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -158,16 +184,16 @@ class _BugReporterState extends State<BugReporter> {
       });
     } else {
       var currentPlatform = Theme.of(context).platform;
-      String platform = "_Unknown";
+      String userAgent = "_Unknown";
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       if (currentPlatform == TargetPlatform.iOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-        platform = iosInfo.toString();
+        userAgent = iosInfo.toString();
       } else if (currentPlatform == TargetPlatform.android) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        platform = androidInfo.toString();
+        userAgent = androidInfo.toString();
       }
-      httpPutBug(title.input.text, description.input.text, platform);
+      httpPutBug(title.input.text, description.input.text, platform.input.text, userAgent);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     }

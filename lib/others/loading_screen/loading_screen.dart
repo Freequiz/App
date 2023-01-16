@@ -11,7 +11,7 @@ class LoadingScreen extends StatefulWidget {
       {super.key,
       required this.message,
       required this.finishedLoading,
-      required this.widget,
+      this.widget = const Drawer(),
       required this.appBar});
 
   @override

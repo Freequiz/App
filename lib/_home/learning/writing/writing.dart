@@ -79,13 +79,7 @@ class _WritingState extends State<Writing> {
     ).then((answerRight) {
       if (answerRight == null || !answerRight) {
         answeredWrong = true;
-        if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.newDefinitions.add(Quiz.indexArray[0]);
-        } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.newDefinitions.add(Quiz.indexArray[0]);
-        }
+        Quiz().answeredWrong();
       } else {
         rightAnswer();
       }
@@ -97,13 +91,7 @@ class _WritingState extends State<Writing> {
 
   rightAnswer() {
     if (!answeredWrong) {
-      if (Quiz.newDefinitions.contains(Quiz.indexArray[0])) {
-        Quiz.newDefinitions.remove(Quiz.indexArray[0]);
-        Quiz.learnedDefinitions.add(Quiz.indexArray[0]);
-      } else if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-        Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-        Quiz.masteredDefinitions.add(Quiz.indexArray[0]);
-      }
+      Quiz().answeredRight("Writing");
     }
     setState(() {
       answerRight = true;

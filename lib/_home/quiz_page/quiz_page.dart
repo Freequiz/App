@@ -7,7 +7,8 @@ import 'package:freequiz/_home/quiz_page/word_list_taskbar.dart';
 import 'package:freequiz/others/style.dart';
 
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key});
+  final String uuid;
+  const QuizPage({super.key, required this.uuid});
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -56,6 +57,7 @@ class _QuizPageState extends State<QuizPage> {
                   child: LearningModes(
                     scrollDirection: Axis.horizontal,
                     width: mobileLayout ? (width - 50) / 4 : (width - 100) / 4,
+                    uuid: widget.uuid,
                   ),
                 ),
                 SizedBox(height: mobileLayout ? 15 : 30),
@@ -82,6 +84,7 @@ class _QuizPageState extends State<QuizPage> {
                   width: (height - 190) / 4,
                   child: LearningModes(
                     width: (height - 190) / 4,
+                    uuid: widget.uuid,
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -118,21 +121,27 @@ class _QuizPageState extends State<QuizPage> {
 
   reset(i) {
     setState(() {
-      Quiz().deleteData(modes[i], "example");
-      Quiz.newDefinitions.clear();
-      Quiz.learnedDefinitions.clear();
-      Quiz.masteredDefinitions.clear();
+      Quiz().deleteData(modes[i], widget.uuid);
+      Quiz.progressArray.clear();
       for (var i = 0; i < Quiz.definition.length; i++) {
-        Quiz.newDefinitions.add(i);
+        Quiz.progressArray[0].add(i);
       }
     });
   }
 
   markWord(_, i) {
-    Quiz.markedWords[i] = !Quiz.markedWords[i];
-    Quiz().checkedIfMarkedWords();
-    setState(() {
-      Quiz().saveMarked("example");
-    });
+    if (Quiz.markedWords[i]) {
+      Quiz.markedWords[i] = !Quiz.markedWords[i];
+      Quiz().checkedIfMarkedWords();
+      setState(() {
+        Quiz().saveMarked(widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][i]['hash']);
+      });
+    } else {
+      Quiz.markedWords[i] = !Quiz.markedWords[i];
+      Quiz().checkedIfMarkedWords();
+      setState(() {
+        Quiz().saveMarked(widget.uuid, Quiz.mapQuiz['quiz_data']['data'][i]['hash'], "");
+      });
+    }
   }
 }

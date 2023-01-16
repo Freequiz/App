@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/create_quiz/basic_textfield.dart';
+import 'package:freequiz/api/api_language.dart';
+import 'package:freequiz/api/api_quiz.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
@@ -14,8 +16,8 @@ class CreateQuiz extends StatefulWidget {
 
 class _CreateQuizState extends State<CreateQuiz> {
   int wordCount = 3;
-  String definitionLanguage = "German";
-  String answerLanguage = "English";
+  String definitionLanguage = "german";
+  String answerLanguage = "english";
   List<TextFieldData> definitions = [
     TextFieldData(hint: language["Definition"]),
     TextFieldData(hint: language["Definition"]),
@@ -28,25 +30,48 @@ class _CreateQuizState extends State<CreateQuiz> {
   ];
   final List<DropdownMenuItem<String>> languages = [
     DropdownMenuItem(
-      value: "German",
-      child: Text(language["German"]),
+      value: "german",
+      child: Text(language["german"]),
     ),
     DropdownMenuItem(
-      value: "English",
-      child: Text(language["English"]),
+      value: "english",
+      child: Text(language["english"]),
     ),
     DropdownMenuItem(
-      value: "French",
-      child: Text(language["French"]),
+      value: "french",
+      child: Text(language["french"]),
     ),
     DropdownMenuItem(
-      value: "Italian",
-      child: Text(language["Italian"]),
+      value: "italian",
+      child: Text(language["italian"]),
+    ),
+    DropdownMenuItem(
+      value: "spanish",
+      child: Text(language["spanish"]),
+    ),
+    DropdownMenuItem(
+      value: "greek",
+      child: Text(language["greek"]),
+    ),
+    DropdownMenuItem(
+      value: "romansh",
+      child: Text(language["romansh"]),
+    ),
+    DropdownMenuItem(
+      value: "japanese",
+      child: Text(language["japanese"]),
+    ),
+    DropdownMenuItem(
+      value: "korean",
+      child: Text(language["korean"]),
+    ),
+    DropdownMenuItem(
+      value: "chinese",
+      child: Text(language["chinese"]),
     ),
   ];
   final title = TextFieldData(hint: language["Title"]);
   final description = TextFieldData(hint: language["Description"]);
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -122,9 +147,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                         textFieldData: description,
                         hintError: language["Description can't be blank"],
                         colorBorder: color1,
-                        maxLines: 6,
+                        maxLines: 4,
                         keyboardType: TextInputType.multiline,
-                        textInputAction: TextInputAction.newline,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -220,8 +244,10 @@ class _CreateQuizState extends State<CreateQuiz> {
                                     answers[i].input.text != "") {
                                   if (i + 2 >= wordCount) {
                                     wordCount++;
-                                    definitions.add(TextFieldData(hint: language["Definition"]));
-                                    answers.add(TextFieldData(hint: language["Answer"]));
+                                    definitions.add(TextFieldData(
+                                        hint: language["Definition"]));
+                                    answers.add(TextFieldData(
+                                        hint: language["Answer"]));
                                   }
                                   FocusScope.of(context).nextFocus();
                                 }
@@ -243,7 +269,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                                   : const Color.fromARGB(255, 234, 247, 255),
                               contentPadding: const EdgeInsets.all(10.0),
                               hintStyle: TextStyle(
-                                color: answers[i].error ? Colors.red : hintColor,
+                                color:
+                                    answers[i].error ? Colors.red : hintColor,
                               ),
                               hintText: answers[i].error
                                   ? language["Answer can't be blank"]
@@ -290,7 +317,7 @@ class _CreateQuizState extends State<CreateQuiz> {
     );
   }
 
-  onPressed() {
+  onPressed() async {
     bool error = false;
     for (var i = 0; i < definitions.length; i++) {
       if (definitions[i].input.text.replaceAll(' ', '') == "") {
@@ -326,8 +353,21 @@ class _CreateQuizState extends State<CreateQuiz> {
       });
     }
     if (!error) {
-      map(title.input.text, description.input.text, definitionLanguage,
-          answerLanguage, definitions, answers);
+      final languages = await httpGetLanguage();
+      String idFrom = "";
+      String idTo = "";
+      for (var i = 1; i < languages['data'].length + 1; i++) {
+        if (languages['data'][i.toString()]['name'] == definitionLanguage) {
+          idFrom = i.toString();
+        }
+        if (languages['data'][i.toString()]['name'] == answerLanguage) {
+          idTo = i.toString();
+        }
+      }
+      await httpPutQuiz(map(title.input.text, description.input.text, "public",
+          idFrom, idTo, definitions, answers));
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
     }
   }
 }

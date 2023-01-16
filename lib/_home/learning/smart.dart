@@ -100,13 +100,7 @@ class _SmartState extends State<Smart> {
     ).then((answerRight) {
       if (!answerRight) {
         answeredWrong = true;
-        if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.newDefinitions.add(Quiz.indexArray[0]);
-        } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.newDefinitions.add(Quiz.indexArray[0]);
-        }
+        Quiz().answeredWrong();
       } else {
         rightAnswerW();
       }
@@ -122,13 +116,7 @@ class _SmartState extends State<Smart> {
     });
     Future.delayed(const Duration(milliseconds: 200), () {
       if (!answeredWrong) {
-        if (Quiz.newDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.newDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.learnedDefinitions.add(Quiz.indexArray[0]);
-        } else if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.masteredDefinitions.add(Quiz.indexArray[0]);
-        }
+        Quiz().answeredRight("Smart");
       }
       if (Quiz.indexArray.length > 1) {
         setState(() {
@@ -152,13 +140,7 @@ class _SmartState extends State<Smart> {
     });
     Future.delayed(const Duration(milliseconds: 200), () {
       if (!answeredWrong) {
-        if (Quiz.newDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.newDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.learnedDefinitions.add(Quiz.indexArray[0]);
-        } else if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.masteredDefinitions.add(Quiz.indexArray[0]);
-        }
+        Quiz().answeredRight("Smart");
       }
       if (Quiz.indexArray.length > 1) {
         answeredWrong = false;
@@ -181,13 +163,7 @@ class _SmartState extends State<Smart> {
     ).then((answerRight) {
       if (answerRight == null || !answerRight) {
         answeredWrong = true;
-        if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.newDefinitions.add(Quiz.indexArray[0]);
-        } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.newDefinitions.add(Quiz.indexArray[0]);
-        }
+        Quiz().answeredWrong();
       } else {
         rightAnswerMC(i);
       }
@@ -195,7 +171,7 @@ class _SmartState extends State<Smart> {
   }
 
   int indexMode() {
-    if (Quiz.newDefinitions.contains(Quiz.indexArray[0])) {
+    if (Quiz.progressArray[0].contains(Quiz.indexArray[0])) {
       return 0;
     }
     return 1;
@@ -203,7 +179,7 @@ class _SmartState extends State<Smart> {
 
   close() {
     FocusScope.of(context).requestFocus(FocusNode());
-    Quiz().saveData("Writing", "example");
+    Quiz().saveData("Smart", "example");
     Future.delayed(const Duration(milliseconds: 500), () {
       widget.refresh();
       Navigator.of(context).pop();

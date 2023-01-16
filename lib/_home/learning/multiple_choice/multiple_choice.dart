@@ -53,13 +53,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
   rightAnswer(i) {
     if (!answeredWrong) {
-      if (Quiz.newDefinitions.contains(Quiz.indexArray[0])) {
-        Quiz.newDefinitions.remove(Quiz.indexArray[0]);
-        Quiz.learnedDefinitions.add(Quiz.indexArray[0]);
-      } else if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-        Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-        Quiz.masteredDefinitions.add(Quiz.indexArray[0]);
-      }
+      Quiz().answeredRight("Multiple Choice");
     }
     setState(() {
       answerRight[i] = true;
@@ -88,13 +82,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
     ).then((answerRight) {
       if (answerRight == null || !answerRight) {
         answeredWrong = true;
-        if (Quiz.learnedDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.learnedDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.newDefinitions.add(Quiz.indexArray[0]);
-        } else if (Quiz.masteredDefinitions.contains(Quiz.indexArray[0])) {
-          Quiz.masteredDefinitions.remove(Quiz.indexArray[0]);
-          Quiz.newDefinitions.add(Quiz.indexArray[0]);
-        }
+        Quiz().answeredWrong();
       } else {
         rightAnswer(i);
       }

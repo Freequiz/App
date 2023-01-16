@@ -1,13 +1,15 @@
 import 'dart:math';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
+import 'package:freequiz/api/api_quiz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Quiz {
+  static Map mapQuiz = {};
   static List<String> answer = [];
   static List<String> definition = [];
   static String title = "";
-  static List<int> newDefinitions = [];
-  static List<int> learnedDefinitions = [];
-  static List<int> masteredDefinitions = [];
+  static List<List<int>> progressArray = [[]];
   static List<int> indexArray = [];
   static List<bool> markedWords = [];
   static bool marked = false;
@@ -20,31 +22,43 @@ class Quiz {
     "MultipleChoice",
     "Cards",
   ];
+  final modesAPI = [
+    "smart",
+    "write",
+    "multi",
+    "cards"
+  ];
 
-  Future<void> loadData(String mode, String uuid) async {
-    newDefinitions = [];
-    learnedDefinitions = [];
-    masteredDefinitions = [];
+  Future<void> loadData(int mode, String uuid) async {
+    progressArray = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
+    var connectivityResult = await (Connectivity().checkConnectivity());
     final prefs = await SharedPreferences.getInstance();
-    final List<String> progress =
-        prefs.getStringList("progress$mode$uuid") ?? [];
-    for (var i = 0; i < progress.length; i++) {
-      if (progress[i] == "0") {
-        newDefinitions.add(i);
-      } else if (progress[i] == "1") {
-        learnedDefinitions.add(i);
-      } else {
-        masteredDefinitions.add(i);
+      final List<String> progress =
+      prefs.getStringList("progress$mode$uuid") ?? [];
+    if (connectivityResult != ConnectivityResult.none || progress.isEmpty) {
+      final List list = mapQuiz['quiz_data']['data'];
+      for (var i = 0; i < list.length; i++) {
+        progressArray[list[i]['score'][modesAPI[mode]]].add(i);
       }
     }
-    for (var i = 0; i < definition.length; i++) {
-      if (!newDefinitions.contains(i) &&
-          !learnedDefinitions.contains(i) &&
-          !masteredDefinitions.contains(i)) {
-        newDefinitions.add(i);
+    else {
+      debugPrint(progress.toString());
+      for (var i = 0; i < progress.length; i++) {
+        progressArray[int.parse(progress[i])].add(i);
+      }
+      for (var i = 0; i < definition.length; i++) {
+        for (var n = 0; n < progressArray.length; n++) {
+          if (!progressArray[n].contains(i)) {
+            if (n == progressArray.length - 1) {
+              progressArray[0].add(i);
+            }
+          } else {
+            n = 6942069420;
+          }
+        }
       }
     }
-    calculateProgress();
+    calculateProgress(modes[mode] == "Smart" ? 0 : 1);
     return;
   }
 
@@ -59,9 +73,10 @@ class Quiz {
   Future<void> deleteData(String mode, String uuid) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("progress$mode$uuid");
+    httpPatchResetScore(uuid, modesAPI[modes.indexOf(mode)]);
   }
 
-  Future<void> loadMarked(String uuid) async {
+  Future<void> loadLocalMarked(String uuid) async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> markedWordsString = prefs.getStringList("mW$uuid") ?? [];
     markedWords = markedWordsString.map((e) => e == 'true').toList();
@@ -71,23 +86,36 @@ class Quiz {
     checkedIfMarkedWords();
   }
 
-  Future<void> saveMarked(String uuid) async {
+  Future<void> loadMarked(uuid) async {
+    List list = mapQuiz['quiz_data']['data'];
+    markedWords.clear();
+    for (var i = 0; i < list.length; i++) {
+      markedWords.add(list[i]['favorite']);
+    }
+    saveMarked(uuid, "", "");
+    checkedIfMarkedWords();
+  }
+
+  Future<void> saveMarked(String uuid, String add, String remove) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(
         "mW$uuid", markedWords.map((e) => e.toString()).toList());
+    if (add != "" || remove != "") {
+      httpPatchFavorites(uuid, add, remove);
+    }
   }
 
   Future<void> saveData(String mode, String uuid) async {
     List<String> progress = [];
+    debugPrint(progressArray.toString());
     for (var i = 0; i < answer.length; i++) {
-      if (newDefinitions.contains(i)) {
-        progress.add("0");
-      } else if (learnedDefinitions.contains(i)) {
-        progress.add("1");
-      } else {
-        progress.add("2");
+      for (var n = 0; n < progressArray.length; n++) {
+        if (progressArray[n].contains(i)) {
+          progress.add(n.toString());
+        }
       }
     }
+    debugPrint(progress.toString());
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList("progress$mode$uuid", progress);
   }
@@ -95,27 +123,26 @@ class Quiz {
   formatArray(onlyMarked) {
     indexArray.clear();
     var array = [];
-    if (newDefinitions.length + learnedDefinitions.length > 0) {
-      if (onlyMarked) {
-        for (var i = 0; i < newDefinitions.length; i++) {
-          if (markedWords[newDefinitions[i]]) {
-            array.add(newDefinitions[i]);
+    var length = 0;
+    for (var n = 0; n < progressArray.length - 1; n++) {
+      length += progressArray[n].length;
+    }
+    if (length > 0) {
+      for (var n = 0; n < progressArray.length - 1; n++) {
+        for (var i = 0; i < progressArray[n].length; i++) {
+          if (onlyMarked) {
+            if (markedWords[progressArray[n][i]]) {
+              array.add(progressArray[n][i]);
+            }
+          } else {
+            array.add(progressArray[n][i]);
           }
-        }
-      } else {
-        array = List.from(newDefinitions);
-      }
-      for (var i = 0; i < learnedDefinitions.length; i++) {
-        if (onlyMarked) {
-          if (markedWords[learnedDefinitions[i]]) {
-            array.add(learnedDefinitions[i]);
-          }
-        } else {
-          array.add(learnedDefinitions[i]);
         }
       }
       randomiseArray(array);
     } else {
+      var masteredDefinitions =
+          List.from(progressArray[progressArray.length - 1]);
       if (onlyMarked) {
         for (var i = 0; i < masteredDefinitions.length; i++) {
           if (markedWords[masteredDefinitions[i]]) {
@@ -185,10 +212,12 @@ class Quiz {
     }
   }
 
-  calculateProgress() {
+  calculateProgress(int mode) {
     amountProgress = 0;
-    amountProgress += learnedDefinitions.length;
-    amountProgress += masteredDefinitions.length * 2;
+    for (var n = 0; n < progressArray.length; n++) {
+      amountProgress += progressArray[n].length * n;
+    }
+    amountProgress / (mode == 0 ? 4 : 2) * 2;
   }
 
   checkedIfMarkedWords() {
@@ -210,5 +239,37 @@ class Quiz {
     }
     return amountUuids;
   }
+
+  answeredWrong() {
+    for (var i = 0; i < progressArray.length; i++) {
+      if (progressArray[i].contains(indexArray[0])) {
+        if (i > 0) {
+          progressArray[i].remove(indexArray[0]);
+          progressArray[i - 1].add(indexArray[0]);
+        }
+      }
+    }
+  }
+
+  answeredRight(String mode) {
+    if (mode == "Smart") {
+      for (var i = progressArray.length - 1; i >= 0; i--) {
+        if (progressArray[i].contains(indexArray[0])) {
+          if (i < 15) {
+            progressArray[i].remove(indexArray[0]);
+            progressArray[i + 1].add(indexArray[0]);
+          }
+        }
+      }
+    } else {
+      for (var i = progressArray.length - 1; i >= 0; i--) {
+        if (progressArray[i].contains(indexArray[0])) {
+          if (i < 2) {
+            progressArray[i].remove(indexArray[0]);
+            progressArray[i + 1].add(indexArray[0]);
+          }
+        }
+      }
+    }
+  }
 }
- 
