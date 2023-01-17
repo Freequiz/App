@@ -65,7 +65,8 @@
     "Username is taken": "Le nom d'utilisateur est pris",
     "Username is not valid": "Le nom d'utilisateur n'est pas valide",
     "Create a New Quiz": "Créer un nouveau quiz",
-    "Loading Quiz": "Charger Quiz",
+    "Loading Quiz": "Charger le quiz",
+    "Loading Quizzes": "Charger les quizs",
     "Loading Profile": "Charger Profile",
     "Loading": "Charger",
     "Smart": "Smart",
@@ -92,10 +93,14 @@
     "Can't be blank": "Ne peut pas être vide",
     "Delete Account": "Supprimer le compte",
     "Are you sure you want to delete your account. It's not reversible": "Êtes-vous sûr de vouloir supprimer votre compte. Ce n'est pas réversible",
+    "Delete Quiz": "Supprimer le quiz",
+    "Are you sure you want to delete your quiz. It's not reversible": "Êtes-vous sûr de vouloir supprimer votre quiz. Ce n'est pas réversible",
     "Invalid bearer token title": "Une erreur inconnue s'est produite",
     "Invalid bearer token description": "Réessayez plus tard. Si cette erreur persiste, veuillez la signaler en utilisant le rapport de bugs",
     "Access token is invalid title": "Erreur d'authentification",
     "Access token is invalid description": "Une erreur s'est produite et vous avez été déconnecté. Si cette erreur persiste, veuillez utiliser le rapport de bug",
+    "Quiz doen't exist title": "Le quiz n'existe pas'",
+    "Quiz doen't exist description": "Le quiz a probablement été supprimé. Si vous êtes sûr que ce n'est pas le cas, veuillez le signaler à l'aide du rapport de bogue.",
     "other error title": "Une erreur inconnue s'est produite",
     "other error description": "Réessayez plus tard. Si cette erreur persiste, veuillez la signaler en utilisant le rapport de bugs",
     "Bug Reporter": "Rapport de bugs",
@@ -107,5 +112,7 @@
     "Title at least 3 characters": "Titre au moins 3 caractères",
     "Description at least 10 characters": "Description au moins 10 caractères",
     "Memorized": "Mémorisé",
-    "Seen": "Vu"
+    "Seen": "Vu",
+    "Created Quizzes": "Quiz créés",
+    "Edit Quiz": "Modifier le quiz"
 }

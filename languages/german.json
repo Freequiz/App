@@ -66,6 +66,7 @@
     "Username is not valid": "Benutzername ist nicht gültig",
     "Create a New Quiz": "Neues Quiz kreieren",
     "Loading Quiz": "Quiz laden",
+    "Loading Quizzes": "Quizze laden",
     "Loading Profile": "Profil laden",
     "Loading": "Laden",
     "Smart": "Smart",
@@ -92,10 +93,14 @@
     "Can't be blank": "Darf nicht leer sein",
     "Delete Account": "Account löschen",
     "Are you sure you want to delete your account. It's not reversible": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten. Dies kann nicht rückgängig gemacht werden",
+    "Delete Quiz": "Quiz löschen",
+    "Are you sure you want to delete your quiz. It's not reversible": "Sind Sie sicher, dass Sie Ihr Quiz löschen möchten. Dies kann nicht rückgängig gemacht werden",
     "Invalid bearer token title": "Ein unbekannter Fehler ist aufgetreten",
     "Invalid bearer token description": "Versuchen Sie es später noch einmal. Wenn dieser Fehler weiterhin auftritt, melden Sie ihn bitte über den Bugreporter",
     "Access token is invalid title": "Authentifizierungsfehler",
     "Access token is invalid description": "Es ist ein Fehler aufgetreten und Sie wurden abgemeldet. Wenn dieser Fehler weiterhin auftritt, verwenden Sie bitte den Bug-Reporter",
+    "Quiz doesn't exist title": "Das Quiz existiert nicht",
+    "Quiz doesn't exist description": "Das Quiz wurde wahrscheinlich gelöscht. Wenn Sie sicher sind, dass dies nicht der Fall ist, melden Sie es bitte mit dem Bug-Reporter.",
     "other error title": "Es ist ein unbekannter Fehler aufgetreten",
     "other error description": "Versuchen Sie es später noch einmal. Wenn dieser Fehler weiterhin besteht, melden Sie ihn bitte über den Bugreporter",
     "Bug Reporter": "Bugreporter", 
@@ -107,5 +112,7 @@
     "Title at least 3 characters": "Titel mindestens 3 Zeichen",
     "Description at least 10 characters": "Beschreibung mindestens 10 Zeichen",
     "Memorized": "Eingeprägt",
-    "Seen": "Gesehen"
+    "Seen": "Gesehen",
+    "Created Quizzes": "Erstellte Quizze",
+    "Edit Quiz": "Quiz bearbeiten"
 }

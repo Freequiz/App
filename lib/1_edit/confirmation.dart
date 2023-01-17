@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/api/users.dart';
+import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
 class Confirmation extends StatelessWidget {
   final Function refresh;
-  const Confirmation({super.key, required this.refresh});
+  final String uuid;
+  const Confirmation({super.key, required this.refresh, required this.uuid});
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +13,14 @@ class Confirmation extends StatelessWidget {
     bool darkMode = brightness == Brightness.dark;
     return AlertDialog(
       title: Text(
-        language["Delete Account"],
+        language["Delete Quiz"],
         style: TextStyle(color: darkMode ? Colors.white : Colors.black),
       ),
       content: Text(language[
-          "Are you sure you want to delete your account. It's not reversible"]),
+          "Are you sure you want to delete your quiz. It's not reversible"]),
       actions: [
         FutureBuilder<Map>(
-          future: APIUsers().httpGetDeleteToken(),
+          future: APIQuizzes().httpGetDeleteTokenQuiz(uuid),
           builder: (context, data) {
             if (data.hasData) {
               return Padding(
@@ -29,13 +30,13 @@ class Confirmation extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () async {
-                        await APIUsers().httpDeleteAccount(data.data!["token"]);
+                        await APIQuizzes().httpDeleteQuiz(data.data!["token"], uuid);
                         // ignore: use_build_context_synchronously
                         Navigator.of(context).pop();
                         refresh();
                       },
                       child: Text(
-                        language["Delete Account"],
+                        language["Delete Quiz"],
                         style: const TextStyle(color: Colors.red),
                       ),
                     ),

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/1_edit/create_quiz/basic_textfield.dart';
-import 'package:freequiz/api/api_language.dart';
-import 'package:freequiz/api/api_quiz.dart';
+import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
+import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
+import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
 
 class CreateQuiz extends StatefulWidget {
-  const CreateQuiz({super.key});
+  final Function refresh;
+  const CreateQuiz({super.key, required this.refresh});
 
   @override
   State<CreateQuiz> createState() => _CreateQuizState();
@@ -16,8 +18,8 @@ class CreateQuiz extends StatefulWidget {
 
 class _CreateQuizState extends State<CreateQuiz> {
   int wordCount = 3;
-  String definitionLanguage = "german";
-  String answerLanguage = "english";
+  int definitionLanguage = 1;
+  int answerLanguage = 3;
   List<TextFieldData> definitions = [
     TextFieldData(hint: language["Definition"]),
     TextFieldData(hint: language["Definition"]),
@@ -27,48 +29,6 @@ class _CreateQuizState extends State<CreateQuiz> {
     TextFieldData(hint: language["Answer"]),
     TextFieldData(hint: language["Answer"]),
     TextFieldData(hint: language["Answer"])
-  ];
-  final List<DropdownMenuItem<String>> languages = [
-    DropdownMenuItem(
-      value: "german",
-      child: Text(language["german"]),
-    ),
-    DropdownMenuItem(
-      value: "english",
-      child: Text(language["english"]),
-    ),
-    DropdownMenuItem(
-      value: "french",
-      child: Text(language["french"]),
-    ),
-    DropdownMenuItem(
-      value: "italian",
-      child: Text(language["italian"]),
-    ),
-    DropdownMenuItem(
-      value: "spanish",
-      child: Text(language["spanish"]),
-    ),
-    DropdownMenuItem(
-      value: "greek",
-      child: Text(language["greek"]),
-    ),
-    DropdownMenuItem(
-      value: "romansh",
-      child: Text(language["romansh"]),
-    ),
-    DropdownMenuItem(
-      value: "japanese",
-      child: Text(language["japanese"]),
-    ),
-    DropdownMenuItem(
-      value: "korean",
-      child: Text(language["korean"]),
-    ),
-    DropdownMenuItem(
-      value: "chinese",
-      child: Text(language["chinese"]),
-    ),
   ];
   final title = TextFieldData(hint: language["Title"]);
   final description = TextFieldData(hint: language["Description"]);
@@ -166,7 +126,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                             dropdownColor: darkMode
                                 ? const Color.fromARGB(255, 40, 40, 40)
                                 : const Color.fromARGB(255, 229, 242, 250),
-                            items: languages,
+                            items: Languages.languages,
                             onChanged: (value) {
                               setState(() {
                                 definitionLanguage = value!;
@@ -191,7 +151,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                             dropdownColor: darkMode
                                 ? const Color.fromARGB(255, 40, 40, 40)
                                 : const Color.fromARGB(255, 229, 242, 250),
-                            items: languages,
+                            items: Languages.languages,
                             onChanged: (value) {
                               setState(() {
                                 answerLanguage = value!;
@@ -237,52 +197,10 @@ class _CreateQuizState extends State<CreateQuiz> {
                           const SizedBox(
                             height: 5,
                           ),
-                          TextField(
-                            onSubmitted: (value) {
-                              setState(() {
-                                if (definitions[i].input.text != "" &&
-                                    answers[i].input.text != "") {
-                                  if (i + 2 >= wordCount) {
-                                    wordCount++;
-                                    definitions.add(TextFieldData(
-                                        hint: language["Definition"]));
-                                    answers.add(TextFieldData(
-                                        hint: language["Answer"]));
-                                  }
-                                  FocusScope.of(context).nextFocus();
-                                }
-                              });
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                answers[i].error = false;
-                              });
-                            },
-                            textInputAction: TextInputAction.next,
-                            onEditingComplete: () {},
-                            autocorrect: false,
-                            controller: answers[i].input,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: darkMode
-                                  ? const Color.fromARGB(255, 45, 45, 45)
-                                  : const Color.fromARGB(255, 234, 247, 255),
-                              contentPadding: const EdgeInsets.all(10.0),
-                              hintStyle: TextStyle(
-                                color:
-                                    answers[i].error ? Colors.red : hintColor,
-                              ),
-                              hintText: answers[i].error
-                                  ? language["Answer can't be blank"]
-                                  : language["Answer"],
-                              border: const OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: answers[i].error ? Colors.red : color1,
-                                  width: 2.0,
-                                ),
-                              ),
-                            ),
+                          AnswerTextField(
+                            textFieldData: answers[i],
+                            onSubmitted: onSubmitted,
+                            i: i,
                           ),
                         ],
                       ),
@@ -353,21 +271,24 @@ class _CreateQuizState extends State<CreateQuiz> {
       });
     }
     if (!error) {
-      final languages = await httpGetLanguage();
-      String idFrom = "";
-      String idTo = "";
-      for (var i = 1; i < languages['data'].length + 1; i++) {
-        if (languages['data'][i.toString()]['name'] == definitionLanguage) {
-          idFrom = i.toString();
-        }
-        if (languages['data'][i.toString()]['name'] == answerLanguage) {
-          idTo = i.toString();
-        }
-      }
-      await httpPutQuiz(map(title.input.text, description.input.text, "public",
-          idFrom, idTo, definitions, answers));
+      await APIQuizzes().httpPutQuiz(mapQuiz(title.input.text, description.input.text,
+          "public", definitionLanguage.toString(), answerLanguage.toString(), definitions, answers));
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
+      widget.refresh;
     }
+  }
+
+  onSubmitted(i) {
+    setState(() {
+      if (definitions[i].input.text != "" && answers[i].input.text != "") {
+        if (i + 2 >= wordCount) {
+          wordCount++;
+          definitions.add(TextFieldData(hint: language["Definition"]));
+          answers.add(TextFieldData(hint: language["Answer"]));
+        }
+        FocusScope.of(context).nextFocus();
+      }
+    });
   }
 }

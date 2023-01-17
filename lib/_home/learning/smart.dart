@@ -9,7 +9,8 @@ import 'package:freequiz/others/style.dart';
 
 class Smart extends StatefulWidget {
   final Function refresh;
-  const Smart({super.key, required this.refresh});
+  final String uuid;
+  const Smart({super.key, required this.refresh, required this.uuid});
 
   @override
   State<Smart> createState() => _SmartState();
@@ -128,7 +129,7 @@ class _SmartState extends State<Smart> {
       } else {
         widget.refresh();
         Navigator.of(context).pop();
-        Quiz().saveData("Smart", "example");
+        Quiz().saveData("Smart", widget.uuid);
       }
       answerRightW = false;
     });
@@ -179,7 +180,7 @@ class _SmartState extends State<Smart> {
 
   close() {
     FocusScope.of(context).requestFocus(FocusNode());
-    Quiz().saveData("Smart", "example");
+    Quiz().saveData("Smart", widget.uuid);
     Future.delayed(const Duration(milliseconds: 500), () {
       widget.refresh();
       Navigator.of(context).pop();

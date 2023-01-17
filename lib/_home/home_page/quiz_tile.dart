@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/share.dart';
-import 'package:freequiz/api/api_quiz.dart';
-import 'package:freequiz/others/error_loading/error_loading.dart';
+import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/others/loading/error_loading/error_loading.dart';
 import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/loading_screen/loading_screen.dart';
+import 'package:freequiz/others/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -82,7 +82,7 @@ class _QuizTileState extends State<QuizTile> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Share.share("https://freequiz.herokuapp.com");
+                        Share.share("https://freequiz.herokuapp.com/quiz/${widget.uuid}");
                       },
                       child: Icon(
                         Icons.ios_share,
@@ -193,7 +193,7 @@ class _QuizTileState extends State<QuizTile> {
   }
 
   onTap() {
-    final futureMap = getQuiz(widget.uuid, false);
+    final futureMap = APIQuizzes().getQuiz(widget.uuid, false);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {

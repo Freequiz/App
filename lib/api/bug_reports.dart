@@ -17,7 +17,7 @@ Future<Map> httpPutBug(String title, String description, String platform, String
     "title": title,
     "body": description,
     "platform": platform,
-    "user_   agent": userAgent
+    "user_agent": userAgent
   }),
   );
   if (response.statusCode == 201) {

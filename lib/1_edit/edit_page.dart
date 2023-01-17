@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/1_edit/create_quiz/create_quiz.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/1_edit/edit_overview.dart';
+import 'package:freequiz/api/users.dart';
+import 'package:freequiz/others/loading/error_loading/error_loading2.dart';
+import 'package:freequiz/others/loading/loading_screen/loading_screen2.dart';
 
 class EditPage extends StatefulWidget {
   const EditPage({super.key});
@@ -11,37 +12,48 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
+  refresh() {
+    setState(() {
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Center(
-            child: TextButton(
-              style: TextButton.styleFrom(
-                  backgroundColor: color1, foregroundColor: Colors.white),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return const CreateQuiz();
-                    },
-                  ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  language["Create a New Quiz"],
-                  style: TextStyle(fontSize: height / 45),
+    return Center(
+      child: FutureBuilder<Map>(
+        future: APIUsers().httpGetCreatedQuizzes("1"),
+        builder: (context, data) {
+          if (data.hasData) {
+            if (data.data!["success"]) {
+              return LoadingScreen2(
+                message: "Loading Quizzes",
+                finishedLoading: true,
+                widget: EditOverview(
+                  data: data.data!['data'],
+                  refresh: refresh,
                 ),
+              );
+            }
+            return Navigator(
+              onGenerateRoute: (settings) => MaterialPageRoute(
+                builder: (context) => ErrorLoading2(
+                    error: data.data!["message"],
+                    previousWidget: const EditPage()),
               ),
-            ),
-          ),
-        ],
+            );
+          } else if (data.hasError) {
+            return Navigator(
+              onGenerateRoute: (settings) => MaterialPageRoute(
+                builder: (context) => ErrorLoading2(
+                    error: data.data!["message"],
+                    previousWidget: const EditPage()),
+              ),
+            );
+          }
+          return const LoadingScreen2(
+            message: "Loading Quizzes",
+          );
+        },
       ),
     );
   }

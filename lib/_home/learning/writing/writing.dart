@@ -7,7 +7,8 @@ import 'package:freequiz/others/style.dart';
 
 class Writing extends StatefulWidget {
   final Function refresh;
-  const Writing({super.key, required this.refresh});
+  final String uuid;
+  const Writing({super.key, required this.refresh, required this.uuid});
 
   @override
   State<Writing> createState() => _WritingState();
@@ -113,7 +114,7 @@ class _WritingState extends State<Writing> {
   close() {
     setState(() {
       FocusScope.of(context).requestFocus(FocusNode());
-      Quiz().saveData("Writing", "example");
+      Quiz().saveData("Writing", widget.uuid);
       Future.delayed(const Duration(milliseconds: 500), () {
         widget.refresh();
         Navigator.of(context).pop();

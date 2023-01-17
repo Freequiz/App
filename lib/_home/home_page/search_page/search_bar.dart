@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search_page.dart';
-import 'package:freequiz/api/api_quiz.dart';
-import 'package:freequiz/others/error_loading/error_loading.dart';
+import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/others/loading/error_loading/error_loading.dart';
 import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/loading_screen/loading_screen.dart';
+import 'package:freequiz/others/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchBar extends StatefulWidget {
@@ -98,7 +98,7 @@ class _SearchBarState extends State<SearchBar> {
       MaterialPageRoute(
         builder: (BuildContext context) {
           return FutureBuilder<Map>(
-            future: httpGetSearch(textController.text, page),
+            future: APIQuizzes().httpGetSearch(textController.text, page),
             builder: (context, searchResults) {
               if (searchResults.hasData) {
                 if (searchResults.data!["success"]) {

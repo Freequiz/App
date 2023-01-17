@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/others/languages.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,6 +26,7 @@ Future<void> initialLoading() async {
   final String response =
       await rootBundle.loadString('languages/$chosenLanguage.json');
   language = json.decode(response);
+  await Languages().get();
   await Profile().loadData();
   return;
 }

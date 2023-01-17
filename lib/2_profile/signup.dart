@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/textfield_data.dart';
-import 'package:freequiz/api/api_account.dart';
+import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/profile.dart';
@@ -311,7 +311,7 @@ class _SignUpState extends State<SignUp> {
       setState(() {
         pressed = true;
       });
-      final Map map = await httpPutAccount(
+      final Map map = await APIUsers().httpPutAccount(
           username.input.text,
           email.input.text,
           password.input.text,

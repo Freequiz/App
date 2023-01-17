@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/textfield_data.dart';
-import 'package:freequiz/api/api_account.dart';
+import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -131,7 +131,7 @@ class _EMailState extends State<EMail> {
       newEmail.hint = language["Can't be blank"];
     }
     else {
-      final Map map = await httpPatchAccount(email: newEmail.input.text);
+      final Map map = await APIUsers().httpPatchAccount(email: newEmail.input.text);
       if (map["success"] == true) {
         setState(() {
           newEmail.input.clear();

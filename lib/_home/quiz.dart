@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/api/api_quiz.dart';
+import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/api/convert_json.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Quiz {
@@ -73,7 +74,7 @@ class Quiz {
   Future<void> deleteData(String mode, String uuid) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("progress$mode$uuid");
-    httpPatchResetScore(uuid, modesAPI[modes.indexOf(mode)]);
+    APIQuizzes().httpPatchResetScore(uuid, modesAPI[modes.indexOf(mode)]);
   }
 
   Future<void> loadLocalMarked(String uuid) async {
@@ -101,7 +102,7 @@ class Quiz {
     await prefs.setStringList(
         "mW$uuid", markedWords.map((e) => e.toString()).toList());
     if (add != "" || remove != "") {
-      httpPatchFavorites(uuid, add, remove);
+      APIQuizzes().httpPatchFavorites(uuid, add, remove);
     }
   }
 
@@ -117,7 +118,9 @@ class Quiz {
     }
     debugPrint(progress.toString());
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList("progress$mode$uuid", progress);
+    prefs.setStringList("progress$mode$uuid", progress);
+    final score = mapScore(progress, modesAPI[modes.indexOf(mode)]);
+    await APIQuizzes().httpPatchScore(uuid, score);
   }
 
   formatArray(onlyMarked) {

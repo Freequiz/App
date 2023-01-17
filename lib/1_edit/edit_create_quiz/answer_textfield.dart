@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
 
-class BasicTextField extends StatefulWidget {
+class AnswerTextField extends StatefulWidget {
   final TextFieldData textFieldData;
-  final Color colorBorder;
   final double widthBorder;
-  final String hintError;
-  final TextInputType keyboardType;
-  final TextInputAction textInputAction;
-  final int maxLines;
-  const BasicTextField({
+  final Function onSubmitted;
+  final int i;
+  const AnswerTextField({
     super.key,
     required this.textFieldData,
-    required this.hintError,
-    required this.colorBorder,
     this.widthBorder = 2.0,
-    this.keyboardType = TextInputType.text,
-    this.textInputAction = TextInputAction.next,
-    this.maxLines = 1,
+    required this.onSubmitted, required this.i
   });
 
   @override
-  State<BasicTextField> createState() => _BasicTextFieldState();
+  State<AnswerTextField> createState() => _AnswerTextFieldState();
 }
 
-class _BasicTextFieldState extends State<BasicTextField> {
+class _AnswerTextFieldState extends State<AnswerTextField> {
   @override
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
@@ -33,18 +28,16 @@ class _BasicTextFieldState extends State<BasicTextField> {
         darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return TextField(
       onSubmitted: (value) {
-        FocusScope.of(context).nextFocus();
+        widget.onSubmitted(widget.i);
       },
       onChanged: (value) {
         setState(() {
           widget.textFieldData.error = false;
         });
       },
-      textInputAction: widget.textInputAction,
       onEditingComplete: () {},
       controller: widget.textFieldData.input,
-      keyboardType: widget.keyboardType,
-      maxLines: widget.maxLines,
+      keyboardAppearance: darkMode ? Brightness.dark : Brightness.light,
       decoration: InputDecoration(
         filled: true,
         fillColor: darkMode
@@ -56,12 +49,12 @@ class _BasicTextFieldState extends State<BasicTextField> {
           fontWeight: FontWeight.w500,
         ),
         hintText: widget.textFieldData.error
-            ? widget.hintError
+            ? language["Answer can't be blank"]
             : widget.textFieldData.hint,
         border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: widget.textFieldData.error ? Colors.red : widget.colorBorder,
+            color: widget.textFieldData.error ? Colors.red : color1,
             width: widget.widthBorder,
           ),
         ),

@@ -8,7 +8,8 @@ import 'package:freequiz/others/style.dart';
 
 class MultipleChoice extends StatefulWidget {
   final Function refresh;
-  const MultipleChoice({super.key, required this.refresh});
+  final String uuid;
+  const MultipleChoice({super.key, required this.refresh, required this.uuid});
 
   @override
   State<MultipleChoice> createState() => _MultipleChoiceState();
@@ -66,7 +67,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
       } else {
         widget.refresh();
         Navigator.of(context).pop();
-        Quiz().saveData("MultipleChoice", "example");
+        Quiz().saveData("MultipleChoice", widget.uuid);
       }
       answerRight = List.filled(4, false);
     });
@@ -90,7 +91,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
   }
 
   close() {
-    Quiz().saveData("Writing", "example");
+    Quiz().saveData("Writing", widget.uuid);
     widget.refresh();
     Navigator.of(context).pop();
   }

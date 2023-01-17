@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
-import 'package:freequiz/api/api_quiz.dart';
+import 'package:freequiz/api/quizzes.dart';
 
 class LastQuizzes extends StatefulWidget {
   final ScrollPhysics physics;
@@ -31,7 +31,7 @@ class _LastQuizzesState extends State<LastQuizzes> {
       itemBuilder: (BuildContext context, int i) {
         String uuid = Quiz.uuids[mobileLayout ? i : i * 2 + widget.n];
         return FutureBuilder<Map>(
-          future: getQuiz(uuid, true),
+          future: APIQuizzes().getQuiz(uuid, true),
           builder: (context, quiz) {
             if (quiz.hasData) {
               return QuizTile(

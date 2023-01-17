@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/textfield_data.dart';
-import 'package:freequiz/api/api_account.dart';
+import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
@@ -193,7 +193,7 @@ class _LoginState extends State<Login> {
       setState(() {
         pressed = true;
       });
-      mapLogin = await httpPostSession(
+      mapLogin = await APIUsers().httpPostSession(
           username.input.text.trim(), password.input.text.trim());
       if (mapLogin.isNotEmpty) {
         if (mapLogin["message"] == "User doesn't exist") {

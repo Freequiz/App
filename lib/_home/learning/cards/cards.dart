@@ -6,7 +6,8 @@ import 'package:freequiz/others/style.dart';
 
 class Cards extends StatefulWidget {
   final Function refresh;
-  const Cards({super.key, required this.refresh});
+  final String uuid;
+  const Cards({super.key, required this.refresh, required this.uuid});
 
   @override
   State<Cards> createState() => _CardsState();
@@ -56,7 +57,7 @@ class _CardsState extends State<Cards> {
       });
     } else {
       widget.refresh();
-      Quiz().saveData("Cards", "example");
+      Quiz().saveData("Cards", widget.uuid);
       Navigator.of(context).pop();
     }
   }
@@ -73,13 +74,13 @@ class _CardsState extends State<Cards> {
       });
     } else {
       widget.refresh();
-      Quiz().saveData("Cards", "example");
+      Quiz().saveData("Cards", widget.uuid);
       Navigator.of(context).pop();
     }
   }
 
   close() {
-    Quiz().saveData("Writing", "example");
+    Quiz().saveData("Writing", widget.uuid);
     widget.refresh();
     Navigator.of(context).pop();
   }

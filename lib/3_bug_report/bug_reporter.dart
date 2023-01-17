@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/api/api_bugs.dart';
+import 'package:freequiz/api/bug_reports.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';

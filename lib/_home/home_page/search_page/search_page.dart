@@ -7,13 +7,11 @@ import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchPage extends StatefulWidget {
-  final ScrollPhysics physics;
   final int n;
   final List data;
   final String searchTerm;
   const SearchPage(
       {super.key,
-      this.physics = const ScrollPhysics(),
       this.n = 0,
       required this.data,
       required this.searchTerm});
@@ -80,7 +78,6 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 ListView.separated(
                   shrinkWrap: true,
-                  physics: widget.physics,
                   itemCount: widget.data.length,
                   itemBuilder: (BuildContext context, int i) {
                     return QuizTile(

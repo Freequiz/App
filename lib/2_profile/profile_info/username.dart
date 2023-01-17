@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/textfield_data.dart';
-import 'package:freequiz/api/api_account.dart';
+import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -129,7 +129,7 @@ class _UsernameState extends State<Username> {
   }
 
   changeUsername() async {
-    final Map map = await httpPatchAccount(username: newUsername.input.text);
+    final Map map = await APIUsers().httpPatchAccount(username: newUsername.input.text);
     if (map["success"] == true) {
       setState(() {
         newUsername.input.clear();

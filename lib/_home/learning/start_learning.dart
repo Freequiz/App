@@ -28,10 +28,10 @@ class StartLearning extends StatefulWidget {
 class _StartLearningState extends State<StartLearning> {
   final List<Color> color = [color5, color2, color3, color4];
   late final List<Widget> pages = [
-    Smart(refresh: refresh),
-    Writing(refresh: refresh),
-    MultipleChoice(refresh: refresh),
-    Cards(refresh: refresh)
+    Smart(refresh: refresh, uuid: widget.uuid,),
+    Writing(refresh: refresh, uuid: widget.uuid),
+    MultipleChoice(refresh: refresh, uuid: widget.uuid),
+    Cards(refresh: refresh, uuid: widget.uuid)
   ];
   final List<String> modes = [
     language["Smart"],

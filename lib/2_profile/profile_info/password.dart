@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/textfield_data.dart';
-import 'package:freequiz/api/api_account.dart';
+import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -258,7 +258,7 @@ class _PasswordState extends State<Password> {
   }
 
   changePassword() async {
-    final Map map = await httpPatchAccount(
+    final Map map = await APIUsers().httpPatchAccount(
         password: newPassword.input.text,
         passwordConfirmation: newPasswordConfirmation.input.text,
         oldPassword: oldPassword.input.text);
