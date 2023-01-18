@@ -59,9 +59,9 @@ class _SearchPageState extends State<SearchPage> {
                   child: SearchFilter(
                     color: color5,
                     child: Text(
-                      Search.from == "Any" && Search.to == "Any"
+                      Search.from == 'Any' && Search.to == 'Any'
                           ? language["Language"]
-                          : "${language[Search.from]} $arrow ${language[Search.to]}",
+                          : "${language[Search.from] ?? Search.from} $arrow ${language[Search.to] ?? Search.to}",
                       style:
                           TextStyle(fontSize: height / 50, color: Colors.white),
                     ),

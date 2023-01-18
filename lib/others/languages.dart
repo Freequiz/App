@@ -7,6 +7,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 class Languages {
   static List<DropdownMenuItem<int>> languages = [];
+  static Map mapLanguagesCopy = {};
 
   get() async {
     final prefs = await SharedPreferences.getInstance();
@@ -19,6 +20,7 @@ class Languages {
       load();
     }
     debugPrint(mapLanguages.toString());
+    mapLanguagesCopy = mapLanguages;
     return;
   }
 
@@ -28,6 +30,7 @@ class Languages {
       mapToList(mapLanguages);
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('languages', jsonEncode(mapLanguages));
+      mapLanguagesCopy = mapLanguages;
     }
   }
 
@@ -42,6 +45,25 @@ class Languages {
       );
     });
     languages = List.from(newLanguages);
+  }
+
+  idToName(int id) {
+    if (id == 0) {
+      return 'Any';
+    }
+    return mapLanguagesCopy['data'][id.toString()]['name'];
+  }
+
+  nameToId(String name) {
+    if (name == 'Any') {
+      return 0;
+    }
+    mapLanguagesCopy['data'].forEach((key, value) {
+      if (value == name) {
+        return int.parse(key);
+      }
+    });
+    return 1;
   }
 }
 

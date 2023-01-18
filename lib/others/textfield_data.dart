@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -11,4 +13,10 @@ class TextFieldData {
   bool error = false;
   Color color = color1;
   bool changed = false;
+  String id = createId();
+  static final Random random = Random.secure();
+  static String createId([int length = 32]) {
+        var values = List<int>.generate(length, (i) => random.nextInt(256));
+        return base64Url.encode(values);
+    }
 }

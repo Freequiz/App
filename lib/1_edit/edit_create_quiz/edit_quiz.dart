@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
+import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -89,13 +90,12 @@ class _EditQuizState extends State<EditQuiz> {
                 if (data.data!['success']) {
                   final quizData = data.data!['quiz_data'];
                   if (firstTime) {
-                  title.input.text = quizData['title'];
-                  description.input.text = quizData['description'];
-                  definitionLanguage = int.parse(quizData['from']['id']);
-                  answerLanguage = int.parse(quizData['to']['id']);
-                  firstTime = false;
-                  }
-                  for (var i = 0; i < quizData['data'].length; i++) {
+                    title.input.text = quizData['title'];
+                    description.input.text = quizData['description'];
+                    definitionLanguage = int.parse(quizData['from']['id']);
+                    answerLanguage = int.parse(quizData['to']['id']);
+                    firstTime = false;
+                    for (var i = 0; i < quizData['data'].length; i++) {
                     if (i >= definitions.length) {
                       wordCount++;
                       definitions.add(TextFieldData(hint: "Description"));
@@ -103,6 +103,7 @@ class _EditQuizState extends State<EditQuiz> {
                     }
                     definitions[i].input.text = quizData['data'][i]['w'];
                     answers[i].input.text = quizData['data'][i]['t'];
+                  }
                   }
                 }
                 return ListView(
@@ -207,32 +208,59 @@ class _EditQuizState extends State<EditQuiz> {
                         );
                       },
                       itemBuilder: (BuildContext context, int i) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(height / 100),
-                            color: darkMode
-                                ? const Color.fromARGB(255, 55, 55, 55)
-                                : color4,
+                        return Dismissible(
+                          key: Key(definitions[i].id),
+                          direction: DismissDirection.endToStart,
+                          onDismissed: (direction) {
+                            setState(() {
+                              definitions.removeAt(i);
+                              answers.removeAt(i);
+                              wordCount--;
+                            });
+                          },
+                          background: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(height / 100),
+                              color: Colors.red,
+                            ),
+                            child: const Align(
+                              alignment: Alignment.centerRight,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                child: Icon(
+                                  Icons.clear,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(height / 100),
-                            child: Column(
-                              children: [
-                                BasicTextField(
-                                  textFieldData: definitions[i],
-                                  hintError:
-                                      language["Definition can't be blank"],
-                                  colorBorder: color1,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                AnswerTextField(
-                                  textFieldData: answers[i],
-                                  onSubmitted: onSubmitted,
-                                  i: i,
-                                ),
-                              ],
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(height / 100),
+                              color: darkMode
+                                  ? const Color.fromARGB(255, 55, 55, 55)
+                                  : color4,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(height / 100),
+                              child: Column(
+                                children: [
+                                  BasicTextField(
+                                    textFieldData: definitions[i],
+                                    hintError:
+                                        language["Definition can't be blank"],
+                                    colorBorder: color1,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  AnswerTextField(
+                                    textFieldData: answers[i],
+                                    onSubmitted: onSubmitted,
+                                    i: i,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -277,6 +305,7 @@ class _EditQuizState extends State<EditQuiz> {
 
   onPressed() async {
     bool error = false;
+    int counter = 0;
     for (var i = 0; i < definitions.length; i++) {
       if (definitions[i].input.text.replaceAll(' ', '') == "") {
         if (answers[i].input.text.replaceAll(' ', '') != "") {
@@ -295,6 +324,9 @@ class _EditQuizState extends State<EditQuiz> {
           });
         }
       }
+      else {
+        counter++;
+      }
     }
     if (title.input.text.replaceAll(' ', '') == "") {
       setState(() {
@@ -310,10 +342,22 @@ class _EditQuizState extends State<EditQuiz> {
         description.input.clear();
       });
     }
+    if (counter < 3) {
+      error = true;
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => const ErrorPopUp());
+    }
     if (!error) {
       await APIQuizzes().httpPatchQuiz(
-          mapQuiz(title.input.text, description.input.text, "public", definitionLanguage.toString(),
-              answerLanguage.toString(), definitions, answers),
+          mapQuiz(
+              title.input.text,
+              description.input.text,
+              "public",
+              definitionLanguage.toString(),
+              answerLanguage.toString(),
+              definitions,
+              answers),
           widget.uuid);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();

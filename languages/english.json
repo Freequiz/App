@@ -116,5 +116,7 @@
     "Memorized": "Memorized",
     "Seen": "Seen",
     "Created Quizzes": "Created Quizzes",
-    "Edit Quiz": "Edit Quiz"
+    "Edit Quiz": "Edit Quiz",
+    "Not enough words": "Not enough words",
+    "Not enough words description": "At least three word pairs are required to create a quiz"
 }

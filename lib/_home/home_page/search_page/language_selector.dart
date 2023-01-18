@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
 
 class LanguageSelector extends StatefulWidget {
@@ -12,36 +13,21 @@ class LanguageSelector extends StatefulWidget {
 }
 
 class _LanguageSelectorState extends State<LanguageSelector> {
-  final List<DropdownMenuItem<String>> languages = [
-    DropdownMenuItem(
-      value: "Any",
-      child: Text(language["Any"]),
-    ),
-    DropdownMenuItem(
-      value: "German",
-      child: Text(language["German"]),
-    ),
-    DropdownMenuItem(
-      value: "English",
-      child: Text(language["English"]),
-    ),
-    DropdownMenuItem(
-      value: "French",
-      child: Text(language["French"]),
-    ),
-    DropdownMenuItem(
-      value: "Italian",
-      child: Text(language["Italian"]),
-    ),
-  ];
+  final List<DropdownMenuItem<int>> languages = List.from(Languages.languages);
 
-  String from = "Any";
-  String to = "Any";
+  int from = 0;
+  int to = 0;
 
   @override
   void initState() {
-    from = Search.from;
-    to = Search.to;
+    from = Languages().nameToId(Search.from);
+    to = Languages().nameToId(Search.to);
+    languages.add(
+      DropdownMenuItem(
+        value: 0,
+        child: Text(language["Any"]),
+      ),
+    );
     super.initState();
   }
 
@@ -114,8 +100,8 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         ),
         TextButton(
           onPressed: () {
-            Search.to = to;
-            Search.from = from;
+            Search.to = Languages().idToName(to);
+            Search.from = Languages().idToName(from);
             Navigator.of(context).pop();
             widget.refresh();
           },
@@ -124,7 +110,6 @@ class _LanguageSelectorState extends State<LanguageSelector> {
           ),
         ),
       ],
-      
     );
   }
 }

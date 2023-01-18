@@ -215,6 +215,17 @@ class Quiz {
     }
   }
 
+  saveUuids() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('uuids', uuids);
+  }
+
+  deleteQuiz(int i) {
+    uuids.removeAt(i);
+    uuids.add('');
+    saveUuids();
+  }
+
   calculateProgress(int mode) {
     amountProgress = 0;
     for (var n = 0; n < progressArray.length; n++) {

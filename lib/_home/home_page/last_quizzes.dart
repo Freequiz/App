@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
 import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/others/style.dart';
 
 class LastQuizzes extends StatefulWidget {
   final ScrollPhysics physics;
@@ -34,9 +35,34 @@ class _LastQuizzesState extends State<LastQuizzes> {
           future: APIQuizzes().getQuiz(uuid, true),
           builder: (context, quiz) {
             if (quiz.hasData) {
-              return QuizTile(
-                data: quiz.data!['quiz_data'],
-                uuid: uuid,
+              return Dismissible(
+                key: Key(Quiz.uuids[i]),
+                direction: DismissDirection.endToStart,
+                onDismissed: (direction) {
+                  setState(() {
+                    Quiz().deleteQuiz(i);
+                  });
+                },
+                background: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(height / 100),
+                    color: color1,
+                  ),
+                  child: const Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Icon(
+                        Icons.clear_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                child: QuizTile(
+                  data: quiz.data!['quiz_data'],
+                  uuid: uuid,
+                ),
               );
             } else if (quiz.hasError) {
               return Drawer(child: Text('${quiz.error}'));

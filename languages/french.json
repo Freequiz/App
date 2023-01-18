@@ -114,5 +114,7 @@
     "Memorized": "Mémorisé",
     "Seen": "Vu",
     "Created Quizzes": "Quiz créés",
-    "Edit Quiz": "Modifier le quiz"
+    "Edit Quiz": "Modifier le quiz",
+    "Not enough words": "Pas assez de mots",
+    "Not enough words description": "Au moins trois paires de mots sont nécessaires pour créer un quiz"
 }

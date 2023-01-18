@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
+import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -178,31 +179,58 @@ class _CreateQuizState extends State<CreateQuiz> {
                   );
                 },
                 itemBuilder: (BuildContext context, int i) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(height / 100),
-                      color: darkMode
-                          ? const Color.fromARGB(255, 55, 55, 55)
-                          : color4,
+                  return Dismissible(
+                    key: Key(definitions[i].id),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      setState(() {
+                        definitions.removeAt(i);
+                        answers.removeAt(i);
+                        wordCount--;
+                      });
+                    },
+                    background: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(height / 100),
+                        color: Colors.red,
+                      ),
+                      child: const Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(height / 100),
-                      child: Column(
-                        children: [
-                          BasicTextField(
-                            textFieldData: definitions[i],
-                            hintError: language["Definition can't be blank"],
-                            colorBorder: color1,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          AnswerTextField(
-                            textFieldData: answers[i],
-                            onSubmitted: onSubmitted,
-                            i: i,
-                          ),
-                        ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(height / 100),
+                        color: darkMode
+                            ? const Color.fromARGB(255, 55, 55, 55)
+                            : color4,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(height / 100),
+                        child: Column(
+                          children: [
+                            BasicTextField(
+                              textFieldData: definitions[i],
+                              hintError: language["Definition can't be blank"],
+                              colorBorder: color1,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            AnswerTextField(
+                              textFieldData: answers[i],
+                              onSubmitted: onSubmitted,
+                              i: i,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -237,6 +265,7 @@ class _CreateQuizState extends State<CreateQuiz> {
 
   onPressed() async {
     bool error = false;
+    int counter = 0;
     for (var i = 0; i < definitions.length; i++) {
       if (definitions[i].input.text.replaceAll(' ', '') == "") {
         if (answers[i].input.text.replaceAll(' ', '') != "") {
@@ -254,7 +283,15 @@ class _CreateQuizState extends State<CreateQuiz> {
             error = true;
           });
         }
+      } else {
+        counter++;
       }
+    }
+    if (counter < 3) {
+      error = true;
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => const ErrorPopUp());
     }
     if (title.input.text.replaceAll(' ', '') == "") {
       setState(() {
@@ -271,8 +308,14 @@ class _CreateQuizState extends State<CreateQuiz> {
       });
     }
     if (!error) {
-      await APIQuizzes().httpPutQuiz(mapQuiz(title.input.text, description.input.text,
-          "public", definitionLanguage.toString(), answerLanguage.toString(), definitions, answers));
+      await APIQuizzes().httpPutQuiz(mapQuiz(
+          title.input.text,
+          description.input.text,
+          "public",
+          definitionLanguage.toString(),
+          answerLanguage.toString(),
+          definitions,
+          answers));
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
       widget.refresh;
