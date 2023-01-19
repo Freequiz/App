@@ -22,8 +22,9 @@ class _LoadingScreen2State extends State<LoadingScreen2> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return AnimatedCrossFade(
-      firstCurve: Curves.easeIn,
-      duration: const Duration(milliseconds: 350),
+      firstCurve: Curves.ease,
+      secondCurve: Curves.easeIn,
+      duration: const Duration(milliseconds: 450),
       firstChild: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

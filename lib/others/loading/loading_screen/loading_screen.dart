@@ -30,7 +30,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedCrossFade(
-              firstCurve: Curves.easeIn,
+              firstCurve: Curves.ease,
+              secondCurve: Curves.easeIn,
               duration: const Duration(milliseconds: 350),
               firstChild: Column(
                 children: [
