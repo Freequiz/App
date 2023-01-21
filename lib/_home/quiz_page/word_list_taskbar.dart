@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -16,24 +17,18 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final hintColor = darkMode ? Colors.white : textGray;
+    final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
     return Container(
-      height: height / 18,
+      height: DeviceInfo.height / 18,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(width / 30.4),
-          topRight: Radius.circular(width / 30.4),
+          topLeft: Radius.circular(DeviceInfo.width / 30.4),
+          topRight: Radius.circular(DeviceInfo.width / 30.4),
         ),
         color: color1,
       ),
       child: Padding(
-        padding: EdgeInsets.all(mobileLayout ? 0 : height / 80),
+        padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo.height / 80),
         child: search
             ? Padding(
                 padding:
@@ -43,34 +38,34 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                     widget.search(textController.text);
                   },
                   keyboardAppearance:
-                      darkMode ? Brightness.dark : Brightness.light,
+                      DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                   controller: textController,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: darkMode
+                    fillColor: DeviceInfo.darkMode
                         ? const Color.fromARGB(255, 45, 45, 45)
                         : const Color.fromARGB(255, 245, 245, 245),
                     contentPadding: const EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: color2,
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: color1,
                         width: 2,
                       ),
-                      borderRadius: BorderRadius.circular(width / 30.4),
+                      borderRadius: BorderRadius.circular(DeviceInfo.width / 30.4),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: color4,
                         width: 2,
                       ),
-                      borderRadius: BorderRadius.circular(width / 30.4),
+                      borderRadius: BorderRadius.circular(DeviceInfo.width / 30.4),
                     ),
                     hintText: language["Search"],
                     suffixIcon: IconButton(
@@ -94,35 +89,35 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 children: [
                   const SizedBox(width: 5.0),
                   Container(
-                    width: mobileLayout
-                        ? (width - 30) / 2 - height / 30
-                        : (width - 30) / 2 - height / 20 - height / 80,
+                    width: DeviceInfo.mobileLayout
+                        ? (DeviceInfo.width - 30) / 2 - DeviceInfo.height / 30
+                        : (DeviceInfo.width - 30) / 2 - DeviceInfo.height / 20 - DeviceInfo.height / 80,
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),
                       child: Text(
                         language["Definition"],
                         style: TextStyle(
-                            fontSize: mobileLayout ? height / 50 : height / 45),
+                            fontSize: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45),
                       ),
                     ),
                   ),
                   Container(
-                    width: mobileLayout
-                        ? (width - 30) / 2 - height / 30
-                        : (width - 30) / 2 - height / 20 - height / 80,
+                    width: DeviceInfo.mobileLayout
+                        ? (DeviceInfo.width - 30) / 2 - DeviceInfo.height / 30
+                        : (DeviceInfo.width - 30) / 2 - DeviceInfo.height / 20 - DeviceInfo.height / 80,
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),
                       child: Text(
                         language["Answer"],
                         style: TextStyle(
-                            fontSize: mobileLayout ? height / 50 : height / 45),
+                            fontSize: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45),
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: height / 20,
+                    width: DeviceInfo.height / 20,
                     child: TextButton(
                       onPressed: () {
                         setState(() {
@@ -131,8 +126,8 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                       },
                       child: Icon(
                         Icons.search,
-                        color: darkMode ? Colors.white : textGray,
-                        size: mobileLayout ? height / 50 : height / 45,
+                        color: DeviceInfo.darkMode ? Colors.white : textGray,
+                        size: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45,
                       ),
                     ),
                   ),

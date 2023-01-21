@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/others/device_info.dart';
 
 class WordList extends StatefulWidget {
   final List definitions;
@@ -31,15 +32,10 @@ class WordList extends StatefulWidget {
 class _WordListState extends State<WordList> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
-    final color5 = darkMode
+    final color5 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
         : const Color.fromARGB(255, 225, 225, 225);
-    final color6 = darkMode
+    final color6 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 50, 50, 50)
         : const Color.fromARGB(255, 245, 245, 245);
     return ListView.builder(
@@ -65,41 +61,41 @@ class _WordListState extends State<WordList> {
             color: i.remainder(2) == 0 ? color5 : color6,
           ),
           child: Padding(
-            padding: EdgeInsets.all(mobileLayout ? 0 : height / 80),
+            padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo.height / 80),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(width: 5.0),
                 Container(
-                  width: mobileLayout
-                      ? (widget.width - 30) / 2 - height / 30
-                      : (widget.width - 30) / 2 - height / 20 - height / 80,
+                  width: DeviceInfo.mobileLayout
+                      ? (widget.width - 30) / 2 - DeviceInfo.height / 30
+                      : (widget.width - 30) / 2 - DeviceInfo.height / 20 - DeviceInfo.height / 80,
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       widget.definitions[i],
                       style: TextStyle(
-                          fontSize: mobileLayout ? height / 50 : height / 45),
+                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45),
                     ),
                   ),
                 ),
                 Container(
-                  width: mobileLayout
-                      ? (widget.width - 30) / 2 - height / 30
-                      : (widget.width - 30) / 2 - height / 20 - height / 80,
+                  width: DeviceInfo.mobileLayout
+                      ? (widget.width - 30) / 2 - DeviceInfo.height / 30
+                      : (widget.width - 30) / 2 - DeviceInfo.height / 20 - DeviceInfo.height / 80,
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       widget.answers[i],
                       style: TextStyle(
-                          fontSize: mobileLayout ? height / 50 : height / 45),
+                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: height / 20,
+                  width: DeviceInfo.height / 20,
                   child: TextButton(
                     onPressed: () {
                       widget.markWord(widget.i, i);
@@ -109,12 +105,12 @@ class _WordListState extends State<WordList> {
                         ? Icon(
                             Icons.star,
                             color: widget.color,
-                            size: mobileLayout ? height / 50 : height / 45,
+                            size: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45,
                           )
                         : Icon(
                             Icons.star_border,
                             color: widget.color,
-                            size: mobileLayout ? height / 50 : height / 45,
+                            size: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45,
                           ),
                   ),
                 ),

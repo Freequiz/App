@@ -118,5 +118,8 @@
     "Created Quizzes": "Created Quizzes",
     "Edit Quiz": "Edit Quiz",
     "Not enough words": "Not enough words",
-    "Not enough words description": "At least three word pairs are required to create a quiz"
+    "Not enough words description": "At least three word pairs are required to create a quiz",
+    "Dark Mode": "Dark Mode",
+    "Automatic": "Automatic",
+    "Light Mode": "Light Mode"
 }

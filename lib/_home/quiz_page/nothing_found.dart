@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
 class NothingFound extends StatefulWidget {
@@ -13,9 +14,7 @@ class _NothingFoundState extends State<NothingFound> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final color5 = darkMode
+    final color5 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
         : const Color.fromARGB(255, 225, 225, 225);
     var shortestSide = MediaQuery.of(context).size.shortestSide;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
 class ErrorPopUp extends StatelessWidget {
@@ -6,12 +7,10 @@ class ErrorPopUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     return AlertDialog(
       title: Text(
         language["Not enough words"],
-        style: TextStyle(color: darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
       content: Text(language["Not enough words description"]),
       actions: [

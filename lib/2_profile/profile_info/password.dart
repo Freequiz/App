@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -16,24 +17,19 @@ class _PasswordState extends State<Password> {
   TextFieldData newPassword = TextFieldData(hint: language["Password"], shown: false);
   TextFieldData newPasswordConfirmation = TextFieldData(hint: language["Confirm Password"], shown: false);
   TextFieldData oldPassword = TextFieldData(hint: language["Old Password"], shown: false);
-  final color5 = const Color.fromARGB(255, 50, 50, 50);
-  final color6 = color3;
   bool edit = false;
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     final textColor =
-        darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+        DeviceInfo.darkMode ? Colors.white : textGray;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(height / 100),
-        color: darkMode ? color5 : color6,
+        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+        color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
       ),
       child: Padding(
-        padding: EdgeInsets.all(height / 100),
+        padding: EdgeInsets.all(DeviceInfo.height / 100),
         child: Column(
           children: [
             Row(
@@ -58,19 +54,19 @@ class _PasswordState extends State<Password> {
               ],
             ),
             edit
-                ? SizedBox(height: height / 60)
+                ? SizedBox(height: DeviceInfo.height / 60)
                 : const SizedBox(
                     height: 0,
                   ),
             edit
                 ? SizedBox(
-                    height: height / 20,
+                    height: DeviceInfo.height / 20,
                     child: TextField(
                       onSubmitted: (value) {
                         FocusScope.of(context).nextFocus();
                       },
                       keyboardAppearance:
-                          darkMode ? Brightness.dark : Brightness.light,
+                          DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                       textInputAction: TextInputAction.next,
                       autocorrect: false,
                       enableSuggestions: false,
@@ -79,7 +75,7 @@ class _PasswordState extends State<Password> {
                       controller: oldPassword.input,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: darkMode
+                        fillColor: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 255, 231, 218),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -122,13 +118,13 @@ class _PasswordState extends State<Password> {
                   ),
             edit
                 ? SizedBox(
-                    height: height / 20,
+                    height: DeviceInfo.height / 20,
                     child: TextField(
                       onSubmitted: (value) {
                         FocusScope.of(context).nextFocus();
                       },
                       keyboardAppearance:
-                          darkMode ? Brightness.dark : Brightness.light,
+                          DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                       textInputAction: TextInputAction.next,
                       autocorrect: false,
                       enableSuggestions: false,
@@ -137,7 +133,7 @@ class _PasswordState extends State<Password> {
                       controller: newPassword.input,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: darkMode
+                        fillColor: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 255, 231, 218),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -183,13 +179,13 @@ class _PasswordState extends State<Password> {
                     children: [
                       Flexible(
                         child: SizedBox(
-                          height: height / 20,
+                          height: DeviceInfo.height / 20,
                           child: TextField(
                             onSubmitted: (value) {
                               changePassword();
                             },
                             keyboardAppearance:
-                                darkMode ? Brightness.dark : Brightness.light,
+                                DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                             autocorrect: false,
                             enableSuggestions: false,
                             obscureText: !newPasswordConfirmation.shown,
@@ -197,7 +193,7 @@ class _PasswordState extends State<Password> {
                             controller: newPasswordConfirmation.input,
                             decoration: InputDecoration(
                               filled: true,
-                              fillColor: darkMode
+                              fillColor: DeviceInfo.darkMode
                                   ? const Color.fromARGB(255, 45, 45, 45)
                                   : const Color.fromARGB(255, 255, 231, 218),
                               contentPadding: const EdgeInsets.all(10.0),
@@ -234,7 +230,7 @@ class _PasswordState extends State<Password> {
                         width: 5,
                       ),
                       SizedBox(
-                        height: height / 20,
+                        height: DeviceInfo.height / 20,
                         child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: color1,

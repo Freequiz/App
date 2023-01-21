@@ -3,6 +3,7 @@ import 'package:freequiz/_home/home_page/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -29,15 +30,12 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
     return Padding(
-      padding: EdgeInsets.all(mobileLayout ? 10 : 30),
+      padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 10 : 30),
       child: Column(
         children: [
           SizedBox(
-            height: height / 20,
+            height: DeviceInfo.height / 20,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
@@ -46,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
                   child: Text(
                     "${language["Results for"]} \"${trim(widget.searchTerm)}\"",
                     style:
-                        TextStyle(fontSize: height / 50, color: Colors.white),
+                        TextStyle(fontSize: DeviceInfo.height / 50, color: Colors.white),
                   ),
                 ),
                 const SizedBox(
@@ -63,7 +61,7 @@ class _SearchPageState extends State<SearchPage> {
                           ? language["Language"]
                           : "${language[Search.from] ?? Search.from} $arrow ${language[Search.to] ?? Search.to}",
                       style:
-                          TextStyle(fontSize: height / 50, color: Colors.white),
+                          TextStyle(fontSize: DeviceInfo.height / 50, color: Colors.white),
                     ),
                   ),
                 ),
@@ -71,13 +69,14 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           SizedBox(
-            height: mobileLayout ? 10 : 30,
+            height: DeviceInfo.mobileLayout ? 10 : 30,
           ),
           Expanded(
             child: ListView(
               children: [
                 ListView.separated(
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: widget.data.length,
                   itemBuilder: (BuildContext context, int i) {
                     return QuizTile(
@@ -88,12 +87,12 @@ class _SearchPageState extends State<SearchPage> {
                   },
                   separatorBuilder: (BuildContext context, int i) {
                     return SizedBox(
-                      height: mobileLayout ? 10 : 30,
+                      height: DeviceInfo.mobileLayout ? 10 : 30,
                     );
                   },
                 ),
                 SizedBox(
-                  height: mobileLayout ? 5 : 15,
+                  height: DeviceInfo.mobileLayout ? 5 : 15,
                 ),
                 Align(
                   child: TextButton(
@@ -105,7 +104,7 @@ class _SearchPageState extends State<SearchPage> {
                     child: Text(
                       language["Load more"],
                       style:
-                          TextStyle(color: Colors.white, fontSize: height / 55),
+                          TextStyle(color: Colors.white, fontSize: DeviceInfo.height / 55),
                     ),
                   ),
                 ),

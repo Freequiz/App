@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/bug_reports.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
@@ -19,11 +20,8 @@ class _BugReporterState extends State<BugReporter> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     final hintColor =
-        darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Bug Reporter"]),
@@ -34,12 +32,12 @@ class _BugReporterState extends State<BugReporter> {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(height / 100),
+                borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
                 color:
-                    darkMode ? const Color.fromARGB(255, 55, 55, 55) : color4,
+                    DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : color4,
               ),
               child: Padding(
-                padding: EdgeInsets.all(height / 100),
+                padding: EdgeInsets.all(DeviceInfo.height / 100),
                 child: Column(
                   children: [
                     TextField(
@@ -56,7 +54,7 @@ class _BugReporterState extends State<BugReporter> {
                       controller: title.input,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: darkMode
+                        fillColor: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -72,7 +70,7 @@ class _BugReporterState extends State<BugReporter> {
                           borderSide: BorderSide(
                             color: title.error
                                 ? Colors.red
-                                : (darkMode ? color3 : color1),
+                                : (DeviceInfo.darkMode ? color3 : color1),
                             width: 3.0,
                           ),
                         ),
@@ -98,7 +96,7 @@ class _BugReporterState extends State<BugReporter> {
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: darkMode
+                        fillColor: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -128,7 +126,7 @@ class _BugReporterState extends State<BugReporter> {
                       controller: platform.input,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: darkMode
+                        fillColor: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -137,7 +135,7 @@ class _BugReporterState extends State<BugReporter> {
                           color: hintColor,
                         ),
                         border: const OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
+                        enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
                             color: color1,
                             width: 2.0,
@@ -150,7 +148,7 @@ class _BugReporterState extends State<BugReporter> {
               ),
             ),
             SizedBox(
-              height: height / 40,
+              height: DeviceInfo.height / 40,
             ),
             Align(
               child: TextButton(

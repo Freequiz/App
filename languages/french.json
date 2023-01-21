@@ -116,5 +116,8 @@
     "Created Quizzes": "Quiz créés",
     "Edit Quiz": "Modifier le quiz",
     "Not enough words": "Pas assez de mots",
-    "Not enough words description": "Au moins trois paires de mots sont nécessaires pour créer un quiz"
+    "Not enough words description": "Au moins trois paires de mots sont nécessaires pour créer un quiz",
+    "Dark Mode": "Mode sombre",
+    "Automatic": "Automatique",
+    "Light Mode": "Mode lumière"
 }

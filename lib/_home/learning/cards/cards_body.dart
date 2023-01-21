@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/subviews/progress_bar.dart';
 import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/others/device_info.dart';
 
 class CardsBody extends StatelessWidget {
   final Function wrong;
@@ -19,16 +20,10 @@ class CardsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final backgroundColor = darkMode
+    final backgroundColor = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 50, 50, 50)
         : const Color.fromARGB(255, 246, 246, 246);
-    final foregroundColor = darkMode ? Colors.white : Colors.black;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
+    final foregroundColor = DeviceInfo.darkMode ? Colors.white : Colors.black;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -46,8 +41,8 @@ class CardsBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(
-                  width: width / 1.25,
-                  height: mobileLayout ? height / 4 : width / 2.5,
+                  width: DeviceInfo.width / 1.25,
+                  height: DeviceInfo.mobileLayout ? DeviceInfo.height / 4 : DeviceInfo.width / 2.5,
                   child: ElevatedButton(
                     style: TextButton.styleFrom(
                       backgroundColor: backgroundColor,
@@ -60,21 +55,21 @@ class CardsBody extends StatelessWidget {
                       showAnswer
                           ? Quiz.answer[Quiz.indexArray[0]]
                           : Quiz.definition[Quiz.indexArray[0]],
-                      style: TextStyle(fontSize: height / 24),
+                      style: TextStyle(fontSize: DeviceInfo.height / 24),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: height / 16,
+                  height: DeviceInfo.height / 16,
                 ),
                 SizedBox(
-                  width: width / 1.25,
+                  width: DeviceInfo.width / 1.25,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: mobileLayout ? width / 5 : width / 10,
-                        height: mobileLayout ? width / 5 : width / 10,
+                        width: DeviceInfo.mobileLayout ? DeviceInfo.width / 5 : DeviceInfo.width / 10,
+                        height: DeviceInfo.mobileLayout ? DeviceInfo.width / 5 : DeviceInfo.width / 10,
                         child: FloatingActionButton(
                           heroTag: "wrong",
                           onPressed: () {
@@ -85,8 +80,8 @@ class CardsBody extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: mobileLayout ? width / 5 : width / 10,
-                        height: mobileLayout ? width / 5 : width / 10,
+                        width: DeviceInfo.mobileLayout ? DeviceInfo.width / 5 : DeviceInfo.width / 10,
+                        height: DeviceInfo.mobileLayout ? DeviceInfo.width / 5 : DeviceInfo.width / 10,
                         child: FloatingActionButton(
                           heroTag: "right",
                           onPressed: () {
@@ -99,7 +94,7 @@ class CardsBody extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: height / 32),
+                SizedBox(height: DeviceInfo.height / 32),
               ],
             ),
           ),

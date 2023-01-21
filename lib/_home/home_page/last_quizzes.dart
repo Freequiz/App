@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
 import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 
 class LastQuizzes extends StatefulWidget {
@@ -17,11 +18,7 @@ class LastQuizzes extends StatefulWidget {
 class _LastQuizzesState extends State<LastQuizzes> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final color6 = darkMode
+    final color6 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
         : const Color.fromARGB(255, 235, 235, 235);
     var shortestSide = MediaQuery.of(context).size.shortestSide;
@@ -45,7 +42,7 @@ class _LastQuizzesState extends State<LastQuizzes> {
                 },
                 background: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(height / 100),
+                    borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
                     color: color1,
                   ),
                   child: const Align(
@@ -69,11 +66,11 @@ class _LastQuizzesState extends State<LastQuizzes> {
             }
             return Container(
               height: mobileLayout
-                  ? height / 30 * 4.5 + 15
-                  : height / 30 * 4.5 + 35,
-              width: width - 20,
+                  ? DeviceInfo.height / 30 * 4.5 + 15
+                  : DeviceInfo.height / 30 * 4.5 + 35,
+              width: DeviceInfo.width - 20,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(height / 100),
+                borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
                 color: color6,
               ),
             );

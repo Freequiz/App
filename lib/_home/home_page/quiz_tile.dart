@@ -3,6 +3,7 @@ import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/share.dart';
 import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/loading/error_loading/error_loading.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/loading/loading_screen/loading_screen.dart';
@@ -35,11 +36,7 @@ class _QuizTileState extends State<QuizTile> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final color6 = darkMode
+    final color6 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
         : const Color.fromARGB(255, 235, 235, 235);
     var shortestSide = MediaQuery.of(context).size.shortestSide;
@@ -52,14 +49,14 @@ class _QuizTileState extends State<QuizTile> {
       child: Container(
         height: mobileLayout
             ? expanded
-                ? height / 30 * 4.5 + 15
-                : height / 30 * 2.5 + 15
+                ? DeviceInfo.height / 30 * 4.5 + 15
+                : DeviceInfo.height / 30 * 2.5 + 15
             : expanded
-                ? height / 30 * 4.5 + 35
-                : height / 30 * 2.5 + 35,
-        width: width - 20,
+                ? DeviceInfo.height / 30 * 4.5 + 35
+                : DeviceInfo.height / 30 * 2.5 + 35,
+        width: DeviceInfo.width - 20,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(height / 100),
+          borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
           color: color6,
         ),
         child: Padding(
@@ -72,13 +69,13 @@ class _QuizTileState extends State<QuizTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: height / 20,
+                height: DeviceInfo.height / 20,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       widget.data['title'],
-                      style: TextStyle(fontSize: height / 30),
+                      style: TextStyle(fontSize: DeviceInfo.height / 30),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -86,7 +83,7 @@ class _QuizTileState extends State<QuizTile> {
                       },
                       child: Icon(
                         Icons.ios_share,
-                        color: darkMode ? Colors.white : textGray,
+                        color: DeviceInfo.darkMode ? Colors.white : textGray,
                       ),
                     ),
                   ],
@@ -96,15 +93,15 @@ class _QuizTileState extends State<QuizTile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: expanded ? height / 15 : height / 30,
+                    height: expanded ? DeviceInfo.height / 15 : DeviceInfo.height / 30,
                     child: Text(
                       expanded
                           ? widget.data['description']
                           : trim(widget.data['description']),
                       style: TextStyle(
                           fontSize: widget.data['description'].length > 50
-                              ? height / 60
-                              : height / 50),
+                              ? DeviceInfo.height / 60
+                              : DeviceInfo.height / 50),
                     ),
                   ),
                   widget.expanded
@@ -113,7 +110,7 @@ class _QuizTileState extends State<QuizTile> {
                           width: 0,
                         )
                       : SizedBox(
-                          height: height / 30,
+                          height: DeviceInfo.height / 30,
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -123,7 +120,7 @@ class _QuizTileState extends State<QuizTile> {
                             child: Text(
                               expanded ? "" : language["More"],
                               style: TextStyle(
-                                  color: color1, fontSize: height / 50),
+                                  color: color1, fontSize: DeviceInfo.height / 50),
                             ),
                           ),
                         ),
@@ -131,20 +128,20 @@ class _QuizTileState extends State<QuizTile> {
               ),
               expanded
                   ? SizedBox(
-                      height: height / 30,
+                      height: DeviceInfo.height / 30,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            height: height / 30,
+                            height: DeviceInfo.height / 30,
                             decoration: BoxDecoration(
                                 color: color2,
                                 borderRadius:
-                                    BorderRadius.circular(height / 60)),
+                                    BorderRadius.circular(DeviceInfo.height / 60)),
                             alignment: Alignment.center,
                             child: Padding(
                               padding:
-                                  EdgeInsets.symmetric(horizontal: height / 60),
+                                  EdgeInsets.symmetric(horizontal: DeviceInfo.height / 60),
                               child: Text(
                                 "${language["Questions"]} ${widget.data['translations'] ?? widget.data['data'].length}",
                                 style: const TextStyle(color: Colors.white),
@@ -155,15 +152,15 @@ class _QuizTileState extends State<QuizTile> {
                             width: 10.0,
                           ),
                           Container(
-                            height: height / 30,
+                            height: DeviceInfo.height / 30,
                             decoration: BoxDecoration(
                                 color: color5,
                                 borderRadius:
-                                    BorderRadius.circular(height / 60)),
+                                    BorderRadius.circular(DeviceInfo.height / 60)),
                             alignment: Alignment.center,
                             child: Padding(
                               padding:
-                                  EdgeInsets.symmetric(horizontal: height / 60),
+                                  EdgeInsets.symmetric(horizontal: DeviceInfo.height / 60),
                               child: Text(
                                 "${language[widget.data['from']['name']]} $arrow ${language[widget.data['to']['name']]}",
                                 style: const TextStyle(color: Colors.white),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
 
 class BasicTextField extends StatefulWidget {
@@ -13,7 +15,7 @@ class BasicTextField extends StatefulWidget {
     super.key,
     required this.textFieldData,
     required this.hintError,
-    required this.colorBorder,
+    this.colorBorder = color1,
     this.widthBorder = 2.0,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
@@ -27,10 +29,8 @@ class BasicTextField extends StatefulWidget {
 class _BasicTextFieldState extends State<BasicTextField> {
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     final hintColor =
-        darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return TextField(
       onSubmitted: (value) {
         FocusScope.of(context).nextFocus();
@@ -44,11 +44,11 @@ class _BasicTextFieldState extends State<BasicTextField> {
       onEditingComplete: () {},
       controller: widget.textFieldData.input,
       keyboardType: widget.keyboardType,
-      keyboardAppearance: darkMode ? Brightness.dark : Brightness.light,
+      keyboardAppearance: DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
       maxLines: widget.maxLines,
       decoration: InputDecoration(
         filled: true,
-        fillColor: darkMode
+        fillColor: DeviceInfo.darkMode
             ? const Color.fromARGB(255, 45, 45, 45)
             : const Color.fromARGB(255, 234, 247, 255),
         contentPadding: const EdgeInsets.all(10.0),

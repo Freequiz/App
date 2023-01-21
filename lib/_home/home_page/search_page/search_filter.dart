@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 
 class SearchFilter extends StatefulWidget {
   final Color color;
@@ -12,9 +13,7 @@ class SearchFilter extends StatefulWidget {
 class _SearchFilterState extends State<SearchFilter> {
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final color6 = darkMode
+    final color6 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
         : widget.color;
     return Container(

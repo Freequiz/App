@@ -6,6 +6,7 @@ import 'package:freequiz/_home/learning/smart.dart';
 import 'package:freequiz/_home/learning/writing/writing.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/word_list.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -53,11 +54,8 @@ class _StartLearningState extends State<StartLearning> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final color5 = darkMode
+
+    final color5 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
         : const Color.fromARGB(255, 225, 225, 225);
     return Column(
@@ -69,11 +67,11 @@ class _StartLearningState extends State<StartLearning> {
         const SizedBox(height: 15),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(width / 30 + 10),
+            borderRadius: BorderRadius.circular(DeviceInfo.width / 30 + 10),
             color: color5,
           ),
-          height: height / 10,
-          width: width - 20.0,
+          height: DeviceInfo.height / 10,
+          width: DeviceInfo.width - 20.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -91,17 +89,17 @@ class _StartLearningState extends State<StartLearning> {
                 },
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
-                  height: height / 10 - 20,
-                  width: widthStartButton(width),
+                  height: DeviceInfo.height / 10 - 20,
+                  width: widthStartButton(DeviceInfo.width),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(width / 30),
+                    borderRadius: BorderRadius.circular(DeviceInfo.width / 30),
                     color: color[widget.i],
                   ),
                   child: Center(
                     child: Text(
                       language["Learn"],
                       style: TextStyle(
-                          fontSize: height / 36,
+                          fontSize: DeviceInfo.height / 36,
                           color: Colors.white,
                           fontWeight: FontWeight.w600),
                     ),
@@ -130,10 +128,10 @@ class _StartLearningState extends State<StartLearning> {
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10.0),
-                        height: height / 10 - 20,
-                        width: widthStartButton(width),
+                        height: DeviceInfo.height / 10 - 20,
+                        width: widthStartButton(DeviceInfo.width),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(width / 30),
+                          borderRadius: BorderRadius.circular(DeviceInfo.width / 30),
                           color: color[widget.i],
                         ),
                         child: Row(
@@ -142,7 +140,7 @@ class _StartLearningState extends State<StartLearning> {
                             Text(
                               language["Learn only"],
                               style: TextStyle(
-                                  fontSize: height / 36,
+                                  fontSize: DeviceInfo.height / 36,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -181,14 +179,14 @@ class _StartLearningState extends State<StartLearning> {
                   children: [
                     progressArray(widget.i, i).isNotEmpty
                         ? Container(
-                            width: (width - 20),
-                            height: height / 30,
+                            width: (DeviceInfo.width - 20),
+                            height: DeviceInfo.height / 30,
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 8),
                               child: Text(
                                 widget.levels[i],
-                                style: TextStyle(fontSize: height / 40),
+                                style: TextStyle(fontSize: DeviceInfo.height / 40),
                               ),
                             ),
                           )
@@ -203,11 +201,11 @@ class _StartLearningState extends State<StartLearning> {
                       i: i,
                       color: color[widget.i],
                       scrollPhysics: const NeverScrollableScrollPhysics(),
-                      width: width,
+                      width: DeviceInfo.width,
                     ),
                     SizedBox(
                       height: progressArray(widget.i, i).isNotEmpty
-                          ? height / 30
+                          ? DeviceInfo.height / 30
                           : 0,
                     ),
                   ],

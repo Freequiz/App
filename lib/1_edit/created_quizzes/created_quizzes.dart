@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/created_quizzes/edit_quiz_tile.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -14,20 +15,17 @@ class CreatedQuizzes extends StatefulWidget {
 class _CreatedQuizzesState extends State<CreatedQuizzes> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
     return ListView(
       children: [
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
             language["Created Quizzes"],
-            style: TextStyle(fontSize: height / 30),
+            style: TextStyle(fontSize: DeviceInfo.height / 30),
           ),
         ),
         SizedBox(
-          height: mobileLayout ? 5 : 15,
+          height: DeviceInfo.mobileLayout ? 5 : 15,
         ),
         ListView.separated(
           shrinkWrap: true,
@@ -42,12 +40,12 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
           },
           separatorBuilder: (BuildContext context, int i) {
             return SizedBox(
-              height: mobileLayout ? 10 : 30,
+              height: DeviceInfo.mobileLayout ? 10 : 30,
             );
           },
         ),
         SizedBox(
-          height: mobileLayout ? 5 : 15,
+          height: DeviceInfo.mobileLayout ? 5 : 15,
         ),
         Align(
           child: TextButton(
@@ -58,7 +56,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
             onPressed: () {},
             child: Text(
               language["Load more"],
-              style: TextStyle(color: Colors.white, fontSize: height / 55),
+              style: TextStyle(color: Colors.white, fontSize: DeviceInfo.height / 55),
             ),
           ),
         ),

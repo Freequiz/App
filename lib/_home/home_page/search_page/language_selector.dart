@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
@@ -33,14 +34,12 @@ class _LanguageSelectorState extends State<LanguageSelector> {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     final hintColor =
-        darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return AlertDialog(
       title: Text(
         language["Language"],
-        style: TextStyle(color: darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
       content: Text(
         language["Choose the desired languages"],
@@ -52,7 +51,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
           children: [
             DropdownButton(
               value: from,
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_drop_down_rounded,
                 color: color1,
               ),
@@ -60,7 +59,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
                 height: 2,
                 color: color1,
               ),
-              dropdownColor: darkMode
+              dropdownColor: DeviceInfo.darkMode
                   ? const Color.fromARGB(255, 40, 40, 40)
                   : const Color.fromARGB(255, 229, 242, 250),
               items: languages,
@@ -71,13 +70,13 @@ class _LanguageSelectorState extends State<LanguageSelector> {
               },
               style: TextStyle(color: hintColor),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_rounded,
               color: color1,
             ),
             DropdownButton(
               value: to,
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_drop_down_rounded,
                 color: color1,
               ),
@@ -85,7 +84,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
                 height: 2,
                 color: color1,
               ),
-              dropdownColor: darkMode
+              dropdownColor: DeviceInfo.darkMode
                   ? const Color.fromARGB(255, 40, 40, 40)
                   : const Color.fromARGB(255, 229, 242, 250),
               items: languages,

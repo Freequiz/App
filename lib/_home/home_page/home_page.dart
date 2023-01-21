@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search_bar.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/home_page/last_quizzes.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,14 +18,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final opacityColor = darkMode ? backgroundGray : Colors.white;
-    final bool mobileLayout = shortestSide < 600;
+    final opacityColor = DeviceInfo.darkMode ? backgroundGray : Colors.white;
     return Padding(
-      padding: EdgeInsets.all(mobileLayout ? 10 : 30),
+      padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 10 : 30),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
@@ -36,10 +32,10 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Center(child: SearchBar()),
             SizedBox(
-              height: mobileLayout ? 10 : 30,
+              height: DeviceInfo.mobileLayout ? 10 : 30,
             ),
             Quiz().amountUuids() > 0
-                ? mobileLayout
+                ? DeviceInfo.mobileLayout
                     ? const Expanded(
                         child: LastQuizzes(),
                       )
@@ -68,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               children: [
                                 SizedBox(
-                                  width: (width - 30) / 4 + 15,
+                                  width: (DeviceInfo.width - 30) / 4 + 15,
                                 ),
                                 const Expanded(
                                   child: LastQuizzes(
@@ -76,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: (width - 30) / 4 + 15,
+                                  width: (DeviceInfo.width - 30) / 4 + 15,
                                 ),
                               ],
                             ),
@@ -88,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                           flex: 1,
                         ),
                         SizedBox(
-                          width: width / 1.25,
+                          width: DeviceInfo.width / 1.25,
                           child: Image.asset(
                             "images/icon_transparent.png",
                             color: opacityColor.withOpacity(0.4),

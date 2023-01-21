@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/users.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
 class Confirmation extends StatelessWidget {
@@ -8,12 +9,10 @@ class Confirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     return AlertDialog(
       title: Text(
         language["Delete Account"],
-        style: TextStyle(color: darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
       content: Text(language[
           "Are you sure you want to delete your account. It's not reversible"]),

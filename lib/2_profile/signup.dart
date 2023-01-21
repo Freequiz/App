@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -25,31 +26,25 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final hintColor = darkMode ? Colors.white : Colors.black;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
+    final hintColor = DeviceInfo.darkMode ? Colors.white : Colors.black;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Padding(
-        padding: mobileLayout
+        padding: DeviceInfo.mobileLayout
             ? const EdgeInsets.all(10.0)
-            : EdgeInsets.symmetric(horizontal: width / 5.5, vertical: 10.0),
+            : EdgeInsets.symmetric(horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
         child: ListView(
           children: [
             SizedBox(
-              height: height / 60,
+              height: DeviceInfo.height / 60,
             ),
             Center(
               child: Text(
                 language["Sign up"],
-                style: TextStyle(fontSize: height / 20),
+                style: TextStyle(fontSize: DeviceInfo.height / 20),
               ),
             ),
             Row(
@@ -57,30 +52,30 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Text(
                   language["By signing up you accept the "],
-                  style: TextStyle(fontSize: height / 65),
+                  style: TextStyle(fontSize: DeviceInfo.height / 65),
                 ),
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {},
                   child: Text(
                     language["terms and conditions"],
-                    style: TextStyle(fontSize: height / 65, color: Colors.blue),
+                    style: TextStyle(fontSize: DeviceInfo.height / 65, color: Colors.blue),
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: height / 40.0,
+              height: DeviceInfo.height / 40.0,
             ),
             SizedBox(
-              height: mobileLayout ? height / 20 : 40,
+              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
                 },
                 textInputAction: TextInputAction.next,
                 keyboardAppearance:
-                    darkMode ? Brightness.dark : Brightness.light,
+                    DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                 keyboardType: TextInputType.name,
                 controller: username.input,
                 decoration: InputDecoration(
@@ -103,13 +98,13 @@ class _SignUpState extends State<SignUp> {
               height: 5.0,
             ),
             SizedBox(
-              height: mobileLayout ? height / 20 : 40,
+              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
                 },
                 keyboardAppearance:
-                    darkMode ? Brightness.dark : Brightness.light,
+                    DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                 textInputAction: TextInputAction.next,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
@@ -134,13 +129,13 @@ class _SignUpState extends State<SignUp> {
               height: 5.0,
             ),
             SizedBox(
-              height: mobileLayout ? height / 20 : 40,
+              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
                 },
                 keyboardAppearance:
-                    darkMode ? Brightness.dark : Brightness.light,
+                    DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                 textInputAction: TextInputAction.next,
                 autocorrect: false,
                 enableSuggestions: false,
@@ -181,13 +176,13 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Flexible(
                   child: SizedBox(
-                    height: mobileLayout ? height / 20 : 40,
+                    height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
                     child: TextField(
                       onSubmitted: (value) {
                         onPressed();
                       },
                       keyboardAppearance:
-                          darkMode ? Brightness.dark : Brightness.light,
+                          DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                       autocorrect: false,
                       enableSuggestions: false,
                       obscureText: !passwordConfirmation.shown,
@@ -228,7 +223,7 @@ class _SignUpState extends State<SignUp> {
                   width: 5,
                 ),
                 SizedBox(
-                  height: mobileLayout ? height / 20 : 40,
+                  height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: color1,
@@ -239,8 +234,8 @@ class _SignUpState extends State<SignUp> {
                     },
                     child: pressed
                         ? SizedBox(
-                            width: mobileLayout ? height / 30 : 30,
-                            height: mobileLayout ? height / 30 : 30,
+                            width: DeviceInfo.mobileLayout ? DeviceInfo.height / 30 : 30,
+                            height: DeviceInfo.mobileLayout ? DeviceInfo.height / 30 : 30,
                             child: const CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -251,12 +246,12 @@ class _SignUpState extends State<SignUp> {
               ],
             ),
             SizedBox(
-              height: height / 60,
+              height: DeviceInfo.height / 60,
             ),
             Center(
               child: Text(
                 language["Already have an Account?"],
-                style: TextStyle(fontSize: height / 65),
+                style: TextStyle(fontSize: DeviceInfo.height / 65),
               ),
             ),
             Align(

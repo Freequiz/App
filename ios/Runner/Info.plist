@@ -50,15 +50,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-		<key>CFBundleTypeRole</key>
-		<string>Editor</string>
-		<key>CFBundleURLName</key>
-		<string>freequiz.herokuapp.com</string>
-		<key>CFBundleURLSchemes</key>
-		<array>
-		<string>freequiz</string>
-		<string>https</string>
-		</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>freequiz.herokuapp.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>freequiz</string>
+			</array>
 		</dict>
 	</array>
 </dict>

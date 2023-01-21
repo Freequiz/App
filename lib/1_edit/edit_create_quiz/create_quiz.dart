@@ -4,6 +4,7 @@ import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
@@ -35,18 +36,12 @@ class _CreateQuizState extends State<CreateQuiz> {
   final description = TextFieldData(hint: language["Description"]);
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     final hintColor =
-        darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
+        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Create Quiz"]),
-        backgroundColor: darkMode ? color1 : color4,
+        backgroundColor: DeviceInfo.darkMode ? color1 : color4,
         leading: TextButton(
           onPressed: () {
             Navigator.of(context).pop();
@@ -77,28 +72,28 @@ class _CreateQuizState extends State<CreateQuiz> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Padding(
-          padding: mobileLayout
+          padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.all(10.0)
-              : EdgeInsets.symmetric(horizontal: width / 5.5, vertical: 10.0),
+              : EdgeInsets.symmetric(horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
           child: ListView(
             children: [
               SizedBox(
-                height: height / 60,
+                height: DeviceInfo.height / 60,
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(height / 100),
+                  borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
                   color:
-                      darkMode ? const Color.fromARGB(255, 55, 55, 55) : color4,
+                      DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : color4,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(height / 100),
+                  padding: EdgeInsets.all(DeviceInfo.height / 100),
                   child: Column(
                     children: [
                       BasicTextField(
                         textFieldData: title,
                         hintError: language["Title can't be blank"],
-                        colorBorder: (darkMode ? color3 : color1),
+                        colorBorder: (DeviceInfo.darkMode ? color3 : color1),
                         widthBorder: 3.0,
                       ),
                       const SizedBox(
@@ -107,7 +102,6 @@ class _CreateQuizState extends State<CreateQuiz> {
                       BasicTextField(
                         textFieldData: description,
                         hintError: language["Description can't be blank"],
-                        colorBorder: color1,
                         maxLines: 4,
                         keyboardType: TextInputType.multiline,
                       ),
@@ -116,7 +110,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                         children: [
                           DropdownButton(
                             value: definitionLanguage,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_drop_down_rounded,
                               color: color1,
                             ),
@@ -124,7 +118,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                               height: 2,
                               color: color1,
                             ),
-                            dropdownColor: darkMode
+                            dropdownColor: DeviceInfo.darkMode
                                 ? const Color.fromARGB(255, 40, 40, 40)
                                 : const Color.fromARGB(255, 229, 242, 250),
                             items: Languages.languages,
@@ -135,13 +129,13 @@ class _CreateQuizState extends State<CreateQuiz> {
                             },
                             style: TextStyle(color: hintColor),
                           ),
-                          Icon(
+                          const Icon(
                             Icons.arrow_forward_rounded,
                             color: color1,
                           ),
                           DropdownButton(
                             value: answerLanguage,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_drop_down_rounded,
                               color: color1,
                             ),
@@ -149,7 +143,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                               height: 2,
                               color: color1,
                             ),
-                            dropdownColor: darkMode
+                            dropdownColor: DeviceInfo.darkMode
                                 ? const Color.fromARGB(255, 40, 40, 40)
                                 : const Color.fromARGB(255, 229, 242, 250),
                             items: Languages.languages,
@@ -167,7 +161,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                 ),
               ),
               SizedBox(
-                height: height / 40,
+                height: DeviceInfo.height / 40,
               ),
               ListView.separated(
                 shrinkWrap: true,
@@ -175,7 +169,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                 itemCount: wordCount,
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(
-                    height: height / 60,
+                    height: DeviceInfo.height / 60,
                   );
                 },
                 itemBuilder: (BuildContext context, int i) {
@@ -191,7 +185,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                     },
                     background: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(height / 100),
+                        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
                         color: Colors.red,
                       ),
                       child: const Align(
@@ -207,19 +201,18 @@ class _CreateQuizState extends State<CreateQuiz> {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(height / 100),
-                        color: darkMode
+                        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                        color: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 55, 55, 55)
                             : color4,
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(height / 100),
+                        padding: EdgeInsets.all(DeviceInfo.height / 100),
                         child: Column(
                           children: [
                             BasicTextField(
                               textFieldData: definitions[i],
                               hintError: language["Definition can't be blank"],
-                              colorBorder: color1,
                             ),
                             const SizedBox(
                               height: 5,
@@ -237,7 +230,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                 },
               ),
               SizedBox(
-                height: height / 40,
+                height: DeviceInfo.height / 40,
               ),
               Align(
                 child: TextButton(

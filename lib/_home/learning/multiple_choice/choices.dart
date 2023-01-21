@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/others/device_info.dart';
 
 class Choices extends StatelessWidget {
   final String choice;
@@ -22,11 +23,9 @@ class Choices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: width / 2.5,
-      height: height / 12,
+      width: DeviceInfo.width / 2.5,
+      height: DeviceInfo.height / 12,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           backgroundColor: answerRight ? Colors.green : background,
@@ -42,7 +41,7 @@ class Choices extends StatelessWidget {
           choice,
           style: TextStyle(
             color: color,
-            fontSize: height / 70,
+            fontSize: DeviceInfo.height / 70,
           ),
         ),
       ),

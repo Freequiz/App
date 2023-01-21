@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/subviews/progress_bar.dart';
 import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
 class WritingBody extends StatelessWidget {
@@ -18,11 +19,6 @@ class WritingBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -42,22 +38,22 @@ class WritingBody extends StatelessWidget {
               children: [
                 Text(
                   Quiz.definition[Quiz.indexArray[0]],
-                  style: TextStyle(fontSize: height / 16),
+                  style: TextStyle(fontSize: DeviceInfo.height / 16),
                 ),
                 SizedBox(
-                  height: height / 5,
+                  height: DeviceInfo.height / 5,
                 ),
                 Row(
                   children: [
                     Flexible(
                       child: SizedBox(
-                        height: mobileLayout ? height / 20 : height / 30,
+                        height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : DeviceInfo.height / 30,
                         child: TextField(
                           autocorrect: false,
                           enableSuggestions: false,
                           keyboardType: TextInputType.name,
                           keyboardAppearance:
-                              darkMode ? Brightness.dark : Brightness.light,
+                              DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                           controller: textController,
                           onEditingComplete: () {
                             onPressed();
@@ -86,7 +82,7 @@ class WritingBody extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     SizedBox(
-                      height: mobileLayout ? height / 20 : height / 30,
+                      height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : DeviceInfo.height / 30,
                       child: TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: answerRight ? Colors.green : color,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/create_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/created_quizzes.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -16,9 +17,6 @@ class EditOverview extends StatefulWidget {
 class _EditOverviewState extends State<EditOverview> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -41,13 +39,13 @@ class _EditOverviewState extends State<EditOverview> {
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   language["Create a New Quiz"],
-                  style: TextStyle(fontSize: height / 45),
+                  style: TextStyle(fontSize: DeviceInfo.height / 45),
                 ),
               ),
             ),
           ),
           SizedBox(
-            height: mobileLayout ? 15 : 45,
+            height: DeviceInfo.mobileLayout ? 15 : 45,
           ),
           Expanded(
             child: CreatedQuizzes(data: widget.data),

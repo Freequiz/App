@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/2_profile/profile_info/confirmation.dart';
+import 'package:freequiz/2_profile/profile_info/dark_mode_switcher/dark_mode_switcher.dart';
 import 'package:freequiz/2_profile/profile_info/email.dart';
 import 'package:freequiz/2_profile/profile_info/password.dart';
 import 'package:freequiz/2_profile/profile_info/username.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
@@ -20,11 +22,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     final textColor =
-        darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -35,18 +34,20 @@ class _ProfileInfoState extends State<ProfileInfo> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: DefaultTextStyle(
             style: TextStyle(
-              fontSize: height / 50,
+              fontSize: DeviceInfo.height / 50,
               color: textColor,
             ),
             child: ListView(
               children: [
-                SizedBox(height: height / 60),
+                SizedBox(height: DeviceInfo.height / 60),
                 Username(data: widget.data, refresh: widget.refresh),
-                SizedBox(height: height / 60),
+                SizedBox(height: DeviceInfo.height / 60),
                 EMail(data: widget.data, refresh: widget.refresh),
-                SizedBox(height: height / 60),
+                SizedBox(height: DeviceInfo.height / 60),
                 Password(refresh: widget.refresh),
-                SizedBox(height: height / 60),
+                SizedBox(height: DeviceInfo.height / 60),
+                const DarkModeSwitcher(),
+                SizedBox(height: DeviceInfo.height / 60),
                 Align(
                   child: TextButton(
                     style: TextButton.styleFrom(

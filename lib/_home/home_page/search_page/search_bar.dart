@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search_page.dart';
 import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/loading/error_loading/error_loading.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/loading/loading_screen/loading_screen.dart';
@@ -19,19 +20,13 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final hintColor = darkMode ? Colors.white : textGray;
-    final backgroundColor = darkMode
+    final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
+    final backgroundColor = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
         : const Color.fromARGB(255, 235, 235, 235);
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
     return Container(
-      height: mobileLayout ? height / 20 + 20 : 60,
-      width: mobileLayout ? width - 20 : width / 2,
+      height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 + 20 : 60,
+      width: DeviceInfo.mobileLayout ? DeviceInfo.width - 20 : DeviceInfo.width / 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: backgroundColor,
@@ -42,17 +37,17 @@ class _SearchBarState extends State<SearchBar> {
           children: [
             Flexible(
               child: SizedBox(
-                height: mobileLayout ? height / 20 : 40,
+                height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
                 child: TextField(
                   onSubmitted: (value) {
                     search();
                   },
                   keyboardAppearance:
-                      darkMode ? Brightness.dark : Brightness.light,
+                      DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                   controller: textController,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: darkMode
+                    fillColor: DeviceInfo.darkMode
                         ? const Color.fromARGB(255, 45, 45, 45)
                         : const Color.fromARGB(255, 245, 245, 245),
                     contentPadding: const EdgeInsets.all(10.0),
@@ -75,7 +70,7 @@ class _SearchBarState extends State<SearchBar> {
               width: 5,
             ),
             SizedBox(
-              height: mobileLayout ? height / 20 : 40,
+              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
               child: TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: color1,
