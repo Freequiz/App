@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -10,7 +11,7 @@ class LoadingScreen extends StatefulWidget {
   const LoadingScreen(
       {super.key,
       required this.message,
-      required this.finishedLoading,
+      this.finishedLoading = false,
       this.widget = const Drawer(),
       required this.appBar});
 
@@ -21,8 +22,6 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: widget.appBar,
       body: Center(
@@ -40,7 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                           "images/icon_transparent.png",
                         )
                       : SpinKitRotatingCircle(
-                          size: width / 2.25,
+                          size: DeviceInfo.width / 2.25,
                           itemBuilder: (BuildContext context, int index) {
                             return Image.asset(
                               "images/icon_transparent.png",
@@ -48,18 +47,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
                           },
                         ),
                   SizedBox(
-                    height: widget.finishedLoading ? 0 : height / 30,
+                    height: widget.finishedLoading ? 0 : DeviceInfo.height / 30,
                   ),
                   Text(
                     language[widget.message],
                     style: TextStyle(
-                        fontSize: widget.finishedLoading ? 0 : height / 45),
+                        fontSize: widget.finishedLoading ? 0 : DeviceInfo.height / 45),
                   ),
                 ],
               ),
               secondChild: SizedBox(
-                width: width,
-                height: height -
+                width: DeviceInfo.width,
+                height: DeviceInfo.height -
                     (MediaQuery.of(context).padding.top + kToolbarHeight) -
                     1,
                 child: widget.widget,

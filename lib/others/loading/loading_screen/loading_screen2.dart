@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -19,8 +20,6 @@ class LoadingScreen2 extends StatefulWidget {
 class _LoadingScreen2State extends State<LoadingScreen2> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return AnimatedCrossFade(
       firstCurve: Curves.ease,
       secondCurve: Curves.easeIn,
@@ -33,7 +32,7 @@ class _LoadingScreen2State extends State<LoadingScreen2> {
                   "images/icon_transparent.png",
                 )
               : SpinKitRotatingCircle(
-                  size: width / 2.25,
+                  size: DeviceInfo.width / 2.25,
                   itemBuilder: (BuildContext context, int index) {
                     return Image.asset(
                       "images/icon_transparent.png",
@@ -41,18 +40,18 @@ class _LoadingScreen2State extends State<LoadingScreen2> {
                   },
                 ),
           SizedBox(
-            height: widget.finishedLoading ? 0 : height / 30,
+            height: widget.finishedLoading ? 0 : DeviceInfo.height / 30,
           ),
           Text(
             language[widget.message],
             style:
-                TextStyle(fontSize: widget.finishedLoading ? 0 : height / 45),
+                TextStyle(fontSize: widget.finishedLoading ? 0 : DeviceInfo.height / 45),
           ),
         ],
       ),
       secondChild: SizedBox(
-          width: width,
-          height: height -
+          width: DeviceInfo.width,
+          height: DeviceInfo.height -
               kToolbarHeight -
               MediaQuery.of(context).padding.top -
               AppBar().preferredSize.height,

@@ -3,7 +3,7 @@ import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
-import 'package:freequiz/_home/subviews/share.dart';
+import 'package:freequiz/_home/subviews/kebab_menu.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -107,15 +107,18 @@ class _EditQuizTileState extends State<EditQuizTile> {
                           children: [
                             Text(
                               widget.data['title'],
-                              style: TextStyle(fontSize: DeviceInfo.height / 30),
+                              style:
+                                  TextStyle(fontSize: DeviceInfo.height / 30),
                             ),
                             GestureDetector(
                               onTap: () {
-                                edit(DeviceInfo.darkMode);
+                                edit();
                               },
                               child: Icon(
                                 Icons.edit,
-                                color: DeviceInfo.darkMode ? Colors.white : textGray,
+                                color: DeviceInfo.darkMode
+                                    ? Colors.white
+                                    : textGray,
                               ),
                             ),
                           ],
@@ -125,7 +128,9 @@ class _EditQuizTileState extends State<EditQuizTile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            height: expanded ? DeviceInfo.height / 15 : DeviceInfo.height / 30,
+                            height: expanded
+                                ? DeviceInfo.height / 15
+                                : DeviceInfo.height / 30,
                             child: Text(
                               expanded
                                   ? widget.data['description']
@@ -153,7 +158,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
                                     child: Text(
                                       expanded ? "" : language["More"],
                                       style: TextStyle(
-                                          color: color1, fontSize: DeviceInfo.height / 50),
+                                          color: color1,
+                                          fontSize: DeviceInfo.height / 50),
                                     ),
                                   ),
                                 ),
@@ -170,8 +176,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
                                     height: DeviceInfo.height / 30,
                                     decoration: BoxDecoration(
                                         color: color2,
-                                        borderRadius:
-                                            BorderRadius.circular(DeviceInfo.height / 60)),
+                                        borderRadius: BorderRadius.circular(
+                                            DeviceInfo.height / 60)),
                                     alignment: Alignment.center,
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -190,8 +196,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
                                     height: DeviceInfo.height / 30,
                                     decoration: BoxDecoration(
                                         color: color5,
-                                        borderRadius:
-                                            BorderRadius.circular(DeviceInfo.height / 60)),
+                                        borderRadius: BorderRadius.circular(
+                                            DeviceInfo.height / 60)),
                                     alignment: Alignment.center,
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -249,9 +255,10 @@ class _EditQuizTileState extends State<EditQuizTile> {
                     appBar: AppBar(
                       title: Text(Quiz.title),
                       actions: [
-                        ShareButton(
+                        KebabMenuButton(
                           url:
                               "https://freequiz.herokuapp.com/quiz/${widget.uuid}",
+                          uuid: widget.uuid,
                         ),
                       ],
                     ),
@@ -280,11 +287,14 @@ class _EditQuizTileState extends State<EditQuizTile> {
     );
   }
 
-  edit(bool darkMode) {
+  edit() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return EditQuiz(refresh: refresh, uuid: widget.uuid);
+          return EditQuiz(
+            refresh: refresh,
+            uuid: widget.uuid,
+          );
         },
       ),
     );

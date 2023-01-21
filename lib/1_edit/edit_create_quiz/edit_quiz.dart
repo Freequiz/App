@@ -13,7 +13,12 @@ import 'package:freequiz/others/textfield_data.dart';
 class EditQuiz extends StatefulWidget {
   final Function refresh;
   final String uuid;
-  const EditQuiz({super.key, required this.refresh, required this.uuid});
+  final bool owner;
+  const EditQuiz(
+      {super.key,
+      required this.refresh,
+      required this.uuid,
+      this.owner = true});
 
   @override
   State<EditQuiz> createState() => _EditQuizState();
@@ -39,8 +44,9 @@ class _EditQuizState extends State<EditQuiz> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final hintColor = DeviceInfo.darkMode
+        ? Colors.white
+        : const Color.fromARGB(255, 40, 40, 40);
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Edit Quiz"]),
@@ -77,7 +83,8 @@ class _EditQuizState extends State<EditQuiz> {
         child: Padding(
           padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.all(10.0)
-              : EdgeInsets.symmetric(horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
+              : EdgeInsets.symmetric(
+                  horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
           child: FutureBuilder<Map>(
             future: APIQuizzes().getQuiz(widget.uuid, false),
             builder: (context, data) {
@@ -108,7 +115,8 @@ class _EditQuizState extends State<EditQuiz> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                        borderRadius:
+                            BorderRadius.circular(DeviceInfo.height / 100),
                         color: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 55, 55, 55)
                             : color4,
@@ -120,7 +128,8 @@ class _EditQuizState extends State<EditQuiz> {
                             BasicTextField(
                               textFieldData: title,
                               hintError: language["Title can't be blank"],
-                              colorBorder: (DeviceInfo.darkMode ? color3 : color1),
+                              colorBorder:
+                                  (DeviceInfo.darkMode ? color3 : color1),
                               widthBorder: 3.0,
                             ),
                             const SizedBox(
@@ -214,7 +223,8 @@ class _EditQuizState extends State<EditQuiz> {
                           },
                           background: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                              borderRadius: BorderRadius.circular(
+                                  DeviceInfo.height / 100),
                               color: Colors.red,
                             ),
                             child: const Align(
@@ -230,7 +240,8 @@ class _EditQuizState extends State<EditQuiz> {
                           ),
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                              borderRadius: BorderRadius.circular(
+                                  DeviceInfo.height / 100),
                               color: DeviceInfo.darkMode
                                   ? const Color.fromARGB(255, 55, 55, 55)
                                   : color4,
@@ -341,16 +352,32 @@ class _EditQuizState extends State<EditQuiz> {
           builder: (BuildContext context) => const ErrorPopUp());
     }
     if (!error) {
-      await APIQuizzes().httpPatchQuiz(
+      if (widget.owner) {
+        await APIQuizzes().httpPatchQuiz(
           mapQuiz(
-              title.input.text,
-              description.input.text,
-              "public",
-              definitionLanguage.toString(),
-              answerLanguage.toString(),
-              definitions,
-              answers),
-          widget.uuid);
+            title.input.text,
+            description.input.text,
+            "public",
+            definitionLanguage.toString(),
+            answerLanguage.toString(),
+            definitions,
+            answers,
+          ),
+          widget.uuid,
+        );
+      } else {
+        APIQuizzes().httpPutQuiz(
+          mapQuiz(
+            title.input.text,
+            description.input.text,
+            "public",
+            definitionLanguage.toString(),
+            answerLanguage.toString(),
+            definitions,
+            answers,
+          ),
+        );
+      }
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
       widget.refresh;

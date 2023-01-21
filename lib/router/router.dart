@@ -1,6 +1,6 @@
-import 'package:freequiz/others/load_quiz.dart';
+import 'package:freequiz/router/load_quiz.dart';
 import 'package:go_router/go_router.dart';
-import 'main.dart';
+import '../main.dart';
 
 final router = GoRouter(
   routes: [

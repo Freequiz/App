@@ -121,5 +121,10 @@
     "Not enough words description": "At least three word pairs are required to create a quiz",
     "Dark Mode": "Dark Mode",
     "Automatic": "Automatic",
-    "Light Mode": "Light Mode"
+    "Light Mode": "Light Mode",
+    "Users doesn't exist title": "The user doens't exist",
+    "Users doesn't exist description": "This user doesn't exist or was deleted. If you are sure it isn't the case please report it using the bug reporter.",
+    "User is not allowed to view Quiz title": "You are not allowed to view this quiz",
+    "User is not allowed to view Quiz description": "The quiz is private or hidden. If this is your quiz, please report it using the bug reporter.",
+    "Share": "Share"
 }

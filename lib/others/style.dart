@@ -11,6 +11,7 @@ const Color highlightWhite = Color.fromARGB(255, 205, 205, 205);
 const Color backgroundWhite = Color.fromARGB(255, 235, 235, 235);
 const Color textGray = Color.fromARGB(255, 40, 40, 40);
 
+//Dark Mode
 ThemeData darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     color: color1,
@@ -39,6 +40,7 @@ ThemeData darkTheme = ThemeData(
   fontFamily: 'Quicksand',
 );
 
+//Light Mode for weird peoples
 ThemeData lightTheme = ThemeData(
     appBarTheme: const AppBarTheme(
       color: color1,

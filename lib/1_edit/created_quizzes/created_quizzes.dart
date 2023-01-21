@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/created_quizzes/edit_quiz_tile.dart';
+import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
+import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
@@ -13,6 +15,9 @@ class CreatedQuizzes extends StatefulWidget {
 }
 
 class _CreatedQuizzesState extends State<CreatedQuizzes> {
+  bool pressed = false;
+  int page = 1;
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -47,20 +52,40 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
         SizedBox(
           height: DeviceInfo.mobileLayout ? 5 : 15,
         ),
-        Align(
-          child: TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: color1,
-              foregroundColor: Colors.white,
-            ),
-            onPressed: () {},
-            child: Text(
-              language["Load more"],
-              style: TextStyle(color: Colors.white, fontSize: DeviceInfo.height / 55),
-            ),
-          ),
-        ),
+        pressed
+            ? Align(
+                child: CircularProgressIndicator(
+                  color: DeviceInfo.darkMode ? Colors.white : color1,
+                ),
+              )
+            : Align(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: color1,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () => onPressed(),
+                  child: Text(
+                    language["Load more"],
+                    style: TextStyle(
+                        color: Colors.white, fontSize: DeviceInfo.height / 55),
+                  ),
+                ),
+              ),
       ],
     );
+  }
+
+  onPressed() async {
+    setState(() {
+      pressed = true;
+    });
+    page++;
+    ListQuizzes.data.addAll(
+      (await APIUsers().httpGetCreatedQuizzes(page))['data'],
+    );
+    setState(() {
+      pressed = false;
+    });
   }
 }

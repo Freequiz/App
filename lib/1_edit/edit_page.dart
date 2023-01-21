@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/1_edit/edit_overview.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/loading/error_loading/error_loading2.dart';
@@ -21,10 +22,11 @@ class _EditPageState extends State<EditPage> {
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<Map>(
-        future: APIUsers().httpGetCreatedQuizzes("1"),
+        future: APIUsers().httpGetCreatedQuizzes(1),
         builder: (context, data) {
           if (data.hasData) {
             if (data.data!["success"]) {
+              ListQuizzes.data = data.data!['data'];
               return LoadingScreen2(
                 message: "Loading Quizzes",
                 finishedLoading: true,

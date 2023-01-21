@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/3_bug_report/bug_reporter.dart';
+import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';

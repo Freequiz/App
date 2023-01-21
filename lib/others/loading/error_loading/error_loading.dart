@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/3_bug_report/bug_reporter.dart';
+import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
 class ErrorLoading extends StatelessWidget {
@@ -8,8 +9,6 @@ class ErrorLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Loading"]),
@@ -17,7 +16,7 @@ class ErrorLoading extends StatelessWidget {
       body: AlertDialog(
         title: Text(
           language["$error title"] ?? language["other error title"],
-          style: TextStyle(color: darkMode ? Colors.white : Colors.black),
+          style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
         ),
         content: Text(language["$error description"] ?? language["other error description"]),
         actions: [

@@ -119,5 +119,10 @@
     "Not enough words description": "Au moins trois paires de mots sont nécessaires pour créer un quiz",
     "Dark Mode": "Mode sombre",
     "Automatic": "Automatique",
-    "Light Mode": "Mode lumière"
+    "Light Mode": "Mode lumière",
+    "Users doesn't exist title": "L'utilisateur n'existe pas",
+    "Users doesn't exist description": "Cet utilisateur n'existe pas ou a été supprimé. Si vous êtes sûr que ce n'est pas le cas, veuillez le signaler en utilisant le rapporteur de bogues.",
+    "User is not allowed to view Quiz title": "Vous n'êtes pas autorisé à voir ce quiz.",
+    "User is not allowed to view Quiz description": "Le quiz est privé ou caché. S'il s'agit de votre quiz, veuillez le signaler en utilisant le rapporteur de bogues.",
+    "Share": "Partager"
 }

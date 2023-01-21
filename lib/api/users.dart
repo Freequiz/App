@@ -200,7 +200,7 @@ class APIUsers {
     }
   }
 
-  Future<Map> httpGetCreatedQuizzes(String page) async {
+  Future<Map> httpGetCreatedQuizzes(int page) async {
     final response = await http.get(
       Uri.parse('https://freequiz.herokuapp.com/api/user/quizzes/$page'),
       headers: {

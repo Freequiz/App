@@ -3,19 +3,15 @@ import 'package:freequiz/_home/home_page/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
+import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchPage extends StatefulWidget {
   final int n;
-  final List data;
   final String searchTerm;
-  const SearchPage(
-      {super.key,
-      this.n = 0,
-      required this.data,
-      required this.searchTerm});
+  const SearchPage({super.key, this.n = 0, required this.searchTerm});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -23,6 +19,8 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final arrow = '\u279C';
+  bool pressed = false;
+  int page = 1;
 
   refresh() {
     setState(() {});
@@ -43,25 +41,24 @@ class _SearchPageState extends State<SearchPage> {
                   color: color2,
                   child: Text(
                     "${language["Results for"]} \"${trim(widget.searchTerm)}\"",
-                    style:
-                        TextStyle(fontSize: DeviceInfo.height / 50, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: DeviceInfo.height / 50, color: Colors.white),
                   ),
                 ),
                 const SizedBox(
                   width: 10.0,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    onTap();
-                  },
+                  onTap: () => onTap(),
                   child: SearchFilter(
                     color: color5,
                     child: Text(
                       Search.from == 'Any' && Search.to == 'Any'
                           ? language["Language"]
                           : "${language[Search.from] ?? Search.from} $arrow ${language[Search.to] ?? Search.to}",
-                      style:
-                          TextStyle(fontSize: DeviceInfo.height / 50, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: DeviceInfo.height / 50,
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -77,11 +74,11 @@ class _SearchPageState extends State<SearchPage> {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: widget.data.length,
+                  itemCount: Search.data.length,
                   itemBuilder: (BuildContext context, int i) {
                     return QuizTile(
-                      data: widget.data[i],
-                      uuid: widget.data[i]['id'],
+                      data: Search.data[i],
+                      uuid: Search.data[i]['id'],
                       expanded: false,
                     );
                   },
@@ -94,20 +91,27 @@ class _SearchPageState extends State<SearchPage> {
                 SizedBox(
                   height: DeviceInfo.mobileLayout ? 5 : 15,
                 ),
-                Align(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: color1,
-                      foregroundColor: Colors.white,
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      language["Load more"],
-                      style:
-                          TextStyle(color: Colors.white, fontSize: DeviceInfo.height / 55),
-                    ),
-                  ),
-                ),
+                pressed
+                    ? Align(
+                        child: CircularProgressIndicator(
+                          color: DeviceInfo.darkMode ? Colors.white : color1,
+                        ),
+                      )
+                    : Align(
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: color1,
+                            foregroundColor: Colors.white,
+                          ),
+                          onPressed: () => onPressed(),
+                          child: Text(
+                            language["Load more"],
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: DeviceInfo.height / 55),
+                          ),
+                        ),
+                      ),
               ],
             ),
           ),
@@ -131,5 +135,18 @@ class _SearchPageState extends State<SearchPage> {
         refresh: refresh,
       ),
     );
+  }
+
+  onPressed() async {
+    setState(() {
+      pressed = true;
+    });
+    page++;
+    Search.data.addAll(
+      (await APIQuizzes().httpGetSearch(widget.searchTerm, page))['data'],
+    );
+    setState(() {
+      pressed = false;
+    });
   }
 }

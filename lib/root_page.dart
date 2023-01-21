@@ -3,7 +3,7 @@ import 'package:freequiz/1_edit/edit_page.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/2_profile/profile_page.dart';
 import 'package:freequiz/2_profile/signup.dart';
-import 'package:freequiz/3_bug_report/bug_report_page.dart';
+import 'package:freequiz/3_bug_reporter/bug_report_page.dart';
 import 'package:freequiz/_home/home_page/home_page.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/main_app_bar.dart';

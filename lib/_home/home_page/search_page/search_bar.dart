@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_page.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
@@ -26,7 +27,9 @@ class _SearchBarState extends State<SearchBar> {
         : const Color.fromARGB(255, 235, 235, 235);
     return Container(
       height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 + 20 : 60,
-      width: DeviceInfo.mobileLayout ? DeviceInfo.width - 20 : DeviceInfo.width / 2,
+      width: DeviceInfo.mobileLayout
+          ? DeviceInfo.width - 20
+          : DeviceInfo.width / 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: backgroundColor,
@@ -97,11 +100,11 @@ class _SearchBarState extends State<SearchBar> {
             builder: (context, searchResults) {
               if (searchResults.hasData) {
                 if (searchResults.data!["success"]) {
+                  Search.data = searchResults.data!["data"];
                   return LoadingScreen(
                     message: "Loading Search Results",
                     finishedLoading: true,
                     widget: SearchPage(
-                      data: searchResults.data!["data"],
                       searchTerm: textController.text,
                     ),
                     appBar: AppBar(
@@ -119,11 +122,6 @@ class _SearchBarState extends State<SearchBar> {
               }
               return LoadingScreen(
                 message: "Loading Search Results",
-                finishedLoading: false,
-                widget: const SearchPage(
-                  data: [],
-                  searchTerm: "",
-                ),
                 appBar: AppBar(
                   title: Text(language["Loading"]),
                 ),

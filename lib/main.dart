@@ -7,7 +7,7 @@ import 'package:freequiz/others/initial_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/root_page.dart';
-import 'package:freequiz/router.dart';
+import 'package:freequiz/router/router.dart';
 import 'package:provider/provider.dart';
 import 'package:uni_links/uni_links.dart';
 

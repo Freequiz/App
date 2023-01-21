@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
-import 'package:freequiz/_home/subviews/share.dart';
+import 'package:freequiz/_home/subviews/kebab_menu.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/loading/error_loading/error_loading.dart';
@@ -79,7 +79,8 @@ class _QuizTileState extends State<QuizTile> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Share.share("https://freequiz.herokuapp.com/quiz/${widget.uuid}");
+                        Share.share(
+                            "https://freequiz.herokuapp.com/quiz/${widget.uuid}");
                       },
                       child: Icon(
                         Icons.ios_share,
@@ -93,7 +94,9 @@ class _QuizTileState extends State<QuizTile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: expanded ? DeviceInfo.height / 15 : DeviceInfo.height / 30,
+                    height: expanded
+                        ? DeviceInfo.height / 15
+                        : DeviceInfo.height / 30,
                     child: Text(
                       expanded
                           ? widget.data['description']
@@ -120,7 +123,8 @@ class _QuizTileState extends State<QuizTile> {
                             child: Text(
                               expanded ? "" : language["More"],
                               style: TextStyle(
-                                  color: color1, fontSize: DeviceInfo.height / 50),
+                                  color: color1,
+                                  fontSize: DeviceInfo.height / 50),
                             ),
                           ),
                         ),
@@ -136,12 +140,12 @@ class _QuizTileState extends State<QuizTile> {
                             height: DeviceInfo.height / 30,
                             decoration: BoxDecoration(
                                 color: color2,
-                                borderRadius:
-                                    BorderRadius.circular(DeviceInfo.height / 60)),
+                                borderRadius: BorderRadius.circular(
+                                    DeviceInfo.height / 60)),
                             alignment: Alignment.center,
                             child: Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: DeviceInfo.height / 60),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: DeviceInfo.height / 60),
                               child: Text(
                                 "${language["Questions"]} ${widget.data['translations'] ?? widget.data['data'].length}",
                                 style: const TextStyle(color: Colors.white),
@@ -155,12 +159,12 @@ class _QuizTileState extends State<QuizTile> {
                             height: DeviceInfo.height / 30,
                             decoration: BoxDecoration(
                                 color: color5,
-                                borderRadius:
-                                    BorderRadius.circular(DeviceInfo.height / 60)),
+                                borderRadius: BorderRadius.circular(
+                                    DeviceInfo.height / 60)),
                             alignment: Alignment.center,
                             child: Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: DeviceInfo.height / 60),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: DeviceInfo.height / 60),
                               child: Text(
                                 "${language[widget.data['from']['name']]} $arrow ${language[widget.data['to']['name']]}",
                                 style: const TextStyle(color: Colors.white),
@@ -209,18 +213,18 @@ class _QuizTileState extends State<QuizTile> {
                     appBar: AppBar(
                       title: Text(Quiz.title),
                       actions: [
-                        ShareButton(
+                        KebabMenuButton(
                           url:
                               "https://freequiz.herokuapp.com/quiz/${widget.uuid}",
+                          uuid: widget.uuid,
                         ),
                       ],
                     ),
                   );
-                }
-                else {
+                } else {
                   return ErrorLoading(
-                  error: quiz.data!["message"],
-                );
+                    error: quiz.data!["message"],
+                  );
                 }
               } else if (quiz.hasError) {
                 return const ErrorLoading(
