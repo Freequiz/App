@@ -69,19 +69,8 @@ class _EditDraftState extends State<EditDraft> {
         backgroundColor: DeviceInfo.darkMode ? color1 : color4,
         leading: TextButton(
           onPressed: () {
+            save();
             Navigator.of(context).pop();
-            final map = mapQuiz(
-              title: title.input.text,
-              description: description.input.text,
-              visibility: "public",
-              from: definitionLanguage.toString(),
-              to: answerLanguage.toString(),
-              definitions: definitions,
-              answers: answers,
-              noBlank: false,
-            );
-            Quiz().saveDraft(map);
-            Quiz.draft = map;
             widget.refresh;
           },
           child: const Icon(
@@ -104,184 +93,200 @@ class _EditDraftState extends State<EditDraft> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: DeviceInfo.height / 60,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
-              color: DeviceInfo.darkMode
-                  ? const Color.fromARGB(255, 55, 55, 55)
-                  : color4,
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(DeviceInfo.height / 100),
-              child: Column(
-                children: [
-                  BasicTextField(
-                    textFieldData: title,
-                    hintError: language["Title can't be blank"],
-                    colorBorder: (DeviceInfo.darkMode ? color3 : color1),
-                    widthBorder: 3.0,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  BasicTextField(
-                    textFieldData: description,
-                    hintError: language["Description can't be blank"],
-                    maxLines: 4,
-                    keyboardType: TextInputType.multiline,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Padding(
+          padding: DeviceInfo.mobileLayout
+              ? const EdgeInsets.all(10.0)
+              : EdgeInsets.symmetric(
+                  horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
+          child: ListView(
+            children: [
+              SizedBox(
+                height: DeviceInfo.height / 60,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                  color: DeviceInfo.darkMode
+                      ? const Color.fromARGB(255, 55, 55, 55)
+                      : color4,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(DeviceInfo.height / 100),
+                  child: Column(
                     children: [
-                      DropdownButton(
-                        value: definitionLanguage,
-                        icon: const Icon(
-                          Icons.arrow_drop_down_rounded,
-                          color: color1,
-                        ),
-                        underline: Container(
-                          height: 2,
-                          color: color1,
-                        ),
-                        dropdownColor: DeviceInfo.darkMode
-                            ? const Color.fromARGB(255, 40, 40, 40)
-                            : const Color.fromARGB(255, 229, 242, 250),
-                        items: Languages.languages,
-                        onChanged: (value) {
-                          setState(() {
-                            definitionLanguage = value!;
-                          });
-                        },
-                        style: TextStyle(color: hintColor),
+                      BasicTextField(
+                        textFieldData: title,
+                        hintError: language["Title can't be blank"],
+                        colorBorder: (DeviceInfo.darkMode ? color3 : color1),
+                        widthBorder: 3.0,
+                        save: save,
                       ),
-                      const Icon(
-                        Icons.arrow_forward_rounded,
-                        color: color1,
+                      const SizedBox(
+                        height: 5,
                       ),
-                      DropdownButton(
-                        value: answerLanguage,
-                        icon: const Icon(
-                          Icons.arrow_drop_down_rounded,
-                          color: color1,
-                        ),
-                        underline: Container(
-                          height: 2,
-                          color: color1,
-                        ),
-                        dropdownColor: DeviceInfo.darkMode
-                            ? const Color.fromARGB(255, 40, 40, 40)
-                            : const Color.fromARGB(255, 229, 242, 250),
-                        items: Languages.languages,
-                        onChanged: (value) {
-                          setState(() {
-                            answerLanguage = value!;
-                          });
-                        },
-                        style: TextStyle(color: hintColor),
+                      BasicTextField(
+                        textFieldData: description,
+                        hintError: language["Description can't be blank"],
+                        maxLines: 4,
+                        keyboardType: TextInputType.multiline,
+                        save: save,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          DropdownButton(
+                            value: definitionLanguage,
+                            icon: const Icon(
+                              Icons.arrow_drop_down_rounded,
+                              color: color1,
+                            ),
+                            underline: Container(
+                              height: 2,
+                              color: color1,
+                            ),
+                            dropdownColor: DeviceInfo.darkMode
+                                ? const Color.fromARGB(255, 40, 40, 40)
+                                : const Color.fromARGB(255, 229, 242, 250),
+                            items: Languages.languages,
+                            onChanged: (value) {
+                              setState(() {
+                                definitionLanguage = value!;
+                              });
+                            },
+                            style: TextStyle(color: hintColor),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_rounded,
+                            color: color1,
+                          ),
+                          DropdownButton(
+                            value: answerLanguage,
+                            icon: const Icon(
+                              Icons.arrow_drop_down_rounded,
+                              color: color1,
+                            ),
+                            underline: Container(
+                              height: 2,
+                              color: color1,
+                            ),
+                            dropdownColor: DeviceInfo.darkMode
+                                ? const Color.fromARGB(255, 40, 40, 40)
+                                : const Color.fromARGB(255, 229, 242, 250),
+                            items: Languages.languages,
+                            onChanged: (value) {
+                              setState(() {
+                                answerLanguage = value!;
+                              });
+                            },
+                            style: TextStyle(color: hintColor),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-          SizedBox(
-            height: DeviceInfo.height / 40,
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: wordCount,
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: DeviceInfo.height / 60,
-              );
-            },
-            itemBuilder: (BuildContext context, int i) {
-              return Dismissible(
-                key: Key(definitions[i].id),
-                direction: DismissDirection.endToStart,
-                onDismissed: (direction) {
-                  setState(() {
-                    definitions.removeAt(i);
-                    answers.removeAt(i);
-                    wordCount--;
-                  });
+              SizedBox(
+                height: DeviceInfo.height / 40,
+              ),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: wordCount,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: DeviceInfo.height / 60,
+                  );
                 },
-                background: Container(
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(DeviceInfo.height / 100),
-                    color: Colors.red,
-                  ),
-                  child: const Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Icon(
-                        Icons.clear,
-                        color: Colors.white,
+                itemBuilder: (BuildContext context, int i) {
+                  return Dismissible(
+                    key: Key(definitions[i].id),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      setState(() {
+                        definitions.removeAt(i);
+                        answers.removeAt(i);
+                        wordCount--;
+                      });
+                    },
+                    background: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(DeviceInfo.height / 100),
+                        color: Colors.red,
+                      ),
+                      child: const Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(DeviceInfo.height / 100),
-                    color: DeviceInfo.darkMode
-                        ? const Color.fromARGB(255, 55, 55, 55)
-                        : color4,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(DeviceInfo.height / 100),
-                    child: Column(
-                      children: [
-                        BasicTextField(
-                          textFieldData: definitions[i],
-                          hintError: language["Definition can't be blank"],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(DeviceInfo.height / 100),
+                        color: DeviceInfo.darkMode
+                            ? const Color.fromARGB(255, 55, 55, 55)
+                            : color4,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(DeviceInfo.height / 100),
+                        child: Column(
+                          children: [
+                            BasicTextField(
+                              textFieldData: definitions[i],
+                              hintError: language["Definition can't be blank"],
+                              save: save,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            AnswerTextField(
+                              textFieldData: answers[i],
+                              onSubmitted: onSubmitted,
+                              i: i,
+                              save: save,
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        AnswerTextField(
-                          textFieldData: answers[i],
-                          onSubmitted: onSubmitted,
-                          i: i,
-                        ),
-                      ],
+                      ),
                     ),
+                  );
+                },
+              ),
+              SizedBox(
+                height: DeviceInfo.height / 40,
+              ),
+              Align(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: color1, foregroundColor: Colors.white),
+                  onPressed: () {
+                    setState(() {
+                      wordCount++;
+                      definitions.add(TextFieldData(hint: "Description"));
+                      answers.add(TextFieldData(hint: "Answer"));
+                    });
+                  },
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
                   ),
                 ),
-              );
-            },
-          ),
-          SizedBox(
-            height: DeviceInfo.height / 40,
-          ),
-          Align(
-            child: TextButton(
-              style: TextButton.styleFrom(
-                  backgroundColor: color1, foregroundColor: Colors.white),
-              onPressed: () {
-                setState(() {
-                  wordCount++;
-                  definitions.add(TextFieldData(hint: "Description"));
-                  answers.add(TextFieldData(hint: "Answer"));
-                });
-              },
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -358,5 +363,20 @@ class _EditDraftState extends State<EditDraft> {
       Navigator.of(context).pop();
       widget.refresh;
     }
+  }
+
+  save() {
+    final map = mapQuiz(
+      title: title.input.text,
+      description: description.input.text,
+      visibility: "public",
+      from: definitionLanguage.toString(),
+      to: answerLanguage.toString(),
+      definitions: definitions,
+      answers: answers,
+      noBlank: false,
+    );
+    Quiz().saveDraft(map);
+    Quiz.draft = map;
   }
 }

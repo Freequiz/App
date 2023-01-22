@@ -11,6 +11,7 @@ class BasicTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final int maxLines;
+  final Function save;
   const BasicTextField({
     super.key,
     required this.textFieldData,
@@ -19,7 +20,7 @@ class BasicTextField extends StatefulWidget {
     this.widthBorder = 2.0,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
-    this.maxLines = 1,
+    this.maxLines = 1, required this.save
   });
 
   @override
@@ -33,6 +34,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
         DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return TextField(
       onSubmitted: (value) {
+        widget.save();
         FocusScope.of(context).nextFocus();
       },
       onChanged: (value) {

@@ -56,18 +56,7 @@ class _EditQuizState extends State<EditQuiz> {
         leading: TextButton(
           onPressed: () {
             if (changed()) {
-              final map = mapQuiz(
-                title: title.input.text,
-                description: description.input.text,
-                visibility: "public",
-                from: definitionLanguage.toString(),
-                to: answerLanguage.toString(),
-                definitions: definitions,
-                answers: answers,
-                noBlank: false,
-              );
-              Quiz().saveDraft(map);
-              Quiz.draft = map;
+              save();
             }
             Navigator.of(context).pop();
             widget.refresh();
@@ -148,6 +137,7 @@ class _EditQuizState extends State<EditQuiz> {
                               colorBorder:
                                   (DeviceInfo.darkMode ? color3 : color1),
                               widthBorder: 3.0,
+                              save: save,
                             ),
                             const SizedBox(
                               height: 5,
@@ -157,6 +147,7 @@ class _EditQuizState extends State<EditQuiz> {
                               hintError: language["Description can't be blank"],
                               maxLines: 4,
                               keyboardType: TextInputType.multiline,
+                              save: save,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -271,15 +262,16 @@ class _EditQuizState extends State<EditQuiz> {
                                     textFieldData: definitions[i],
                                     hintError:
                                         language["Definition can't be blank"],
+                                    save: save,
                                   ),
                                   const SizedBox(
                                     height: 5,
                                   ),
                                   AnswerTextField(
-                                    textFieldData: answers[i],
-                                    onSubmitted: onSubmitted,
-                                    i: i,
-                                  ),
+                                      textFieldData: answers[i],
+                                      onSubmitted: onSubmitted,
+                                      i: i,
+                                      save: save),
                                 ],
                               ),
                             ),
@@ -384,7 +376,7 @@ class _EditQuizState extends State<EditQuiz> {
         final response = await APIQuizzes().httpPutQuiz(map);
         debugPrint(response.toString());
       }
-      
+
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
       widget.refresh;
@@ -429,5 +421,20 @@ class _EditQuizState extends State<EditQuiz> {
       }
     }
     return false;
+  }
+
+  save() {
+    final map = mapQuiz(
+      title: title.input.text,
+      description: description.input.text,
+      visibility: "public",
+      from: definitionLanguage.toString(),
+      to: answerLanguage.toString(),
+      definitions: definitions,
+      answers: answers,
+      noBlank: false,
+    );
+    Quiz().saveDraft(map);
+    Quiz.draft = map;
   }
 }

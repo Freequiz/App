@@ -48,18 +48,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         leading: TextButton(
           onPressed: () {
             if (changed()) {
-              final map = mapQuiz(
-                title: title.input.text,
-                description: description.input.text,
-                visibility: "public",
-                from: definitionLanguage.toString(),
-                to: answerLanguage.toString(),
-                definitions: definitions,
-                answers: answers,
-                noBlank: false,
-              );
-              Quiz().saveDraft(map);
-              Quiz.draft = map;
+              save();
             }
             Navigator.of(context).pop();
             widget.refresh();
@@ -115,6 +104,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                         hintError: language["Title can't be blank"],
                         colorBorder: (DeviceInfo.darkMode ? color3 : color1),
                         widthBorder: 3.0,
+                        save: save,
                       ),
                       const SizedBox(
                         height: 5,
@@ -124,6 +114,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                         hintError: language["Description can't be blank"],
                         maxLines: 4,
                         keyboardType: TextInputType.multiline,
+                        save: save,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -235,6 +226,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                             BasicTextField(
                               textFieldData: definitions[i],
                               hintError: language["Definition can't be blank"],
+                              save: save,
                             ),
                             const SizedBox(
                               height: 5,
@@ -243,6 +235,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                               textFieldData: answers[i],
                               onSubmitted: onSubmitted,
                               i: i,
+                              save: save,
                             ),
                           ],
                         ),
@@ -369,5 +362,20 @@ class _CreateQuizState extends State<CreateQuiz> {
       }
     }
     return false;
+  }
+
+  save() {
+    final map = mapQuiz(
+      title: title.input.text,
+      description: description.input.text,
+      visibility: "public",
+      from: definitionLanguage.toString(),
+      to: answerLanguage.toString(),
+      definitions: definitions,
+      answers: answers,
+      noBlank: false,
+    );
+    Quiz().saveDraft(map);
+    Quiz.draft = map;
   }
 }

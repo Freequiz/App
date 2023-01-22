@@ -9,12 +9,14 @@ class AnswerTextField extends StatefulWidget {
   final double widthBorder;
   final Function onSubmitted;
   final int i;
-  const AnswerTextField({
-    super.key,
-    required this.textFieldData,
-    this.widthBorder = 2.0,
-    required this.onSubmitted, required this.i
-  });
+  final Function save;
+  const AnswerTextField(
+      {super.key,
+      required this.textFieldData,
+      this.widthBorder = 2.0,
+      required this.onSubmitted,
+      required this.i,
+      required this.save});
 
   @override
   State<AnswerTextField> createState() => _AnswerTextFieldState();
@@ -23,10 +25,12 @@ class AnswerTextField extends StatefulWidget {
 class _AnswerTextFieldState extends State<AnswerTextField> {
   @override
   Widget build(BuildContext context) {
-    final hintColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final hintColor = DeviceInfo.darkMode
+        ? Colors.white
+        : const Color.fromARGB(255, 40, 40, 40);
     return TextField(
       onSubmitted: (value) {
+        widget.save();
         widget.onSubmitted(widget.i);
       },
       onChanged: (value) {
@@ -36,7 +40,8 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
       },
       onEditingComplete: () {},
       controller: widget.textFieldData.input,
-      keyboardAppearance: DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+      keyboardAppearance:
+          DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
       decoration: InputDecoration(
         filled: true,
         fillColor: DeviceInfo.darkMode
