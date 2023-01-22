@@ -7,8 +7,8 @@ import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class CreatedQuizzes extends StatefulWidget {
-  final List data;
-  const CreatedQuizzes({super.key, required this.data});
+  final Function refresh;
+  const CreatedQuizzes({super.key, required this.refresh});
 
   @override
   State<CreatedQuizzes> createState() => _CreatedQuizzesState();
@@ -34,13 +34,14 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
         ),
         ListView.separated(
           shrinkWrap: true,
-          itemCount: widget.data.length,
+          itemCount: ListQuizzes.data.length,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int i) {
             return EditQuizTile(
-              data: widget.data[i],
-              uuid: widget.data[i]['id'],
+              data: ListQuizzes.data[i],
+              uuid: ListQuizzes.data[i]['id'],
               expanded: false,
+              refresh: widget.refresh,
             );
           },
           separatorBuilder: (BuildContext context, int i) {

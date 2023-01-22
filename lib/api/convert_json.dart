@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/textfield_data.dart';
 
 definitionArray(quiz) {
@@ -20,13 +20,27 @@ answerArray(quiz) {
   return answer;
 }
 
-mapQuiz(String title, String description, String visibility, String from,
-    String to, List<TextFieldData> definition, List<TextFieldData> answer) {
+mapQuiz(
+    {required String title,
+    required String description,
+    required String visibility,
+    required String from,
+    required String to,
+    required List<TextFieldData> definitions,
+    required List<TextFieldData> answers,
+    bool noBlank = true}) {
   List translations = [];
-  for (var i = 0; i < definition.length; i++) {
-    if (definition[i].input.text != "") {
+  if (noBlank) {
+    for (var i = 0; i < definitions.length; i++) {
+      if (definitions[i].input.text != "") {
+        translations
+            .add({'w': definitions[i].input.text, 't': answers[i].input.text});
+      }
+    }
+  } else {
+    for (var i = 0; i < definitions.length; i++) {
       translations
-          .add({'w': definition[i].input.text, 't': answer[i].input.text});
+          .add({'w': definitions[i].input.text, 't': answers[i].input.text});
     }
   }
   Map map = {

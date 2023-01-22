@@ -125,5 +125,7 @@
   "Users doesn't exist description": "Questo utente non esiste o è stato eliminato. Se siete sicuri che non sia questo il caso, segnalatelo tramite il bug reporter.",
   "User is not allowed to view Quiz title": "Non sei autorizzato a visualizzare questo quiz",
   "User is not allowed to view Quiz description": "Il quiz è privato o nascosto. Se questo è il vostro quiz, segnalatelo tramite il segnalatore di bug.",
-  "Share": "Quota"
+  "Share": "Quota",
+  "Draft": "Bozza",
+  "Empty title": "Titolo vuoto"
 }

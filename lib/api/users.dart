@@ -1,19 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:freequiz/quiz.dart';
 import 'package:http/http.dart' as http;
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class APIUsers {
   bool newAccessToken = false;
+  final domain = 'https://freequiz.herokuapp.com';
+  final bearerToken = 'Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924';
 
-//log in
+  //log in
   Future<Map> httpPostSession(String username, String password) async {
     final response = await http.post(
-      Uri.parse('https://freequiz.herokuapp.com/api/user/login'),
+      Uri.parse('$domain/api/user/login'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
       },
       encoding: Encoding.getByName('utf-8'),
       body: {
@@ -37,10 +40,10 @@ class APIUsers {
 //get account data
   Future<Map> httpGetData() async {
     final response = await http.get(
-      Uri.parse('https://freequiz.herokuapp.com/api/user/data'),
+      Uri.parse('$domain/api/user/data'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -59,10 +62,10 @@ class APIUsers {
 //get delete token to delete the account
   Future<Map> httpGetDeleteToken() async {
     final response = await http.get(
-      Uri.parse('https://freequiz.herokuapp.com/api/user/delete_token'),
+      Uri.parse('$domain/api/user/delete_token'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -83,10 +86,10 @@ class APIUsers {
       if (connectivityResult == ConnectivityResult.mobile ||
           connectivityResult == ConnectivityResult.wifi) {
         final response = await http.post(
-          Uri.parse('https://freequiz.herokuapp.com/api/user/refresh'),
+          Uri.parse('$domain/api/user/refresh'),
           headers: {
             "Authorization":
-                "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+                bearerToken,
             "Access-token": Profile.accessToken
           },
         );
@@ -112,10 +115,10 @@ class APIUsers {
       String passwordConfirmation = "",
       String oldPassword = ""}) async {
     final response = await http.patch(
-        Uri.parse('https://freequiz.herokuapp.com/api/user/update'),
+        Uri.parse('$domain/api/user/update'),
         headers: {
           "Authorization":
-              "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+              bearerToken,
           "Access-token": Profile.accessToken,
           HttpHeaders.contentTypeHeader: "application/json"
         },
@@ -150,10 +153,10 @@ class APIUsers {
   Future<Map> httpPutAccount(String username, String email, String password,
       String passwordConfirmation, bool agb) async {
     final response = await http.put(
-      Uri.parse('https://freequiz.herokuapp.com/api/user/create'),
+      Uri.parse('$domain/api/user/create'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
       encoding: Encoding.getByName('utf-8'),
@@ -182,10 +185,10 @@ class APIUsers {
 //delete account
   Future<Map> httpDeleteAccount(deleteToken) async {
     final response = await http.delete(
-      Uri.parse('https://freequiz.herokuapp.com/api/user/delete/$deleteToken'),
+      Uri.parse('$domain/api/user/delete/$deleteToken'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken,
       },
     );
@@ -200,12 +203,18 @@ class APIUsers {
     }
   }
 
+  Future<Map> getCreatedQuizzes(int page) async {
+    final map = httpGetCreatedQuizzes(page);
+    await Quiz().loadDraft();
+    return map;
+  }
+
   Future<Map> httpGetCreatedQuizzes(int page) async {
     final response = await http.get(
-      Uri.parse('https://freequiz.herokuapp.com/api/user/quizzes/$page'),
+      Uri.parse('$domain/api/user/quizzes/$page'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken
       },
     );

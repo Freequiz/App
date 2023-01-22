@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:freequiz/2_profile/profile.dart';
-import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class APIQuizzes {
+  final domain = 'https://freequiz.herokuapp.com';
+  final bearerToken = 'Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924';
   Future<Map> getQuiz(String uuid, bool preview) async {
     if (!preview) {
       Quiz().manageQuizzes(uuid);
@@ -48,10 +50,10 @@ class APIQuizzes {
 
   Future<Map> httpGetQuiz(String uuid) async {
     final response = await http.get(
-      Uri.parse('https://freequiz.herokuapp.com/api/quiz/$uuid/data'),
+      Uri.parse('$domain/api/quiz/$uuid/data'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -70,10 +72,10 @@ class APIQuizzes {
 
   Future<Map> httpPatchFavorites(String uuid, String add, String remove) async {
     final response = await http.patch(
-      Uri.parse('https://freequiz.herokuapp.com/api/quiz/$uuid/favorites'),
+      Uri.parse('$domain/api/quiz/$uuid/favorites'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
@@ -107,10 +109,10 @@ class APIQuizzes {
 
   Future<Map> httpPatchScore(String uuid, Map score) async {
     final response = await http.patch(
-      Uri.parse('https://freequiz.herokuapp.com/api/quiz/$uuid/score'),
+      Uri.parse('$domain/api/quiz/$uuid/score'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
@@ -133,10 +135,10 @@ class APIQuizzes {
   Future<Map> httpPatchResetScore(String uuid, String mode) async {
     final response = await http.patch(
       Uri.parse(
-          'https://freequiz.herokuapp.com/api/quiz/$uuid/score/reset/$mode'),
+          '$domain/api/quiz/$uuid/score/reset/$mode'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
@@ -159,10 +161,10 @@ class APIQuizzes {
   Future<Map> httpGetSearch(String searchTerm, int page) async {
     final response = await http.get(
       Uri.parse(
-          'https://freequiz.herokuapp.com/api/quiz/search/$page?query=$searchTerm'),
+          '$domain/api/quiz/search/$page?query=$searchTerm'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -181,10 +183,10 @@ class APIQuizzes {
 
   Future<Map> httpPutQuiz(Map map) async {
     final response = await http.put(
-      Uri.parse('https://freequiz.herokuapp.com/api/quiz/create'),
+      Uri.parse('$domain/api/quiz/create'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
@@ -194,22 +196,16 @@ class APIQuizzes {
     if (response.statusCode == 201) {
       return jsonDecode(response.body);
     }
-    if (response.statusCode == 400) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    }
     throw Exception('Error');
   }
 
   Future<Map> httpDeleteQuiz(String deleteToken, String uuid) async {
     final response = await http.delete(
       Uri.parse(
-          'https://freequiz.herokuapp.com/api/quiz/$uuid/delete/$deleteToken'),
+          '$domain/api/quiz/$uuid/delete/$deleteToken'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken,
       },
     );
@@ -224,10 +220,10 @@ class APIQuizzes {
 
   Future<Map> httpGetDeleteTokenQuiz(String uuid) async {
     final response = await http.get(
-      Uri.parse('https://freequiz.herokuapp.com/api/quiz/$uuid/delete_token'),
+      Uri.parse('$domain/api/quiz/$uuid/delete_token'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -243,10 +239,10 @@ class APIQuizzes {
 
   Future<Map> httpPatchQuiz(Map map, String uuid) async {
     final response = await http.patch(
-      Uri.parse('https://freequiz.herokuapp.com/api/quiz/$uuid/update'),
+      Uri.parse('$domain/api/quiz/$uuid/update'),
       headers: {
         "Authorization":
-            "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+            bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },

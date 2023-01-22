@@ -103,8 +103,8 @@
     "Access token is invalid description": "An error occured and you were logged out. If this error persists, please use the bug reporter",
     "other error title": "An unknown error has occurred",
     "other error description": "Try again later. If this error persists, please report it using the bug reporter.",
-    "Quiz doen't exist title": "The quiz doesn't exist",
-    "Quiz doen't exist description": "The quiz was probably deleted. If you are sure it isn't the case please report it using the bug reporter.",
+    "Quiz doesn't exist title": "The quiz doesn't exist",
+    "Quiz doesn't exist description": "The quiz was probably deleted. If you are sure it isn't the case please report it using the bug reporter.",
     "Bug Reporter": "Bug Reporter",
     "Try again": "Try again",
     "Platform": "Platform",
@@ -126,5 +126,7 @@
     "Users doesn't exist description": "This user doesn't exist or was deleted. If you are sure it isn't the case please report it using the bug reporter.",
     "User is not allowed to view Quiz title": "You are not allowed to view this quiz",
     "User is not allowed to view Quiz description": "The quiz is private or hidden. If this is your quiz, please report it using the bug reporter.",
-    "Share": "Share"
+    "Share": "Share",
+    "Draft": "Draft",
+    "Emtpy title": "Emtpy title"
 }

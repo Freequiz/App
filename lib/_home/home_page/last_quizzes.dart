@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
@@ -16,6 +17,13 @@ class LastQuizzes extends StatefulWidget {
 }
 
 class _LastQuizzesState extends State<LastQuizzes> {
+  final defaultMap = {
+    'title': language["Quiz doesn't exist title"],
+    'description': language["Quiz doesn't exist description"],
+    'translations': 0,
+    'from': {'name': 'null'},
+    'to': {'name': 'null'}
+  };
   @override
   Widget build(BuildContext context) {
     final color6 = DeviceInfo.darkMode
@@ -42,7 +50,8 @@ class _LastQuizzesState extends State<LastQuizzes> {
                 },
                 background: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                    borderRadius:
+                        BorderRadius.circular(DeviceInfo.height / 100),
                     color: color1,
                   ),
                   child: const Align(
@@ -57,7 +66,7 @@ class _LastQuizzesState extends State<LastQuizzes> {
                   ),
                 ),
                 child: QuizTile(
-                  data: quiz.data!['quiz_data'],
+                  data: quiz.data!['quiz_data'] ?? defaultMap,
                   uuid: uuid,
                 ),
               );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/kebab_menu.dart';
 import 'package:freequiz/api/quizzes.dart';
@@ -39,15 +39,13 @@ class _QuizTileState extends State<QuizTile> {
     final color6 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 55, 55, 55)
         : const Color.fromARGB(255, 235, 235, 235);
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         onTap();
       },
       child: Container(
-        height: mobileLayout
+        height: DeviceInfo.mobileLayout
             ? expanded
                 ? DeviceInfo.height / 30 * 4.5 + 15
                 : DeviceInfo.height / 30 * 2.5 + 15
@@ -60,7 +58,7 @@ class _QuizTileState extends State<QuizTile> {
           color: color6,
         ),
         child: Padding(
-          padding: mobileLayout
+          padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.only(
                   left: 10.0, right: 10.0, bottom: 10.0, top: 5.0)
               : const EdgeInsets.only(
@@ -97,6 +95,13 @@ class _QuizTileState extends State<QuizTile> {
                     height: expanded
                         ? DeviceInfo.height / 15
                         : DeviceInfo.height / 30,
+                    width: expanded
+                        ? DeviceInfo.mobileLayout
+                            ? DeviceInfo.width - 40
+                            : DeviceInfo.width - 60
+                        : DeviceInfo.mobileLayout
+                            ? (DeviceInfo.width - 40) / 6 * 5
+                            : (DeviceInfo.width - 60) / 6 * 5,
                     child: Text(
                       expanded
                           ? widget.data['description']

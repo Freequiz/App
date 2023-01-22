@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:freequiz/others/device_info.dart';
@@ -36,15 +38,31 @@ class _CreateQuizState extends State<CreateQuiz> {
   final description = TextFieldData(hint: language["Description"]);
   @override
   Widget build(BuildContext context) {
-    final hintColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final hintColor = DeviceInfo.darkMode
+        ? Colors.white
+        : const Color.fromARGB(255, 40, 40, 40);
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Create Quiz"]),
         backgroundColor: DeviceInfo.darkMode ? color1 : color4,
         leading: TextButton(
           onPressed: () {
+            if (changed()) {
+              final map = mapQuiz(
+                title: title.input.text,
+                description: description.input.text,
+                visibility: "public",
+                from: definitionLanguage.toString(),
+                to: answerLanguage.toString(),
+                definitions: definitions,
+                answers: answers,
+                noBlank: false,
+              );
+              Quiz().saveDraft(map);
+              Quiz.draft = map;
+            }
             Navigator.of(context).pop();
+            widget.refresh();
           },
           child: const Icon(
             Icons.arrow_back_ios,
@@ -74,7 +92,8 @@ class _CreateQuizState extends State<CreateQuiz> {
         child: Padding(
           padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.all(10.0)
-              : EdgeInsets.symmetric(horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
+              : EdgeInsets.symmetric(
+                  horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
           child: ListView(
             children: [
               SizedBox(
@@ -83,8 +102,9 @@ class _CreateQuizState extends State<CreateQuiz> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
-                  color:
-                      DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : color4,
+                  color: DeviceInfo.darkMode
+                      ? const Color.fromARGB(255, 55, 55, 55)
+                      : color4,
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(DeviceInfo.height / 100),
@@ -185,7 +205,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                     },
                     background: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                        borderRadius:
+                            BorderRadius.circular(DeviceInfo.height / 100),
                         color: Colors.red,
                       ),
                       child: const Align(
@@ -201,7 +222,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                        borderRadius:
+                            BorderRadius.circular(DeviceInfo.height / 100),
                         color: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 55, 55, 55)
                             : color4,
@@ -301,17 +323,20 @@ class _CreateQuizState extends State<CreateQuiz> {
       });
     }
     if (!error) {
-      await APIQuizzes().httpPutQuiz(mapQuiz(
-          title.input.text,
-          description.input.text,
-          "public",
-          definitionLanguage.toString(),
-          answerLanguage.toString(),
-          definitions,
-          answers));
+      final map = mapQuiz(
+          title: title.input.text,
+          description: description.input.text,
+          visibility: "public",
+          from: definitionLanguage.toString(),
+          to: answerLanguage.toString(),
+          definitions: definitions,
+          answers: answers);
+      final response = await APIQuizzes().httpPutQuiz(map);
+      final quiz = response['quiz_data'];
+      ListQuizzes.data.insert(0, quiz);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
-      widget.refresh;
+      widget.refresh();
     }
   }
 
@@ -326,5 +351,23 @@ class _CreateQuizState extends State<CreateQuiz> {
         FocusScope.of(context).nextFocus();
       }
     });
+  }
+
+  changed() {
+    if (title.input.text.isNotEmpty) {
+      return true;
+    }
+    if (description.input.text.isNotEmpty) {
+      return true;
+    }
+    for (var i = 0; i < definitions.length; i++) {
+      if (definitions[i].input.text.isNotEmpty) {
+        return true;
+      }
+      if (answers[i].input.text.isNotEmpty) {
+        return true;
+      }
+    }
+    return false;
   }
 }

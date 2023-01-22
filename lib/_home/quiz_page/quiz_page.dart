@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/learning_modes.dart';
 import 'package:freequiz/_home/quiz_page/nothing_found.dart';
 import 'package:freequiz/_home/quiz_page/word_list.dart';

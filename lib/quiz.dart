@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -17,32 +18,27 @@ class Quiz {
   static int amountDefinitions = 0;
   static int amountProgress = 0;
   static List<String> uuids = [];
+  static Map draft = {};
   final List<String> modes = [
     "Smart",
     "Writing",
     "MultipleChoice",
     "Cards",
   ];
-  final modesAPI = [
-    "smart",
-    "write",
-    "multi",
-    "cards"
-  ];
+  final modesAPI = ["smart", "write", "multi", "cards"];
 
   Future<void> loadData(int mode, String uuid) async {
-    progressArray = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
+    progressArray = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
     var connectivityResult = await (Connectivity().checkConnectivity());
     final prefs = await SharedPreferences.getInstance();
-      final List<String> progress =
-      prefs.getStringList("progress$mode$uuid") ?? [];
+    final List<String> progress =
+        prefs.getStringList("progress$mode$uuid") ?? [];
     if (connectivityResult != ConnectivityResult.none || progress.isEmpty) {
       final List list = mapQuiz['quiz_data']['data'];
       for (var i = 0; i < list.length; i++) {
         progressArray[list[i]['score'][modesAPI[mode]]].add(i);
       }
-    }
-    else {
+    } else {
       debugPrint(progress.toString());
       for (var i = 0; i < progress.length; i++) {
         progressArray[int.parse(progress[i])].add(i);
@@ -285,5 +281,20 @@ class Quiz {
         }
       }
     }
+  }
+
+  saveDraft(Map map) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('draft', jsonEncode(map));
+  }
+
+  loadDraft() async {
+    final prefs = await SharedPreferences.getInstance();
+    draft = jsonDecode(prefs.getString('draft') ?? "{}");
+  }
+
+  deleteDraft() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('draft');
   }
 }

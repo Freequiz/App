@@ -99,8 +99,8 @@
     "Invalid bearer token description": "Réessayez plus tard. Si cette erreur persiste, veuillez la signaler en utilisant le rapport de bugs",
     "Access token is invalid title": "Erreur d'authentification",
     "Access token is invalid description": "Une erreur s'est produite et vous avez été déconnecté. Si cette erreur persiste, veuillez utiliser le rapport de bug",
-    "Quiz doen't exist title": "Le quiz n'existe pas'",
-    "Quiz doen't exist description": "Le quiz a probablement été supprimé. Si vous êtes sûr que ce n'est pas le cas, veuillez le signaler à l'aide du rapport de bogue.",
+    "Quiz doesn't exist title": "Le quiz n'existe pas'",
+    "Quiz doesn't exist description": "Le quiz a probablement été supprimé. Si vous êtes sûr que ce n'est pas le cas, veuillez le signaler à l'aide du rapport de bogue.",
     "other error title": "Une erreur inconnue s'est produite",
     "other error description": "Réessayez plus tard. Si cette erreur persiste, veuillez la signaler en utilisant le rapport de bugs",
     "Bug Reporter": "Rapport de bugs",
@@ -124,5 +124,7 @@
     "Users doesn't exist description": "Cet utilisateur n'existe pas ou a été supprimé. Si vous êtes sûr que ce n'est pas le cas, veuillez le signaler en utilisant le rapporteur de bogues.",
     "User is not allowed to view Quiz title": "Vous n'êtes pas autorisé à voir ce quiz.",
     "User is not allowed to view Quiz description": "Le quiz est privé ou caché. S'il s'agit de votre quiz, veuillez le signaler en utilisant le rapporteur de bogues.",
-    "Share": "Partager"
+    "Share": "Partager",
+    "Draft": "Brouillon",
+    "Emtpy title": "Titre vide"
 }

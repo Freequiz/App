@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
-import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 

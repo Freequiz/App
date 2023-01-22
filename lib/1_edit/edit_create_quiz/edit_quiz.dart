@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:freequiz/others/device_info.dart';
@@ -41,6 +42,7 @@ class _EditQuizState extends State<EditQuiz> {
   ];
   final title = TextFieldData(hint: language["Title"]);
   final description = TextFieldData(hint: language["Description"]);
+  Map quizData = {};
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,22 @@ class _EditQuizState extends State<EditQuiz> {
         backgroundColor: DeviceInfo.darkMode ? color1 : color4,
         leading: TextButton(
           onPressed: () {
+            if (changed()) {
+              final map = mapQuiz(
+                title: title.input.text,
+                description: description.input.text,
+                visibility: "public",
+                from: definitionLanguage.toString(),
+                to: answerLanguage.toString(),
+                definitions: definitions,
+                answers: answers,
+                noBlank: false,
+              );
+              Quiz().saveDraft(map);
+              Quiz.draft = map;
+            }
             Navigator.of(context).pop();
+            widget.refresh();
           },
           child: const Icon(
             Icons.arrow_back_ios,
@@ -90,7 +107,7 @@ class _EditQuizState extends State<EditQuiz> {
             builder: (context, data) {
               if (data.hasData) {
                 if (data.data!['success']) {
-                  final quizData = data.data!['quiz_data'];
+                  quizData = data.data!['quiz_data'];
                   if (firstTime) {
                     title.input.text = quizData['title'];
                     description.input.text = quizData['description'];
@@ -352,32 +369,22 @@ class _EditQuizState extends State<EditQuiz> {
           builder: (BuildContext context) => const ErrorPopUp());
     }
     if (!error) {
+      final map = mapQuiz(
+          title: title.input.text,
+          description: description.input.text,
+          visibility: "public",
+          from: definitionLanguage.toString(),
+          to: answerLanguage.toString(),
+          definitions: definitions,
+          answers: answers);
       if (widget.owner) {
-        await APIQuizzes().httpPatchQuiz(
-          mapQuiz(
-            title.input.text,
-            description.input.text,
-            "public",
-            definitionLanguage.toString(),
-            answerLanguage.toString(),
-            definitions,
-            answers,
-          ),
-          widget.uuid,
-        );
+        final response = await APIQuizzes().httpPatchQuiz(map, widget.uuid);
+        debugPrint(response.toString());
       } else {
-        APIQuizzes().httpPutQuiz(
-          mapQuiz(
-            title.input.text,
-            description.input.text,
-            "public",
-            definitionLanguage.toString(),
-            answerLanguage.toString(),
-            definitions,
-            answers,
-          ),
-        );
+        final response = await APIQuizzes().httpPutQuiz(map);
+        debugPrint(response.toString());
       }
+      
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
       widget.refresh;
@@ -395,5 +402,32 @@ class _EditQuizState extends State<EditQuiz> {
         FocusScope.of(context).nextFocus();
       }
     });
+  }
+
+  bool changed() {
+    if (title.input.text != quizData['title']) {
+      return true;
+    }
+    if (description.input.text != quizData['description']) {
+      return true;
+    }
+    if (definitionLanguage != int.parse(quizData['from']['id'])) {
+      return true;
+    }
+    if (answerLanguage != int.parse(quizData['to']['id'])) {
+      return true;
+    }
+    if (definitions.length != quizData['data'].length) {
+      return true;
+    }
+    for (var i = 0; i < quizData['data'].length; i++) {
+      if (definitions[i].input.text != quizData['data'][i]['w']) {
+        return true;
+      }
+      if (answers[i].input.text != quizData['data'][i]['t']) {
+        return true;
+      }
+    }
+    return false;
   }
 }

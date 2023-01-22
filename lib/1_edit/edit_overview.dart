@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/1_edit/quiz_draft/draft.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/create_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/created_quizzes.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 class EditOverview extends StatefulWidget {
   final List data;
-  final Function refresh;
-  const EditOverview({super.key, required this.data, required this.refresh});
+  const EditOverview({super.key, required this.data});
 
   @override
   State<EditOverview> createState() => _EditOverviewState();
 }
 
 class _EditOverviewState extends State<EditOverview> {
+  bool draft = false;
+
+  refresh() {
+    setState(() {
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +38,9 @@ class _EditOverviewState extends State<EditOverview> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return CreateQuiz(refresh: widget.refresh,);
+                      return CreateQuiz(
+                        refresh: refresh,
+                      );
                     },
                   ),
                 );
@@ -47,8 +57,17 @@ class _EditOverviewState extends State<EditOverview> {
           SizedBox(
             height: DeviceInfo.mobileLayout ? 15 : 45,
           ),
+          Quiz.draft.isNotEmpty
+              ? Draft(
+                  refresh: refresh,
+                )
+              : const SizedBox(
+                  height: 0,
+                ),
           Expanded(
-            child: CreatedQuizzes(data: widget.data),
+            child: CreatedQuizzes(
+              refresh: refresh,
+            ),
           ),
         ],
       ),

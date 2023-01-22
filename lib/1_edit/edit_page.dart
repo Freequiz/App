@@ -13,16 +13,12 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
-  refresh() {
-    setState(() {
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<Map>(
-        future: APIUsers().httpGetCreatedQuizzes(1),
+        future: APIUsers().getCreatedQuizzes(1),
         builder: (context, data) {
           if (data.hasData) {
             if (data.data!["success"]) {
@@ -32,7 +28,6 @@ class _EditPageState extends State<EditPage> {
                 finishedLoading: true,
                 widget: EditOverview(
                   data: data.data!['data'],
-                  refresh: refresh,
                 ),
               );
             }

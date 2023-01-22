@@ -124,5 +124,7 @@
     "Users doesn't exist description": "Dieser Benutzer existiert nicht oder wurde gelöscht. Wenn Sie sicher sind, dass dies nicht der Fall ist, melden Sie es bitte über den Bugreporter.",
     "User is not allowed to view Quiz title": "Sie sind nicht berechtigt, dieses Quiz anzusehen",
     "User is not allowed to view Quiz description": "Das Quiz ist privat oder versteckt. Wenn dies Ihr Quiz ist, melden Sie den Fehler bitte über den Fehlerreporter.",
-    "Share": "Teilen"
+    "Share": "Teilen",
+    "Draft": "Entwurf",
+    "Emtpy title": "Leerer Titel"
 }

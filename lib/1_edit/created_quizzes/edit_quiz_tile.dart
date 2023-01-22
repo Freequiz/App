@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
-import 'package:freequiz/_home/quiz.dart';
+import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/kebab_menu.dart';
 import 'package:freequiz/api/quizzes.dart';
@@ -15,11 +15,13 @@ class EditQuizTile extends StatefulWidget {
   final Map data;
   final bool expanded;
   final String uuid;
+  final Function refresh;
   const EditQuizTile(
       {super.key,
       required this.data,
       required this.uuid,
-      this.expanded = true});
+      this.expanded = true,
+      required this.refresh});
 
   @override
   State<EditQuizTile> createState() => _EditQuizTileState();
@@ -36,7 +38,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
     expanded = widget.expanded;
   }
 
-  refresh() {
+  show() {
+    widget.refresh();
     setState(() {
       shown = false;
     });
@@ -60,7 +63,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) =>
-                        Confirmation(refresh: refresh, uuid: widget.uuid));
+                        Confirmation(refresh: show, uuid: widget.uuid));
               },
               background: Container(
                 decoration: BoxDecoration(
@@ -131,6 +134,13 @@ class _EditQuizTileState extends State<EditQuizTile> {
                             height: expanded
                                 ? DeviceInfo.height / 15
                                 : DeviceInfo.height / 30,
+                            width: expanded
+                                ? DeviceInfo.mobileLayout
+                                    ? DeviceInfo.width - 40
+                                    : DeviceInfo.width - 60
+                                : DeviceInfo.mobileLayout
+                                    ? (DeviceInfo.width - 40) / 6 * 5
+                                    : (DeviceInfo.width - 60) / 6 * 5,
                             child: Text(
                               expanded
                                   ? widget.data['description']
@@ -292,7 +302,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
       MaterialPageRoute(
         builder: (BuildContext context) {
           return EditQuiz(
-            refresh: refresh,
+            refresh: widget.refresh,
             uuid: widget.uuid,
           );
         },

@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:freequiz/2_profile/profile.dart';
 
+const domain = 'https://freequiz.herokuapp.com';
+const bearerToken = 'Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924';
+
 Future<Map> httpGetLanguage() async {
   final response = await http.get(
-    Uri.parse('https://freequiz.herokuapp.com/api/languages'),
+    Uri.parse('$domain/api/languages'),
     headers: {
       "Authorization":
-          "Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924",
+          bearerToken,
       "Access-token": Profile.accessToken
     },
   );
