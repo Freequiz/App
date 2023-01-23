@@ -110,7 +110,7 @@
     "Submit": "Senden",
     "Report Bug": "Fehler melden",
     "Title at least 3 characters": "Titel mindestens 3 Zeichen",
-    "Description at least 10 characters": "Beschreibung mindestens 10 Zeichen",
+    "Description at least 5 characters": "Beschreibung mindestens 5 Zeichen lang.",
     "Memorized": "Eingeprägt",
     "Seen": "Gesehen",
     "Created Quizzes": "Erstellte Quizze",
@@ -126,5 +126,8 @@
     "User is not allowed to view Quiz description": "Das Quiz ist privat oder versteckt. Wenn dies Ihr Quiz ist, melden Sie den Fehler bitte über den Fehlerreporter.",
     "Share": "Teilen",
     "Draft": "Entwurf",
-    "Emtpy title": "Leerer Titel"
+    "Emtpy title": "Leerer Titel",
+    "Success!": "Erfolg!",
+    "Quiz saved": "Quiz gespeichert",
+    "Saving Quiz": "Quiz speichern"
 }

@@ -16,8 +16,8 @@ class _BugReportPageState extends State<BugReportPage> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        height: DeviceInfo.height / 6,
-        width: DeviceInfo.width / 1.5,
+        height: DeviceInfo().height() / 6,
+        width: DeviceInfo().width() / 1.5,
         child: TextButton(
           style: TextButton.styleFrom(
               backgroundColor: color1, foregroundColor: Colors.white),
@@ -30,7 +30,7 @@ class _BugReportPageState extends State<BugReportPage> {
               ),
             );
           },
-          child: Text(language["Report Bug"], style: TextStyle(fontSize: DeviceInfo.height / 40),),
+          child: Text(language["Report Bug"], style: TextStyle(fontSize: DeviceInfo().height() / 40),),
         ),
       ),
     );

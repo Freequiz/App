@@ -111,7 +111,7 @@
   "Submit": "Invia",
   "Report Bug": "Segnala un errore",
   "Title at least 3 characters": "Titolo di almeno 3 caratteri",
-  "Description at least 10 characters": "Descrizione di almeno 10 caratteri",
+  "Description at least 5 characters": "Descrizione di almeno 5 caratteri",
   "Memorized": "memorizzato",
   "Seen": "Visto",
   "Created Quizzes": "Quiz creati",
@@ -127,5 +127,8 @@
   "User is not allowed to view Quiz description": "Il quiz è privato o nascosto. Se questo è il vostro quiz, segnalatelo tramite il segnalatore di bug.",
   "Share": "Quota",
   "Draft": "Bozza",
-  "Empty title": "Titolo vuoto"
+  "Empty title": "Titolo vuoto",
+  "Success!": "Successo!",
+  "Quiz saved": "Quiz salvato"
+
 }

@@ -3,9 +3,10 @@ import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_page.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/loading/error_loading/error_loading.dart';
+import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchBar extends StatefulWidget {
@@ -26,10 +27,10 @@ class _SearchBarState extends State<SearchBar> {
         ? const Color.fromARGB(255, 55, 55, 55)
         : const Color.fromARGB(255, 235, 235, 235);
     return Container(
-      height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 + 20 : 60,
+      height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 + 20 : 60,
       width: DeviceInfo.mobileLayout
-          ? DeviceInfo.width - 20
-          : DeviceInfo.width / 2,
+          ? DeviceInfo().width() - 20
+          : DeviceInfo().width() / 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: backgroundColor,
@@ -40,7 +41,7 @@ class _SearchBarState extends State<SearchBar> {
           children: [
             Flexible(
               child: SizedBox(
-                height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+                height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                 child: TextField(
                   onSubmitted: (value) {
                     search();
@@ -55,7 +56,7 @@ class _SearchBarState extends State<SearchBar> {
                         : const Color.fromARGB(255, 245, 245, 245),
                     contentPadding: const EdgeInsets.all(10.0),
                     border: const OutlineInputBorder(),
-                    hintText: language["Search"],
+                    hintText: "Search".transl(),
                     suffixIcon: IconButton(
                       color: hintColor,
                       onPressed: () {
@@ -73,7 +74,7 @@ class _SearchBarState extends State<SearchBar> {
               width: 5,
             ),
             SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
               child: TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: color1,

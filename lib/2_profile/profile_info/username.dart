@@ -24,11 +24,11 @@ class _UsernameState extends State<Username> {
         DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
         color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
       ),
       child: Padding(
-        padding: EdgeInsets.all(DeviceInfo.height / 100),
+        padding: EdgeInsets.all(DeviceInfo().height() / 100),
         child: Column(
           children: [
             Row(
@@ -53,7 +53,7 @@ class _UsernameState extends State<Username> {
               ],
             ),
             edit
-                ? SizedBox(height: DeviceInfo.height / 60)
+                ? SizedBox(height: DeviceInfo().height() / 60)
                 : const SizedBox(
                     height: 0,
                   ),
@@ -62,7 +62,7 @@ class _UsernameState extends State<Username> {
                     children: [
                       Flexible(
                         child: SizedBox(
-                          height: DeviceInfo.height / 20,
+                          height: DeviceInfo().height() / 20,
                           child: TextField(
                             onSubmitted: (value) {
                               changeUsername();
@@ -101,7 +101,7 @@ class _UsernameState extends State<Username> {
                         width: 5,
                       ),
                       SizedBox(
-                        height: DeviceInfo.height / 20,
+                        height: DeviceInfo().height() / 20,
                         child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: color1,

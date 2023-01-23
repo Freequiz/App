@@ -24,11 +24,11 @@ class _EMailState extends State<EMail> {
         DeviceInfo.darkMode ? Colors.white : textGray;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
         color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
       ),
       child: Padding(
-        padding: EdgeInsets.all(DeviceInfo.height / 100),
+        padding: EdgeInsets.all(DeviceInfo().height() / 100),
         child: Column(
           children: [
             Row(
@@ -53,7 +53,7 @@ class _EMailState extends State<EMail> {
               ],
             ),
             edit
-                ? SizedBox(height: DeviceInfo.height / 60)
+                ? SizedBox(height: DeviceInfo().height() / 60)
                 : const SizedBox(
                     height: 0,
                   ),
@@ -62,7 +62,7 @@ class _EMailState extends State<EMail> {
                     children: [
                       Flexible(
                         child: SizedBox(
-                          height: DeviceInfo.height / 20,
+                          height: DeviceInfo().height() / 20,
                           child: TextField(
                             onSubmitted: (value) {
                               changeEmail();
@@ -99,7 +99,7 @@ class _EMailState extends State<EMail> {
                         width: 5,
                       ),
                       SizedBox(
-                        height: DeviceInfo.height / 20,
+                        height: DeviceInfo().height() / 20,
                         child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: color1,

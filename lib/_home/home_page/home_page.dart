@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               children: [
                                 SizedBox(
-                                  width: (DeviceInfo.width - 30) / 4 + 15,
+                                  width: (DeviceInfo().width() - 30) / 4 + 15,
                                 ),
                                 const Expanded(
                                   child: LastQuizzes(
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: (DeviceInfo.width - 30) / 4 + 15,
+                                  width: (DeviceInfo().width() - 30) / 4 + 15,
                                 ),
                               ],
                             ),
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                           flex: 1,
                         ),
                         SizedBox(
-                          width: DeviceInfo.width / 1.25,
+                          width: DeviceInfo().width() / 1.25,
                           child: Image.asset(
                             "images/icon_transparent.png",
                             color: opacityColor.withOpacity(0.4),

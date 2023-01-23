@@ -129,11 +129,11 @@ class _KebabMenuItemState extends State<KebabMenuItem> {
           children: [
             Text(
               language[widget.text],
-              style: TextStyle(fontSize: DeviceInfo.height / 40),
+              style: TextStyle(fontSize: DeviceInfo().height() / 40),
             ),
             Icon(
               widget.icon,
-              size: DeviceInfo.height / 40,
+              size: DeviceInfo().height() / 40,
               color: DeviceInfo.darkMode ? Colors.white : textGray,
             )
           ],

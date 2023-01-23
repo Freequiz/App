@@ -16,7 +16,7 @@ class Draft extends StatelessWidget {
           child: Text(
             language["Draft"],
             style: TextStyle(
-                fontSize: DeviceInfo.height / 30, color: Colors.white),
+                fontSize: DeviceInfo().height() / 30, color: Colors.white),
           ),
         ),
         SizedBox(

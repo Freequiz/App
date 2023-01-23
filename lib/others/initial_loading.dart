@@ -30,3 +30,4 @@ Future<void> initialLoading() async {
   await Profile().loadData();
   return;
 }
+

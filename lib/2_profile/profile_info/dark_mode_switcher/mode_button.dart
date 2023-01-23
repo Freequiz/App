@@ -25,10 +25,10 @@ class _ModeButtonState extends State<ModeButton> {
         Phoenix.rebirth(context);
       },
       child: Container(
-        width: (DeviceInfo.width - 20) / 3,
+        width: (DeviceInfo().width() - 20) / 3,
         height: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+          borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
           color: DeviceInfo.theme== widget.value
               ? DeviceInfo.darkMode
                   ? highlightGray
@@ -38,7 +38,7 @@ class _ModeButtonState extends State<ModeButton> {
         child: Center(
             child: Text(
           language[widget.value],
-          style: TextStyle(fontSize: DeviceInfo.height / 60),
+          style: TextStyle(fontSize: DeviceInfo().height() / 60),
         )),
       ),
     );

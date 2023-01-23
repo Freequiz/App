@@ -112,7 +112,7 @@
     "Submit": "Submit",
     "Report Bug": "Report Bug",
     "Title at least 3 characters": "Title at least 3 characters",
-    "Description at least 10 characters": "Description at least 10 characters",
+    "Description at least 5 characters": "Description at least 5 characters long.",
     "Memorized": "Memorized",
     "Seen": "Seen",
     "Created Quizzes": "Created Quizzes",
@@ -128,5 +128,8 @@
     "User is not allowed to view Quiz description": "The quiz is private or hidden. If this is your quiz, please report it using the bug reporter.",
     "Share": "Share",
     "Draft": "Draft",
-    "Emtpy title": "Emtpy title"
+    "Emtpy title": "Emtpy title",
+    "Success!": "Success!",
+    "Quiz saved": "Quiz saved",
+    "Saving Quiz": "Saving Quiz"
 }

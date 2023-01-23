@@ -33,7 +33,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Column(
         children: [
           SizedBox(
-            height: DeviceInfo.height / 20,
+            height: DeviceInfo().height() / 20,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
@@ -42,7 +42,7 @@ class _SearchPageState extends State<SearchPage> {
                   child: Text(
                     "${language["Results for"]} \"${trim(widget.searchTerm)}\"",
                     style: TextStyle(
-                        fontSize: DeviceInfo.height / 50, color: Colors.white),
+                        fontSize: DeviceInfo().height() / 50, color: Colors.white),
                   ),
                 ),
                 const SizedBox(
@@ -57,7 +57,7 @@ class _SearchPageState extends State<SearchPage> {
                           ? language["Language"]
                           : "${language[Search.from] ?? Search.from} $arrow ${language[Search.to] ?? Search.to}",
                       style: TextStyle(
-                          fontSize: DeviceInfo.height / 50,
+                          fontSize: DeviceInfo().height() / 50,
                           color: Colors.white),
                     ),
                   ),
@@ -66,7 +66,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           SizedBox(
-            height: DeviceInfo.mobileLayout ? 10 : 30,
+            height: DeviceInfo.mobileLayout ? 10 : 25,
           ),
           Expanded(
             child: ListView(
@@ -80,11 +80,12 @@ class _SearchPageState extends State<SearchPage> {
                       data: Search.data[i],
                       uuid: Search.data[i]['id'],
                       expanded: false,
+                      width: DeviceInfo.mobileLayout ? DeviceInfo().width() - 20 : DeviceInfo().width() - 60,
                     );
                   },
                   separatorBuilder: (BuildContext context, int i) {
                     return SizedBox(
-                      height: DeviceInfo.mobileLayout ? 10 : 30,
+                      height: DeviceInfo.mobileLayout ? 10 : 25,
                     );
                   },
                 ),
@@ -108,7 +109,7 @@ class _SearchPageState extends State<SearchPage> {
                             language["Load more"],
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: DeviceInfo.height / 55),
+                                fontSize: DeviceInfo().height() / 55),
                           ),
                         ),
                       ),

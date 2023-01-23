@@ -32,12 +32,12 @@ class _BugReporterState extends State<BugReporter> {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
                 color:
                     DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : color4,
               ),
               child: Padding(
-                padding: EdgeInsets.all(DeviceInfo.height / 100),
+                padding: EdgeInsets.all(DeviceInfo().height() / 100),
                 child: Column(
                   children: [
                     TextField(
@@ -148,7 +148,7 @@ class _BugReporterState extends State<BugReporter> {
               ),
             ),
             SizedBox(
-              height: DeviceInfo.height / 40,
+              height: DeviceInfo().height() / 40,
             ),
             Align(
               child: TextButton(

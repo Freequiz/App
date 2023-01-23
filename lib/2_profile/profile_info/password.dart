@@ -25,11 +25,11 @@ class _PasswordState extends State<Password> {
         DeviceInfo.darkMode ? Colors.white : textGray;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
         color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
       ),
       child: Padding(
-        padding: EdgeInsets.all(DeviceInfo.height / 100),
+        padding: EdgeInsets.all(DeviceInfo().height() / 100),
         child: Column(
           children: [
             Row(
@@ -54,13 +54,13 @@ class _PasswordState extends State<Password> {
               ],
             ),
             edit
-                ? SizedBox(height: DeviceInfo.height / 60)
+                ? SizedBox(height: DeviceInfo().height() / 60)
                 : const SizedBox(
                     height: 0,
                   ),
             edit
                 ? SizedBox(
-                    height: DeviceInfo.height / 20,
+                    height: DeviceInfo().height() / 20,
                     child: TextField(
                       onSubmitted: (value) {
                         FocusScope.of(context).nextFocus();
@@ -118,7 +118,7 @@ class _PasswordState extends State<Password> {
                   ),
             edit
                 ? SizedBox(
-                    height: DeviceInfo.height / 20,
+                    height: DeviceInfo().height() / 20,
                     child: TextField(
                       onSubmitted: (value) {
                         FocusScope.of(context).nextFocus();
@@ -179,7 +179,7 @@ class _PasswordState extends State<Password> {
                     children: [
                       Flexible(
                         child: SizedBox(
-                          height: DeviceInfo.height / 20,
+                          height: DeviceInfo().height() / 20,
                           child: TextField(
                             onSubmitted: (value) {
                               changePassword();
@@ -230,7 +230,7 @@ class _PasswordState extends State<Password> {
                         width: 5,
                       ),
                       SizedBox(
-                        height: DeviceInfo.height / 20,
+                        height: DeviceInfo().height() / 20,
                         child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: color1,

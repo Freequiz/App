@@ -43,7 +43,7 @@ class _DraftTileState extends State<DraftTile> {
               },
               background: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                  borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
                   color: Colors.red,
                 ),
                 child: const Align(
@@ -59,11 +59,11 @@ class _DraftTileState extends State<DraftTile> {
               ),
               child: Container(
                 height: DeviceInfo.mobileLayout
-                    ? DeviceInfo.height / 30 * 2.5 + 15
-                    : DeviceInfo.height / 30 * 2.5 + 35,
-                width: DeviceInfo.width - 20,
+                    ? DeviceInfo().height() / 30 * 2.5 + 15
+                    : DeviceInfo().height() / 30 * 2.5 + 35,
+                width: DeviceInfo().width() - 20,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                  borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
                   color: color6,
                 ),
                 child: Padding(
@@ -76,7 +76,7 @@ class _DraftTileState extends State<DraftTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: DeviceInfo.height / 20,
+                        height: DeviceInfo().height() / 20,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -85,7 +85,7 @@ class _DraftTileState extends State<DraftTile> {
                                   ? Quiz.draft['title']
                                   : language["Emtpy title"],
                               style: TextStyle(
-                                  fontSize: DeviceInfo.height / 30,
+                                  fontSize: DeviceInfo().height() / 30,
                                   color: Colors.red),
                             ),
                           ],
@@ -95,14 +95,14 @@ class _DraftTileState extends State<DraftTile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            height: DeviceInfo.height / 30,
+                            height: DeviceInfo().height() / 30,
                             child: Text(
                               trim(Quiz.draft['description']),
                               style: TextStyle(
                                   fontSize:
                                       Quiz.draft['description'].length > 50
-                                          ? DeviceInfo.height / 60
-                                          : DeviceInfo.height / 50,
+                                          ? DeviceInfo().height() / 60
+                                          : DeviceInfo().height() / 50,
                                   color: Colors.red),
                             ),
                           ),

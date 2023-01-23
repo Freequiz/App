@@ -40,10 +40,10 @@ class MultipleChoiceBody extends StatelessWidget {
               children: [
                 Text(
                   Quiz.definition[Quiz.indexArray[0]],
-                  style: TextStyle(fontSize: DeviceInfo.height / 16),
+                  style: TextStyle(fontSize: DeviceInfo().height() / 16),
                 ),
                 SizedBox(
-                  height: DeviceInfo.height / 3,
+                  height: DeviceInfo().height() / 3,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -69,7 +69,7 @@ class MultipleChoiceBody extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: DeviceInfo.height / 100,
+                  height: DeviceInfo().height() / 100,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -95,7 +95,7 @@ class MultipleChoiceBody extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: DeviceInfo.height / 16,
+                  height: DeviceInfo().height() / 16,
                 ),
               ],
             ),

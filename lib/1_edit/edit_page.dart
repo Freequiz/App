@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/1_edit/edit_overview.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/loading/error_loading/error_loading2.dart';
-import 'package:freequiz/others/loading/loading_screen/loading_screen2.dart';
+import 'package:freequiz/loading/error_loading/error_loading2.dart';
+import 'package:freequiz/loading/loading_screen/loading_screen2.dart';
 
 class EditPage extends StatefulWidget {
   const EditPage({super.key});

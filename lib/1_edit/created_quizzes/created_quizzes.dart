@@ -26,7 +26,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
           alignment: Alignment.centerLeft,
           child: Text(
             language["Created Quizzes"],
-            style: TextStyle(fontSize: DeviceInfo.height / 30),
+            style: TextStyle(fontSize: DeviceInfo().height() / 30),
           ),
         ),
         SizedBox(
@@ -69,7 +69,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
                   child: Text(
                     language["Load more"],
                     style: TextStyle(
-                        color: Colors.white, fontSize: DeviceInfo.height / 55),
+                        color: Colors.white, fontSize: DeviceInfo().height() / 55),
                   ),
                 ),
               ),

@@ -3,8 +3,8 @@ import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/2_profile/profile_info/profile_info.dart';
 import 'package:freequiz/2_profile/signup.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/loading/error_loading/error_loading2.dart';
-import 'package:freequiz/others/loading/loading_screen/loading_screen2.dart';
+import 'package:freequiz/loading/error_loading/error_loading2.dart';
+import 'package:freequiz/loading/loading_screen/loading_screen2.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

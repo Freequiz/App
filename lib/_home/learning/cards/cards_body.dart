@@ -41,8 +41,8 @@ class CardsBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(
-                  width: DeviceInfo.width / 1.25,
-                  height: DeviceInfo.mobileLayout ? DeviceInfo.height / 4 : DeviceInfo.width / 2.5,
+                  width: DeviceInfo().width() / 1.25,
+                  height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 4 : DeviceInfo().width() / 2.5,
                   child: ElevatedButton(
                     style: TextButton.styleFrom(
                       backgroundColor: backgroundColor,
@@ -55,21 +55,21 @@ class CardsBody extends StatelessWidget {
                       showAnswer
                           ? Quiz.answer[Quiz.indexArray[0]]
                           : Quiz.definition[Quiz.indexArray[0]],
-                      style: TextStyle(fontSize: DeviceInfo.height / 24),
+                      style: TextStyle(fontSize: DeviceInfo().height() / 24),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: DeviceInfo.height / 16,
+                  height: DeviceInfo().height() / 16,
                 ),
                 SizedBox(
-                  width: DeviceInfo.width / 1.25,
+                  width: DeviceInfo().width() / 1.25,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: DeviceInfo.mobileLayout ? DeviceInfo.width / 5 : DeviceInfo.width / 10,
-                        height: DeviceInfo.mobileLayout ? DeviceInfo.width / 5 : DeviceInfo.width / 10,
+                        width: DeviceInfo.mobileLayout ? DeviceInfo().width() / 5 : DeviceInfo().width() / 10,
+                        height: DeviceInfo.mobileLayout ? DeviceInfo().width() / 5 : DeviceInfo().width() / 10,
                         child: FloatingActionButton(
                           heroTag: "wrong",
                           onPressed: () {
@@ -80,8 +80,8 @@ class CardsBody extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: DeviceInfo.mobileLayout ? DeviceInfo.width / 5 : DeviceInfo.width / 10,
-                        height: DeviceInfo.mobileLayout ? DeviceInfo.width / 5 : DeviceInfo.width / 10,
+                        width: DeviceInfo.mobileLayout ? DeviceInfo().width() / 5 : DeviceInfo().width() / 10,
+                        height: DeviceInfo.mobileLayout ? DeviceInfo().width() / 5 : DeviceInfo().width() / 10,
                         child: FloatingActionButton(
                           heroTag: "right",
                           onPressed: () {
@@ -94,7 +94,7 @@ class CardsBody extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: DeviceInfo.height / 32),
+                SizedBox(height: DeviceInfo().height() / 32),
               ],
             ),
           ),

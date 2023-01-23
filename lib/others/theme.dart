@@ -10,14 +10,14 @@ class ThemePreference {
 
   Future<String> getTheme() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    DeviceInfo.theme = prefs.getString('theme') ?? "Dark Mode";
+    DeviceInfo.theme = prefs.getString('theme') ?? "Automatic";
     return DeviceInfo.theme;
   }
 }
 
 class ThemeProvider with ChangeNotifier {
   ThemePreference themePreference = ThemePreference();
-  String _theme = "Dark Mode";
+  String _theme = "Automatic";
 
   String get theme => _theme;
 

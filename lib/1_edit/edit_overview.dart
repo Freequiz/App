@@ -49,7 +49,7 @@ class _EditOverviewState extends State<EditOverview> {
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   language["Create a New Quiz"],
-                  style: TextStyle(fontSize: DeviceInfo.height / 45),
+                  style: TextStyle(fontSize: DeviceInfo().height() / 45),
                 ),
               ),
             ),

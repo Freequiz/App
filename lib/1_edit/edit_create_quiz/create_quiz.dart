@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
+import 'package:freequiz/1_edit/edit_create_quiz/progress_pop_up.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
@@ -77,31 +77,34 @@ class _CreateQuizState extends State<CreateQuiz> {
         behavior: HitTestBehavior.opaque,
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
+          if (changed()) {
+            save();
+          }
         },
         child: Padding(
           padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(
-                  horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
+                  horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
           child: ListView(
             children: [
               SizedBox(
-                height: DeviceInfo.height / 60,
+                height: DeviceInfo().height() / 60,
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+                  borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
                   color: DeviceInfo.darkMode
                       ? const Color.fromARGB(255, 55, 55, 55)
                       : color4,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(DeviceInfo.height / 100),
+                  padding: EdgeInsets.all(DeviceInfo().height() / 100),
                   child: Column(
                     children: [
                       BasicTextField(
                         textFieldData: title,
-                        hintError: language["Title can't be blank"],
+                        hintError: language["Title at least 3 characters"],
                         colorBorder: (DeviceInfo.darkMode ? color3 : color1),
                         widthBorder: 3.0,
                         save: save,
@@ -111,7 +114,9 @@ class _CreateQuizState extends State<CreateQuiz> {
                       ),
                       BasicTextField(
                         textFieldData: description,
-                        hintError: language["Description can't be blank"],
+                        hintError: language["Description can't be blank"] +
+                            '. ' +
+                            language["Description at least 5 characters"],
                         maxLines: 4,
                         keyboardType: TextInputType.multiline,
                         save: save,
@@ -172,7 +177,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                 ),
               ),
               SizedBox(
-                height: DeviceInfo.height / 40,
+                height: DeviceInfo().height() / 40,
               ),
               ListView.separated(
                 shrinkWrap: true,
@@ -180,7 +185,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                 itemCount: wordCount,
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(
-                    height: DeviceInfo.height / 60,
+                    height: DeviceInfo().height() / 60,
                   );
                 },
                 itemBuilder: (BuildContext context, int i) {
@@ -197,7 +202,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                     background: Container(
                       decoration: BoxDecoration(
                         borderRadius:
-                            BorderRadius.circular(DeviceInfo.height / 100),
+                            BorderRadius.circular(DeviceInfo().height() / 100),
                         color: Colors.red,
                       ),
                       child: const Align(
@@ -214,13 +219,13 @@ class _CreateQuizState extends State<CreateQuiz> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius:
-                            BorderRadius.circular(DeviceInfo.height / 100),
+                            BorderRadius.circular(DeviceInfo().height() / 100),
                         color: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 55, 55, 55)
                             : color4,
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(DeviceInfo.height / 100),
+                        padding: EdgeInsets.all(DeviceInfo().height() / 100),
                         child: Column(
                           children: [
                             BasicTextField(
@@ -245,7 +250,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                 },
               ),
               SizedBox(
-                height: DeviceInfo.height / 40,
+                height: DeviceInfo().height() / 40,
               ),
               Align(
                 child: TextButton(
@@ -254,8 +259,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                   onPressed: () {
                     setState(() {
                       wordCount++;
-                      definitions.add(TextFieldData(hint: "Description"));
-                      answers.add(TextFieldData(hint: "Answer"));
+                      definitions.add(TextFieldData(hint: language["Definition"]));
+                      answers.add(TextFieldData(hint: language["Answer"]));
                     });
                   },
                   child: const Icon(
@@ -301,14 +306,14 @@ class _CreateQuizState extends State<CreateQuiz> {
           context: context,
           builder: (BuildContext context) => const ErrorPopUp());
     }
-    if (title.input.text.replaceAll(' ', '') == "") {
+    if (title.input.text.replaceAll(' ', '').length < 3) {
       setState(() {
         title.error = true;
         error = true;
         title.input.clear();
       });
     }
-    if (description.input.text.replaceAll(' ', '') == "") {
+    if (description.input.text.replaceAll(' ', '').length < 5) {
       setState(() {
         description.error = true;
         error = true;
@@ -324,12 +329,15 @@ class _CreateQuizState extends State<CreateQuiz> {
           to: answerLanguage.toString(),
           definitions: definitions,
           answers: answers);
-      final response = await APIQuizzes().httpPutQuiz(map);
-      final quiz = response['quiz_data'];
-      ListQuizzes.data.insert(0, quiz);
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pop();
-      widget.refresh();
+      final response = APIQuizzes().httpPutQuiz(map);
+      showDialog(
+        context: context,
+        builder: (context) => ProgressPopUp(
+          title: 'Create Quiz',
+          response: response,
+          refresh: widget.refresh,
+        ),
+      );
     }
   }
 

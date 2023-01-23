@@ -19,16 +19,16 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
   Widget build(BuildContext context) {
     final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
     return Container(
-      height: DeviceInfo.height / 18,
+      height: DeviceInfo().height() / 18,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(DeviceInfo.width / 30.4),
-          topRight: Radius.circular(DeviceInfo.width / 30.4),
+          topLeft: Radius.circular(DeviceInfo().width() / 30.4),
+          topRight: Radius.circular(DeviceInfo().width() / 30.4),
         ),
         color: color1,
       ),
       child: Padding(
-        padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo.height / 80),
+        padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo().height() / 80),
         child: search
             ? Padding(
                 padding:
@@ -58,14 +58,14 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                         color: color1,
                         width: 2,
                       ),
-                      borderRadius: BorderRadius.circular(DeviceInfo.width / 30.4),
+                      borderRadius: BorderRadius.circular(DeviceInfo().width() / 30.4),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
                         color: color4,
                         width: 2,
                       ),
-                      borderRadius: BorderRadius.circular(DeviceInfo.width / 30.4),
+                      borderRadius: BorderRadius.circular(DeviceInfo().width() / 30.4),
                     ),
                     hintText: language["Search"],
                     suffixIcon: IconButton(
@@ -90,34 +90,34 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                   const SizedBox(width: 5.0),
                   Container(
                     width: DeviceInfo.mobileLayout
-                        ? (DeviceInfo.width - 30) / 2 - DeviceInfo.height / 30
-                        : (DeviceInfo.width - 30) / 2 - DeviceInfo.height / 20 - DeviceInfo.height / 80,
+                        ? (DeviceInfo().width() - 30) / 2 - DeviceInfo().height() / 30
+                        : (DeviceInfo().width() - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),
                       child: Text(
                         language["Definition"],
                         style: TextStyle(
-                            fontSize: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45),
+                            fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
                       ),
                     ),
                   ),
                   Container(
                     width: DeviceInfo.mobileLayout
-                        ? (DeviceInfo.width - 30) / 2 - DeviceInfo.height / 30
-                        : (DeviceInfo.width - 30) / 2 - DeviceInfo.height / 20 - DeviceInfo.height / 80,
+                        ? (DeviceInfo().width() - 30) / 2 - DeviceInfo().height() / 30
+                        : (DeviceInfo().width() - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),
                       child: Text(
                         language["Answer"],
                         style: TextStyle(
-                            fontSize: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45),
+                            fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: DeviceInfo.height / 20,
+                    width: DeviceInfo().height() / 20,
                     child: TextButton(
                       onPressed: () {
                         setState(() {
@@ -127,7 +127,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                       child: Icon(
                         Icons.search,
                         color: DeviceInfo.darkMode ? Colors.white : textGray,
-                        size: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45,
+                        size: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
                       ),
                     ),
                   ),

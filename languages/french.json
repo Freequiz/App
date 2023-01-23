@@ -110,7 +110,7 @@
     "Submit": "Soumettre",
     "Report Bug": "Soumettre un bug",
     "Title at least 3 characters": "Titre au moins 3 caractères",
-    "Description at least 10 characters": "Description au moins 10 caractères",
+    "Description at least 5 characters": "Description au moins 5 caractères de long.",
     "Memorized": "Mémorisé",
     "Seen": "Vu",
     "Created Quizzes": "Quiz créés",
@@ -126,5 +126,9 @@
     "User is not allowed to view Quiz description": "Le quiz est privé ou caché. S'il s'agit de votre quiz, veuillez le signaler en utilisant le rapporteur de bogues.",
     "Share": "Partager",
     "Draft": "Brouillon",
-    "Emtpy title": "Titre vide"
+    "Emtpy title": "Titre vide",
+    "Success!": "Succès!",
+    "Quiz saved": "Quiz enregistré",
+    "Saving Quiz": "Enregistrer le quiz"
+
 }

@@ -35,16 +35,16 @@ class _SignUpState extends State<SignUp> {
       child: Padding(
         padding: DeviceInfo.mobileLayout
             ? const EdgeInsets.all(10.0)
-            : EdgeInsets.symmetric(horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
+            : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
         child: ListView(
           children: [
             SizedBox(
-              height: DeviceInfo.height / 60,
+              height: DeviceInfo().height() / 60,
             ),
             Center(
               child: Text(
                 language["Sign up"],
-                style: TextStyle(fontSize: DeviceInfo.height / 20),
+                style: TextStyle(fontSize: DeviceInfo().height() / 20),
               ),
             ),
             Row(
@@ -52,23 +52,23 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Text(
                   language["By signing up you accept the "],
-                  style: TextStyle(fontSize: DeviceInfo.height / 65),
+                  style: TextStyle(fontSize: DeviceInfo().height() / 65),
                 ),
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {},
                   child: Text(
                     language["terms and conditions"],
-                    style: TextStyle(fontSize: DeviceInfo.height / 65, color: Colors.blue),
+                    style: TextStyle(fontSize: DeviceInfo().height() / 65, color: Colors.blue),
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: DeviceInfo.height / 40.0,
+              height: DeviceInfo().height() / 40.0,
             ),
             SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
@@ -98,7 +98,7 @@ class _SignUpState extends State<SignUp> {
               height: 5.0,
             ),
             SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
@@ -129,7 +129,7 @@ class _SignUpState extends State<SignUp> {
               height: 5.0,
             ),
             SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
               child: TextField(
                 onSubmitted: (value) {
                   FocusScope.of(context).nextFocus();
@@ -176,7 +176,7 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Flexible(
                   child: SizedBox(
-                    height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+                    height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                     child: TextField(
                       onSubmitted: (value) {
                         onPressed();
@@ -223,7 +223,7 @@ class _SignUpState extends State<SignUp> {
                   width: 5,
                 ),
                 SizedBox(
-                  height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+                  height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: color1,
@@ -234,8 +234,8 @@ class _SignUpState extends State<SignUp> {
                     },
                     child: pressed
                         ? SizedBox(
-                            width: DeviceInfo.mobileLayout ? DeviceInfo.height / 30 : 30,
-                            height: DeviceInfo.mobileLayout ? DeviceInfo.height / 30 : 30,
+                            width: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
+                            height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
                             child: const CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -246,12 +246,12 @@ class _SignUpState extends State<SignUp> {
               ],
             ),
             SizedBox(
-              height: DeviceInfo.height / 60,
+              height: DeviceInfo().height() / 60,
             ),
             Center(
               child: Text(
                 language["Already have an Account?"],
-                style: TextStyle(fontSize: DeviceInfo.height / 65),
+                style: TextStyle(fontSize: DeviceInfo().height() / 65),
               ),
             ),
             Align(

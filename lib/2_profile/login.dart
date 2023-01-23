@@ -49,22 +49,22 @@ class _LoginState extends State<Login> {
         child: Padding(
           padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.all(10.0)
-              : EdgeInsets.symmetric(horizontal: DeviceInfo.width / 5.5, vertical: 10.0),
+              : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: DeviceInfo.height / 60,
+                height: DeviceInfo().height() / 60,
               ),
               Text(
                 language["Login"],
-                style: TextStyle(fontSize: DeviceInfo.height / 20),
+                style: TextStyle(fontSize: DeviceInfo().height() / 20),
               ),
               SizedBox(
-                height: DeviceInfo.height / 60,
+                height: DeviceInfo().height() / 60,
               ),
               SizedBox(
-                height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+                height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                 child: TextField(
                   onSubmitted: (value) {
                     setState(() {
@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
                 children: [
                   Flexible(
                     child: SizedBox(
-                      height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+                      height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                       child: TextField(
                         onSubmitted: (value) {
                           onPressed();
@@ -146,7 +146,7 @@ class _LoginState extends State<Login> {
                     width: 5,
                   ),
                   SizedBox(
-                    height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : 40,
+                    height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: color1,
@@ -157,8 +157,8 @@ class _LoginState extends State<Login> {
                       },
                       child: pressed
                           ? SizedBox(
-                              width: DeviceInfo.mobileLayout ? DeviceInfo.height / 30 : 30,
-                              height: DeviceInfo.mobileLayout ? DeviceInfo.height / 30 : 30,
+                              width: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
+                              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
                               child: const CircularProgressIndicator(
                                 color: Colors.white,
                               ),

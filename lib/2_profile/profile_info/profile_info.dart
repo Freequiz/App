@@ -34,20 +34,20 @@ class _ProfileInfoState extends State<ProfileInfo> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: DefaultTextStyle(
             style: TextStyle(
-              fontSize: DeviceInfo.height / 50,
+              fontSize: DeviceInfo().height() / 50,
               color: textColor,
             ),
             child: ListView(
               children: [
-                SizedBox(height: DeviceInfo.height / 60),
+                SizedBox(height: DeviceInfo().height() / 60),
                 Username(data: widget.data, refresh: widget.refresh),
-                SizedBox(height: DeviceInfo.height / 60),
+                SizedBox(height: DeviceInfo().height() / 60),
                 EMail(data: widget.data, refresh: widget.refresh),
-                SizedBox(height: DeviceInfo.height / 60),
+                SizedBox(height: DeviceInfo().height() / 60),
                 Password(refresh: widget.refresh),
-                SizedBox(height: DeviceInfo.height / 60),
+                SizedBox(height: DeviceInfo().height() / 60),
                 const DarkModeSwitcher(),
-                SizedBox(height: DeviceInfo.height / 60),
+                SizedBox(height: DeviceInfo().height() / 60),
                 Align(
                   child: TextButton(
                     style: TextButton.styleFrom(

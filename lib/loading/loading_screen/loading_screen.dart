@@ -39,7 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                           "images/icon_transparent.png",
                         )
                       : SpinKitRotatingCircle(
-                          size: DeviceInfo.width / 2.25,
+                          size: DeviceInfo().width() / 2.25,
                           itemBuilder: (BuildContext context, int index) {
                             return Image.asset(
                               "images/icon_transparent.png",
@@ -47,18 +47,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
                           },
                         ),
                   SizedBox(
-                    height: widget.finishedLoading ? 0 : DeviceInfo.height / 30,
+                    height: widget.finishedLoading ? 0 : DeviceInfo().height() / 30,
                   ),
                   Text(
                     language[widget.message],
                     style: TextStyle(
-                        fontSize: widget.finishedLoading ? 0 : DeviceInfo.height / 45),
+                        fontSize: widget.finishedLoading ? 0 : DeviceInfo().height() / 45),
                   ),
                 ],
               ),
               secondChild: SizedBox(
-                width: DeviceInfo.width,
-                height: DeviceInfo.height -
+                width: DeviceInfo().width(),
+                height: DeviceInfo().height() -
                     (MediaQuery.of(context).padding.top + kToolbarHeight) -
                     1,
                 child: widget.widget,

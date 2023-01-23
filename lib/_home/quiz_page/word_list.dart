@@ -61,41 +61,41 @@ class _WordListState extends State<WordList> {
             color: i.remainder(2) == 0 ? color5 : color6,
           ),
           child: Padding(
-            padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo.height / 80),
+            padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo().height() / 80),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(width: 5.0),
                 Container(
                   width: DeviceInfo.mobileLayout
-                      ? (widget.width - 30) / 2 - DeviceInfo.height / 30
-                      : (widget.width - 30) / 2 - DeviceInfo.height / 20 - DeviceInfo.height / 80,
+                      ? (widget.width - 30) / 2 - DeviceInfo().height() / 30
+                      : (widget.width - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       widget.definitions[i],
                       style: TextStyle(
-                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45),
+                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
                     ),
                   ),
                 ),
                 Container(
                   width: DeviceInfo.mobileLayout
-                      ? (widget.width - 30) / 2 - DeviceInfo.height / 30
-                      : (widget.width - 30) / 2 - DeviceInfo.height / 20 - DeviceInfo.height / 80,
+                      ? (widget.width - 30) / 2 - DeviceInfo().height() / 30
+                      : (widget.width - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       widget.answers[i],
                       style: TextStyle(
-                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45),
+                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: DeviceInfo.height / 20,
+                  width: DeviceInfo().height() / 20,
                   child: TextButton(
                     onPressed: () {
                       widget.markWord(widget.i, i);
@@ -105,12 +105,12 @@ class _WordListState extends State<WordList> {
                         ? Icon(
                             Icons.star,
                             color: widget.color,
-                            size: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45,
+                            size: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
                           )
                         : Icon(
                             Icons.star_border,
                             color: widget.color,
-                            size: DeviceInfo.mobileLayout ? DeviceInfo.height / 50 : DeviceInfo.height / 45,
+                            size: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
                           ),
                   ),
                 ),

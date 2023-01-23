@@ -4,8 +4,8 @@ import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/share.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/loading/error_loading/error_loading.dart';
-import 'package:freequiz/others/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/loading/error_loading/error_loading.dart';
+import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 
 class LoadQuiz extends StatefulWidget {
   final String uuid;

@@ -20,9 +20,9 @@ class _DarkModeSwitcherState extends State<DarkModeSwitcher> {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      width: DeviceInfo.width - 20,
+      width: DeviceInfo().width() - 20,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo.height / 100),
+        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
         color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
       ),
       child: Row(

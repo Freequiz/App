@@ -38,16 +38,16 @@ class WritingBody extends StatelessWidget {
               children: [
                 Text(
                   Quiz.definition[Quiz.indexArray[0]],
-                  style: TextStyle(fontSize: DeviceInfo.height / 16),
+                  style: TextStyle(fontSize: DeviceInfo().height() / 16),
                 ),
                 SizedBox(
-                  height: DeviceInfo.height / 5,
+                  height: DeviceInfo().height() / 5,
                 ),
                 Row(
                   children: [
                     Flexible(
                       child: SizedBox(
-                        height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : DeviceInfo.height / 30,
+                        height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : DeviceInfo().height() / 30,
                         child: TextField(
                           autocorrect: false,
                           enableSuggestions: false,
@@ -82,7 +82,7 @@ class WritingBody extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     SizedBox(
-                      height: DeviceInfo.mobileLayout ? DeviceInfo.height / 20 : DeviceInfo.height / 30,
+                      height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : DeviceInfo().height() / 30,
                       child: TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: answerRight ? Colors.green : color,
