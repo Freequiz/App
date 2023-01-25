@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_draft/draft.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/create_quiz.dart';
@@ -17,9 +19,11 @@ class EditOverview extends StatefulWidget {
 
 class _EditOverviewState extends State<EditOverview> {
   bool draft = false;
+  Key key = Key(Random().toString());
 
   refresh() {
     setState(() {
+      key = Key(Random().toString());
     });
   }
 
@@ -66,6 +70,7 @@ class _EditOverviewState extends State<EditOverview> {
                 ),
           Expanded(
             child: CreatedQuizzes(
+              key: key,
               refresh: refresh,
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
+import 'package:freequiz/_home/learning/learning.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
@@ -14,7 +15,6 @@ class Cards extends StatefulWidget {
 }
 
 class _CardsState extends State<Cards> {
-  bool showAnswer = false;
   bool answeredWrong = false;
 
   @override
@@ -34,17 +34,12 @@ class _CardsState extends State<Cards> {
         backgroundColor: color4,
       ),
       body: CardsBody(
+        key: const Key('Back'),
         wrong: wrong,
         right: right,
-        changeShowAnswer: changeShowAnswer,
-        showAnswer: showAnswer,
         color: color4,
       ),
     );
-  }
-
-  changeShowAnswer() {
-    showAnswer = !showAnswer;
   }
 
   wrong() {
@@ -53,7 +48,7 @@ class _CardsState extends State<Cards> {
     if (Quiz.indexArray.length > 1) {
       setState(() {
         Quiz.indexArray.removeAt(0);
-        showAnswer = false;
+        Learning.showAnswer = false;
       });
     } else {
       widget.refresh();
@@ -70,7 +65,7 @@ class _CardsState extends State<Cards> {
       setState(() {
         answeredWrong = false;
         Quiz.indexArray.removeAt(0);
-        showAnswer = false;
+        Learning.showAnswer = false;
       });
     } else {
       widget.refresh();

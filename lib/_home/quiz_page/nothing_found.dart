@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
-class NothingFound extends StatefulWidget {
+class NothingFound extends StatelessWidget {
   const NothingFound({super.key});
 
-  @override
-  State<NothingFound> createState() => _NothingFoundState();
-}
-
-class _NothingFoundState extends State<NothingFound> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

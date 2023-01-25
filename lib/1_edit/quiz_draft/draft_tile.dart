@@ -16,10 +16,6 @@ class DraftTile extends StatefulWidget {
 class _DraftTileState extends State<DraftTile> {
   bool shown = true;
 
-  refresh() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     final color6 = DeviceInfo.darkMode
@@ -127,7 +123,7 @@ class _DraftTileState extends State<DraftTile> {
       MaterialPageRoute(
         builder: (BuildContext context) {
           return EditDraft(
-            refresh: refresh,
+            refresh: widget.refresh,
           );
         },
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 
-class WordList extends StatefulWidget {
+class WordList extends StatelessWidget {
   final List definitions;
   final List answers;
   final List marked;
@@ -26,11 +26,6 @@ class WordList extends StatefulWidget {
   });
 
   @override
-  State<WordList> createState() => _WordListState();
-}
-
-class _WordListState extends State<WordList> {
-  @override
   Widget build(BuildContext context) {
     final color5 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
@@ -40,23 +35,23 @@ class _WordListState extends State<WordList> {
         : const Color.fromARGB(255, 245, 245, 245);
     return ListView.builder(
       shrinkWrap: true,
-      physics: widget.scrollPhysics,
-      itemCount: widget.definitions.length,
+      physics: scrollPhysics,
+      itemCount: definitions.length,
       itemBuilder: (BuildContext context, int i) {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                topLeft: i == 0 && widget.roundedCornersTop
-                    ? Radius.circular(widget.width / 30.4)
+                topLeft: i == 0 && roundedCornersTop
+                    ? Radius.circular(width / 30.4)
                     : Radius.zero,
-                topRight: i == 0 && widget.roundedCornersTop
-                    ? Radius.circular(widget.width / 30.4)
+                topRight: i == 0 && roundedCornersTop
+                    ? Radius.circular(width / 30.4)
                     : Radius.zero,
-                bottomLeft: i == widget.definitions.length - 1
-                    ? Radius.circular(widget.width / 30.4)
+                bottomLeft: i == definitions.length - 1
+                    ? Radius.circular(width / 30.4)
                     : Radius.zero,
-                bottomRight: i == widget.definitions.length - 1
-                    ? Radius.circular(widget.width / 30.4)
+                bottomRight: i == definitions.length - 1
+                    ? Radius.circular(width / 30.4)
                     : Radius.zero),
             color: i.remainder(2) == 0 ? color5 : color6,
           ),
@@ -68,13 +63,13 @@ class _WordListState extends State<WordList> {
                 const SizedBox(width: 5.0),
                 Container(
                   width: DeviceInfo.mobileLayout
-                      ? (widget.width - 30) / 2 - DeviceInfo().height() / 30
-                      : (widget.width - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
+                      ? (width - 30) / 2 - DeviceInfo().height() / 30
+                      : (width - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
-                      widget.definitions[i],
+                      definitions[i],
                       style: TextStyle(
                           fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
                     ),
@@ -82,13 +77,13 @@ class _WordListState extends State<WordList> {
                 ),
                 Container(
                   width: DeviceInfo.mobileLayout
-                      ? (widget.width - 30) / 2 - DeviceInfo().height() / 30
-                      : (widget.width - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
+                      ? (width - 30) / 2 - DeviceInfo().height() / 30
+                      : (width - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
-                      widget.answers[i],
+                      answers[i],
                       style: TextStyle(
                           fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
                     ),
@@ -98,18 +93,18 @@ class _WordListState extends State<WordList> {
                   width: DeviceInfo().height() / 20,
                   child: TextButton(
                     onPressed: () {
-                      widget.markWord(widget.i, i);
+                      markWord(i, i);
                     },
                     child: Quiz.markedWords[
-                            widget.marked.isEmpty ? i : widget.marked[i]]
+                            marked.isEmpty ? i : marked[i]]
                         ? Icon(
                             Icons.star,
-                            color: widget.color,
+                            color: color,
                             size: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
                           )
                         : Icon(
                             Icons.star_border,
-                            color: widget.color,
+                            color: color,
                             size: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
                           ),
                   ),

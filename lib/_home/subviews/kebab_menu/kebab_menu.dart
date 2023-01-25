@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
+import 'package:freequiz/_home/subviews/kebab_menu/kebab_menu_item.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -102,43 +102,5 @@ class _KebabMenuState extends State<KebabMenu> {
 
   share() {
     Share.share(widget.url);
-  }
-}
-
-class KebabMenuItem extends StatefulWidget {
-  final Function onTap;
-  final IconData icon;
-  final String text;
-  const KebabMenuItem(
-      {super.key, required this.onTap, required this.icon, required this.text});
-
-  @override
-  State<KebabMenuItem> createState() => _KebabMenuItemState();
-}
-
-class _KebabMenuItemState extends State<KebabMenuItem> {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: widget.onTap(),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              language[widget.text],
-              style: TextStyle(fontSize: DeviceInfo().height() / 40),
-            ),
-            Icon(
-              widget.icon,
-              size: DeviceInfo().height() / 40,
-              color: DeviceInfo.darkMode ? Colors.white : textGray,
-            )
-          ],
-        ),
-      ),
-    );
   }
 }

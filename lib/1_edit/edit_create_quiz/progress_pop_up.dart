@@ -76,9 +76,9 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
   close(data) {
     final quiz = data.data!['quiz_data'];
     ListQuizzes.data.insert(0, quiz);
+    Quiz().deleteDraft();
+    Quiz.draft.clear();
     Future.delayed(const Duration(milliseconds: 500), () {
-      Quiz().deleteDraft();
-      Quiz.draft.clear();
       Navigator.of(context).pop();
       Navigator.of(context).pop();
       widget.refresh();

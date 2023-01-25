@@ -7,6 +7,7 @@ import 'package:freequiz/quiz.dart';
 class Learning {
   static List<String> choices = [];
   static bool answeredWrong = false;
+  static bool showAnswer = false;
 
   randomChoices() {
     List<String> copyArray = Quiz.answer.toList();
