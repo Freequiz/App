@@ -174,7 +174,7 @@ class _QuizTileState extends State<QuizTile> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: DeviceInfo().height() / 60),
                               child: Text(
-                                "${widget.data['from']['name'].transl()} $arrow ${widget.data['to']['name'].transl()}",
+                                "",
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),
