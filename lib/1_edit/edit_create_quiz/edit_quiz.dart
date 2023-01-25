@@ -313,11 +313,9 @@ class _EditQuizState extends State<EditQuiz> {
                   ],
                 );
               }
-              return Container(
-                color: const Color.fromARGB(255, 40, 40, 40),
-                child: Center(
+              return Center(
                     child: CircularProgressIndicator(
-                        color: DeviceInfo.darkMode ? Colors.white : color1)),
+                        color: DeviceInfo.darkMode ? Colors.white : color1)
               );
             },
           ),

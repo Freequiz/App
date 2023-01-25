@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/subviews/correction.dart';
-import 'package:freequiz/_home/learning/multiple_choice/multiple_choice.dart';
+import 'package:freequiz/_home/learning/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
 import 'package:freequiz/quiz.dart';
@@ -17,17 +16,21 @@ class Smart extends StatefulWidget {
 }
 
 class _SmartState extends State<Smart> {
-  bool answeredWrong = false;
   List answerRightMC = List.filled(4, false);
   bool answerRightW = false;
   final _textController = TextEditingController();
-  List<String> choices = randomChoices(Quiz.answer, Quiz.indexArray[0]);
+
+  @override
+  void initState() {
+    Learning().randomChoices();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final modes = [
       MultipleChoiceBody(
-        choices: choices,
+        choices: Learning.choices,
         wrongAnswer: wrongAnswerMC,
         rightAnswer: rightAnswerMC,
         answerRight: answerRightMC,
@@ -46,44 +49,19 @@ class _SmartState extends State<Smart> {
           backgroundColor: color5,
           title: Text(language["Smart"]),
           leading: TextButton(
-            onPressed: () {
-              close();
-            },
+            onPressed: () =>
+                Learning().close(context, widget.refresh, widget.uuid, "Smart"),
             child: const Icon(
               Icons.arrow_back_ios_new,
               color: Colors.white,
             ),
           ),
         ),
-        body: modes[indexMode()]);
-  }
-
-  newChoices() {
-    setState(() {
-      choices = randomChoices(Quiz.answer, Quiz.indexArray[0]);
-    });
+        body: modes[Learning().indexMode()]);
   }
 
   onPressed() {
-    if (_textController.text
-            .trim()
-            .replaceAll(',', ' ')
-            .replaceAll('/', ' ')
-            .replaceAll('.', ' ')
-            .replaceAll(';', ' ')
-            .replaceAll('(', ' ')
-            .replaceAll(')', ' ')
-            .replaceAll('   ', '')
-            .replaceAll('  ', '') ==
-        Quiz.answer[Quiz.indexArray[0]]
-            .replaceAll(',', ' ')
-            .replaceAll('/', ' ')
-            .replaceAll('.', ' ')
-            .replaceAll(';', ' ')
-            .replaceAll('(', ' ')
-            .replaceAll(')', ' ')
-            .replaceAll('   ', '')
-            .replaceAll('  ', '')) {
+    if (Learning().correct(_textController.text)) {
       rightAnswerW();
     } else {
       wrongAnswerW();
@@ -91,23 +69,8 @@ class _SmartState extends State<Smart> {
   }
 
   wrongAnswerW() {
-    final givenAnswer = _textController.text;
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => Correction(
-        givenAnswer: givenAnswer,
-        rightAnswer: Quiz.answer[Quiz.indexArray[0]],
-      ),
-    ).then((answerRight) {
-      if (!answerRight) {
-        answeredWrong = true;
-        Quiz().answeredWrong();
-      } else {
-        rightAnswerW();
-      }
-    });
     setState(() {
-      _textController.clear();
+      Learning().wrongAnswerWriting(_textController, context, rightAnswerW);
     });
   }
 
@@ -116,15 +79,15 @@ class _SmartState extends State<Smart> {
       answerRightW = true;
     });
     Future.delayed(const Duration(milliseconds: 200), () {
-      if (!answeredWrong) {
+      if (!Learning.answeredWrong) {
         Quiz().answeredRight("Smart");
       }
       if (Quiz.indexArray.length > 1) {
         setState(() {
-          answeredWrong = false;
+          Learning.answeredWrong = false;
           Quiz.indexArray.removeAt(0);
           _textController.clear();
-          newChoices();
+          Learning().newChoices();
         });
       } else {
         widget.refresh();
@@ -140,50 +103,23 @@ class _SmartState extends State<Smart> {
       answerRightMC[i] = true;
     });
     Future.delayed(const Duration(milliseconds: 200), () {
-      if (!answeredWrong) {
+      if (!Learning.answeredWrong) {
         Quiz().answeredRight("Smart");
       }
       if (Quiz.indexArray.length > 1) {
-        answeredWrong = false;
+        Learning.answeredWrong = false;
         Quiz.indexArray.removeAt(0);
-        newChoices();
+        setState(() {
+          Learning().newChoices();
+        });
       } else {
-        close();
+        Learning().close(context, widget.refresh, widget.uuid, "Smart");
       }
       answerRightMC = List.filled(4, false);
     });
   }
 
   wrongAnswerMC(String choice, int i) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => Correction(
-        givenAnswer: choice,
-        rightAnswer: Quiz.answer[Quiz.indexArray[0]],
-      ),
-    ).then((answerRight) {
-      if (answerRight == null || !answerRight) {
-        answeredWrong = true;
-        Quiz().answeredWrong();
-      } else {
-        rightAnswerMC(i);
-      }
-    });
-  }
-
-  int indexMode() {
-    if (Quiz.progressArray[0].contains(Quiz.indexArray[0])) {
-      return 0;
-    }
-    return 1;
-  }
-
-  close() {
-    FocusScope.of(context).requestFocus(FocusNode());
-    Quiz().saveData("Smart", widget.uuid);
-    Future.delayed(const Duration(milliseconds: 500), () {
-      widget.refresh();
-      Navigator.of(context).pop();
-    });
+    Learning().wrongAnswerMultipleChoice(context, choice, rightAnswerMC, i);
   }
 }

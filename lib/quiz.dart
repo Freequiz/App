@@ -64,7 +64,7 @@ class Quiz {
     for (var i = 0; i < array.length; i++) {
       arrayIndex.add(i);
     }
-    return arrayIndex;
+    return arrayIndex; 
   }
 
   Future<void> deleteData(String mode, String uuid) async {
@@ -253,6 +253,7 @@ class Quiz {
   answeredWrong() {
     for (var i = 0; i < progressArray.length; i++) {
       if (progressArray[i].contains(indexArray[0])) {
+        debugPrint(i.toString());
         if (i > 0) {
           progressArray[i].remove(indexArray[0]);
           progressArray[i - 1].add(indexArray[0]);

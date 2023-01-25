@@ -5,16 +5,8 @@ import 'package:freequiz/_home/home_page/last_quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late Future<Map> futureMap;
-  bool finishedWaiting = false;
 
   @override
   Widget build(BuildContext context) {

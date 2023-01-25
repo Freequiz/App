@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_draft/edit_draft.dart';
 import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 
@@ -43,7 +44,8 @@ class _DraftTileState extends State<DraftTile> {
               },
               background: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+                  borderRadius:
+                      BorderRadius.circular(DeviceInfo().height() / 100),
                   color: Colors.red,
                 ),
                 child: const Align(
@@ -63,7 +65,8 @@ class _DraftTileState extends State<DraftTile> {
                     : DeviceInfo().height() / 30 * 2.5 + 35,
                 width: DeviceInfo().width() - 20,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+                  borderRadius:
+                      BorderRadius.circular(DeviceInfo().height() / 100),
                   color: color6,
                 ),
                 child: Padding(
@@ -97,13 +100,13 @@ class _DraftTileState extends State<DraftTile> {
                           SizedBox(
                             height: DeviceInfo().height() / 30,
                             child: Text(
-                              trim(Quiz.draft['description']),
+                              Quiz.draft['description'].toString().triming(32),
                               style: TextStyle(
-                                  fontSize:
-                                      Quiz.draft['description'].length > 50
-                                          ? DeviceInfo().height() / 60
-                                          : DeviceInfo().height() / 50,
-                                  color: Colors.red),
+                                fontSize: Quiz.draft['description'].length > 50
+                                    ? DeviceInfo().height() / 60
+                                    : DeviceInfo().height() / 50,
+                                color: Colors.red,
+                              ),
                             ),
                           ),
                         ],
@@ -117,15 +120,6 @@ class _DraftTileState extends State<DraftTile> {
               height: 0,
             ),
     );
-  }
-
-  trim(String description) {
-    final String trimmedDescription =
-        description.characters.take(32).toString();
-    if (trimmedDescription.length == Quiz.draft['description'].length) {
-      return trimmedDescription;
-    }
-    return '$trimmedDescription...';
   }
 
   onTap() {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:freequiz/others/string_extensions.dart';
 
 class LoadingScreen extends StatefulWidget {
   final String message;
@@ -50,7 +50,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     height: widget.finishedLoading ? 0 : DeviceInfo().height() / 30,
                   ),
                   Text(
-                    language[widget.message],
+                    widget.message.transl(),
                     style: TextStyle(
                         fontSize: widget.finishedLoading ? 0 : DeviceInfo().height() / 45),
                   ),

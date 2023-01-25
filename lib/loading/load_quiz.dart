@@ -7,17 +7,17 @@ import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz.dart';
 
-load({required BuildContext context, required String uuid}) {
+loadQuiz({required BuildContext context, required String uuid}) {
   final futureMap = APIQuizzes().getQuiz(uuid, false);
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (BuildContext context) {
         return FutureBuilder<Map>(
           future: futureMap,
-          builder: (context, quiz) {
-            if (quiz.hasData) {
-              if (quiz.data!['success']) {
-                Quiz.title = quiz.data!['quiz_data']['title'];
+          builder: (context, data) {
+            if (data.hasData) {
+              if (data.data!['success']) {
+                Quiz.title = data.data!['quiz_data']['title'];
                 return LoadingScreen(
                   message: "Loading Quiz",
                   finishedLoading: true,
@@ -36,10 +36,10 @@ load({required BuildContext context, required String uuid}) {
                 );
               } else {
                 return ErrorLoading(
-                  error: quiz.data!["message"],
+                  error: data.data!["message"],
                 );
               }
-            } else if (quiz.hasError) {
+            } else if (data.hasError) {
               return const ErrorLoading(
                 error: "other error",
               );

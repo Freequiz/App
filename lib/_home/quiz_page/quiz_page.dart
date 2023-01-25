@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/_home/quiz_page/search_bar_words.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/learning_modes.dart';
 import 'package:freequiz/_home/quiz_page/nothing_found.dart';
@@ -79,6 +80,7 @@ class _QuizPageState extends State<QuizPage> {
               ],
             )
           : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   width: (height - 190) / 4,
@@ -89,12 +91,22 @@ class _QuizPageState extends State<QuizPage> {
                 ),
                 const SizedBox(width: 20),
                 Expanded(
-                  child: WordList(
-                    definitions: shownDefinition,
-                    answers: shownAnswer,
-                    markWord: markWord,
-                    color: color2,
-                    width: width - (height - 190) / 4 - 60,
+                  child: Column(
+                    children: [
+                      SearchBarWords(
+                        search: search,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      WordList(
+                        definitions: shownDefinition,
+                        answers: shownAnswer,
+                        markWord: markWord,
+                        color: color2,
+                        width: width - (height - 190) / 4 - 60,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -119,28 +131,20 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {});
   }
 
-  reset(i) {
-    setState(() {
-      Quiz().deleteData(modes[i], widget.uuid);
-      Quiz.progressArray.clear();
-      for (var i = 0; i < Quiz.definition.length; i++) {
-        Quiz.progressArray[0].add(i);
-      }
-    });
-  }
-
   markWord(_, i) {
     if (Quiz.markedWords[i]) {
       Quiz.markedWords[i] = !Quiz.markedWords[i];
       Quiz().checkedIfMarkedWords();
       setState(() {
-        Quiz().saveMarked(widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][i]['hash']);
+        Quiz().saveMarked(
+            widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][i]['hash']);
       });
     } else {
       Quiz.markedWords[i] = !Quiz.markedWords[i];
       Quiz().checkedIfMarkedWords();
       setState(() {
-        Quiz().saveMarked(widget.uuid, Quiz.mapQuiz['quiz_data']['data'][i]['hash'], "");
+        Quiz().saveMarked(
+            widget.uuid, Quiz.mapQuiz['quiz_data']['data'][i]['hash'], "");
       });
     }
   }

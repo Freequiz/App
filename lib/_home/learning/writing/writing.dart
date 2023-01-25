@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/subviews/correction.dart';
+import 'package:freequiz/_home/learning/learning.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -16,7 +16,6 @@ class Writing extends StatefulWidget {
 
 class _WritingState extends State<Writing> {
   final _textController = TextEditingController();
-  bool answeredWrong = false;
   bool answerRight = false;
 
   @override
@@ -44,25 +43,7 @@ class _WritingState extends State<Writing> {
   }
 
   onPressed() {
-    if (_textController.text
-            .trim()
-            .replaceAll(',', ' ')
-            .replaceAll('/', ' ')
-            .replaceAll('.', ' ')
-            .replaceAll(';', ' ')
-            .replaceAll('(', ' ')
-            .replaceAll(')', ' ')
-            .replaceAll('   ', '')
-            .replaceAll('  ', '') ==
-        Quiz.answer[Quiz.indexArray[0]]
-            .replaceAll(',', ' ')
-            .replaceAll('/', ' ')
-            .replaceAll('.', ' ')
-            .replaceAll(';', ' ')
-            .replaceAll('(', ' ')
-            .replaceAll(')', ' ')
-            .replaceAll('   ', '')
-            .replaceAll('  ', '')) {
+    if (Learning().correct(_textController.text)) {
       rightAnswer();
     } else {
       wrongAnswer();
@@ -70,28 +51,13 @@ class _WritingState extends State<Writing> {
   }
 
   wrongAnswer() {
-    final givenAnswer = _textController.text;
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => Correction(
-        givenAnswer: givenAnswer,
-        rightAnswer: Quiz.answer[Quiz.indexArray[0]],
-      ),
-    ).then((answerRight) {
-      if (answerRight == null || !answerRight) {
-        answeredWrong = true;
-        Quiz().answeredWrong();
-      } else {
-        rightAnswer();
-      }
-    });
     setState(() {
-      _textController.clear();
+      Learning().wrongAnswerWriting(_textController, context, rightAnswer);
     });
   }
 
   rightAnswer() {
-    if (!answeredWrong) {
+    if (!Learning.answeredWrong) {
       Quiz().answeredRight("Writing");
     }
     setState(() {
@@ -100,7 +66,7 @@ class _WritingState extends State<Writing> {
     Future.delayed(const Duration(milliseconds: 300), () {
       if (Quiz.indexArray.length > 1) {
         setState(() {
-          answeredWrong = false;
+          Learning.answeredWrong = false;
           Quiz.indexArray.removeAt(0);
           _textController.clear();
         });
@@ -112,13 +78,6 @@ class _WritingState extends State<Writing> {
   }
 
   close() {
-    setState(() {
-      FocusScope.of(context).requestFocus(FocusNode());
-      Quiz().saveData("Writing", widget.uuid);
-      Future.delayed(const Duration(milliseconds: 500), () {
-        widget.refresh();
-        Navigator.of(context).pop();
-      });
-    });
+    Learning().close(context, widget.refresh, widget.uuid, "Writing");
   }
 }

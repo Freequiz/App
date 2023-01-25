@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/device_info.dart';
 
 class ProgressBar extends StatefulWidget {
   final int amountLeft;
@@ -15,14 +16,11 @@ class _ProgressBarState extends State<ProgressBar> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
-    final color5 = darkMode
+    final color5 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
         : const Color.fromARGB(255, 225, 225, 225);
     double widthProgress =
-        width / widget.amount * (widget.amount - widget.amountLeft);
+        DeviceInfo().width() / widget.amount * (widget.amount - widget.amountLeft);
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -32,7 +30,7 @@ class _ProgressBarState extends State<ProgressBar> {
       child: AnimatedSize(
         duration: const Duration(milliseconds: 100),
         child: Container(
-          width: width,
+          width: DeviceInfo().width(),
           height: expanded ? 21 : 7,
           color: color5,
           alignment: Alignment.centerLeft,

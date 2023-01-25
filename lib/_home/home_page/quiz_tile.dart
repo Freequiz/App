@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/loading/loading.dart';
+import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/string_extensions.dart';
-import 'package:freequiz/quiz.dart';
-import 'package:freequiz/_home/quiz_page/quiz_page.dart';
-import 'package:freequiz/_home/subviews/kebab_menu.dart';
-import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/loading/error_loading/error_loading.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -45,16 +38,12 @@ class _QuizTileState extends State<QuizTile> {
         : const Color.fromARGB(255, 235, 235, 235);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: 
-        load(context: context, uuid: widget.uuid),
+      onTap: () => loadQuiz(
+        context: context,
+        uuid: widget.uuid,
+      ),
       child: Container(
-        height: DeviceInfo.mobileLayout
-            ? expanded
-                ? DeviceInfo().height() / 30 * 4.5 + 15
-                : DeviceInfo().height() / 30 * 2.5 + 15
-            : expanded
-                ? DeviceInfo().height() / 30 * 4.5 + 35
-                : DeviceInfo().height() / 30 * 2.5 + 35,
+        height: height(),
         width: DeviceInfo().width() - 20,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
@@ -78,65 +67,13 @@ class _QuizTileState extends State<QuizTile> {
                       widget.data['title'],
                       style: TextStyle(fontSize: DeviceInfo().height() / 30),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Share.share(
-                            "https://freequiz.herokuapp.com/quiz/${widget.uuid}");
-                      },
-                      child: Icon(
-                        Icons.ios_share,
-                        color: DeviceInfo.darkMode ? Colors.white : textGray,
-                      ),
-                    ),
+                    shareButton()
                   ],
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: expanded
-                        ? DeviceInfo().height() / 15
-                        : DeviceInfo().height() / 30,
-                    width: expanded
-                        ? DeviceInfo.mobileLayout
-                            ? widget.width - 20
-                            : widget.width - 40
-                        : DeviceInfo.mobileLayout
-                            ? widget.width / 6 * 5 - 20
-                            : widget.width / 6 * 5 - 40,
-                    child: Text(
-                      expanded
-                          ? widget.data['description']
-                          : trim(widget.data['description']),
-                      style: TextStyle(
-                          fontSize: widget.data['description'].length > 50
-                              ? DeviceInfo().height() / 60
-                              : DeviceInfo().height() / 50),
-                    ),
-                  ),
-                  widget.expanded
-                      ? const SizedBox(
-                          height: 0,
-                          width: 0,
-                        )
-                      : SizedBox(
-                          height: DeviceInfo().height() / 30,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                expanded = true;
-                              });
-                            },
-                            child: Text(
-                              expanded ? "" : "More".transl(),
-                              style: TextStyle(
-                                  color: color1,
-                                  fontSize: DeviceInfo().height() / 50),
-                            ),
-                          ),
-                        ),
-                ],
+                children: [description(), moreButton()],
               ),
               expanded
                   ? SizedBox(
@@ -144,41 +81,11 @@ class _QuizTileState extends State<QuizTile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            height: DeviceInfo().height ()/ 30,
-                            decoration: BoxDecoration(
-                                color: color2,
-                                borderRadius: BorderRadius.circular(
-                                    DeviceInfo().height() / 60)),
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: DeviceInfo().height() / 60),
-                              child: Text(
-                                "${"Questions".transl()} ${widget.data['translations'] ?? widget.data['data'].length}",
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
+                          numberOfTranslations(),
                           const SizedBox(
                             width: 10.0,
                           ),
-                          Container(
-                            height: DeviceInfo().height() / 30,
-                            decoration: BoxDecoration(
-                                color: color5,
-                                borderRadius: BorderRadius.circular(
-                                    DeviceInfo().height() / 60)),
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: DeviceInfo().height() / 60),
-                              child: Text(
-                                "",
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
+                          infoLanguage()
                         ],
                       ),
                     )
@@ -192,12 +99,108 @@ class _QuizTileState extends State<QuizTile> {
     );
   }
 
-  trim(String description) {
-    final String trimmedDescription = 
-        description.characters.take(32).toString();
-    if (trimmedDescription.length == widget.data['description'].length) {
-      return trimmedDescription;
+  Widget shareButton() {
+    return GestureDetector(
+      onTap: () {
+        Share.share("https://freequiz.herokuapp.com/quiz/${widget.uuid}");
+      },
+      child: Icon(
+        Icons.ios_share,
+        color: DeviceInfo.darkMode ? Colors.white : textGray,
+      ),
+    );
+  }
+
+  Widget description() {
+    return SizedBox(
+      height:
+          expanded ? DeviceInfo().height() / 15 : DeviceInfo().height() / 30,
+      width: expanded
+          ? DeviceInfo.mobileLayout
+              ? widget.width - 20
+              : widget.width - 40
+          : DeviceInfo.mobileLayout
+              ? widget.width / 6 * 5 - 20
+              : widget.width / 6 * 5 - 40,
+      child: Text(
+        expanded
+            ? widget.data['description']
+            : widget.data['description'].toString().triming(32),
+        style: TextStyle(
+            fontSize: widget.data['description'].length > 50
+                ? DeviceInfo().height() / 60
+                : DeviceInfo().height() / 50),
+      ),
+    );
+  }
+
+  Widget moreButton() {
+    return widget.expanded
+        ? const SizedBox(
+            height: 0,
+            width: 0,
+          )
+        : SizedBox(
+            height: DeviceInfo().height() / 30,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  expanded = true;
+                });
+              },
+              child: Text(
+                expanded ? "" : "More".transl(),
+                style: TextStyle(
+                    color: color1, fontSize: DeviceInfo().height() / 50),
+              ),
+            ),
+          );
+  }
+
+  Widget numberOfTranslations() {
+    return Container(
+      height: DeviceInfo().height() / 30,
+      decoration: BoxDecoration(
+          color: color2,
+          borderRadius: BorderRadius.circular(DeviceInfo().height() / 60)),
+      alignment: Alignment.center,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
+        child: Text(
+          "${"Questions".transl()} ${widget.data['translations'] ?? widget.data['data'].length}",
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  Widget infoLanguage() {
+    return Container(
+      height: DeviceInfo().height() / 30,
+      decoration: BoxDecoration(
+          color: color5,
+          borderRadius: BorderRadius.circular(DeviceInfo().height() / 60)),
+      alignment: Alignment.center,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
+        child: Text(
+          "${widget.data['from']['name'].toString().transl()} $arrow ${widget.data['to']['name'].toString().transl()}",
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  double height() {
+    if (DeviceInfo.mobileLayout) {
+      if (expanded) {
+        return DeviceInfo().height() / 30 * 4.5 + 15;
+      }
+      return DeviceInfo().height() / 30 * 2.5 + 15;
     }
-    return '$trimmedDescription...';
+    if (expanded) {
+      return DeviceInfo().height() / 30 * 4.5 + 35;
+    }
+    return DeviceInfo().height() / 30 * 2.5 + 35;
   }
 }

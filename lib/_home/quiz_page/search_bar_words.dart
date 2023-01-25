@@ -1,42 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+class SearchBarWords extends StatefulWidget {
+  final Function search;
+  const SearchBarWords({super.key, required this.search});
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<SearchBarWords> createState() => _SearchBarWordsState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarWordsState extends State<SearchBarWords> {
   final textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
-    final backgroundColor = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 55, 55, 55)
-        : const Color.fromARGB(255, 235, 235, 235);
     return Container(
-      width: DeviceInfo.mobileLayout
-          ? DeviceInfo().width() - 20
-          : DeviceInfo().width() / 2,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: backgroundColor,
+        borderRadius: BorderRadius.circular(DeviceInfo().width() / 100),
+        color: DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : backgroundWhite,
       ),
+      width: DeviceInfo().width() / 2,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(
           children: [
             Flexible(
               child: SizedBox(
-                height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
+                height: 48,
                 child: TextField(
-                  onSubmitted: (value) => loadSearch(context: context, searchTerm: textController.text),
+                  onChanged: (value) {
+                    widget.search(textController.text);
+                  },
                   keyboardAppearance:
                       DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                   controller: textController,
@@ -59,20 +56,6 @@ class _SearchBarState extends State<SearchBar> {
                     ),
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: color1,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () => loadSearch(context: context, searchTerm: textController.text),
-                child: const Icon(Icons.search_rounded),
               ),
             ),
           ],

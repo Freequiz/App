@@ -26,7 +26,7 @@ class _EditOverviewState extends State<EditOverview> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: DeviceInfo.mobileLayout ? const EdgeInsets.all(10.0) : const EdgeInsets.all(30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

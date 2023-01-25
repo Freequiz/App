@@ -46,7 +46,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
           },
           separatorBuilder: (BuildContext context, int i) {
             return SizedBox(
-              height: DeviceInfo.mobileLayout ? 10 : 30,
+              height: DeviceInfo.mobileLayout ? 10 : 20,
             );
           },
         ),

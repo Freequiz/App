@@ -6,6 +6,7 @@ import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchPage extends StatefulWidget {
@@ -40,9 +41,10 @@ class _SearchPageState extends State<SearchPage> {
                 SearchFilter(
                   color: color2,
                   child: Text(
-                    "${language["Results for"]} \"${trim(widget.searchTerm)}\"",
+                    "${language["Results for"]} \"${widget.searchTerm.triming(32)}\"",
                     style: TextStyle(
-                        fontSize: DeviceInfo().height() / 50, color: Colors.white),
+                        fontSize: DeviceInfo().height() / 50,
+                        color: Colors.white),
                   ),
                 ),
                 const SizedBox(
@@ -72,6 +74,8 @@ class _SearchPageState extends State<SearchPage> {
             child: ListView(
               children: [
                 ListView.separated(
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: Search.data.length,
@@ -80,7 +84,9 @@ class _SearchPageState extends State<SearchPage> {
                       data: Search.data[i],
                       uuid: Search.data[i]['id'],
                       expanded: false,
-                      width: DeviceInfo.mobileLayout ? DeviceInfo().width() - 20 : DeviceInfo().width() - 60,
+                      width: DeviceInfo.mobileLayout
+                          ? DeviceInfo().width() - 20
+                          : DeviceInfo().width() - 60,
                     );
                   },
                   separatorBuilder: (BuildContext context, int i) {
@@ -119,14 +125,6 @@ class _SearchPageState extends State<SearchPage> {
         ],
       ),
     );
-  }
-
-  trim(String searchTerm) {
-    final String trimmedSearchTerm = searchTerm.characters.take(20).toString();
-    if (trimmedSearchTerm.length == searchTerm.length) {
-      return trimmedSearchTerm;
-    }
-    return '$trimmedSearchTerm...';
   }
 
   onTap() {

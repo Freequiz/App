@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
-import 'package:freequiz/quiz.dart';
-import 'package:freequiz/_home/quiz_page/quiz_page.dart';
-import 'package:freequiz/_home/subviews/kebab_menu.dart';
-import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/loading/error_loading/error_loading.dart';
-import 'package:freequiz/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
 class EditQuizTile extends StatefulWidget {
@@ -52,9 +48,10 @@ class _EditQuizTileState extends State<EditQuizTile> {
         : const Color.fromARGB(255, 235, 235, 235);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {
-        onTap();
-      },
+      onTap: () => loadQuiz(
+        context: context,
+        uuid: widget.uuid,
+      ),
       child: shown
           ? Dismissible(
               key: Key(widget.uuid),
@@ -67,7 +64,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
               },
               background: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+                  borderRadius:
+                      BorderRadius.circular(DeviceInfo().height() / 100),
                   color: Colors.red,
                 ),
                 child: const Align(
@@ -91,7 +89,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
                         : DeviceInfo().height() / 30 * 2.5 + 35,
                 width: DeviceInfo().width() - 20,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+                  borderRadius:
+                      BorderRadius.circular(DeviceInfo().height() / 100),
                   color: color6,
                 ),
                 child: Padding(
@@ -110,13 +109,11 @@ class _EditQuizTileState extends State<EditQuizTile> {
                           children: [
                             Text(
                               widget.data['title'],
-                              style:
-                                  TextStyle(fontSize: DeviceInfo().height() / 30),
+                              style: TextStyle(
+                                  fontSize: DeviceInfo().height() / 30),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                edit();
-                              },
+                              onTap: () => edit(),
                               child: Icon(
                                 Icons.edit,
                                 color: DeviceInfo.darkMode
@@ -144,7 +141,9 @@ class _EditQuizTileState extends State<EditQuizTile> {
                             child: Text(
                               expanded
                                   ? widget.data['description']
-                                  : trim(widget.data['description']),
+                                  : widget.data['description']
+                                      .toString()
+                                      .triming(32),
                               style: TextStyle(
                                   fontSize:
                                       widget.data['description'].length > 50
@@ -191,7 +190,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
                                     alignment: Alignment.center,
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: DeviceInfo().height() / 60),
+                                          horizontal:
+                                              DeviceInfo().height() / 60),
                                       child: Text(
                                         "${language["Questions"]} ${widget.data['translations'] ?? widget.data['data'].length}",
                                         style: const TextStyle(
@@ -211,7 +211,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
                                     alignment: Alignment.center,
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: DeviceInfo().height() / 60),
+                                          horizontal:
+                                              DeviceInfo().height() / 60),
                                       child: Text(
                                         "${language[widget.data['from']['name']]} $arrow ${language[widget.data['to']['name']]}",
                                         style: const TextStyle(
@@ -233,67 +234,6 @@ class _EditQuizTileState extends State<EditQuizTile> {
           : const SizedBox(
               height: 0,
             ),
-    );
-  }
-
-  trim(String description) {
-    final String trimmedDescription =
-        description.characters.take(32).toString();
-    if (trimmedDescription.length == widget.data['description'].length) {
-      return trimmedDescription;
-    }
-    return '$trimmedDescription...';
-  }
-
-  onTap() {
-    final futureMap = APIQuizzes().getQuiz(widget.uuid, false);
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (BuildContext context) {
-          return FutureBuilder<Map>(
-            future: futureMap,
-            builder: (context, quiz) {
-              if (quiz.hasData) {
-                if (quiz.data!['success']) {
-                  Quiz.title = quiz.data!['quiz_data']['title'];
-                  return LoadingScreen(
-                    message: "Loading Quiz",
-                    finishedLoading: true,
-                    widget: QuizPage(
-                      uuid: widget.uuid,
-                    ),
-                    appBar: AppBar(
-                      title: Text(Quiz.title),
-                      actions: [
-                        KebabMenuButton(
-                          url:
-                              "https://freequiz.herokuapp.com/quiz/${widget.uuid}",
-                          uuid: widget.uuid,
-                        ),
-                      ],
-                    ),
-                  );
-                } else {
-                  return ErrorLoading(
-                    error: quiz.data!["message"],
-                  );
-                }
-              } else if (quiz.hasError) {
-                return const ErrorLoading(
-                  error: "other error",
-                );
-              }
-              return LoadingScreen(
-                message: "Loading Quiz",
-                finishedLoading: false,
-                appBar: AppBar(
-                  title: Text(language["Loading"]),
-                ),
-              );
-            },
-          );
-        },
-      ),
     );
   }
 

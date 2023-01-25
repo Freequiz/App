@@ -20,21 +20,27 @@ class _BugReporterState extends State<BugReporter> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final hintColor = DeviceInfo.darkMode
+        ? Colors.white
+        : const Color.fromARGB(255, 40, 40, 40);
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Bug Reporter"]),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: DeviceInfo.mobileLayout
+            ? const EdgeInsets.all(10.0)
+            : EdgeInsets.symmetric(
+                horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
-                color:
-                    DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : color4,
+                borderRadius:
+                    BorderRadius.circular(DeviceInfo().height() / 100),
+                color: DeviceInfo.darkMode
+                    ? const Color.fromARGB(255, 55, 55, 55)
+                    : color4,
               ),
               child: Padding(
                 padding: EdgeInsets.all(DeviceInfo().height() / 100),
@@ -191,7 +197,8 @@ class _BugReporterState extends State<BugReporter> {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         userAgent = androidInfo.toString();
       }
-      httpPutBug(title.input.text, description.input.text, platform.input.text, userAgent);
+      httpPutBug(title.input.text, description.input.text, platform.input.text,
+          userAgent);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     }

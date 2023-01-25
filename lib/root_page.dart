@@ -53,7 +53,7 @@ class _RootPageState extends State<RootPage> {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
             BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.bug_report), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.bug_report_rounded), label: ""),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
           ],
           currentIndex: currentPage,
