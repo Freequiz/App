@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 
@@ -28,11 +29,11 @@ class WordList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color5 = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 60, 60, 60)
-        : const Color.fromARGB(255, 225, 225, 225);
+        ? gray60
+        : white225;
     final color6 = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 50, 50, 50)
-        : const Color.fromARGB(255, 245, 245, 245);
+        ? backgroundGray
+        : backgroundWhite;
     return ListView.builder(
       shrinkWrap: true,
       physics: scrollPhysics,
@@ -55,9 +56,8 @@ class WordList extends StatelessWidget {
                     : Radius.zero),
             color: i.remainder(2) == 0 ? color5 : color6,
           ),
-          child: Padding(
-            padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo().height() / 80),
-            child: Row(
+          padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo().height() / 80),
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(width: 5.0),
@@ -112,7 +112,6 @@ class WordList extends StatelessWidget {
                 const SizedBox(width: 5.0),
               ],
             ),
-          ),
         );
       },
     );

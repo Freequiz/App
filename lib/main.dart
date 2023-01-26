@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/router/router.dart';
 import 'package:provider/provider.dart';
-
-import 'others/theme.dart';
+import 'package:freequiz/others/theme.dart';
 
 void main() {
   runApp(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/_home/quiz_page/quiz_description.dart';
 import 'package:freequiz/_home/quiz_page/search_bar_words.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/learning_modes.dart';
-import 'package:freequiz/_home/quiz_page/nothing_found.dart';
-import 'package:freequiz/_home/quiz_page/word_list.dart';
-import 'package:freequiz/_home/quiz_page/word_list_taskbar.dart';
+import 'package:freequiz/_home/quiz_page/word_list/nothing_found.dart';
+import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
+import 'package:freequiz/_home/quiz_page/word_list/word_list_taskbar.dart';
 import 'package:freequiz/others/style.dart';
 
 class QuizPage extends StatefulWidget {
@@ -62,21 +63,31 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 SizedBox(height: mobileLayout ? 15 : 30),
-                WordListTaskbar(
-                  search: search,
-                ),
-                shownDefinition.isEmpty
-                    ? const NothingFound()
-                    : Expanded(
-                        child: WordList(
-                          definitions: shownDefinition,
-                          answers: shownAnswer,
-                          markWord: markWord,
-                          color: color2,
-                          width: width,
-                          roundedCornersTop: false,
-                        ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      const QuizDescription(),
+                      SizedBox(height: mobileLayout ? 15 : 30),
+                      WordListTaskbar(
+                        search: search,
                       ),
+                      shownDefinition.isEmpty
+                          ? const NothingFound()
+                          : Expanded(
+                              child: WordList(
+                                definitions: shownDefinition,
+                                answers: shownAnswer,
+                                markWord: markWord,
+                                color: color2,
+                                width: width,
+                                scrollPhysics:
+                                    const NeverScrollableScrollPhysics(),
+                                roundedCornersTop: false,
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
               ],
             )
           : Row(

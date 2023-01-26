@@ -6,8 +6,10 @@ const Color color3 = Color.fromARGB(255, 233, 209, 196);
 const Color color4 = Color.fromARGB(255, 209, 222, 230);
 const Color color5 = Color.fromARGB(255, 154, 137, 188);
 const Color backgroundGray = Color.fromARGB(255, 50, 50, 50);
+const Color gray60 = Color.fromARGB(255, 60, 60, 60);
 const Color highlightGray = Color.fromARGB(255, 70, 70, 70);
 const Color highlightWhite = Color.fromARGB(255, 205, 205, 205);
+const Color white225 = Color.fromARGB(255, 225, 225, 225);
 const Color backgroundWhite = Color.fromARGB(255, 235, 235, 235);
 const Color textGray = Color.fromARGB(255, 40, 40, 40);
 
@@ -23,6 +25,7 @@ ThemeData darkTheme = ThemeData(
     headline2: TextStyle(color: Colors.white),
     bodyText2: TextStyle(color: Colors.white),
   ),
+  iconTheme: const IconThemeData(color: Colors.white),
   scaffoldBackgroundColor: const Color.fromARGB(255, 40, 40, 40),
   drawerTheme: const DrawerThemeData(
     backgroundColor: Color.fromARGB(255, 40, 40, 40),
