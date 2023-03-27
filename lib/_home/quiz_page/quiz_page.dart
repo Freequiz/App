@@ -73,17 +73,15 @@ class _QuizPageState extends State<QuizPage> {
                       ),
                       shownDefinition.isEmpty
                           ? const NothingFound()
-                          : Expanded(
-                              child: WordList(
-                                definitions: shownDefinition,
-                                answers: shownAnswer,
-                                markWord: markWord,
-                                color: color2,
-                                width: width,
-                                scrollPhysics:
-                                    const NeverScrollableScrollPhysics(),
-                                roundedCornersTop: false,
-                              ),
+                          : WordList(
+                              definitions: shownDefinition,
+                              answers: shownAnswer,
+                              markWord: markWord,
+                              color: color2,
+                              width: width,
+                              scrollPhysics:
+                                  const NeverScrollableScrollPhysics(),
+                              roundedCornersTop: false,
                             ),
                     ],
                   ),

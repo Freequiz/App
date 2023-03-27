@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/loading/load_user.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz.dart';
@@ -29,18 +30,22 @@ class QuizDescription extends StatelessWidget {
                       : DeviceInfo().height() / 45),
             ),
           ),
-          Container(
-            height: DeviceInfo().height() / 35,
-            width: DeviceInfo().height() / 35,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(DeviceInfo().height() / 70),
-              border: Border.all(color: Colors.white, width: 2.0),
-            ),
-            child: Center(
+          GestureDetector(
+            onTap: () => loadUser(context: context, user: Quiz.mapQuiz['quiz_data']['created_by']),
+            child: Container(
+              height: DeviceInfo().height() / 35,
+              width: DeviceInfo().height() / 35,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(DeviceInfo().height() / 70),
+                border: Border.all(color: Colors.white, width: 2.0),
+              ),
+              child: Center(
                 child: Icon(
-              Icons.person,
-              size: DeviceInfo().height() / 45,
-            )),
+                  Icons.person,
+                  size: DeviceInfo().height() / 45,
+                ),
+              ),
+            ),
           ),
         ],
       ),

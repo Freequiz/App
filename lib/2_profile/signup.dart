@@ -36,10 +36,10 @@ class _SignUpState extends State<SignUp> {
         padding: DeviceInfo.mobileLayout
             ? const EdgeInsets.all(10.0)
             : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
-        child: ListView(
+        child: Column(
           children: [
             SizedBox(
-              height: DeviceInfo().height() / 60,
+              height: DeviceInfo().height() / 15,
             ),
             Center(
               child: Text(

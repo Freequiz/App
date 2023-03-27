@@ -81,7 +81,7 @@ class APIUsers {
 
 //refresh access token
   httpPostRefresh() async {
-    if (!newAccessToken) {
+    if (!newAccessToken && Profile.accessToken != "") {
       var connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.mobile ||
           connectivityResult == ConnectivityResult.wifi) {
@@ -212,6 +212,25 @@ class APIUsers {
   Future<Map> httpGetCreatedQuizzes(int page) async {
     final response = await http.get(
       Uri.parse('$domain/api/user/quizzes/$page'),
+      headers: {
+        "Authorization":
+            bearerToken,
+        "Access-token": Profile.accessToken
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else if (response.statusCode == 401) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error');
+    }
+  }
+
+  Future<Map> httpGetPublicQuizzes(int page, String username) async {
+    final response = await http.get(
+      Uri.parse('$domain/api/user/$username/public/$page'),
       headers: {
         "Authorization":
             bearerToken,
