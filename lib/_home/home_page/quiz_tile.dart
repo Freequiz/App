@@ -43,7 +43,6 @@ class _QuizTileState extends State<QuizTile> {
         uuid: widget.uuid,
       ),
       child: Container(
-        height: height(),
         width: DeviceInfo().width() - 20,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
@@ -76,8 +75,9 @@ class _QuizTileState extends State<QuizTile> {
                 children: [description(), moreButton()],
               ),
               expanded
-                  ? SizedBox(
-                      height: DeviceInfo().height() / 30,
+                  ? Container(
+                      padding: const EdgeInsets.only(top: 15),
+                      height: DeviceInfo().height() / 30 + 15,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -113,8 +113,6 @@ class _QuizTileState extends State<QuizTile> {
 
   Widget description() {
     return SizedBox(
-      height:
-          expanded ? DeviceInfo().height() / 15 : DeviceInfo().height() / 30,
       width: expanded
           ? DeviceInfo.mobileLayout
               ? widget.width - 20
@@ -189,18 +187,5 @@ class _QuizTileState extends State<QuizTile> {
         ),
       ),
     );
-  }
-
-  double height() {
-    if (DeviceInfo.mobileLayout) {
-      if (expanded) {
-        return DeviceInfo().height() / 30 * 4.5 + 15;
-      }
-      return DeviceInfo().height() / 30 * 2.5 + 15;
-    }
-    if (expanded) {
-      return DeviceInfo().height() / 30 * 4.5 + 35;
-    }
-    return DeviceInfo().height() / 30 * 2.5 + 35;
   }
 }
