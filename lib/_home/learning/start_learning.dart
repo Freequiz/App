@@ -224,19 +224,20 @@ class _StartLearningState extends State<StartLearning> {
   }
 
   markWord(i, i2) {
-    if (Quiz.markedWords[Quiz.progressArray[i][i2]]) {
-      Quiz.markedWords[Quiz.progressArray[i][i2]] =
-          !Quiz.markedWords[Quiz.progressArray[i][i2]];
+    final iWord = Quiz.progressArray[i][i2];
+    if (Quiz.markedWords[iWord]) {
+      Quiz.markedWords[iWord] =
+          !Quiz.markedWords[iWord];
       Quiz().checkedIfMarkedWords();
       setState(() {
-        Quiz().saveMarked(widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][i]['hash']);
+        Quiz().saveMarked(widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][iWord]['hash']);
       });
     } else {
-      Quiz.markedWords[Quiz.progressArray[i][i2]] =
-          !Quiz.markedWords[Quiz.progressArray[i][i2]];
+      Quiz.markedWords[iWord] =
+          !Quiz.markedWords[iWord];
       Quiz().checkedIfMarkedWords();
       setState(() {
-        Quiz().saveMarked(widget.uuid, Quiz.mapQuiz['quiz_data']['data'][i]['hash'], "");
+        Quiz().saveMarked(widget.uuid, Quiz.mapQuiz['quiz_data']['data'][iWord]['hash'], "");
       });
     }
     widget.refresh();

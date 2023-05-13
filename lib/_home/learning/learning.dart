@@ -69,6 +69,7 @@ class Learning {
     ).then((answerRight) {
       if (answerRight != null) {
         if (answerRight) {
+          debugPrint("Answered right");
           rightAnswerW();
         } else {
           answeredWrong = true;
