@@ -19,6 +19,7 @@ class WritingBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("done");
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

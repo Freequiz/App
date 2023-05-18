@@ -15,7 +15,6 @@ class MultipleChoice extends StatefulWidget {
 }
 
 class _MultipleChoiceState extends State<MultipleChoice> {
-  bool answeredWrong = false;
   List answerRight = List.filled(4, false);
 
   @override
@@ -52,7 +51,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
   }
 
   rightAnswer(i) {
-    if (!answeredWrong) {
+    if (!Learning.answeredWrong) {
       Quiz().answeredRight("Multiple Choice");
     }
     setState(() {
@@ -60,7 +59,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
     });
     Future.delayed(const Duration(milliseconds: 300), () {
       if (Quiz.indexArray.length > 1) {
-        answeredWrong = false;
+        Learning.answeredWrong = false;
         Quiz.indexArray.removeAt(0);
         setState(() {
           Learning().newChoices();
@@ -77,8 +76,6 @@ class _MultipleChoiceState extends State<MultipleChoice> {
   }
 
   close() {
-    Quiz().saveData("MultipleChoice", widget.uuid);
-    widget.refresh();
-    Navigator.of(context).pop();
+    Learning().close(context, widget.refresh, widget.uuid, "MultipleChoice");
   }
 }

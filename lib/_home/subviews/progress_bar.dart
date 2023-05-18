@@ -28,6 +28,7 @@ class _ProgressBarState extends State<ProgressBar> {
         });
       },
       child: AnimatedSize(
+        alignment: expanded ? Alignment.center : Alignment.topCenter,
         duration: const Duration(milliseconds: 100),
         child: Container(
           width: DeviceInfo().width(),
@@ -48,7 +49,6 @@ class _ProgressBarState extends State<ProgressBar> {
                 color: Colors.green,
               ),
               width: widthProgress,
-              height: expanded ? 21 : 7,
               alignment: Alignment.centerRight,
               child: widthProgress > 25
                   ? expanded

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
@@ -12,6 +11,7 @@ class Quiz {
   static List<String> definition = [];
   static String title = "";
   static List<List<int>> progressArray = [[]];
+  static List<int> indexAnsweredWrong = [];
   static List<int> indexArray = [];
   static List<bool> markedWords = [];
   static bool marked = false;
@@ -28,12 +28,12 @@ class Quiz {
   final modesAPI = ["smart", "write", "multi", "cards"];
 
   Future<void> loadData(int mode, String uuid) async {
+    debugPrint("Load Data");
     progressArray = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
-    var connectivityResult = await (Connectivity().checkConnectivity());
     final prefs = await SharedPreferences.getInstance();
-    final List<String> progress =
-        prefs.getStringList("progress$mode$uuid") ?? [];
-    if (connectivityResult != ConnectivityResult.none || progress.isEmpty) {
+    final List<String> progress = prefs.getStringList("progress${modes[mode]}$uuid") ?? [];
+    debugPrint(progress.toString());
+    if (progress.isEmpty) {
       final List list = mapQuiz['quiz_data']['data'];
       for (var i = 0; i < list.length; i++) {
         progressArray[list[i]['score'][modesAPI[mode]]].add(i);
@@ -69,6 +69,7 @@ class Quiz {
 
   Future<void> deleteData(String mode, String uuid) async {
     final prefs = await SharedPreferences.getInstance();
+    debugPrint(mode);
     prefs.remove("progress$mode$uuid");
     APIQuizzes().httpPatchResetScore(uuid, modesAPI[modes.indexOf(mode)]);
   }
@@ -123,7 +124,7 @@ class Quiz {
     indexArray.clear();
     var array = [];
     var length = 0;
-    for (var n = 0; n < progressArray.length - 1; n++) {
+    for (var n = 0; n < progressArray.length - 2; n++) {
       length += progressArray[n].length;
     }
     if (length > 0) {
@@ -156,8 +157,8 @@ class Quiz {
   }
 
   randomiseArray(array) {
-    if (array.length < 20) {
-      amountDefinitions = array.length;
+    if (array.length + indexAnsweredWrong.length < 20) {
+      amountDefinitions = array.length + indexAnsweredWrong.length;
       for (var n = 0; n < array.length; n) {
         final i = Random().nextInt(array.length);
         indexArray.add(array[i]);
@@ -165,12 +166,22 @@ class Quiz {
       }
     } else {
       amountDefinitions = 20;
-      for (var n = 0; n < 20; n++) {
+      for (var n = 0; n < 20 - indexAnsweredWrong.length; n++) {
         final i = Random().nextInt(array.length);
         indexArray.add(array[i]);
         array.removeAt(i);
       }
     }
+    if (indexArray.isEmpty) {
+      indexArray.add(indexAnsweredWrong[0]);
+      indexAnsweredWrong.removeAt(0);
+    }
+    for (var n = 0; n < indexAnsweredWrong.length; n++) {
+      final i = Random().nextInt(indexArray.length);
+      indexArray.insert(i, indexAnsweredWrong[n]);
+    }
+    indexAnsweredWrong.clear();
+    debugPrint("done");
   }
 
   List<String> definitionArray(indexArray) {
@@ -260,6 +271,7 @@ class Quiz {
         }
       }
     }
+    indexAnsweredWrong.add(indexArray[0]);
   }
 
   answeredRight(String mode) {
