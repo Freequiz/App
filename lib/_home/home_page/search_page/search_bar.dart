@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/string_extensions.dart';
@@ -71,7 +72,10 @@ class _SearchBarState extends State<SearchBar> {
                   backgroundColor: color1,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () => loadSearch(context: context, searchTerm: textController.text),
+                onPressed: () {
+                  Search.mode == "Quiz";
+                  loadSearch(context: context, searchTerm: textController.text);
+                },
                 child: const Icon(Icons.search_rounded),
               ),
             ),

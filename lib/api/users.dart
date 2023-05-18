@@ -246,4 +246,27 @@ class APIUsers {
       throw Exception('Error');
     }
   }
+
+  Future<Map> httpGetSearch(String searchTerm, int page) async {
+    final response = await http.get(
+      Uri.parse(
+          '$domain/api/user/search/$page?query=$searchTerm'),
+      headers: {
+        "Authorization":
+            bearerToken,
+        "Access-token": Profile.accessToken
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
+    if (response.statusCode == 401) {
+      return jsonDecode(response.body);
+    }
+    if (response.statusCode == 404) {
+      return jsonDecode(response.body);
+    }
+    throw Exception('Error');
+  }
 }

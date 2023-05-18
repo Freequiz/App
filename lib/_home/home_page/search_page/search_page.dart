@@ -3,7 +3,10 @@ import 'package:freequiz/_home/home_page/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
+import 'package:freequiz/_home/home_page/search_page/user_tile.dart';
 import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/api/users.dart';
+import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/string_extensions.dart';
@@ -12,7 +15,9 @@ import 'package:freequiz/others/style.dart';
 class SearchPage extends StatefulWidget {
   final int n;
   final String searchTerm;
-  const SearchPage({super.key, this.n = 0, required this.searchTerm});
+  final String mode;
+  const SearchPage(
+      {super.key, this.n = 0, required this.searchTerm, this.mode = "Quiz"});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -51,7 +56,7 @@ class _SearchPageState extends State<SearchPage> {
                   width: 10.0,
                 ),
                 GestureDetector(
-                  onTap: () => onTap(),
+                  onTap: () => selectLanguage(),
                   child: SearchFilter(
                     color: color5,
                     child: Text(
@@ -59,11 +64,28 @@ class _SearchPageState extends State<SearchPage> {
                           ? language["Language"]
                           : "${language[Search.from] ?? Search.from} $arrow ${language[Search.to] ?? Search.to}",
                       style: TextStyle(
-                          fontSize: DeviceInfo().height() / 50,
-                          color: Colors.white),
+                        fontSize: DeviceInfo().height() / 50,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                GestureDetector(
+                  onTap: () => changeMode(),
+                  child: SearchFilter(
+                    color: color4,
+                    child: Text(
+                      Search.mode.transl(),
+                      style: TextStyle(
+                        fontSize: DeviceInfo().height() / 50,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -73,28 +95,7 @@ class _SearchPageState extends State<SearchPage> {
           Expanded(
             child: ListView(
               children: [
-                ListView.separated(
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: Search.data.length,
-                  itemBuilder: (BuildContext context, int i) {
-                    return QuizTile(
-                      data: Search.data[i],
-                      uuid: Search.data[i]['id'],
-                      expanded: false,
-                      width: DeviceInfo.mobileLayout
-                          ? DeviceInfo().width() - 20
-                          : DeviceInfo().width() - 60,
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int i) {
-                    return SizedBox(
-                      height: DeviceInfo.mobileLayout ? 10 : 25,
-                    );
-                  },
-                ),
+                Search.mode == "Quiz" ? listQuizzes() : listUsers(),
                 SizedBox(
                   height: DeviceInfo.mobileLayout ? 5 : 15,
                 ),
@@ -127,7 +128,55 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  onTap() {
+  Widget listQuizzes() {
+    return ListView.separated(
+      addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: Search.data.length,
+      itemBuilder: (BuildContext context, int i) {
+        return QuizTile(
+          data: Search.data[i],
+          uuid: Search.data[i]['id'],
+          expanded: false,
+          width: DeviceInfo.mobileLayout
+              ? DeviceInfo().width() - 20
+              : DeviceInfo().width() - 60,
+        );
+      },
+      separatorBuilder: (BuildContext context, int i) {
+        return SizedBox(
+          height: DeviceInfo.mobileLayout ? 10 : 25,
+        );
+      },
+    );
+  }
+
+  Widget listUsers() {
+    return ListView.separated(
+      addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: Search.data.length,
+      itemBuilder: (BuildContext context, int i) {
+        return UserTile(
+          data: Search.data[i],
+          width: DeviceInfo.mobileLayout
+              ? DeviceInfo().width() - 20
+              : DeviceInfo().width() - 60,
+        );
+      },
+      separatorBuilder: (BuildContext context, int i) {
+        return SizedBox(
+          height: DeviceInfo.mobileLayout ? 10 : 25,
+        );
+      },
+    );
+  }
+
+  selectLanguage() {
     showDialog(
       context: context,
       builder: (BuildContext context) => LanguageSelector(
@@ -136,13 +185,29 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
+  changeMode() {
+    if (Search.mode == "Quiz") {
+      Search.mode = "User";
+    } else {
+      Search.mode = "Quiz";
+    }
+    reload();
+  }
+
+  reload() {
+    loadSearch(
+        context: context, searchTerm: widget.searchTerm, mode: Search.mode);
+  }
+
   onPressed() async {
     setState(() {
       pressed = true;
     });
     page++;
     Search.data.addAll(
-      (await APIQuizzes().httpGetSearch(widget.searchTerm, page))['data'],
+      Search.mode == "Quiz"
+          ? (await APIQuizzes().httpGetSearch(widget.searchTerm, page))['data']
+          : (await APIUsers().httpGetSearch(widget.searchTerm, page))['data'],
     );
     setState(() {
       pressed = false;

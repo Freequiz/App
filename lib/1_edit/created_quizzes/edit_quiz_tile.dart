@@ -80,13 +80,6 @@ class _EditQuizTileState extends State<EditQuizTile> {
                 ),
               ),
               child: Container(
-                height: DeviceInfo.mobileLayout
-                    ? expanded
-                        ? DeviceInfo().height() / 30 * 4.5 + 15
-                        : DeviceInfo().height() / 30 * 2.5 + 15
-                    : expanded
-                        ? DeviceInfo().height() / 30 * 4.5 + 35
-                        : DeviceInfo().height() / 30 * 2.5 + 35,
                 width: DeviceInfo().width() - 20,
                 decoration: BoxDecoration(
                   borderRadius:
@@ -128,9 +121,6 @@ class _EditQuizTileState extends State<EditQuizTile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            height: expanded
-                                ? DeviceInfo().height() / 15
-                                : DeviceInfo().height() / 30,
                             width: expanded
                                 ? DeviceInfo.mobileLayout
                                     ? DeviceInfo().width() - 40
@@ -175,8 +165,9 @@ class _EditQuizTileState extends State<EditQuizTile> {
                         ],
                       ),
                       expanded
-                          ? SizedBox(
-                              height: DeviceInfo().height() / 30,
+                          ? Container(
+                              padding: const EdgeInsets.only(top: 15),
+                              height: DeviceInfo().height() / 30 + 15,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
