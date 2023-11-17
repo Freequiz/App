@@ -7,9 +7,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import 'infos.dart';
+
 class APIQuizzes {
-  final domain = 'https://freequiz.herokuapp.com';
-  final bearerToken = 'Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924';
   Future<Map> getQuiz(String uuid, bool preview) async {
     if (!preview) {
       Quiz().manageQuizzes(uuid);
@@ -50,10 +50,9 @@ class APIQuizzes {
 
   Future<Map> httpGetQuiz(String uuid) async {
     final response = await http.get(
-      Uri.parse('$domain/api/quiz/$uuid/data'),
+      Uri.parse('${ApiInfos.basePath}/quiz/$uuid/data'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -72,10 +71,9 @@ class APIQuizzes {
 
   Future<Map> httpPatchFavorites(String uuid, String add, String remove) async {
     final response = await http.patch(
-      Uri.parse('$domain/api/quiz/$uuid/favorites'),
+      Uri.parse('${ApiInfos.basePath}/quiz/$uuid/favorites'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
@@ -109,10 +107,9 @@ class APIQuizzes {
 
   Future<Map> httpPatchScore(String uuid, Map score) async {
     final response = await http.patch(
-      Uri.parse('$domain/api/quiz/$uuid/score'),
+      Uri.parse('${ApiInfos.basePath}/quiz/$uuid/score'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
@@ -135,10 +132,9 @@ class APIQuizzes {
   Future<Map> httpPatchResetScore(String uuid, String mode) async {
     final response = await http.patch(
       Uri.parse(
-          '$domain/api/quiz/$uuid/score/reset/$mode'),
+          '${ApiInfos.basePath}/quiz/$uuid/score/reset/$mode'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
@@ -161,10 +157,9 @@ class APIQuizzes {
   Future<Map> httpGetSearch(String searchTerm, int page) async {
     final response = await http.get(
       Uri.parse(
-          '$domain/api/quiz/search/$page?query=$searchTerm'),
+          '${ApiInfos.basePath}/quiz/search/$page?query=$searchTerm'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -183,10 +178,9 @@ class APIQuizzes {
 
   Future<Map> httpPutQuiz(Map map) async {
     final response = await http.put(
-      Uri.parse('$domain/api/quiz/create'),
+      Uri.parse('${ApiInfos.basePath}/quiz/create'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
@@ -202,10 +196,9 @@ class APIQuizzes {
   Future<Map> httpDeleteQuiz(String deleteToken, String uuid) async {
     final response = await http.delete(
       Uri.parse(
-          '$domain/api/quiz/$uuid/delete/$deleteToken'),
+          '${ApiInfos.basePath}/quiz/$uuid/delete/$deleteToken'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken,
       },
     );
@@ -220,10 +213,9 @@ class APIQuizzes {
 
   Future<Map> httpGetDeleteTokenQuiz(String uuid) async {
     final response = await http.get(
-      Uri.parse('$domain/api/quiz/$uuid/delete_token'),
+      Uri.parse('${ApiInfos.basePath}/quiz/$uuid/delete_token'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -239,10 +231,9 @@ class APIQuizzes {
 
   Future<Map> httpPatchQuiz(Map map, String uuid) async {
     final response = await http.patch(
-      Uri.parse('$domain/api/quiz/$uuid/update'),
+      Uri.parse('${ApiInfos.basePath}/quiz/$uuid/update'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },

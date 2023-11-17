@@ -5,18 +5,17 @@ import 'package:http/http.dart' as http;
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
+import 'infos.dart';
+
 class APIUsers {
   bool newAccessToken = false;
-  final domain = 'https://freequiz.herokuapp.com';
-  final bearerToken = 'Bearer 3b589393da6bc000705e75c9ae2fec24442fe09bad96b1f31645f9813abc1924';
 
   //log in
   Future<Map> httpPostSession(String username, String password) async {
     final response = await http.post(
-      Uri.parse('$domain/api/user/login'),
+      Uri.parse('${ApiInfos.basePath}/user/login'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
       },
       encoding: Encoding.getByName('utf-8'),
       body: {
@@ -40,10 +39,9 @@ class APIUsers {
 //get account data
   Future<Map> httpGetData() async {
     final response = await http.get(
-      Uri.parse('$domain/api/user/data'),
+      Uri.parse('${ApiInfos.basePath}/user/data'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -62,10 +60,9 @@ class APIUsers {
 //get delete token to delete the account
   Future<Map> httpGetDeleteToken() async {
     final response = await http.get(
-      Uri.parse('$domain/api/user/delete_token'),
+      Uri.parse('${ApiInfos.basePath}/user/delete_token'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -86,10 +83,10 @@ class APIUsers {
       if (connectivityResult == ConnectivityResult.mobile ||
           connectivityResult == ConnectivityResult.wifi) {
         final response = await http.post(
-          Uri.parse('$domain/api/user/refresh'),
+          Uri.parse('${ApiInfos.basePath}/user/refresh'),
           headers: {
             "Authorization":
-                bearerToken,
+   ApiInfos.bearerToken,
             "Access-token": Profile.accessToken
           },
         );
@@ -115,10 +112,10 @@ class APIUsers {
       String passwordConfirmation = "",
       String oldPassword = ""}) async {
     final response = await http.patch(
-        Uri.parse('$domain/api/user/update'),
+        Uri.parse('${ApiInfos.basePath}/user/update'),
         headers: {
           "Authorization":
-              bearerToken,
+ ApiInfos.bearerToken,
           "Access-token": Profile.accessToken,
           HttpHeaders.contentTypeHeader: "application/json"
         },
@@ -153,10 +150,9 @@ class APIUsers {
   Future<Map> httpPutAccount(String username, String email, String password,
       String passwordConfirmation, bool agb) async {
     final response = await http.put(
-      Uri.parse('$domain/api/user/create'),
+      Uri.parse('${ApiInfos.basePath}/user/create'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
       encoding: Encoding.getByName('utf-8'),
@@ -185,10 +181,9 @@ class APIUsers {
 //delete account
   Future<Map> httpDeleteAccount(deleteToken) async {
     final response = await http.delete(
-      Uri.parse('$domain/api/user/delete/$deleteToken'),
+      Uri.parse('${ApiInfos.basePath}/user/delete/$deleteToken'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken,
       },
     );
@@ -211,10 +206,9 @@ class APIUsers {
 
   Future<Map> httpGetCreatedQuizzes(int page) async {
     final response = await http.get(
-      Uri.parse('$domain/api/user/quizzes/$page'),
+      Uri.parse('${ApiInfos.basePath}/user/quizzes/$page'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -230,10 +224,9 @@ class APIUsers {
 
   Future<Map> httpGetPublicQuizzes(int page, String username) async {
     final response = await http.get(
-      Uri.parse('$domain/api/user/$username/public/$page'),
+      Uri.parse('${ApiInfos.basePath}/user/$username/public/$page'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken
       },
     );
@@ -250,10 +243,9 @@ class APIUsers {
   Future<Map> httpGetSearch(String searchTerm, int page) async {
     final response = await http.get(
       Uri.parse(
-          '$domain/api/user/search/$page?query=$searchTerm'),
+          '${ApiInfos.basePath}/user/search/$page?query=$searchTerm'),
       headers: {
-        "Authorization":
-            bearerToken,
+        "Authorization": ApiInfos.bearerToken,
         "Access-token": Profile.accessToken
       },
     );

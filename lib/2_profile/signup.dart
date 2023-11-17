@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -24,6 +25,17 @@ class _SignUpState extends State<SignUp> {
       TextFieldData(hint: language["Confirm Password"], shown: false);
   bool pressed = false;
 
+  Map<String, Map<String, String>> errorMessages = {
+      "username": {
+        "taken": "Username is taken",
+        "invalid": "Username is not valid"
+      },
+      "email": {
+        "taken": "Email is taken",
+        "invalid": "Email is not valid"
+      }
+  };
+
   @override
   Widget build(BuildContext context) {
     final hintColor = DeviceInfo.darkMode ? Colors.white : Colors.black;
@@ -35,7 +47,8 @@ class _SignUpState extends State<SignUp> {
       child: Padding(
         padding: DeviceInfo.mobileLayout
             ? const EdgeInsets.all(10.0)
-            : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+            : EdgeInsets.symmetric(
+                horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
         child: Column(
           children: [
             SizedBox(
@@ -59,7 +72,9 @@ class _SignUpState extends State<SignUp> {
                   onTap: () {},
                   child: Text(
                     language["terms and conditions"],
-                    style: TextStyle(fontSize: DeviceInfo().height() / 65, color: Colors.blue),
+                    style: TextStyle(
+                        fontSize: DeviceInfo().height() / 65,
+                        color: Colors.blue),
                   ),
                 ),
               ],
@@ -176,13 +191,16 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Flexible(
                   child: SizedBox(
-                    height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
+                    height: DeviceInfo.mobileLayout
+                        ? DeviceInfo().height() / 20
+                        : 40,
                     child: TextField(
                       onSubmitted: (value) {
                         onPressed();
                       },
-                      keyboardAppearance:
-                          DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+                      keyboardAppearance: DeviceInfo.darkMode
+                          ? Brightness.dark
+                          : Brightness.light,
                       autocorrect: false,
                       enableSuggestions: false,
                       obscureText: !passwordConfirmation.shown,
@@ -223,19 +241,24 @@ class _SignUpState extends State<SignUp> {
                   width: 5,
                 ),
                 SizedBox(
-                  height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
+                  height:
+                      DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: color1,
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {
-                      pressed ? (){} : onPressed();
+                      pressed ? () {} : onPressed();
                     },
                     child: pressed
                         ? SizedBox(
-                            width: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
-                            height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
+                            width: DeviceInfo.mobileLayout
+                                ? DeviceInfo().height() / 30
+                                : 30,
+                            height: DeviceInfo.mobileLayout
+                                ? DeviceInfo().height() / 30
+                                : 30,
                             child: const CircularProgressIndicator(
                               color: Colors.white,
                             ),
@@ -312,48 +335,49 @@ class _SignUpState extends State<SignUp> {
           password.input.text,
           passwordConfirmation.input.text,
           true);
+      //throw new Exception("Hallo Nithus");
       if (map["success"] == true) {
         Profile.accessToken = map["access_token"];
         Profile().saveData();
         widget.refresh();
-      } else if (map["message"] == "Username is already taken") {
-        setState(() {
-          username.input.clear();
-          username.hint = language["Username is taken"];
-          username.error = true;
-          pressed = false;
-        });
-      } else if (map["message"] == "Username doesn't meet requirements") {
-        setState(() {
-          username.input.clear();
-          username.hint = language["Username is not valid"];
-          username.error = true;
-          pressed = false;
-        });
-      } else if (map["message"] == "Email is already taken") {
-        setState(() {
-          email.input.clear();
-          email.hint = language["E-Mail is taken"];
-          email.error = true;
-          pressed = false;
-        });
-      } else if (map["message"] == "Email doesn't meet requirements") {
-        setState(() {
-          email.input.clear();
-          email.hint = language["E-Mail is invalid"];
-          email.error = true;
-          pressed = false;
-        });
-      } else if (map["message"] == "Password doesn't meet requirements") {
+      } else if (map["token"] == "password.invalid") {
         setState(() {
           password.input.clear();
           passwordConfirmation.input.clear();
           password.hint =
-              language["At least 8 characters long, capital letter,"];
-          passwordConfirmation.hint = language["lowercase letter and number"];
+              "At least 8 characters long, capital letter,".transl();
+          passwordConfirmation.hint = "lowercase letter and number".transl();
           password.error = true;
           pressed = false;
         });
+      } else if (map["token"] == "record.invalid") {
+        map["errors"].forEach((object, error) {
+
+          String errorMessage = errorMessages[object]![error[0]['error']]!.transl();
+          
+          switch (object) {
+            case "username":
+              setState(() {
+                username.input.clear();
+                username.hint = errorMessage;
+                username.error = true;
+                pressed = false;
+              });
+              break;
+            case "email":
+              setState(() {
+                email.input.clear();
+                email.hint = errorMessage;
+                email.error = true;
+                pressed = false;
+              });
+              break;
+            default:
+              throw Exception("No matching Error");
+          }
+        });
+      } else {
+        throw Exception("Error not handled");
       }
     }
   }
