@@ -3,7 +3,9 @@ import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/languages.dart';
+import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class LanguageSelector extends StatefulWidget {
   final Function refresh;
@@ -38,11 +40,11 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return AlertDialog(
       title: Text(
-        language["Language"],
+        "Language".transl(),
         style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
       content: Text(
-        language["Choose the desired languages"],
+        "Choose the desired languages".transl(),
       ),
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
@@ -68,7 +70,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
                   from = value!;
                 });
               },
-              style: TextStyle(color: hintColor),
+              style: textColor(hintColor),
             ),
             const Icon(
               Icons.arrow_forward_rounded,
@@ -93,7 +95,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
                   to = value!;
                 });
               },
-              style: TextStyle(color: hintColor),
+              style: textColor(hintColor),
             ),
           ],
         ),

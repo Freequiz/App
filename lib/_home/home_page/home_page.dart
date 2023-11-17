@@ -5,6 +5,8 @@ import 'package:freequiz/_home/home_page/last_quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 
+import '../../others/utilities.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -34,16 +36,14 @@ class HomePage extends StatelessWidget {
                     : Quiz().amountUuids() > 1
                         ? Expanded(
                             child: Row(
-                              children: const [
-                                Expanded(
+                              children: [
+                                const Expanded(
                                   child: LastQuizzes(
                                     physics: NeverScrollableScrollPhysics(),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                Expanded(
+                                Space.width(30),
+                                const Expanded(
                                   child: LastQuizzes(
                                     physics: NeverScrollableScrollPhysics(),
                                     n: 1,
@@ -55,17 +55,13 @@ class HomePage extends StatelessWidget {
                         : Expanded(
                             child: Row(
                               children: [
-                                SizedBox(
-                                  width: (DeviceInfo().width() - 30) / 4 + 15,
-                                ),
+                                Space.width((DeviceInfo().width() - 30) / 4 + 15),
                                 const Expanded(
                                   child: LastQuizzes(
                                     physics: NeverScrollableScrollPhysics(),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: (DeviceInfo().width() - 30) / 4 + 15,
-                                ),
+                                Space.width((DeviceInfo().width() - 30) / 4 + 15)
                               ],
                             ),
                           )

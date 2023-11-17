@@ -5,6 +5,8 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
+import '../../../others/utilities.dart';
+
 class SearchBar extends StatefulWidget {
   const SearchBar({super.key});
 
@@ -62,9 +64,7 @@ class _SearchBarState extends State<SearchBar> {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 5,
-            ),
+            Space.width(5),
             SizedBox(
               height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
               child: TextButton(

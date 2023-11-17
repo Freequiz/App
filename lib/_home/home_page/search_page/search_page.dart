@@ -12,6 +12,8 @@ import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
+import '../../../others/utilities.dart';
+
 class SearchPage extends StatefulWidget {
   final int n;
   final String searchTerm;
@@ -52,9 +54,7 @@ class _SearchPageState extends State<SearchPage> {
                         color: Colors.white),
                   ),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                Space.width(10),
                 GestureDetector(
                   onTap: () => selectLanguage(),
                   child: SearchFilter(
@@ -89,9 +89,7 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           ),
-          SizedBox(
-            height: DeviceInfo.mobileLayout ? 10 : 25,
-          ),
+          Space.height(DeviceInfo.mobileLayout ? 10 : 25),
           Expanded(
             child: ListView(
               children: [

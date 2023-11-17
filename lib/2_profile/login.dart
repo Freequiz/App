@@ -5,6 +5,7 @@ import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class Login extends StatefulWidget {
   final Function refresh;
@@ -53,16 +54,12 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: DeviceInfo().height() / 60,
-              ),
+              Space.height(DeviceInfo().height() / 60),
               Text(
                 language["Login"],
                 style: TextStyle(fontSize: DeviceInfo().height() / 20),
               ),
-              SizedBox(
-                height: DeviceInfo().height() / 60,
-              ),
+              Space.height(DeviceInfo().height() / 60),
               SizedBox(
                 height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                 child: TextField(
@@ -95,7 +92,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              const SizedBox(height: 5),
+              Space.height(5),
               Row(
                 children: [
                   Flexible(
@@ -142,9 +139,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
+                  Space.width(5),
                   SizedBox(
                     height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                     child: TextButton(

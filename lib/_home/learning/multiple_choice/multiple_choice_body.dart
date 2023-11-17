@@ -4,6 +4,8 @@ import 'package:freequiz/_home/subviews/progress_bar.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 
+import '../../../others/utilities.dart';
+
 class MultipleChoiceBody extends StatelessWidget {
   final List choices;
   final Function wrongAnswer;
@@ -68,9 +70,7 @@ class MultipleChoiceBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: DeviceInfo().height() / 100,
-                ),
+                Space.height(DeviceInfo().height() / 100),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -94,9 +94,7 @@ class MultipleChoiceBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: DeviceInfo().height() / 16,
-                ),
+                Space.height(DeviceInfo().height() / 16),
               ],
             ),
           ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 
+import '../../others/utilities.dart';
+
 class ProgressBar extends StatefulWidget {
   final int amountLeft;
   final int amount;
@@ -59,8 +61,8 @@ class _ProgressBarState extends State<ProgressBar> {
                           child: Text(
                               "${(100 / widget.amount * (widget.amount - widget.amountLeft)).round()}%"),
                         )
-                      : const SizedBox()
-                  : const SizedBox(),
+                      : empty()
+                  : empty(),
             ),
           ),
         ),

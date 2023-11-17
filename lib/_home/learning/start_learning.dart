@@ -11,6 +11,8 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
+import '../../others/utilities.dart';
+
 class StartLearning extends StatefulWidget {
   final int i;
   final Function refresh;
@@ -30,7 +32,10 @@ class StartLearning extends StatefulWidget {
 class _StartLearningState extends State<StartLearning> {
   final List<Color> color = [color5, color2, color3, color4];
   late final List<Widget> pages = [
-    Smart(refresh: refresh, uuid: widget.uuid,),
+    Smart(
+      refresh: refresh,
+      uuid: widget.uuid,
+    ),
     Writing(refresh: refresh, uuid: widget.uuid),
     MultipleChoice(refresh: refresh, uuid: widget.uuid),
     Cards(refresh: refresh, uuid: widget.uuid)
@@ -55,7 +60,6 @@ class _StartLearningState extends State<StartLearning> {
 
   @override
   Widget build(BuildContext context) {
-
     final color5 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
         : const Color.fromARGB(255, 225, 225, 225);
@@ -93,7 +97,8 @@ class _StartLearningState extends State<StartLearning> {
                   height: DeviceInfo().height() / 10 - 20,
                   width: widthStartButton(DeviceInfo().width()),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(DeviceInfo().width() / 30),
+                    borderRadius:
+                        BorderRadius.circular(DeviceInfo().width() / 30),
                     color: color[widget.i],
                   ),
                   child: Center(
@@ -107,13 +112,7 @@ class _StartLearningState extends State<StartLearning> {
                   ),
                 ),
               ),
-              Quiz.marked
-                  ? const SizedBox(
-                      width: 10,
-                    )
-                  : const SizedBox(
-                      width: 0,
-                    ),
+              Quiz.marked ? Space.width(10) : empty(),
               Quiz.marked
                   ? GestureDetector(
                       behavior: HitTestBehavior.opaque,
@@ -132,7 +131,8 @@ class _StartLearningState extends State<StartLearning> {
                         height: DeviceInfo().height() / 10 - 20,
                         width: widthStartButton(DeviceInfo().width()),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(DeviceInfo().width() / 30),
+                          borderRadius:
+                              BorderRadius.circular(DeviceInfo().width() / 30),
                           color: color[widget.i],
                         ),
                         child: Row(
@@ -145,9 +145,7 @@ class _StartLearningState extends State<StartLearning> {
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600),
                             ),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
+                            Space.width(5.0),
                             const Icon(
                               Icons.star,
                               color: Colors.white,
@@ -156,15 +154,11 @@ class _StartLearningState extends State<StartLearning> {
                         ),
                       ),
                     )
-                  : const SizedBox(
-                      width: 0,
-                    ),
+                  : empty()
             ],
           ),
         ),
-        const SizedBox(
-          height: 15,
-        ),
+        Space.height(15),
         Flexible(
           fit: FlexFit.loose,
           child: Padding(
@@ -187,13 +181,12 @@ class _StartLearningState extends State<StartLearning> {
                               padding: const EdgeInsets.only(left: 8),
                               child: Text(
                                 widget.levels[i],
-                                style: TextStyle(fontSize: DeviceInfo().height() / 40),
+                                style: TextStyle(
+                                    fontSize: DeviceInfo().height() / 40),
                               ),
                             ),
                           )
-                        : const SizedBox(
-                            height: 0,
-                          ),
+                        : empty(),
                     WordList(
                       definitions: defintions(widget.i, i),
                       answers: answers(widget.i, i),
@@ -204,8 +197,8 @@ class _StartLearningState extends State<StartLearning> {
                       scrollPhysics: const NeverScrollableScrollPhysics(),
                       width: DeviceInfo().width(),
                     ),
-                    SizedBox(
-                      height: progressArray(widget.i, i).isNotEmpty
+                    Space.height(
+                      progressArray(widget.i, i).isNotEmpty
                           ? DeviceInfo().height() / 30
                           : 0,
                     ),
@@ -226,18 +219,18 @@ class _StartLearningState extends State<StartLearning> {
   markWord(i, i2) {
     final iWord = Quiz.progressArray[i][i2];
     if (Quiz.markedWords[iWord]) {
-      Quiz.markedWords[iWord] =
-          !Quiz.markedWords[iWord];
+      Quiz.markedWords[iWord] = !Quiz.markedWords[iWord];
       Quiz().checkedIfMarkedWords();
       setState(() {
-        Quiz().saveMarked(widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][iWord]['hash']);
+        Quiz().saveMarked(
+            widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][iWord]['hash']);
       });
     } else {
-      Quiz.markedWords[iWord] =
-          !Quiz.markedWords[iWord];
+      Quiz.markedWords[iWord] = !Quiz.markedWords[iWord];
       Quiz().checkedIfMarkedWords();
       setState(() {
-        Quiz().saveMarked(widget.uuid, Quiz.mapQuiz['quiz_data']['data'][iWord]['hash'], "");
+        Quiz().saveMarked(
+            widget.uuid, Quiz.mapQuiz['quiz_data']['data'][iWord]['hash'], "");
       });
     }
     widget.refresh();

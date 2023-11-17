@@ -5,6 +5,7 @@ import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class BugReporter extends StatefulWidget {
   const BugReporter({super.key});
@@ -82,9 +83,7 @@ class _BugReporterState extends State<BugReporter> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    Space.height(5),
                     TextField(
                       onSubmitted: (value) {
                         FocusScope.of(context).nextFocus();
@@ -121,9 +120,7 @@ class _BugReporterState extends State<BugReporter> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    Space.height(5),
                     TextField(
                       onSubmitted: (value) {
                         FocusScope.of(context).nextFocus();
@@ -153,9 +150,7 @@ class _BugReporterState extends State<BugReporter> {
                 ),
               ),
             ),
-            SizedBox(
-              height: DeviceInfo().height() / 40,
-            ),
+            Space.height(DeviceInfo().height() / 40),
             Align(
               child: TextButton(
                 style: TextButton.styleFrom(

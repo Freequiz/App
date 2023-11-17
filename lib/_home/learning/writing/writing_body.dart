@@ -4,6 +4,8 @@ import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 
+import '../../../others/utilities.dart';
+
 class WritingBody extends StatelessWidget {
   final Function onPressed;
   final bool answerRight;
@@ -41,9 +43,7 @@ class WritingBody extends StatelessWidget {
                   Quiz.definition[Quiz.indexArray[0]],
                   style: TextStyle(fontSize: DeviceInfo().height() / 16),
                 ),
-                SizedBox(
-                  height: DeviceInfo().height() / 5,
-                ),
+                Space.height(DeviceInfo().height() / 5),
                 Row(
                   children: [
                     Flexible(
@@ -81,7 +81,7 @@ class WritingBody extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 5),
+                    Space.width(5),
                     SizedBox(
                       height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : DeviceInfo().height() / 30,
                       child: TextButton(

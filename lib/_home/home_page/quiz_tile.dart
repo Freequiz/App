@@ -5,6 +5,8 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../others/utilities.dart';
+
 class QuizTile extends StatefulWidget {
   final Map data;
   final bool expanded;
@@ -89,9 +91,7 @@ class _QuizTileState extends State<QuizTile> {
                         ],
                       ),
                     )
-                  : const SizedBox(
-                      height: 0,
-                    ),
+                  : empty()
             ],
           ),
         ),
@@ -102,7 +102,7 @@ class _QuizTileState extends State<QuizTile> {
   Widget shareButton() {
     return GestureDetector(
       onTap: () {
-        Share.share("https://freequiz.herokuapp.com/quiz/${widget.uuid}");
+        Share.share("https://www.freequiz.ch/quiz/${widget.uuid}");
       },
       child: Icon(
         Icons.ios_share,
@@ -134,10 +134,7 @@ class _QuizTileState extends State<QuizTile> {
 
   Widget moreButton() {
     return widget.expanded
-        ? const SizedBox(
-            height: 0,
-            width: 0,
-          )
+        ? empty()
         : SizedBox(
             height: DeviceInfo().height() / 30,
             child: GestureDetector(
@@ -166,7 +163,7 @@ class _QuizTileState extends State<QuizTile> {
         padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
         child: Text(
           "${"Questions".transl()} ${widget.data['translations'] ?? widget.data['data'].length}",
-          style: const TextStyle(color: Colors.white),
+          style: textColor(Colors.white),
         ),
       ),
     );
@@ -183,7 +180,7 @@ class _QuizTileState extends State<QuizTile> {
         padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
         child: Text(
           "${widget.data['from']['name'].toString().transl()} $arrow ${widget.data['to']['name'].toString().transl()}",
-          style: const TextStyle(color: Colors.white),
+          style: textColor(Colors.white),
         ),
       ),
     );

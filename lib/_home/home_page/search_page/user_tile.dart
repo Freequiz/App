@@ -3,15 +3,13 @@ import 'package:freequiz/loading/load_user.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:share_plus/share_plus.dart';
 
 class UserTile extends StatefulWidget {
   final Map data;
   final double width;
-  const UserTile(
-      {super.key,
-      required this.data,
-      required this.width});
+  const UserTile({super.key, required this.data, required this.width});
 
   @override
   State<UserTile> createState() => _UserTileState();
@@ -25,10 +23,7 @@ class _UserTileState extends State<UserTile> {
         : const Color.fromARGB(255, 235, 235, 235);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => loadUser(
-        context: context,
-        user: widget.data['username']
-      ),
+      onTap: () => loadUser(context: context, user: widget.data['username']),
       child: Container(
         width: DeviceInfo().width() - 20,
         decoration: BoxDecoration(
@@ -77,7 +72,8 @@ class _UserTileState extends State<UserTile> {
   Widget shareButton() {
     return GestureDetector(
       onTap: () {
-        Share.share("https://freequiz.herokuapp.com/user/${widget.data['username']}");
+        Share.share(
+            "https://freequiz.herokuapp.com/user/${widget.data['username']}");
       },
       child: Icon(
         Icons.ios_share,
@@ -98,7 +94,7 @@ class _UserTileState extends State<UserTile> {
         padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
         child: Text(
           "$n ${n > 1 ? "Quizzes".transl() : "Quiz".transl()} ",
-          style: const TextStyle(color: Colors.white),
+          style: textColor(Colors.white),
         ),
       ),
     );

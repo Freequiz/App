@@ -7,6 +7,8 @@ import 'package:freequiz/_home/subviews/progress_bar.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 
+import '../../../others/utilities.dart';
+
 class CardsBody extends StatefulWidget {
   final Function wrong;
   final Function right;
@@ -98,9 +100,7 @@ class _CardsBodyState extends State<CardsBody> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: DeviceInfo().height() / 16,
-                ),
+                Space.height(DeviceInfo().height() / 16),
                 SizedBox(
                   width: DeviceInfo().width() / 1.25,
                   child: Row(
@@ -141,7 +141,7 @@ class _CardsBodyState extends State<CardsBody> {
                     ],
                   ),
                 ),
-                SizedBox(height: DeviceInfo().height() / 32),
+                Space.height(DeviceInfo().height() / 32),
               ],
             ),
           ),
