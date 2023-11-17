@@ -5,6 +5,8 @@ import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
+import '../../others/utilities.dart';
+
 class Username extends StatefulWidget {
   final Map data;
   final Function refresh;
@@ -20,8 +22,9 @@ class _UsernameState extends State<Username> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final textColor = DeviceInfo.darkMode
+        ? Colors.white
+        : const Color.fromARGB(255, 40, 40, 40);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
@@ -52,72 +55,71 @@ class _UsernameState extends State<Username> {
                 ),
               ],
             ),
-            edit
-                ? SizedBox(height: DeviceInfo().height() / 60)
-                : const SizedBox(
-                    height: 0,
-                  ),
-            edit
-                ? Row(
-                    children: [
-                      Flexible(
-                        child: SizedBox(
-                          height: DeviceInfo().height() / 20,
-                          child: TextField(
-                            onSubmitted: (value) {
-                              changeUsername();
-                            },
-                            keyboardAppearance:
-                                DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                            keyboardType: TextInputType.emailAddress,
-                            autocorrect: false,
-                            controller: newUsername.input,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: DeviceInfo.darkMode
-                                  ? const Color.fromARGB(255, 45, 45, 45)
-                                  : const Color.fromARGB(255, 255, 231, 218),
-                              contentPadding: const EdgeInsets.all(10.0),
-                              hintText: newUsername.hint,
-                              hintStyle: TextStyle(
-                                color: newUsername.error
-                                    ? Colors.red
-                                    : (newUsername.changed
-                                        ? Colors.green
-                                        : textColor),
-                              ),
-                              border: const OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: newUsername.color,
-                                  width: 2.0,
-                                ),
-                              ),
+            conditional(
+              edit,
+              SizedBox(height: DeviceInfo().height() / 60),
+            ),
+            conditional(
+              edit,
+              Row(
+                children: [
+                  Flexible(
+                    child: SizedBox(
+                      height: DeviceInfo().height() / 20,
+                      child: TextField(
+                        onSubmitted: (value) {
+                          changeUsername();
+                        },
+                        keyboardAppearance: DeviceInfo.darkMode
+                            ? Brightness.dark
+                            : Brightness.light,
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                        controller: newUsername.input,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: DeviceInfo.darkMode
+                              ? const Color.fromARGB(255, 45, 45, 45)
+                              : const Color.fromARGB(255, 255, 231, 218),
+                          contentPadding: const EdgeInsets.all(10.0),
+                          hintText: newUsername.hint,
+                          hintStyle: TextStyle(
+                            color: newUsername.error
+                                ? Colors.red
+                                : (newUsername.changed
+                                    ? Colors.green
+                                    : textColor),
+                          ),
+                          border: const OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: newUsername.color,
+                              width: 2.0,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      SizedBox(
-                        height: DeviceInfo().height() / 20,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: color1,
-                            foregroundColor: Colors.white,
-                          ),
-                          onPressed: () {
-                            changeUsername();
-                          },
-                          child: const Icon(Icons.arrow_forward_ios),
-                        ),
-                      ),
-                    ],
-                  )
-                : const SizedBox(
-                    height: 0,
+                    ),
                   ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  SizedBox(
+                    height: DeviceInfo().height() / 20,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: color1,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        changeUsername();
+                      },
+                      child: const Icon(Icons.arrow_forward_ios),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -125,7 +127,8 @@ class _UsernameState extends State<Username> {
   }
 
   changeUsername() async {
-    final Map map = await APIUsers().httpPatchAccount(username: newUsername.input.text);
+    final Map map =
+        await APIUsers().httpPatchAccount(username: newUsername.input.text);
     if (map["success"] == true) {
       setState(() {
         newUsername.input.clear();

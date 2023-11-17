@@ -31,7 +31,9 @@ class _EditOverviewState extends State<EditOverview> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: DeviceInfo.mobileLayout ? const EdgeInsets.all(10.0) : const EdgeInsets.all(30),
+      padding: DeviceInfo.mobileLayout
+          ? const EdgeInsets.all(10.0)
+          : const EdgeInsets.all(30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -54,17 +56,18 @@ class _EditOverviewState extends State<EditOverview> {
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   language["Create a New Quiz"],
-                  style: TextStyle(fontSize: DeviceInfo().height() / 45),
+                  style: textSize(DeviceInfo().height() / 45),
                 ),
               ),
             ),
           ),
           Space.height(DeviceInfo.mobileLayout ? 15 : 45),
-          Quiz.draft.isNotEmpty
-              ? Draft(
-                  refresh: refresh,
-                )
-              : empty(),
+          conditional(
+            Quiz.draft.isNotEmpty,
+            Draft(
+              refresh: refresh,
+            ),
+          ),
           Expanded(
             child: CreatedQuizzes(
               key: key,

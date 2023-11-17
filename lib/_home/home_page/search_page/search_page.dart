@@ -97,27 +97,29 @@ class _SearchPageState extends State<SearchPage> {
                 SizedBox(
                   height: DeviceInfo.mobileLayout ? 5 : 15,
                 ),
-                pressed
-                    ? Align(
-                        child: CircularProgressIndicator(
-                          color: DeviceInfo.darkMode ? Colors.white : color1,
-                        ),
-                      )
-                    : Align(
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: color1,
-                            foregroundColor: Colors.white,
-                          ),
-                          onPressed: () => onPressed(),
-                          child: Text(
-                            language["Load more"],
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: DeviceInfo().height() / 55),
-                          ),
-                        ),
+                conditional(
+                  pressed,
+                  Align(
+                    child: CircularProgressIndicator(
+                      color: DeviceInfo.darkMode ? Colors.white : color1,
+                    ),
+                  ),
+                  defaultWidget: Align(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: color1,
+                        foregroundColor: Colors.white,
                       ),
+                      onPressed: () => onPressed(),
+                      child: Text(
+                        language["Load more"],
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: DeviceInfo().height() / 55),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -144,9 +146,7 @@ class _SearchPageState extends State<SearchPage> {
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return SizedBox(
-          height: DeviceInfo.mobileLayout ? 10 : 25,
-        );
+        return Space.height(DeviceInfo.mobileLayout ? 10 : 25);
       },
     );
   }
@@ -167,9 +167,7 @@ class _SearchPageState extends State<SearchPage> {
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return SizedBox(
-          height: DeviceInfo.mobileLayout ? 10 : 25,
-        );
+        return Space.height(DeviceInfo.mobileLayout ? 10 : 25);
       },
     );
   }

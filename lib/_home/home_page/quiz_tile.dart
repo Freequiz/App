@@ -66,7 +66,7 @@ class _QuizTileState extends State<QuizTile> {
                   children: [
                     Text(
                       widget.data['title'],
-                      style: TextStyle(fontSize: DeviceInfo().height() / 30),
+                      style: textSize(DeviceInfo().height() / 30),
                     ),
                     shareButton()
                   ],
@@ -76,22 +76,23 @@ class _QuizTileState extends State<QuizTile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [description(), moreButton()],
               ),
-              expanded
-                  ? Container(
-                      padding: const EdgeInsets.only(top: 15),
-                      height: DeviceInfo().height() / 30 + 15,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          numberOfTranslations(),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          infoLanguage()
-                        ],
+              conditional(
+                expanded,
+                Container(
+                  padding: const EdgeInsets.only(top: 15),
+                  height: DeviceInfo().height() / 30 + 15,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      numberOfTranslations(),
+                      const SizedBox(
+                        width: 10.0,
                       ),
-                    )
-                  : empty()
+                      infoLanguage()
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -133,23 +134,24 @@ class _QuizTileState extends State<QuizTile> {
   }
 
   Widget moreButton() {
-    return widget.expanded
-        ? empty()
-        : SizedBox(
-            height: DeviceInfo().height() / 30,
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  expanded = true;
-                });
-              },
-              child: Text(
-                expanded ? "" : "More".transl(),
-                style: TextStyle(
-                    color: color1, fontSize: DeviceInfo().height() / 50),
-              ),
-            ),
-          );
+    return conditional(
+      !widget.expanded,
+      SizedBox(
+        height: DeviceInfo().height() / 30,
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              expanded = true;
+            });
+          },
+          child: Text(
+            expanded ? "" : "More".transl(),
+            style:
+                TextStyle(color: color1, fontSize: DeviceInfo().height() / 50),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget numberOfTranslations() {

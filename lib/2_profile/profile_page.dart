@@ -6,6 +6,8 @@ import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/error_loading/error_loading2.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen2.dart';
 
+import '../others/utilities.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -21,42 +23,44 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Profile.accessToken == ""
-          ? SignUp(
-              refresh: refresh,
-            )
-          : FutureBuilder<Map>(
-              future: APIUsers().httpGetData(),
-              builder: (context, data) {
-                if (data.hasData) {
-                  if (data.data!["success"]) {
-                    return LoadingScreen2(
-                      message: "Loading Profile",
-                      finishedLoading: true,
-                      widget: ProfileInfo(refresh: refresh, data: data.data!),
-                    );
-                  }
-                  return Navigator(
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                      builder: (context) => ErrorLoading2(
-                          error: data.data!["message"],
-                          previousWidget: const ProfilePage()),
-                    ),
-                  );
-                } else if (data.hasError) {
-                  return Navigator(
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                      builder: (context) => ErrorLoading2(
-                          error: data.data!["message"],
-                          previousWidget: const ProfilePage()),
-                    ),
-                  );
-                }
-                return const LoadingScreen2(
+      child: conditional(
+        Profile.accessToken == "",
+        SignUp(
+          refresh: refresh,
+        ),
+        defaultWidget: FutureBuilder<Map>(
+          future: APIUsers().httpGetData(),
+          builder: (context, data) {
+            if (data.hasData) {
+              if (data.data!["success"]) {
+                return LoadingScreen2(
                   message: "Loading Profile",
+                  finishedLoading: true,
+                  widget: ProfileInfo(refresh: refresh, data: data.data!),
                 );
-              },
-            ),
+              }
+              return Navigator(
+                onGenerateRoute: (settings) => MaterialPageRoute(
+                  builder: (context) => ErrorLoading2(
+                      error: data.data!["message"],
+                      previousWidget: const ProfilePage()),
+                ),
+              );
+            } else if (data.hasError) {
+              return Navigator(
+                onGenerateRoute: (settings) => MaterialPageRoute(
+                  builder: (context) => ErrorLoading2(
+                      error: data.data!["message"],
+                      previousWidget: const ProfilePage()),
+                ),
+              );
+            }
+            return const LoadingScreen2(
+              message: "Loading Profile",
+            );
+          },
+        ),
+      ),
     );
   }
 }

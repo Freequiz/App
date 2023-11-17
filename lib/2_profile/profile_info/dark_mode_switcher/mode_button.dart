@@ -4,6 +4,7 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/theme.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:provider/provider.dart';
 
 class ModeButton extends StatefulWidget {
@@ -38,7 +39,7 @@ class _ModeButtonState extends State<ModeButton> {
         child: Center(
             child: Text(
           language[widget.value],
-          style: TextStyle(fontSize: DeviceInfo().height() / 60),
+          style: textSize(DeviceInfo().height() / 60),
         )),
       ),
     );

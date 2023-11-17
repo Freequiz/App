@@ -5,6 +5,8 @@ import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
+import '../../others/utilities.dart';
+
 class Password extends StatefulWidget {
   final Function refresh;
   const Password({super.key, required this.refresh});
@@ -14,15 +16,17 @@ class Password extends StatefulWidget {
 }
 
 class _PasswordState extends State<Password> {
-  TextFieldData newPassword = TextFieldData(hint: language["Password"], shown: false);
-  TextFieldData newPasswordConfirmation = TextFieldData(hint: language["Confirm Password"], shown: false);
-  TextFieldData oldPassword = TextFieldData(hint: language["Old Password"], shown: false);
+  TextFieldData newPassword =
+      TextFieldData(hint: language["Password"], shown: false);
+  TextFieldData newPasswordConfirmation =
+      TextFieldData(hint: language["Confirm Password"], shown: false);
+  TextFieldData oldPassword =
+      TextFieldData(hint: language["Old Password"], shown: false);
   bool edit = false;
 
   @override
   Widget build(BuildContext context) {
-    final textColor =
-        DeviceInfo.darkMode ? Colors.white : textGray;
+    final textColor = DeviceInfo.darkMode ? Colors.white : textGray;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
@@ -53,200 +57,188 @@ class _PasswordState extends State<Password> {
                 ),
               ],
             ),
-            edit
-                ? SizedBox(height: DeviceInfo().height() / 60)
-                : const SizedBox(
-                    height: 0,
-                  ),
-            edit
-                ? SizedBox(
-                    height: DeviceInfo().height() / 20,
-                    child: TextField(
-                      onSubmitted: (value) {
-                        FocusScope.of(context).nextFocus();
-                      },
-                      keyboardAppearance:
-                          DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                      textInputAction: TextInputAction.next,
-                      autocorrect: false,
-                      enableSuggestions: false,
-                      obscureText: !oldPassword.shown,
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: oldPassword.input,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: DeviceInfo.darkMode
-                            ? const Color.fromARGB(255, 45, 45, 45)
-                            : const Color.fromARGB(255, 255, 231, 218),
-                        contentPadding: const EdgeInsets.all(10.0),
-                        hintText: oldPassword.hint,
-                        hintStyle: TextStyle(
-                          color: newPassword.error ? Colors.red : textColor,
-                        ),
-                        border: const OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: newPassword.color,
-                            width: 2.0,
-                          ),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            oldPassword.shown
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: color1,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              oldPassword.shown = !oldPassword.shown;
-                            });
-                          },
-                        ),
+            conditional(
+              edit,
+              SizedBox(height: DeviceInfo().height() / 60),
+            ),
+            conditional(
+              edit,
+              SizedBox(
+                height: DeviceInfo().height() / 20,
+                child: TextField(
+                  onSubmitted: (value) {
+                    FocusScope.of(context).nextFocus();
+                  },
+                  keyboardAppearance:
+                      DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+                  textInputAction: TextInputAction.next,
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  obscureText: !oldPassword.shown,
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: oldPassword.input,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: DeviceInfo.darkMode
+                        ? const Color.fromARGB(255, 45, 45, 45)
+                        : const Color.fromARGB(255, 255, 231, 218),
+                    contentPadding: const EdgeInsets.all(10.0),
+                    hintText: oldPassword.hint,
+                    hintStyle: TextStyle(
+                      color: newPassword.error ? Colors.red : textColor,
+                    ),
+                    border: const OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: newPassword.color,
+                        width: 2.0,
                       ),
                     ),
-                  )
-                : const SizedBox(
-                    height: 0,
-                  ),
-            edit
-                ? const SizedBox(
-                    height: 5.0,
-                  )
-                : const SizedBox(
-                    height: 0,
-                  ),
-            edit
-                ? SizedBox(
-                    height: DeviceInfo().height() / 20,
-                    child: TextField(
-                      onSubmitted: (value) {
-                        FocusScope.of(context).nextFocus();
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        oldPassword.shown
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: color1,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          oldPassword.shown = !oldPassword.shown;
+                        });
                       },
-                      keyboardAppearance:
-                          DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                      textInputAction: TextInputAction.next,
-                      autocorrect: false,
-                      enableSuggestions: false,
-                      obscureText: !newPassword.shown,
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: newPassword.input,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: DeviceInfo.darkMode
-                            ? const Color.fromARGB(255, 45, 45, 45)
-                            : const Color.fromARGB(255, 255, 231, 218),
-                        contentPadding: const EdgeInsets.all(10.0),
-                        hintText: newPassword.hint,
-                        hintStyle: TextStyle(
-                          color: newPassword.error ? Colors.red : textColor,
-                        ),
-                        border: const OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: newPassword.color,
-                            width: 2.0,
-                          ),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            newPassword.shown
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: color1,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              newPassword.shown = !newPassword.shown;
-                            });
-                          },
-                        ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            conditional(edit, Space.height(5.0)),
+            conditional(
+              edit,
+              SizedBox(
+                height: DeviceInfo().height() / 20,
+                child: TextField(
+                  onSubmitted: (value) {
+                    FocusScope.of(context).nextFocus();
+                  },
+                  keyboardAppearance:
+                      DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+                  textInputAction: TextInputAction.next,
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  obscureText: !newPassword.shown,
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: newPassword.input,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: DeviceInfo.darkMode
+                        ? const Color.fromARGB(255, 45, 45, 45)
+                        : const Color.fromARGB(255, 255, 231, 218),
+                    contentPadding: const EdgeInsets.all(10.0),
+                    hintText: newPassword.hint,
+                    hintStyle: TextStyle(
+                      color: newPassword.error ? Colors.red : textColor,
+                    ),
+                    border: const OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: newPassword.color,
+                        width: 2.0,
                       ),
                     ),
-                  )
-                : const SizedBox(
-                    height: 0,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        newPassword.shown
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: color1,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          newPassword.shown = !newPassword.shown;
+                        });
+                      },
+                    ),
                   ),
-            edit
-                ? const SizedBox(
-                    height: 5.0,
-                  )
-                : const SizedBox(
-                    height: 0,
-                  ),
-            edit
-                ? Row(
-                    children: [
-                      Flexible(
-                        child: SizedBox(
-                          height: DeviceInfo().height() / 20,
-                          child: TextField(
-                            onSubmitted: (value) {
-                              changePassword();
-                            },
-                            keyboardAppearance:
-                                DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                            autocorrect: false,
-                            enableSuggestions: false,
-                            obscureText: !newPasswordConfirmation.shown,
-                            keyboardType: TextInputType.visiblePassword,
-                            controller: newPasswordConfirmation.input,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: DeviceInfo.darkMode
-                                  ? const Color.fromARGB(255, 45, 45, 45)
-                                  : const Color.fromARGB(255, 255, 231, 218),
-                              contentPadding: const EdgeInsets.all(10.0),
-                              hintText: newPasswordConfirmation.hint,
-                              hintStyle: TextStyle(
-                                color: newPassword.error ? Colors.red : textColor,
-                              ),
-                              border: const OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: newPassword.color,
-                                  width: 2.0,
-                                ),
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  newPasswordConfirmation.shown
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: color1,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    newPasswordConfirmation.shown =
-                                        !newPasswordConfirmation.shown;
-                                  });
-                                },
-                              ),
+                ),
+              ),
+            ),
+            conditional(
+              edit,
+              Space.height(5.0),
+            ),
+            conditional(
+              edit,
+              Row(
+                children: [
+                  Flexible(
+                    child: SizedBox(
+                      height: DeviceInfo().height() / 20,
+                      child: TextField(
+                        onSubmitted: (value) {
+                          changePassword();
+                        },
+                        keyboardAppearance: DeviceInfo.darkMode
+                            ? Brightness.dark
+                            : Brightness.light,
+                        autocorrect: false,
+                        enableSuggestions: false,
+                        obscureText: !newPasswordConfirmation.shown,
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: newPasswordConfirmation.input,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: DeviceInfo.darkMode
+                              ? const Color.fromARGB(255, 45, 45, 45)
+                              : const Color.fromARGB(255, 255, 231, 218),
+                          contentPadding: const EdgeInsets.all(10.0),
+                          hintText: newPasswordConfirmation.hint,
+                          hintStyle: TextStyle(
+                            color: newPassword.error ? Colors.red : textColor,
+                          ),
+                          border: const OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: newPassword.color,
+                              width: 2.0,
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      SizedBox(
-                        height: DeviceInfo().height() / 20,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: color1,
-                            foregroundColor: Colors.white,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              newPasswordConfirmation.shown
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: color1,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                newPasswordConfirmation.shown =
+                                    !newPasswordConfirmation.shown;
+                              });
+                            },
                           ),
-                          onPressed: () {
-                            changePassword();
-                          },
-                          child: const Icon(Icons.arrow_forward_ios),
                         ),
                       ),
-                    ],
-                  )
-                : const SizedBox(
-                    height: 0,
+                    ),
                   ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  SizedBox(
+                    height: DeviceInfo().height() / 20,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: color1,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        changePassword();
+                      },
+                      child: const Icon(Icons.arrow_forward_ios),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -281,7 +273,8 @@ class _PasswordState extends State<Password> {
       setState(() {
         newPassword.input.clear();
         newPasswordConfirmation.input.clear();
-        newPassword.hint = language["At least 8 characters long, capital letter,"];
+        newPassword.hint =
+            language["At least 8 characters long, capital letter,"];
         newPasswordConfirmation.hint = language["lowercase letter and number"];
         newPassword.color = Colors.red;
         newPassword.error = true;

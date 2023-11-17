@@ -28,63 +28,69 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: DeviceInfo.mobileLayout ? 10 : 30,
             ),
-            Quiz().amountUuids() > 0
-                ? DeviceInfo.mobileLayout
-                    ? const Expanded(
-                        child: LastQuizzes(),
-                      )
-                    : Quiz().amountUuids() > 1
-                        ? Expanded(
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  child: LastQuizzes(
-                                    physics: NeverScrollableScrollPhysics(),
-                                  ),
-                                ),
-                                Space.width(30),
-                                const Expanded(
-                                  child: LastQuizzes(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    n: 1,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : Expanded(
-                            child: Row(
-                              children: [
-                                Space.width((DeviceInfo().width() - 30) / 4 + 15),
-                                const Expanded(
-                                  child: LastQuizzes(
-                                    physics: NeverScrollableScrollPhysics(),
-                                  ),
-                                ),
-                                Space.width((DeviceInfo().width() - 30) / 4 + 15)
-                              ],
-                            ),
-                          )
-                : Expanded(
-                    child: Column(
+            conditional(
+              Quiz().amountUuids() > 0,
+              conditional(
+                DeviceInfo.mobileLayout,
+                const Expanded(
+                  child: LastQuizzes(),
+                ),
+                defaultWidget: conditional(
+                  Quiz().amountUuids() > 1,
+                  Expanded(
+                    child: Row(
                       children: [
-                        const Spacer(
-                          flex: 1,
-                        ),
-                        SizedBox(
-                          width: DeviceInfo().width() / 1.25,
-                          child: Image.asset(
-                            "images/icon_transparent.png",
-                            color: opacityColor.withOpacity(0.4),
-                            colorBlendMode: BlendMode.modulate,
+                        const Expanded(
+                          child: LastQuizzes(
+                            physics: NeverScrollableScrollPhysics(),
                           ),
                         ),
-                        const Spacer(
-                          flex: 2,
-                        ),
+                        Space.width(30),
+                        const Expanded(
+                          child: LastQuizzes(
+                            physics: NeverScrollableScrollPhysics(),
+                            n: 1,
+                          ),
+                        )
                       ],
                     ),
-                  )
+                  ),
+                  defaultWidget: Expanded(
+                    child: Row(
+                      children: [
+                        Space.width((DeviceInfo().width() - 30) / 4 + 15),
+                        const Expanded(
+                          child: LastQuizzes(
+                            physics: NeverScrollableScrollPhysics(),
+                          ),
+                        ),
+                        Space.width((DeviceInfo().width() - 30) / 4 + 15)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              defaultWidget: Expanded(
+                child: Column(
+                  children: [
+                    const Spacer(
+                      flex: 1,
+                    ),
+                    SizedBox(
+                      width: DeviceInfo().width() / 1.25,
+                      child: Image.asset(
+                        "images/icon_transparent.png",
+                        color: opacityColor.withOpacity(0.4),
+                        colorBlendMode: BlendMode.modulate,
+                      ),
+                    ),
+                    const Spacer(
+                      flex: 2,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

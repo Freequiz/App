@@ -3,6 +3,8 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:freequiz/others/string_extensions.dart';
 
+import '../../others/utilities.dart';
+
 class LoadingScreen extends StatefulWidget {
   final String message;
   final bool finishedLoading;
@@ -34,25 +36,27 @@ class _LoadingScreenState extends State<LoadingScreen> {
               duration: const Duration(milliseconds: 350),
               firstChild: Column(
                 children: [
-                  widget.finishedLoading
-                      ? Image.asset(
+                  conditional(
+                    widget.finishedLoading,
+                    Image.asset(
+                      "images/icon_transparent.png",
+                    ),
+                    defaultWidget: SpinKitRotatingCircle(
+                      size: DeviceInfo().width() / 2.25,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Image.asset(
                           "images/icon_transparent.png",
-                        )
-                      : SpinKitRotatingCircle(
-                          size: DeviceInfo().width() / 2.25,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Image.asset(
-                              "images/icon_transparent.png",
-                            );
-                          },
-                        ),
-                  SizedBox(
-                    height: widget.finishedLoading ? 0 : DeviceInfo().height() / 30,
+                        );
+                      },
+                    ),
                   ),
+                  Space.height(
+                      widget.finishedLoading ? 0 : DeviceInfo().height() / 30),
                   Text(
                     widget.message.transl(),
-                    style: TextStyle(
-                        fontSize: widget.finishedLoading ? 0 : DeviceInfo().height() / 45),
+                    style: textSize(widget.finishedLoading
+                        ? 0
+                        : DeviceInfo().height() / 45),
                   ),
                 ],
               ),

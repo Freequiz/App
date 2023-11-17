@@ -5,6 +5,7 @@ import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class CreatedQuizzes extends StatefulWidget {
   final Function refresh;
@@ -26,7 +27,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
           alignment: Alignment.centerLeft,
           child: Text(
             language["Created Quizzes"],
-            style: TextStyle(fontSize: DeviceInfo().height() / 30),
+            style: textSize(DeviceInfo().height() / 30),
           ),
         ),
         SizedBox(
@@ -53,26 +54,28 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
         SizedBox(
           height: DeviceInfo.mobileLayout ? 5 : 15,
         ),
-        pressed
-            ? Align(
-                child: CircularProgressIndicator(
-                  color: DeviceInfo.darkMode ? Colors.white : color1,
-                ),
-              )
-            : Align(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: color1,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () => onPressed(),
-                  child: Text(
-                    language["Load more"],
-                    style: TextStyle(
-                        color: Colors.white, fontSize: DeviceInfo().height() / 55),
-                  ),
-                ),
+        conditional(
+          pressed,
+          Align(
+            child: CircularProgressIndicator(
+              color: DeviceInfo.darkMode ? Colors.white : color1,
+            ),
+          ),
+          defaultWidget: Align(
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: color1,
+                foregroundColor: Colors.white,
               ),
+              onPressed: () => onPressed(),
+              child: Text(
+                language["Load more"],
+                style: TextStyle(
+                    color: Colors.white, fontSize: DeviceInfo().height() / 55),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

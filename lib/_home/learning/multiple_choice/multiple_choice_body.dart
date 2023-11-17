@@ -42,7 +42,7 @@ class MultipleChoiceBody extends StatelessWidget {
               children: [
                 Text(
                   Quiz.definition[Quiz.indexArray[0]],
-                  style: TextStyle(fontSize: DeviceInfo().height() / 16),
+                  style: textSize(DeviceInfo().height() / 16),
                 ),
                 SizedBox(
                   height: DeviceInfo().height() / 3,

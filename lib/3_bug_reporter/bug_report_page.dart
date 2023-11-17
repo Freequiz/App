@@ -3,6 +3,7 @@ import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class BugReportPage extends StatefulWidget {
   const BugReportPage({super.key});
@@ -30,7 +31,7 @@ class _BugReportPageState extends State<BugReportPage> {
               ),
             );
           },
-          child: Text(language["Report Bug"], style: TextStyle(fontSize: DeviceInfo().height() / 40),),
+          child: Text(language["Report Bug"], style: textSize(DeviceInfo().height() / 40),),
         ),
       ),
     );

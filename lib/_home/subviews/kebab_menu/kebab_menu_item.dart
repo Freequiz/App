@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class KebabMenuItem extends StatelessWidget {
   final Function onTap;
@@ -23,7 +24,7 @@ class KebabMenuItem extends StatelessWidget {
           children: [
             Text(
               text.transl(),
-              style: TextStyle(fontSize: DeviceInfo().height() / 40),
+              style: textSize(DeviceInfo().height() / 40),
             ),
             Icon(
               icon,

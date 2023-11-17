@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class LoadingScreen2 extends StatefulWidget {
   final String message;
@@ -27,25 +28,27 @@ class _LoadingScreen2State extends State<LoadingScreen2> {
       firstChild: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          widget.finishedLoading
-              ? Image.asset(
+          conditional(
+            widget.finishedLoading,
+            Image.asset(
+              "images/icon_transparent.png",
+            ),
+            defaultWidget: SpinKitRotatingCircle(
+              size: DeviceInfo().width() / 2.25,
+              itemBuilder: (BuildContext context, int index) {
+                return Image.asset(
                   "images/icon_transparent.png",
-                )
-              : SpinKitRotatingCircle(
-                  size: DeviceInfo().width() / 2.25,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Image.asset(
-                      "images/icon_transparent.png",
-                    );
-                  },
-                ),
-          SizedBox(
-            height: widget.finishedLoading ? 0 : DeviceInfo().height() / 30,
+                );
+              },
+            ),
+          ),
+          Space.height(
+            widget.finishedLoading ? 0 : DeviceInfo().height() / 30,
           ),
           Text(
             language[widget.message],
-            style:
-                TextStyle(fontSize: widget.finishedLoading ? 0 : DeviceInfo().height() / 45),
+            style: textSize(
+                widget.finishedLoading ? 0 : DeviceInfo().height() / 45),
           ),
         ],
       ),

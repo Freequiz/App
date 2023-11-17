@@ -3,6 +3,7 @@ import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz.dart';
 
 class ProgressPopUp extends StatefulWidget {
@@ -62,13 +63,13 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
         },
       ),
       actions: [
-        closeButton
-            ? TextButton(
-                onPressed:
-                    closeButton ? () => Navigator.of(context).pop() : () {},
-                child: Text(language['Close']),
-              )
-            : const SizedBox()
+        conditional(
+          closeButton,
+          TextButton(
+            onPressed: closeButton ? () => Navigator.of(context).pop() : () {},
+            child: Text(language['Close']),
+          ),
+        ),
       ],
     );
   }

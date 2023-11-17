@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class NothingFound extends StatelessWidget {
   const NothingFound({super.key});
@@ -29,7 +30,7 @@ class NothingFound extends StatelessWidget {
         child: Center(
           child: Text(
             language["Nothing found"],
-            style: TextStyle(fontSize: mobileLayout ? height / 50 : height / 45),
+            style: textSize(mobileLayout ? height / 50 : height / 45),
           ),
         ),
       ),

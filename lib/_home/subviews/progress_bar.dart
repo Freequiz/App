@@ -21,8 +21,9 @@ class _ProgressBarState extends State<ProgressBar> {
     final color5 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
         : const Color.fromARGB(255, 225, 225, 225);
-    double widthProgress =
-        DeviceInfo().width() / widget.amount * (widget.amount - widget.amountLeft);
+    double widthProgress = DeviceInfo().width() /
+        widget.amount *
+        (widget.amount - widget.amountLeft);
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -52,17 +53,19 @@ class _ProgressBarState extends State<ProgressBar> {
               ),
               width: widthProgress,
               alignment: Alignment.centerRight,
-              child: widthProgress > 25
-                  ? expanded
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 3.0,
-                          ),
-                          child: Text(
-                              "${(100 / widget.amount * (widget.amount - widget.amountLeft)).round()}%"),
-                        )
-                      : empty()
-                  : empty(),
+              child: conditional(
+                widthProgress > 35,
+                conditional(
+                  expanded,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 3.0,
+                    ),
+                    child: Text(
+                        "${(100 / widget.amount * (widget.amount - widget.amountLeft)).round()}%"),
+                  ),
+                ),
+              ),
             ),
           ),
         ),

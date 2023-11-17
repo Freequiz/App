@@ -112,49 +112,53 @@ class _StartLearningState extends State<StartLearning> {
                   ),
                 ),
               ),
-              Quiz.marked ? Space.width(10) : empty(),
-              Quiz.marked
-                  ? GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () {
-                        Quiz().formatArray(true);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return pages[widget.i];
-                            },
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        height: DeviceInfo().height() / 10 - 20,
-                        width: widthStartButton(DeviceInfo().width()),
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(DeviceInfo().width() / 30),
-                          color: color[widget.i],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Learn only".transl(),
-                              style: TextStyle(
-                                  fontSize: DeviceInfo().height() / 36,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Space.width(5.0),
-                            const Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
+              conditional(
+                Quiz.marked,
+                Space.width(10),
+              ),
+              conditional(
+                Quiz.marked,
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    Quiz().formatArray(true);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return pages[widget.i];
+                        },
                       ),
-                    )
-                  : empty()
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    height: DeviceInfo().height() / 10 - 20,
+                    width: widthStartButton(DeviceInfo().width()),
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(DeviceInfo().width() / 30),
+                      color: color[widget.i],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Learn only".transl(),
+                          style: TextStyle(
+                              fontSize: DeviceInfo().height() / 36,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Space.width(5.0),
+                        const Icon(
+                          Icons.star,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -172,21 +176,22 @@ class _StartLearningState extends State<StartLearning> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    progressArray(widget.i, i).isNotEmpty
-                        ? Container(
-                            width: (DeviceInfo().width() - 20),
-                            height: DeviceInfo().height() / 30,
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Text(
-                                widget.levels[i],
-                                style: TextStyle(
-                                    fontSize: DeviceInfo().height() / 40),
-                              ),
-                            ),
-                          )
-                        : empty(),
+                    conditional(
+                      progressArray(widget.i, i).isNotEmpty,
+                      Container(
+                        width: (DeviceInfo().width() - 20),
+                        height: DeviceInfo().height() / 30,
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Text(
+                            widget.levels[i],
+                            style:
+                                TextStyle(fontSize: DeviceInfo().height() / 40),
+                          ),
+                        ),
+                      ),
+                    ),
                     WordList(
                       definitions: defintions(widget.i, i),
                       answers: answers(widget.i, i),

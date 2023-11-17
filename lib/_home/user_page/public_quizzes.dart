@@ -7,6 +7,8 @@ import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
+import '../../others/utilities.dart';
+
 class PublicQuizzes extends StatefulWidget {
   final String user;
   const PublicQuizzes({super.key, required this.user});
@@ -30,9 +32,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
             style: TextStyle(fontSize: DeviceInfo().height() / 30),
           ),
         ),
-        SizedBox(
-          height: DeviceInfo.mobileLayout ? 10 : 30,
-        ),
+        Space.height(DeviceInfo.mobileLayout ? 10 : 30),
         ListView.separated(
           shrinkWrap: true,
           itemCount: ListPublicQuizzes.data.length,
@@ -46,34 +46,32 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
             );
           },
           separatorBuilder: (BuildContext context, int i) {
-            return SizedBox(
-              height: DeviceInfo.mobileLayout ? 10 : 20,
-            );
+            return Space.height(DeviceInfo.mobileLayout ? 10 : 20);
           },
         ),
-        SizedBox(
-          height: DeviceInfo.mobileLayout ? 5 : 15,
-        ),
-        pressed
-            ? Align(
-                child: CircularProgressIndicator(
-                  color: DeviceInfo.darkMode ? Colors.white : color1,
-                ),
-              )
-            : Align(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: color1,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () => onPressed(),
-                  child: Text(
-                    language["Load more"],
-                    style: TextStyle(
-                        color: Colors.white, fontSize: DeviceInfo().height() / 55),
-                  ),
-                ),
+        Space.height(DeviceInfo.mobileLayout ? 5 : 15),
+        conditional(
+          pressed,
+          Align(
+            child: CircularProgressIndicator(
+              color: DeviceInfo.darkMode ? Colors.white : color1,
+            ),
+          ),
+          defaultWidget: Align(
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: color1,
+                foregroundColor: Colors.white,
               ),
+              onPressed: () => onPressed(),
+              child: Text(
+                language["Load more"],
+                style: TextStyle(
+                    color: Colors.white, fontSize: DeviceInfo().height() / 55),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

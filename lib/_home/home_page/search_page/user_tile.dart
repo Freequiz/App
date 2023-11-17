@@ -46,7 +46,7 @@ class _UserTileState extends State<UserTile> {
                   children: [
                     Text(
                       widget.data['username'],
-                      style: TextStyle(fontSize: DeviceInfo().height() / 30),
+                      style: textSize(DeviceInfo().height() / 30),
                     ),
                     shareButton()
                   ],

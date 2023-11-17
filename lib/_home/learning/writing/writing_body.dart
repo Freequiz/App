@@ -41,7 +41,7 @@ class WritingBody extends StatelessWidget {
               children: [
                 Text(
                   Quiz.definition[Quiz.indexArray[0]],
-                  style: TextStyle(fontSize: DeviceInfo().height() / 16),
+                  style: textSize(DeviceInfo().height() / 16),
                 ),
                 Space.height(DeviceInfo().height() / 5),
                 Row(

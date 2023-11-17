@@ -14,6 +14,15 @@ TextStyle textColor(Color color) {
   return TextStyle(color: color);
 }
 
-Widget empty() {
-  return const SizedBox(height: 0, width: 0);
+TextStyle textSize(double size) {
+  return TextStyle(fontSize: size);
+}
+
+Widget conditional(bool condition, Widget widget, { Widget defaultWidget = const SizedBox() }) {
+  if (condition) {
+    return widget;
+  }
+  else {
+    return defaultWidget;
+  }
 }

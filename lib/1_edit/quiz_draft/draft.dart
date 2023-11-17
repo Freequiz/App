@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_draft/draft_tile.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class Draft extends StatelessWidget {
   final Function refresh;
@@ -19,15 +20,11 @@ class Draft extends StatelessWidget {
                 fontSize: DeviceInfo().height() / 30, color: Colors.white),
           ),
         ),
-        SizedBox(
-          height: DeviceInfo.mobileLayout ? 5 : 15,
-        ),
+        Space.height(DeviceInfo.mobileLayout ? 5 : 15),
         DraftTile(
           refresh: refresh,
         ),
-        SizedBox(
-          height: DeviceInfo.mobileLayout ? 15 : 45,
-        ),
+        Space.height(DeviceInfo.mobileLayout ? 15 : 45),
       ],
     );
   }

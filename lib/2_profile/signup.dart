@@ -7,6 +7,7 @@ import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
 
 class SignUp extends StatefulWidget {
   final Function refresh;
@@ -26,14 +27,11 @@ class _SignUpState extends State<SignUp> {
   bool pressed = false;
 
   Map<String, Map<String, String>> errorMessages = {
-      "username": {
-        "taken": "Username is taken",
-        "invalid": "Username is not valid"
-      },
-      "email": {
-        "taken": "Email is taken",
-        "invalid": "Email is not valid"
-      }
+    "username": {
+      "taken": "Username is taken",
+      "invalid": "Username is not valid"
+    },
+    "email": {"taken": "Email is taken", "invalid": "Email is not valid"}
   };
 
   @override
@@ -57,7 +55,7 @@ class _SignUpState extends State<SignUp> {
             Center(
               child: Text(
                 language["Sign up"],
-                style: TextStyle(fontSize: DeviceInfo().height() / 20),
+                style: textSize(DeviceInfo().height() / 20),
               ),
             ),
             Row(
@@ -65,7 +63,7 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Text(
                   language["By signing up you accept the "],
-                  style: TextStyle(fontSize: DeviceInfo().height() / 65),
+                  style: textSize(DeviceInfo().height() / 65),
                 ),
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
@@ -251,19 +249,21 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () {
                       pressed ? () {} : onPressed();
                     },
-                    child: pressed
-                        ? SizedBox(
-                            width: DeviceInfo.mobileLayout
-                                ? DeviceInfo().height() / 30
-                                : 30,
-                            height: DeviceInfo.mobileLayout
-                                ? DeviceInfo().height() / 30
-                                : 30,
-                            child: const CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
-                          )
-                        : const Icon(Icons.arrow_forward_ios),
+                    child: conditional(
+                      pressed,
+                      SizedBox(
+                        width: DeviceInfo.mobileLayout
+                            ? DeviceInfo().height() / 30
+                            : 30,
+                        height: DeviceInfo.mobileLayout
+                            ? DeviceInfo().height() / 30
+                            : 30,
+                        child: const CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
+                      defaultWidget: const Icon(Icons.arrow_forward_ios),
+                    ),
                   ),
                 ),
               ],
@@ -274,7 +274,7 @@ class _SignUpState extends State<SignUp> {
             Center(
               child: Text(
                 language["Already have an Account?"],
-                style: TextStyle(fontSize: DeviceInfo().height() / 65),
+                style: textSize(DeviceInfo().height() / 65),
               ),
             ),
             Align(
@@ -352,9 +352,9 @@ class _SignUpState extends State<SignUp> {
         });
       } else if (map["token"] == "record.invalid") {
         map["errors"].forEach((object, error) {
+          String errorMessage =
+              errorMessages[object]![error[0]['error']]!.transl();
 
-          String errorMessage = errorMessages[object]![error[0]['error']]!.transl();
-          
           switch (object) {
             case "username":
               setState(() {
