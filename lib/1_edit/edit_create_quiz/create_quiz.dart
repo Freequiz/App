@@ -329,7 +329,7 @@ class _CreateQuizState extends State<CreateQuiz> {
           to: answerLanguage.toString(),
           definitions: definitions,
           answers: answers);
-      final response = APIQuizzes().httpPutQuiz(map);
+      final response = APIQuizzes.createQuiz(map);
       showDialog(
         context: context,
         builder: (context) => ProgressPopUp(

@@ -18,7 +18,7 @@ class Confirmation extends StatelessWidget {
           "Are you sure you want to delete your account. It's not reversible"]),
       actions: [
         FutureBuilder<Map>(
-          future: APIUsers().httpGetDeleteToken(),
+          future: APIUsers.getDeleteToken(),
           builder: (context, data) {
             if (data.hasData) {
               return Padding(
@@ -28,7 +28,7 @@ class Confirmation extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () async {
-                        await APIUsers().httpDeleteAccount(data.data!["token"]);
+                        await APIUsers.deleteAccount(data.data!["token"]);
                         // ignore: use_build_context_synchronously
                         Navigator.of(context).pop();
                         refresh();

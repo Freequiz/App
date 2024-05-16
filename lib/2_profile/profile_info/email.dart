@@ -126,7 +126,7 @@ class _EMailState extends State<EMail> {
       newEmail.hint = language["Can't be blank"];
     } else {
       final Map map =
-          await APIUsers().httpPatchAccount(email: newEmail.input.text);
+          await APIUsers.updateAccount(email: newEmail.input.text);
       if (map["success"] == true) {
         setState(() {
           newEmail.input.clear();

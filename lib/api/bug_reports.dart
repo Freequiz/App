@@ -2,14 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:http/http.dart' as http;
-import 'infos.dart';
+import '../secrets.dart';
+import 'api.dart';
 
 Future<Map> httpPutBug(
     String title, String description, String platform, String userAgent) async {
   final response = await http.put(
-    Uri.parse('${ApiInfos.basePath}/bug/create'),
+    Uri.parse('${Api.basePath}/bug/create'),
     headers: {
-      "Authorization": ApiInfos.bearerToken,
+      "Authorization": Secrets.bearerToken,
       "Access-token": Profile.accessToken,
       HttpHeaders.contentTypeHeader: "application/json"
     },

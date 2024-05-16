@@ -329,7 +329,7 @@ class _SignUpState extends State<SignUp> {
       setState(() {
         pressed = true;
       });
-      final Map map = await APIUsers().httpPutAccount(
+      final Map map = await APIUsers.createAccount(
           username.input.text,
           email.input.text,
           password.input.text,

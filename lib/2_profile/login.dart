@@ -196,7 +196,7 @@ class _LoginState extends State<Login> {
       setState(() {
         pressed = true;
       });
-      mapLogin = await APIUsers().httpPostSession(
+      mapLogin = await APIUsers.login(
           username.input.text.trim(), password.input.text.trim());
       if (mapLogin.isNotEmpty) {
         if (mapLogin["message"] == "User doesn't exist") {

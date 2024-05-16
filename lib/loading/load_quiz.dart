@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/kebab_menu/kebab_menu.dart';
-import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz.dart';
 
 loadQuiz({required BuildContext context, required String uuid}) {
-  final futureMap = APIQuizzes().getQuiz(uuid, false);
+  final futureMap = LocalStorage.getQuiz(uuid, false);
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (BuildContext context) {

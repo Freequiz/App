@@ -29,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
           refresh: refresh,
         ),
         defaultWidget: FutureBuilder<Map>(
-          future: APIUsers().httpGetData(),
+          future: APIUsers.getData(),
           builder: (context, data) {
             if (data.hasData) {
               if (data.data!["success"]) {

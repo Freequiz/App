@@ -202,8 +202,8 @@ class _SearchPageState extends State<SearchPage> {
     page++;
     Search.data.addAll(
       Search.mode == "Quiz"
-          ? (await APIQuizzes().httpGetSearch(widget.searchTerm, page))['data']
-          : (await APIUsers().httpGetSearch(widget.searchTerm, page))['data'],
+          ? (await APIQuizzes.search(widget.searchTerm, page))['data']
+          : (await APIUsers.search(widget.searchTerm, page))['data'],
     );
     setState(() {
       pressed = false;

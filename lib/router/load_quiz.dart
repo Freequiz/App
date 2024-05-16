@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_home/subviews/share.dart';
-import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
@@ -18,7 +18,7 @@ class LoadQuiz extends StatefulWidget {
 class _LoadQuizState extends State<LoadQuiz> {
   @override
   Widget build(BuildContext context) {
-    final futureMap = APIQuizzes().getQuiz(widget.uuid, false);
+    final futureMap = LocalStorage.getQuiz(widget.uuid, false);
     return FutureBuilder<Map>(
       future: futureMap,
       builder: (context, quiz) {

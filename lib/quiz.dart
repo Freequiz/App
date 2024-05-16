@@ -71,7 +71,7 @@ class Quiz {
     final prefs = await SharedPreferences.getInstance();
     debugPrint(mode);
     prefs.remove("progress$mode$uuid");
-    APIQuizzes().httpPatchResetScore(uuid, modesAPI[modes.indexOf(mode)]);
+    APIQuizzes.resetScore(uuid, modesAPI[modes.indexOf(mode)]);
   }
 
   Future<void> loadLocalMarked(String uuid) async {
@@ -99,7 +99,7 @@ class Quiz {
     await prefs.setStringList(
         "mW$uuid", markedWords.map((e) => e.toString()).toList());
     if (add != "" || remove != "") {
-      APIQuizzes().httpPatchFavorites(uuid, add, remove);
+      APIQuizzes.setFavorites(uuid, add, remove);
     }
   }
 
@@ -117,7 +117,7 @@ class Quiz {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList("progress$mode$uuid", progress);
     final score = mapScore(progress, modesAPI[modes.indexOf(mode)]);
-    await APIQuizzes().httpPatchScore(uuid, score);
+    await APIQuizzes.setScore(uuid, score);
   }
 
   formatArray(onlyMarked) {

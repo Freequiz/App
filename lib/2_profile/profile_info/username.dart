@@ -128,7 +128,7 @@ class _UsernameState extends State<Username> {
 
   changeUsername() async {
     final Map map =
-        await APIUsers().httpPatchAccount(username: newUsername.input.text);
+        await APIUsers.updateAccount(username: newUsername.input.text);
     if (map["success"] == true) {
       setState(() {
         newUsername.input.clear();

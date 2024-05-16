@@ -19,7 +19,7 @@ class Confirmation extends StatelessWidget {
           "Are you sure you want to delete your quiz. It's not reversible"]),
       actions: [
         FutureBuilder<Map>(
-          future: APIQuizzes().httpGetDeleteTokenQuiz(uuid),
+          future: APIQuizzes.getDeleteToken(uuid),
           builder: (context, data) {
             if (data.hasData) {
               return Padding(
@@ -29,7 +29,7 @@ class Confirmation extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () async {
-                        await APIQuizzes().httpDeleteQuiz(data.data!["token"], uuid);
+                        await APIQuizzes.deleteQuiz(data.data!["token"], uuid);
                         // ignore: use_build_context_synchronously
                         Navigator.of(context).pop();
                         refresh();

@@ -82,7 +82,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
     });
     page++;
     ListPublicQuizzes.data.addAll(
-      (await APIUsers().httpGetPublicQuizzes(page, widget.user))['data'],
+      (await APIUsers.getPublicQuizzes(page, widget.user))['data'],
     );
     setState(() {
       pressed = false;

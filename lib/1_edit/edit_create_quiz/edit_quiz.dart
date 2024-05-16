@@ -3,6 +3,7 @@ import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/progress_pop_up.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/convert_json.dart';
@@ -98,7 +99,7 @@ class _EditQuizState extends State<EditQuiz> {
               : EdgeInsets.symmetric(
                   horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
           child: FutureBuilder<Map>(
-            future: APIQuizzes().getQuiz(widget.uuid, false),
+            future: LocalStorage.getQuiz(widget.uuid, false),
             builder: (context, data) {
               if (data.hasData) {
                 if (data.data!['success']) {
@@ -378,7 +379,7 @@ class _EditQuizState extends State<EditQuiz> {
           definitions: definitions,
           answers: answers);
       if (widget.owner) {
-        final response = APIQuizzes().httpPatchQuiz(map, widget.uuid);
+        final response = APIQuizzes.updateQuiz(map, widget.uuid);
         showDialog(
           context: context,
           builder: (context) => ProgressPopUp(
@@ -388,7 +389,7 @@ class _EditQuizState extends State<EditQuiz> {
           ),
         );
       } else {
-        final response = APIQuizzes().httpPutQuiz(map);
+        final response = APIQuizzes.createQuiz(map);
         showDialog(
           context: context,
           builder: (context) => ProgressPopUp(

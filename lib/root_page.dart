@@ -32,7 +32,7 @@ class _RootPageState extends State<RootPage> {
   @override
   void initState() {
     currentPage = widget.i;
-    APIUsers().httpPostRefresh();
+    APIUsers.refresh();
     super.initState();
   }
 

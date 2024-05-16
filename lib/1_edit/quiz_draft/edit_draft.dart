@@ -353,7 +353,7 @@ class _EditDraftState extends State<EditDraft> {
       });
     }
     if (!error) {
-      final response = APIQuizzes().httpPutQuiz(
+      final response = APIQuizzes.createQuiz(
         mapQuiz(
             title: title.input.text,
             description: description.input.text,

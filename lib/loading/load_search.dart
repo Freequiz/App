@@ -13,7 +13,7 @@ loadSearch({required BuildContext context, required String searchTerm, mode = "Q
       MaterialPageRoute(
         builder: (BuildContext context) {
           return FutureBuilder<Map>(
-            future: mode == "Quiz" ? APIQuizzes().httpGetSearch(searchTerm, 1) : APIUsers().httpGetSearch(searchTerm, 1),
+            future: mode == "Quiz" ? APIQuizzes.search(searchTerm, 1) : APIUsers.search(searchTerm, 1),
             builder: (context, searchResults) {
               if (searchResults.hasData) {
                 if (searchResults.data!["success"]) {

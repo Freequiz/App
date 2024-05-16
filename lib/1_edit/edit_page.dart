@@ -18,7 +18,7 @@ class _EditPageState extends State<EditPage> {
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<Map>(
-        future: APIUsers().getCreatedQuizzes(1),
+        future: APIUsers.getQuizzes(1),
         builder: (context, data) {
           if (data.hasData) {
             if (data.data!["success"]) {

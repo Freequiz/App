@@ -86,7 +86,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
     });
     page++;
     ListQuizzes.data.addAll(
-      (await APIUsers().httpGetCreatedQuizzes(page))['data'],
+      (await APIUsers.httpGetQuizzes(page))['data'],
     );
     setState(() {
       pressed = false;

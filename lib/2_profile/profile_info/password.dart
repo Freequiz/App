@@ -246,7 +246,7 @@ class _PasswordState extends State<Password> {
   }
 
   changePassword() async {
-    final Map map = await APIUsers().httpPatchAccount(
+    final Map map = await APIUsers.updateAccount(
         password: newPassword.input.text,
         passwordConfirmation: newPasswordConfirmation.input.text,
         oldPassword: oldPassword.input.text);

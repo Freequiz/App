@@ -12,7 +12,7 @@ loadUser({required BuildContext context, required String user}) {
     MaterialPageRoute(
       builder: (BuildContext context) {
         return FutureBuilder<Map>(
-          future: APIUsers().httpGetPublicQuizzes(1, user),
+          future: APIUsers.getPublicQuizzes(1, user),
           builder: (context, data) {
             if (data.hasData) {
               if (data.data!['success']) {

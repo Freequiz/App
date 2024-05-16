@@ -1,18 +1,9 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:freequiz/2_profile/profile.dart';
-
-import 'infos.dart';
+import 'api.dart';
 
 
 Future<Map> httpGetLanguage() async {
-  final response = await http.get(
-    Uri.parse('${ApiInfos.basePath}/languages'),
-    headers: {
-      "Authorization": ApiInfos.bearerToken,
-      "Access-token": Profile.accessToken
-    },
-  );
+  final response = await Api.httpGet(path: 'languages');
 
   if (response.statusCode == 200) {
     return jsonDecode(response.body);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
@@ -37,7 +38,7 @@ class _LastQuizzesState extends State<LastQuizzes> {
       itemBuilder: (BuildContext context, int i) {
         String uuid = Quiz.uuids[mobileLayout ? i : i * 2 + widget.n];
         return FutureBuilder<Map>(
-          future: APIQuizzes().getQuiz(uuid, true),
+          future: LocalStorage.getQuiz(uuid, true),
           builder: (context, quiz) {
             if (quiz.hasData) {
               return Dismissible(
