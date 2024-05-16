@@ -45,13 +45,7 @@ class APIUsers {
   static Future<Map> getDeleteToken() async {
     final response = await Api.httpGet(path: 'user/delete_token');
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> deleteAccount(deleteToken) async {
@@ -132,16 +126,7 @@ class APIUsers {
     final response =
         await Api.httpGet(path: 'user/search/$page?query=$searchTerm');
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 404) {
-      return jsonDecode(response.body);
-    }
-    throw Exception('Error');
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> getQuizzes(int page) async {
@@ -153,25 +138,13 @@ class APIUsers {
   static Future<Map> httpGetQuizzes(int page) async {
     final response = await Api.httpGet(path: 'user/quizzes/$page');
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> getPublicQuizzes(int page, String username) async {
     final response = await Api.httpGet(path: 'user/$username/public/$page');
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> updateAccount(
@@ -201,14 +174,6 @@ class APIUsers {
                 ),
     );
 
-    if (response.statusCode == 202) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 400) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 }

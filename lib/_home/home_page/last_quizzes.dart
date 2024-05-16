@@ -3,7 +3,6 @@ import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/home_page/quiz_tile.dart';
-import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 

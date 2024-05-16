@@ -1,10 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:freequiz/2_profile/profile.dart';
-import 'package:freequiz/secrets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-
 import 'api.dart';
 
 class APIQuizzes {
@@ -14,35 +9,20 @@ class APIQuizzes {
       body: jsonEncode({"quiz": map}),
     );
 
-    if (response.statusCode == 201) {
-      return jsonDecode(response.body);
-    }
-    throw Exception('Error');
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> getDeleteToken(String uuid) async {
     final response = await Api.httpGet(path: 'quiz/$uuid/delete_token');
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> deleteQuiz(String deleteToken, String uuid) async {
     final response =
         await Api.httpDelete(path: 'quiz/$uuid/delete/$deleteToken');
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> getQuiz(String uuid) async {
@@ -65,16 +45,7 @@ class APIQuizzes {
     final response =
         await Api.httpGet(path: 'quiz/search/$page?query=$searchTerm');
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 404) {
-      return jsonDecode(response.body);
-    }
-    throw Exception('Error');
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> updateQuiz(Map map, String uuid) async {
@@ -85,15 +56,7 @@ class APIQuizzes {
       ),
     );
 
-    if (response.statusCode == 202) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 400) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> setFavorites(
@@ -114,19 +77,7 @@ class APIQuizzes {
               },
             ),
     );
-    if (response.statusCode == 202) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 400) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 404) {
-      return jsonDecode(response.body);
-    }
-    throw Exception('Error');
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> setScore(String uuid, Map score) async {
@@ -135,34 +86,12 @@ class APIQuizzes {
       body: jsonEncode({"score": score}),
     );
 
-    if (response.statusCode == 202) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 400) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 404) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> resetScore(String uuid, String mode) async {
     final response = await Api.httpPatch(path: 'quiz/$uuid/score/reset/$mode', body: "");
 
-    if (response.statusCode == 202) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 400) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    }
-    if (response.statusCode == 404) {
-      return jsonDecode(response.body);
-    }
-    throw Exception('Error');
+    return Api.decodeResponse(response);
   }
 }

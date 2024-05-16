@@ -1,20 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:freequiz/2_profile/profile.dart';
-import 'package:http/http.dart' as http;
-import '../secrets.dart';
 import 'api.dart';
 
 Future<Map> httpPutBug(
     String title, String description, String platform, String userAgent) async {
-  final response = await http.put(
-    Uri.parse('${Api.basePath}/bug/create'),
-    headers: {
-      "Authorization": Secrets.bearerToken,
-      "Access-token": Profile.accessToken,
-      HttpHeaders.contentTypeHeader: "application/json"
-    },
-    encoding: Encoding.getByName('utf-8'),
+  final response = await Api.httpPut(
+    path: 'bug/create',
     body: jsonEncode({
       "title": title,
       "body": description,
@@ -22,13 +12,6 @@ Future<Map> httpPutBug(
       "user_agent": userAgent
     }),
   );
-  if (response.statusCode == 201) {
-    return jsonDecode(response.body);
-  } else if (response.statusCode == 400) {
-    return jsonDecode(response.body);
-  } else if (response.statusCode == 401) {
-    return jsonDecode(response.body);
-  } else {
-    throw Exception('Error');
-  }
+
+  return Api.decodeResponse(response);
 }
