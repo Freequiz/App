@@ -40,7 +40,7 @@ ThemeData darkTheme = ThemeData(
     ),
     hintStyle: TextStyle(color: Colors.white),
   ),
-  fontFamily: 'Quicksand',
+  fontFamily: 'Inter',
 );
 
 //Light Mode for weird peoples
@@ -65,4 +65,4 @@ ThemeData lightTheme = ThemeData(
           OutlineInputBorder(borderSide: BorderSide(width: 2, color: color2)),
       hintStyle: TextStyle(color: Colors.black),
     ),
-    fontFamily: 'Quicksand');
+    fontFamily: 'Inter');
