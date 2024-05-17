@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:freequiz/quiz.dart';
-import 'package:freequiz/secrets.dart';
 import 'package:http/http.dart' as http;
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -16,7 +15,6 @@ class APIUsers {
     final response = await http.put(
       Api.uri('user/create'),
       headers: {
-        "Authorization": Secrets.bearerToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
       encoding: Encoding.getByName('utf-8'),
@@ -65,9 +63,7 @@ class APIUsers {
   static Future<Map> login(String username, String password) async {
     final response = await http.post(
       Api.uri('user/login'),
-      headers: {
-        "Authorization": Secrets.bearerToken,
-      },
+      headers: {},
       encoding: Encoding.getByName('utf-8'),
       body: {
         "username": username,

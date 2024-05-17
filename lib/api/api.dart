@@ -2,11 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:freequiz/2_profile/profile.dart';
-import 'package:freequiz/secrets.dart';
 import 'package:http/http.dart';
 
 class Api {
-  static const basePath = "https://www.freequiz.ch/api/";
+  static const basePath = "https://dev.freequiz.ch/api/";
 
   static Uri uri(String path) {
     return Uri.parse(basePath + path);
@@ -17,8 +16,7 @@ class Api {
     return put(
       uri(path),
       headers: {
-        "Authorization": Secrets.bearerToken,
-        "Access-token": Profile.accessToken,
+        "Authorization": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
       encoding: Encoding.getByName('utf-8'),
@@ -30,8 +28,7 @@ class Api {
     return get(
       uri(path),
       headers: {
-        "Authorization": Secrets.bearerToken,
-        "Access-token": Profile.accessToken
+        "Authorization": Profile.accessToken
       },
     );
   }
@@ -40,16 +37,14 @@ class Api {
     return delete(
       uri(path),
       headers: {
-        "Authorization": Secrets.bearerToken,
-        "Access-token": Profile.accessToken
+        "Authorization": Profile.accessToken
       },
     );
   }
 
   static Future<Response> httpPost({required String path}) async {
     return post(uri(path), headers: {
-      "Authorization": Secrets.bearerToken,
-      "Access-token": Profile.accessToken
+      "Authorization": Profile.accessToken
     });
   }
 
@@ -58,8 +53,7 @@ class Api {
     return patch(
       uri(path),
       headers: {
-        "Authorization": Secrets.bearerToken,
-        "Access-token": Profile.accessToken,
+        "Authorization": Profile.accessToken,
         HttpHeaders.contentTypeHeader: "application/json"
       },
       encoding: Encoding.getByName('utf-8'),
