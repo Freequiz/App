@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:freequiz/api/convert_json.dart';
 import 'package:freequiz/api/quizzes.dart';

@@ -338,7 +338,7 @@ class _SignUpState extends State<SignUp> {
       //throw new Exception("Hallo Nithus");
       if (map["success"] == true) {
         Profile.accessToken = map["access_token"];
-        Profile().saveData();
+        Profile.saveData();
         widget.refresh();
       } else if (map["token"] == "password.invalid") {
         setState(() {

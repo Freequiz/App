@@ -27,7 +27,7 @@ Future<void> initialLoading() async {
       await rootBundle.loadString('languages/$chosenLanguage.json');
   language = json.decode(response);
   await Languages().get();
-  await Profile().loadData();
+  await Profile.loadData();
   return;
 }
 

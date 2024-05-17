@@ -55,7 +55,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     onPressed: () async {
                       Profile.accessToken = "";
                       widget.refresh();
-                      Profile().deleteData();
+                      Profile.deleteData();
                     },
                     child: Text(language["Logout"]),
                   ),

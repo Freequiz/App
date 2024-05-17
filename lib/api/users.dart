@@ -51,7 +51,7 @@ class APIUsers {
 
     if (response.statusCode == 200) {
       Profile.accessToken = "";
-      Profile().deleteData();
+      Profile.deleteData();
       return jsonDecode(response.body);
     } else if (response.statusCode == 401) {
       return jsonDecode(response.body);
@@ -93,7 +93,7 @@ class APIUsers {
         if (response.statusCode == 200) {
           final decodedResponse = jsonDecode(response.body);
           Profile.accessToken = decodedResponse["access_token"];
-          Profile().saveData();
+          Profile.saveData();
           newAccessToken = true;
         } else if (response.statusCode == 401) {
           return jsonDecode(response.body);
@@ -111,7 +111,7 @@ class APIUsers {
       return jsonDecode(response.body);
     } else if (response.statusCode == 401) {
       Profile.accessToken = "";
-      Profile().deleteData();
+      Profile.deleteData();
       return jsonDecode(response.body);
     } else {
       throw Exception('Error');
