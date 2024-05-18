@@ -105,8 +105,8 @@ class _EditQuizState extends State<EditQuiz> {
                         quiz.definitions.add(TextFieldData(hint: language["Description"]));
                         quiz.answers.add(TextFieldData(hint: language["Answer"]));
                       }
-                      quiz.definitions[i].input.text = quizData['data'][i]['w'];
-                      quiz.answers[i].input.text = quizData['data'][i]['t'];
+                      quiz.definitions[i].input.text = quizData['data'][i]['word'];
+                      quiz.answers[i].input.text = quizData['data'][i]['translation'];
                     }
                   }
                 }
@@ -315,50 +315,19 @@ class _EditQuizState extends State<EditQuiz> {
   }
 
   onPressed() async {
-    bool error = false;
-    int counter = 0;
-    for (var i = 0; i < quiz.definitions.length; i++) {
-      if (quiz.definitions[i].input.text.replaceAll(' ', '') == "") {
-        if (quiz.answers[i].input.text.replaceAll(' ', '') != "") {
-          setState(() {
-            quiz.definitions[i].error = true;
-            quiz.definitions[i].input.clear();
-            error = true;
-          });
-        }
-      } else if (quiz.answers[i].input.text.replaceAll(' ', '') == "") {
-        if (quiz.definitions[i].input.text.replaceAll(' ', '') != "") {
-          setState(() {
-            quiz.answers[i].error = true;
-            quiz.answers[i].input.clear();
-            error = true;
-          });
-        }
-      } else {
-        counter++;
-      }
+    quiz.checkForErrors();
+
+    if (quiz.error) {
+      setState(() {});
     }
-    if (quiz.title.input.text.replaceAll(' ', '').length < 3) {
-      setState(() {
-        quiz.title.error = true;
-        error = true;
-        quiz.title.input.clear();
-      });
-    }
-    if (quiz.description.input.text.replaceAll(' ', '').length < 5) {
-      setState(() {
-        quiz.description.error = true;
-        error = true;
-        quiz.description.input.clear();
-      });
-    }
-    if (counter < 3) {
-      error = true;
+    
+    if (quiz.counter < 3) {
       showDialog(
           context: context,
           builder: (BuildContext context) => const ErrorPopUp());
     }
-    if (!error) {
+
+    if (!quiz.error) {
       final map = quiz.createMap();
       if (widget.owner) {
         final response = APIQuizzes.updateQuiz(map, widget.uuid);

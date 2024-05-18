@@ -20,6 +20,9 @@ class QuizForm {
     TextFieldData(hint: language["Answer"])
   ];
 
+  int counter = 0;
+  bool error = false;
+
   int definitionLanguage = 1;
   int answerLanguage = 3;
 
@@ -34,6 +37,7 @@ class QuizForm {
         };
       }
     }
+
     Map map = {
       'title': title.input.value.text,
       'description': description.input.value.text,
@@ -59,25 +63,37 @@ class QuizForm {
     return true;
   }
 
-  (int, bool, List<int>, List<int>) checkWordPairs() {
-    int counter = 0;
-    bool error = false;
-    
-    List<int> emptyDefinitions = [];
-    List<int> emptyAnswers = [];
+  checkForErrors() {
+    error = false;
 
     for (var i = 0; i < definitions.length; i++) {
       if (emptyDefinition(i)) {
-        emptyDefinitions.add(i);
+        definitions[i].error = true;
+        definitions[i].input.clear();
         error = true;
       } else if (emptyAnswer(i)) {
-        emptyAnswers.add(i);
+        answers[i].error = true;
+        answers[i].input.clear();
         error = true;
       } else {
         counter++;
       }
     }
 
-    return (counter, error, emptyDefinitions, emptyAnswers);
+    if (counter < 3) {
+      error = true;
+    }
+
+    if (title.input.text.replaceAll(' ', '').length < 3) {
+      title.error = true;
+      title.input.clear();
+      error = true;
+    }
+
+    if (description.input.text.replaceAll(' ', '').length < 5) {
+      description.error = true;
+      description.input.clear();
+      error = true; 
+    }
   }
 }

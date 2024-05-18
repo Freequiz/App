@@ -126,11 +126,18 @@ class _QuizTileState extends State<QuizTile> {
             ? widget.data['description']
             : widget.data['description'].toString().triming(32),
         style: TextStyle(
-            fontSize: widget.data['description'].length > 50
+            fontSize: longDescription(widget.data['description'])
                 ? DeviceInfo().height() / 60
                 : DeviceInfo().height() / 50),
       ),
     );
+  }
+
+  bool longDescription(String? description) {
+    if (description != null) {
+      return description.length > 50;
+    }
+    return false;
   }
 
   Widget moreButton() {

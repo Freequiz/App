@@ -4,7 +4,7 @@ definitionArray(quiz) {
   List<String> definition = [];
   final List list = quiz['quiz_data']['data'];
   for (var i = 0; i < list.length; i++) {
-    definition.add(list[i]['w']);
+    definition.add(list[i]['word']);
   }
   return definition;
 }
@@ -13,7 +13,7 @@ answerArray(quiz) {
   List<String> answer = [];
   final List list = quiz['quiz_data']['data'];
   for (var i = 0; i < list.length; i++) {
-    answer.add(list[i]['t']);
+    answer.add(list[i]['translation']);
   }
   return answer;
 }

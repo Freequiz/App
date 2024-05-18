@@ -71,6 +71,9 @@ class _SearchBarState extends State<SearchBar> {
                 style: TextButton.styleFrom(
                   backgroundColor: color1,
                   foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
                 ),
                 onPressed: () {
                   Search.mode == "Quiz";
