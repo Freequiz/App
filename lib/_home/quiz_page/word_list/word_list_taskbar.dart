@@ -29,7 +29,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
           topLeft: Radius.circular(DeviceInfo().width() / 30.4),
           topRight: Radius.circular(DeviceInfo().width() / 30.4),
         ),
-        color: color1,
+        color: grayFreequiz,
       ),
       child: conditional(
         search,
@@ -50,14 +50,14 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
               contentPadding: const EdgeInsets.all(10.0),
               border: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: color2,
+                  color: roseFreequiz,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(50.0),
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: color1,
+                  color: grayFreequiz,
                   width: 2,
                 ),
                 borderRadius:
@@ -65,7 +65,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: color4,
+                  color: blueFreequiz,
                   width: 2,
                 ),
                 borderRadius:

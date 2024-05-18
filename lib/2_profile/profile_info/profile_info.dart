@@ -51,7 +51,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                 Align(
                   child: TextButton(
                     style: TextButton.styleFrom(
-                        backgroundColor: color1, foregroundColor: Colors.white),
+                        backgroundColor: grayFreequiz, foregroundColor: Colors.white),
                     onPressed: () async {
                       Profile.accessToken = "";
                       widget.refresh();

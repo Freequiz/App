@@ -31,13 +31,13 @@ class _CardsState extends State<Cards> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: color4,
+        backgroundColor: blueFreequiz,
       ),
       body: CardsBody(
         key: const Key('Back'),
         wrong: wrong,
         right: right,
-        color: color4,
+        color: blueFreequiz,
       ),
     );
   }

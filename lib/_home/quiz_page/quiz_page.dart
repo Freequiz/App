@@ -25,7 +25,7 @@ class _QuizPageState extends State<QuizPage> {
     Icons.format_list_bulleted_rounded,
     Icons.quiz_outlined
   ];
-  final List<Color> color = [color5, color2, color3, color4];
+  final List<Color> color = [purpleFreequiz, roseFreequiz, yellowFreequiz, blueFreequiz];
   final List<String> modes = [
     "Smart",
     "Writing",
@@ -80,7 +80,7 @@ class _QuizPageState extends State<QuizPage> {
                           definitions: shownDefinition,
                           answers: shownAnswer,
                           markWord: markWord,
-                          color: color2,
+                          color: roseFreequiz,
                           width: width,
                           scrollPhysics: const NeverScrollableScrollPhysics(),
                           roundedCornersTop: false,
@@ -114,7 +114,7 @@ class _QuizPageState extends State<QuizPage> {
                     definitions: shownDefinition,
                     answers: shownAnswer,
                     markWord: markWord,
-                    color: color2,
+                    color: roseFreequiz,
                     width: width - (height - 190) / 4 - 60,
                   ),
                 ],

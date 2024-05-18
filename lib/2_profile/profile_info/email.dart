@@ -103,7 +103,7 @@ class _EMailState extends State<EMail> {
                     height: DeviceInfo().height() / 20,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: color1,
+                        backgroundColor: grayFreequiz,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {

@@ -100,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                   border: const OutlineInputBorder(),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: username.error ? Colors.red : color1,
+                      color: username.error ? Colors.red : grayFreequiz,
                       width: 2.0,
                     ),
                   ),
@@ -131,7 +131,7 @@ class _SignUpState extends State<SignUp> {
                   border: const OutlineInputBorder(),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: email.error ? Colors.red : color1,
+                      color: email.error ? Colors.red : grayFreequiz,
                       width: 2.0,
                     ),
                   ),
@@ -164,14 +164,14 @@ class _SignUpState extends State<SignUp> {
                   border: const OutlineInputBorder(),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: password.error ? Colors.red : color1,
+                      color: password.error ? Colors.red : grayFreequiz,
                       width: 2.0,
                     ),
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
                       password.shown ? Icons.visibility : Icons.visibility_off,
-                      color: color1,
+                      color: grayFreequiz,
                     ),
                     onPressed: () {
                       setState(() {
@@ -213,7 +213,7 @@ class _SignUpState extends State<SignUp> {
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: password.error ? Colors.red : color1,
+                            color: password.error ? Colors.red : grayFreequiz,
                             width: 2.0,
                           ),
                         ),
@@ -222,7 +222,7 @@ class _SignUpState extends State<SignUp> {
                             passwordConfirmation.shown
                                 ? Icons.visibility
                                 : Icons.visibility_off,
-                            color: color1,
+                            color: grayFreequiz,
                           ),
                           onPressed: () {
                             setState(() {
@@ -243,7 +243,7 @@ class _SignUpState extends State<SignUp> {
                       DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: color1,
+                      backgroundColor: grayFreequiz,
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {
@@ -280,7 +280,7 @@ class _SignUpState extends State<SignUp> {
             Align(
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: color1,
+                  backgroundColor: grayFreequiz,
                   foregroundColor: Colors.white,
                 ),
                 onPressed: () {

@@ -108,7 +108,7 @@ class _UsernameState extends State<Username> {
                     height: DeviceInfo().height() / 20,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: color1,
+                        backgroundColor: grayFreequiz,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {

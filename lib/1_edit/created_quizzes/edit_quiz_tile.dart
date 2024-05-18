@@ -153,7 +153,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
                             child: Text(
                               expanded ? "" : language["More"],
                               style: TextStyle(
-                                  color: color1,
+                                  color: grayFreequiz,
                                   fontSize: DeviceInfo().height() / 50),
                             ),
                           ),
@@ -172,7 +172,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
                           Container(
                             height: DeviceInfo().height() / 30,
                             decoration: BoxDecoration(
-                                color: color2,
+                                color: roseFreequiz,
                                 borderRadius: BorderRadius.circular(
                                     DeviceInfo().height() / 60)),
                             alignment: Alignment.center,
@@ -189,7 +189,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
                           Container(
                             height: DeviceInfo().height() / 30,
                             decoration: BoxDecoration(
-                                color: color5,
+                                color: purpleFreequiz,
                                 borderRadius: BorderRadius.circular(
                                     DeviceInfo().height() / 60)),
                             alignment: Alignment.center,

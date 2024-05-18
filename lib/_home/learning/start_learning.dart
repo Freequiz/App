@@ -30,7 +30,7 @@ class StartLearning extends StatefulWidget {
 }
 
 class _StartLearningState extends State<StartLearning> {
-  final List<Color> color = [color5, color2, color3, color4];
+  final List<Color> color = [purpleFreequiz, roseFreequiz, yellowFreequiz, blueFreequiz];
   late final List<Widget> pages = [
     Smart(
       refresh: refresh,

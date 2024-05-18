@@ -34,19 +34,19 @@ class _SmartState extends State<Smart> {
         wrongAnswer: wrongAnswerMC,
         rightAnswer: rightAnswerMC,
         answerRight: answerRightMC,
-        background: color5,
+        background: purpleFreequiz,
         color: Colors.white,
       ),
       WritingBody(
         onPressed: onPressed,
         answerRight: answerRightW,
         textController: _textController,
-        color: color5,
+        color: purpleFreequiz,
       )
     ];
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: color5,
+          backgroundColor: purpleFreequiz,
           title: Text(language["Smart"]),
           leading: TextButton(
             onPressed: () =>

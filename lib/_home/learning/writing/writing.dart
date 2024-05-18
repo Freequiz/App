@@ -32,13 +32,13 @@ class _WritingState extends State<Writing> {
               color: Colors.white,
             ),
           ),
-          backgroundColor: color2,
+          backgroundColor: roseFreequiz,
         ),
         body: WritingBody(
           onPressed: onPressed,
           answerRight: answerRight,
           textController: _textController,
-          color: color2,
+          color: roseFreequiz,
         ));
   }
 

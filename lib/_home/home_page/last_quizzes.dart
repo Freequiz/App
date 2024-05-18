@@ -53,7 +53,7 @@ class _LastQuizzesState extends State<LastQuizzes> {
                   decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.circular(DeviceInfo().height() / 100),
-                    color: color1,
+                    color: grayFreequiz,
                   ),
                   child: const Align(
                     alignment: Alignment.centerRight,

@@ -41,7 +41,7 @@ class _BugReporterState extends State<BugReporter> {
                     BorderRadius.circular(DeviceInfo().height() / 100),
                 color: DeviceInfo.darkMode
                     ? const Color.fromARGB(255, 55, 55, 55)
-                    : color4,
+                    : blueFreequiz,
               ),
               child: Padding(
                 padding: EdgeInsets.all(DeviceInfo().height() / 100),
@@ -77,7 +77,7 @@ class _BugReporterState extends State<BugReporter> {
                           borderSide: BorderSide(
                             color: title.error
                                 ? Colors.red
-                                : (DeviceInfo.darkMode ? color3 : color1),
+                                : (DeviceInfo.darkMode ? yellowFreequiz : grayFreequiz),
                             width: 3.0,
                           ),
                         ),
@@ -114,7 +114,7 @@ class _BugReporterState extends State<BugReporter> {
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: description.error ? Colors.red : color1,
+                            color: description.error ? Colors.red : grayFreequiz,
                             width: 2.0,
                           ),
                         ),
@@ -140,7 +140,7 @@ class _BugReporterState extends State<BugReporter> {
                         border: const OutlineInputBorder(),
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: color1,
+                            color: grayFreequiz,
                             width: 2.0,
                           ),
                         ),
@@ -154,7 +154,7 @@ class _BugReporterState extends State<BugReporter> {
             Align(
               child: TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: color1, foregroundColor: Colors.white),
+                    backgroundColor: grayFreequiz, foregroundColor: Colors.white),
                 onPressed: () {
                   submit();
                 },

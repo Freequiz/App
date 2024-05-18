@@ -11,7 +11,7 @@ class TextFieldData {
 
   TextEditingController input = TextEditingController();
   bool error = false;
-  Color color = color1;
+  Color color = grayFreequiz;
   bool changed = false;
   String id = createId();
   static final Random random = Random.secure();

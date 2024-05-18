@@ -33,7 +33,7 @@ class _CreateQuizState extends State<CreateQuiz> {
     return Scaffold(
       appBar: AppBar(
         title: Text(language["Create Quiz"]),
-        backgroundColor: DeviceInfo.darkMode ? color1 : color4,
+        backgroundColor: DeviceInfo.darkMode ? grayFreequiz : blueFreequiz,
         leading: TextButton(
           onPressed: () {
             if (changed()) {
@@ -84,7 +84,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                       BorderRadius.circular(DeviceInfo().height() / 100),
                   color: DeviceInfo.darkMode
                       ? const Color.fromARGB(255, 55, 55, 55)
-                      : color4,
+                      : blueFreequiz,
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(DeviceInfo().height() / 100),
@@ -93,7 +93,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                       BasicTextField(
                         textFieldData: quiz.title,
                         hintError: language["Title at least 3 characters"],
-                        colorBorder: (DeviceInfo.darkMode ? color3 : color1),
+                        colorBorder: (DeviceInfo.darkMode ? yellowFreequiz : grayFreequiz),
                         widthBorder: 3.0,
                         save: save,
                       ),
@@ -116,11 +116,11 @@ class _CreateQuizState extends State<CreateQuiz> {
                             value: quiz.definitionLanguage,
                             icon: const Icon(
                               Icons.arrow_drop_down_rounded,
-                              color: color1,
+                              color: grayFreequiz,
                             ),
                             underline: Container(
                               height: 2,
-                              color: color1,
+                              color: grayFreequiz,
                             ),
                             dropdownColor: DeviceInfo.darkMode
                                 ? const Color.fromARGB(255, 40, 40, 40)
@@ -135,17 +135,17 @@ class _CreateQuizState extends State<CreateQuiz> {
                           ),
                           const Icon(
                             Icons.arrow_forward_rounded,
-                            color: color1,
+                            color: grayFreequiz,
                           ),
                           DropdownButton(
                             value: quiz.answerLanguage,
                             icon: const Icon(
                               Icons.arrow_drop_down_rounded,
-                              color: color1,
+                              color: grayFreequiz,
                             ),
                             underline: Container(
                               height: 2,
-                              color: color1,
+                              color: grayFreequiz,
                             ),
                             dropdownColor: DeviceInfo.darkMode
                                 ? const Color.fromARGB(255, 40, 40, 40)
@@ -210,7 +210,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                             BorderRadius.circular(DeviceInfo().height() / 100),
                         color: DeviceInfo.darkMode
                             ? const Color.fromARGB(255, 55, 55, 55)
-                            : color4,
+                            : blueFreequiz,
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(DeviceInfo().height() / 100),
@@ -243,7 +243,7 @@ class _CreateQuizState extends State<CreateQuiz> {
               Align(
                 child: TextButton(
                   style: TextButton.styleFrom(
-                      backgroundColor: color1, foregroundColor: Colors.white),
+                      backgroundColor: grayFreequiz, foregroundColor: Colors.white),
                   onPressed: () {
                     setState(() {
                       wordCount++;

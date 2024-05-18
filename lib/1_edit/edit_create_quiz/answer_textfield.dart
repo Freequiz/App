@@ -58,7 +58,7 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
         border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: widget.textFieldData.error ? Colors.red : color1,
+            color: widget.textFieldData.error ? Colors.red : grayFreequiz,
             width: widget.widthBorder,
           ),
         ),

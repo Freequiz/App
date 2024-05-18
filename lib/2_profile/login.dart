@@ -87,7 +87,7 @@ class _LoginState extends State<Login> {
                     border: const OutlineInputBorder(),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: username.error ? Colors.red : color1,
+                        color: username.error ? Colors.red : grayFreequiz,
                         width: 2.0,
                       ),
                     ),
@@ -125,7 +125,7 @@ class _LoginState extends State<Login> {
                               password.shown
                                   ? Icons.visibility
                                   : Icons.visibility_off,
-                              color: color1,
+                              color: grayFreequiz,
                             ),
                             onPressed: () {
                               setState(() {
@@ -136,7 +136,7 @@ class _LoginState extends State<Login> {
                           border: const OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: password.error ? Colors.red : color1,
+                              color: password.error ? Colors.red : grayFreequiz,
                               width: 2.0,
                             ),
                           ),
@@ -151,7 +151,7 @@ class _LoginState extends State<Login> {
                         : 40,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: color1,
+                        backgroundColor: grayFreequiz,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {

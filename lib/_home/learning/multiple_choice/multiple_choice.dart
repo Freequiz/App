@@ -37,14 +37,14 @@ class _MultipleChoiceState extends State<MultipleChoice> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: color3,
+        backgroundColor: yellowFreequiz,
       ),
       body: MultipleChoiceBody(
         choices: Learning.choices,
         wrongAnswer: wrongAnswer,
         rightAnswer: rightAnswer,
         answerRight: answerRight,
-        background: color3,
+        background: yellowFreequiz,
         color: backgroundGray,
       ),
     );

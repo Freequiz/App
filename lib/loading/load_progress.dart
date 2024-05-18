@@ -26,10 +26,10 @@ final List<String> levelsSmart = [
   "Mastered".transl()
 ];
 final List<Color> color = [
-  color5,
-  color2,
-  color3,
-  color4,
+  purpleFreequiz,
+  roseFreequiz,
+  yellowFreequiz,
+  blueFreequiz,
 ];
 
 loadProgress(BuildContext context, String uuid, int i, Function reset,

@@ -21,7 +21,7 @@ class _BugReportPageState extends State<BugReportPage> {
         width: DeviceInfo().width() / 1.5,
         child: TextButton(
           style: TextButton.styleFrom(
-              backgroundColor: color1, foregroundColor: Colors.white),
+              backgroundColor: grayFreequiz, foregroundColor: Colors.white),
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(

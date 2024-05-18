@@ -46,7 +46,7 @@ class _SearchPageState extends State<SearchPage> {
               scrollDirection: Axis.horizontal,
               children: [
                 SearchFilter(
-                  color: color2,
+                  color: roseFreequiz,
                   child: Text(
                     "${language["Results for"]} \"${widget.searchTerm.triming(32)}\"",
                     style: TextStyle(
@@ -58,7 +58,7 @@ class _SearchPageState extends State<SearchPage> {
                 GestureDetector(
                   onTap: () => selectLanguage(),
                   child: SearchFilter(
-                    color: color5,
+                    color: purpleFreequiz,
                     child: Text(
                       Search.from == 'Any' && Search.to == 'Any'
                           ? language["Language"]
@@ -76,7 +76,7 @@ class _SearchPageState extends State<SearchPage> {
                 GestureDetector(
                   onTap: () => changeMode(),
                   child: SearchFilter(
-                    color: color4,
+                    color: blueFreequiz,
                     child: Text(
                       Search.mode.transl(),
                       style: TextStyle(
@@ -101,13 +101,13 @@ class _SearchPageState extends State<SearchPage> {
                   pressed,
                   Align(
                     child: CircularProgressIndicator(
-                      color: DeviceInfo.darkMode ? Colors.white : color1,
+                      color: DeviceInfo.darkMode ? Colors.white : grayFreequiz,
                     ),
                   ),
                   defaultWidget: Align(
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: color1,
+                        backgroundColor: grayFreequiz,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () => onPressed(),

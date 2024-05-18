@@ -16,7 +16,7 @@ class BasicTextField extends StatefulWidget {
     super.key,
     required this.textFieldData,
     required this.hintError,
-    this.colorBorder = color1,
+    this.colorBorder = grayFreequiz,
     this.widthBorder = 2.0,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,

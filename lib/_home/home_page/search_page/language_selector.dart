@@ -55,11 +55,11 @@ class _LanguageSelectorState extends State<LanguageSelector> {
               value: from,
               icon: const Icon(
                 Icons.arrow_drop_down_rounded,
-                color: color1,
+                color: grayFreequiz,
               ),
               underline: Container(
                 height: 2,
-                color: color1,
+                color: grayFreequiz,
               ),
               dropdownColor: DeviceInfo.darkMode
                   ? const Color.fromARGB(255, 40, 40, 40)
@@ -74,17 +74,17 @@ class _LanguageSelectorState extends State<LanguageSelector> {
             ),
             const Icon(
               Icons.arrow_forward_rounded,
-              color: color1,
+              color: grayFreequiz,
             ),
             DropdownButton(
               value: to,
               icon: const Icon(
                 Icons.arrow_drop_down_rounded,
-                color: color1,
+                color: grayFreequiz,
               ),
               underline: Container(
                 height: 2,
-                color: color1,
+                color: grayFreequiz,
               ),
               dropdownColor: DeviceInfo.darkMode
                   ? const Color.fromARGB(255, 40, 40, 40)

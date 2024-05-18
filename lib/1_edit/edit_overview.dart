@@ -40,7 +40,7 @@ class _EditOverviewState extends State<EditOverview> {
           Center(
             child: TextButton(
               style: TextButton.styleFrom(
-                  backgroundColor: color1, foregroundColor: Colors.white),
+                  backgroundColor: grayFreequiz, foregroundColor: Colors.white),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(

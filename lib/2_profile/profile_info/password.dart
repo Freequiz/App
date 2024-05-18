@@ -99,7 +99,7 @@ class _PasswordState extends State<Password> {
                         oldPassword.shown
                             ? Icons.visibility
                             : Icons.visibility_off,
-                        color: color1,
+                        color: grayFreequiz,
                       ),
                       onPressed: () {
                         setState(() {
@@ -150,7 +150,7 @@ class _PasswordState extends State<Password> {
                         newPassword.shown
                             ? Icons.visibility
                             : Icons.visibility_off,
-                        color: color1,
+                        color: grayFreequiz,
                       ),
                       onPressed: () {
                         setState(() {
@@ -207,7 +207,7 @@ class _PasswordState extends State<Password> {
                               newPasswordConfirmation.shown
                                   ? Icons.visibility
                                   : Icons.visibility_off,
-                              color: color1,
+                              color: grayFreequiz,
                             ),
                             onPressed: () {
                               setState(() {
@@ -227,7 +227,7 @@ class _PasswordState extends State<Password> {
                     height: DeviceInfo().height() / 20,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: color1,
+                        backgroundColor: grayFreequiz,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {

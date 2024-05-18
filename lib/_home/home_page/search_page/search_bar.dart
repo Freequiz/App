@@ -71,7 +71,7 @@ class _SearchBarState extends State<SearchBar> {
               height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: color1,
+                  backgroundColor: grayFreequiz,
                   foregroundColor: Colors.white,
                 ),
                 onPressed: () {

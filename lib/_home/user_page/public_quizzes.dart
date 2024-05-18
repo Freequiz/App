@@ -54,13 +54,13 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
           pressed,
           Align(
             child: CircularProgressIndicator(
-              color: DeviceInfo.darkMode ? Colors.white : color1,
+              color: DeviceInfo.darkMode ? Colors.white : grayFreequiz,
             ),
           ),
           defaultWidget: Align(
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: color1,
+                backgroundColor: grayFreequiz,
                 foregroundColor: Colors.white,
               ),
               onPressed: () => onPressed(),

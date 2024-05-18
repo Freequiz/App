@@ -154,7 +154,7 @@ class _QuizTileState extends State<QuizTile> {
           child: Text(
             expanded ? "" : "More".transl(),
             style:
-                TextStyle(color: color1, fontSize: DeviceInfo().height() / 50),
+                TextStyle(color: grayFreequiz, fontSize: DeviceInfo().height() / 50),
           ),
         ),
       ),
@@ -165,7 +165,7 @@ class _QuizTileState extends State<QuizTile> {
     return Container(
       height: DeviceInfo().height() / 30,
       decoration: BoxDecoration(
-          color: color2,
+          color: roseFreequiz,
           borderRadius: BorderRadius.circular(DeviceInfo().height() / 60)),
       alignment: Alignment.center,
       child: Padding(
@@ -182,7 +182,7 @@ class _QuizTileState extends State<QuizTile> {
     return Container(
       height: DeviceInfo().height() / 30,
       decoration: BoxDecoration(
-          color: color5,
+          color: purpleFreequiz,
           borderRadius: BorderRadius.circular(DeviceInfo().height() / 60)),
       alignment: Alignment.center,
       child: Padding(
