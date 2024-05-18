@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
-import 'package:freequiz/_home/subviews/kebab_menu/kebab_menu_item.dart';
+import 'package:freequiz/_views/kebab_menu/kebab_menu_item.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';

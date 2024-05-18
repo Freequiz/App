@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/card.dart';
 import 'package:freequiz/_home/learning/learning.dart';
-import 'package:freequiz/_home/subviews/progress_bar.dart';
+import 'package:freequiz/_views/learning/progress_bar.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 

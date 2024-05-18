@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice.dart';
-import 'package:freequiz/_home/subviews/progress_bar.dart';
+import 'package:freequiz/_views/learning/progress_bar.dart';
 import 'package:freequiz/_home/learning/smart.dart';
 import 'package:freequiz/_home/learning/writing/writing.dart';
 import 'package:freequiz/others/string_extensions.dart';

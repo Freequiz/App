@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/start_learning.dart';
-import 'package:freequiz/_home/subviews/confirmation.dart';
+import 'package:freequiz/_views/learning/confirmation.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';

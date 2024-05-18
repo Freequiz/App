@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/_views/buttons/share.dart';
+import 'package:freequiz/_views/quiz_tile/additional_info.dart';
 import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:freequiz/_views/quiz_tile/description.dart';
 
 import '../../others/utilities.dart';
 
@@ -68,76 +70,23 @@ class _QuizTileState extends State<QuizTile> {
                       widget.data['title'],
                       style: textSize(DeviceInfo().height() / 30),
                     ),
-                    shareButton()
+                    ShareButton(url: "https://www.freequiz.ch/quiz/${widget.uuid}", color: DeviceInfo.darkMode ? Colors.white : textGray)
                   ],
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [description(), moreButton()],
+                children: [Description(expanded: expanded, width: widget.width, description: widget.data['description']), moreButton()],
               ),
               conditional(
                 expanded,
-                Container(
-                  padding: const EdgeInsets.only(top: 15),
-                  height: DeviceInfo().height() / 30 + 15,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      numberOfTranslations(),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      infoLanguage()
-                    ],
-                  ),
-                ),
+                AdditionalInfo(data: widget.data)
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  Widget shareButton() {
-    return GestureDetector(
-      onTap: () {
-        Share.share("https://www.freequiz.ch/quiz/${widget.uuid}");
-      },
-      child: Icon(
-        Icons.ios_share,
-        color: DeviceInfo.darkMode ? Colors.white : textGray,
-      ),
-    );
-  }
-
-  Widget description() {
-    return SizedBox(
-      width: expanded
-          ? DeviceInfo.mobileLayout
-              ? widget.width - 20
-              : widget.width - 40
-          : DeviceInfo.mobileLayout
-              ? widget.width / 6 * 5 - 20
-              : widget.width / 6 * 5 - 40,
-      child: Text(
-        expanded
-            ? widget.data['description']
-            : widget.data['description'].toString().triming(32),
-        style: TextStyle(
-            fontSize: longDescription(widget.data['description'])
-                ? DeviceInfo().height() / 60
-                : DeviceInfo().height() / 50),
-      ),
-    );
-  }
-
-  bool longDescription(String? description) {
-    if (description != null) {
-      return description.length > 50;
-    }
-    return false;
   }
 
   Widget moreButton() {
@@ -156,40 +105,6 @@ class _QuizTileState extends State<QuizTile> {
             style:
                 TextStyle(color: grayFreequiz, fontSize: DeviceInfo().height() / 50),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget numberOfTranslations() {
-    return Container(
-      height: DeviceInfo().height() / 30,
-      decoration: BoxDecoration(
-          color: roseFreequiz,
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 60)),
-      alignment: Alignment.center,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
-        child: Text(
-          "${"Questions".transl()} ${widget.data['translations'] ?? widget.data['data'].length}",
-          style: textColor(Colors.white),
-        ),
-      ),
-    );
-  }
-
-  Widget infoLanguage() {
-    return Container(
-      height: DeviceInfo().height() / 30,
-      decoration: BoxDecoration(
-          color: purpleFreequiz,
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 60)),
-      alignment: Alignment.center,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
-        child: Text(
-          "${widget.data['from']['name'].toString().transl()} $arrow ${widget.data['to']['name'].toString().transl()}",
-          style: textColor(Colors.white),
         ),
       ),
     );

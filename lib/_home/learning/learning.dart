@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/subviews/correction.dart';
+import 'package:freequiz/_views/learning/correction.dart';
 import 'package:freequiz/quiz.dart';
 
 class Learning {

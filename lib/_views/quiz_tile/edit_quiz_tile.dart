@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
-import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
+import 'package:freequiz/_views/buttons/edit.dart';
+import 'package:freequiz/_views/quiz_tile/additional_info.dart';
+import 'package:freequiz/_views/quiz_tile/description.dart';
 import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
 import '../../others/utilities.dart';
@@ -26,7 +27,6 @@ class EditQuizTile extends StatefulWidget {
 }
 
 class _EditQuizTileState extends State<EditQuizTile> {
-  final arrow = '\u279C';
   bool expanded = true;
   bool shown = true;
 
@@ -106,40 +106,14 @@ class _EditQuizTileState extends State<EditQuizTile> {
                           style:
                               TextStyle(fontSize: DeviceInfo().height() / 30),
                         ),
-                        GestureDetector(
-                          onTap: () => edit(),
-                          child: Icon(
-                            Icons.edit,
-                            color:
-                                DeviceInfo.darkMode ? Colors.white : textGray,
-                          ),
-                        ),
+                        Edit(widget: widget)
                       ],
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: expanded
-                            ? DeviceInfo.mobileLayout
-                                ? DeviceInfo().width() - 40
-                                : DeviceInfo().width() - 60
-                            : DeviceInfo.mobileLayout
-                                ? (DeviceInfo().width() - 40) / 6 * 5
-                                : (DeviceInfo().width() - 60) / 6 * 5,
-                        child: Text(
-                          expanded
-                              ? widget.data['description']
-                              : widget.data['description']
-                                  .toString()
-                                  .triming(32),
-                          style: TextStyle(
-                              fontSize: widget.data['description'].length > 50
-                                  ? DeviceInfo().height() / 60
-                                  : DeviceInfo().height() / 50),
-                        ),
-                      ),
+                      Description(expanded: expanded, width: DeviceInfo().width() - 20, description: widget.data['description']),
                       conditional(
                         !widget.expanded,
                         SizedBox(
@@ -163,67 +137,13 @@ class _EditQuizTileState extends State<EditQuizTile> {
                   ),
                   conditional(
                     expanded,
-                    Container(
-                      padding: const EdgeInsets.only(top: 15),
-                      height: DeviceInfo().height() / 30 + 15,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: DeviceInfo().height() / 30,
-                            decoration: BoxDecoration(
-                                color: roseFreequiz,
-                                borderRadius: BorderRadius.circular(
-                                    DeviceInfo().height() / 60)),
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: DeviceInfo().height() / 60),
-                              child: Text(
-                                "${language["Questions"]} ${widget.data['translations'] ?? widget.data['data'].length}",
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Space.width(10.0),
-                          Container(
-                            height: DeviceInfo().height() / 30,
-                            decoration: BoxDecoration(
-                                color: purpleFreequiz,
-                                borderRadius: BorderRadius.circular(
-                                    DeviceInfo().height() / 60)),
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: DeviceInfo().height() / 60),
-                              child: Text(
-                                "${language[widget.data['from']['name']]} $arrow ${language[widget.data['to']['name']]}",
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    AdditionalInfo(data: widget.data)
                   )
                 ],
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  edit() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (BuildContext context) {
-          return EditQuiz(
-            refresh: widget.refresh,
-            uuid: widget.uuid,
-          );
-        },
       ),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
-import 'package:freequiz/_home/subviews/share.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';

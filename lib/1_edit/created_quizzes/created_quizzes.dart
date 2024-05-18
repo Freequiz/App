@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/1_edit/created_quizzes/edit_quiz_tile.dart';
+import 'package:freequiz/_views/quiz_tile/edit_quiz_tile.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
@@ -84,10 +84,12 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
     setState(() {
       pressed = true;
     });
+
     page++;
     ListQuizzes.data.addAll(
       (await APIUsers.httpGetQuizzes(page))['data'],
     );
+
     setState(() {
       pressed = false;
     });

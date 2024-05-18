@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/home_page/quiz_tile.dart';
+import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
