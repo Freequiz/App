@@ -52,9 +52,9 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
               language['other error description'],
             );
           }
-          return Row(
+          return const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               CircularProgressIndicator(
                 color: Colors.white,
               )

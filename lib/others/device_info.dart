@@ -1,20 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class DeviceInfo {
-  static Brightness brightness =
-      MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-          .platformBrightness;
+  static final brightness = PlatformDispatcher.instance.platformBrightness;
+
   static bool darkMode = theme == "Dark Mode"
       ? true
       : theme == "Light Mode"
           ? false
           : brightness == Brightness.dark;
+
   static String theme = "Automatic";
-  static bool mobileLayout =
-      MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-              .size
-              .shortestSide <
-          600;
+
+  static bool mobileLayout = PlatformDispatcher.instance.displays.first.size.shortestSide < 600;
+
   setTheme() {
     final darkMode = theme == "Dark Mode"
         ? true
@@ -24,9 +22,9 @@ class DeviceInfo {
     DeviceInfo.darkMode = darkMode;
   }
   double height() {
-    return MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height;
+    return PlatformDispatcher.instance.displays.first.size.height;
   }
   double width() {
-    return MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width;
+    return PlatformDispatcher.instance.displays.first.size.width;
   }
 }

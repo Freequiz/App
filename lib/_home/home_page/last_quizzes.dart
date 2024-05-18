@@ -17,6 +17,7 @@ class LastQuizzes extends StatefulWidget {
 }
 
 class _LastQuizzesState extends State<LastQuizzes> {
+  
   final defaultMap = {
     'title': "Quiz doesn't exist title".transl(),
     'description': "Quiz doesn't exist description".transl(),

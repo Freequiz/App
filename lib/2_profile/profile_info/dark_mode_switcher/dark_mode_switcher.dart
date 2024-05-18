@@ -25,8 +25,8 @@ class _DarkModeSwitcherState extends State<DarkModeSwitcher> {
         borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
         color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
       ),
-      child: Row(
-        children: const [
+      child: const Row(
+        children: [
           ModeButton(value: "Dark Mode"),
           ModeButton(value: "Automatic"),
           ModeButton(value: "Light Mode")
