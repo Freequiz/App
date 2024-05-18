@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/api/convert_json.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Quiz {
@@ -29,9 +28,27 @@ class Quiz {
 
   Future<void> loadData(int mode, String uuid) async {
     debugPrint("Load Data");
-    progressArray = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
+    progressArray = [
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ];
     final prefs = await SharedPreferences.getInstance();
-    final List<String> progress = prefs.getStringList("progress${modes[mode]}$uuid") ?? [];
+    final List<String> progress =
+        prefs.getStringList("progress${modes[mode]}$uuid") ?? [];
     debugPrint(progress.toString());
     if (progress.isEmpty) {
       final List list = mapQuiz['quiz_data']['data'];
@@ -64,7 +81,7 @@ class Quiz {
     for (var i = 0; i < array.length; i++) {
       arrayIndex.add(i);
     }
-    return arrayIndex; 
+    return arrayIndex;
   }
 
   Future<void> deleteData(String mode, String uuid) async {
@@ -116,8 +133,6 @@ class Quiz {
     debugPrint(progress.toString());
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList("progress$mode$uuid", progress);
-    final score = mapScore(progress, modesAPI[modes.indexOf(mode)]);
-    await APIQuizzes.setScore(uuid, score);
   }
 
   formatArray(onlyMarked) {
@@ -275,22 +290,11 @@ class Quiz {
   }
 
   answeredRight(String mode) {
-    if (mode == "Smart") {
-      for (var i = progressArray.length - 1; i >= 0; i--) {
-        if (progressArray[i].contains(indexArray[0])) {
-          if (i < 15) {
-            progressArray[i].remove(indexArray[0]);
-            progressArray[i + 1].add(indexArray[0]);
-          }
-        }
-      }
-    } else {
-      for (var i = progressArray.length - 1; i >= 0; i--) {
-        if (progressArray[i].contains(indexArray[0])) {
-          if (i < 2) {
-            progressArray[i].remove(indexArray[0]);
-            progressArray[i + 1].add(indexArray[0]);
-          }
+    for (var i = progressArray.length - 1; i >= 0; i--) {
+      if (progressArray[i].contains(indexArray[0])) {
+        if (mode == "Smart" ? i < 15 : i < 2) {
+          progressArray[i].remove(indexArray[0]);
+          progressArray[i + 1].add(indexArray[0]);
         }
       }
     }

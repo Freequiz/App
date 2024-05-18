@@ -80,17 +80,18 @@ class APIQuizzes {
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> setScore(String uuid, Map score) async {
+  static Future<Map> setScore(String uuid, String scoreID, String mode, int score) async {
     final response = await Api.httpPatch(
-      path: 'quiz/$uuid/score',
-      body: jsonEncode({"score": score}),
+      path: 'quiz/$uuid/score/$scoreID/$mode',
+      body: {"score": score},
     );
 
     return Api.decodeResponse(response);
   }
 
   static Future<Map> resetScore(String uuid, String mode) async {
-    final response = await Api.httpPatch(path: 'quiz/$uuid/score/reset/$mode', body: "");
+    final response =
+        await Api.httpPatch(path: 'quiz/$uuid/score/reset/$mode', body: "");
 
     return Api.decodeResponse(response);
   }
