@@ -37,9 +37,11 @@ class _SearchBarState extends State<SearchBar> {
           children: [
             Flexible(
               child: SizedBox(
-                height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
+                height:
+                    DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
                 child: TextField(
-                  onSubmitted: (value) => loadSearch(context: context, searchTerm: textController.text),
+                  onSubmitted: (value) => loadSearch(
+                      context: context, searchTerm: textController.text),
                   keyboardAppearance:
                       DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                   controller: textController,
@@ -71,9 +73,6 @@ class _SearchBarState extends State<SearchBar> {
                 style: TextButton.styleFrom(
                   backgroundColor: color1,
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
                 ),
                 onPressed: () {
                   Search.mode == "Quiz";

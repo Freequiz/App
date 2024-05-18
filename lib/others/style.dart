@@ -27,6 +27,13 @@ ThemeData darkTheme = ThemeData(
   ),
   iconTheme: const IconThemeData(color: Colors.white),
   scaffoldBackgroundColor: const Color.fromARGB(255, 40, 40, 40),
+  textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    ),
   drawerTheme: const DrawerThemeData(
     backgroundColor: Color.fromARGB(255, 40, 40, 40),
   ),
@@ -57,6 +64,13 @@ ThemeData lightTheme = ThemeData(
       bodyMedium: TextStyle(color: textGray),
     ),
     scaffoldBackgroundColor: Colors.white,
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    ),
     inputDecorationTheme: const InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(width: 2, color: color1),
