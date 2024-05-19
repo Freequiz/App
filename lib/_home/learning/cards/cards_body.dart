@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/card.dart';
-import 'package:freequiz/_home/learning/learning.dart';
+import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_views/learning/progress_bar.dart';
-import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 
 import '../../../others/utilities.dart';
 
@@ -39,8 +39,8 @@ class _CardsBodyState extends State<CardsBody> {
         Padding(
           padding: const EdgeInsets.only(top: 1.0),
           child: ProgressBar(
-            amount: Quiz.amountDefinitions,
-            amountLeft: Quiz.indexArray.length,
+            amount: Questionnaire.length,
+            amountLeft: Questionnaire.questions.length,
           ),
         ),
         Padding(

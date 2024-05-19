@@ -94,7 +94,7 @@ class _KebabMenuState extends State<KebabMenu> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return EditQuiz(refresh: refresh, uuid: widget.uuid, owner: Quiz.mapQuiz['quiz_data']['owner'],);
+          return EditQuiz(refresh: refresh, uuid: widget.uuid, owner: QuizHelper.quiz!.owner,);
         },
       ),
     );

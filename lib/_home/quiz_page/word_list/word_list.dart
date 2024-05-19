@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 
 class WordList extends StatelessWidget {
-  final List definitions;
-  final List answers;
-  final List marked;
+  final List<Translation> list;
   final Function markWord;
   final int i;
   final Color color;
@@ -15,9 +13,7 @@ class WordList extends StatelessWidget {
   final bool roundedCornersTop;
   const WordList({
     super.key,
-    required this.definitions,
-    required this.answers,
-    this.marked = const [],
+    required this.list,
     required this.markWord,
     this.i = 0,
     required this.color,
@@ -37,7 +33,7 @@ class WordList extends StatelessWidget {
     return ListView.builder(
       shrinkWrap: true,
       physics: scrollPhysics,
-      itemCount: definitions.length,
+      itemCount: list.length,
       itemBuilder: (BuildContext context, int i2) {
         return Container(
           decoration: BoxDecoration(
@@ -48,10 +44,10 @@ class WordList extends StatelessWidget {
                 topRight: i2 == 0 && roundedCornersTop
                     ? Radius.circular(width / 30.4)
                     : Radius.zero,
-                bottomLeft: i2 == definitions.length - 1
+                bottomLeft: i2 == list.length - 1
                     ? Radius.circular(width / 30.4)
                     : Radius.zero,
-                bottomRight: i2 == definitions.length - 1
+                bottomRight: i2 == list.length - 1
                     ? Radius.circular(width / 30.4)
                     : Radius.zero),
             color: i2.remainder(2) == 0 ? color5 : color6,
@@ -69,7 +65,7 @@ class WordList extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
-                      definitions[i2],
+                      list[i2].word,
                       style: TextStyle(
                           fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
                     ),
@@ -83,7 +79,7 @@ class WordList extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
-                      answers[i2],
+                      list[i2].translation,
                       style: TextStyle(
                           fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
                     ),
@@ -95,8 +91,7 @@ class WordList extends StatelessWidget {
                     onPressed: () {
                       markWord(i, i2);
                     },
-                    child: Quiz.markedWords[
-                            marked.isEmpty ? i2 : marked[i2]]
+                    child: list[i2].favorite
                         ? Icon(
                             Icons.star,
                             color: color,

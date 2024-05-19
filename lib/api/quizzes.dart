@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'api.dart';
 
 class APIQuizzes {
@@ -30,8 +30,7 @@ class APIQuizzes {
 
     if (response.statusCode == 200) {
       final map = jsonDecode(response.body);
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString(uuid, json.encode(map));
+      LocalStorage.saveQuiz(uuid, map);
       return map;
     }
     if (response.statusCode == 404) {
@@ -59,28 +58,15 @@ class APIQuizzes {
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> setFavorites(
-      String uuid, String add, String remove) async {
+  static Future<Map> setFavorites(String uuid, int scoreID, bool favorite) async {
     final response = await Api.httpPatch(
-      path: 'quiz/$uuid/favorites',
-      body: add != ""
-          ? jsonEncode({
-              "favorites": {
-                "add": [add]
-              }
-            })
-          : jsonEncode(
-              {
-                "favorites": {
-                  "remove": [remove]
-                }
-              },
-            ),
+      path: 'quiz/$uuid/score/$scoreID/favorite',
+      body: {"favorite": favorite}
     );
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> setScore(String uuid, String scoreID, String mode, int score) async {
+  static Future<Map> setScore(String uuid, int scoreID, String mode, int score) async {
     final response = await Api.httpPatch(
       path: 'quiz/$uuid/score/$scoreID/$mode',
       body: {"score": score},

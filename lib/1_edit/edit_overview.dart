@@ -63,7 +63,7 @@ class _EditOverviewState extends State<EditOverview> {
           ),
           Space.height(DeviceInfo.mobileLayout ? 15 : 45),
           conditional(
-            Quiz.draft.isNotEmpty,
+            QuizHelper.draft.isNotEmpty,
             Draft(
               refresh: refresh,
             ),

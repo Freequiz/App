@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/learning/learning.dart';
+import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
-import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/quiz/question.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 
 class MultipleChoice extends StatefulWidget {
   final Function refresh;
@@ -19,7 +20,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
   @override
   void initState() {
-    Learning().randomChoices();
+    Question.randomChoices();
     super.initState();
   }
 
@@ -40,7 +41,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
         backgroundColor: yellowFreequiz,
       ),
       body: MultipleChoiceBody(
-        choices: Learning.choices,
+        choices: Question.choices,
         wrongAnswer: wrongAnswer,
         rightAnswer: rightAnswer,
         answerRight: answerRight,
@@ -52,17 +53,17 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
   rightAnswer(i) {
     if (!Learning.answeredWrong) {
-      Quiz().answeredRight("Multiple Choice");
+      Questionnaire.answeredRight();
     }
     setState(() {
       answerRight[i] = true;
     });
     Future.delayed(const Duration(milliseconds: 300), () {
-      if (Quiz.indexArray.length > 1) {
+      if (Questionnaire.questions.length > 1) {
         Learning.answeredWrong = false;
-        Quiz.indexArray.removeAt(0);
+        Questionnaire.questions.removeAt(0);
         setState(() {
-          Learning().newChoices();
+          Question.randomChoices();
         });
       } else {
         close();
@@ -76,6 +77,6 @@ class _MultipleChoiceState extends State<MultipleChoice> {
   }
 
   close() {
-    Learning().close(context, widget.refresh, widget.uuid, "MultipleChoice");
+    Learning().stop(context, widget.refresh, widget.uuid, "MultipleChoice");
   }
 }

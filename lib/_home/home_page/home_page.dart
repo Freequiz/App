@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search_bar.dart' as search;
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/_home/home_page/last_quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
@@ -31,14 +31,14 @@ class HomePage extends StatelessWidget {
               height: DeviceInfo.mobileLayout ? 10 : 30,
             ),
             conditional(
-              Quiz().amountUuids() > 0,
+              LocalStorage.amountUuids() > 0,
               conditional(
                 DeviceInfo.mobileLayout,
                 const Expanded(
                   child: LastQuizzes(),
                 ),
                 defaultWidget: conditional(
-                  Quiz().amountUuids() > 1,
+                  LocalStorage.amountUuids() > 1,
                   Expanded(
                     child: Row(
                       children: [

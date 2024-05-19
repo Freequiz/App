@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/string_extensions.dart';
-import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
+import 'package:freequiz/quiz/manage.dart';
 
 class LastQuizzes extends StatefulWidget {
   final ScrollPhysics physics;
@@ -34,19 +34,19 @@ class _LastQuizzesState extends State<LastQuizzes> {
     final bool mobileLayout = shortestSide < 600;
     return ListView.separated(
       physics: widget.physics,
-      itemCount: mobileLayout ? Quiz().amountUuids() : half(),
+      itemCount: mobileLayout ? LocalStorage.amountUuids() : half(),
       itemBuilder: (BuildContext context, int i) {
-        String uuid = Quiz.uuids[mobileLayout ? i : i * 2 + widget.n];
+        String uuid = LocalStorage.uuids[mobileLayout ? i : i * 2 + widget.n];
         return FutureBuilder<Map>(
-          future: LocalStorage.getQuiz(uuid, true),
+          future: ManageQuiz.load(uuid, true),
           builder: (context, quiz) {
             if (quiz.hasData) {
               return Dismissible(
-                key: Key(Quiz.uuids[i]),
+                key: Key(LocalStorage.uuids[i]),
                 direction: DismissDirection.endToStart,
                 onDismissed: (direction) {
                   setState(() {
-                    Quiz().deleteQuiz(i);
+                    LocalStorage.deleteQuiz(i);
                   });
                 },
                 background: Container(
@@ -99,7 +99,7 @@ class _LastQuizzesState extends State<LastQuizzes> {
   }
 
   half() {
-    double half = Quiz().amountUuids() / 2;
+    double half = LocalStorage.amountUuids() / 2;
     if (half.remainder(1) != 0) {
       if (widget.n == 0) {
         return (half + 0.5).toInt();

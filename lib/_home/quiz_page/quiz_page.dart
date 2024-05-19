@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/quiz_description.dart';
 import 'package:freequiz/_home/quiz_page/search_bar_words.dart';
+import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/learning_modes.dart';
 import 'package:freequiz/_home/quiz_page/word_list/nothing_found.dart';
@@ -26,19 +27,12 @@ class _QuizPageState extends State<QuizPage> {
     Icons.quiz_outlined
   ];
   final List<Color> color = [purpleFreequiz, roseFreequiz, yellowFreequiz, blueFreequiz];
-  final List<String> modes = [
-    "Smart",
-    "Writing",
-    "MultipleChoice",
-    "Cards",
-  ];
 
   refresh() {
     setState(() {});
   }
 
-  List shownDefinition = Quiz.definition;
-  List shownAnswer = Quiz.answer;
+  List<Translation> list = QuizHelper.quiz!.translations.translations.toList();
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +68,10 @@ class _QuizPageState extends State<QuizPage> {
                   WordListTaskbar(
                     search: search,
                   ),
-                  shownDefinition.isEmpty
+                  list.isEmpty
                       ? const NothingFound()
                       : WordList(
-                          definitions: shownDefinition,
-                          answers: shownAnswer,
+                          list: list,
                           markWord: markWord,
                           color: roseFreequiz,
                           width: width,
@@ -111,8 +104,7 @@ class _QuizPageState extends State<QuizPage> {
                     height: 20,
                   ),
                   WordList(
-                    definitions: shownDefinition,
-                    answers: shownAnswer,
+                    list: list,
                     markWord: markWord,
                     color: roseFreequiz,
                     width: width - (height - 190) / 4 - 60,
@@ -127,37 +119,24 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   search(String searchTerm) {
-    shownDefinition = [];
-    shownAnswer = [];
-    for (var i = 0; i < Quiz.definition.length; i++) {
-      final definition = Quiz.definition[i];
-      final answer = Quiz.answer[i];
-      if (definition.contains(searchTerm)) {
-        shownDefinition.add(definition);
-        shownAnswer.add(answer);
-      } else if (answer.contains(searchTerm)) {
-        shownDefinition.add(definition);
-        shownAnswer.add(answer);
+    list.clear();
+
+    for (Translation translation in QuizHelper.quiz!.translations.translations) {
+      if (translation.word.contains(searchTerm)) {
+        list.add(translation);
+        continue;
+      }
+      if (translation.translation.contains(searchTerm)) {
+        list.add(translation);
       }
     }
     setState(() {});
   }
 
-  markWord(_, i) {
-    if (Quiz.markedWords[i]) {
-      Quiz.markedWords[i] = !Quiz.markedWords[i];
-      Quiz().checkedIfMarkedWords();
-      setState(() {
-        Quiz().saveMarked(
-            widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][i]['hash']);
-      });
-    } else {
-      Quiz.markedWords[i] = !Quiz.markedWords[i];
-      Quiz().checkedIfMarkedWords();
-      setState(() {
-        Quiz().saveMarked(
-            widget.uuid, Quiz.mapQuiz['quiz_data']['data'][i]['hash'], "");
-      });
-    }
+  markWord(Translation translation) {
+    setState(() {
+      translation.toggleFavorite();
+    });
+    QuizHelper().checkedIfMarkedWords();
   }
 }

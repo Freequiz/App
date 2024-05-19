@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
@@ -77,8 +78,8 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
   close(data) {
     final quiz = data.data!['quiz_data'];
     ListQuizzes.data.insert(0, quiz);
-    Quiz().deleteDraft();
-    Quiz.draft.clear();
+    LocalStorage.deleteDraft();
+    QuizHelper.draft.clear();
     Future.delayed(const Duration(milliseconds: 500), () {
       Navigator.of(context).pop();
       Navigator.of(context).pop();

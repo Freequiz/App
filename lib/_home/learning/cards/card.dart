@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/learning/learning.dart';
+import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 
 class CardWidget extends StatelessWidget {
   CardWidget({super.key});
@@ -25,8 +25,8 @@ class CardWidget extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         Learning.showAnswer
-            ? Quiz.answer[Quiz.indexArray[0]]
-            : Quiz.definition[Quiz.indexArray[0]],
+            ? Questionnaire.questions[0].translation
+            : Questionnaire.questions[0].word,
         style: TextStyle(
             fontSize: DeviceInfo().height() / 24, color: foregroundColor),
       ),

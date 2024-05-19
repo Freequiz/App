@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:http/http.dart' as http;
 import 'package:freequiz/2_profile/profile.dart';
@@ -127,7 +128,7 @@ class APIUsers {
 
   static Future<Map> getQuizzes(int page) async {
     final map = httpGetQuizzes(page);
-    await Quiz().loadDraft();
+    QuizHelper.draft = await LocalStorage.loadDraft();
     return map;
   }
 

@@ -12,6 +12,7 @@ import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
+import 'package:freequiz/quiz/manage.dart';
 
 class EditQuiz extends StatefulWidget {
   final Function refresh;
@@ -88,7 +89,7 @@ class _EditQuizState extends State<EditQuiz> {
               : EdgeInsets.symmetric(
                   horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
           child: FutureBuilder<Map>(
-            future: LocalStorage.getQuiz(widget.uuid, false),
+            future: ManageQuiz.load(widget.uuid, false),
             builder: (context, data) {
               if (data.hasData) {
                 if (data.data!['success']) {
@@ -395,7 +396,7 @@ class _EditQuizState extends State<EditQuiz> {
 
   save() {
     final map = quiz.createMap();
-    Quiz().saveDraft(map);
-    Quiz.draft = map;
+    LocalStorage.saveDraft(map);
+    QuizHelper.draft = map;
   }
 }

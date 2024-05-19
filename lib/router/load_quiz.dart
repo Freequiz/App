@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/buttons/share.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/quiz/manage.dart';
 
 class LoadQuiz extends StatefulWidget {
   final String uuid;
@@ -18,13 +18,12 @@ class LoadQuiz extends StatefulWidget {
 class _LoadQuizState extends State<LoadQuiz> {
   @override
   Widget build(BuildContext context) {
-    final futureMap = LocalStorage.getQuiz(widget.uuid, false);
+    final futureMap = ManageQuiz.load(widget.uuid, false);
     return FutureBuilder<Map>(
       future: futureMap,
       builder: (context, quiz) {
         if (quiz.hasData) {
           if (quiz.data!['success']) {
-            Quiz.title = quiz.data!['quiz_data']['title'];
             return LoadingScreen(
               message: "Loading Quiz",
               finishedLoading: true,
@@ -32,7 +31,7 @@ class _LoadQuizState extends State<LoadQuiz> {
                 uuid: widget.uuid,
               ),
               appBar: AppBar(
-                title: Text(Quiz.title),
+                title: Text(QuizHelper.quiz!.title),
                 leading: TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();

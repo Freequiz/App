@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 
 class Choices extends StatelessWidget {
   final String choice;
@@ -31,7 +31,7 @@ class Choices extends StatelessWidget {
           backgroundColor: answerRight ? Colors.green : background,
         ),
         onPressed: () {
-          if (choice != Quiz.answer[Quiz.indexArray[0]]) {
+          if (choice != Questionnaire.questions[0].translation) {
             wrongAnswer(choice, i);
           } else {
             rightAnswer(i);

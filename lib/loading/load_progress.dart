@@ -4,14 +4,8 @@ import 'package:freequiz/_views/learning/confirmation.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/learning.dart';
 
-final List<String> modes = [
-  "Smart",
-  "Writing",
-  "MultipleChoice",
-  "Cards",
-];
 final List<String> levelsNormal = [
   "New".transl(),
   "Learned".transl(),
@@ -37,50 +31,36 @@ loadProgress(BuildContext context, String uuid, int i, Function reset,
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (BuildContext context) {
-        return FutureBuilder<void>(
-          future: Quiz().loadData(i, uuid),
-          builder: (context, done) {
-            if (done.connectionState == ConnectionState.done) {
-              return LoadingScreen(
-                message: "Loading Progress",
-                finishedLoading: true,
-                widget: StartLearning(
-                  i: i,
-                  refresh: refresh,
-                  levels: i == 0 ? levelsSmart : levelsNormal,
-                  uuid: uuid,
+        return LoadingScreen(
+          message: "Loading Progress",
+          finishedLoading: true,
+          widget: StartLearning(
+            i: i,
+            refresh: refresh,
+            levels: i == 0 ? levelsSmart : levelsNormal,
+            uuid: uuid,
+          ),
+          appBar: AppBar(
+            backgroundColor: color[i],
+            title: Text(Learning.modes[i].transl()),
+            actions: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
                 ),
-                appBar: AppBar(
-                  backgroundColor: color[i],
-                  title: Text(modes[i].transl()),
-                  actions: [
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => Confirmation(
-                            reset: reset,
-                            i: i,
-                          ),
-                        );
-                      },
-                      child: const Icon(Icons.refresh_rounded),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => Confirmation(
+                      reset: reset,
+                      i: i,
                     ),
-                  ],
-                ),
-              );
-            }
-            return LoadingScreen(
-              message: "Loading Progress",
-              finishedLoading: false,
-              appBar: AppBar(
-                title: Text("Loading".transl()),
+                  );
+                },
+                child: const Icon(Icons.refresh_rounded),
               ),
-            );
-          },
+            ],
+          ),
         );
       },
     ),

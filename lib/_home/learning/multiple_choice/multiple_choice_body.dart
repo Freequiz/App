@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/multiple_choice/choices.dart';
 import 'package:freequiz/_views/learning/progress_bar.dart';
-import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 
 import '../../../others/utilities.dart';
 
@@ -30,8 +30,8 @@ class MultipleChoiceBody extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 1.0),
           child: ProgressBar(
-            amount: Quiz.amountDefinitions,
-            amountLeft: Quiz.indexArray.length,
+            amount: Questionnaire.length,
+            amountLeft: Questionnaire.questions.length,
           ),
         ),
         Padding(
@@ -41,7 +41,7 @@ class MultipleChoiceBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  Quiz.definition[Quiz.indexArray[0]],
+                  Questionnaire.questions[0].word,
                   style: textSize(DeviceInfo().height() / 16),
                 ),
                 SizedBox(

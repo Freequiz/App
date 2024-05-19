@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/loading/load_progress.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/learning.dart';
+import 'package:freequiz/quiz/progress.dart';
 
 class LearningModes extends StatefulWidget {
   final Axis scrollDirection;
@@ -60,11 +61,7 @@ class _LearningModesState extends State<LearningModes> {
 
   reset(i) {
     setState(() {
-      Quiz().deleteData(modes[i], widget.uuid);
-      Quiz.progressArray = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
-      for (var i = 0; i < Quiz.definition.length; i++) {
-        Quiz.progressArray[0].add(i);
-      }
+      Progress.reset(Learning.modes[i], widget.uuid);
     });
   }
 }

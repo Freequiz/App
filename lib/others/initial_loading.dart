@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:freequiz/2_profile/profile.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/languages.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +12,7 @@ Future<void> initialLoading() async {
   String defaultLocale = Platform.localeName; 
   String chosenLanguage = "english";
   final prefs = await SharedPreferences.getInstance();
-  Quiz.uuids = prefs.getStringList("uuids") ?? ["", "", "", "", ""];
+  LocalStorage.uuids = prefs.getStringList("uuids") ?? ["", "", "", "", ""];
   defaultLocale = defaultLocale.substring(0, defaultLocale.length - 3);
   if (defaultLocale == "de") {
     chosenLanguage = "german";

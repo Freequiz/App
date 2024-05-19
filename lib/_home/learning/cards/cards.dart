@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
-import 'package:freequiz/_home/learning/learning.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
+import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 
 class Cards extends StatefulWidget {
   final Function refresh;
@@ -44,38 +46,38 @@ class _CardsState extends State<Cards> {
 
   wrong() {
     answeredWrong = true;
-    Quiz().answeredWrong();
-    if (Quiz.indexArray.length > 1) {
+    Questionnaire.answeredWrong();
+    if (Questionnaire.questions.length > 1) {
       setState(() {
-        Quiz.indexArray.removeAt(0);
+        Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
       });
     } else {
       widget.refresh();
-      Quiz().saveData("Cards", widget.uuid);
+      LocalStorage.saveQuiz(widget.uuid, QuizHelper.quiz!.toMap());
       Navigator.of(context).pop();
     }
   }
 
   right() {
     if (!answeredWrong) {
-      Quiz().answeredRight("Cards");
+      Questionnaire.answeredRight();
     }
-    if (Quiz.indexArray.length > 1) {
+    if (Questionnaire.questions.length > 1) {
       setState(() {
         answeredWrong = false;
-        Quiz.indexArray.removeAt(0);
+        Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
       });
     } else {
       widget.refresh();
-      Quiz().saveData("Cards", widget.uuid);
+      LocalStorage.saveQuiz(widget.uuid, QuizHelper.quiz!.toMap());
       Navigator.of(context).pop();
     }
   }
 
   close() {
-    Quiz().saveData("Writing", widget.uuid);
+    LocalStorage.saveQuiz(widget.uuid, QuizHelper.quiz!.toMap());
     widget.refresh();
     Navigator.of(context).pop();
   }

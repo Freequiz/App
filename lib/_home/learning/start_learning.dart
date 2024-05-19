@@ -4,12 +4,15 @@ import 'package:freequiz/_home/learning/multiple_choice/multiple_choice.dart';
 import 'package:freequiz/_views/learning/progress_bar.dart';
 import 'package:freequiz/_home/learning/smart.dart';
 import 'package:freequiz/_home/learning/writing/writing.dart';
+import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/quiz/progress.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 
 import '../../others/utilities.dart';
 
@@ -47,14 +50,14 @@ class _StartLearningState extends State<StartLearning> {
     language["Cards"],
   ];
   final List<String> mode = [
-    "Smart",
-    "Writing",
-    "MultipleChoice",
-    "Cards",
+    "smart",
+    "write",
+    "multi",
+    "cards",
   ];
 
   refresh() {
-    Quiz().calculateProgress(widget.i);
+    Progress.calculate(widget.i);
     setState(() {});
   }
 
@@ -66,9 +69,9 @@ class _StartLearningState extends State<StartLearning> {
     return Column(
       children: [
         ProgressBar(
-            amountLeft: Quiz.answer.length * (widget.i == 0 ? 4 : 2) -
-                Quiz.amountProgress,
-            amount: Quiz.answer.length * (widget.i == 0 ? 4 : 2)),
+            amountLeft: /*QuizHelper.answer.length * (widget.i == 0 ? 4 : 2) -
+                QuizHelper.amountProgress*/ 50,
+            amount: /*QuizHelper.answer.length * (widget.i == 0 ? 4 : 2)*/ 10),
         const SizedBox(height: 15),
         Container(
           decoration: BoxDecoration(
@@ -83,7 +86,7 @@ class _StartLearningState extends State<StartLearning> {
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  Quiz().formatArray(false);
+                  Questionnaire.create(false, mode[widget.i]);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
@@ -113,15 +116,15 @@ class _StartLearningState extends State<StartLearning> {
                 ),
               ),
               conditional(
-                Quiz.marked,
+                QuizHelper.marked,
                 Space.width(10),
               ),
               conditional(
-                Quiz.marked,
+                QuizHelper.marked,
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
-                    Quiz().formatArray(true);
+                    Questionnaire.create(true, mode[widget.i]);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
@@ -173,11 +176,12 @@ class _StartLearningState extends State<StartLearning> {
               itemBuilder: (BuildContext context, int i) {
                 debugPrint(i.toString());
                 debugPrint(widget.levels[i]);
+                final progressArray = Progress.array(widget.i, i);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     conditional(
-                      progressArray(widget.i, i).isNotEmpty,
+                      progressArray.isNotEmpty,
                       Container(
                         width: (DeviceInfo().width() - 20),
                         height: DeviceInfo().height() / 30,
@@ -193,9 +197,7 @@ class _StartLearningState extends State<StartLearning> {
                       ),
                     ),
                     WordList(
-                      definitions: defintions(widget.i, i),
-                      answers: answers(widget.i, i),
-                      marked: progressArray(widget.i, i),
+                      list: progressArray,
                       markWord: markWord,
                       i: i,
                       color: color[widget.i],
@@ -203,7 +205,7 @@ class _StartLearningState extends State<StartLearning> {
                       width: DeviceInfo().width(),
                     ),
                     Space.height(
-                      progressArray(widget.i, i).isNotEmpty
+                      progressArray.isNotEmpty
                           ? DeviceInfo().height() / 30
                           : 0,
                     ),
@@ -218,48 +220,14 @@ class _StartLearningState extends State<StartLearning> {
   }
 
   widthStartButton(width) {
-    return Quiz.marked ? (width - 50) / 2 : width - 40;
+    return QuizHelper.marked ? (width - 50) / 2 : width - 40;
   }
 
-  markWord(i, i2) {
-    final iWord = Quiz.progressArray[i][i2];
-    if (Quiz.markedWords[iWord]) {
-      Quiz.markedWords[iWord] = !Quiz.markedWords[iWord];
-      Quiz().checkedIfMarkedWords();
-      setState(() {
-        Quiz().saveMarked(
-            widget.uuid, "", Quiz.mapQuiz['quiz_data']['data'][iWord]['hash']);
-      });
-    } else {
-      Quiz.markedWords[iWord] = !Quiz.markedWords[iWord];
-      Quiz().checkedIfMarkedWords();
-      setState(() {
-        Quiz().saveMarked(
-            widget.uuid, Quiz.mapQuiz['quiz_data']['data'][iWord]['hash'], "");
-      });
-    }
+  markWord(Translation translation) {
+    setState(() {
+      translation.toggleFavorite();
+    });
+    QuizHelper().checkedIfMarkedWords();
     widget.refresh();
-  }
-
-  defintions(int mode, int i) {
-    return Quiz().definitionArray(progressArray(mode, i));
-  }
-
-  answers(int mode, int i) {
-    return Quiz().answerArray(progressArray(mode, i));
-  }
-
-  progressArray(int mode, int i) {
-    if (mode == 0) {
-      if (i == 4) {
-        var progressArray = [];
-        for (var n = 4; n < Quiz.progressArray.length; n++) {
-          progressArray += Quiz.progressArray[n];
-        }
-        return progressArray;
-      }
-      return Quiz.progressArray[i];
-    }
-    return Quiz.progressArray[i];
   }
 }

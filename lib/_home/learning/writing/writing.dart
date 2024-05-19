@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/learning/learning.dart';
+import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
-import 'package:freequiz/quiz.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/quiz/question.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 
 class Writing extends StatefulWidget {
   final Function refresh;
@@ -43,7 +44,7 @@ class _WritingState extends State<Writing> {
   }
 
   onPressed() {
-    if (Learning().correct(_textController.text)) {
+    if (Question.correct(_textController.text)) {
       rightAnswer();
     } else {
       wrongAnswer();
@@ -58,16 +59,16 @@ class _WritingState extends State<Writing> {
 
   rightAnswer() {
     if (!Learning.answeredWrong) {
-      Quiz().answeredRight("Writing");
+      Questionnaire.answeredRight();
     }
     setState(() {
       answerRight = true;
     });
     Future.delayed(const Duration(milliseconds: 300), () {
-      if (Quiz.indexArray.length > 1) {
+      if (Questionnaire.questions.length > 1) {
         setState(() {
           Learning.answeredWrong = false;
-          Quiz.indexArray.removeAt(0);
+          Questionnaire.questions.removeAt(0);
           _textController.clear();
         });
       } else {
@@ -78,6 +79,6 @@ class _WritingState extends State<Writing> {
   }
 
   close() {
-    Learning().close(context, widget.refresh, widget.uuid, "Writing");
+    Learning().stop(context, widget.refresh, widget.uuid, "Writing");
   }
 }

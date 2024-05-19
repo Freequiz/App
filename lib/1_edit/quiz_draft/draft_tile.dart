@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_draft/edit_draft.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz.dart';
@@ -34,9 +35,9 @@ class _DraftTileState extends State<DraftTile> {
           key: const Key('Draft'),
           direction: DismissDirection.endToStart,
           onDismissed: (direction) async {
-            await Quiz().deleteDraft();
+            await LocalStorage.deleteDraft();
             setState(() {
-              Quiz.draft.clear();
+              QuizHelper.draft.clear();
               shown = false;
             });
             widget.refresh();
@@ -81,8 +82,8 @@ class _DraftTileState extends State<DraftTile> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          Quiz.draft['title'] != ""
-                              ? Quiz.draft['title']
+                          QuizHelper.draft['title'] != ""
+                              ? QuizHelper.draft['title']
                               : language["Emtpy title"],
                           style: TextStyle(
                               fontSize: DeviceInfo().height() / 30,
@@ -97,9 +98,9 @@ class _DraftTileState extends State<DraftTile> {
                       SizedBox(
                         height: DeviceInfo().height() / 30,
                         child: Text(
-                          Quiz.draft['description'].toString().triming(32),
+                          QuizHelper.draft['description'].toString().triming(32),
                           style: TextStyle(
-                            fontSize: Quiz.draft['description'].length > 50
+                            fontSize: QuizHelper.draft['description'].length > 50
                                 ? DeviceInfo().height() / 60
                                 : DeviceInfo().height() / 50,
                             color: Colors.red,

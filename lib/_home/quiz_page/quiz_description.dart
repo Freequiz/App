@@ -23,7 +23,7 @@ class QuizDescription extends StatelessWidget {
           SizedBox(
             width: (DeviceInfo().width() - 46) / 8 * 7,
             child: Text(
-              Quiz.mapQuiz['quiz_data']['description'],
+              QuizHelper.quiz!.description ?? '',
               style: TextStyle(
                   fontSize: DeviceInfo.mobileLayout
                       ? DeviceInfo().height() / 50
@@ -31,7 +31,7 @@ class QuizDescription extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => loadUser(context: context, user: Quiz.mapQuiz['quiz_data']['created_by']),
+            onTap: () => loadUser(context: context, user: QuizHelper.quiz!.creator),
             child: Container(
               height: DeviceInfo().height() / 35,
               width: DeviceInfo().height() / 35,
