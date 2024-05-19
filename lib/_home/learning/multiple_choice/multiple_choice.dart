@@ -77,6 +77,6 @@ class _MultipleChoiceState extends State<MultipleChoice> {
   }
 
   close() {
-    Learning().stop(context, widget.refresh, widget.uuid, "MultipleChoice");
+    Learning.stop(context, widget.refresh, widget.uuid, "MultipleChoice");
   }
 }

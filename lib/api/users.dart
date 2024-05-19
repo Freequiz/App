@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:freequiz/local_storage/quizzes.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';

@@ -1,14 +1,14 @@
 import 'dart:math';
 
 import 'package:freequiz/models/translation.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/progress.dart';
 
 class Questionnaire {
   static List<Translation> questions = [];
   static int length = 0;
 
-  static int maxScore = 3;
+  static Map<String, int> maxScores = {'smart': 4, 'write': 2, 'multi': 2, 'cards': 2};
   static String mode = "";
 
   static create(bool onlyFavorite, String quizMode) {
@@ -20,7 +20,7 @@ class Questionnaire {
     for (Translation translation in QuizHelper.quiz!.translations.translations) {
       if (onlyFavorite && !translation.favorite) continue;
 
-      if (translation.score[mode]! >= 3) continue;
+      if (translation.score[mode]! >= Questionnaire.maxScore(mode)) continue;
 
       array.add(translation);
     }
@@ -53,5 +53,9 @@ class Questionnaire {
 
   static answeredRight() {
     Progress.increase(QuizHelper.quiz!.id, mode, questions[0]);
+  }
+
+  static maxScore(String mode) {
+    return maxScores[mode];
   }
 }

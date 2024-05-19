@@ -1,7 +1,8 @@
 import 'dart:math';
+import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/models/translation.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 
 class Question {
   static List<String> choices = [];
@@ -13,7 +14,7 @@ class Question {
     }
 
     choices = [];
-    options.remove(Questionnaire.questions[0]); //remove answer
+    options.remove(Questionnaire.questions[0].translation); //remove answer
 
     for (var n = 0; n < 3; n++) {
       if (options.isNotEmpty) {
@@ -31,26 +32,7 @@ class Question {
     return choices;
   }
 
-  static correct(String input) {
-    return input
-            .trim()
-            .replaceAll(',', ' ')
-            .replaceAll('/', ' ')
-            .replaceAll('.', ' ')
-            .replaceAll(';', ' ')
-            .replaceAll('(', ' ')
-            .replaceAll(')', ' ')
-            .replaceAll('.', ' ')
-            .replaceAll('   ', '')
-            .replaceAll('  ', '') ==
-        Questionnaire.questions[0].translation
-            .replaceAll(',', ' ')
-            .replaceAll('/', ' ')
-            .replaceAll('.', ' ')
-            .replaceAll(';', ' ')
-            .replaceAll('(', ' ')
-            .replaceAll(')', ' ')
-            .replaceAll('   ', '')
-            .replaceAll('  ', '');
+  static bool correct(String input) {
+    return input.format() == Questionnaire.questions[0].translation.format();
   }
 }

@@ -22,3 +22,21 @@ extension Triming on String {
     return '$trimmedDescription...';
   }
 }
+
+extension Format on String {
+  String format() {
+    return trim()
+            .replaceAll(',', ' ')
+            .replaceAll('/', ' ')
+            .replaceAll('', ' ')
+            .replaceAll('.', ' ')
+            .replaceAll(';', ' ')
+            .replaceAll('(', ' ')
+            .replaceAll(')', ' ')
+            .replaceAll('.', ' ')
+            .replaceAll('\u2019', '\u0027')
+            .replaceAll('\u2018', '\u0027')
+            .replaceAll('   ', '')
+            .replaceAll('  ', '');
+  }
+}

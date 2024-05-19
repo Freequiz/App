@@ -79,6 +79,6 @@ class _WritingState extends State<Writing> {
   }
 
   close() {
-    Learning().stop(context, widget.refresh, widget.uuid, "Writing");
+    Learning.stop(context, widget.refresh, widget.uuid, "Writing");
   }
 }

@@ -89,7 +89,7 @@ class WordList extends StatelessWidget {
                   width: DeviceInfo().height() / 20,
                   child: TextButton(
                     onPressed: () {
-                      markWord(i, i2);
+                      markWord(list[i2]);
                     },
                     child: list[i2].favorite
                         ? Icon(

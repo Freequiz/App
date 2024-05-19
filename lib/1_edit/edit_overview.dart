@@ -5,7 +5,7 @@ import 'package:freequiz/1_edit/quiz_draft/draft.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/create_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/created_quizzes.dart';
 import 'package:freequiz/others/utilities.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';

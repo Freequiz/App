@@ -3,7 +3,7 @@ import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/question.dart';
@@ -53,14 +53,14 @@ class _SmartState extends State<Smart> {
         title: Text(language["Smart"]),
         leading: TextButton(
           onPressed: () =>
-              Learning().stop(context, widget.refresh, widget.uuid, "Smart"),
+              Learning.stop(context, widget.refresh, widget.uuid, "Smart"),
           child: const Icon(
             Icons.arrow_back_ios_new,
             color: Colors.white,
           ),
         ),
       ),
-      body: modes[0],
+      body: modes[Questionnaire.questions[0].score['smart'] > 1 ? 1 : 0],
     );
   }
 
@@ -117,7 +117,7 @@ class _SmartState extends State<Smart> {
           Question.randomChoices();
         });
       } else {
-        Learning().stop(context, widget.refresh, widget.uuid, "Smart");
+        Learning.stop(context, widget.refresh, widget.uuid, "Smart");
       }
       answerRightMC = List.filled(4, false);
     });

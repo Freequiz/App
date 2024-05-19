@@ -5,7 +5,7 @@ import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/progress_pop_up.dart';
 import 'package:freequiz/1_edit/quiz.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';

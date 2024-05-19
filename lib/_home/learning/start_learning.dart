@@ -6,11 +6,12 @@ import 'package:freequiz/_home/learning/smart.dart';
 import 'package:freequiz/_home/learning/writing/writing.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/others/string_extensions.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 
@@ -49,15 +50,9 @@ class _StartLearningState extends State<StartLearning> {
     language["Multiple Choice"],
     language["Cards"],
   ];
-  final List<String> mode = [
-    "smart",
-    "write",
-    "multi",
-    "cards",
-  ];
 
   refresh() {
-    Progress.calculate(widget.i);
+    Progress.calculate(Learning.modes[widget.i]);
     setState(() {});
   }
 
@@ -66,12 +61,12 @@ class _StartLearningState extends State<StartLearning> {
     final color5 = DeviceInfo.darkMode
         ? const Color.fromARGB(255, 60, 60, 60)
         : const Color.fromARGB(255, 225, 225, 225);
+    Progress.calculate(Learning.modes[widget.i]);
     return Column(
       children: [
         ProgressBar(
-            amountLeft: /*QuizHelper.answer.length * (widget.i == 0 ? 4 : 2) -
-                QuizHelper.amountProgress*/ 50,
-            amount: /*QuizHelper.answer.length * (widget.i == 0 ? 4 : 2)*/ 10),
+            amountLeft: QuizHelper.quiz!.translations.translations.length - Progress.amount,
+            amount: QuizHelper.quiz!.translations.translations.length),
         const SizedBox(height: 15),
         Container(
           decoration: BoxDecoration(
@@ -86,7 +81,7 @@ class _StartLearningState extends State<StartLearning> {
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  Questionnaire.create(false, mode[widget.i]);
+                  Questionnaire.create(false, Learning.modes[widget.i]);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
@@ -124,7 +119,7 @@ class _StartLearningState extends State<StartLearning> {
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
-                    Questionnaire.create(true, mode[widget.i]);
+                    Questionnaire.create(true, Learning.modes[widget.i]);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
@@ -174,9 +169,7 @@ class _StartLearningState extends State<StartLearning> {
             child: ListView.builder(
               itemCount: widget.i == 0 ? 5 : 3,
               itemBuilder: (BuildContext context, int i) {
-                debugPrint(i.toString());
-                debugPrint(widget.levels[i]);
-                final progressArray = Progress.array(widget.i, i);
+                final progressArray = Progress.array(Learning.modes[widget.i], i);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -227,7 +220,7 @@ class _StartLearningState extends State<StartLearning> {
     setState(() {
       translation.toggleFavorite();
     });
-    QuizHelper().checkedIfMarkedWords();
+    QuizHelper.checkedIfMarkedWords();
     widget.refresh();
   }
 }

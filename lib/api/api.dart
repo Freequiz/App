@@ -57,7 +57,7 @@ class Api {
         HttpHeaders.contentTypeHeader: "application/json"
       },
       encoding: Encoding.getByName('utf-8'),
-      body: body,
+      body: json.encode(body),
     );
   }
 

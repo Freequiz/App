@@ -16,7 +16,7 @@ class QuizHelper {
 
   final modesAPI = ["smart", "write", "multi", "cards"];
 
-  checkedIfMarkedWords() {
+  static checkedIfMarkedWords() {
     QuizHelper.marked = false;
     for (Translation translation in quiz!.translations.translations) {
       if (!translation.favorite) continue;

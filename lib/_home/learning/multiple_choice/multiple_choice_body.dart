@@ -31,7 +31,7 @@ class MultipleChoiceBody extends StatelessWidget {
           padding: const EdgeInsets.only(top: 1.0),
           child: ProgressBar(
             amount: Questionnaire.length,
-            amountLeft: Questionnaire.questions.length,
+            amountLeft: Questionnaire.questions.length.toDouble(),
           ),
         ),
         Padding(

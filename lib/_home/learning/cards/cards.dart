@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz/learning.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
@@ -17,7 +17,6 @@ class Cards extends StatefulWidget {
 }
 
 class _CardsState extends State<Cards> {
-  bool answeredWrong = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,6 @@ class _CardsState extends State<Cards> {
   }
 
   wrong() {
-    answeredWrong = true;
     Questionnaire.answeredWrong();
     if (Questionnaire.questions.length > 1) {
       setState(() {
@@ -60,12 +58,9 @@ class _CardsState extends State<Cards> {
   }
 
   right() {
-    if (!answeredWrong) {
-      Questionnaire.answeredRight();
-    }
+    Questionnaire.answeredRight();
     if (Questionnaire.questions.length > 1) {
       setState(() {
-        answeredWrong = false;
         Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
       });

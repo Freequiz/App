@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/models/quiz.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 
 class ManageQuiz {
   static Future<Map> load(String uuid, bool preview) async {

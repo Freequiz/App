@@ -3,7 +3,7 @@ import 'package:freequiz/1_edit/quiz_draft/edit_draft.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/string_extensions.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/device_info.dart';
 
 import '../../others/utilities.dart';

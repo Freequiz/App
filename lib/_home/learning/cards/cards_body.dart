@@ -40,7 +40,7 @@ class _CardsBodyState extends State<CardsBody> {
           padding: const EdgeInsets.only(top: 1.0),
           child: ProgressBar(
             amount: Questionnaire.length,
-            amountLeft: Questionnaire.questions.length,
+            amountLeft: Questionnaire.questions.length.toDouble(),
           ),
         ),
         Padding(

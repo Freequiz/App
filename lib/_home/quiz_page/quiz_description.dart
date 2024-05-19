@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/loading/load_user.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 
 class QuizDescription extends StatelessWidget {
   const QuizDescription({super.key});

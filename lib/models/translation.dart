@@ -1,5 +1,5 @@
 import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 
 class Translation {
   Map<String, dynamic> translationData;

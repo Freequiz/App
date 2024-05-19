@@ -21,7 +21,6 @@ class WritingBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("done");
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -29,7 +28,7 @@ class WritingBody extends StatelessWidget {
           padding: const EdgeInsets.only(top: 1.0),
           child: ProgressBar(
             amount: Questionnaire.length,
-            amountLeft: Questionnaire.questions.length,
+            amountLeft: Questionnaire.questions.length.toDouble(),
           ),
         ),
         Padding(

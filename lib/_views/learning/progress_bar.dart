@@ -4,7 +4,7 @@ import 'package:freequiz/others/device_info.dart';
 import '../../others/utilities.dart';
 
 class ProgressBar extends StatefulWidget {
-  final int amountLeft;
+  final double amountLeft;
   final int amount;
   const ProgressBar(
       {super.key, required this.amountLeft, required this.amount});

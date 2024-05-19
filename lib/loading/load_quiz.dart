@@ -4,7 +4,7 @@ import 'package:freequiz/_views/kebab_menu/kebab_menu.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/string_extensions.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/manage.dart';
 
 loadQuiz({required BuildContext context, required String uuid}) {
@@ -17,6 +17,7 @@ loadQuiz({required BuildContext context, required String uuid}) {
           builder: (context, data) {
             if (data.hasData) {
               if (data.data!['success']) {
+                QuizHelper.checkedIfMarkedWords();
                 return LoadingScreen(
                   message: "Loading Quiz",
                   finishedLoading: true,

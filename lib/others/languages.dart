@@ -19,7 +19,7 @@ class Languages {
     if (connectivityResult != ConnectivityResult.none) {
       load();
     }
-    debugPrint(mapLanguages.toString());
+    //debugPrint(mapLanguages.toString());
     mapLanguagesCopy = mapLanguages;
     return;
   }

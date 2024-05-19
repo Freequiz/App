@@ -29,6 +29,7 @@ class Choices extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           backgroundColor: answerRight ? Colors.green : background,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         ),
         onPressed: () {
           if (choice != Questionnaire.questions[0].translation) {
