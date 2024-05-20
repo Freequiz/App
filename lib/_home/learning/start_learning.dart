@@ -44,12 +44,6 @@ class _StartLearningState extends State<StartLearning> {
     MultipleChoice(refresh: refresh, uuid: widget.uuid),
     Cards(refresh: refresh, uuid: widget.uuid)
   ];
-  final List<String> modes = [
-    language["Smart"],
-    language["Writing"],
-    language["Multiple Choice"],
-    language["Cards"],
-  ];
 
   refresh() {
     Progress.calculate(Learning.modes[widget.i]);

@@ -5,16 +5,8 @@ class QuizHelper {
   static Quiz? quiz;
 
   static bool marked = false;
+
   static Map draft = {};
-
-  final List<String> modes = [
-    "Smart",
-    "Writing",
-    "MultipleChoice",
-    "Cards",
-  ];
-
-  final modesAPI = ["smart", "write", "multi", "cards"];
 
   static checkedIfMarkedWords() {
     QuizHelper.marked = false;

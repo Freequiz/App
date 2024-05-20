@@ -63,8 +63,15 @@ class QuizForm {
     return true;
   }
 
+  bool empty(i) {
+    if (answers[i].input.text.replaceAll(' ', '') != "") return false;
+    if (definitions[i].input.text.replaceAll(' ', '') != "") return false;
+    return true;
+  }
+
   checkForErrors() {
     error = false;
+    counter = 0;
 
     for (var i = 0; i < definitions.length; i++) {
       if (emptyDefinition(i)) {
@@ -75,7 +82,9 @@ class QuizForm {
         answers[i].error = true;
         answers[i].input.clear();
         error = true;
-      } else {
+      }
+      else if (empty(i)) {} 
+      else {
         counter++;
       }
     }

@@ -3,7 +3,9 @@ import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_views/kebab_menu/kebab_menu.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/string_extensions.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/manage.dart';
 
@@ -25,7 +27,13 @@ loadQuiz({required BuildContext context, required String uuid}) {
                     uuid: uuid,
                   ),
                   appBar: AppBar(
-                    title: Text(QuizHelper.quiz!.title),
+                    title: Text(
+                      QuizHelper.quiz!.title,
+                      maxLines: 2,
+                      style: textSize(
+                        DeviceInfo().height() / 50,
+                      ),
+                    ),
                     actions: [
                       KebabMenuButton(
                         url: "https://freequiz.herokuapp.com/quiz/$uuid",

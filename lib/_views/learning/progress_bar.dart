@@ -62,7 +62,10 @@ class _ProgressBarState extends State<ProgressBar> {
                       horizontal: 3.0,
                     ),
                     child: Text(
-                        "${(100 / widget.amount * (widget.amount - widget.amountLeft)).round()}%"),
+                      widget.amount == 0
+                          ? "0%"
+                          : "${(100 / widget.amount * (widget.amount - widget.amountLeft)).round()}%",
+                    ),
                   ),
                 ),
               ),

@@ -5,6 +5,7 @@ import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 
 final List<String> levelsNormal = [
   "New".transl(),
@@ -28,6 +29,8 @@ final List<Color> color = [
 
 loadProgress(BuildContext context, String uuid, int i, Function reset,
     Function refresh) {
+  if (QuizHelper.quiz!.translations.translations.isEmpty) return;
+  
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (BuildContext context) {

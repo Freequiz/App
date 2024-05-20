@@ -106,7 +106,8 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                   style: TextStyle(
                       fontSize: DeviceInfo.mobileLayout
                           ? DeviceInfo().height() / 50
-                          : DeviceInfo().height() / 45),
+                          : DeviceInfo().height() / 45,
+                      color: Colors.white),
                 ),
               ),
             ),
@@ -124,7 +125,8 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                   style: TextStyle(
                       fontSize: DeviceInfo.mobileLayout
                           ? DeviceInfo().height() / 50
-                          : DeviceInfo().height() / 45),
+                          : DeviceInfo().height() / 45,
+                      color: Colors.white),
                 ),
               ),
             ),
@@ -138,7 +140,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 },
                 child: Icon(
                   Icons.search,
-                  color: DeviceInfo.darkMode ? Colors.white : textGray,
+                  color:Colors.white,
                   size: DeviceInfo.mobileLayout
                       ? DeviceInfo().height() / 50
                       : DeviceInfo().height() / 45,

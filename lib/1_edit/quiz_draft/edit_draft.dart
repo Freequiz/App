@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/progress_pop_up.dart';
-import 'package:freequiz/1_edit/quiz.dart';
+import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/api/quizzes.dart';

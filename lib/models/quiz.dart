@@ -5,11 +5,11 @@ class Quiz {
   Map quizData;
 
   String id;
-  String title = "";
-  String? description = "";
+  String title;
+  String? description;
 
-  String visibility = "";
-  String creator = "";
+  String visibility;
+  String creator;
 
   bool favorite = false;
 
