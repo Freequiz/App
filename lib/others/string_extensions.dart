@@ -13,13 +13,13 @@ extension Translating on String {
   }
 }
 
-extension Triming on String {
-  String triming(int amount) {
-    final String trimmedDescription = characters.take(amount).toString();
-    if (trimmedDescription.length == length) {
-      return trimmedDescription;
+extension Truncate on String {
+  String truncate(int amount) {
+    final String trimmedString = characters.take(amount).toString();
+    if (trimmedString.length == length) {
+      return trimmedString;
     }
-    return '$trimmedDescription...';
+    return '$trimmedString...';
   }
 }
 

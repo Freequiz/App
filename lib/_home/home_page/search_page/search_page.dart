@@ -48,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
                 SearchFilter(
                   color: roseFreequiz,
                   child: Text(
-                    "${language["Results for"]} \"${widget.searchTerm.triming(32)}\"",
+                    "${language["Results for"]} \"${widget.searchTerm.truncate(32)}\"",
                     style: TextStyle(
                         fontSize: DeviceInfo().height() / 50,
                         color: Colors.white),

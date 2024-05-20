@@ -3,6 +3,7 @@ import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/_views/buttons/edit.dart';
 import 'package:freequiz/_views/quiz_tile/additional_info.dart';
 import 'package:freequiz/_views/quiz_tile/description.dart';
+import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -96,24 +97,17 @@ class _EditQuizTileState extends State<EditQuizTile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: DeviceInfo().height() / 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          widget.data['title'],
-                          style:
-                              TextStyle(fontSize: DeviceInfo().height() / 30),
-                        ),
-                        Edit(widget: widget)
-                      ],
-                    ),
+                  TileTitle(
+                    title: widget.data['title'],
+                    button: Edit(widget: widget),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Description(expanded: expanded, width: DeviceInfo().width() - 20, description: widget.data['description']),
+                      Description(
+                          expanded: expanded,
+                          width: DeviceInfo().width() - 20,
+                          description: widget.data['description']),
                       conditional(
                         !widget.expanded,
                         SizedBox(
@@ -135,10 +129,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
                       ),
                     ],
                   ),
-                  conditional(
-                    expanded,
-                    AdditionalInfo(data: widget.data)
-                  )
+                  conditional(expanded, AdditionalInfo(data: widget.data))
                 ],
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_draft/edit_draft.dart';
+import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/string_extensions.dart';
@@ -76,21 +77,11 @@ class _DraftTileState extends State<DraftTile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: DeviceInfo().height() / 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          QuizHelper.draft['title'] != ""
-                              ? QuizHelper.draft['title']
-                              : language["Emtpy title"],
-                          style: TextStyle(
-                              fontSize: DeviceInfo().height() / 30,
-                              color: Colors.red),
-                        ),
-                      ],
-                    ),
+                  TileTitle(
+                    title: QuizHelper.draft['title'] != ""
+                        ? QuizHelper.draft['title']
+                        : language["Emtpy title"],
+                    color: Colors.red,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,11 +89,14 @@ class _DraftTileState extends State<DraftTile> {
                       SizedBox(
                         height: DeviceInfo().height() / 30,
                         child: Text(
-                          QuizHelper.draft['description'].toString().triming(32),
+                          QuizHelper.draft['description']
+                              .toString()
+                              .truncate(32),
                           style: TextStyle(
-                            fontSize: QuizHelper.draft['description'].length > 50
-                                ? DeviceInfo().height() / 60
-                                : DeviceInfo().height() / 50,
+                            fontSize:
+                                QuizHelper.draft['description'].length > 50
+                                    ? DeviceInfo().height() / 60
+                                    : DeviceInfo().height() / 50,
                             color: Colors.red,
                           ),
                         ),

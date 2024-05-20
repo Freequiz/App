@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/string_extensions.dart';
 
 class Description extends StatelessWidget {
-  const Description({super.key, required this.expanded, required this.width, required this.description});
+  const Description(
+      {super.key,
+      required this.expanded,
+      required this.width,
+      required this.description});
 
   final bool expanded;
   final double width;
@@ -20,21 +23,13 @@ class Description extends StatelessWidget {
               ? width / 6 * 5 - 20
               : width / 6 * 5 - 40,
       child: Text(
-        expanded
-            ? description
-            : description.toString().triming(32),
+        description,
+        maxLines: expanded ? 2 : 1,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
-            fontSize: longDescription(description)
-                ? DeviceInfo().height() / 60
-                : DeviceInfo().height() / 50),
+          fontSize: DeviceInfo().height() / 60,
+        ),
       ),
     );
-  }
-
-  bool longDescription(String? description) {
-    if (description != null) {
-      return description.length > 50;
-    }
-    return false;
   }
 }
