@@ -52,11 +52,10 @@ class WordList extends StatelessWidget {
                     : Radius.zero),
             color: i2.remainder(2) == 0 ? color5 : color6,
           ),
-          padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo().height() / 80),
+          padding: DeviceInfo.mobileLayout ? const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0) : EdgeInsets.all(DeviceInfo().height() / 80),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(width: 5.0),
                 Container(
                   width: DeviceInfo.mobileLayout
                       ? (width - 30) / 2 - DeviceInfo().height() / 30
@@ -66,8 +65,9 @@ class WordList extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       list[i2].word,
+                      maxLines: 3,
                       style: TextStyle(
-                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
+                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 60 : DeviceInfo().height() / 45),
                     ),
                   ),
                 ),
@@ -80,8 +80,9 @@ class WordList extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       list[i2].translation,
+                      maxLines: 3,
                       style: TextStyle(
-                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45),
+                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 60 : DeviceInfo().height() / 45),
                     ),
                   ),
                 ),
@@ -104,7 +105,6 @@ class WordList extends StatelessWidget {
                           ),
                   ),
                 ),
-                const SizedBox(width: 5.0),
               ],
             ),
         );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/quiz_page/quiz_description.dart';
+import 'package:freequiz/_home/quiz_page/description.dart';
 import 'package:freequiz/_home/quiz_page/search_bar_words.dart';
 import 'package:freequiz/models/translation.dart';
+import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/_home/quiz_page/learning_modes.dart';
 import 'package:freequiz/_home/quiz_page/word_list/nothing_found.dart';
@@ -26,7 +27,12 @@ class _QuizPageState extends State<QuizPage> {
     Icons.format_list_bulleted_rounded,
     Icons.quiz_outlined
   ];
-  final List<Color> color = [purpleFreequiz, roseFreequiz, yellowFreequiz, blueFreequiz];
+  final List<Color> color = [
+    purpleFreequiz,
+    roseFreequiz,
+    yellowFreequiz,
+    blueFreequiz
+  ];
 
   refresh() {
     setState(() {});
@@ -97,6 +103,13 @@ class _QuizPageState extends State<QuizPage> {
             Expanded(
               child: Column(
                 children: [
+                  Text(
+                    QuizHelper.quiz!.title,
+                    style: TextStyle(
+                      fontSize: DeviceInfo().height() / 40,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   SearchBarWords(
                     search: search,
                   ),
@@ -121,7 +134,8 @@ class _QuizPageState extends State<QuizPage> {
   search(String searchTerm) {
     list.clear();
 
-    for (Translation translation in QuizHelper.quiz!.translations.translations) {
+    for (Translation translation
+        in QuizHelper.quiz!.translations.translations) {
       if (translation.word.contains(searchTerm)) {
         list.add(translation);
         continue;

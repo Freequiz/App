@@ -59,9 +59,17 @@ class APIQuizzes {
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> setFavorites(String uuid, int scoreID, bool favorite) async {
+  static Future<Map> setFavorite(String uuid, int scoreID, bool favorite) async {
     final response = await Api.httpPatch(
       path: 'quiz/$uuid/score/$scoreID/favorite',
+      body: {"favorite": favorite}
+    );
+    return Api.decodeResponse(response);
+  }
+
+  static Future<Map> setQuizFavorite(String uuid, bool favorite) async {
+    final response = await Api.httpPatch(
+      path: 'quiz/$uuid/favorite',
       body: {"favorite": favorite}
     );
     return Api.decodeResponse(response);

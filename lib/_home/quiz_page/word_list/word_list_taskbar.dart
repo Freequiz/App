@@ -107,6 +107,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                       fontSize: DeviceInfo.mobileLayout
                           ? DeviceInfo().height() / 50
                           : DeviceInfo().height() / 45,
+                      fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
               ),
@@ -126,6 +127,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                       fontSize: DeviceInfo.mobileLayout
                           ? DeviceInfo().height() / 50
                           : DeviceInfo().height() / 45,
+                      fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
               ),

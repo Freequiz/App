@@ -55,11 +55,11 @@ class Translation {
 
   setFavorite(bool state) {
     favorite = state;
-    APIQuizzes.setFavorites(QuizHelper.quiz!.id, scoreID, state);
+    APIQuizzes.setFavorite(QuizHelper.quiz!.id, scoreID, state);
   }
 
   toggleFavorite() {
     favorite = !favorite;
-    APIQuizzes.setFavorites(QuizHelper.quiz!.id, scoreID, favorite);
+    APIQuizzes.setFavorite(QuizHelper.quiz!.id, scoreID, favorite);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/models/language.dart';
 import 'package:freequiz/models/translations.dart';
 
@@ -81,5 +82,10 @@ class Quiz {
         "data": translations.toMap()
       }
     };
+  }
+
+  toggleFavorite() {
+    favorite = !favorite;
+    APIQuizzes.setQuizFavorite(id, favorite);
   }
 }

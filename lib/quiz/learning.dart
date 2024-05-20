@@ -62,13 +62,6 @@ class Learning {
     });
   }
 
-  /*int indexMode() {
-    if (QuizHelper.progressArray[0].contains(QuizHelper.indexArray[0])) {
-      return 0;
-    }
-    return 1;
-  }*/
-
   static stop(BuildContext context, Function refresh, String uuid, String mode) {
     LocalStorage.saveQuiz(uuid, QuizHelper.quiz!.toMap());
     FocusScope.of(context).requestFocus(FocusNode());
