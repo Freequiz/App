@@ -45,6 +45,7 @@ class _SearchBarState extends State<SearchBar> {
                   keyboardAppearance:
                       DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                   controller: textController,
+                  canRequestFocus: true,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: DeviceInfo.darkMode

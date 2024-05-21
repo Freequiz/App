@@ -119,6 +119,18 @@ class APIUsers {
     }
   }
 
+  static Future<Map> getFavorites() async {
+    final response = await Api.httpGet(path: 'user/favorites/1');
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else if (response.statusCode == 401) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error');
+    }
+  }
+
   static Future<Map> search(String searchTerm, int page) async {
     final response =
         await Api.httpGet(path: 'user/search/$page?query=$searchTerm');

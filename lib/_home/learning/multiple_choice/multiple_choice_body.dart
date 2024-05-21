@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/multiple_choice/choices.dart';
+import 'package:freequiz/_home/learning/prompt.dart';
 import 'package:freequiz/_views/learning/progress_bar.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
@@ -40,10 +41,7 @@ class MultipleChoiceBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  Questionnaire.questions[0].word,
-                  style: textSize(DeviceInfo().height() / 16),
-                ),
+                TextPromt(text: Questionnaire.questions[0].word),
                 SizedBox(
                   height: DeviceInfo().height() / 3,
                 ),

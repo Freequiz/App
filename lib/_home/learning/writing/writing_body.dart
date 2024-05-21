@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/_home/learning/prompt.dart';
 import 'package:freequiz/_views/learning/progress_bar.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/initial_loading.dart';
@@ -38,10 +39,7 @@ class WritingBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  Questionnaire.questions[0].word,
-                  style: textSize(DeviceInfo().height() / 16),
-                ),
+                TextPromt(text: Questionnaire.questions[0].word),
                 Space.height(DeviceInfo().height() / 5),
                 Row(
                   children: [
@@ -51,7 +49,7 @@ class WritingBody extends StatelessWidget {
                         child: TextField(
                           autocorrect: false,
                           enableSuggestions: false,
-                          keyboardType: TextInputType.name,
+                          keyboardType: TextInputType.text,
                           keyboardAppearance:
                               DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                           controller: textController,

@@ -65,7 +65,6 @@ class WordList extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       list[i2].word,
-                      maxLines: 3,
                       style: TextStyle(
                           fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 60 : DeviceInfo().height() / 45),
                     ),
@@ -80,7 +79,6 @@ class WordList extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       list[i2].translation,
-                      maxLines: 3,
                       style: TextStyle(
                           fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 60 : DeviceInfo().height() / 45),
                     ),

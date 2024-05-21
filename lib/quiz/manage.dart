@@ -38,4 +38,15 @@ class ManageQuiz {
 
     return localQuiz;
   }
+
+  static Future<Map> loadRecent() async {
+    Map<String, List> recentQuizzes = {'data': []};
+    for (String uuid in LocalStorage.uuids) {
+      if (uuid == "") break;
+      final quiz = await load(uuid, true);
+      recentQuizzes['data']!.add(quiz['quiz_data']!);
+    }
+
+    return recentQuizzes;
+  }
 }

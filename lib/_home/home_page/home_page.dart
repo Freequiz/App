@@ -1,19 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search_bar.dart' as search;
+import 'package:freequiz/_views/quiz_list/quiz_list.dart';
+import 'package:freequiz/_views/switcher/switcher.dart';
+import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/api/users.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
-import 'package:freequiz/_home/home_page/last_quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/quiz/manage.dart';
 
 import '../../others/utilities.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<HomePage> createState() => _HomePageState();
+}
 
-    final opacityColor = DeviceInfo.darkMode ? backgroundGray : Colors.white;
+class _HomePageState extends State<HomePage> {
+  final opacityColor = DeviceInfo.darkMode ? backgroundGray : Colors.white;
+  String shownQuizzes = "history";
+
+  Future<Map> recent = ManageQuiz.loadRecent();
+  Future<Map> favorites = APIUsers.getFavorites();
+
+  @override
+  Widget build(BuildContext context) {
+    onTap(String value) {
+      setState(() {
+        shownQuizzes = value;
+      });
+    }
+
+    removeRecent(i) {
+      LocalStorage.deleteQuiz(i);
+    }
+
+    removeFavorite(i) async {
+        APIQuizzes.setQuizFavorite((await favorites)["data"][i]["id"], false);
+    }
+
+    debugPrint("hello $shownQuizzes");
 
     return Padding(
       padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 10 : 30),
@@ -30,48 +58,29 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: DeviceInfo.mobileLayout ? 10 : 30,
             ),
+            Switcher(
+              onTap: onTap,
+              texts: const ["history", "favorite"],
+              value: shownQuizzes,
+              width: DeviceInfo().width() / 3,
+              icons: const [Icon(Icons.history), Icon(Icons.star_rounded)],
+            ),
+            SizedBox(
+              height: DeviceInfo.mobileLayout ? 10 : 30,
+            ),
             conditional(
               LocalStorage.amountUuids() > 0,
-              conditional(
-                DeviceInfo.mobileLayout,
-                const Expanded(
-                  child: LastQuizzes(),
-                ),
-                defaultWidget: conditional(
-                  LocalStorage.amountUuids() > 1,
-                  Expanded(
-                    child: Row(
-                      children: [
-                        const Expanded(
-                          child: LastQuizzes(
-                            physics: NeverScrollableScrollPhysics(),
-                          ),
-                        ),
-                        Space.width(30),
-                        const Expanded(
-                          child: LastQuizzes(
-                            physics: NeverScrollableScrollPhysics(),
-                            n: 1,
-                          ),
-                        )
-                      ],
+              shownQuizzes == "history"
+                  ? QuizList(
+                      key: const Key("history"),
+                      future: recent,
+                      onDismissed: removeRecent,
+                    )
+                  : QuizList(
+                      key: const Key("favorites"),
+                      future: favorites,
+                      onDismissed: removeFavorite,
                     ),
-                  ),
-                  defaultWidget: Expanded(
-                    child: Row(
-                      children: [
-                        Space.width((DeviceInfo().width() - 30) / 4 + 15),
-                        const Expanded(
-                          child: LastQuizzes(
-                            physics: NeverScrollableScrollPhysics(),
-                          ),
-                        ),
-                        Space.width((DeviceInfo().width() - 30) / 4 + 15)
-                      ],
-                    ),
-                  ),
-                ),
-              ),
               defaultWidget: Expanded(
                 child: Column(
                   children: [

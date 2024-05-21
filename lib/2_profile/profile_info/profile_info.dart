@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/2_profile/profile_info/confirmation.dart';
-import 'package:freequiz/2_profile/profile_info/dark_mode_switcher/dark_mode_switcher.dart';
+import 'package:freequiz/2_profile/profile_info/dark_mode_switcher.dart';
 import 'package:freequiz/2_profile/profile_info/email.dart';
 import 'package:freequiz/2_profile/profile_info/password.dart';
 import 'package:freequiz/2_profile/profile_info/username.dart';
