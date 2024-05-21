@@ -9,8 +9,6 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/manage.dart';
 
-import '../../others/utilities.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -48,24 +46,28 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 10 : 30),
       child: RefreshIndicator(
         onRefresh: () => onRefresh(),
-        child: Column(
-          children: [
-            const Center(child: search.SearchBar()),
-            SizedBox(
-              height: DeviceInfo.mobileLayout ? 10 : 30,
-            ),
-            Switcher(
-              onTap: onTap,
-              texts: const ["history", "favorite"],
-              value: shownQuizzes,
-              width: DeviceInfo().width() / 3,
-              icons: const [Icon(Icons.history), Icon(Icons.star_rounded)],
-            ),
-            SizedBox(
-              height: DeviceInfo.mobileLayout ? 10 : 30,
-            ),
-            conditional(
-              LocalStorage.amountUuids() > 0,
+        child: GestureDetector(
+          onTap: () {
+            Future.delayed(const Duration(milliseconds: 50), () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            });
+          },
+          child: Column(
+            children: [
+              const Center(child: search.SearchBar()),
+              SizedBox(
+                height: DeviceInfo.mobileLayout ? 10 : 30,
+              ),
+              Switcher(
+                onTap: onTap,
+                texts: const ["history", "favorite"],
+                value: shownQuizzes,
+                width: DeviceInfo().width() / 3,
+                icons: const [Icon(Icons.history), Icon(Icons.star_rounded)],
+              ),
+              SizedBox(
+                height: DeviceInfo.mobileLayout ? 10 : 30,
+              ),
               shownQuizzes == "history"
                   ? QuizList(
                       key: keyHistory,
@@ -77,28 +79,8 @@ class _HomePageState extends State<HomePage> {
                       future: favorites,
                       onDismissed: removeFavorite,
                     ),
-              defaultWidget: Expanded(
-                child: Column(
-                  children: [
-                    const Spacer(
-                      flex: 1,
-                    ),
-                    SizedBox(
-                      width: DeviceInfo().width() / 1.25,
-                      child: Image.asset(
-                        "images/icon_transparent.png",
-                        color: opacityColor.withOpacity(0.4),
-                        colorBlendMode: BlendMode.modulate,
-                      ),
-                    ),
-                    const Spacer(
-                      flex: 2,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -112,8 +94,10 @@ class _HomePageState extends State<HomePage> {
     await favorites;
 
     setState(() {
-      keyHistory = keyHistory == const Key("h") ? const Key("h1") : const Key("h");
-      keyFavorites = keyFavorites == const Key("f") ? const Key("f1") : const Key("f");
+      keyHistory =
+          keyHistory == const Key("h") ? const Key("h1") : const Key("h");
+      keyFavorites =
+          keyFavorites == const Key("f") ? const Key("f1") : const Key("f");
     });
 
     return;
