@@ -12,7 +12,7 @@ class ListQuizzes extends StatefulWidget {
       {super.key,
       required this.data,
       required this.onDismissed,
-      this.physics = const ScrollPhysics(),
+      this.physics = const AlwaysScrollableScrollPhysics(),
       this.n = 0});
 
   @override
@@ -42,7 +42,7 @@ class _ListQuizzesState extends State<ListQuizzes> {
         return Dismissible(
           key: Key(quizData['id']),
           direction: DismissDirection.endToStart,
-          onDismissed: (direction) => onDismissed(i),
+          onDismissed: (direction) => onDismissed(i, quizData['id']),
           background: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -78,9 +78,11 @@ class _ListQuizzesState extends State<ListQuizzes> {
     );
   }
 
-  onDismissed(i) {
-    data.removeAt(i);
-    widget.onDismissed(i);
+  onDismissed(int i, String uuid) {
+    setState(() {
+      data.removeAt(i);
+    });
+    widget.onDismissed(i, uuid);
   }
 
   half(int amount) {

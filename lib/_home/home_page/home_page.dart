@@ -25,6 +25,9 @@ class _HomePageState extends State<HomePage> {
   Future<Map> recent = ManageQuiz.loadRecent();
   Future<Map> favorites = APIUsers.getFavorites();
 
+  Key keyHistory = const Key("h");
+  Key keyFavorites = const Key("f");
+
   @override
   Widget build(BuildContext context) {
     onTap(String value) {
@@ -33,26 +36,19 @@ class _HomePageState extends State<HomePage> {
       });
     }
 
-    removeRecent(i) {
+    removeRecent(int i, String uuid) {
       LocalStorage.deleteQuiz(i);
     }
 
-    removeFavorite(i) async {
-        APIQuizzes.setQuizFavorite((await favorites)["data"][i]["id"], false);
+    removeFavorite(int i, String uuid) async {
+      APIQuizzes.setQuizFavorite(uuid, false);
     }
-
-    debugPrint("hello $shownQuizzes");
 
     return Padding(
       padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 10 : 30),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
+      child: RefreshIndicator(
+        onRefresh: () => onRefresh(),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Center(child: search.SearchBar()),
             SizedBox(
@@ -72,12 +68,12 @@ class _HomePageState extends State<HomePage> {
               LocalStorage.amountUuids() > 0,
               shownQuizzes == "history"
                   ? QuizList(
-                      key: const Key("history"),
+                      key: keyHistory,
                       future: recent,
                       onDismissed: removeRecent,
                     )
                   : QuizList(
-                      key: const Key("favorites"),
+                      key: keyFavorites,
                       future: favorites,
                       onDismissed: removeFavorite,
                     ),
@@ -106,5 +102,20 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> onRefresh() async {
+    recent = ManageQuiz.loadRecent();
+    favorites = APIUsers.getFavorites();
+
+    await recent;
+    await favorites;
+
+    setState(() {
+      keyHistory = keyHistory == const Key("h") ? const Key("h1") : const Key("h");
+      keyFavorites = keyFavorites == const Key("f") ? const Key("f1") : const Key("f");
+    });
+
+    return;
   }
 }

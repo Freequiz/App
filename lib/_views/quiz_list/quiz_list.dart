@@ -11,15 +11,12 @@ class QuizList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    debugPrint("Hello Quiz List");
-
     return FutureBuilder<Map>(
       future: future,
       builder: (context, data) {
         if (data.hasData) {
           final List list = data.data!['data'] as List;
 
-          debugPrint("Hello Quiz List");
           return conditional(
             DeviceInfo.mobileLayout,
             Expanded(
