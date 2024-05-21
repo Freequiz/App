@@ -8,7 +8,9 @@ import 'package:freequiz/others/style.dart';
 import '../../../others/utilities.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+  const SearchBar({super.key, required this.focusNode});
+
+  final FocusNode focusNode;
 
   @override
   State<SearchBar> createState() => _SearchBarState();
@@ -40,8 +42,10 @@ class _SearchBarState extends State<SearchBar> {
                 height:
                     DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
                 child: TextField(
+                  onTap: () => widget.focusNode.requestFocus(),
                   onSubmitted: (value) => loadSearch(
                       context: context, searchTerm: textController.text),
+                  focusNode: widget.focusNode,
                   keyboardAppearance:
                       DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
                   controller: textController,

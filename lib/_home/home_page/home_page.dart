@@ -23,6 +23,8 @@ class _HomePageState extends State<HomePage> {
   Future<Map> recent = ManageQuiz.loadRecent();
   Future<Map> favorites = APIUsers.getFavorites();
 
+  FocusNode focusNode = FocusNode();
+
   Key keyHistory = const Key("h");
   Key keyFavorites = const Key("f");
 
@@ -47,14 +49,15 @@ class _HomePageState extends State<HomePage> {
       child: RefreshIndicator(
         onRefresh: () => onRefresh(),
         child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 50), () {
-              FocusScope.of(context).requestFocus(FocusNode());
+              focusNode.unfocus();
             });
           },
           child: Column(
             children: [
-              const Center(child: search.SearchBar()),
+              Center(child: search.SearchBar(focusNode: focusNode,)),
               SizedBox(
                 height: DeviceInfo.mobileLayout ? 10 : 30,
               ),
