@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/utilities.dart';
 
 class NothingFound extends StatelessWidget {
@@ -29,7 +29,7 @@ class NothingFound extends StatelessWidget {
         padding: EdgeInsets.all(mobileLayout ? 0 : height / 80),
         child: Center(
           child: Text(
-            language["Nothing found"],
+            context.tr('nothing found'),
             style: textSize(mobileLayout ? height / 50 : height / 45),
           ),
         ),

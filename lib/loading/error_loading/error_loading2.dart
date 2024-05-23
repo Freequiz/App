@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 
 class ErrorLoading2 extends StatelessWidget {
   final String error;
@@ -13,10 +13,10 @@ class ErrorLoading2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        language["$error title"],
+        context.tr('$error title'),
         style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
-      content: Text(language["$error description"]),
+      content: Text('$error description').tr(),
       actions: [
         TextButton(
           onPressed: () {
@@ -28,7 +28,7 @@ class ErrorLoading2 extends StatelessWidget {
               ),
             );
           },
-          child: Text(language["Bug Reporter"]),
+          child: const Text('bug reporter').tr(),
         ),
         TextButton(
           onPressed: () {
@@ -36,7 +36,7 @@ class ErrorLoading2 extends StatelessWidget {
               MaterialPageRoute(builder: (context) => previousWidget),
             );
           },
-          child: Text(language["Try again"]),
+          child: const Text('try again').tr(),
         )
       ],
     );

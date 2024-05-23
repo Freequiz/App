@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/draft_tile.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/utilities.dart';
 
 class Draft extends StatelessWidget {
@@ -15,7 +15,7 @@ class Draft extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            language["Draft"],
+            context.tr('draft'),
             style: TextStyle(
                 fontSize: DeviceInfo().height() / 30, color: Colors.white),
           ),

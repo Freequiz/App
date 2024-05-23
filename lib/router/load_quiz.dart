@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/quiz/manage.dart';
@@ -62,7 +62,7 @@ class _LoadQuizState extends State<LoadQuiz> {
           message: "Loading Quiz",
           finishedLoading: false,
           appBar: AppBar(
-            title: Text(language["Loading"]),
+            title: const Text('Loading').tr(),
           ),
         );
       },

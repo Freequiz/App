@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/bug_reports.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -15,9 +15,9 @@ class BugReporter extends StatefulWidget {
 }
 
 class _BugReporterState extends State<BugReporter> {
-  TextFieldData title = TextFieldData(hint: language["Title"]);
-  TextFieldData description = TextFieldData(hint: language["Description"]);
-  TextFieldData platform = TextFieldData(hint: language["Platform"]);
+  TextFieldData title = TextFieldData(hint: 'title'.tr());
+  TextFieldData description = TextFieldData(hint: 'description'.tr());
+  TextFieldData platform = TextFieldData(hint: 'platform'.tr());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _BugReporterState extends State<BugReporter> {
         : const Color.fromARGB(255, 40, 40, 40);
     return Scaffold(
       appBar: AppBar(
-        title: Text(language["Bug Reporter"]),
+        title: const Text('bug reporter').tr(),
       ),
       body: Padding(
         padding: DeviceInfo.mobileLayout
@@ -70,7 +70,7 @@ class _BugReporterState extends State<BugReporter> {
                           fontWeight: FontWeight.w500,
                         ),
                         hintText: title.error
-                            ? language["Title at least 3 characters"]
+                            ? context.tr('title error')
                             : title.hint,
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
@@ -106,7 +106,7 @@ class _BugReporterState extends State<BugReporter> {
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
                         hintText: description.error
-                            ? language["Description at least 10 characters"]
+                            ? context.tr('description error')
                             : description.hint,
                         hintStyle: TextStyle(
                           color: description.error ? Colors.red : hintColor,
@@ -159,7 +159,7 @@ class _BugReporterState extends State<BugReporter> {
                   submit();
                 },
                 child: Text(
-                  language["Submit"],
+                  context.tr('submit'),
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

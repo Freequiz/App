@@ -1,24 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/textfield_data.dart';
 
 class QuizForm {
-  final title = TextFieldData(hint: language["Title"]);
-  final description = TextFieldData(hint: language["Description"]);
+  final title = TextFieldData(hint: 'title'.tr());
+  final description = TextFieldData(hint: 'description'.tr());
 
   String visibility = "public";
 
-  List<TextFieldData> definitions = [
-    TextFieldData(hint: language["Definition"]),
-    TextFieldData(hint: language["Definition"]),
-    TextFieldData(hint: language["Definition"])
+  List<WordPair> wordPairs = [
+    WordPair(key: "1"),
+    WordPair(key: "2"),
+    WordPair(key: "3")
   ];
 
-  List<TextFieldData> answers = [
-    TextFieldData(hint: language["Answer"]),
-    TextFieldData(hint: language["Answer"]),
-    TextFieldData(hint: language["Answer"])
-  ];
+  List<WordPair> destroyed = [];
 
   int counter = 0;
   bool error = false;
@@ -29,13 +25,18 @@ class QuizForm {
   Map createMap() {
     Map<String, Map> translations = {};
 
-    for (var i = 0; i < definitions.length; i++) {
-      if (definitions[i].input.text != "") {
-        translations["$i"] = {
-          'word': definitions[i].input.text,
-          'translation': answers[i].input.text
-        };
+    for (WordPair wordPair in wordPairs) {
+      Map<String, Map> map = wordPair.toMap();
+      if (wordPair.definition.input.text == "") {
+        map[wordPair.key]!["_destroy"] = "1";
       }
+      translations.addAll(map);
+    }
+
+    for (WordPair wordPair in destroyed) {
+      Map<String, Map> map = wordPair.toMap();
+      map[wordPair.key]!["_destroy"] = "1";
+      translations.addAll(map);
     }
 
     Map map = {
@@ -52,20 +53,20 @@ class QuizForm {
   }
 
   bool emptyDefinition(i) {
-    if (definitions[i].input.text.replaceAll(' ', '') != "") return false;
-    if (answers[i].input.text.replaceAll(' ', '') == "") return false;
+    if (wordPairs[i].definition.input.text.replaceAll(' ', '') != "") return false;
+    if (wordPairs[i].answer.input.text.replaceAll(' ', '') == "") return false;
     return true;
   }
 
   bool emptyAnswer(i) {
-    if (answers[i].input.text.replaceAll(' ', '') != "") return false;
-    if (definitions[i].input.text.replaceAll(' ', '') == "") return false;
+    if (wordPairs[i].answer.input.text.replaceAll(' ', '') != "") return false;
+    if (wordPairs[i].definition.input.text.replaceAll(' ', '') == "") return false;
     return true;
   }
 
   bool empty(i) {
-    if (answers[i].input.text.replaceAll(' ', '') != "") return false;
-    if (definitions[i].input.text.replaceAll(' ', '') != "") return false;
+    if (wordPairs[i].answer.input.text.replaceAll(' ', '') != "") return false;
+    if (wordPairs[i].definition.input.text.replaceAll(' ', '') != "") return false;
     return true;
   }
 
@@ -73,18 +74,17 @@ class QuizForm {
     error = false;
     counter = 0;
 
-    for (var i = 0; i < definitions.length; i++) {
+    for (var i = 0; i < wordPairs.length; i++) {
       if (emptyDefinition(i)) {
-        definitions[i].error = true;
-        definitions[i].input.clear();
+        wordPairs[i].definition.error = true;
+        wordPairs[i].definition.input.clear();
         error = true;
       } else if (emptyAnswer(i)) {
-        answers[i].error = true;
-        answers[i].input.clear();
+        wordPairs[i].answer.error = true;
+        wordPairs[i].answer.input.clear();
         error = true;
-      }
-      else if (empty(i)) {} 
-      else {
+      } else if (empty(i)) {
+      } else {
         counter++;
       }
     }
@@ -102,7 +102,31 @@ class QuizForm {
     if (description.input.text.replaceAll(' ', '').length < 5) {
       description.error = true;
       description.input.clear();
-      error = true; 
+      error = true;
     }
+  }
+
+  addWordPair() {
+    wordPairs
+        .add(WordPair(key: DateTime.now().microsecondsSinceEpoch.toString()));
+  }
+}
+
+class WordPair {
+  String key;
+
+  final definition = TextFieldData(hint: 'definition'.tr());
+
+  final answer = TextFieldData(hint: 'answer'.tr());
+
+  WordPair({required this.key});
+
+  toMap() {
+    return {
+      key: {
+        "word": definition.input.text,
+        "translation": answer.input.text,
+      }
+    };
   }
 }

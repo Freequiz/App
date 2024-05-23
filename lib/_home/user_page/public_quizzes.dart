@@ -1,10 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/_home/user_page/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
 import '../../others/utilities.dart';
@@ -28,7 +27,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
         Align(
           alignment: Alignment.center,
           child: Text(
-            "Quizzes".transl(),
+            context.tr('quizzes'),
             style: TextStyle(fontSize: DeviceInfo().height() / 30),
           ),
         ),
@@ -65,7 +64,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
               ),
               onPressed: () => onPressed(),
               child: Text(
-                language["Load more"],
+                context.tr('load more'),
                 style: TextStyle(
                     color: Colors.white, fontSize: DeviceInfo().height() / 55),
               ),

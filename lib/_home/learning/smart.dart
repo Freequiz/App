@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/question.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
@@ -50,7 +50,7 @@ class _SmartState extends State<Smart> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: purpleFreequiz,
-        title: Text(language["Smart"]),
+        title: const Text("Smart").tr(),
         leading: TextButton(
           onPressed: () =>
               Learning.stop(context, widget.refresh, widget.uuid, "Smart"),

@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
     final hintColor = DeviceInfo.darkMode ? Colors.white : Colors.black;
     return Scaffold(
       appBar: AppBar(
-        title: Text(language["Sign up"]),
+        title: const Text('sign up').tr(),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
             children: [
               Space.height(DeviceInfo().height() / 60),
               Text(
-                language["Login"],
+                context.tr('login'),
                 style: textSize(DeviceInfo().height() / 20),
               ),
               Space.height(DeviceInfo().height() / 60),
@@ -82,8 +82,8 @@ class _LoginState extends State<Login> {
                       color: username.error ? Colors.red : hintColor,
                     ),
                     hintText: username.error
-                        ? language["Username not found"]
-                        : language["Username"],
+                        ? context.tr('username error')
+                        : context.tr('username'),
                     border: const OutlineInputBorder(),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -118,8 +118,8 @@ class _LoginState extends State<Login> {
                             color: password.error ? Colors.red : hintColor,
                           ),
                           hintText: password.error
-                              ? language["Wrong Password"]
-                              : language["Password"],
+                              ? context.tr('wrong password')
+                              : context.tr('password'),
                           suffixIcon: IconButton(
                             icon: Icon(
                               password.shown

@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/question.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
@@ -28,7 +28,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(language["Multiple Choice"]),
+        title: const Text('multiple choice').tr(),
         leading: TextButton(
           onPressed: () {
             close();

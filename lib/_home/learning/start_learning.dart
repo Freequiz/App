@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice.dart';
@@ -5,11 +6,9 @@ import 'package:freequiz/_views/learning/progress_bar.dart';
 import 'package:freequiz/_home/learning/smart.dart';
 import 'package:freequiz/_home/learning/writing/writing.dart';
 import 'package:freequiz/models/translation.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
@@ -95,7 +94,7 @@ class _StartLearningState extends State<StartLearning> {
                   ),
                   child: Center(
                     child: Text(
-                      language["Learn"],
+                      context.tr('learn'),
                       style: TextStyle(
                           fontSize: DeviceInfo().height() / 36,
                           color: Colors.white,
@@ -135,7 +134,7 @@ class _StartLearningState extends State<StartLearning> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Learn only".transl(),
+                          context.tr('learn only'),
                           style: TextStyle(
                               fontSize: DeviceInfo().height() / 36,
                               color: Colors.white,

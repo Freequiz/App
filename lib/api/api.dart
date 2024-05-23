@@ -7,6 +7,8 @@ import 'package:http/http.dart';
 class Api {
   static const basePath = "https://dev.freequiz.ch/api/";
 
+  static Map defaultResponse = {"success": false};
+
   static Uri uri(String path) {
     return Uri.parse(basePath + path);
   }
@@ -78,9 +80,11 @@ class Api {
       case 404:
         debugPrint(response.toString());
         return jsonDecode(response.body);
+      case 503:
+        debugPrint(response.toString());
+        return defaultResponse;
       default:
         throw Exception('Unhandled Error');
-
     }
   }
 }

@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/initial_loading.dart';
 
 class Correction extends StatelessWidget {
   final String givenAnswer;
@@ -11,20 +11,18 @@ class Correction extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return AlertDialog(
-      title: Text(
-        language["Your answer was wrong"],
-      ),
+      title: const Text('answer wrong').tr(),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(language["The right answer was:"]),
+          const Text('right answer').tr(),
           Text(
             rightAnswer,
             style: TextStyle(fontSize: height / 32, color: Colors.green),
           ),
           SizedBox(height: height / 32),
-          Text(language["But you answered:"]),
+          const Text('your answer').tr(),
           Text(
             givenAnswer,
             style: TextStyle(fontSize: height / 32, color: Colors.red),
@@ -33,21 +31,19 @@ class Correction extends StatelessWidget {
       ),
       actions: [
         Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
-              child: Text(
-                language["My answer was right"],
-              ),
+              child: const Text('answer right').tr(),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
-              child: Text(language["Close"]),
+              child: const Text('close').tr(),
             ),
           ],
         ),

@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 import '../../../others/utilities.dart';
@@ -71,7 +71,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 borderRadius:
                     BorderRadius.circular(DeviceInfo().width() / 30.4),
               ),
-              hintText: language["Search"],
+              hintText: context.tr('search'),
               suffixIcon: IconButton(
                 color: hintColor,
                 onPressed: () {
@@ -102,7 +102,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
-                  language["Definition"],
+                  context.tr('definition'),
                   style: TextStyle(
                       fontSize: DeviceInfo.mobileLayout
                           ? DeviceInfo().height() / 50
@@ -122,7 +122,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
-                  language["Answer"],
+                  context.tr('answer'),
                   style: TextStyle(
                       fontSize: DeviceInfo.mobileLayout
                           ? DeviceInfo().height() / 50

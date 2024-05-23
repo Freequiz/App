@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_draft/edit_draft.dart';
 import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/device_info.dart';
@@ -80,7 +80,7 @@ class _DraftTileState extends State<DraftTile> {
                   TileTitle(
                     title: QuizHelper.draft['title'] != ""
                         ? QuizHelper.draft['title']
-                        : language["Emtpy title"],
+                        : context.tr('empty title'),
                     color: Colors.red,
                   ),
                   Row(

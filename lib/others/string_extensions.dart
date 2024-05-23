@@ -1,15 +1,8 @@
 import 'package:characters/characters.dart';
-import 'package:freequiz/others/initial_loading.dart';
 
 extension Capitalizing on String {
   String capitalize() {
     return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
-  }
-}
-
-extension Translating on String {
-  String transl() {
-    return language[this] ?? this;
   }
 }
 

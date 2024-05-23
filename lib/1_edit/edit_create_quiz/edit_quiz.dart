@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/basic_textfield.dart';
@@ -8,10 +9,8 @@ import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/quiz/manage.dart';
 
 class EditQuiz extends StatefulWidget {
@@ -29,7 +28,6 @@ class EditQuiz extends StatefulWidget {
 }
 
 class _EditQuizState extends State<EditQuiz> {
-  int wordCount = 3;
   bool firstTime = true;
 
   QuizForm quiz = QuizForm();
@@ -44,8 +42,8 @@ class _EditQuizState extends State<EditQuiz> {
     return Scaffold(
       appBar: AppBar(
         title: widget.owner
-            ? Text(language["Edit Quiz"])
-            : Text(language['Create Quiz']),
+            ? const Text('edit quiz').tr()
+            : const Text('create quiz').tr(),
         backgroundColor: DeviceInfo.darkMode ? grayFreequiz : blueFreequiz,
         leading: TextButton(
           onPressed: () {
@@ -70,7 +68,7 @@ class _EditQuizState extends State<EditQuiz> {
               onPressed();
             },
             child: Text(
-              language["Done"],
+              context.tr('done'),
             ),
           ),
         ],
@@ -101,13 +99,14 @@ class _EditQuizState extends State<EditQuiz> {
                     quiz.answerLanguage = int.parse(quizData['to']['id']);
                     firstTime = false;
                     for (var i = 0; i < quizData['data'].length; i++) {
-                      if (i >= quiz.definitions.length) {
-                        wordCount++;
-                        quiz.definitions.add(TextFieldData(hint: language["Description"]));
-                        quiz.answers.add(TextFieldData(hint: language["Answer"]));
+                      if (i >= quiz.wordPairs.length) {
+                        quiz.addWordPair();
                       }
-                      quiz.definitions[i].input.text = quizData['data'][i]['word'];
-                      quiz.answers[i].input.text = quizData['data'][i]['translation'];
+                      quiz.wordPairs[i].definition.input.text =
+                          quizData['data'][i]['word'];
+                      quiz.wordPairs[i].answer.input.text =
+                          quizData['data'][i]['translation'];
+                      quiz.wordPairs[i].key = quizData['data'][i]['id'].toString();
                     }
                   }
                 }
@@ -131,9 +130,10 @@ class _EditQuizState extends State<EditQuiz> {
                             BasicTextField(
                               textFieldData: quiz.title,
                               hintError:
-                                  language["Title at least 3 characters"],
-                              colorBorder:
-                                  (DeviceInfo.darkMode ? yellowFreequiz : grayFreequiz),
+                                  context.tr('title error'),
+                              colorBorder: (DeviceInfo.darkMode
+                                  ? yellowFreequiz
+                                  : grayFreequiz),
                               widthBorder: 3.0,
                               save: save,
                             ),
@@ -142,10 +142,7 @@ class _EditQuizState extends State<EditQuiz> {
                             ),
                             BasicTextField(
                               textFieldData: quiz.description,
-                              hintError: language[
-                                      "Description can't be blank"] +
-                                  '. ' +
-                                  language["Description at least 5 characters"],
+                              hintError: context.tr('description error'),
                               maxLines: 4,
                               keyboardType: TextInputType.multiline,
                               save: save,
@@ -213,21 +210,21 @@ class _EditQuizState extends State<EditQuiz> {
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: wordCount,
+                      itemCount: quiz.wordPairs.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           height: DeviceInfo().height() / 60,
                         );
                       },
                       itemBuilder: (BuildContext context, int i) {
+                        WordPair wordPair = quiz.wordPairs[i];
                         return Dismissible(
-                          key: Key(quiz.definitions[i].id),
+                          key: Key(wordPair.definition.id),
                           direction: DismissDirection.endToStart,
                           onDismissed: (direction) {
                             setState(() {
-                              quiz.definitions.removeAt(i);
-                              quiz.answers.removeAt(i);
-                              wordCount--;
+                              quiz.destroyed.add(quiz.wordPairs[i]);
+                              quiz.wordPairs.removeAt(i);
                             });
                           },
                           background: Container(
@@ -256,20 +253,21 @@ class _EditQuizState extends State<EditQuiz> {
                                   : blueFreequiz,
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(DeviceInfo().height() / 100),
+                              padding:
+                                  EdgeInsets.all(DeviceInfo().height() / 100),
                               child: Column(
                                 children: [
                                   BasicTextField(
-                                    textFieldData: quiz.definitions[i],
+                                    textFieldData: wordPair.definition,
                                     hintError:
-                                        language["Definition can't be blank"],
+                                        context.tr('definition error'),
                                     save: save,
                                   ),
                                   const SizedBox(
                                     height: 5,
                                   ),
                                   AnswerTextField(
-                                      textFieldData: quiz.answers[i],
+                                      textFieldData: wordPair.answer,
                                       onSubmitted: onSubmitted,
                                       i: i,
                                       save: save),
@@ -290,9 +288,13 @@ class _EditQuizState extends State<EditQuiz> {
                             foregroundColor: Colors.white),
                         onPressed: () {
                           setState(() {
-                            wordCount++;
-                            quiz.definitions.add(TextFieldData(hint: language["Definition"]));
-                            quiz.answers.add(TextFieldData(hint: language["Answer"]));
+                            quiz.wordPairs.add(
+                              WordPair(
+                                key: DateTime.now()
+                                    .microsecondsSinceEpoch
+                                    .toString(),
+                              ),
+                            );
                           });
                         },
                         child: const Icon(
@@ -305,9 +307,9 @@ class _EditQuizState extends State<EditQuiz> {
                 );
               }
               return Center(
-                    child: CircularProgressIndicator(
-                        color: DeviceInfo.darkMode ? Colors.white : grayFreequiz)
-              );
+                  child: CircularProgressIndicator(
+                      color:
+                          DeviceInfo.darkMode ? Colors.white : grayFreequiz));
             },
           ),
         ),
@@ -321,7 +323,7 @@ class _EditQuizState extends State<EditQuiz> {
     if (quiz.error) {
       setState(() {});
     }
-    
+
     if (quiz.counter < 3) {
       showDialog(
           context: context,
@@ -356,11 +358,10 @@ class _EditQuizState extends State<EditQuiz> {
 
   onSubmitted(int i) {
     setState(() {
-      if (quiz.definitions[i].input.text != "" && quiz.answers[i].input.text != "") {
-        if (i + 2 >= wordCount) {
-          wordCount++;
-          quiz.definitions.add(TextFieldData(hint: language["Definition"]));
-          quiz.answers.add(TextFieldData(hint: language["Answer"]));
+      if (quiz.wordPairs[i].definition.input.text != "" &&
+          quiz.wordPairs[i].answer.input.text != "") {
+        if (i + 2 >= quiz.wordPairs.length) {
+          quiz.addWordPair();
         }
         FocusScope.of(context).nextFocus();
       }
@@ -380,14 +381,16 @@ class _EditQuizState extends State<EditQuiz> {
     if (quiz.answerLanguage != int.parse(quizData['to']['id'])) {
       return true;
     }
-    if (quiz.definitions.length != quizData['data'].length) {
+    if (quiz.wordPairs.length != quizData['data'].length) {
       return true;
     }
     for (var i = 0; i < quizData['data'].length; i++) {
-      if (quiz.definitions[i].input.text != quizData['data'][i]['w']) {
+      if (quiz.wordPairs[i].definition.input.text !=
+          quizData['data'][i]['word']) {
         return true;
       }
-      if (quiz.answers[i].input.text != quizData['data'][i]['t']) {
+      if (quiz.wordPairs[i].answer.input.text !=
+          quizData['data'][i]['translation']) {
         return true;
       }
     }

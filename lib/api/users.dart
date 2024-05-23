@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:http/http.dart' as http;
@@ -98,7 +99,11 @@ class APIUsers {
           newAccessToken = true;
         } else if (response.statusCode == 401) {
           return jsonDecode(response.body);
-        } else {
+        }
+        else if (response.statusCode == 503) {
+          debugPrint(response.toString());
+          return Api.defaultResponse;
+        }else {
           throw Exception('Error');
         }
       }
@@ -122,13 +127,7 @@ class APIUsers {
   static Future<Map> getFavorites() async {
     final response = await Api.httpGet(path: 'user/favorites/1');
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 401) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error');
-    }
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> search(String searchTerm, int page) async {

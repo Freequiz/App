@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:freequiz/others/utilities.dart';
 
@@ -46,7 +46,7 @@ class _LoadingScreen2State extends State<LoadingScreen2> {
             widget.finishedLoading ? 0 : DeviceInfo().height() / 30,
           ),
           Text(
-            language[widget.message],
+            widget.message.tr(),
             style: textSize(
                 widget.finishedLoading ? 0 : DeviceInfo().height() / 45),
           ),

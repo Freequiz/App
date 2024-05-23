@@ -38,7 +38,7 @@ class Questionnaire {
   }
 
   static randomise(List<Translation> array) {
-    for (var _ = 0; _ < 20; _++) {
+    for (var n = 0; n < 20; n++) {
       if (array.isEmpty) break;
 
       final i = Random().nextInt(array.length);

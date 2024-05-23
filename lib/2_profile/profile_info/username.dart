@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 import '../../others/utilities.dart';
@@ -18,7 +18,7 @@ class Username extends StatefulWidget {
 
 class _UsernameState extends State<Username> {
   bool edit = false;
-  TextFieldData newUsername = TextFieldData(hint: language["Username"]);
+  TextFieldData newUsername = TextFieldData(hint: 'username'.tr());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _UsernameState extends State<Username> {
           children: [
             Row(
               children: [
-                Text(language["Username"]),
+                const Text('username').tr(),
                 const Spacer(),
                 Text(widget.data["data"]["username"]),
                 const SizedBox(
@@ -132,7 +132,7 @@ class _UsernameState extends State<Username> {
     if (map["success"] == true) {
       setState(() {
         newUsername.input.clear();
-        newUsername.hint = language["Username changed successfully"];
+        newUsername.hint = 'username change'.tr();
         newUsername.color = Colors.green;
         newUsername.error = false;
         newUsername.changed = true;
@@ -141,7 +141,7 @@ class _UsernameState extends State<Username> {
     } else if (map["message"] == "Invalid Username") {
       setState(() {
         newUsername.input.clear();
-        newUsername.hint = language["Username is not valid"];
+        newUsername.hint = 'username invalid'.tr();
         newUsername.color = Colors.red;
         newUsername.error = true;
         newUsername.changed = false;
@@ -149,7 +149,7 @@ class _UsernameState extends State<Username> {
     } else if (map["message"] == "Username is taken") {
       setState(() {
         newUsername.input.clear();
-        newUsername.hint = language["Username is taken"];
+        newUsername.hint = 'username taken'.tr();
         newUsername.color = Colors.red;
         newUsername.error = true;
         newUsername.changed = false;

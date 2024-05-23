@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/_views/buttons/edit.dart';
@@ -6,7 +7,6 @@ import 'package:freequiz/_views/quiz_tile/description.dart';
 import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 import '../../others/utilities.dart';
@@ -119,7 +119,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
                               });
                             },
                             child: Text(
-                              expanded ? "" : language["More"],
+                              expanded ? "" : context.tr('more'),
                               style: TextStyle(
                                   color: grayFreequiz,
                                   fontSize: DeviceInfo().height() / 50),

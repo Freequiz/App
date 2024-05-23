@@ -1,0 +1,149 @@
+{
+    "search": "Search",
+    "any": "Any",
+    "language": "Language",
+    "choose language": "Choose the desired language",
+    "done": "Done",
+    "results for": "Results for \"{}\"",
+    "fromto": "{} \u279C {}",
+    "load more": "Load more",
+    "amount quizzes": {
+        "one": "{} Quiz",
+        "other": "{} Quizzes"
+    },
+
+    "quizzes": "Quizzes",
+    "title": "Title",
+    "description": "Description",
+
+    "definition": "Definition",
+    "answer": "Answer",
+    "translation": "Translation",
+
+    "close": "Close",
+    "more": "More",
+
+    "learn": "Learn",
+    "learn only": "Learn only",
+
+    "smart": "Smart",
+    "cards": "Cards",
+    "multiple choice": "Multiple Choice",
+    "multi": "Multiple Choice",
+    "write": "Writing",
+    "writing": "Writing",
+
+    "no description": "No Description",
+    "nothing found": "Nothing found",
+
+    "delete": "Delete",
+    "delete quiz": "Delete Quiz",
+    "confirmation delete quiz": "Are you sure you want to delete your quiz. It's not reversible",
+    "delete account": "Delete account",
+    "delete account confirmation": "Are you sure you want to delete your account. It's not reversible",
+    "delete progress": "Delete Progress",
+    "confirmation delete progress": "Are you sure you want to delete your progress and start over?",
+
+    "answer wrong": "Your answer was wrong",
+    "right answer": "The right answer was:",
+    "your answer": "But you answered:",
+    "answer right": "My answer was right",
+
+    "amount questions": {
+        "zero": "No Questions",
+        "one": "1 Question",
+        "other": "{} Questions"
+    },
+
+    "empty title": "Empty Title",
+
+    "create new quiz": "Create a New Quiz",
+    "created quizzes": "Created Quizzes",
+    "create quiz": "Create Quiz",
+    "edit quiz": "Edit Quiz",
+
+    "answer blank": "Answer can't be blank",
+    "title error": "Title at least 3 characters",
+    "description error": "Description can't be blank. \n Description at least 5 characters long",
+    "definition error": "Definition can't be blank",
+
+    "not enough words": "Not enough words",
+    "not enough words description": "At least three word pairs are required to create a quiz",
+
+    "quiz saved": "Quiz saved",
+
+    "Invalid bearer token title": "An unknown error has occurred",
+    "Invalid bearer token description": "Try again later. If this error persists, please report it using the bug reporter.",
+    "Access token is invalid title": "Authentication error",
+    "Access token is invalid description": "An error occured and you were logged out. If this error persists, please use the bug reporter",
+    "other error title": "An unknown error has occurred",
+    "other error description": "Try again later. If this error persists, please report it using the bug reporter.",
+    "Quiz doesn't exist title": "The quiz doesn't exist",
+    "Quiz doesn't exist description": "The quiz was probably deleted. If you are sure it isn't the case please report it using the bug reporter.",
+
+    "draft": "Draft",
+
+    "sign up": "Sign up",
+    "login": "Login",
+    "log in": "Log in",
+    "logout": "Logout",
+
+    "username": "Username",
+    "username error": "Username not found",
+    "password": "Password",
+    "confirm password": "Confirm Password",
+    "wrong password": "Wrong Password",
+    "old password": "Old Password",
+    "password change": "Password changed",
+    "successfully": "successfully",
+
+    "terms 1": "By signing up you accept the ",
+    "terms 2": "terms and conditions",
+
+    "already account": "Already have an Account?",
+
+    "blank": "Can't be blank",
+    "password dont match": "Passwords don't match",
+    "password length 1": "At least 8 characters long, capital letter,",
+    "password length 2": "lowercase letter and number",
+
+    "email": "E-Mail",
+    "email success": "E-Mail changed succesfully",
+    "invalid email": "Invalid E-Mail",
+    "email taken": "E-Mail is taken",
+
+    "username change": "Username changed successfully",
+    "username invalid": "Username is not valid",
+    "username taken": "Username is taken",
+
+    "report bug": "Report Bug",
+    "platform": "Platform",
+    "bug reporter": "Bug Reporter",
+    "submit": "Submit",
+    
+    "new": "New",
+    "seen": "Seen",
+    "memorized": "Memorized",
+    "learned": "Learned",
+    "mastered": "Mastered",
+
+    "loading": "Loading",
+
+    "try again": "Try again",
+
+    "German": "German",
+    "English": "English",
+    "French": "French",
+    "Italian": "Italian",
+    "german": "German",
+    "english": "English",
+    "french": "French",
+    "italian": "Italian",
+    "spanish": "Spanish",
+    "latin": "Latin",
+    "greek": "Greek",
+    "romansh": "Romansh",
+    "japanese": "Japanese",
+    "korean": "Korean",
+    "chinese": "Chinese"
+}

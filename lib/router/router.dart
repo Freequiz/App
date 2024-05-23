@@ -10,8 +10,8 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: 'quiz/:quizUuid',
-          builder: (context, state) => state.params['quizUuid'] != null
-              ? LoadQuiz(uuid: state.params['quizUuid']!)
+          builder: (context, state) => state.pathParameters['quizUuid'] != null
+              ? LoadQuiz(uuid: state.pathParameters['quizUuid']!)
               : const App(),
         ),
       ],

@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/textfield_data.dart';
 
@@ -53,7 +53,7 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
           fontWeight: FontWeight.w500,
         ),
         hintText: widget.textFieldData.error
-            ? language["Answer can't be blank"]
+            ? context.tr('answer blank')
             : widget.textFieldData.hint,
         border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(

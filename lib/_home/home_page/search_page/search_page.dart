@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
@@ -8,7 +9,6 @@ import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -48,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
                 SearchFilter(
                   color: roseFreequiz,
                   child: Text(
-                    "${language["Results for"]} \"${widget.searchTerm.truncate(32)}\"",
+                    context.tr('results for', args: [widget.searchTerm.truncate(32)]),
                     style: TextStyle(
                         fontSize: DeviceInfo().height() / 50,
                         color: Colors.white),
@@ -61,8 +61,8 @@ class _SearchPageState extends State<SearchPage> {
                     color: purpleFreequiz,
                     child: Text(
                       Search.from == 'Any' && Search.to == 'Any'
-                          ? language["Language"]
-                          : "${language[Search.from] ?? Search.from} $arrow ${language[Search.to] ?? Search.to}",
+                          ? context.tr('language')
+                          : context.tr('fromto', args: [Search.from.tr(), Search.to.tr()]),
                       style: TextStyle(
                         fontSize: DeviceInfo().height() / 50,
                         color: Colors.white,
@@ -78,7 +78,7 @@ class _SearchPageState extends State<SearchPage> {
                   child: SearchFilter(
                     color: blueFreequiz,
                     child: Text(
-                      Search.mode.transl(),
+                      context.tr(Search.mode),
                       style: TextStyle(
                         fontSize: DeviceInfo().height() / 50,
                         color: Colors.white,
@@ -112,7 +112,7 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                       onPressed: () => onPressed(),
                       child: Text(
-                        language["Load more"],
+                        context.tr('load more'),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: DeviceInfo().height() / 55),

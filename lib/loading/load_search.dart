@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_home/home_page/search_page/search_page.dart';
@@ -5,7 +6,6 @@ import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
-import 'package:freequiz/others/string_extensions.dart';
 
 loadSearch({required BuildContext context, required String searchTerm, mode = "Quiz"}) {
   debugPrint(mode);
@@ -26,7 +26,7 @@ loadSearch({required BuildContext context, required String searchTerm, mode = "Q
                       mode: mode,
                     ),
                     appBar: AppBar(
-                      title: Text("Search".transl()),
+                      title: const Text('search').tr(),
                     ),
                   );
                 }
@@ -41,7 +41,7 @@ loadSearch({required BuildContext context, required String searchTerm, mode = "Q
               return LoadingScreen(
                 message: "Loading Search Results",
                 appBar: AppBar(
-                  title: Text("Loading".transl()),
+                  title: const Text('loading').tr(),
                 ),
               );
             },

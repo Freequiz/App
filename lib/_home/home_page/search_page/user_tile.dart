@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/loading/load_user.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
@@ -93,7 +93,7 @@ class _UserTileState extends State<UserTile> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
         child: Text(
-          "$n ${n > 1 ? "Quizzes".transl() : "Quiz".transl()} ",
+          'amount quizzes'.plural(n),
           style: textColor(Colors.white),
         ),
       ),

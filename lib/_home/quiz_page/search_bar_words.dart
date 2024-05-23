@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
 class SearchBarWords extends StatefulWidget {
@@ -44,7 +44,7 @@ class _SearchBarWordsState extends State<SearchBarWords> {
                         : const Color.fromARGB(255, 245, 245, 245),
                     contentPadding: const EdgeInsets.all(10.0),
                     border: const OutlineInputBorder(),
-                    hintText: "Search".transl(),
+                    hintText: context.tr('search'),
                     suffixIcon: IconButton(
                       color: hintColor,
                       onPressed: () {

@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/user_page/list_quizzes.dart';
 import 'package:freequiz/_home/user_page/user_page.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
-import 'package:freequiz/others/string_extensions.dart';
 
 loadUser({required BuildContext context, required String user}) {
   ListPublicQuizzes.data.clear();
@@ -41,7 +41,7 @@ loadUser({required BuildContext context, required String user}) {
               message: "Loading User",
               finishedLoading: false,
               appBar: AppBar(
-                title: Text("Loading".transl()),
+                title: const Text('loading').tr(),
               ),
             );
           },

@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 
 import '../../others/utilities.dart';
@@ -17,11 +17,11 @@ class Password extends StatefulWidget {
 
 class _PasswordState extends State<Password> {
   TextFieldData newPassword =
-      TextFieldData(hint: language["Password"], shown: false);
+      TextFieldData(hint: 'password'.tr(), shown: false);
   TextFieldData newPasswordConfirmation =
-      TextFieldData(hint: language["Confirm Password"], shown: false);
+      TextFieldData(hint: 'confirm password'.tr(), shown: false);
   TextFieldData oldPassword =
-      TextFieldData(hint: language["Old Password"], shown: false);
+      TextFieldData(hint: 'old password'.tr(), shown: false);
   bool edit = false;
 
   @override
@@ -38,7 +38,7 @@ class _PasswordState extends State<Password> {
           children: [
             Row(
               children: [
-                Text(language["Password"]),
+                const Text('password').tr(),
                 const Spacer(),
                 const Text("· · · · · · · ·"),
                 const SizedBox(
@@ -255,16 +255,16 @@ class _PasswordState extends State<Password> {
         newPassword.input.clear();
         newPasswordConfirmation.input.clear();
         oldPassword.input.clear();
-        oldPassword.hint = language["Password changed"];
-        newPassword.hint = language["successfully"];
-        newPasswordConfirmation.hint = language[""];
+        oldPassword.hint = 'password change'.tr();
+        newPassword.hint = 'successfully'.tr();
+        newPasswordConfirmation.hint = "";
         newPassword.color = Colors.green;
       });
     } else if (map["message"] == "Passwords don't match") {
       setState(() {
         newPassword.input.clear();
         newPasswordConfirmation.input.clear();
-        newPassword.hint = language["Passwords don't match"];
+        newPassword.hint = 'password dont match'.tr();
         newPasswordConfirmation.hint = "";
         newPassword.color = Colors.red;
         newPassword.error = true;
@@ -274,8 +274,8 @@ class _PasswordState extends State<Password> {
         newPassword.input.clear();
         newPasswordConfirmation.input.clear();
         newPassword.hint =
-            language["At least 8 characters long, capital letter,"];
-        newPasswordConfirmation.hint = language["lowercase letter and number"];
+            'password length 1'.tr();
+        newPasswordConfirmation.hint = 'password length 2'.tr();
         newPassword.color = Colors.red;
         newPassword.error = true;
       });

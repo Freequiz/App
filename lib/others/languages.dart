@@ -1,7 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:freequiz/api/languages.dart';
-import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/others/string_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -40,7 +41,7 @@ class Languages {
       newLanguages.add(
         DropdownMenuItem(
           value: int.parse(key),
-          child: Text(language[value['name']] ?? value['name'].capitalize()),
+          child: Text(value['name'].toString().tr().capitalize()),
         ),
       );
     });

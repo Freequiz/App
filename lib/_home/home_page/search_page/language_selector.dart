@@ -1,9 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/languages.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 
@@ -28,7 +27,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
     languages.add(
       DropdownMenuItem(
         value: 0,
-        child: Text(language["Any"]),
+        child: Text(context.tr('any')),
       ),
     );
     super.initState();
@@ -40,11 +39,11 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
     return AlertDialog(
       title: Text(
-        "Language".transl(),
+        context.tr('language'),
         style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
       content: Text(
-        "Choose the desired languages".transl(),
+        context.tr('choose language'),
       ),
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
@@ -107,7 +106,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
             widget.refresh();
           },
           child: Text(
-            language["Done"],
+            context.tr('done'),
           ),
         ),
       ],

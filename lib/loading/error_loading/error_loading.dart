@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 
 class ErrorLoading extends StatelessWidget {
   final String error;
@@ -11,14 +11,14 @@ class ErrorLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(language["Loading"]),
+        title: const Text('loading').tr(),
       ),
       body: AlertDialog(
         title: Text(
-          language["$error title"] ?? language["other error title"],
+          context.tr('$error title'),
           style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
         ),
-        content: Text(language["$error description"] ?? language["other error description"]),
+        content: Text(context.tr("$error description")),
         actions: [
           TextButton(
             onPressed: () {
@@ -30,13 +30,13 @@ class ErrorLoading extends StatelessWidget {
                 ),
               );
             },
-            child: Text(language["Bug Reporter"]),
+            child: const Text('bug reporter').tr(),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text(language["Close"]),
+            child: const Text('close').tr(),
           )
         ],
       ),

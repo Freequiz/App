@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/title.dart';
 import 'package:freequiz/loading/load_user.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 
@@ -32,7 +32,7 @@ class QuizDescription extends StatelessWidget {
                   child: Text(
                     QuizHelper.quiz!.description != ""
                         ? QuizHelper.quiz!.description!
-                        : "No Description".transl(),
+                        : context.tr('no description'),
                     style: TextStyle(
                         fontSize: DeviceInfo.mobileLayout
                             ? DeviceInfo().height() / 55

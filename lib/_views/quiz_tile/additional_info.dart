@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/badge.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 
@@ -21,8 +21,7 @@ class AdditionalInfo extends StatelessWidget {
         children: [
           InfoBadge(
             color: roseFreequiz,
-            text:
-                "${language["Questions"]} ${data['translations'] ?? data['data'].length}",
+            text:'amount questions'.plural(data['data'].length),
           ),
 
           Space.width(10.0),
@@ -30,7 +29,7 @@ class AdditionalInfo extends StatelessWidget {
           InfoBadge(
             color: purpleFreequiz,
             text:
-                "${language[data['from']['name']]} $arrow ${language[data['to']['name']]}",
+            context.tr("fromto", args: [context.tr(data['from']['name']), context.tr(data['to']['name'])])
           ),
         ],
       ),

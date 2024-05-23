@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 
@@ -31,7 +31,7 @@ class _BugReportPageState extends State<BugReportPage> {
               ),
             );
           },
-          child: Text(language["Report Bug"], style: textSize(DeviceInfo().height() / 40),),
+          child: Text(context.tr('report bug'), style: textSize(DeviceInfo().height() / 40),),
         ),
       ),
     );

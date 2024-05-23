@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/initial_loading.dart';
 
 class Confirmation extends StatelessWidget {
   final Function reset;
@@ -12,11 +12,10 @@ class Confirmation extends StatelessWidget {
     bool darkMode = brightness == Brightness.dark;
     return AlertDialog(
       title: Text(
-        language["Delete Progress"],
+        context.tr('delete progress'),
         style: TextStyle(color: darkMode ? Colors.white : Colors.black),
       ),
-      content: Text(language[
-          "Are you sure you want to delete your progress and start over?"]),
+      content: const Text('confirmation delete progress').tr(),
       actions: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -30,7 +29,7 @@ class Confirmation extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
                 child: Text(
-                  language["Delete"],
+                  context.tr('delete'),
                   style: const TextStyle(color: Colors.red),
                 ),
               ),
@@ -38,7 +37,7 @@ class Confirmation extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text(language["Close"]),
+                child: const Text('close').tr(),
               )
             ],
           ),

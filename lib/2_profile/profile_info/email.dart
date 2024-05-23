@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 
@@ -16,7 +16,7 @@ class EMail extends StatefulWidget {
 }
 
 class _EMailState extends State<EMail> {
-  TextFieldData newEmail = TextFieldData(hint: language["E-Mail"]);
+  TextFieldData newEmail = TextFieldData(hint: 'email'.tr());
   bool edit = false;
 
   @override
@@ -33,7 +33,7 @@ class _EMailState extends State<EMail> {
           children: [
             Row(
               children: [
-                Text(language["E-Mail"]),
+                const Text('email').tr(),
                 const Spacer(),
                 Text(widget.data["data"]["email"]),
                 const SizedBox(
@@ -123,14 +123,14 @@ class _EMailState extends State<EMail> {
 
   changeEmail() async {
     if (newEmail.input.text.isEmpty) {
-      newEmail.hint = language["Can't be blank"];
+      newEmail.hint = 'blank'.tr();
     } else {
       final Map map =
           await APIUsers.updateAccount(email: newEmail.input.text);
       if (map["success"] == true) {
         setState(() {
           newEmail.input.clear();
-          newEmail.hint = language["E-Mail changed succesfully"];
+          newEmail.hint = 'email success'.tr();
           newEmail.color = Colors.green;
           newEmail.error = false;
           newEmail.changed = true;
@@ -139,7 +139,7 @@ class _EMailState extends State<EMail> {
       } else if (map["message"] == "Invalid email") {
         setState(() {
           newEmail.input.clear();
-          newEmail.hint = language["Invalid E-Mail"];
+          newEmail.hint = 'invalid email'.tr();
           newEmail.color = Colors.red;
           newEmail.error = true;
           newEmail.changed = false;
@@ -147,7 +147,7 @@ class _EMailState extends State<EMail> {
       } else if (map["message"] == "Email is taken") {
         setState(() {
           newEmail.input.clear();
-          newEmail.hint = language["Email is taken"];
+          newEmail.hint = 'email taken'.tr();
           newEmail.color = Colors.red;
           newEmail.error = true;
           newEmail.changed = false;

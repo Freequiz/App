@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 
@@ -38,7 +38,7 @@ class SwitcherButton extends StatelessWidget {
         child: Center(
           child: icon ??
               Text(
-                text.transl(),
+                context.tr(text),
                 style: textSize(DeviceInfo().height() / 60),
               ),
         ),

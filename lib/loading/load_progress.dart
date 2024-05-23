@@ -1,24 +1,24 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/start_learning.dart';
 import 'package:freequiz/_views/learning/confirmation.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 
 final List<String> levelsNormal = [
-  "New".transl(),
-  "Learned".transl(),
-  "Mastered".transl(),
+  "new".tr(),
+  "learned".tr(),
+  "mastered".tr(),
 ];
 
 final List<String> levelsSmart = [
-  "New".transl(),
-  "Seen".transl(),
-  "Memorized".transl(),
-  "Learned".transl(),
-  "Mastered".transl()
+  "new".tr(),
+  "seen".tr(),
+  "memorized".tr(),
+  "learned".tr(),
+  "mastered".tr()
 ];
 final List<Color> color = [
   purpleFreequiz,
@@ -45,7 +45,7 @@ loadProgress(BuildContext context, String uuid, int i, Function reset,
           ),
           appBar: AppBar(
             backgroundColor: color[i],
-            title: Text(Learning.modes[i].transl()),
+            title: Text(Learning.modes[i].tr()),
             actions: [
               TextButton(
                 style: TextButton.styleFrom(

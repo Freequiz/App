@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 
 class Confirmation extends StatelessWidget {
   final Function refresh;
@@ -12,11 +12,10 @@ class Confirmation extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        language["Delete Quiz"],
+        context.tr('delete quiz'),
         style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
-      content: Text(language[
-          "Are you sure you want to delete your quiz. It's not reversible"]),
+      content: const Text('confirmation delete quiz').tr(),
       actions: [
         FutureBuilder<Map>(
           future: APIQuizzes.getDeleteToken(uuid),
@@ -35,7 +34,7 @@ class Confirmation extends StatelessWidget {
                         refresh();
                       },
                       child: Text(
-                        language["Delete Quiz"],
+                        context.tr('delete quiz'),
                         style: const TextStyle(color: Colors.red),
                       ),
                     ),
@@ -43,7 +42,7 @@ class Confirmation extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text(language["Close"]),
+                      child: const Text('close').tr(),
                     )
                   ],
                 ),

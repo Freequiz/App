@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/edit_quiz_tile.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 
@@ -26,7 +26,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            language["Created Quizzes"],
+            context.tr('created quizzes'),
             style: textSize(DeviceInfo().height() / 30),
           ),
         ),
@@ -69,7 +69,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
               ),
               onPressed: () => onPressed(),
               child: Text(
-                language["Load more"],
+                context.tr('load more'),
                 style: TextStyle(
                     color: Colors.white, fontSize: DeviceInfo().height() / 55),
               ),

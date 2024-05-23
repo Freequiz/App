@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 
@@ -22,7 +22,7 @@ class _CardsState extends State<Cards> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(language["Cards"]),
+        title: const Text('cards').tr(),
         leading: TextButton(
           onPressed: () {
             close();

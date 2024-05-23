@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/2_profile/profile_info/confirmation.dart';
 import 'package:freequiz/2_profile/profile_info/dark_mode_switcher.dart';
@@ -5,7 +6,6 @@ import 'package:freequiz/2_profile/profile_info/email.dart';
 import 'package:freequiz/2_profile/profile_info/password.dart';
 import 'package:freequiz/2_profile/profile_info/username.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
 
@@ -57,7 +57,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       widget.refresh();
                       Profile.deleteData();
                     },
-                    child: Text(language["Logout"]),
+                    child: const Text('logout').tr(),
                   ),
                 ),
                 const SizedBox(height: 20.0,),
@@ -71,7 +71,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           context: context,
                           builder: (BuildContext context) => Confirmation(refresh: widget.refresh));
                     },
-                    child: Text(language["Delete Account"]),
+                    child: const Text('delete account').tr(),
                   ),
                 ),
               ],

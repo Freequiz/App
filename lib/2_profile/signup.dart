@@ -1,9 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
@@ -18,12 +17,12 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextFieldData username = TextFieldData(hint: language["Username"]);
-  TextFieldData email = TextFieldData(hint: language["E-Mail"]);
+  TextFieldData username = TextFieldData(hint: 'username'.tr());
+  TextFieldData email = TextFieldData(hint: 'email'.tr());
   TextFieldData password =
-      TextFieldData(hint: language["Password"], shown: false);
+      TextFieldData(hint: 'password'.tr(), shown: false);
   TextFieldData passwordConfirmation =
-      TextFieldData(hint: language["Confirm Password"], shown: false);
+      TextFieldData(hint: 'confirm password'.tr(), shown: false);
   bool pressed = false;
 
   Map<String, Map<String, String>> errorMessages = {
@@ -54,7 +53,7 @@ class _SignUpState extends State<SignUp> {
             ),
             Center(
               child: Text(
-                language["Sign up"],
+                context.tr('sign up'),
                 style: textSize(DeviceInfo().height() / 20),
               ),
             ),
@@ -62,14 +61,14 @@ class _SignUpState extends State<SignUp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  language["By signing up you accept the "],
+                  context.tr('terms 1'),
                   style: textSize(DeviceInfo().height() / 65),
                 ),
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {},
                   child: Text(
-                    language["terms and conditions"],
+                    context.tr('terms 2'),
                     style: TextStyle(
                         fontSize: DeviceInfo().height() / 65,
                         color: Colors.blue),
@@ -273,7 +272,7 @@ class _SignUpState extends State<SignUp> {
             ),
             Center(
               child: Text(
-                language["Already have an Account?"],
+                context.tr('already account'),
                 style: textSize(DeviceInfo().height() / 65),
               ),
             ),
@@ -292,7 +291,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   );
                 },
-                child: Text(language["Log in"]),
+                child: const Text('log in').tr(),
               ),
             ),
           ],
@@ -306,23 +305,23 @@ class _SignUpState extends State<SignUp> {
       setState(() {
         password.input.clear();
         passwordConfirmation.input.clear();
-        password.hint = language["Passwords don't match"];
+        password.hint = 'password dont match'.tr();
         passwordConfirmation.hint = "";
         password.error = true;
       });
     } else if (username.input.text.isEmpty) {
       setState(() {
-        username.hint = language["Can't be blank"];
+        username.hint = 'blank'.tr();
         username.error = true;
       });
     } else if (email.input.text.isEmpty) {
       setState(() {
-        email.hint = language["Can't be blank"];
+        email.hint = 'blank'.tr();
         email.error = true;
       });
     } else if (password.input.text.isEmpty) {
       setState(() {
-        password.hint = language["Can't be blank"];
+        password.hint = 'blank'.tr();
         passwordConfirmation.hint = "";
       });
     } else {
@@ -345,15 +344,15 @@ class _SignUpState extends State<SignUp> {
           password.input.clear();
           passwordConfirmation.input.clear();
           password.hint =
-              "At least 8 characters long, capital letter,".transl();
-          passwordConfirmation.hint = "lowercase letter and number".transl();
+              'password length 1'.tr();
+          passwordConfirmation.hint = 'password length 2'.tr();
           password.error = true;
           pressed = false;
         });
       } else if (map["token"] == "record.invalid") {
         map["errors"].forEach((object, error) {
           String errorMessage =
-              errorMessages[object]![error[0]['error']]!.transl();
+              errorMessages[object]![error[0]['error']]!.tr();
 
           switch (object) {
             case "username":

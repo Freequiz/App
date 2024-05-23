@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
@@ -28,7 +28,7 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        language[widget.title],
+        context.tr(widget.title),
         style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : textGray),
       ),
       content: FutureBuilder(
@@ -39,18 +39,17 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
               closeButton = false;
               close(data);
               return Text(
-                language['Quiz saved'],
+                context.tr('quiz saved'),
                 style: const TextStyle(color: Colors.green),
               );
             }
             return Text(
-              language['${data.data!['message']} description'] ??
-                  language['other error description'],
+              context.tr(data.data!['message'] ?? 'other error description'),
             );
           }
           if (data.hasError) {
             return Text(
-              language['other error description'],
+              context.tr('other error description'),
             );
           }
           return const Row(
@@ -68,7 +67,7 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
           closeButton,
           TextButton(
             onPressed: closeButton ? () => Navigator.of(context).pop() : () {},
-            child: Text(language['Close']),
+            child: const Text('close').tr(),
           ),
         ),
       ],

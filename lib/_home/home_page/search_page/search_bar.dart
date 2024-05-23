@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 
 import '../../../others/utilities.dart';
@@ -57,7 +57,7 @@ class _SearchBarState extends State<SearchBar> {
                         : const Color.fromARGB(255, 245, 245, 245),
                     contentPadding: const EdgeInsets.all(10.0),
                     border: const OutlineInputBorder(),
-                    hintText: "Search".transl(),
+                    hintText: context.tr('language'),
                     suffixIcon: IconButton(
                       color: hintColor,
                       onPressed: () {
