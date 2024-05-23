@@ -22,7 +22,7 @@ class ManageQuiz {
     }
 
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult != ConnectivityResult.none && !preview) {
+    if (connectivityResult.contains(ConnectivityResult.none) && !preview) {
       final quiz = await APIQuizzes.getQuiz(uuid);
       if (quiz['success']) {
         QuizHelper.quiz = Quiz.fromJson(quiz['quiz_data']);

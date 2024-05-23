@@ -87,8 +87,8 @@ class APIUsers {
   static refresh() async {
     if (!newAccessToken && Profile.accessToken != "") {
       var connectivityResult = await (Connectivity().checkConnectivity());
-      if (connectivityResult == ConnectivityResult.mobile ||
-          connectivityResult == ConnectivityResult.wifi) {
+      if (connectivityResult.contains(ConnectivityResult.mobile) ||
+          connectivityResult.contains(ConnectivityResult.wifi)) {
         final response = await Api.httpPost(path: 'user/refresh');
 
         if (response.statusCode == 200) {

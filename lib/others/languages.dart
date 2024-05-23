@@ -16,7 +16,7 @@ class Languages {
       mapToList(mapLanguages);
     }
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult != ConnectivityResult.none) {
+    if (!connectivityResult.contains(ConnectivityResult.none)) {
       load();
     }
     //debugPrint(mapLanguages.toString());
