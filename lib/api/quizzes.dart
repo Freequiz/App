@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
 import 'api.dart';
 
 class APIQuizzes {
@@ -31,7 +30,6 @@ class APIQuizzes {
 
     if (response.statusCode == 200) {
       final map = jsonDecode(response.body);
-      LocalStorage.saveQuiz(uuid, map);
       return map;
     }
     if (response.statusCode == 404) {

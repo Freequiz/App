@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/models/language.dart';
 import 'package:freequiz/models/translations.dart';
@@ -81,6 +83,22 @@ class Quiz {
         "to": to.toMap(),
         "data": translations.toMap()
       }
+    };
+  }
+
+  Map<String, Object?> toMapDatabase() {
+    return {
+      "id": id,
+      "title": title,
+      "description": description,
+      "visibility": visibility,
+      "created_by": creator,
+      "favorite": favorite,
+      "owner": owner,
+      "from_language": json.encode(from.toMap()),
+      "to_language": json.encode(to.toMap()),
+      "data": json.encode(translations.toMap()),
+      "time": DateTime.now().millisecondsSinceEpoch
     };
   }
 

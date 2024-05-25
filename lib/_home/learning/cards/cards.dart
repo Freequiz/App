@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
+import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/style.dart';
@@ -52,7 +52,7 @@ class _CardsState extends State<Cards> {
       });
     } else {
       widget.refresh();
-      LocalStorage.saveQuiz(widget.uuid, QuizHelper.quiz!.toMap());
+      QuizDatabase.updateQuiz(QuizHelper.quiz!); //TODO: Change to Update
       Navigator.of(context).pop();
     }
   }
@@ -66,13 +66,13 @@ class _CardsState extends State<Cards> {
       });
     } else {
       widget.refresh();
-      LocalStorage.saveQuiz(widget.uuid, QuizHelper.quiz!.toMap());
+      QuizDatabase.updateQuiz(QuizHelper.quiz!);
       Navigator.of(context).pop();
     }
   }
 
   close() {
-    LocalStorage.saveQuiz(widget.uuid, QuizHelper.quiz!.toMap());
+    QuizDatabase.updateQuiz(QuizHelper.quiz!);
     widget.refresh();
     Navigator.of(context).pop();
   }

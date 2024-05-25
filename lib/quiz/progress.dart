@@ -1,5 +1,5 @@
 import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
+import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
@@ -12,7 +12,7 @@ class Progress {
       translation.score[mode] = 0;
     }
     
-    LocalStorage.saveQuiz(uuid, QuizHelper.quiz!.toMap());
+    QuizDatabase.updateQuiz(QuizHelper.quiz!);
     APIQuizzes.resetScore(uuid, mode);
   }
 

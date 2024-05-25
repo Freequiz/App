@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
+import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/_views/learning/correction.dart';
@@ -63,7 +63,7 @@ class Learning {
   }
 
   static stop(BuildContext context, Function refresh, String uuid, String mode) {
-    LocalStorage.saveQuiz(uuid, QuizHelper.quiz!.toMap());
+    QuizDatabase.updateQuiz(QuizHelper.quiz!);
     FocusScope.of(context).requestFocus(FocusNode());
     Future.delayed(const Duration(milliseconds: 500), () {
       refresh();

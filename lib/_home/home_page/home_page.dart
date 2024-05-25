@@ -4,7 +4,7 @@ import 'package:freequiz/_views/quiz_list/quiz_list.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
+import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/manage.dart';
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     removeRecent(int i, String uuid) {
-      LocalStorage.deleteQuiz(i);
+      QuizDatabase.deleteQuiz(uuid);
     }
 
     removeFavorite(int i, String uuid) async {

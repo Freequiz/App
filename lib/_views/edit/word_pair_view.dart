@@ -6,7 +6,7 @@ import 'package:freequiz/_views/edit/basic_textfield.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 
-class WordPairView extends StatefulWidget {
+class WordPairView extends StatelessWidget {
   final WordPair wordPair;
   final Function onDismissed;
   final Function save;
@@ -21,16 +21,11 @@ class WordPairView extends StatefulWidget {
   });
 
   @override
-  State<WordPairView> createState() => _WordPairViewState();
-}
-
-class _WordPairViewState extends State<WordPairView> {
-  @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key(widget.wordPair.definition.id),
+      key: Key(wordPair.definition.id),
       direction: DismissDirection.endToStart,
-      onDismissed: (direction) => widget.onDismissed(),
+      onDismissed: (direction) => onDismissed(),
       background: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
@@ -57,17 +52,17 @@ class _WordPairViewState extends State<WordPairView> {
           child: Column(
             children: [
               BasicTextField(
-                textFieldData: widget.wordPair.definition,
+                textFieldData: wordPair.definition,
                 hintError: context.tr('definition error'),
-                save: widget.save,
+                save: save,
               ),
               const SizedBox(
                 height: 5,
               ),
               AnswerTextField(
-                textFieldData: widget.wordPair.answer,
-                onSubmitted: widget.onSubmitted,
-                save: widget.save,
+                textFieldData: wordPair.answer,
+                onSubmitted: onSubmitted,
+                save: save,
               ),
             ],
           ),

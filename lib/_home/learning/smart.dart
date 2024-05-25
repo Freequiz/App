@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
+import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
@@ -96,7 +96,7 @@ class _SmartState extends State<Smart> {
       } else {
         widget.refresh();
         Navigator.of(context).pop();
-        LocalStorage.saveQuiz(widget.uuid, QuizHelper.quiz!.toMap());
+        QuizDatabase.updateQuiz(QuizHelper.quiz!);
       }
       answerRightW = false;
     });
