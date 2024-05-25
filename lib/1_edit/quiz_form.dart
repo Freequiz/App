@@ -9,9 +9,9 @@ class QuizForm {
   String visibility = "public";
 
   List<WordPair> wordPairs = [
+    WordPair(key: "0"),
     WordPair(key: "1"),
-    WordPair(key: "2"),
-    WordPair(key: "3")
+    WordPair(key: "2")
   ];
 
   List<WordPair> destroyed = [];
@@ -108,7 +108,7 @@ class QuizForm {
 
   addWordPair() {
     wordPairs
-        .add(WordPair(key: DateTime.now().microsecondsSinceEpoch.toString()));
+        .add(WordPair(key: wordPairs.length.toString()));
   }
 }
 

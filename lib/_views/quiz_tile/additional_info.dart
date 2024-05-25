@@ -21,7 +21,7 @@ class AdditionalInfo extends StatelessWidget {
         children: [
           InfoBadge(
             color: roseFreequiz,
-            text:'amount questions'.plural(data['data'].length),
+            text:'amount questions'.plural(data['translations'] ?? data['data'].length),
           ),
 
           Space.width(10.0),

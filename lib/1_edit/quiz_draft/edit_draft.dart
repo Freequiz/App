@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/1_edit/edit_create_quiz/answer_textfield.dart';
+import 'package:freequiz/_views/edit/answer_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/progress_pop_up.dart';
 import 'package:freequiz/1_edit/quiz_form.dart';
+import 'package:freequiz/_views/edit/header.dart';
 import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
-import '../edit_create_quiz/basic_textfield.dart';
+import '../../_views/edit/basic_textfield.dart';
 
 class EditDraft extends StatefulWidget {
   final Function refresh;
@@ -92,90 +92,7 @@ class _EditDraftState extends State<EditDraft> {
               SizedBox(
                 height: DeviceInfo().height() / 60,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(DeviceInfo().height() / 100),
-                  color: DeviceInfo.darkMode
-                      ? const Color.fromARGB(255, 55, 55, 55)
-                      : blueFreequiz,
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(DeviceInfo().height() / 100),
-                  child: Column(
-                    children: [
-                      BasicTextField(
-                        textFieldData: quiz.title,
-                        hintError: context.tr('title error'),
-                        colorBorder: (DeviceInfo.darkMode ? yellowFreequiz : grayFreequiz),
-                        widthBorder: 3.0,
-                        save: save,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      BasicTextField(
-                        textFieldData: quiz.description,
-                        hintError: context.tr('description error'),
-                        maxLines: 4,
-                        keyboardType: TextInputType.multiline,
-                        save: save,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          DropdownButton(
-                            value: quiz.definitionLanguage,
-                            icon: const Icon(
-                              Icons.arrow_drop_down_rounded,
-                              color: grayFreequiz,
-                            ),
-                            underline: Container(
-                              height: 2,
-                              color: grayFreequiz,
-                            ),
-                            dropdownColor: DeviceInfo.darkMode
-                                ? const Color.fromARGB(255, 40, 40, 40)
-                                : const Color.fromARGB(255, 229, 242, 250),
-                            items: Languages.languages,
-                            onChanged: (value) {
-                              setState(() {
-                                quiz.definitionLanguage = value!;
-                              });
-                            },
-                            style: TextStyle(color: hintColor),
-                          ),
-                          const Icon(
-                            Icons.arrow_forward_rounded,
-                            color: grayFreequiz,
-                          ),
-                          DropdownButton(
-                            value: quiz.answerLanguage,
-                            icon: const Icon(
-                              Icons.arrow_drop_down_rounded,
-                              color: grayFreequiz,
-                            ),
-                            underline: Container(
-                              height: 2,
-                              color: grayFreequiz,
-                            ),
-                            dropdownColor: DeviceInfo.darkMode
-                                ? const Color.fromARGB(255, 40, 40, 40)
-                                : const Color.fromARGB(255, 229, 242, 250),
-                            items: Languages.languages,
-                            onChanged: (value) {
-                              setState(() {
-                                quiz.answerLanguage = value!;
-                              });
-                            },
-                            style: TextStyle(color: hintColor),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              EditHeader(quiz: quiz, save: save, hintColor: hintColor),
               SizedBox(
                 height: DeviceInfo().height() / 40,
               ),

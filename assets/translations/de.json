@@ -11,6 +11,7 @@
         "one": "{} Quiz",
         "other": "{} Quizze"
     },
+    "Quiz": "Quiz",
 
     "quizzes": "Quizze",
     "title": "Titel",
@@ -159,5 +160,9 @@
 
     "Share": "Teilen",
     "Edit": "Bearbeiten",
-    "Close": "Schliessen"
+    "Close": "Schliessen",
+
+    "private": "Privat",
+    "hidden": "Versteckt",
+    "public": "Öffentlich"
 }

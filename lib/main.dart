@@ -8,23 +8,18 @@ import 'package:provider/provider.dart';
 import 'package:freequiz/others/theme.dart';
 
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); //needs to be initialized to await EasyLocalization.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); //needs to be initialized to await EasyLocalization.ensureInitialized();
 
   await EasyLocalization.ensureInitialized();
 
   runApp(
     Phoenix(
       child: EasyLocalization(
-          supportedLocales: const [
-            Locale('en'),
-            Locale('de'),
-            Locale('fr'),
-            Locale('it'),
-          ],
-          path: 'assets/translations',
-          fallbackLocale: const Locale('en'),
-          child: const MyApp()),
+        supportedLocales: const [Locale('en'), Locale('de'), Locale('fr'), Locale('it')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('en'),
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -46,8 +41,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getCurrentAppTheme() async {
-    themeChangeProvider.theme =
-        await themeChangeProvider.themePreference.getTheme();
+    themeChangeProvider.theme = await themeChangeProvider.themePreference.getTheme();
   }
 
   @override
@@ -64,8 +58,7 @@ class _MyAppState extends State<MyApp> {
             locale: context.locale,
             debugShowCheckedModeBanner: false,
             theme: themeChangeProvider.theme == "Dark Mode" ||
-                    (themeChangeProvider.theme == "Automatic" &&
-                        DeviceInfo.darkMode)
+                    (themeChangeProvider.theme == "Automatic" && DeviceInfo.darkMode)
                 ? darkTheme
                 : lightTheme,
             routerConfig: router,
