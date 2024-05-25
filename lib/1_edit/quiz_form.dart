@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:freequiz/local_storage/quizzes.dart';
 import 'package:freequiz/others/textfield_data.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
 
 class QuizForm {
   final title = TextFieldData(hint: 'title'.tr());
@@ -109,6 +111,13 @@ class QuizForm {
   addWordPair() {
     wordPairs
         .add(WordPair(key: wordPairs.length.toString()));
+  }
+
+  save() {
+    final map = createMap();
+
+    LocalStorage.saveDraft(map);
+    QuizHelper.draft = map;
   }
 }
 

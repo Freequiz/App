@@ -1,13 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/_views/edit/answer_textfield.dart';
-import 'package:freequiz/_views/edit/basic_textfield.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/progress_pop_up.dart';
 import 'package:freequiz/1_edit/quiz_form.dart';
-import 'package:freequiz/_views/edit/header.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
-import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/_views/edit/edit_view.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
@@ -25,9 +21,6 @@ class _CreateQuizState extends State<CreateQuiz> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode
-        ? Colors.white
-        : const Color.fromARGB(255, 40, 40, 40);
     return Scaffold(
       appBar: AppBar(
         title: const Text('create quiz').tr(),
@@ -35,7 +28,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         leading: TextButton(
           onPressed: () {
             if (changed()) {
-              save();
+              quiz.save();
             }
             Navigator.of(context).pop();
             widget.refresh();
@@ -63,113 +56,14 @@ class _CreateQuizState extends State<CreateQuiz> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
           if (changed()) {
-            save();
+            quiz.save();
           }
         },
         child: Padding(
           padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.all(10.0)
-              : EdgeInsets.symmetric(
-                  horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
-          child: ListView(
-            children: [
-              SizedBox(
-                height: DeviceInfo().height() / 60,
-              ),
-              EditHeader(quiz: quiz, save: save, hintColor: hintColor),
-              SizedBox(
-                height: DeviceInfo().height() / 40,
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: quiz.wordPairs.length,
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    height: DeviceInfo().height() / 60,
-                  );
-                },
-                itemBuilder: (BuildContext context, int i) {
-                  WordPair wordPair = quiz.wordPairs[i];
-                  return Dismissible(
-                    key: Key(wordPair.definition.id),
-                    direction: DismissDirection.endToStart,
-                    onDismissed: (direction) {
-                      setState(() {
-                        quiz.wordPairs.removeAt(i);
-                      });
-                    },
-                    background: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(DeviceInfo().height() / 100),
-                        color: Colors.red,
-                      ),
-                      child: const Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Icon(
-                            Icons.clear,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(DeviceInfo().height() / 100),
-                        color: DeviceInfo.darkMode
-                            ? const Color.fromARGB(255, 55, 55, 55)
-                            : blueFreequiz,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(DeviceInfo().height() / 100),
-                        child: Column(
-                          children: [
-                            BasicTextField(
-                              textFieldData: wordPair.definition,
-                              hintError: context.tr('definition error'),
-                              save: save,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            AnswerTextField(
-                              textFieldData: wordPair.answer,
-                              onSubmitted: onSubmitted,
-                              i: i,
-                              save: save,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: DeviceInfo().height() / 40,
-              ),
-              Align(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                      backgroundColor: grayFreequiz,
-                      foregroundColor: Colors.white),
-                  onPressed: () {
-                    setState(() {
-                      quiz.addWordPair();
-                    });
-                  },
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
+              : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+          child: EditView(quiz: quiz),
         ),
       ),
     );
@@ -183,9 +77,7 @@ class _CreateQuizState extends State<CreateQuiz> {
     }
 
     if (quiz.counter < 3) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => const ErrorPopUp());
+      showDialog(context: context, builder: (BuildContext context) => const ErrorPopUp());
     }
 
     if (!quiz.error) {
@@ -201,18 +93,6 @@ class _CreateQuizState extends State<CreateQuiz> {
         ),
       );
     }
-  }
-
-  onSubmitted(int i) {
-    setState(() {
-      if (quiz.wordPairs[i].definition.input.text != "" &&
-          quiz.wordPairs[i].answer.input.text != "") {
-        if (i + 2 >= quiz.wordPairs.length) {
-          quiz.addWordPair();
-        }
-        FocusScope.of(context).nextFocus();
-      }
-    });
   }
 
   changed() {
@@ -231,12 +111,5 @@ class _CreateQuizState extends State<CreateQuiz> {
       }
     }
     return false;
-  }
-
-  save() {
-    final map = quiz.createMap();
-
-    LocalStorage.saveDraft(map);
-    QuizHelper.draft = map;
   }
 }

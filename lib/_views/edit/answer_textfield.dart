@@ -8,14 +8,12 @@ class AnswerTextField extends StatefulWidget {
   final TextFieldData textFieldData;
   final double widthBorder;
   final Function onSubmitted;
-  final int i;
   final Function save;
   const AnswerTextField(
       {super.key,
       required this.textFieldData,
       this.widthBorder = 2.0,
       required this.onSubmitted,
-      required this.i,
       required this.save});
 
   @override
@@ -31,7 +29,7 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
     return TextField(
       onSubmitted: (value) {
         widget.save();
-        widget.onSubmitted(widget.i);
+        widget.onSubmitted();
       },
       onChanged: (value) {
         setState(() {
