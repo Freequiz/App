@@ -114,6 +114,7 @@ class QuizForm {
 
 class WordPair {
   String key;
+  int? id;
 
   final definition = TextFieldData(hint: 'definition'.tr());
 
@@ -122,11 +123,17 @@ class WordPair {
   WordPair({required this.key});
 
   toMap() {
-    return {
+    Map<String, Map> map = {
       key: {
         "word": definition.input.text,
         "translation": answer.input.text,
       }
     };
+
+    if (id != null) {
+      map[key]!['id'] = id!.toString();
+    }
+
+    return map;
   }
 }

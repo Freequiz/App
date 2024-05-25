@@ -72,8 +72,6 @@
 
     "quiz saved": "Quiz gespeichert",
 
-    "Invalid bearer token title": "Ein unbekannter Fehler ist aufgetreten",
-    "Invalid bearer token description": "Versuchen Sie es später noch einmal. Wenn dieser Fehler weiterhin auftritt, melden Sie ihn bitte über den Bugreporter",
     "Access token is invalid title": "Authentifizierungsfehler",
     "Access token is invalid description": "Es ist ein Fehler aufgetreten und Sie wurden abgemeldet. Wenn dieser Fehler weiterhin auftritt, verwenden Sie bitte den Bug-Reporter",
     "Quiz doesn't exist title": "Das Quiz existiert nicht",
@@ -131,19 +129,35 @@
 
     "try again": "Nochmals Versuchen",
 
-    "German": "Tedesco",
-    "English": "inglese",
-    "French": "francese",
-    "Italian": "Italiano",
-    "german": "Tedesco",
-    "english": "inglese",
-    "french": "francese",
-    "italian": "Italiano",
-    "spanish": "Spagnolo",
-    "latin": "Latino",
-    "greek": "Greco",
-    "romansh": "Romancio",
-    "japanese": "Giapponese",
-    "korean": "Coreano",
-    "chinese": "Cinese"
+    "German": "Deutsch",
+    "English": "Englisch",
+    "French": "Französisch",
+    "Italian": "Italienisch",
+    "german": "Deutsch",
+    "english": "Englisch",
+    "french": "Französisch",
+    "italian": "Italienisch",
+    "spanish": "Spanisch",
+    "latin": "Latein",
+    "greek": "Griechisch",
+    "romansh": "Rätoromanisch",
+    "japanese": "Japanisch",
+    "korean": "Koreanisch",
+    "chinese": "Chinesisch",
+
+    "Loading Quizzes": "Quizze laden",
+    "Loading Profile": "Profil laden",
+    "Loading Quiz": "Quiz laden",
+    "Loading Progress": "Fortschritt laden",
+    "Loading Search Results": "Suchresultate laden",
+
+    "Edit Quiz": "Quiz bearbeiten",
+
+    "Dark Mode": "Dunkler Modes",
+    "Automatic": "Automatisch",
+    "Light Mode": "Lichtmodus",
+
+    "Share": "Teilen",
+    "Edit": "Bearbeiten",
+    "Close": "Schliessen"
 }

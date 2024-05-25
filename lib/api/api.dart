@@ -72,19 +72,23 @@ class Api {
       case 202:
         return jsonDecode(response.body);
       case 400:
-        debugPrint(response.toString());
+        printError(response);
         return jsonDecode(response.body);
       case 401:
-        debugPrint(response.toString());
+        printError(response);
         return jsonDecode(response.body);
       case 404:
-        debugPrint(response.toString());
+        printError(response);
         return jsonDecode(response.body);
       case 503:
-        debugPrint(response.toString());
+        printError(response);
         return defaultResponse;
       default:
         throw Exception('Unhandled Error');
     }
+  }
+
+  static void printError(Response response) async {
+    debugPrint((await jsonDecode(response.body)).toString());
   }
 }

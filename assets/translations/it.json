@@ -57,8 +57,6 @@
     "not enough words": "Non abbastanza parole",
     "not enough words description": "Per creare un quiz sono necessarie almeno tre coppie di parole",
     "quiz saved": "Quiz salvato",
-    "Invalid bearer token title": "Si è verificato un errore sconosciuto",
-    "Invalid bearer token description": "Riprovare più tardi. ",
     "Access token is invalid title": "Errore di autenticazione",
     "Access token is invalid description": "Si è verificato un errore e sei stato disconnesso. ",
     "other error title": "Si è verificato un errore sconosciuto",
@@ -118,5 +116,16 @@
     "romansh": "Romancio",
     "japanese": "Giapponese",
     "korean": "Coreano",
-    "chinese": "Cinese"
+    "chinese": "Cinese",
+
+    "Loading Quizzes": "Caricamento del Quiz",
+    "Loading Profile": "Profilo di caricamento",
+    "Loading Quiz": "Caricamento del quiz",
+    "Loading Progress": "Caricamento dell'avanzamento",
+
+    "Edit Quiz": "Quiz sopportato",
+
+    "Dark Mode": "Modalità scura",
+    "Automatic": "Automatico",
+    "Light Mode": "Modalità luce"
   }

@@ -8,7 +8,7 @@
     "fromto": "{} ➜ {}",
     "load more": "Charger plus",
     "amount quizzes": {
-      "one": "{} Questionnaire",
+      "one": "{} Quiz",
       "other": "{} Quiz"
     },
     "quizzes": "Quiz",
@@ -57,8 +57,6 @@
     "not enough words": "Pas assez de mots",
     "not enough words description": "Au moins trois paires de mots sont nécessaires pour créer un quiz",
     "quiz saved": "Quiz enregistré",
-    "Invalid bearer token title": "Une erreur inconnue s'est produite",
-    "Invalid bearer token description": "Réessayez plus tard. ",
     "Access token is invalid title": "Erreur d'authentification",
     "Access token is invalid description": "Une erreur s'est produite et vous avez été déconnecté. ",
     "other error title": "Une erreur inconnue s'est produite",
@@ -118,5 +116,16 @@
     "romansh": "Romanche",
     "japanese": "Japonais",
     "korean": "Coréen",
-    "chinese": "Chinois"
+    "chinese": "Chinois",
+
+    "Loading Quizzes": "Charger les Quiz",
+    "Loading Profile": "Charger le profile",
+    "Loading Quiz": "Charger le Quiz",
+    "Loading Progress": "Charger le progrès",
+
+    "Edit Quiz": "Modifier le quiz",
+
+    "Dark Mode": "Mode sombre",
+    "Automatic": "Automatique",
+    "Light Mode": "Mode lumière"
   }

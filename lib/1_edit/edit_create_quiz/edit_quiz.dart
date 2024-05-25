@@ -91,6 +91,7 @@ class _EditQuizState extends State<EditQuiz> {
             builder: (context, data) {
               if (data.hasData) {
                 if (data.data!['success']) {
+                  debugPrint(data.data!['quiz_data'].toString());
                   quizData = data.data!['quiz_data'];
                   if (firstTime) {
                     quiz.title.input.text = quizData['title'];
@@ -106,7 +107,7 @@ class _EditQuizState extends State<EditQuiz> {
                           quizData['data'][i]['word'];
                       quiz.wordPairs[i].answer.input.text =
                           quizData['data'][i]['translation'];
-                      quiz.wordPairs[i].key = quizData['data'][i]['id'].toString();
+                      quiz.wordPairs[i].id = quizData['data'][i]['id'];
                     }
                   }
                 }

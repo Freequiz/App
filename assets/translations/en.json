@@ -72,8 +72,6 @@
 
     "quiz saved": "Quiz saved",
 
-    "Invalid bearer token title": "An unknown error has occurred",
-    "Invalid bearer token description": "Try again later. If this error persists, please report it using the bug reporter.",
     "Access token is invalid title": "Authentication error",
     "Access token is invalid description": "An error occured and you were logged out. If this error persists, please use the bug reporter",
     "other error title": "An unknown error has occurred",
@@ -145,5 +143,21 @@
     "romansh": "Romansh",
     "japanese": "Japanese",
     "korean": "Korean",
-    "chinese": "Chinese"
+    "chinese": "Chinese",
+
+    "Loading Quizzes": "Loading Quizzes",
+    "Loading Profile": "Loading Profile",
+    "Loading Quiz": "Loading Quiz",
+    "Loading Progress": "Loading Progress",
+    "Loading Search Results": "Loading Search Results",
+
+    "Edit Quiz": "Edit Quiz",
+
+    "Dark Mode": "Dark Mode",
+    "Automatic": "Automatic",
+    "Light Mode": "Light Mode",
+
+    "Share": "Share",
+    "Edit": "Edit",
+    "Close": "Close"
 }
