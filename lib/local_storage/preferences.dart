@@ -12,6 +12,6 @@ class Preferences {
 
   static loadAnswerLanguage() async {
     final prefs = await SharedPreferences.getInstance();
-    answerLanguage = prefs.getInt('answer language') ?? 1;
+    answerLanguage = prefs.getInt('answer_language') ?? 1;
   }
 }
