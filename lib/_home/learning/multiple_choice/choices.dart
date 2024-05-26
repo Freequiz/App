@@ -32,7 +32,7 @@ class Choices extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         ),
         onPressed: () {
-          if (choice != Questionnaire.questions[0].translation) {
+          if (choice != Questionnaire.answer()) {
             wrongAnswer(choice, i);
           } else {
             rightAnswer(i);

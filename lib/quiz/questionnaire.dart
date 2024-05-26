@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/progress.dart';
@@ -57,5 +58,19 @@ class Questionnaire {
 
   static maxScore(String mode) {
     return maxScores[mode];
+  }
+
+  static definition() {
+    if (Preferences.answerLanguage == 0) {
+      return questions[0].translation;
+    }
+    return questions[0].word;
+  }
+
+  static answer() {
+    if (Preferences.answerLanguage == 0) {
+      return questions[0].word;
+    }
+    return questions[0].translation;
   }
 }

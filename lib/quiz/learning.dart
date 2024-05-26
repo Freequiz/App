@@ -22,7 +22,7 @@ class Learning {
       context: context,
       builder: (BuildContext context) => Correction(
         givenAnswer: givenAnswer,
-        rightAnswer: Questionnaire.questions[0].translation,
+        rightAnswer: Questionnaire.answer(),
       ),
     ).then((answerRight) {
       if (answerRight != null) {
@@ -45,7 +45,7 @@ class Learning {
       context: context,
       builder: (BuildContext context) => Correction(
         givenAnswer: choice,
-        rightAnswer: Questionnaire.questions[0].translation,
+        rightAnswer: Questionnaire.answer(),
       ),
     ).then((answerRight) {
       if (answerRight != null) {

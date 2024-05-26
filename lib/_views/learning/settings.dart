@@ -20,7 +20,7 @@ class _LearningSettingsState extends State<LearningSettings> {
   @override
   void initState() {
     options = widget.languages;
-    options.add('both');
+    //options.add('both');
     value = options[Preferences.answerLanguage];
 
     super.initState();
@@ -40,7 +40,7 @@ class _LearningSettingsState extends State<LearningSettings> {
       contentPadding: const EdgeInsets.all(20.0),
       content: Column(
         children: [
-          const SizedBox(height: 20,),
+          const SizedBox(height: 20),
           Text(
             context.tr('answer with'),
             style: TextStyle(
@@ -48,6 +48,7 @@ class _LearningSettingsState extends State<LearningSettings> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          const SizedBox(height: 5),
           Switcher(
             onTap: onTap,
             texts: options,

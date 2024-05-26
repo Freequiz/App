@@ -1,4 +1,5 @@
 import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 
 class Translation {
@@ -61,5 +62,12 @@ class Translation {
   toggleFavorite() {
     favorite = !favorite;
     APIQuizzes.setFavorite(QuizHelper.quiz!.id, scoreID, favorite);
+  }
+
+  String answer() {
+    if (Preferences.answerLanguage == 0) {
+      return word;
+    }
+    return translation;
   }
 }

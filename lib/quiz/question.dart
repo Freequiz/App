@@ -10,11 +10,11 @@ class Question {
   static randomChoices() {
     List<String> options = [];
     for (Translation translation in QuizHelper.quiz!.translations.translations) {
-      options.add(translation.translation);
+      options.add(translation.answer());
     }
 
     choices = [];
-    options.remove(Questionnaire.questions[0].translation); //remove answer
+    options.remove(Questionnaire.answer()); //remove answer
 
     for (var n = 0; n < 3; n++) {
       if (options.isNotEmpty) {
@@ -27,12 +27,13 @@ class Question {
     }
     
     int i = Random().nextInt(4);
-    choices.insert(i, Questionnaire.questions[0].translation);
+    choices.insert(i, Questionnaire.answer());
 
     return choices;
   }
 
   static bool correct(String input) {
-    return input.format() == Questionnaire.questions[0].translation.format();
+    String answer = Questionnaire.answer();
+    return input.format() == answer.format();
   }
 }

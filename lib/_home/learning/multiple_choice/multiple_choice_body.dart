@@ -41,7 +41,7 @@ class MultipleChoiceBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextPromt(text: Questionnaire.questions[0].word),
+                TextPromt(text: Questionnaire.definition()),
                 SizedBox(
                   height: DeviceInfo().height() / 3,
                 ),

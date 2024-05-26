@@ -39,7 +39,7 @@ class WritingBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextPromt(text: Questionnaire.questions[0].word),
+                TextPromt(text: Questionnaire.definition()),
                 Space.height(DeviceInfo().height() / 5),
                 Row(
                   children: [

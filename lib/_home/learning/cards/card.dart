@@ -25,8 +25,8 @@ class CardWidget extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         Learning.showAnswer
-            ? Questionnaire.questions[0].translation
-            : Questionnaire.questions[0].word,
+            ? Questionnaire.answer()
+            : Questionnaire.definition(),
         style: TextStyle(
             fontSize: DeviceInfo().height() / 24, color: foregroundColor),
       ),
