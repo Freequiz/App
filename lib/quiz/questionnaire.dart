@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/models/translation.dart';
+import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/progress.dart';
 
@@ -9,7 +10,6 @@ class Questionnaire {
   static List<Translation> questions = [];
   static int length = 0;
 
-  static Map<String, int> maxScores = {'smart': 4, 'write': 2, 'multi': 2, 'cards': 2};
   static String mode = "";
 
   static create(bool onlyFavorite, String quizMode) {
@@ -34,8 +34,9 @@ class Questionnaire {
       }
     }
 
+    Learning.errors.clear();
     randomise(array);
-    length = questions.length;
+    length = questions.length;    
   }
 
   static randomise(List<Translation> array) {
@@ -50,6 +51,7 @@ class Questionnaire {
 
   static answeredWrong() {
     Progress.decrease(QuizHelper.quiz!.id, mode, questions[0]);
+    Learning.errors.add(questions[0]);
   }
 
   static answeredRight() {
@@ -57,7 +59,7 @@ class Questionnaire {
   }
 
   static maxScore(String mode) {
-    return maxScores[mode];
+    return Preferences.maxScores[mode];
   }
 
   static definition() {

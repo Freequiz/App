@@ -35,7 +35,11 @@ class QuizDatabase {
   static Future<List<Map>> loadQuizzes() async {
     final db = await database;
 
-    final List<Map<String, Object?>> quizzesMap = await db.query('quizzes');
+    final List<Map<String, Object?>> quizzesMap = await db.query(
+      'quizzes',
+      orderBy: 'time DESC',
+      limit: 20,
+    );
 
     List<Map> decodedMaps = [];
 

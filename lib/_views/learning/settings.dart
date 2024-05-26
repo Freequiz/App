@@ -3,29 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/quiz/learning.dart';
 
 class LearningSettings extends StatefulWidget {
   final List<String> languages;
-  const LearningSettings({super.key, required this.languages});
+  final String mode;
+  const LearningSettings({super.key, required this.languages, required this.mode});
 
   @override
   State<LearningSettings> createState() => _LearningSettingsState();
 }
 
 class _LearningSettingsState extends State<LearningSettings> {
-  List<String> options = [];
-
-  String value = "";
+  String answerLanguage = "";
+  String maxScore = "";
 
   @override
   void initState() {
-    options = widget.languages;
-    //options.add('both');
-    value = options[Preferences.answerLanguage];
+    answerLanguage = widget.languages[Preferences.answerLanguage];
+    maxScore = Preferences.maxScores[widget.mode].toString();
 
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +50,34 @@ class _LearningSettingsState extends State<LearningSettings> {
           ),
           const SizedBox(height: 5),
           Switcher(
-            onTap: onTap,
-            texts: options,
-            value: value,
+            onTap: changeAnswerLanguage,
+            texts: widget.languages,
+            value: answerLanguage,
             width: DeviceInfo().width() - 80,
+          ),
+          const SizedBox(height: 30),
+          conditional(
+            Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            Text(
+              context.tr('amount repetition'),
+              style: TextStyle(
+                fontSize: DeviceInfo().height() / 50,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          conditional(
+            Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            const SizedBox(height: 5),
+          ),
+          conditional(
+            Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            Switcher(
+              onTap: changeMaxScore,
+              texts: Learning.maxScoreOptions[widget.mode]!,
+              value: maxScore,
+              width: DeviceInfo().width() - 80,
+            ),
           ),
         ],
       ),
@@ -76,10 +100,17 @@ class _LearningSettingsState extends State<LearningSettings> {
     );
   }
 
-  onTap(String text) {
-    Preferences.saveAnswerLanguage(options.indexOf(text));
+  changeAnswerLanguage(String text) {
+    Preferences.saveAnswerLanguage(widget.languages.indexOf(text));
     setState(() {
-      value = text;
+      answerLanguage = text;
+    });
+  }
+
+  changeMaxScore(String n) {
+    Preferences.saveMaxScore(widget.mode, int.parse(n));
+    setState(() {
+      maxScore = n;
     });
   }
 }

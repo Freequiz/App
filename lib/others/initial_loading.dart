@@ -8,6 +8,7 @@ Future<void> initialLoading() async {
   await Languages().get();
   await Profile.loadData();
   await Preferences.loadAnswerLanguage();
+  await Preferences.loadMaxScores();
   return;
 }
 

@@ -60,7 +60,7 @@ class _SmartState extends State<Smart> {
           ),
         ),
       ),
-      body: modes[Questionnaire.questions[0].score['smart'] > 1 ? 1 : 0],
+      body: modes[Questionnaire.questions[0].score['smart'] > 0 ? 1 : 0],
     );
   }
 

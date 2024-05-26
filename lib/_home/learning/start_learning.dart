@@ -175,7 +175,7 @@ class _StartLearningState extends State<StartLearning> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8),
                           child: Text(
-                            widget.levels[i],
+                            i < widget.levels.length ? widget.levels[i] : widget.levels.last,
                             style:
                                 TextStyle(fontSize: DeviceInfo().height() / 40),
                           ),

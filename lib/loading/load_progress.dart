@@ -8,25 +8,15 @@ import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 
-final List<String> levelsNormal = [
-  "new".tr(),
-  "learned".tr(),
-  "mastered".tr(),
-];
 
-final List<String> levelsSmart = [
-  "new".tr(),
-  "seen".tr(),
-  "memorized".tr(),
-  "learned".tr(),
-  "mastered".tr()
-];
 final List<Color> color = [
   purpleFreequiz,
   roseFreequiz,
   yellowFreequiz,
   blueFreequiz,
 ];
+
+//TODO: Fix this shit
 
 loadProgress(BuildContext context, String uuid, int i, Function reset,
     Function refresh) {
@@ -41,7 +31,7 @@ loadProgress(BuildContext context, String uuid, int i, Function reset,
           widget: StartLearning(
             i: i,
             refresh: refresh,
-            levels: i == 0 ? levelsSmart : levelsNormal,
+            levels: Learning.getLevels(i),
             uuid: uuid,
           ),
           appBar: AppBar(
@@ -72,6 +62,7 @@ loadProgress(BuildContext context, String uuid, int i, Function reset,
                     context: context,
                     builder: (BuildContext context) => LearningSettings(
                       languages: [QuizHelper.quiz!.from.name, QuizHelper.quiz!.to.name],
+                      mode: Learning.modes[i]
                     ),
                   );
                 },
