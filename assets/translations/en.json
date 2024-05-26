@@ -17,6 +17,10 @@
     "title": "Title",
     "description": "Description",
 
+    "settings": "Settings",
+    "both": "Both",
+    "answer with": "Answer with:",
+
     "definition": "Definition",
     "answer": "Answer",
     "translation": "Translation",

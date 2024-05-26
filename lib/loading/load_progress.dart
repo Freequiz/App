@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/start_learning.dart';
 import 'package:freequiz/_views/learning/confirmation.dart';
+import 'package:freequiz/_views/learning/settings.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
@@ -61,6 +62,20 @@ loadProgress(BuildContext context, String uuid, int i, Function reset,
                   );
                 },
                 child: const Icon(Icons.refresh_rounded),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => LearningSettings(
+                      languages: [QuizHelper.quiz!.from.name, QuizHelper.quiz!.to.name],
+                    ),
+                  );
+                },
+                child: const Icon(Icons.settings_rounded),
               ),
             ],
           ),

@@ -52,7 +52,7 @@ class _CardsState extends State<Cards> {
       });
     } else {
       widget.refresh();
-      QuizDatabase.updateQuiz(QuizHelper.quiz!); //TODO: Change to Update
+      QuizDatabase.updateQuiz(QuizHelper.quiz!);
       Navigator.of(context).pop();
     }
   }

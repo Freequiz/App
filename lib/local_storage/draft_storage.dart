@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'package:freequiz/local_storage/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalStorage {
+class DraftStorage {
   static saveDraft(Map map) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('draft', jsonEncode(map));
@@ -16,11 +15,5 @@ class LocalStorage {
   static deleteDraft() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('draft');
-  }
-
-  static int amountUuids() {
-    int amountUuids = 0;
-    amountUuids = QuizDatabase.loadedQuizzes.length;
-    return amountUuids;
   }
 }

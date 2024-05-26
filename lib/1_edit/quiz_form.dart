@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/local_storage/quizzes.dart';
+import 'package:freequiz/local_storage/draft_storage.dart';
 import 'package:freequiz/others/textfield_data.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 
@@ -113,17 +113,24 @@ class QuizForm {
         .add(WordPair(key: wordPairs.length.toString()));
   }
 
-  save() {
-    final map = createMap();
+  removeWordPair(int i) {
+    destroyed.add(wordPairs[i]);
+    wordPairs.removeAt(i);
+  }
 
-    LocalStorage.saveDraft(map);
+  save({required String mode, String? id}) {
+    final map = createMap();
+    map['mode'] = mode;
+    map['id'] = id;
+
+    DraftStorage.saveDraft(map);
     QuizHelper.draft = map;
   }
 }
 
 class WordPair {
   String key;
-  int? id;
+  String? id;
 
   final definition = TextFieldData(hint: 'definition'.tr());
 
@@ -140,7 +147,7 @@ class WordPair {
     };
 
     if (id != null) {
-      map[key]!['id'] = id!.toString();
+      map[key]!['id'] = id;
     }
 
     return map;

@@ -35,7 +35,7 @@ class _EditQuizState extends State<EditQuiz> {
         leading: TextButton(
           onPressed: () {
             if (changed()) {
-              quiz.save();
+              quiz.save(mode: widget.owner ? 'edit' : 'create', id: widget.uuid);
             }
             Navigator.of(context).pop();
             widget.refresh();
@@ -65,7 +65,7 @@ class _EditQuizState extends State<EditQuiz> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
           if (changed()) {
-            quiz.save();
+            quiz.save(mode: widget.owner ? 'edit' : 'create', id: widget.uuid);
           }
         },
         child: Padding(
@@ -85,13 +85,14 @@ class _EditQuizState extends State<EditQuiz> {
                     quiz.definitionLanguage = int.parse(quizData['from']['id']);
                     quiz.answerLanguage = int.parse(quizData['to']['id']);
                     firstTime = false;
+
                     for (var i = 0; i < quizData['data'].length; i++) {
                       if (i >= quiz.wordPairs.length) {
                         quiz.addWordPair();
                       }
                       quiz.wordPairs[i].definition.input.text = quizData['data'][i]['word'];
                       quiz.wordPairs[i].answer.input.text = quizData['data'][i]['translation'];
-                      quiz.wordPairs[i].id = quizData['data'][i]['id'];
+                      quiz.wordPairs[i].id = quizData['data'][i]['id'].toString();
                     }
                   }
                 }

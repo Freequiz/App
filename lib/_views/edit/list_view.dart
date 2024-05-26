@@ -30,7 +30,7 @@ class _ListWordPairsState extends State<ListWordPairs> {
         return WordPairView(
           wordPair: wordPair,
           onDismissed: () => setState(() {
-            widget.quiz.wordPairs.removeAt(i);
+            widget.quiz.removeWordPair(i);
           }),
           save: widget.quiz.save,
           onSubmitted: () => onSubmitted(i),

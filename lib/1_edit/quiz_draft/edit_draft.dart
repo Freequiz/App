@@ -19,6 +19,8 @@ class EditDraft extends StatefulWidget {
 
 class _EditDraftState extends State<EditDraft> {
   bool firstTime = true;
+  String mode = "";
+  String? id;
 
   QuizForm quiz = QuizForm();
 
@@ -29,13 +31,18 @@ class _EditDraftState extends State<EditDraft> {
     quiz.description.input.text = quizData['description'];
     quiz.definitionLanguage = int.parse(quizData['from']);
     quiz.answerLanguage = int.parse(quizData['to']);
+
     firstTime = false;
+    mode = quizData['mode'];
+    id = quizData['id'];
+
     for (var i = 0; i < quizData['translations_attributes'].length; i++) {
       if (i >= quiz.wordPairs.length) {
         quiz.addWordPair();
       }
       quiz.wordPairs[i].definition.input.text = quizData['translations_attributes']["$i"]['word'];
       quiz.wordPairs[i].answer.input.text = quizData['translations_attributes']["$i"]['translation'];
+      quiz.wordPairs[i].id = quizData['translations_attributes']["$i"]['id'];
     }
     super.initState();
   }
@@ -48,7 +55,7 @@ class _EditDraftState extends State<EditDraft> {
         backgroundColor: DeviceInfo.darkMode ? grayFreequiz : blueFreequiz,
         leading: TextButton(
           onPressed: () {
-            quiz.save();
+            quiz.save(mode: mode, id: id);
             Navigator.of(context).pop();
             widget.refresh;
           },
@@ -74,7 +81,7 @@ class _EditDraftState extends State<EditDraft> {
         behavior: HitTestBehavior.opaque,
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
-          quiz.save();
+          quiz.save(mode: mode, id: id);
         },
         child: Padding(
           padding: DeviceInfo.mobileLayout
@@ -99,16 +106,28 @@ class _EditDraftState extends State<EditDraft> {
 
     if (!quiz.error) {
       final map = quiz.createMap();
-      final response = APIQuizzes.createQuiz(map);
 
-      showDialog(
-        context: context,
-        builder: (context) => ProgressPopUp(
-          title: 'Create Quiz',
-          response: response,
-          refresh: widget.refresh,
-        ),
-      );
+      if (mode == 'edit' && id != null) {
+        final response = APIQuizzes.updateQuiz(map, id!);
+        showDialog(
+          context: context,
+          builder: (context) => ProgressPopUp(
+            title: 'Edit Quiz',
+            response: response,
+            refresh: widget.refresh,
+          ),
+        );
+      } else {
+        final response = APIQuizzes.createQuiz(map);
+        showDialog(
+          context: context,
+          builder: (context) => ProgressPopUp(
+            title: 'Create Quiz',
+            response: response,
+            refresh: widget.refresh,
+          ),
+        );
+      }
     }
   }
 }

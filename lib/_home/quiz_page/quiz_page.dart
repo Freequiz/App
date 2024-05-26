@@ -136,11 +136,11 @@ class _QuizPageState extends State<QuizPage> {
 
     for (Translation translation
         in QuizHelper.quiz!.translations.translations) {
-      if (translation.word.contains(searchTerm)) {
+      if (translation.word.toLowerCase().contains(searchTerm.toLowerCase())) {
         list.add(translation);
         continue;
       }
-      if (translation.translation.contains(searchTerm)) {
+      if (translation.translation.toLowerCase().contains(searchTerm.toLowerCase())) {
         list.add(translation);
       }
     }

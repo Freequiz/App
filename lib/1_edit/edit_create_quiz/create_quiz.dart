@@ -28,7 +28,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         leading: TextButton(
           onPressed: () {
             if (changed()) {
-              quiz.save();
+              quiz.save(mode: 'create');
             }
             Navigator.of(context).pop();
             widget.refresh();
@@ -56,7 +56,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
           if (changed()) {
-            quiz.save();
+            quiz.save(mode: 'create');
           }
         },
         child: Padding(
