@@ -16,41 +16,50 @@ class Questionnaire {
     questions.clear();
     mode = quizMode;
 
-    List<Translation> array = [];
+    List<Translation> options = [];
 
     for (Translation translation in QuizHelper.quiz!.translations.translations) {
       if (onlyFavorite && !translation.favorite) continue;
 
       if (translation.score[mode]! >= Questionnaire.maxScore(mode)) continue;
 
-      array.add(translation);
+      options.add(translation);
     }
 
-    if (array.isEmpty) {
+    if (options.isEmpty) {
       for (Translation translation in QuizHelper.quiz!.translations.translations) {
         if (onlyFavorite && !translation.favorite) continue;
 
-        array.add(translation);
+        options.add(translation);
       }
     }
 
+    randomise(options);
+    
     Learning.errors.clear();
-    randomise(array);
     length = questions.length;    
   }
 
   static randomise(List<Translation> array) {
-    for (var n = 0; n < 20; n++) {
+    for (var n = 0; n < 10 - Learning.errors.length; n++) {
       if (array.isEmpty) break;
 
       final i = Random().nextInt(array.length);
       questions.add(array[i]);
       array.removeAt(i);
     }
+
+    //add previous errors
+    for (Translation translation in Learning.errors) {
+      if (questions.contains(translation)) return;
+      final i = questions.isNotEmpty ? Random().nextInt(questions.length) : 0;
+      questions.insert(i, translation);
+    }
   }
 
   static answeredWrong() {
     Progress.decrease(QuizHelper.quiz!.id, mode, questions[0]);
+    if (Learning.errors.contains(questions[0])) return;
     Learning.errors.add(questions[0]);
   }
 
