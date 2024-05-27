@@ -44,7 +44,7 @@ class _LearningModesState extends State<LearningModes> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(widget.width / 7)),
             ),
-            onPressed: () => loadProgress(context, widget.uuid, i, reset, refresh),
+            onPressed: () => loadLearning(context, widget.uuid, i, reset, refresh),
             child: Icon(
               icon[i],
               size: widget.width / 2,

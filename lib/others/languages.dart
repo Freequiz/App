@@ -55,15 +55,17 @@ class Languages {
     return mapLanguagesCopy['data'][id.toString()]['name'];
   }
 
-  nameToId(String name) {
+  int nameToId(String name) {
     if (name == 'Any') {
       return 0;
     }
-    mapLanguagesCopy['data'].forEach((key, value) {
-      if (value == name) {
+
+    for (String key in mapLanguagesCopy['data'].keys) {
+      if (mapLanguagesCopy['data'][key]['name'] == name) {
         return int.parse(key);
       }
-    });
+    }
+    
     return 1;
   }
 }

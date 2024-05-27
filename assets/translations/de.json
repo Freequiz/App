@@ -150,6 +150,7 @@
     "japanese": "Japanisch",
     "korean": "Koreanisch",
     "chinese": "Chinesisch",
+    "Any": "Alle",
 
     "Loading Quizzes": "Quizze laden",
     "Loading Profile": "Profil laden",
@@ -159,7 +160,7 @@
 
     "Edit Quiz": "Quiz bearbeiten",
 
-    "Dark Mode": "Dunkler Modes",
+    "Dark Mode": "Dunkler Modus",
     "Automatic": "Automatisch",
     "Light Mode": "Lichtmodus",
 

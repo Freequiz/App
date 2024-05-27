@@ -51,7 +51,7 @@ ThemeData darkTheme = ThemeData(
   drawerTheme: const DrawerThemeData(
     backgroundColor: Color.fromARGB(255, 40, 40, 40),
   ),
-  dialogTheme: const DialogTheme(backgroundColor: backgroundGray),
+  dialogTheme: const DialogTheme(backgroundColor: Color.fromARGB(255, 40, 40, 40)),
   inputDecorationTheme: const InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: grayFreequiz),

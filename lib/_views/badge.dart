@@ -6,15 +6,14 @@ class InfoBadge extends StatelessWidget {
 
   final String text;
   final Color color;
-  final arrow = '\u279C';
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: DeviceInfo().height() / 30,
+      height: double.infinity,
       decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 60)),
+          borderRadius: BorderRadius.circular(100)),
       alignment: Alignment.center,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),

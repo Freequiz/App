@@ -36,7 +36,7 @@ class _LearningSettingsState extends State<LearningSettings> {
         context.tr('settings'),
         style: TextStyle(color: darkMode ? Colors.white : Colors.black),
       ),
-      insetPadding: const EdgeInsets.all(20.0),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
       contentPadding: const EdgeInsets.all(20.0),
       content: Column(
         children: [

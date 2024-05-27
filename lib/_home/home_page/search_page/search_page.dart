@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:freequiz/_views/badge.dart';
 import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
-import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
 import 'package:freequiz/_home/home_page/search_page/user_tile.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
@@ -45,45 +45,27 @@ class _SearchPageState extends State<SearchPage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                SearchFilter(
+                InfoBadge(
                   color: roseFreequiz,
-                  child: Text(
+                  text: 
                     context.tr('results for', args: [widget.searchTerm.truncate(32)]),
-                    style: TextStyle(
-                        fontSize: DeviceInfo().height() / 50,
-                        color: Colors.white),
-                  ),
                 ),
-                Space.width(10),
+                Space.width(8),
                 GestureDetector(
                   onTap: () => selectLanguage(),
-                  child: SearchFilter(
+                  child: InfoBadge(
                     color: purpleFreequiz,
-                    child: Text(
-                      Search.from == 'Any' && Search.to == 'Any'
+                    text: Search.from == 'Any' && Search.to == 'Any'
                           ? context.tr('language')
                           : context.tr('fromto', args: [Search.from.tr(), Search.to.tr()]),
-                      style: TextStyle(
-                        fontSize: DeviceInfo().height() / 50,
-                        color: Colors.white,
-                      ),
-                    ),
                   ),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                Space.width(8),
                 GestureDetector(
                   onTap: () => changeMode(),
-                  child: SearchFilter(
+                  child: InfoBadge(
                     color: blueFreequiz,
-                    child: Text(
-                      context.tr(Search.mode),
-                      style: TextStyle(
-                        fontSize: DeviceInfo().height() / 50,
-                        color: Colors.white,
-                      ),
-                    ),
+                    text: context.tr(Search.mode),
                   ),
                 )
               ],

@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
+import 'package:freequiz/_views/edit/dropdown.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/others/utilities.dart';
 
 class LanguageSelector extends StatefulWidget {
   final Function refresh;
@@ -27,7 +27,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
     languages.add(
       DropdownMenuItem(
         value: 0,
-        child: Text(context.tr('any')),
+        child: const Text('any').tr(),
       ),
     );
     super.initState();
@@ -35,13 +35,15 @@ class _LanguageSelectorState extends State<LanguageSelector> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final hintColor = DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+
+    debugPrint(from.toString());
     return AlertDialog(
       title: Text(
         context.tr('language'),
         style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
       content: Text(
         context.tr('choose language'),
       ),
@@ -50,51 +52,29 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            DropdownButton(
-              value: from,
-              icon: const Icon(
-                Icons.arrow_drop_down_rounded,
-                color: grayFreequiz,
-              ),
-              underline: Container(
-                height: 2,
-                color: grayFreequiz,
-              ),
-              dropdownColor: DeviceInfo.darkMode
-                  ? const Color.fromARGB(255, 40, 40, 40)
-                  : const Color.fromARGB(255, 229, 242, 250),
+            Dropdown(
+              initialValue: from,
               items: languages,
               onChanged: (value) {
                 setState(() {
                   from = value!;
                 });
               },
-              style: textColor(hintColor),
+              hintColor: hintColor,
             ),
             const Icon(
               Icons.arrow_forward_rounded,
               color: grayFreequiz,
             ),
-            DropdownButton(
-              value: to,
-              icon: const Icon(
-                Icons.arrow_drop_down_rounded,
-                color: grayFreequiz,
-              ),
-              underline: Container(
-                height: 2,
-                color: grayFreequiz,
-              ),
-              dropdownColor: DeviceInfo.darkMode
-                  ? const Color.fromARGB(255, 40, 40, 40)
-                  : const Color.fromARGB(255, 229, 242, 250),
+            Dropdown(
+              initialValue: to,
               items: languages,
               onChanged: (value) {
                 setState(() {
                   to = value!;
                 });
               },
-              style: textColor(hintColor),
+              hintColor: hintColor,
             ),
           ],
         ),

@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:freequiz/_views/badge.dart';
+import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/loading/load_user.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
-import 'package:share_plus/share_plus.dart';
 
 class UserTile extends StatefulWidget {
   final Map data;
@@ -18,9 +19,11 @@ class UserTile extends StatefulWidget {
 class _UserTileState extends State<UserTile> {
   @override
   Widget build(BuildContext context) {
-    final color6 = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 55, 55, 55)
-        : const Color.fromARGB(255, 235, 235, 235);
+    final color6 =
+        DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : const Color.fromARGB(255, 235, 235, 235);
+
+    final n = widget.data["quizzes"];
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => loadUser(context: context, user: widget.data['username']),
@@ -32,10 +35,8 @@ class _UserTileState extends State<UserTile> {
         ),
         child: Padding(
           padding: DeviceInfo.mobileLayout
-              ? const EdgeInsets.only(
-                  left: 10.0, right: 10.0, bottom: 10.0, top: 5.0)
-              : const EdgeInsets.only(
-                  left: 20.0, right: 20.0, bottom: 20.0, top: 15.0),
+              ? const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 5.0)
+              : const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0, top: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -48,7 +49,10 @@ class _UserTileState extends State<UserTile> {
                       widget.data['username'],
                       style: textSize(DeviceInfo().height() / 30),
                     ),
-                    shareButton()
+                    ShareButton(
+                      url: "https://freequiz.herokuapp.com/user/${widget.data['username']}",
+                      color: DeviceInfo.darkMode ? Colors.white : textGray,
+                    )
                   ],
                 ),
               ),
@@ -58,43 +62,15 @@ class _UserTileState extends State<UserTile> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    numberOfQuizzes(),
+                    InfoBadge(
+                      color: roseFreequiz,
+                      text: 'amount quizzes'.plural(n),
+                    ),
                   ],
                 ),
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget shareButton() {
-    return GestureDetector(
-      onTap: () {
-        Share.share(
-            "https://freequiz.herokuapp.com/user/${widget.data['username']}");
-      },
-      child: Icon(
-        Icons.ios_share,
-        color: DeviceInfo.darkMode ? Colors.white : textGray,
-      ),
-    );
-  }
-
-  Widget numberOfQuizzes() {
-    var n = widget.data["quizzes"];
-    return Container(
-      height: DeviceInfo().height() / 30,
-      decoration: BoxDecoration(
-          color: roseFreequiz,
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 60)),
-      alignment: Alignment.center,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
-        child: Text(
-          'amount quizzes'.plural(n),
-          style: textColor(Colors.white),
         ),
       ),
     );

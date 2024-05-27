@@ -13,7 +13,7 @@ class TextPromt extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: textSize(DeviceInfo().height() / 8 / log(text.length)),
+      style: textSize(min(DeviceInfo().height() / 9 / log(text.length), DeviceInfo().height() / 15) ),
     );
   }
 }

@@ -18,7 +18,7 @@ final List<Color> color = [
 
 //TODO: Fix this shit
 
-loadProgress(BuildContext context, String uuid, int i, Function reset,
+loadLearning(BuildContext context, String uuid, int i, Function reset,
     Function refresh) {
   if (QuizHelper.quiz!.translations.translations.isEmpty) return;
   
