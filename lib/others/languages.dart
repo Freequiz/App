@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:freequiz/api/languages.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 class Languages {
   static List<DropdownMenuItem<int>> languages = [];
@@ -16,11 +15,9 @@ class Languages {
     if (mapLanguages.isNotEmpty) {
       mapToList(mapLanguages);
     }
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (!connectivityResult.contains(ConnectivityResult.none)) {
-      load();
-    }
-    //debugPrint(mapLanguages.toString());
+      
+    load();
+
     mapLanguagesCopy = mapLanguages;
     return;
   }

@@ -8,45 +8,44 @@ import 'package:freequiz/loading/error_loading/error_loading.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 
 loadSearch({required BuildContext context, required String searchTerm, mode = "Quiz"}) {
-  debugPrint(mode);
-    return Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (BuildContext context) {
-          return FutureBuilder<Map>(
-            future: mode == "Quiz" ? APIQuizzes.search(searchTerm, 1) : APIUsers.search(searchTerm, 1),
-            builder: (context, searchResults) {
-              if (searchResults.hasData) {
-                if (searchResults.data!["success"]) {
-                  Search.data = searchResults.data!["data"];
-                  return LoadingScreen(
-                    message: "Loading Search Results",
-                    finishedLoading: true,
-                    widget: SearchPage(
-                      searchTerm: searchTerm,
-                      mode: mode,
-                    ),
-                    appBar: AppBar(
-                      title: const Text('search').tr(),
-                    ),
-                  );
-                }
-                return ErrorLoading(
-                  error: searchResults.data!["message"],
-                );
-              } else if (searchResults.hasError) {
-                return const ErrorLoading(
-                  error: "other error",
+  return Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (BuildContext context) {
+        return FutureBuilder<Map>(
+          future: mode == "Quiz" ? APIQuizzes.search(searchTerm, 1) : APIUsers.search(searchTerm, 1),
+          builder: (context, searchResults) {
+            if (searchResults.hasData) {
+              if (searchResults.data!["success"]) {
+                Search.data = searchResults.data!["data"];
+                return LoadingScreen(
+                  message: "Loading Search Results",
+                  finishedLoading: true,
+                  widget: SearchPage(
+                    searchTerm: searchTerm,
+                    mode: mode,
+                  ),
+                  appBar: AppBar(
+                    title: const Text('search').tr(),
+                  ),
                 );
               }
-              return LoadingScreen(
-                message: "Loading Search Results",
-                appBar: AppBar(
-                  title: const Text('loading').tr(),
-                ),
+              return ErrorLoading(
+                error: searchResults.data!["message"],
               );
-            },
-          );
-        },
-      ),
-    );
-  }
+            } else if (searchResults.hasError) {
+              return const ErrorLoading(
+                error: "other error",
+              );
+            }
+            return LoadingScreen(
+              message: "Loading Search Results",
+              appBar: AppBar(
+                title: const Text('loading').tr(),
+              ),
+            );
+          },
+        );
+      },
+    ),
+  );
+}

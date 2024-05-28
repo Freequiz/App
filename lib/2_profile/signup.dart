@@ -25,14 +25,6 @@ class _SignUpState extends State<SignUp> {
       TextFieldData(hint: 'confirm password'.tr(), shown: false);
   bool pressed = false;
 
-  Map<String, Map<String, String>> errorMessages = {
-    "username": {
-      "taken": "Username is taken",
-      "invalid": "Username is not valid"
-    },
-    "email": {"taken": "Email is taken", "invalid": "Email is not valid"}
-  };
-
   @override
   Widget build(BuildContext context) {
     final hintColor = DeviceInfo.darkMode ? Colors.white : Colors.black;
@@ -351,8 +343,7 @@ class _SignUpState extends State<SignUp> {
         });
       } else if (map["token"] == "record.invalid") {
         map["errors"].forEach((object, error) {
-          String errorMessage =
-              errorMessages[object]![error[0]['error']]!.tr();
+          String errorMessage = "$object.${error[0]['error']!}".tr();
 
           switch (object) {
             case "username":

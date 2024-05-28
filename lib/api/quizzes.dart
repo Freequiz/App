@@ -28,15 +28,7 @@ class APIQuizzes {
   static Future<Map> getQuiz(String uuid) async {
     final response = await Api.httpGet(path: 'quiz/$uuid/data');
 
-    if (response.statusCode == 200) {
-      final map = jsonDecode(response.body);
-      return map;
-    }
-    if (response.statusCode == 404) {
-      final map = jsonDecode(response.body);
-      return map;
-    }
-    throw Exception('Error');
+    return Api.decodeResponse(response);
   }
 
   static Future<Map> search(String searchTerm, int page) async {

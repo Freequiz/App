@@ -5,37 +5,45 @@ import 'package:freequiz/local_storage/draft_storage.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:freequiz/2_profile/profile.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'api.dart';
 
 class APIUsers {
   static bool newAccessToken = false;
 
-  static Future<Map> createAccount(String username, String email, String password,
-      String passwordConfirmation, bool agb) async {
-    final response = await http.put(
-      Api.uri('user/create'),
-      headers: {
-        HttpHeaders.contentTypeHeader: "application/json"
+  static Future<Map> createAccount(
+      String username, String email, String password, String passwordConfirmation, bool agb) async {
+    final response = await Api.requestHandler(
+      request: () {
+        return http.put(
+          Api.uri('user/create'),
+          headers: {HttpHeaders.contentTypeHeader: "application/json"},
+          encoding: Encoding.getByName('utf-8'),
+          body: jsonEncode(
+            {
+              "user": {
+                "username": username,
+                "email": email,
+                "password": password,
+                "password_confirmation": passwordConfirmation,
+                "agb": agb
+              }
+            },
+          ),
+        ).timeout(const Duration(seconds: 10));
       },
-      encoding: Encoding.getByName('utf-8'),
-      body: jsonEncode({
-        "user": {
-          "username": username,
-          "email": email,
-          "password": password,
-          "password_confirmation": passwordConfirmation,
-          "agb": agb
-        }
-      }),
     );
+
     if (response.statusCode == 201) {
       newAccessToken = true;
       return jsonDecode(response.body);
     } else if (response.statusCode == 400) {
       return jsonDecode(response.body);
     } else if (response.statusCode == 401) {
+      return jsonDecode(response.body);
+    } else if (response.statusCode == 500) {
+      return jsonDecode(response.body);
+    } else if (response.statusCode == 503) {
       return jsonDecode(response.body);
     } else {
       throw Exception('Error');
@@ -63,13 +71,17 @@ class APIUsers {
   }
 
   static Future<Map> login(String username, String password) async {
-    final response = await http.post(
-      Api.uri('user/login'),
-      headers: {},
-      encoding: Encoding.getByName('utf-8'),
-      body: {
-        "username": username,
-        "password": password,
+    final response = await Api.requestHandler(
+      request: () {
+        return http.post(
+          Api.uri('user/login'),
+          headers: {},
+          encoding: Encoding.getByName('utf-8'),
+          body: {
+            "username": username,
+            "password": password,
+          },
+        ).timeout(const Duration(seconds: 10));
       },
     );
 
@@ -80,6 +92,10 @@ class APIUsers {
       return jsonDecode(response.body);
     } else if (response.statusCode == 401) {
       return jsonDecode(response.body);
+    } else if (response.statusCode == 500) {
+      return jsonDecode(response.body);
+    } else if (response.statusCode == 503) {
+      return jsonDecode(response.body);
     } else {
       throw Exception('Error');
     }
@@ -87,25 +103,15 @@ class APIUsers {
 
   static refresh() async {
     if (!newAccessToken && Profile.accessToken != "") {
-      var connectivityResult = await (Connectivity().checkConnectivity());
-      if (connectivityResult.contains(ConnectivityResult.mobile) ||
-          connectivityResult.contains(ConnectivityResult.wifi)) {
-        final response = await Api.httpPost(path: 'user/refresh');
+      final response = await Api.httpPost(path: 'user/refresh');
 
-        if (response.statusCode == 200) {
-          final decodedResponse = jsonDecode(response.body);
-          Profile.accessToken = decodedResponse["access_token"];
-          Profile.saveData();
-          newAccessToken = true;
-        } else if (response.statusCode == 401) {
-          return jsonDecode(response.body);
-        }
-        else if (response.statusCode == 503) {
-          debugPrint(response.toString());
-          return Api.defaultResponse;
-        }else {
-          throw Exception('Error');
-        }
+      if (response.statusCode == 200) {
+        final decodedResponse = jsonDecode(response.body);
+        Profile.accessToken = decodedResponse["access_token"];
+        Profile.saveData();
+        newAccessToken = true;
+      } else {
+        debugPrint("Couldn't refresh Access Token");
       }
     }
   }
@@ -131,8 +137,7 @@ class APIUsers {
   }
 
   static Future<Map> search(String searchTerm, int page) async {
-    final response =
-        await Api.httpGet(path: 'user/search/$page?query=$searchTerm');
+    final response = await Api.httpGet(path: 'user/search/$page?query=$searchTerm');
 
     return Api.decodeResponse(response);
   }

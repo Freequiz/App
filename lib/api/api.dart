@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -7,59 +8,87 @@ import 'package:http/http.dart';
 class Api {
   static const basePath = "https://dev.freequiz.ch/api/";
 
-  static Map defaultResponse = {"success": false};
+  static String noConnection = 'no connection';
+  static String timeout = 'request timed out';
+
+  static Map responseDefault = {'success': false};
+  static Map responseNoConnection = {"success": false, "message": noConnection};
+  static Map responseTimeout = {"success": false, "message": timeout};
 
   static Uri uri(String path) {
     return Uri.parse(basePath + path);
   }
 
-  static Future<Response> httpPut(
-      {required String path, required Object body}) async {
-    return put(
-      uri(path),
-      headers: {
-        "Authorization": Profile.accessToken,
-        HttpHeaders.contentTypeHeader: "application/json"
+  static Future<Response> requestHandler({required Function request}) async {
+    try {
+      final Response response = await request();
+      return response;
+    } on TimeoutException catch (_) {
+      return Response(jsonEncode(responseTimeout), 503);
+    } on SocketException catch (_) {
+      return Response(jsonEncode(responseNoConnection), 503);
+    } catch (e) {
+      responseDefault['message'] = e;
+      return Response(jsonEncode(responseDefault), 500);
+    }
+  }
+
+  static Future<Response> httpPut({required String path, required Object body}) async {
+    return requestHandler(
+      request: () {
+        return put(
+          uri(path),
+          headers: {"Authorization": Profile.accessToken, HttpHeaders.contentTypeHeader: "application/json"},
+          encoding: Encoding.getByName('utf-8'),
+          body: body,
+        ).timeout(const Duration(seconds: 10));
       },
-      encoding: Encoding.getByName('utf-8'),
-      body: body,
     );
   }
 
   static Future<Response> httpGet({required String path}) async {
-    return get(
-      uri(path),
-      headers: {
-        "Authorization": Profile.accessToken
+    return requestHandler(
+      request: () {
+        return get(
+          uri(path),
+          headers: {"Authorization": Profile.accessToken},
+        ).timeout(const Duration(seconds: 10));
       },
     );
   }
 
   static Future<Response> httpDelete({required String path}) async {
-    return delete(
-      uri(path),
-      headers: {
-        "Authorization": Profile.accessToken
+    return requestHandler(
+      request: () {
+        return delete(
+          uri(path),
+          headers: {"Authorization": Profile.accessToken},
+        ).timeout(const Duration(seconds: 10));
       },
     );
   }
 
   static Future<Response> httpPost({required String path}) async {
-    return post(uri(path), headers: {
-      "Authorization": Profile.accessToken
-    });
+    return requestHandler(
+      request: () {
+        return post(
+          uri(path),
+          headers: {"Authorization": Profile.accessToken},
+        ).timeout(const Duration(seconds: 10));
+      },
+    );
   }
 
-  static Future<Response> httpPatch(
-      {required String path, required Object body}) async {
-    return patch(
-      uri(path),
-      headers: {
-        "Authorization": Profile.accessToken,
-        HttpHeaders.contentTypeHeader: "application/json"
+  static Future<Response> httpPatch({required String path, required Object body}) async {
+    return requestHandler(
+      request: () {
+        return patch(
+          uri(path),
+          headers: {"Authorization": Profile.accessToken, HttpHeaders.contentTypeHeader: "application/json"},
+          encoding: Encoding.getByName('utf-8'),
+          body: json.encode(body),
+        ).timeout(const Duration(seconds: 10));
       },
-      encoding: Encoding.getByName('utf-8'),
-      body: json.encode(body),
     );
   }
 
@@ -80,9 +109,12 @@ class Api {
       case 404:
         printError(response);
         return jsonDecode(response.body);
+      case 500:
+        printError(response);
+        return jsonDecode(response.body);
       case 503:
         printError(response);
-        return defaultResponse;
+        return jsonDecode(response.body);
       default:
         throw Exception('Unhandled Error');
     }

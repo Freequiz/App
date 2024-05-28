@@ -8,6 +8,7 @@ import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 
 loadUser({required BuildContext context, required String user}) {
   ListPublicQuizzes.data.clear();
+  
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (BuildContext context) {
