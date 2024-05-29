@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 
 class SwitcherButton extends StatelessWidget {
@@ -24,17 +23,9 @@ class SwitcherButton extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => onTap(text),
-      child: Container(
+      child: SizedBox(
         width: width,
         height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
-          color: selected
-              ? DeviceInfo.darkMode
-                  ? highlightGray
-                  : highlightWhite
-              : const Color.fromARGB(0, 69, 69, 69),
-        ),
         child: Center(
           child: icon ??
               Text(
