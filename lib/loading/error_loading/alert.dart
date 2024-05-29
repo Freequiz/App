@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
 import 'package:freequiz/others/device_info.dart';
 
-class ErrorLoading2 extends StatelessWidget {
+class ErrorLoadingAlert extends StatelessWidget {
   final String error;
   final Widget previousWidget;
-  const ErrorLoading2(
+  const ErrorLoadingAlert(
       {super.key, required this.error, required this.previousWidget});
 
   @override

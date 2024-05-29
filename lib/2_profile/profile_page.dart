@@ -3,7 +3,7 @@ import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/2_profile/profile_info/profile_info.dart';
 import 'package:freequiz/2_profile/signup.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/loading/error_loading/error_loading2.dart';
+import 'package:freequiz/loading/error_loading/alert.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen2.dart';
 
 import '../others/utilities.dart';
@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
               }
               return Navigator(
                 onGenerateRoute: (settings) => MaterialPageRoute(
-                  builder: (context) => ErrorLoading2(
+                  builder: (context) => ErrorLoadingAlert(
                       error: data.data!["message"],
                       previousWidget: const ProfilePage()),
                 ),
@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
             } else if (data.hasError) {
               return Navigator(
                 onGenerateRoute: (settings) => MaterialPageRoute(
-                  builder: (context) => ErrorLoading2(
+                  builder: (context) => ErrorLoadingAlert(
                       error: data.data!["message"],
                       previousWidget: const ProfilePage()),
                 ),

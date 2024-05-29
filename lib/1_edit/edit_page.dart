@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/1_edit/edit_overview.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/loading/error_loading/error_loading2.dart';
+import 'package:freequiz/loading/error_loading/alert.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen2.dart';
 
 class EditPage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _EditPageState extends State<EditPage> {
             }
             return Navigator(
               onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => ErrorLoading2(
+                builder: (context) => ErrorLoadingAlert(
                     error: data.data!["message"],
                     previousWidget: const EditPage()),
               ),
@@ -41,7 +41,7 @@ class _EditPageState extends State<EditPage> {
           } else if (data.hasError) {
             return Navigator(
               onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => ErrorLoading2(
+                builder: (context) => ErrorLoadingAlert(
                     error: data.data!["message"],
                     previousWidget: const EditPage()),
               ),

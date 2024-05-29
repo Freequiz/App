@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_views/buttons/favorite.dart';
 import 'package:freequiz/_views/kebab_menu/kebab_menu.dart';
-import 'package:freequiz/loading/error_loading/error_loading.dart';
+import 'package:freequiz/loading/error_loading/view.dart';
 import 'package:freequiz/loading/loading_screen/loading_screen.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/manage.dart';
@@ -54,13 +54,15 @@ class LoadQuiz extends StatelessWidget {
               ),
             );
           } else {
-            return ErrorLoading(
+            return ErrorLoadingView(
               error: data.data!["message"],
+              widget: this,
             );
           }
         } else if (data.hasError) {
-          return const ErrorLoading(
+          return ErrorLoadingView(
             error: "other error",
+            widget: this,
           );
         }
         return LoadingScreen(
