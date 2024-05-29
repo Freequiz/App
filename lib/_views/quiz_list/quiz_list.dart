@@ -19,46 +19,40 @@ class QuizList extends StatelessWidget {
 
           return conditional(
             DeviceInfo.mobileLayout,
-            Expanded(
-              child: ListQuizzes(data: list, onDismissed: onDismissed),
-            ),
+            ListQuizzes(data: list, onDismissed: onDismissed),
             defaultWidget: conditional(
               list.length > 1,
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ListQuizzes(
-                        data: list,
-                        onDismissed: onDismissed,
-                        physics: const NeverScrollableScrollPhysics(),
-                      ),
-                    ),
-                    Space.width(30),
-                    Expanded(
-                      child: ListQuizzes(
-                        data: list,
-                        onDismissed: onDismissed,
-                        physics: const NeverScrollableScrollPhysics(),
-                        n: 1,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              defaultWidget: Expanded(
-                child: Row(
-                  children: [
-                    Space.width((DeviceInfo().width() - 30) / 4 + 15),
-                    Expanded(
-                        child: ListQuizzes(
+              Row(
+                children: [
+                  Expanded(
+                    child: ListQuizzes(
                       data: list,
                       onDismissed: onDismissed,
                       physics: const NeverScrollableScrollPhysics(),
-                    )),
-                    Space.width((DeviceInfo().width() - 30) / 4 + 15)
-                  ],
-                ),
+                    ),
+                  ),
+                  Space.width(30),
+                  Expanded(
+                    child: ListQuizzes(
+                      data: list,
+                      onDismissed: onDismissed,
+                      physics: const NeverScrollableScrollPhysics(),
+                      n: 1,
+                    ),
+                  )
+                ],
+              ),
+              defaultWidget: Row(
+                children: [
+                  Space.width((DeviceInfo().width() - 30) / 4 + 15),
+                  Expanded(
+                      child: ListQuizzes(
+                    data: list,
+                    onDismissed: onDismissed,
+                    physics: const NeverScrollableScrollPhysics(),
+                  )),
+                  Space.width((DeviceInfo().width() - 30) / 4 + 15)
+                ],
               ),
             ),
           );

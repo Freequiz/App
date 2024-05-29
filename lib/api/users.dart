@@ -142,13 +142,13 @@ class APIUsers {
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> getQuizzes(int page) async {
-    final map = httpGetQuizzes(page);
+  static Future<Map> getQuizzesAndDraft(int page) async {
+    final map = getQuizzes(page);
     QuizHelper.draft = await DraftStorage.loadDraft();
     return map;
   }
 
-  static Future<Map> httpGetQuizzes(int page) async {
+  static Future<Map> getQuizzes(int page) async {
     final response = await Api.httpGet(path: 'user/quizzes/$page');
 
     return Api.decodeResponse(response);

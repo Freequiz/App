@@ -77,7 +77,6 @@ class _EditQuizState extends State<EditQuiz> {
             builder: (context, data) {
               if (data.hasData) {
                 if (data.data!['success']) {
-                  debugPrint(data.data!['quiz_data'].toString());
                   quizData = data.data!['quiz_data'];
                   if (firstTime) {
                     quiz.title.input.text = quizData['title'];

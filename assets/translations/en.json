@@ -170,5 +170,8 @@
 
     "private": "Privat",
     "hidden": "Versteckt",
-    "public": "Öffentlich"
+    "public": "Öffentlich",
+
+    "favorite": "Favorites",
+    "history": "History"
 }

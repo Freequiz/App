@@ -38,7 +38,6 @@ class _ListQuizzesState extends State<ListQuizzes> {
           : half(data.length),
       itemBuilder: (BuildContext context, int i) {
         final quizData = data[DeviceInfo.mobileLayout ? i : i * 2 + widget.n];
-        debugPrint(quizData.toString());
         return Dismissible(
           key: Key(quizData['id']),
           direction: DismissDirection.endToStart,

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'api.dart';
 
 class APIQuizzes {
@@ -39,7 +38,6 @@ class APIQuizzes {
   }
 
   static Future<Map> updateQuiz(Map map, String uuid) async {
-    debugPrint("https://dev.freequiz.ch/api/quiz/$uuid/update");
     final response = await Api.httpPatch(
       path: 'quiz/$uuid/update',
       body:
