@@ -1,5 +1,6 @@
 import 'package:freequiz/app.dart';
 import 'package:freequiz/loading/load_quiz.dart';
+import 'package:freequiz/loading/load_user.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -13,6 +14,11 @@ final router = GoRouter(
           builder: (context, state) => state.pathParameters['quizUuid'] != null
               ? LoadQuiz(uuid: state.pathParameters['quizUuid']!)
               : const App(),
+        ),
+        GoRoute(
+          path: 'user/:userID',
+          builder: (context, state) =>
+              state.pathParameters['userID'] != null ? LoadUser(user: state.pathParameters['userID']!) : const App(),
         ),
       ],
     ),

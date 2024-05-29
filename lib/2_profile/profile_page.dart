@@ -4,7 +4,7 @@ import 'package:freequiz/2_profile/profile_info/profile_info.dart';
 import 'package:freequiz/2_profile/signup.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/error_loading/alert.dart';
-import 'package:freequiz/loading/loading_screen/loading_screen2.dart';
+import 'package:freequiz/loading/loading_screen/loading_animation.dart';
 
 import '../others/utilities.dart';
 
@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
           builder: (context, data) {
             if (data.hasData) {
               if (data.data!["success"]) {
-                return LoadingScreen2(
+                return LoadingAnimation(
                   message: "Loading Profile",
                   finishedLoading: true,
                   widget: ProfileInfo(refresh: refresh, data: data.data!),
@@ -55,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               );
             }
-            return const LoadingScreen2(
+            return const LoadingAnimation(
               message: "Loading Profile",
             );
           },

@@ -1,8 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/loading/loading_screen/loading_animation.dart';
 
 class LoadingScreen extends StatefulWidget {
   final String message;
@@ -25,53 +22,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: widget.appBar,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedCrossFade(
-              firstCurve: Curves.ease,
-              secondCurve: Curves.easeIn,
-              duration: const Duration(milliseconds: 350),
-              firstChild: Column(
-                children: [
-                  conditional(
-                    widget.finishedLoading,
-                    Image.asset(
-                      "images/icon_transparent.png",
-                    ),
-                    defaultWidget: SpinKitRotatingCircle(
-                      size: DeviceInfo().width() / 2.25,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Image.asset(
-                          "images/icon_transparent.png",
-                        );
-                      },
-                    ),
-                  ),
-                  Space.height(
-                      widget.finishedLoading ? 0 : DeviceInfo().height() / 30),
-                  Text(
-                    widget.message.tr(),
-                    style: textSize(widget.finishedLoading
-                        ? 0
-                        : DeviceInfo().height() / 45),
-                  ),
-                ],
-              ),
-              secondChild: SizedBox(
-                width: DeviceInfo().width(),
-                height: DeviceInfo().height() -
-                    (MediaQuery.of(context).padding.top + kToolbarHeight) -
-                    1,
-                child: widget.widget,
-              ),
-              crossFadeState: widget.finishedLoading
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-            ),
-          ],
-        ),
+      body: LoadingAnimation(
+        message: widget.message,
+        finishedLoading: widget.finishedLoading,
+        widget: widget.widget,
       ),
     );
   }
