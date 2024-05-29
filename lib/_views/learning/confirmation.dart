@@ -24,8 +24,7 @@ class Confirmation extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  reset(i);
-                  Navigator.of(context).pop();
+                  reset();
                   Navigator.of(context).pop();
                 },
                 child: Text(

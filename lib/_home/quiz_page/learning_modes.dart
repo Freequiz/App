@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/loading/load_progress.dart';
+import 'package:freequiz/loading/load_learning.dart';
+import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 
@@ -20,6 +21,13 @@ class _LearningModesState extends State<LearningModes> {
     Icons.keyboard_alt_outlined,
     Icons.format_list_bulleted_rounded, 
     Icons.quiz_outlined
+  ];
+
+  final List<Color> color = [
+    purpleFreequiz,
+    roseFreequiz,
+    yellowFreequiz,
+    blueFreequiz,
   ];
 
   refresh() {
