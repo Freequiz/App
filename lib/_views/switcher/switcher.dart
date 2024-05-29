@@ -50,7 +50,7 @@ class _SwitcherState extends State<Switcher> {
               .moveX(
                 begin: widget.texts.indexOf(previousValue) * widget.width / widget.texts.length,
                 end: widget.texts.indexOf(widget.value) * widget.width / widget.texts.length,
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 200),
               )
               .callback(
                 callback: (_) => setState(() {

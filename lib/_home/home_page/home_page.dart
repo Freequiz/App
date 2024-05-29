@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/_home/home_page/search_page/search_bar.dart' as search;
 import 'package:freequiz/_views/quiz_list/quiz_list.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
@@ -57,7 +58,10 @@ class _HomePageState extends State<HomePage> {
           },
           child: Column(
             children: [
-              Center(child: search.SearchBar(focusNode: focusNode,)),
+              Center(
+                  child: search.SearchBar(
+                focusNode: focusNode,
+              )),
               SizedBox(
                 height: DeviceInfo.mobileLayout ? 10 : 30,
               ),
@@ -71,17 +75,26 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: DeviceInfo.mobileLayout ? 10 : 30,
               ),
-              shownQuizzes == "history"
-                  ? QuizList(
+              Expanded(
+                child: Stack(
+                  children: [
+                    QuizList(
                       key: keyHistory,
                       future: recent,
                       onDismissed: removeRecent,
                     )
-                  : QuizList(
+                    .animate(target: shownQuizzes == "history" ? 0 : 1)
+                    .moveX(begin: 0, end: -DeviceInfo().width(), duration: const Duration(milliseconds: 200)),
+                    QuizList(
                       key: keyFavorites,
                       future: favorites,
                       onDismissed: removeFavorite,
-                    ),
+                    )
+                    .animate(target: shownQuizzes == "history" ? 0 : 1)
+                    .moveX(begin: DeviceInfo().width(), end: 0, duration: const Duration(milliseconds: 200)),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -97,10 +110,8 @@ class _HomePageState extends State<HomePage> {
     await favorites;
 
     setState(() {
-      keyHistory =
-          keyHistory == const Key("h") ? const Key("h1") : const Key("h");
-      keyFavorites =
-          keyFavorites == const Key("f") ? const Key("f1") : const Key("f");
+      keyHistory = keyHistory == const Key("h") ? const Key("h1") : const Key("h");
+      keyFavorites = keyFavorites == const Key("f") ? const Key("f1") : const Key("f");
     });
 
     return;

@@ -29,12 +29,10 @@ class _LearningSettingsState extends State<LearningSettings> {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     return AlertDialog(
       title: Text(
         context.tr('settings'),
-        style: TextStyle(color: darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
       insetPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
       contentPadding: const EdgeInsets.all(20.0),
