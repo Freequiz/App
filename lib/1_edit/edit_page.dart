@@ -3,7 +3,7 @@ import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/1_edit/edit_overview.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/error_loading/alert.dart';
-import 'package:freequiz/loading/loading_screen/loading_animation.dart';
+import 'package:freequiz/loading/loading_screen/animation.dart';
 
 class EditPage extends StatefulWidget {
   const EditPage({super.key});
