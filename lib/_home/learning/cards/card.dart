@@ -10,7 +10,7 @@ class CardWidget extends StatelessWidget {
   final backgroundColor = DeviceInfo.darkMode
       ? const Color.fromARGB(255, 50, 50, 50)
       : const Color.fromARGB(255, 246, 246, 246);
-  final foregroundColor = DeviceInfo.darkMode ? Colors.white : textGray;
+  final foregroundColor = DeviceInfo.darkMode ? Colors.white : gray40;
   @override
   Widget build(BuildContext context) {
     return Container(

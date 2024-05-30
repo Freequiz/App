@@ -126,7 +126,7 @@ class APIUsers {
       Profile.deleteData();
       return jsonDecode(response.body);
     } else {
-      throw Exception('Error');
+      return jsonDecode(response.body);
     }
   }
 

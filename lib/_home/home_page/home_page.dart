@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/_home/home_page/search_page/search_bar.dart' as search;
-import 'package:freequiz/_views/quiz_list/quiz_list.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
+import 'package:freequiz/loading/load_quiz_list.dart';
 import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final opacityColor = DeviceInfo.darkMode ? backgroundGray : Colors.white;
+  final opacityColor = DeviceInfo.darkMode ? gray55 : Colors.white;
   int shownQuizzes = 0;
   int previousShownQuizzes = 0;
 
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   child: Stack(
                     children: [
                       Positioned.fill(
-                        child: QuizList(
+                        child: LoadQuizList(
                           key: keyHistory,
                           future: recent,
                           onDismissed: removeRecent,
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                             }),),
                       ),
                       Positioned.fill(
-                        child: QuizList(
+                        child: LoadQuizList(
                           key: keyFavorites,
                           future: favorites,
                           onDismissed: removeFavorite,
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                             .moveX(begin: DeviceInfo().width() * (1 - previousShownQuizzes), end: DeviceInfo().width() * (1 - shownQuizzes), duration: const Duration(milliseconds: 200)),
                       ),
                       Positioned.fill(
-                        child: QuizList(
+                        child: LoadQuizList(
                           key: keyPersonal,
                           future: personal,
                           onDismissed: removePersonal,

@@ -46,7 +46,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
         rightAnswer: rightAnswer,
         answerRight: answerRight,
         background: yellowFreequiz,
-        color: backgroundGray,
+        color: gray55,
       ),
     );
   }

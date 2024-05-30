@@ -19,7 +19,7 @@ class MainAppBar extends StatelessWidget {
                 foreground: Paint()
                   ..style = PaintingStyle.stroke
                   ..strokeWidth = 1.0
-                  ..color = textGray,
+                  ..color = gray40,
               ),
             ),
             const Text(

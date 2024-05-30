@@ -18,7 +18,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
+    final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
     return Container(
       height: DeviceInfo().height() / 18,
       padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo().height() / 80),

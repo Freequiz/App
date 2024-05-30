@@ -16,11 +16,11 @@ class _SearchBarWordsState extends State<SearchBarWords> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
+    final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DeviceInfo().width() / 100),
-        color: DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : backgroundWhite,
+        color: DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : white235,
       ),
       width: DeviceInfo().width() / 2,
       child: Padding(

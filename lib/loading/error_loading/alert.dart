@@ -2,12 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/others/style.dart';
 
 class ErrorLoadingAlert extends StatelessWidget {
   final String error;
   final Widget previousWidget;
+  final Color backgroundColor;
   const ErrorLoadingAlert(
-      {super.key, required this.error, required this.previousWidget});
+      {super.key, required this.error, required this.previousWidget, this.backgroundColor = gray55});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +18,7 @@ class ErrorLoadingAlert extends StatelessWidget {
         context.tr('$error title'),
         style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
+      backgroundColor: backgroundColor,
       content: Text('$error description').tr(),
       actions: [
         TextButton(

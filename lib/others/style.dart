@@ -6,15 +6,14 @@ const Color yellowFreequiz = Color.fromARGB(255, 233, 209, 196);
 const Color blueFreequiz = Color.fromARGB(255, 209, 222, 230);
 const Color purpleFreequiz = Color.fromARGB(255, 154, 137, 188);
 
-const Color backgroundGray = Color.fromARGB(255, 50, 50, 50);
-const Color gray60 = Color.fromARGB(255, 60, 60, 60);
-const Color highlightGray = Color.fromARGB(255, 70, 70, 70);
+const Color gray40 = Color.fromARGB(255, 40, 40, 40); //used for app background and for text
+const Color gray55 = Color.fromARGB(255, 55, 55, 55); //used for background elements
+const Color gray60 = Color.fromARGB(255, 60, 60, 60); //middle gray
+const Color gray70 = Color.fromARGB(255, 70, 70, 70); //used for highlights
 
-const Color backgroundWhite = Color.fromARGB(255, 235, 235, 235);
-const Color white225 = Color.fromARGB(255, 225, 225, 225);
-const Color highlightWhite = Color.fromARGB(255, 205, 205, 205);
-
-const Color textGray = Color.fromARGB(255, 40, 40, 40);
+const Color white235 = Color.fromARGB(255, 235, 235, 235); //used for app background and for text
+const Color white225 = Color.fromARGB(255, 225, 225, 225); //middle white
+const Color white205 = Color.fromARGB(255, 205, 205, 205); //used for highlights
 
 //Dark Mode
 ThemeData darkTheme = ThemeData(
@@ -40,7 +39,7 @@ ThemeData darkTheme = ThemeData(
     titleSmall: TextStyle(color: Colors.white),
   ),
   iconTheme: const IconThemeData(color: Colors.white),
-  scaffoldBackgroundColor: const Color.fromARGB(255, 40, 40, 40),
+  scaffoldBackgroundColor: gray40,
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -49,9 +48,9 @@ ThemeData darkTheme = ThemeData(
       ),
     ),
   drawerTheme: const DrawerThemeData(
-    backgroundColor: Color.fromARGB(255, 40, 40, 40),
+    backgroundColor: gray40,
   ),
-  dialogTheme: const DialogTheme(backgroundColor: Color.fromARGB(255, 40, 40, 40)),
+  dialogTheme: const DialogTheme(backgroundColor: gray40),
   inputDecorationTheme: const InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: grayFreequiz),
@@ -71,11 +70,11 @@ ThemeData lightTheme = ThemeData(
       foregroundColor: Colors.white,
     ),
     textTheme: const TextTheme(
-      titleMedium: TextStyle(color: textGray),
-      displayLarge: TextStyle(color: textGray),
-      displayMedium: TextStyle(color: textGray),
-      bodyLarge: TextStyle(color: textGray),
-      bodyMedium: TextStyle(color: textGray),
+      titleMedium: TextStyle(color: gray40),
+      displayLarge: TextStyle(color: gray40),
+      displayMedium: TextStyle(color: gray40),
+      bodyLarge: TextStyle(color: gray40),
+      bodyMedium: TextStyle(color: gray40),
     ),
     scaffoldBackgroundColor: Colors.white,
     textButtonTheme: TextButtonThemeData(

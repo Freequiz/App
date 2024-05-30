@@ -13,7 +13,7 @@ class QuizDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: DeviceInfo.darkMode ? gray60 : backgroundWhite,
+        color: DeviceInfo.darkMode ? gray60 : white235,
         borderRadius: BorderRadius.circular(DeviceInfo().width() / 30.4),
       ),
       constraints: BoxConstraints(minHeight: DeviceInfo().height() / 15),

@@ -25,7 +25,7 @@ Widget loading({
           showDialog(
             context: context,
             builder: (context) {
-              return NoConnectionAlert(onClose: () {});
+              return const NoConnectionAlert();
             },
           );
         });

@@ -35,7 +35,7 @@ class ManageQuiz {
   }
 
   static Future<Map> loadRecent() async {
-    Map<String, List> recentQuizzes = {'data': []};
+    Map<String, dynamic> recentQuizzes = {'success': true,'data': []};
 
     List<Map> quizzes = await QuizDatabase.loadQuizzes();
 

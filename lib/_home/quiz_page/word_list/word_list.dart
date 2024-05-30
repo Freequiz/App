@@ -28,8 +28,8 @@ class WordList extends StatelessWidget {
         ? gray60
         : white225;
     final color6 = DeviceInfo.darkMode
-        ? backgroundGray
-        : backgroundWhite;
+        ? gray55
+        : white235;
     return ListView.builder(
       shrinkWrap: true,
       physics: scrollPhysics,

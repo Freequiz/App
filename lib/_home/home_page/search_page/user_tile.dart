@@ -51,7 +51,7 @@ class _UserTileState extends State<UserTile> {
                     ),
                     ShareButton(
                       url: "https://freequiz.herokuapp.com/user/${widget.data['username']}",
-                      color: DeviceInfo.darkMode ? Colors.white : textGray,
+                      color: DeviceInfo.darkMode ? Colors.white : gray40,
                     )
                   ],
                 ),

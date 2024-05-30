@@ -27,7 +27,7 @@ class _UsernameState extends State<Username> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
-        color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
+        color: DeviceInfo.darkMode ? gray55 : white235,
       ),
       child: Padding(
         padding: EdgeInsets.all(DeviceInfo().height() / 100),

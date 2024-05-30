@@ -20,9 +20,9 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
+    final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
     final backgroundColor = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 55, 55, 55)
+        ? gray55
         : const Color.fromARGB(255, 235, 235, 235);
     return Container(
       width: DeviceInfo.mobileLayout

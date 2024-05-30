@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/others/style.dart';
 
 class NoConnectionAlert extends StatelessWidget {
+  final Color backgroundColor;
+  final bool showButton;
 
-  final Function onClose;
-
-  const NoConnectionAlert(
-      {super.key, required this.onClose});
+  const NoConnectionAlert({super.key, this.backgroundColor = gray40, this.showButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +16,18 @@ class NoConnectionAlert extends StatelessWidget {
         context.tr('no connection title'),
         style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
       ),
+      backgroundColor: backgroundColor,
       content: const Text('no connection description').tr(),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('close').tr(),
-        ),
-      ],
+      actions: showButton
+          ? [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('close').tr(),
+              ),
+            ]
+          : null,
     );
   }
 }

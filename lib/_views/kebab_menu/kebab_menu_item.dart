@@ -29,7 +29,7 @@ class KebabMenuItem extends StatelessWidget {
             Icon(
               icon,
               size: DeviceInfo().height() / 40,
-              color: DeviceInfo.darkMode ? Colors.white : textGray,
+              color: DeviceInfo.darkMode ? Colors.white : gray40,
             )
           ],
         ),

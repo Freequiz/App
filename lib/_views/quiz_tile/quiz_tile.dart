@@ -33,7 +33,7 @@ class _QuizTileState extends State<QuizTile> {
   @override
   Widget build(BuildContext context) {
     final color6 =
-        DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : const Color.fromARGB(255, 235, 235, 235);
+        DeviceInfo.darkMode ? gray55 : white235;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => loadQuiz(
@@ -57,7 +57,7 @@ class _QuizTileState extends State<QuizTile> {
                 title: widget.data['title'],
                 button: ShareButton(
                     url: "https://www.freequiz.ch/quiz/${widget.uuid}",
-                    color: DeviceInfo.darkMode ? Colors.white : textGray),
+                    color: DeviceInfo.darkMode ? Colors.white : gray40),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

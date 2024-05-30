@@ -29,7 +29,7 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
     return AlertDialog(
       title: Text(
         context.tr(widget.title),
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : textGray),
+        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : gray40),
       ),
       content: FutureBuilder(
         future: widget.response,

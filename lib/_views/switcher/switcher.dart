@@ -35,7 +35,7 @@ class _SwitcherState extends State<Switcher> {
       width: widget.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
-        color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
+        color: DeviceInfo.darkMode ? gray55 : white235,
       ),
       child: Stack(
         children: [
@@ -44,7 +44,7 @@ class _SwitcherState extends State<Switcher> {
             height: 50,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
-                color: DeviceInfo.darkMode ? highlightGray : highlightWhite),
+                color: DeviceInfo.darkMode ? gray70 : white205),
           )
               .animate(target: onChange ? 1 : 0)
               .moveX(

@@ -15,7 +15,7 @@ class Edit extends StatelessWidget {
       onTap: () => edit(context, widget),
       child: Icon(
         Icons.edit,
-        color: DeviceInfo.darkMode ? Colors.white : textGray,
+        color: DeviceInfo.darkMode ? Colors.white : gray40,
       ),
     );
   }

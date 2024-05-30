@@ -65,7 +65,7 @@ class _KebabMenuState extends State<KebabMenu> {
           text: "Share",
         ),
         Container(
-          color: DeviceInfo.darkMode ? textGray : highlightWhite,
+          color: DeviceInfo.darkMode ? gray40 : white205,
           height: 2.0,
         ),
         KebabMenuItem(
@@ -74,7 +74,7 @@ class _KebabMenuState extends State<KebabMenu> {
           text: "Edit",
         ),
         Container(
-          color: DeviceInfo.darkMode ? textGray : highlightWhite,
+          color: DeviceInfo.darkMode ? gray40 : white205,
           height: 2.0,
         ),
         KebabMenuItem(

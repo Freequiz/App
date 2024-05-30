@@ -46,8 +46,8 @@ class _EditQuizTileState extends State<EditQuizTile> {
   @override
   Widget build(BuildContext context) {
     final color6 = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 55, 55, 55)
-        : const Color.fromARGB(255, 235, 235, 235);
+        ? gray55
+        : white235;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => loadQuiz(

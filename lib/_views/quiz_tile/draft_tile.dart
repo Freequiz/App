@@ -4,6 +4,7 @@ import 'package:freequiz/1_edit/quiz_draft/edit_draft.dart';
 import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/local_storage/draft_storage.dart';
 import 'package:freequiz/others/string_extensions.dart';
+import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/utilities/conditional.dart';
@@ -23,8 +24,8 @@ class _DraftTileState extends State<DraftTile> {
   @override
   Widget build(BuildContext context) {
     final color6 = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 55, 55, 55)
-        : const Color.fromARGB(255, 235, 235, 235);
+        ? gray55
+        : white235;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/loading/error_loading/alert.dart';
+import 'package:freequiz/others/style.dart';
 
 class ErrorLoadingView extends StatelessWidget {
   final String error;
@@ -18,6 +19,7 @@ class ErrorLoadingView extends StatelessWidget {
         child: ErrorLoadingAlert(
           error: error,
           previousWidget: widget,
+          backgroundColor: gray40,
         ),
       ),
     );
