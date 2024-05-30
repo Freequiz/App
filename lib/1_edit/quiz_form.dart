@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/local_storage/draft_storage.dart';
-import 'package:freequiz/others/textfield_data.dart';
+import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 
 class QuizForm {

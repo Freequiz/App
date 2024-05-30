@@ -9,7 +9,7 @@ class Languages {
   static List<DropdownMenuItem<int>> languages = [];
   static Map mapLanguagesCopy = {};
 
-  get() async {
+  static get() async {
     final prefs = await SharedPreferences.getInstance();
     final Map mapLanguages = jsonDecode(prefs.getString('languages') ?? "{}");
     if (mapLanguages.isNotEmpty) {
@@ -22,7 +22,7 @@ class Languages {
     return;
   }
 
-  load() async {
+  static load() async {
     Map mapLanguages = await httpGetLanguage();
     if (mapLanguages['success']) {
       mapToList(mapLanguages);
@@ -32,7 +32,7 @@ class Languages {
     }
   }
 
-  mapToList(mapLanguages) {
+  static mapToList(mapLanguages) {
     List<DropdownMenuItem<int>> newLanguages = [];
     mapLanguages['data'].forEach((key, value) {
       newLanguages.add(

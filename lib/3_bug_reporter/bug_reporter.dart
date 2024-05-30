@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/api/bug_reports.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/others/textfield_data.dart';
+import 'package:freequiz/models/textfield_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:freequiz/others/utilities.dart';
 

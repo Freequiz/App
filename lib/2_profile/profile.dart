@@ -8,7 +8,7 @@ class Profile {
     await SecureStorage.setAccessToken(accessToken);
   }
 
-  static loadData() async {
+  static loadAccessToken() async {
     accessToken = await SecureStorage.readAccessToken();
     loaded = true;
   }
