@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class LearningSettings extends StatefulWidget {
   final List<String> languages;
@@ -54,9 +54,9 @@ class _LearningSettingsState extends State<LearningSettings> {
             width: DeviceInfo().width() - 80,
           ),
           const SizedBox(height: 30),
-          conditional(
-            Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
-            Text(
+          Conditional(
+            condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            widget: Text(
               context.tr('amount repetition'),
               style: TextStyle(
                 fontSize: DeviceInfo().height() / 50,
@@ -64,13 +64,13 @@ class _LearningSettingsState extends State<LearningSettings> {
               ),
             ),
           ),
-          conditional(
-            Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
-            const SizedBox(height: 5),
+          Conditional(
+            condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            widget: const SizedBox(height: 5),
           ),
-          conditional(
-            Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
-            Switcher(
+          Conditional(
+            condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            widget: Switcher(
               onTap: changeMaxScore,
               texts: Learning.maxScoreOptions[widget.mode]!,
               value: maxScore,

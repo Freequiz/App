@@ -6,8 +6,7 @@ import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/conditional.dart';
-
-import '../../others/utilities.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class PublicQuizzes extends StatefulWidget {
   final String user;

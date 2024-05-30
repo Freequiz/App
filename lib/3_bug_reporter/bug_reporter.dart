@@ -5,7 +5,7 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class BugReporter extends StatefulWidget {
   const BugReporter({super.key});

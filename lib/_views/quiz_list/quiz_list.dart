@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_list/list.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class QuizList extends StatelessWidget {
   final Future<Map> future;

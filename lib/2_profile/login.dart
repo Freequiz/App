@@ -7,6 +7,7 @@ import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class Login extends StatefulWidget {
   final Function refresh;

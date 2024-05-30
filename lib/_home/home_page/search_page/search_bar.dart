@@ -4,8 +4,7 @@ import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-
-import '../../../others/utilities.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({super.key, required this.focusNode});

@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class LoadingAnimation extends StatefulWidget {
   final String message;

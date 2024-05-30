@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/draft_tile.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class Draft extends StatelessWidget {
   final Function refresh;

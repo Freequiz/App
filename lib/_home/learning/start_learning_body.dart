@@ -14,8 +14,8 @@ import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/space.dart';
 
-import '../../others/utilities.dart';
 
 class StartLearningBody extends StatefulWidget {
   final int i;

@@ -6,8 +6,7 @@ import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-
-import '../../../others/utilities.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class CardsBody extends StatefulWidget {
   final Function wrong;

@@ -5,8 +5,7 @@ import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/conditional.dart';
-
-import '../../others/utilities.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class Password extends StatefulWidget {
   final Function refresh;

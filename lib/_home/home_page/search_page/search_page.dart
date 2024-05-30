@@ -12,8 +12,7 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/conditional.dart';
-
-import '../../../others/utilities.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class SearchPage extends StatefulWidget {
   final int n;
