@@ -5,8 +5,7 @@ import 'package:freequiz/2_profile/signup.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/error_loading/alert.dart';
 import 'package:freequiz/loading/loading_screen/loading_animation.dart';
-
-import '../others/utilities.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -23,9 +22,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: conditional(
-        Profile.accessToken == "",
-        SignUp(
+      child: Conditional(
+        condition: Profile.accessToken == "",
+        widget: SignUp(
           refresh: refresh,
         ),
         defaultWidget: FutureBuilder<Map>(

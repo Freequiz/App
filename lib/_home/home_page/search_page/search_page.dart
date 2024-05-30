@@ -11,6 +11,7 @@ import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 import '../../../others/utilities.dart';
 
@@ -79,9 +80,9 @@ class _SearchPageState extends State<SearchPage> {
                 SizedBox(
                   height: DeviceInfo.mobileLayout ? 5 : 15,
                 ),
-                conditional(
-                  pressed,
-                  Align(
+                Conditional(
+                  condition: pressed,
+                  widget: Align(
                     child: CircularProgressIndicator(
                       color: DeviceInfo.darkMode ? Colors.white : grayFreequiz,
                     ),

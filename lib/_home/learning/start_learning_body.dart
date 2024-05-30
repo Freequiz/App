@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice.dart';
-import 'package:freequiz/_views/learning/progress_bar.dart';
+import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/_home/learning/smart.dart';
 import 'package:freequiz/_home/learning/writing/writing.dart';
 import 'package:freequiz/models/translation.dart';
@@ -13,6 +13,7 @@ import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 import '../../others/utilities.dart';
 
@@ -103,13 +104,13 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                   ),
                 ),
               ),
-              conditional(
-                QuizHelper.marked,
-                Space.width(10),
+              Conditional(
+                condition: QuizHelper.marked,
+                widget: Space.width(10),
               ),
-              conditional(
-                QuizHelper.marked,
-                GestureDetector(
+              Conditional(
+                condition: QuizHelper.marked,
+                widget: GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     Questionnaire.create(true, Learning.modes[widget.i]);
@@ -166,9 +167,9 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    conditional(
-                      progressArray.isNotEmpty,
-                      Container(
+                    Conditional(
+                      condition: progressArray.isNotEmpty,
+                      widget: Container(
                         width: (DeviceInfo().width() - 20),
                         height: DeviceInfo().height() / 30,
                         alignment: Alignment.centerLeft,

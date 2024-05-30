@@ -5,6 +5,7 @@ import 'package:freequiz/_home/user_page/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 import '../../others/utilities.dart';
 
@@ -49,9 +50,9 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
           },
         ),
         Space.height(DeviceInfo.mobileLayout ? 5 : 15),
-        conditional(
-          pressed,
-          Align(
+        Conditional(
+          condition: pressed,
+          widget: Align(
             child: CircularProgressIndicator(
               color: DeviceInfo.darkMode ? Colors.white : grayFreequiz,
             ),

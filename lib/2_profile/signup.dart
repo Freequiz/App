@@ -7,6 +7,7 @@ import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class SignUp extends StatefulWidget {
   final Function refresh;
@@ -240,9 +241,9 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () {
                       pressed ? () {} : onPressed();
                     },
-                    child: conditional(
-                      pressed,
-                      SizedBox(
+                    child: Conditional(
+                      condition: pressed,
+                      widget: SizedBox(
                         width: DeviceInfo.mobileLayout
                             ? DeviceInfo().height() / 30
                             : 30,

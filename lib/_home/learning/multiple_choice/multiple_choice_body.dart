@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/multiple_choice/choices.dart';
 import 'package:freequiz/_home/learning/prompt.dart';
-import 'package:freequiz/_views/learning/progress_bar.dart';
+import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 

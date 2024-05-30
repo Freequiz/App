@@ -9,8 +9,8 @@ import 'package:freequiz/_home/quiz_page/word_list/nothing_found.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list_taskbar.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
-import '../../others/utilities.dart';
 
 class QuizPage extends StatefulWidget {
   final String uuid;
@@ -52,9 +52,9 @@ class _QuizPageState extends State<QuizPage> {
               top: 15.0, bottom: 30.0, left: 10.0, right: 10.0)
           : const EdgeInsets.only(
               top: 20.0, bottom: 20.0, left: 20.0, right: 20.0),
-      child: conditional(
-        height > width,
-        Column(
+      child: Conditional(
+        condition: height > width,
+        widget: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(

@@ -9,6 +9,7 @@ import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class EditOverview extends StatefulWidget {
   final List data;
@@ -62,9 +63,9 @@ class _EditOverviewState extends State<EditOverview> {
             ),
           ),
           Space.height(DeviceInfo.mobileLayout ? 15 : 45),
-          conditional(
-            QuizHelper.draft.isNotEmpty,
-            Draft(
+          Conditional(
+            condition: QuizHelper.draft.isNotEmpty,
+            widget: Draft(
               refresh: refresh,
             ),
           ),

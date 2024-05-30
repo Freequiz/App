@@ -8,8 +8,7 @@ import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-
-import '../../others/utilities.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class EditQuizTile extends StatefulWidget {
   final Map data;
@@ -55,9 +54,9 @@ class _EditQuizTileState extends State<EditQuizTile> {
         context: context,
         uuid: widget.uuid,
       ),
-      child: conditional(
-        shown,
-        Dismissible(
+      child: Conditional(
+        condition: shown,
+        widget: Dismissible(
           key: Key(widget.uuid),
           direction: DismissDirection.endToStart,
           onDismissed: (direction) {
@@ -108,9 +107,9 @@ class _EditQuizTileState extends State<EditQuizTile> {
                           expanded: expanded,
                           width: DeviceInfo().width() - 20,
                           description: widget.data['description']),
-                      conditional(
-                        !widget.expanded,
-                        SizedBox(
+                      Conditional(
+                        condition: !widget.expanded,
+                        widget: SizedBox(
                           height: DeviceInfo().height() / 30,
                           child: GestureDetector(
                             onTap: () {
@@ -129,7 +128,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
                       ),
                     ],
                   ),
-                  conditional(expanded, AdditionalInfo(data: widget.data))
+                  Conditional(condition: expanded, widget: AdditionalInfo(data: widget.data))
                 ],
               ),
             ),

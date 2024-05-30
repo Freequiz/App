@@ -6,8 +6,8 @@ import 'package:freequiz/local_storage/draft_storage.dart';
 import 'package:freequiz/others/string_extensions.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
-import '../../others/utilities.dart';
 
 class DraftTile extends StatefulWidget {
   final Function refresh;
@@ -30,9 +30,9 @@ class _DraftTileState extends State<DraftTile> {
       onTap: () {
         onTap();
       },
-      child: conditional(
-        shown,
-        Dismissible(
+      child: Conditional(
+        condition: shown,
+        widget: Dismissible(
           key: const Key('Draft'),
           direction: DismissDirection.endToStart,
           onDismissed: (direction) async {

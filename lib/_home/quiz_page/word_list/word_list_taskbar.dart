@@ -2,8 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-
-import '../../../others/utilities.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class WordListTaskbar extends StatefulWidget {
   final Function search;
@@ -22,8 +21,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
     final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
     return Container(
       height: DeviceInfo().height() / 18,
-      padding: EdgeInsets.all(
-          DeviceInfo.mobileLayout ? 0 : DeviceInfo().height() / 80),
+      padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : DeviceInfo().height() / 80),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(DeviceInfo().width() / 30.4),
@@ -31,16 +29,15 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
         ),
         color: grayFreequiz,
       ),
-      child: conditional(
-        search,
-        Padding(
+      child: Conditional(
+        condition: search,
+        widget: Padding(
           padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
           child: TextField(
             onChanged: (value) {
               widget.search(textController.text);
             },
-            keyboardAppearance:
-                DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+            keyboardAppearance: DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
             controller: textController,
             decoration: InputDecoration(
               filled: true,
@@ -60,16 +57,14 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                   color: grayFreequiz,
                   width: 2,
                 ),
-                borderRadius:
-                    BorderRadius.circular(DeviceInfo().width() / 30.4),
+                borderRadius: BorderRadius.circular(DeviceInfo().width() / 30.4),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: blueFreequiz,
                   width: 2,
                 ),
-                borderRadius:
-                    BorderRadius.circular(DeviceInfo().width() / 30.4),
+                borderRadius: BorderRadius.circular(DeviceInfo().width() / 30.4),
               ),
               hintText: context.tr('search'),
               suffixIcon: IconButton(
@@ -95,18 +90,14 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
             Container(
               width: DeviceInfo.mobileLayout
                   ? (DeviceInfo().width() - 30) / 2 - DeviceInfo().height() / 30
-                  : (DeviceInfo().width() - 30) / 2 -
-                      DeviceInfo().height() / 20 -
-                      DeviceInfo().height() / 80,
+                  : (DeviceInfo().width() - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   context.tr('definition'),
                   style: TextStyle(
-                      fontSize: DeviceInfo.mobileLayout
-                          ? DeviceInfo().height() / 50
-                          : DeviceInfo().height() / 45,
+                      fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
@@ -115,18 +106,14 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
             Container(
               width: DeviceInfo.mobileLayout
                   ? (DeviceInfo().width() - 30) / 2 - DeviceInfo().height() / 30
-                  : (DeviceInfo().width() - 30) / 2 -
-                      DeviceInfo().height() / 20 -
-                      DeviceInfo().height() / 80,
+                  : (DeviceInfo().width() - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   context.tr('answer'),
                   style: TextStyle(
-                      fontSize: DeviceInfo.mobileLayout
-                          ? DeviceInfo().height() / 50
-                          : DeviceInfo().height() / 45,
+                      fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
@@ -142,10 +129,8 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 },
                 child: Icon(
                   Icons.search,
-                  color:Colors.white,
-                  size: DeviceInfo.mobileLayout
-                      ? DeviceInfo().height() / 50
-                      : DeviceInfo().height() / 45,
+                  color: Colors.white,
+                  size: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
                 ),
               ),
             ),

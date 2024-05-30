@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_list/list.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class QuizList extends StatelessWidget {
   final Future<Map> future;
@@ -17,12 +18,12 @@ class QuizList extends StatelessWidget {
         if (data.hasData) {
           final List list = data.data!['data'] as List;
 
-          return conditional(
-            DeviceInfo.mobileLayout,
-            ListQuizzes(data: list, onDismissed: onDismissed),
-            defaultWidget: conditional(
-              list.length > 1,
-              Row(
+          return Conditional(
+            condition: DeviceInfo.mobileLayout,
+            widget: ListQuizzes(data: list, onDismissed: onDismissed),
+            defaultWidget: Conditional(
+              condition: list.length > 1,
+              widget: Row(
                 children: [
                   Expanded(
                     child: ListQuizzes(

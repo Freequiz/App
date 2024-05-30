@@ -4,7 +4,7 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class EMail extends StatefulWidget {
   final Function refresh;
@@ -52,13 +52,13 @@ class _EMailState extends State<EMail> {
                 ),
               ],
             ),
-            conditional(
-              edit,
-              SizedBox(height: DeviceInfo().height() / 60),
+            Conditional(
+              condition: edit,
+              widget: SizedBox(height: DeviceInfo().height() / 60),
             ),
-            conditional(
-              edit,
-              Row(
+            Conditional(
+              condition: edit,
+              widget: Row(
                 children: [
                   Flexible(
                     child: SizedBox(

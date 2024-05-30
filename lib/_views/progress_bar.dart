@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
-
-import '../../others/utilities.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class ProgressBar extends StatefulWidget {
   final double amountLeft;
@@ -53,11 +52,11 @@ class _ProgressBarState extends State<ProgressBar> {
               ),
               width: widthProgress,
               alignment: Alignment.centerRight,
-              child: conditional(
-                widthProgress > 35,
-                conditional(
-                  expanded,
-                  Padding(
+              child: Conditional(
+                condition: widthProgress > 35,
+                widget: Conditional(
+                  condition: expanded,
+                  widget: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 3.0,
                     ),

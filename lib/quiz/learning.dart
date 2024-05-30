@@ -5,7 +5,7 @@ import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/_views/learning/correction.dart';
+import 'package:freequiz/_views/alerts/correction.dart';
 
 class Learning {
   static final modes = ['smart', 'write', 'multi', 'cards'];

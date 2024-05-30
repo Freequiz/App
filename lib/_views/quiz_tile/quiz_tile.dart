@@ -7,20 +7,14 @@ import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/_views/quiz_tile/description.dart';
-
-import '../../others/utilities.dart';
+import 'package:freequiz/utilities/conditional.dart';
 
 class QuizTile extends StatefulWidget {
   final Map data;
   final bool expanded;
   final String uuid;
   final double width;
-  const QuizTile(
-      {super.key,
-      required this.data,
-      required this.uuid,
-      this.expanded = true,
-      required this.width});
+  const QuizTile({super.key, required this.data, required this.uuid, this.expanded = true, required this.width});
 
   @override
   State<QuizTile> createState() => _QuizTileState();
@@ -38,9 +32,8 @@ class _QuizTileState extends State<QuizTile> {
 
   @override
   Widget build(BuildContext context) {
-    final color6 = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 55, 55, 55)
-        : const Color.fromARGB(255, 235, 235, 235);
+    final color6 =
+        DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : const Color.fromARGB(255, 235, 235, 235);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => loadQuiz(
@@ -55,10 +48,8 @@ class _QuizTileState extends State<QuizTile> {
         ),
         child: Padding(
           padding: DeviceInfo.mobileLayout
-              ? const EdgeInsets.only(
-                  left: 10.0, right: 10.0, bottom: 10.0, top: 3.0)
-              : const EdgeInsets.only(
-                  left: 20.0, right: 20.0, bottom: 20.0, top: 15.0),
+              ? const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 3.0)
+              : const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0, top: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -71,14 +62,11 @@ class _QuizTileState extends State<QuizTile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Description(
-                      expanded: expanded,
-                      width: widget.width,
-                      description: widget.data['description']),
+                  Description(expanded: expanded, width: widget.width, description: widget.data['description']),
                   moreButton()
                 ],
               ),
-              conditional(expanded, AdditionalInfo(data: widget.data)),
+              Conditional(condition: expanded, widget: AdditionalInfo(data: widget.data)),
             ],
           ),
         ),
@@ -87,9 +75,9 @@ class _QuizTileState extends State<QuizTile> {
   }
 
   Widget moreButton() {
-    return conditional(
-      !widget.expanded,
-      SizedBox(
+    return Conditional(
+      condition: !widget.expanded,
+      widget: SizedBox(
         height: DeviceInfo().height() / 30,
         child: GestureDetector(
           onTap: () {
@@ -99,8 +87,7 @@ class _QuizTileState extends State<QuizTile> {
           },
           child: Text(
             expanded ? "" : context.tr('more'),
-            style: TextStyle(
-                color: grayFreequiz, fontSize: DeviceInfo().height() / 50),
+            style: TextStyle(color: grayFreequiz, fontSize: DeviceInfo().height() / 50),
           ),
         ),
       ),

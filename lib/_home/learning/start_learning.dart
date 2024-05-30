@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/start_learning_body.dart';
-import 'package:freequiz/_views/learning/confirmation.dart';
-import 'package:freequiz/_views/learning/settings.dart';
+import 'package:freequiz/_views/alerts/confirmation.dart';
+import 'package:freequiz/_views/alerts/settings.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
