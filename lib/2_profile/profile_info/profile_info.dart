@@ -23,7 +23,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
   @override
   Widget build(BuildContext context) {
     final textColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+        DeviceInfo.darkMode ? Colors.white : gray40;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {

@@ -69,7 +69,7 @@ class _RootPageState extends State<RootPage> {
     }
     return Drawer(
       child: Image.asset(
-        "images/icon_transparent.png",
+        "assets/images/icon_transparent.png",
       ),
     );
   }

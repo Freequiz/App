@@ -27,7 +27,7 @@ class _LoadingAnimationState extends State<LoadingAnimation> {
           size: DeviceInfo().width() / 3,
           itemBuilder: (BuildContext context, int index) {
             return Image.asset(
-              "images/icon_transparent.png",
+              "assets/images/icon_transparent.png",
             );
           },
         ),
