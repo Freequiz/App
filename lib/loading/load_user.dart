@@ -1,10 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/user_page/list_quizzes.dart';
 import 'package:freequiz/_home/user_page/user_page.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/loading/error_loading/view.dart';
-import 'package:freequiz/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/loading/loading.dart';
+import 'package:freequiz/loading/loading_screen/view.dart';
 
 loadUser({required BuildContext context, required String user}) {
   ListPublicQuizzes.data.clear();
@@ -19,7 +18,6 @@ loadUser({required BuildContext context, required String user}) {
 }
 
 class LoadUser extends StatelessWidget {
-
   final String user;
 
   const LoadUser({super.key, required this.user});
@@ -29,12 +27,10 @@ class LoadUser extends StatelessWidget {
     return FutureBuilder<Map>(
       future: APIUsers.getPublicQuizzes(1, user),
       builder: (context, data) {
-        if (data.hasData) {
-          if (data.data!['success']) {
-            ListPublicQuizzes.data.addAll(
-              data.data!['data'],
-            );
-            return LoadingScreen(
+        return loading(
+          data: data,
+          previousWidget: this,
+          widget: LoadingScreen(
               message: "Loading User",
               finishedLoading: true,
               widget: UserPage(
@@ -43,25 +39,9 @@ class LoadUser extends StatelessWidget {
               appBar: AppBar(
                 title: Text(user),
               ),
-            );
-          } else {
-            return ErrorLoadingView(
-              error: data.data!["message"],
-              widget: this,
-            );
-          }
-        } else if (data.hasError) {
-          return ErrorLoadingView(
-            error: "other error",
-            widget: this,
-          );
-        }
-        return LoadingScreen(
-          message: "Loading User",
-          finishedLoading: false,
-          appBar: AppBar(
-            title: const Text('loading').tr(),
-          ),
+            ),
+          context: context,
+          onLoad: () => ListPublicQuizzes.data.addAll(data.data!['data'],)
         );
       },
     );

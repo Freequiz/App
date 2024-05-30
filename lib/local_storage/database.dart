@@ -80,10 +80,7 @@ class QuizDatabase {
     map['owner'] = map['owner'] == "true";
     map['favorite'] = map['favorite'] == "true";
 
-    return {
-      "success": true,
-      "quiz_data": map,
-    };
+    return map;
   }
 
   static Future<void> updateQuiz(Quiz quiz) async {

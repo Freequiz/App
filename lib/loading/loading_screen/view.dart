@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/loading/loading_screen/loading_animation.dart';
+import 'package:freequiz/loading/loading_screen/animation.dart';
 
 class LoadingScreen extends StatefulWidget {
   final String message;

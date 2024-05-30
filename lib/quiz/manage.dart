@@ -22,10 +22,12 @@ class ManageQuiz {
     if (quiz.containsKey('message')) {
       if (quiz['message'] == Api.noConnection || quiz['message'] == Api.timeout) {
         if (!preview) {
-          QuizHelper.quiz = Quiz.fromJson(localQuiz['quiz_data']);
+          QuizHelper.quiz = Quiz.fromJson(localQuiz);
         }
 
-        return localQuiz;
+        quiz['quiz_data'] = localQuiz;
+        quiz['offline_data'] = true;
+        return quiz;
       }
     }
 

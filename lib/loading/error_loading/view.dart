@@ -13,7 +13,13 @@ class ErrorLoadingView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('loading').tr(),
       ),
-      body: ErrorLoadingAlert(error: error, previousWidget: widget,)
+      body: Container(
+        color: const Color.fromARGB(255, 30, 30, 30),
+        child: ErrorLoadingAlert(
+          error: error,
+          previousWidget: widget,
+        ),
+      ),
     );
   }
 }

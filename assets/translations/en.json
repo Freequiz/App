@@ -85,7 +85,13 @@
     "Quiz doesn't exist title": "The quiz doesn't exist",
     "Quiz doesn't exist description": "The quiz was probably deleted. If you are sure it isn't the case please report it using the bug reporter.",
 
+    "no connection title": "No internet connection",
+    "no connection description": "You seem to have no internet connection. You can still continue to learn with Quizzes from your history.",
+    "continue": "Continue",
+
     "draft": "Draft",
+
+    "error": "Error",
 
     "sign up": "Sign up",
     "login": "Login",

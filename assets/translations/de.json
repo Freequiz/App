@@ -68,6 +68,8 @@
     "create quiz": "Quiz kreieren",
     "edit quiz": "Quiz bearbeiten",
 
+    "error": "Fehler",
+
     "answer blank": "Antwort kann nicht leer sein",
     "title error": "Titel mindestens 3 Zeichen",
     "description error": "Beschreibung kann nicht leer sein. \n Beschreibung mindestens 5 Zeichen lang",
@@ -84,6 +86,10 @@
     "Quiz doesn't exist description": "Das Quiz wurde wahrscheinlich gelöscht. Wenn Sie sicher sind, dass dies nicht der Fall ist, melden Sie es bitte mit dem Bug-Reporter.",
     "other error title": "Es ist ein unbekannter Fehler aufgetreten",
     "other error description": "Versuchen Sie es später noch einmal. Wenn dieser Fehler weiterhin besteht, melden Sie ihn bitte über den Bugreporter",
+
+    "no connection title": "Keine Internetverbindung",
+    "no connection description": "Sie scheinen keine Internetverbindung zu haben. Sie können aber weiterhin mit Quizzen aus ihrem Verlauf lernen.",
+    "continue": "Fortfahren",
 
     "draft": "Entwurf",
 

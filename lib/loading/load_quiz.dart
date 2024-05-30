@@ -1,19 +1,16 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_views/buttons/favorite.dart';
 import 'package:freequiz/_views/kebab_menu/kebab_menu.dart';
-import 'package:freequiz/loading/error_loading/view.dart';
-import 'package:freequiz/loading/loading_screen/loading_screen.dart';
+import 'package:freequiz/loading/loading.dart';
+import 'package:freequiz/loading/loading_screen/view.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/manage.dart';
 
 void loadQuiz({required BuildContext context, required String uuid}) {
-  Navigator.of(context).push(
-    MaterialPageRoute(builder: (context) {
-      return LoadQuiz(uuid: uuid);
-    })
-  );
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+    return LoadQuiz(uuid: uuid);
+  }));
 }
 
 class LoadQuiz extends StatelessWidget {
@@ -31,46 +28,30 @@ class LoadQuiz extends StatelessWidget {
     return FutureBuilder<Map>(
       future: futureMap,
       builder: (context, data) {
-        if (data.hasData) {
-          if (data.data!['success']) {
-            QuizHelper.checkedIfMarkedWords();
-            return LoadingScreen(
-              message: "Loading Quiz",
-              finishedLoading: true,
-              widget: QuizPage(
-                uuid: uuid,
-              ),
-              appBar: AppBar(
-                actions: [
-                  Favorite(
-                    favorite: QuizHelper.quiz!.favorite,
-                    toggleFavorite: toggleFavorite,
-                  ),
-                  KebabMenuButton(
-                    url: "https://freequiz.herokuapp.com/quiz/$uuid",
-                    uuid: uuid,
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return ErrorLoadingView(
-              error: data.data!["message"],
-              widget: this,
-            );
-          }
-        } else if (data.hasError) {
-          return ErrorLoadingView(
-            error: "other error",
-            widget: this,
-          );
-        }
-        return LoadingScreen(
-          message: "Loading Quiz",
-          finishedLoading: false,
-          appBar: AppBar(
-            title: const Text('loading').tr(),
+        return loading(
+          data: data,
+          previousWidget: this,
+          widget: LoadingScreen(
+            message: "Loading Quiz",
+            finishedLoading: true,
+            widget: QuizPage(
+              uuid: uuid,
+            ),
+            appBar: AppBar(
+              actions: [
+                Favorite(
+                  favorite: QuizHelper.quiz?.favorite ?? false,
+                  toggleFavorite: toggleFavorite,
+                ),
+                KebabMenuButton(
+                  url: "https://freequiz.herokuapp.com/quiz/$uuid",
+                  uuid: uuid,
+                ),
+              ],
+            ),
           ),
+          context: context,
+          onLoad: () => QuizHelper.checkedIfMarkedWords(),
         );
       },
     );

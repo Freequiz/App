@@ -4,7 +4,7 @@ import 'package:freequiz/2_profile/profile_info/profile_info.dart';
 import 'package:freequiz/2_profile/signup.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/error_loading/alert.dart';
-import 'package:freequiz/loading/loading_screen/loading_animation.dart';
+import 'package:freequiz/loading/loading_screen/animation.dart';
 import 'package:freequiz/utilities/conditional.dart';
 
 class ProfilePage extends StatefulWidget {
