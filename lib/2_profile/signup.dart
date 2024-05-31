@@ -1,5 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:freequiz/_views/buttons/submit.dart';
+import 'package:freequiz/_views/textfields/email.dart';
+import 'package:freequiz/_views/textfields/password.dart';
+import 'package:freequiz/_views/textfields/password_confirmation.dart';
+import 'package:freequiz/_views/textfields/username.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
@@ -7,7 +12,6 @@ import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
-import 'package:freequiz/utilities/conditional.dart';
 
 class SignUp extends StatefulWidget {
   final Function refresh;
@@ -20,15 +24,20 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextFieldData username = TextFieldData(hint: 'username'.tr());
   TextFieldData email = TextFieldData(hint: 'email'.tr());
-  TextFieldData password =
-      TextFieldData(hint: 'password'.tr(), shown: false);
-  TextFieldData passwordConfirmation =
-      TextFieldData(hint: 'confirm password'.tr(), shown: false);
+  TextFieldData password = TextFieldData(hint: 'password'.tr(), shown: false);
+  TextFieldData passwordConfirmation = TextFieldData(hint: 'confirm password'.tr(), shown: false);
   bool pressed = false;
+
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = FocusNode();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : Colors.black;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -37,8 +46,7 @@ class _SignUpState extends State<SignUp> {
       child: Padding(
         padding: DeviceInfo.mobileLayout
             ? const EdgeInsets.all(10.0)
-            : EdgeInsets.symmetric(
-                horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+            : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
         child: Column(
           children: [
             SizedBox(
@@ -62,9 +70,7 @@ class _SignUpState extends State<SignUp> {
                   onTap: () {},
                   child: Text(
                     context.tr('terms 2'),
-                    style: TextStyle(
-                        fontSize: DeviceInfo().height() / 65,
-                        color: Colors.blue),
+                    style: TextStyle(fontSize: DeviceInfo().height() / 65, color: Colors.blue),
                   ),
                 ),
               ],
@@ -72,107 +78,23 @@ class _SignUpState extends State<SignUp> {
             SizedBox(
               height: DeviceInfo().height() / 40.0,
             ),
-            SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
-              child: TextField(
-                onSubmitted: (value) {
-                  FocusScope.of(context).nextFocus();
-                },
-                textInputAction: TextInputAction.next,
-                keyboardAppearance:
-                    DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                keyboardType: TextInputType.name,
-                controller: username.input,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(10.0),
-                  hintText: username.hint,
-                  hintStyle: TextStyle(
-                    color: username.error ? Colors.red : hintColor,
-                  ),
-                  border: const OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: username.error ? Colors.red : grayFreequiz,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            UsernameTextfield(username: username, focusNode: focusNode),
             const SizedBox(
               height: 5.0,
             ),
-            SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
-              child: TextField(
-                onSubmitted: (value) {
-                  FocusScope.of(context).nextFocus();
-                },
-                keyboardAppearance:
-                    DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                textInputAction: TextInputAction.next,
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                controller: email.input,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(10.0),
-                  hintText: email.hint,
-                  hintStyle: TextStyle(
-                    color: email.error ? Colors.red : hintColor,
-                  ),
-                  border: const OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: email.error ? Colors.red : grayFreequiz,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            EmailTextfield(email: email, focusNode: focusNode),
             const SizedBox(
               height: 5.0,
             ),
-            SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
-              child: TextField(
-                onSubmitted: (value) {
-                  FocusScope.of(context).nextFocus();
-                },
-                keyboardAppearance:
-                    DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                textInputAction: TextInputAction.next,
-                autocorrect: false,
-                enableSuggestions: false,
-                obscureText: !password.shown,
-                keyboardType: TextInputType.visiblePassword,
-                controller: password.input,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(10.0),
-                  hintText: password.hint,
-                  hintStyle: TextStyle(
-                    color: password.error ? Colors.red : hintColor,
-                  ),
-                  border: const OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: password.error ? Colors.red : grayFreequiz,
-                      width: 2.0,
-                    ),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      password.shown ? Icons.visibility : Icons.visibility_off,
-                      color: grayFreequiz,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        password.shown = !password.shown;
-                      });
-                    },
-                  ),
-                ),
-              ),
+            PasswordTextfield(
+              password: password,
+              onPressed: () {
+                focusNode.requestFocus();
+                setState(() {
+                  password.error = false;
+                });
+              },
+              textInputAction: TextInputAction.next,
             ),
             const SizedBox(
               height: 5.0,
@@ -180,84 +102,15 @@ class _SignUpState extends State<SignUp> {
             Row(
               children: [
                 Flexible(
-                  child: SizedBox(
-                    height: DeviceInfo.mobileLayout
-                        ? DeviceInfo().height() / 20
-                        : 40,
-                    child: TextField(
-                      onSubmitted: (value) {
-                        onPressed();
-                      },
-                      keyboardAppearance: DeviceInfo.darkMode
-                          ? Brightness.dark
-                          : Brightness.light,
-                      autocorrect: false,
-                      enableSuggestions: false,
-                      obscureText: !passwordConfirmation.shown,
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: passwordConfirmation.input,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(10.0),
-                        hintText: passwordConfirmation.hint,
-                        hintStyle: TextStyle(
-                          color: password.error ? Colors.red : hintColor,
-                        ),
-                        border: const OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: password.error ? Colors.red : grayFreequiz,
-                            width: 2.0,
-                          ),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            passwordConfirmation.shown
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: grayFreequiz,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              passwordConfirmation.shown =
-                                  !passwordConfirmation.shown;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
+                  child: PasswordConfirmationTextfield(
+                    passwordConfirmation: passwordConfirmation,
+                    onPressed: onPressed,
                   ),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
-                SizedBox(
-                  height:
-                      DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: grayFreequiz,
-                      foregroundColor: Colors.white,
-                    ),
-                    onPressed: () {
-                      pressed ? () {} : onPressed();
-                    },
-                    child: Conditional(
-                      condition: pressed,
-                      widget: SizedBox(
-                        width: DeviceInfo.mobileLayout
-                            ? DeviceInfo().height() / 30
-                            : 30,
-                        height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().height() / 30
-                            : 30,
-                        child: const CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      ),
-                      defaultWidget: const Icon(Icons.arrow_forward_ios),
-                    ),
-                  ),
-                ),
+                SubmitButton(pressed: pressed, onPressed: onPressed)
               ],
             ),
             SizedBox(
@@ -322,11 +175,7 @@ class _SignUpState extends State<SignUp> {
         pressed = true;
       });
       final Map map = await APIUsers.createAccount(
-          username.input.text,
-          email.input.text,
-          password.input.text,
-          passwordConfirmation.input.text,
-          true);
+          username.input.text, email.input.text, password.input.text, passwordConfirmation.input.text, true);
       //throw new Exception("Hallo Nithus");
       if (map["success"] == true) {
         Profile.accessToken = map["access_token"];
@@ -336,8 +185,7 @@ class _SignUpState extends State<SignUp> {
         setState(() {
           password.input.clear();
           passwordConfirmation.input.clear();
-          password.hint =
-              'password length 1'.tr();
+          password.hint = 'password length 1'.tr();
           passwordConfirmation.hint = 'password length 2'.tr();
           password.error = true;
           pressed = false;
