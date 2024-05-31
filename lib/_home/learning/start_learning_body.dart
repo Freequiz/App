@@ -53,8 +53,8 @@ class _StartLearningBodyState extends State<StartLearningBody> {
   @override
   Widget build(BuildContext context) {
     final color5 = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 60, 60, 60)
-        : const Color.fromARGB(255, 225, 225, 225);
+        ? gray60
+        : white225;
     Progress.calculate(Learning.modes[widget.i]);
     return Column(
       children: [

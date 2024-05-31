@@ -35,7 +35,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
 
     return AlertDialog(
       title: Text(

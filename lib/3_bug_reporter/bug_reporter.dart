@@ -23,7 +23,7 @@ class _BugReporterState extends State<BugReporter> {
   Widget build(BuildContext context) {
     final hintColor = DeviceInfo.darkMode
         ? Colors.white
-        : const Color.fromARGB(255, 40, 40, 40);
+        : gray40;
     return Scaffold(
       appBar: AppBar(
         title: const Text('bug reporter').tr(),
@@ -40,7 +40,7 @@ class _BugReporterState extends State<BugReporter> {
                 borderRadius:
                     BorderRadius.circular(DeviceInfo().height() / 100),
                 color: DeviceInfo.darkMode
-                    ? const Color.fromARGB(255, 55, 55, 55)
+                    ? gray55
                     : blueFreequiz,
               ),
               child: Padding(

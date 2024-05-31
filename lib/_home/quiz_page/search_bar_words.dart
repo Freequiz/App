@@ -20,7 +20,7 @@ class _SearchBarWordsState extends State<SearchBarWords> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DeviceInfo().width() / 100),
-        color: DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : white235,
+        color: DeviceInfo.darkMode ? gray55 : white235,
       ),
       width: DeviceInfo().width() / 2,
       child: Padding(

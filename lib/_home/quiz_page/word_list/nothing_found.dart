@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 
 class NothingFound extends StatelessWidget {
@@ -11,8 +12,8 @@ class NothingFound extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final color5 = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 60, 60, 60)
-        : const Color.fromARGB(255, 225, 225, 225);
+        ? gray60
+        : white225;
     var shortestSide = MediaQuery.of(context).size.shortestSide;
     final bool mobileLayout = shortestSide < 600;
     return Container(

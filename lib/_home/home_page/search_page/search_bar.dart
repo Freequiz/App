@@ -23,7 +23,7 @@ class _SearchBarState extends State<SearchBar> {
     final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
     final backgroundColor = DeviceInfo.darkMode
         ? gray55
-        : const Color.fromARGB(255, 235, 235, 235);
+        : white235;
     return Container(
       width: DeviceInfo.mobileLayout
           ? DeviceInfo().width() - 20

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/card.dart';
+import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/others/device_info.dart';
@@ -29,7 +30,7 @@ class _CardsBodyState extends State<CardsBody> {
       : const Color.fromARGB(255, 240, 240, 240);
   final backgroundColor2 = DeviceInfo.darkMode
       ? const Color.fromARGB(255, 43, 43, 43)
-      : const Color.fromARGB(255, 235, 235, 235);
+      : white235;
   @override
   Widget build(BuildContext context) {
     return Column(

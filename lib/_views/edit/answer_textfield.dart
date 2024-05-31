@@ -25,7 +25,7 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
   Widget build(BuildContext context) {
     final hintColor = DeviceInfo.darkMode
         ? Colors.white
-        : const Color.fromARGB(255, 40, 40, 40);
+        : gray40;
     return TextField(
       onSubmitted: (value) {
         widget.save();

@@ -20,7 +20,7 @@ class _UserTileState extends State<UserTile> {
   @override
   Widget build(BuildContext context) {
     final color6 =
-        DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : const Color.fromARGB(255, 235, 235, 235);
+        DeviceInfo.darkMode ? gray55 : white235;
 
     final n = widget.data["quizzes"];
 

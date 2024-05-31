@@ -45,7 +45,7 @@ class WordPairView extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
-          color: DeviceInfo.darkMode ? const Color.fromARGB(255, 55, 55, 55) : blueFreequiz,
+          color: DeviceInfo.darkMode ? gray55 : blueFreequiz,
         ),
         child: Padding(
           padding: EdgeInsets.all(DeviceInfo().height() / 100),

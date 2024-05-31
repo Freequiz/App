@@ -37,7 +37,7 @@ class _DropdownState extends State<Dropdown> {
         color: grayFreequiz,
       ),
       dropdownColor:
-          DeviceInfo.darkMode ? const Color.fromARGB(255, 40, 40, 40) : const Color.fromARGB(255, 229, 242, 250),
+          DeviceInfo.darkMode ? gray40 : const Color.fromARGB(255, 229, 242, 250),
       items: widget.items,
       onChanged: (newValue) {
         setState(() {

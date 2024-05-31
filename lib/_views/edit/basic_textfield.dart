@@ -31,7 +31,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
   @override
   Widget build(BuildContext context) {
     final hintColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+        DeviceInfo.darkMode ? Colors.white : gray40;
     return TextField(
       onSubmitted: (value) {
         widget.save();

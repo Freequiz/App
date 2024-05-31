@@ -23,7 +23,7 @@ class _UsernameState extends State<Username> {
   Widget build(BuildContext context) {
     final textColor = DeviceInfo.darkMode
         ? Colors.white
-        : const Color.fromARGB(255, 40, 40, 40);
+        : gray40;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
