@@ -63,7 +63,8 @@ class _LoginState extends State<Login> {
                   Flexible(
                     child: PasswordTextfield(
                       password: password,
-                      onPressed: onPressed,
+                      focusNode: focusNode,
+                      onSubmitted: onPressed,
                     ),
                   ),
                   Space.width(5),
@@ -81,11 +82,13 @@ class _LoginState extends State<Login> {
     if (password.input.text.isEmpty) {
       setState(() {
         password.error = true;
+        password.color = Colors.red;
         password.hint = context.tr('wrong password');
       });
     } else if (username.input.text.isEmpty) {
       setState(() {
         username.error = true;
+        username.color = Colors.red;
         username.hint = context.tr('username error');
       });
     } else {
@@ -97,12 +100,14 @@ class _LoginState extends State<Login> {
         if (mapLogin["message"] == "User doesn't exist") {
           setState(() {
             username.error = true;
+            username.color = Colors.red;
             pressed = false;
             username.input.clear();
           });
         } else if (mapLogin["message"] == "Wrong password") {
           setState(() {
             password.error = true;
+            password.color = Colors.red;
             pressed = false;
             password.input.clear();
           });

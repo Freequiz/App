@@ -88,12 +88,7 @@ class _SignUpState extends State<SignUp> {
             ),
             PasswordTextfield(
               password: password,
-              onPressed: () {
-                focusNode.requestFocus();
-                setState(() {
-                  password.error = false;
-                });
-              },
+              focusNode: focusNode,
               textInputAction: TextInputAction.next,
             ),
             const SizedBox(
@@ -104,7 +99,7 @@ class _SignUpState extends State<SignUp> {
                 Flexible(
                   child: PasswordConfirmationTextfield(
                     passwordConfirmation: passwordConfirmation,
-                    onPressed: onPressed,
+                    onSubmitted: onPressed,
                   ),
                 ),
                 const SizedBox(
@@ -154,16 +149,19 @@ class _SignUpState extends State<SignUp> {
         password.hint = 'password dont match'.tr();
         passwordConfirmation.hint = "";
         password.error = true;
+        password.color = Colors.red;
       });
     } else if (username.input.text.isEmpty) {
       setState(() {
         username.hint = 'blank'.tr();
         username.error = true;
+        username.color = Colors.red;
       });
     } else if (email.input.text.isEmpty) {
       setState(() {
         email.hint = 'blank'.tr();
         email.error = true;
+        email.color = Colors.red;
       });
     } else if (password.input.text.isEmpty) {
       setState(() {
@@ -188,6 +186,7 @@ class _SignUpState extends State<SignUp> {
           password.hint = 'password length 1'.tr();
           passwordConfirmation.hint = 'password length 2'.tr();
           password.error = true;
+          password.color = Colors.red;
           pressed = false;
         });
       } else if (map["token"] == "record.invalid") {
@@ -200,6 +199,7 @@ class _SignUpState extends State<SignUp> {
                 username.input.clear();
                 username.hint = errorMessage;
                 username.error = true;
+                username.color = Colors.red;
                 pressed = false;
               });
               break;
@@ -208,6 +208,7 @@ class _SignUpState extends State<SignUp> {
                 email.input.clear();
                 email.hint = errorMessage;
                 email.error = true;
+                email.color = Colors.red;
                 pressed = false;
               });
               break;

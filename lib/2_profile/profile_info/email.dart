@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:freequiz/_views/textfields/email.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
@@ -61,39 +62,10 @@ class _EMailState extends State<EMail> {
               widget: Row(
                 children: [
                   Flexible(
-                    child: SizedBox(
-                      height: DeviceInfo().height() / 20,
-                      child: TextField(
-                        onSubmitted: (value) {
-                          changeEmail();
-                        },
-                        keyboardAppearance: DeviceInfo.darkMode
-                            ? Brightness.dark
-                            : Brightness.light,
-                        keyboardType: TextInputType.emailAddress,
-                        autocorrect: false,
-                        controller: newEmail.input,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: DeviceInfo.darkMode
-                              ? const Color.fromARGB(255, 45, 45, 45)
-                              : const Color.fromARGB(255, 255, 231, 218),
-                          contentPadding: const EdgeInsets.all(10.0),
-                          hintText: newEmail.hint,
-                          hintStyle: TextStyle(
-                            color: newEmail.error
-                                ? Colors.red
-                                : (newEmail.changed ? Colors.green : textColor),
-                          ),
-                          border: const OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: newEmail.color,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
+                    child: EmailTextfield(
+                      email: newEmail,
+                      focusNode: FocusNode(),
+                      onSubmitted: changeEmail,
                     ),
                   ),
                   const SizedBox(
@@ -125,8 +97,7 @@ class _EMailState extends State<EMail> {
     if (newEmail.input.text.isEmpty) {
       newEmail.hint = 'blank'.tr();
     } else {
-      final Map map =
-          await APIUsers.updateAccount(email: newEmail.input.text);
+      final Map map = await APIUsers.updateAccount(email: newEmail.input.text);
       if (map["success"] == true) {
         setState(() {
           newEmail.input.clear();

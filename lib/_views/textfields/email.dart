@@ -5,8 +5,9 @@ import 'package:freequiz/models/textfield_data.dart';
 class EmailTextfield extends StatefulWidget {
   final TextFieldData email;
   final FocusNode focusNode;
+  final Function? onSubmitted;
 
-  const EmailTextfield({super.key, required this.email, required this.focusNode});
+  const EmailTextfield({super.key, required this.email, required this.focusNode, this.onSubmitted});
 
   @override
   State<EmailTextfield> createState() => _EmailTextfieldState();
@@ -18,10 +19,15 @@ class _EmailTextfieldState extends State<EmailTextfield> {
     return BasicTextfield(
       data: widget.email,
       onSubmitted: () {
-        widget.focusNode.requestFocus();
-        setState(() {
-          widget.email.error = false;
-        });
+        if (widget.onSubmitted == null) {
+          widget.focusNode.requestFocus();
+          setState(() {
+            widget.email.error = false;
+          });
+        }
+        else {
+          widget.onSubmitted!();
+        }
       },
       textInputAction: TextInputAction.next,
       textInputType: TextInputType.emailAddress,

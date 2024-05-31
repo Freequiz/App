@@ -5,8 +5,9 @@ import 'package:freequiz/models/textfield_data.dart';
 class UsernameTextfield extends StatefulWidget {
   final TextFieldData username;
   final FocusNode focusNode;
+  final Function? onSubmitted;
 
-  const UsernameTextfield({super.key, required this.username, required this.focusNode});
+  const UsernameTextfield({super.key, required this.username, required this.focusNode, this.onSubmitted});
 
   @override
   State<UsernameTextfield> createState() => _UsernameTextfieldState();
@@ -18,10 +19,15 @@ class _UsernameTextfieldState extends State<UsernameTextfield> {
     return BasicTextfield(
       data: widget.username,
       onSubmitted: () {
-        widget.focusNode.requestFocus();
+        if (widget.onSubmitted == null) {
+          widget.focusNode.requestFocus();
         setState(() {
           widget.username.error = false;
         });
+        }
+        else {
+          widget.onSubmitted!();
+        }
       },
       textInputAction: TextInputAction.next,
       textInputType: TextInputType.name,

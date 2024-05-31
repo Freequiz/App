@@ -5,9 +5,9 @@ import 'package:freequiz/others/style.dart';
 
 class PasswordConfirmationTextfield extends StatefulWidget {
   final TextFieldData passwordConfirmation;
-  final Function onPressed;
+  final Function onSubmitted;
 
-  const PasswordConfirmationTextfield({super.key, required this.passwordConfirmation, required this.onPressed});
+  const PasswordConfirmationTextfield({super.key, required this.passwordConfirmation, required this.onSubmitted});
 
   @override
   State<PasswordConfirmationTextfield> createState() => _PasswordConfirmationTextfieldState();
@@ -18,7 +18,7 @@ class _PasswordConfirmationTextfieldState extends State<PasswordConfirmationText
   Widget build(BuildContext context) {
     return BasicTextfield(
       data: widget.passwordConfirmation,
-      onSubmitted: widget.onPressed,
+      onSubmitted: widget.onSubmitted,
       obscureText: !widget.passwordConfirmation.shown,
       suffixIcon: IconButton(
           icon: Icon(

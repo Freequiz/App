@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:freequiz/_views/textfields/password.dart';
+import 'package:freequiz/_views/textfields/password_confirmation.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
@@ -16,13 +18,18 @@ class Password extends StatefulWidget {
 }
 
 class _PasswordState extends State<Password> {
-  TextFieldData newPassword =
-      TextFieldData(hint: 'password'.tr(), shown: false);
-  TextFieldData newPasswordConfirmation =
-      TextFieldData(hint: 'confirm password'.tr(), shown: false);
-  TextFieldData oldPassword =
-      TextFieldData(hint: 'old password'.tr(), shown: false);
+  TextFieldData newPassword = TextFieldData(hint: 'password'.tr(), shown: false);
+  TextFieldData newPasswordConfirmation = TextFieldData(hint: 'confirm password'.tr(), shown: false);
+  TextFieldData oldPassword = TextFieldData(hint: 'old password'.tr(), shown: false);
   bool edit = false;
+
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = FocusNode();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,103 +70,19 @@ class _PasswordState extends State<Password> {
             ),
             Conditional(
               condition: edit,
-              widget: SizedBox(
-                height: DeviceInfo().height() / 20,
-                child: TextField(
-                  onSubmitted: (value) {
-                    FocusScope.of(context).nextFocus();
-                  },
-                  keyboardAppearance:
-                      DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                  textInputAction: TextInputAction.next,
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  obscureText: !oldPassword.shown,
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: oldPassword.input,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: DeviceInfo.darkMode
-                        ? const Color.fromARGB(255, 45, 45, 45)
-                        : const Color.fromARGB(255, 255, 231, 218),
-                    contentPadding: const EdgeInsets.all(10.0),
-                    hintText: oldPassword.hint,
-                    hintStyle: TextStyle(
-                      color: newPassword.error ? Colors.red : textColor,
-                    ),
-                    border: const OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: newPassword.color,
-                        width: 2.0,
-                      ),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        oldPassword.shown
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: grayFreequiz,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          oldPassword.shown = !oldPassword.shown;
-                        });
-                      },
-                    ),
-                  ),
-                ),
+              widget: PasswordTextfield(
+                password: oldPassword,
+                focusNode: focusNode,
+                textInputAction: TextInputAction.next,
               ),
             ),
             Conditional(condition: edit, widget: Space.height(5.0)),
             Conditional(
               condition: edit,
-              widget: SizedBox(
-                height: DeviceInfo().height() / 20,
-                child: TextField(
-                  onSubmitted: (value) {
-                    FocusScope.of(context).nextFocus();
-                  },
-                  keyboardAppearance:
-                      DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                  textInputAction: TextInputAction.next,
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  obscureText: !newPassword.shown,
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: newPassword.input,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: DeviceInfo.darkMode
-                        ? const Color.fromARGB(255, 45, 45, 45)
-                        : const Color.fromARGB(255, 255, 231, 218),
-                    contentPadding: const EdgeInsets.all(10.0),
-                    hintText: newPassword.hint,
-                    hintStyle: TextStyle(
-                      color: newPassword.error ? Colors.red : textColor,
-                    ),
-                    border: const OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: newPassword.color,
-                        width: 2.0,
-                      ),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        newPassword.shown
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: grayFreequiz,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          newPassword.shown = !newPassword.shown;
-                        });
-                      },
-                    ),
-                  ),
-                ),
+              widget: PasswordTextfield(
+                password: newPassword,
+                focusNode: focusNode,
+                textInputAction: TextInputAction.next,
               ),
             ),
             Conditional(
@@ -171,53 +94,9 @@ class _PasswordState extends State<Password> {
               widget: Row(
                 children: [
                   Flexible(
-                    child: SizedBox(
-                      height: DeviceInfo().height() / 20,
-                      child: TextField(
-                        onSubmitted: (value) {
-                          changePassword();
-                        },
-                        keyboardAppearance: DeviceInfo.darkMode
-                            ? Brightness.dark
-                            : Brightness.light,
-                        autocorrect: false,
-                        enableSuggestions: false,
-                        obscureText: !newPasswordConfirmation.shown,
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: newPasswordConfirmation.input,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: DeviceInfo.darkMode
-                              ? const Color.fromARGB(255, 45, 45, 45)
-                              : const Color.fromARGB(255, 255, 231, 218),
-                          contentPadding: const EdgeInsets.all(10.0),
-                          hintText: newPasswordConfirmation.hint,
-                          hintStyle: TextStyle(
-                            color: newPassword.error ? Colors.red : textColor,
-                          ),
-                          border: const OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: newPassword.color,
-                              width: 2.0,
-                            ),
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              newPasswordConfirmation.shown
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: grayFreequiz,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                newPasswordConfirmation.shown =
-                                    !newPasswordConfirmation.shown;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
+                    child: PasswordConfirmationTextfield(
+                      passwordConfirmation: newPasswordConfirmation,
+                      onSubmitted: () => changePassword,
                     ),
                   ),
                   const SizedBox(
@@ -258,9 +137,11 @@ class _PasswordState extends State<Password> {
         oldPassword.hint = 'password change'.tr();
         newPassword.hint = 'successfully'.tr();
         newPasswordConfirmation.hint = "";
+        oldPassword.color = Colors.green;
         newPassword.color = Colors.green;
+        newPasswordConfirmation.color = Colors.green;
       });
-    } else if (map["message"] == "Passwords don't match") {
+    } else if (map["message"] == "Something went wrong whilst updating the user") {
       setState(() {
         newPassword.input.clear();
         newPasswordConfirmation.input.clear();
@@ -268,16 +149,19 @@ class _PasswordState extends State<Password> {
         newPasswordConfirmation.hint = "";
         newPassword.color = Colors.red;
         newPassword.error = true;
+        newPasswordConfirmation.color = Colors.red;
+        newPasswordConfirmation.error = true;
       });
-    } else if (map["message"] == "New password doesn't meet requirements") {
+    } else if (map["message"] == "Password doesn't meet requirements") {
       setState(() {
         newPassword.input.clear();
         newPasswordConfirmation.input.clear();
-        newPassword.hint =
-            'password length 1'.tr();
+        newPassword.hint = 'password length 1'.tr();
         newPasswordConfirmation.hint = 'password length 2'.tr();
         newPassword.color = Colors.red;
         newPassword.error = true;
+        newPasswordConfirmation.color = Colors.red;
+        newPasswordConfirmation.error = true;
       });
     }
   }

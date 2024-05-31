@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:freequiz/_views/textfields/username.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
@@ -21,9 +22,7 @@ class _UsernameState extends State<Username> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = DeviceInfo.darkMode
-        ? Colors.white
-        : gray40;
+    final textColor = DeviceInfo.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
@@ -63,41 +62,10 @@ class _UsernameState extends State<Username> {
               widget: Row(
                 children: [
                   Flexible(
-                    child: SizedBox(
-                      height: DeviceInfo().height() / 20,
-                      child: TextField(
-                        onSubmitted: (value) {
-                          changeUsername();
-                        },
-                        keyboardAppearance: DeviceInfo.darkMode
-                            ? Brightness.dark
-                            : Brightness.light,
-                        keyboardType: TextInputType.emailAddress,
-                        autocorrect: false,
-                        controller: newUsername.input,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: DeviceInfo.darkMode
-                              ? const Color.fromARGB(255, 45, 45, 45)
-                              : const Color.fromARGB(255, 255, 231, 218),
-                          contentPadding: const EdgeInsets.all(10.0),
-                          hintText: newUsername.hint,
-                          hintStyle: TextStyle(
-                            color: newUsername.error
-                                ? Colors.red
-                                : (newUsername.changed
-                                    ? Colors.green
-                                    : textColor),
-                          ),
-                          border: const OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: newUsername.color,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
+                    child: UsernameTextfield(
+                      username: newUsername,
+                      focusNode: FocusNode(),
+                      onSubmitted: changeUsername,
                     ),
                   ),
                   const SizedBox(
@@ -126,8 +94,7 @@ class _UsernameState extends State<Username> {
   }
 
   changeUsername() async {
-    final Map map =
-        await APIUsers.updateAccount(username: newUsername.input.text);
+    final Map map = await APIUsers.updateAccount(username: newUsername.input.text);
     if (map["success"] == true) {
       setState(() {
         newUsername.input.clear();

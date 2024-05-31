@@ -1,11 +1,10 @@
-import 'dart:convert';
 import 'api.dart';
 
 class APIQuizzes {
   static Future<Map> createQuiz(Map map) async {
     final response = await Api.httpPut(
       path: 'quiz/create',
-      body: jsonEncode({"quiz": map}),
+      body: {"quiz": map},
     );
 
     return Api.decodeResponse(response);

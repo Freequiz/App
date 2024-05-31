@@ -15,22 +15,24 @@ class APIUsers {
       String username, String email, String password, String passwordConfirmation, bool agb) async {
     final response = await Api.requestHandler(
       request: () {
-        return http.put(
-          Api.uri('user/create'),
-          headers: {HttpHeaders.contentTypeHeader: "application/json"},
-          encoding: Encoding.getByName('utf-8'),
-          body: jsonEncode(
-            {
-              "user": {
-                "username": username,
-                "email": email,
-                "password": password,
-                "password_confirmation": passwordConfirmation,
-                "agb": agb
-              }
-            },
-          ),
-        ).timeout(const Duration(seconds: 10));
+        return http
+            .put(
+              Api.uri('user/create'),
+              headers: {HttpHeaders.contentTypeHeader: "application/json"},
+              encoding: Encoding.getByName('utf-8'),
+              body: jsonEncode(
+                {
+                  "user": {
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                    "password_confirmation": passwordConfirmation,
+                    "agb": agb
+                  }
+                },
+              ),
+            )
+            .timeout(const Duration(seconds: 10));
       },
     );
 
@@ -73,15 +75,17 @@ class APIUsers {
   static Future<Map> login(String username, String password) async {
     final response = await Api.requestHandler(
       request: () {
-        return http.post(
-          Api.uri('user/login'),
-          headers: {},
-          encoding: Encoding.getByName('utf-8'),
-          body: {
-            "username": username,
-            "password": password,
-          },
-        ).timeout(const Duration(seconds: 10));
+        return http
+            .post(
+              Api.uri('user/login'),
+              headers: {},
+              encoding: Encoding.getByName('utf-8'),
+              body: {
+                "username": username,
+                "password": password,
+              },
+            )
+            .timeout(const Duration(seconds: 10));
       },
     );
 
@@ -166,25 +170,23 @@ class APIUsers {
       String password = "",
       String passwordConfirmation = "",
       String oldPassword = ""}) async {
-    final response = await Api.httpPut(
+    final response = await Api.httpPatch(
       path: 'user/update',
       body: username != ""
-          ? jsonEncode({
+          ? {
               "user": {"username": username}
-            })
+            }
           : email != ""
-              ? jsonEncode({
+              ? {
                   "user": {"email": email}
-                })
-              : jsonEncode(
-                  {
-                    "user": {
-                      "password": password,
-                      "password_confirmation": passwordConfirmation,
-                      "old_password": oldPassword
-                    }
-                  },
-                ),
+                }
+              : {
+                  "user": {
+                    "password": password,
+                    "password_confirmation": passwordConfirmation,
+                    "old_password": oldPassword
+                  }
+                },
     );
 
     return Api.decodeResponse(response);

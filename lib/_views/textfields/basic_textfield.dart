@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/style.dart';
 
 class BasicTextfield extends StatelessWidget {
   final TextFieldData data;
@@ -42,7 +41,7 @@ class BasicTextfield extends StatelessWidget {
           border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: data.error ? Colors.red : grayFreequiz,
+              color: data.color,
               width: 2.0,
             ),
           ),

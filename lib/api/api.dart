@@ -40,7 +40,7 @@ class Api {
           uri(path),
           headers: {"Authorization": Profile.accessToken, HttpHeaders.contentTypeHeader: "application/json"},
           encoding: Encoding.getByName('utf-8'),
-          body: body,
+          body: json.encode(body),
         ).timeout(const Duration(seconds: 10));
       },
     );
