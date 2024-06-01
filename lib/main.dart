@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:app_links/app_links.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:freequiz/others/device_info.dart';
@@ -34,14 +36,40 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   ThemeProvider themeChangeProvider = ThemeProvider();
 
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
+
   @override
   void initState() {
     super.initState();
+
+    initDeepLinks();
     getCurrentAppTheme();
+  }
+
+  @override
+  void dispose() {
+    _linkSubscription?.cancel();
+
+    super.dispose();
+  }
+
+  Future<void> initDeepLinks() async {
+    _appLinks = AppLinks();
+
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
+      debugPrint('onAppLink: $uri');
+      openAppLink(uri);
+    });
   }
 
   void getCurrentAppTheme() async {
     themeChangeProvider.theme = await themeChangeProvider.themePreference.getTheme();
+  }
+
+  void openAppLink(Uri uri) {
+    _navigatorKey.currentState?.pushNamed(uri.path);
   }
 
   @override
@@ -52,7 +80,7 @@ class _MyAppState extends State<MyApp> {
       },
       child: Consumer<ThemeProvider>(
         builder: (BuildContext context, value, child) {
-          return MaterialApp.router(
+          return MaterialApp(
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
@@ -61,7 +89,9 @@ class _MyAppState extends State<MyApp> {
                     (themeChangeProvider.theme == "Automatic" && DeviceInfo.darkMode)
                 ? darkTheme
                 : lightTheme,
-            routerConfig: router,
+            navigatorKey: _navigatorKey,
+            initialRoute: "/",
+            onGenerateRoute: (settings) => appRouter(settings),
           );
         },
       ),

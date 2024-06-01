@@ -39,6 +39,7 @@ class _RootPageState extends State<RootPage> {
     if (Profile.accessToken != "") {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const MainAppBar(),
         ),
         body: pages[currentPage],

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.freequiz">
+    package="com.tamtam.freequiz">
    <application
         android:label="freequiz"
         android:name="${applicationName}"
@@ -30,8 +30,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="freequiz.herokuapp.com" />
-                <data android:scheme="freequiz" />
+                <data android:scheme="https" android:host="freequiz.ch" />
+                <data android:scheme="freequiz" android:host="freequiz.ch" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

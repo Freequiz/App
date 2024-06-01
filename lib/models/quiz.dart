@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/models/language.dart';
 import 'package:freequiz/models/translations.dart';
