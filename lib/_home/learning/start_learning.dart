@@ -7,6 +7,7 @@ import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/utilities/space.dart';
 
 class StartLearning extends StatefulWidget {
   final int i;
@@ -40,10 +41,7 @@ class _StartLearningState extends State<StartLearning> {
         backgroundColor: color[widget.i],
         title: Text(Learning.modes[widget.i].tr()),
         actions: [
-          TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.white,
-            ),
+          IconButton(
             onPressed: () {
               showDialog(
                 context: context,
@@ -53,12 +51,9 @@ class _StartLearningState extends State<StartLearning> {
                 ),
               );
             },
-            child: const Icon(Icons.refresh_rounded),
+            icon: const Icon(Icons.refresh_rounded),
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.white,
-            ),
+          IconButton(
             onPressed: () {
               showDialog(
                 context: context,
@@ -68,8 +63,9 @@ class _StartLearningState extends State<StartLearning> {
                 ),
               );
             },
-            child: const Icon(Icons.settings_rounded),
+            icon: const Icon(Icons.settings_rounded),
           ),
+          Space.width(10)
         ],
       ),
       body: StartLearningBody(

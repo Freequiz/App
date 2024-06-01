@@ -13,8 +13,9 @@ class QuizTile extends StatefulWidget {
   final Map data;
   final bool expanded;
   final String uuid;
+  final Widget? button;
   final double width;
-  const QuizTile({super.key, required this.data, required this.uuid, this.expanded = true, required this.width});
+  const QuizTile({super.key, required this.data, required this.uuid, this.expanded = true, this.button, required this.width});
 
   @override
   State<QuizTile> createState() => _QuizTileState();
@@ -55,7 +56,7 @@ class _QuizTileState extends State<QuizTile> {
             children: [
               TileTitle(
                 title: widget.data['title'],
-                button: ShareButton(
+                button: widget.button ?? ShareButton(
                     url: "https://www.freequiz.ch/quiz/${widget.uuid}",
                     color: DeviceInfo.darkMode ? Colors.white : gray40),
               ),

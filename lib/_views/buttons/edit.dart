@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/_views/quiz_tile/edit_quiz_tile.dart';
+import 'package:freequiz/_views/quiz_tile/edit_quiz.dart';
 
 class Edit extends StatelessWidget {
   const Edit({super.key, required this.widget});

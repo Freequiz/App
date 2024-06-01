@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/_home/home_page/search_page/search_bar.dart' as search;
+import 'package:freequiz/_views/quiz_tile/backgrounds/delete.dart';
+import 'package:freequiz/_views/quiz_tile/backgrounds/dismiss.dart';
+import 'package:freequiz/_views/quiz_tile/backgrounds/favorite.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
@@ -101,6 +104,7 @@ class _HomePageState extends State<HomePage> {
                         child: LoadQuizList(
                           key: keyHistory,
                           future: recent,
+                          background: const BackgroundDismiss(),
                           onDismissed: removeRecent,
                         )
                             .animate(target: onChanged ? 1 : 0)
@@ -114,6 +118,7 @@ class _HomePageState extends State<HomePage> {
                         child: LoadQuizList(
                           key: keyFavorites,
                           future: favorites,
+                          background: const BackgroundFavorite(),
                           onDismissed: removeFavorite,
                         )
                             .animate(target: onChanged ? 1 : 0)
@@ -123,6 +128,7 @@ class _HomePageState extends State<HomePage> {
                         child: LoadQuizList(
                           key: keyPersonal,
                           future: personal,
+                          background: const BackgroundDelete(),
                           onDismissed: removePersonal,
                         )
                             .animate(target: onChanged ? 1 : 0)

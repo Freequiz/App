@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
+import 'package:freequiz/_views/quiz_tile/dismissible.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/style.dart';
 
 class ListQuizzes extends StatefulWidget {
   final ScrollPhysics physics;
   final int n;
   final List data;
   final Function onDismissed;
+  final Widget background;
   const ListQuizzes(
       {super.key,
       required this.data,
       required this.onDismissed,
       this.physics = const AlwaysScrollableScrollPhysics(),
+      required this.background,
       this.n = 0});
 
   @override
@@ -33,40 +34,13 @@ class _ListQuizzesState extends State<ListQuizzes> {
   Widget build(BuildContext context) {
     return ListView.separated(
       physics: widget.physics,
-      itemCount: DeviceInfo.mobileLayout
-          ? data.length
-          : half(data.length),
+      itemCount: DeviceInfo.mobileLayout ? data.length : half(data.length),
       itemBuilder: (BuildContext context, int i) {
         final quizData = data[DeviceInfo.mobileLayout ? i : i * 2 + widget.n];
-        return Dismissible(
-          key: Key(quizData['id']),
-          direction: DismissDirection.endToStart,
-          onDismissed: (direction) => onDismissed(i, quizData['id']),
-          background: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(DeviceInfo().height() / 100),
-                  bottomRight: Radius.circular(DeviceInfo().height() / 100)),
-              color: grayFreequiz,
-            ),
-            child: const Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: Icon(
-                  Icons.clear_rounded,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          child: QuizTile(
-            data: quizData,
-            uuid: quizData['id'],
-            width: DeviceInfo.mobileLayout
-                ? DeviceInfo().width() - 20
-                : (DeviceInfo().width() - 90) / 2,
-          ),
+        return DismissibleQuizTile(
+          quizData: quizData,
+          background: widget.background,
+          onDismissed: (uuid) => onDismissed(i, uuid),
         );
       },
       separatorBuilder: (BuildContext context, int i) {
