@@ -14,6 +14,13 @@ class ThemeProvider with ChangeNotifier {
     return PlatformDispatcher.instance.platformBrightness == Brightness.dark;
   }
 
+  bool get override {
+    if (theme == "Automatic") {
+      return false;
+    }
+    return true;
+  }
+
   void toggleTheme(value) {
     Preferences.setTheme(value);
     theme = value;

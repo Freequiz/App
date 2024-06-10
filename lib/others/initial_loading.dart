@@ -11,7 +11,6 @@ Future<void> initialLoading() async {
     Languages.get,
     Profile.loadAccessToken,
     Preferences.loadAnswerLanguage,
-    Preferences.getTheme
   ];
 
   await Future.wait(functions.map((functions) => functions())); //run all Functions at the same time and wait for them
