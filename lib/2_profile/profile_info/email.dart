@@ -79,6 +79,7 @@ class _EMailState extends State<EMail> {
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {
+                        FocusScope.of(context).unfocus();
                         changeEmail();
                       },
                       child: const Icon(Icons.arrow_forward_ios),
@@ -100,6 +101,7 @@ class _EMailState extends State<EMail> {
       final Map map = await APIUsers.updateAccount(email: newEmail.input.text);
       if (map["success"] == true) {
         setState(() {
+          UserHelper.user!.email = newEmail.input.text;
           newEmail.input.clear();
           newEmail.hint = 'email success'.tr();
           newEmail.color = Colors.green;

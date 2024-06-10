@@ -110,6 +110,7 @@ class _PasswordState extends State<Password> {
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {
+                        FocusScope.of(context).unfocus();
                         changePassword();
                       },
                       child: const Icon(Icons.arrow_forward_ios),

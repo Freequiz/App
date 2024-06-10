@@ -79,6 +79,7 @@ class _UsernameState extends State<Username> {
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {
+                        FocusScope.of(context).unfocus();
                         changeUsername();
                       },
                       child: const Icon(Icons.arrow_forward_ios),
@@ -97,6 +98,7 @@ class _UsernameState extends State<Username> {
     final Map map = await APIUsers.updateAccount(username: newUsername.input.text);
     if (map["success"] == true) {
       setState(() {
+        UserHelper.user!.username = newUsername.input.text;
         newUsername.input.clear();
         newUsername.hint = 'username change'.tr();
         newUsername.color = Colors.green;

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/local_storage/secure_storage.dart';
 
 class Profile {
@@ -11,7 +10,6 @@ class Profile {
 
   static loadAccessToken() async {
     accessToken = await SecureStorage.readAccessToken();
-    debugPrint(accessToken);
     loaded = true;
   }
 
