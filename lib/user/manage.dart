@@ -6,6 +6,12 @@ import 'package:freequiz/user/helper.dart';
 
 class ManageUser {
   static Future<Map> load() async {
+    if (UserHelper.user != null) {
+      if (UserHelper.user!.username != "") {
+        return {'success': true, 'data': UserHelper.user!.toMap()};
+      }
+    }
+
     final futureUser = APIUsers.getData();
 
     final localUser = await Preferences.loadUser();
