@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/_home/user_page/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/widgets/conditional.dart';
@@ -32,7 +31,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
             style: TextStyle(fontSize: context.screenHeight/ 30),
           ),
         ),
-        Space.height(DeviceInfo.mobileLayout ? 10 : 30),
+        Space.height(context.mobileLayout ? 10 : 30),
         ListView.separated(
           shrinkWrap: true,
           itemCount: ListPublicQuizzes.data.length,
@@ -46,15 +45,15 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
             );
           },
           separatorBuilder: (BuildContext context, int i) {
-            return Space.height(DeviceInfo.mobileLayout ? 10 : 20);
+            return Space.height(context.mobileLayout ? 10 : 20);
           },
         ),
-        Space.height(DeviceInfo.mobileLayout ? 5 : 15),
+        Space.height(context.mobileLayout ? 5 : 15),
         Conditional(
           condition: pressed,
           widget: Align(
             child: CircularProgressIndicator(
-              color: DeviceInfo.darkMode ? Colors.white : grayFreequiz,
+              color: context.darkMode ? Colors.white : grayFreequiz,
             ),
           ),
           defaultWidget: Align(

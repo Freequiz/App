@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class NoConnectionAlert extends StatelessWidget {
   final Color backgroundColor;
@@ -14,7 +14,7 @@ class NoConnectionAlert extends StatelessWidget {
     return AlertDialog(
       title: Text(
         context.tr('no connection title'),
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
       backgroundColor: backgroundColor,
       content: const Text('no connection description').tr(),

@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/local_storage/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/router/router.dart';
 import 'package:provider/provider.dart';
-import 'package:freequiz/others/theme.dart';
+import 'package:freequiz/utilities/providers/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //needs to be initialized to await EasyLocalization.ensureInitialized();
@@ -42,10 +42,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    super.initState();
-
+    themeChangeProvider.theme = Preferences.theme;
     initDeepLinks();
-    getCurrentAppTheme();
+
+    super.initState();
   }
 
   @override
@@ -64,10 +64,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void getCurrentAppTheme() async {
-    themeChangeProvider.theme = await themeChangeProvider.themePreference.getTheme();
-  }
-
   void openAppLink(Uri uri) {
     _navigatorKey.currentState?.pushNamed(uri.path);
   }
@@ -75,20 +71,17 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) {
-        return themeChangeProvider;
-      },
+      create: (context) => themeChangeProvider,
       child: Consumer<ThemeProvider>(
-        builder: (BuildContext context, value, child) {
+        builder: (BuildContext context, themeProvider, child) {
           return MaterialApp(
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             debugShowCheckedModeBanner: false,
-            theme: themeChangeProvider.theme == "Dark Mode" ||
-                    (themeChangeProvider.theme == "Automatic" && DeviceInfo.darkMode)
-                ? darkTheme
-                : lightTheme,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: themeProvider.darkMode ? ThemeMode.dark : ThemeMode.light,
             navigatorKey: _navigatorKey,
             initialRoute: "/",
             onGenerateRoute: (settings) => appRouter(settings),

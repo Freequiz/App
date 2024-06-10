@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/_views/edit/answer_textfield.dart';
 import 'package:freequiz/_views/edit/basic_textfield.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
@@ -46,7 +45,7 @@ class WordPairView extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-          color: DeviceInfo.darkMode ? gray55 : blueFreequiz,
+          color: context.darkMode ? gray55 : blueFreequiz,
         ),
         child: Padding(
           padding: EdgeInsets.all(context.screenHeight/ 100),

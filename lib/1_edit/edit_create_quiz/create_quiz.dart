@@ -5,7 +5,6 @@ import 'package:freequiz/1_edit/edit_create_quiz/progress_pop_up.dart';
 import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/_views/edit/edit_view.dart';
 import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
@@ -25,7 +24,7 @@ class _CreateQuizState extends State<CreateQuiz> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('create quiz').tr(),
-        backgroundColor: DeviceInfo.darkMode ? grayFreequiz : blueFreequiz,
+        backgroundColor: context.darkMode ? grayFreequiz : blueFreequiz,
         leading: TextButton(
           onPressed: () {
             if (changed()) {
@@ -61,7 +60,7 @@ class _CreateQuizState extends State<CreateQuiz> {
           }
         },
         child: Padding(
-          padding: DeviceInfo.mobileLayout
+          padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
           child: EditView(quiz: quiz),

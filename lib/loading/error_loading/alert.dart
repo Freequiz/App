@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class ErrorLoadingAlert extends StatelessWidget {
   final String error;
@@ -16,7 +16,7 @@ class ErrorLoadingAlert extends StatelessWidget {
     return AlertDialog(
       title: Text(
         context.tr('$error title'),
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
       backgroundColor: backgroundColor,
       content: Text('$error description').tr(),

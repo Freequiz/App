@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/title.dart';
 import 'package:freequiz/loading/load_user.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
@@ -14,7 +13,7 @@ class QuizDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: DeviceInfo.darkMode ? gray60 : white235,
+        color: context.darkMode ? gray60 : white235,
         borderRadius: BorderRadius.circular(context.screenWidth / 30.4),
       ),
       constraints: BoxConstraints(minHeight: context.screenHeight/ 15),
@@ -35,7 +34,7 @@ class QuizDescription extends StatelessWidget {
                         ? QuizHelper.quiz!.description!
                         : context.tr('no description'),
                     style: TextStyle(
-                        fontSize: DeviceInfo.mobileLayout
+                        fontSize: context.mobileLayout
                             ? context.screenHeight/ 55
                             : context.screenHeight/ 45),
                   ),

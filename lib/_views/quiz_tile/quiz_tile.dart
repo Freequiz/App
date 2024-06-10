@@ -4,7 +4,6 @@ import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/_views/quiz_tile/additional_info.dart';
 import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/loading/load_quiz.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/_views/quiz_tile/description.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
@@ -35,7 +34,7 @@ class _QuizTileState extends State<QuizTile> {
   @override
   Widget build(BuildContext context) {
     final color6 =
-        DeviceInfo.darkMode ? gray55 : white235;
+        context.darkMode ? gray55 : white235;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => loadQuiz(
@@ -49,7 +48,7 @@ class _QuizTileState extends State<QuizTile> {
           color: color6,
         ),
         child: Padding(
-          padding: DeviceInfo.mobileLayout
+          padding: context.mobileLayout
               ? const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 3.0)
               : const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0, top: 15.0),
           child: Column(
@@ -59,7 +58,7 @@ class _QuizTileState extends State<QuizTile> {
                 title: widget.data['title'],
                 button: widget.button ?? ShareButton(
                     url: "https://www.freequiz.ch/quiz/${widget.uuid}",
-                    color: DeviceInfo.darkMode ? Colors.white : gray40),
+                    color: context.darkMode ? Colors.white : gray40),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

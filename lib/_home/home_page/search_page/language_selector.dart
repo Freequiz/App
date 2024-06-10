@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_views/edit/dropdown.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class LanguageSelector extends StatefulWidget {
   final Function refresh;
@@ -35,12 +35,12 @@ class _LanguageSelectorState extends State<LanguageSelector> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
+    final hintColor = context.darkMode ? Colors.white : gray40;
 
     return AlertDialog(
       title: Text(
         context.tr('language'),
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
       insetPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
       content: Text(

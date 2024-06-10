@@ -7,7 +7,6 @@ import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/extensions/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/utilities/widgets/conditional.dart';
 
 
@@ -24,7 +23,7 @@ class _DraftTileState extends State<DraftTile> {
 
   @override
   Widget build(BuildContext context) {
-    final color6 = DeviceInfo.darkMode
+    final color6 = context.darkMode
         ? gray55
         : white235;
     return GestureDetector(
@@ -62,7 +61,7 @@ class _DraftTileState extends State<DraftTile> {
             ),
           ),
           child: Container(
-            height: DeviceInfo.mobileLayout
+            height: context.mobileLayout
                 ? context.screenHeight/ 30 * 2.5 + 15
                 : context.screenHeight/ 30 * 2.5 + 35,
             width: context.screenWidth - 20,
@@ -71,7 +70,7 @@ class _DraftTileState extends State<DraftTile> {
               color: color6,
             ),
             child: Padding(
-              padding: DeviceInfo.mobileLayout
+              padding: context.mobileLayout
                   ? const EdgeInsets.only(
                       left: 10.0, right: 10.0, bottom: 10.0, top: 5.0)
                   : const EdgeInsets.only(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/dismissible.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class ListQuizzes extends StatefulWidget {
   final ScrollPhysics physics;
@@ -34,9 +34,9 @@ class _ListQuizzesState extends State<ListQuizzes> {
   Widget build(BuildContext context) {
     return ListView.separated(
       physics: widget.physics,
-      itemCount: DeviceInfo.mobileLayout ? data.length : half(data.length),
+      itemCount: context.mobileLayout ? data.length : half(data.length),
       itemBuilder: (BuildContext context, int i) {
-        final quizData = data[DeviceInfo.mobileLayout ? i : i * 2 + widget.n];
+        final quizData = data[context.mobileLayout ? i : i * 2 + widget.n];
         return DismissibleQuizTile(
           quizData: quizData,
           background: widget.background,
@@ -45,7 +45,7 @@ class _ListQuizzesState extends State<ListQuizzes> {
       },
       separatorBuilder: (BuildContext context, int i) {
         return SizedBox(
-          height: DeviceInfo.mobileLayout ? 10 : 30,
+          height: context.mobileLayout ? 10 : 30,
         );
       },
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/models/textfield_data.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class BasicTextField extends StatefulWidget {
   final TextFieldData textFieldData;
@@ -31,7 +31,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
   @override
   Widget build(BuildContext context) {
     final hintColor =
-        DeviceInfo.darkMode ? Colors.white : gray40;
+        context.darkMode ? Colors.white : gray40;
     return TextField(
       onSubmitted: (value) {
         widget.save();
@@ -46,11 +46,11 @@ class _BasicTextFieldState extends State<BasicTextField> {
       onEditingComplete: () {},
       controller: widget.textFieldData.input,
       keyboardType: widget.keyboardType,
-      keyboardAppearance: DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+      keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
       maxLines: widget.maxLines,
       decoration: InputDecoration(
         filled: true,
-        fillColor: DeviceInfo.darkMode
+        fillColor: context.darkMode
             ? const Color.fromARGB(255, 45, 45, 45)
             : const Color.fromARGB(255, 234, 247, 255),
         contentPadding: const EdgeInsets.all(10.0),

@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/local_storage/draft_storage.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/widgets/conditional.dart';
 
 class ProgressPopUp extends StatefulWidget {
@@ -29,7 +29,7 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
     return AlertDialog(
       title: Text(
         context.tr(widget.title),
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : gray40),
+        style: TextStyle(color: context.darkMode ? Colors.white : gray40),
       ),
       content: FutureBuilder(
         future: widget.response,

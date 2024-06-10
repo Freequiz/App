@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/bug_reports.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -22,7 +21,7 @@ class _BugReporterState extends State<BugReporter> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode
+    final hintColor = context.darkMode
         ? Colors.white
         : gray40;
     return Scaffold(
@@ -30,7 +29,7 @@ class _BugReporterState extends State<BugReporter> {
         title: const Text('bug reporter').tr(),
       ),
       body: Padding(
-        padding: DeviceInfo.mobileLayout
+        padding: context.mobileLayout
             ? const EdgeInsets.all(10.0)
             : EdgeInsets.symmetric(
                 horizontal: context.screenWidth / 5.5, vertical: 10.0),
@@ -40,7 +39,7 @@ class _BugReporterState extends State<BugReporter> {
               decoration: BoxDecoration(
                 borderRadius:
                     BorderRadius.circular(context.screenHeight/ 100),
-                color: DeviceInfo.darkMode
+                color: context.darkMode
                     ? gray55
                     : blueFreequiz,
               ),
@@ -62,7 +61,7 @@ class _BugReporterState extends State<BugReporter> {
                       controller: title.input,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: DeviceInfo.darkMode
+                        fillColor: context.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -78,7 +77,7 @@ class _BugReporterState extends State<BugReporter> {
                           borderSide: BorderSide(
                             color: title.error
                                 ? Colors.red
-                                : (DeviceInfo.darkMode ? yellowFreequiz : grayFreequiz),
+                                : (context.darkMode ? yellowFreequiz : grayFreequiz),
                             width: 3.0,
                           ),
                         ),
@@ -102,7 +101,7 @@ class _BugReporterState extends State<BugReporter> {
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: DeviceInfo.darkMode
+                        fillColor: context.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -130,7 +129,7 @@ class _BugReporterState extends State<BugReporter> {
                       controller: platform.input,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: DeviceInfo.darkMode
+                        fillColor: context.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),

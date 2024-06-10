@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class Confirmation extends StatelessWidget {
   final Function refresh;
@@ -13,7 +13,7 @@ class Confirmation extends StatelessWidget {
     return AlertDialog(
       title: Text(
         context.tr('delete quiz'),
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
       content: const Text('confirmation delete quiz').tr(),
       actions: [

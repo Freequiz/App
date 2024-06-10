@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_views/badge.dart';
 import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/loading/load_user.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
@@ -21,7 +20,7 @@ class _UserTileState extends State<UserTile> {
   @override
   Widget build(BuildContext context) {
     final color6 =
-        DeviceInfo.darkMode ? gray55 : white235;
+        context.darkMode ? gray55 : white235;
 
     final n = widget.data["quizzes"];
 
@@ -35,7 +34,7 @@ class _UserTileState extends State<UserTile> {
           color: color6,
         ),
         child: Padding(
-          padding: DeviceInfo.mobileLayout
+          padding: context.mobileLayout
               ? const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 5.0)
               : const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0, top: 15.0),
           child: Column(
@@ -52,7 +51,7 @@ class _UserTileState extends State<UserTile> {
                     ),
                     ShareButton(
                       url: "https://freequiz.herokuapp.com/user/${widget.data['username']}",
-                      color: DeviceInfo.darkMode ? Colors.white : gray40,
+                      color: context.darkMode ? Colors.white : gray40,
                     )
                   ],
                 ),

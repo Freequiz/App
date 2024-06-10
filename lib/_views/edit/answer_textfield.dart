@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/models/textfield_data.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class AnswerTextField extends StatefulWidget {
   final TextFieldData textFieldData;
@@ -23,7 +23,7 @@ class AnswerTextField extends StatefulWidget {
 class _AnswerTextFieldState extends State<AnswerTextField> {
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode
+    final hintColor = context.darkMode
         ? Colors.white
         : gray40;
     return TextField(
@@ -39,10 +39,10 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
       onEditingComplete: () {},
       controller: widget.textFieldData.input,
       keyboardAppearance:
-          DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+          context.darkMode ? Brightness.dark : Brightness.light,
       decoration: InputDecoration(
         filled: true,
-        fillColor: DeviceInfo.darkMode
+        fillColor: context.darkMode
             ? const Color.fromARGB(255, 45, 45, 45)
             : const Color.fromARGB(255, 234, 247, 255),
         contentPadding: const EdgeInsets.all(10.0),

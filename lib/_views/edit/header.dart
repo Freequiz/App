@@ -4,7 +4,6 @@ import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/1_edit/visibility_options.dart';
 import 'package:freequiz/_views/edit/basic_textfield.dart';
 import 'package:freequiz/_views/edit/dropdown.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
@@ -26,7 +25,7 @@ class _EditHeaderState extends State<EditHeader> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-        color: DeviceInfo.darkMode ? gray55 : blueFreequiz,
+        color: context.darkMode ? gray55 : blueFreequiz,
       ),
       child: Padding(
         padding: EdgeInsets.all(context.screenHeight/ 100),
@@ -35,7 +34,7 @@ class _EditHeaderState extends State<EditHeader> {
             BasicTextField(
               textFieldData: widget.quiz.title,
               hintError: context.tr('title error'),
-              colorBorder: (DeviceInfo.darkMode ? yellowFreequiz : grayFreequiz),
+              colorBorder: (context.darkMode ? yellowFreequiz : grayFreequiz),
               widthBorder: 3.0,
               save: widget.save,
             ),

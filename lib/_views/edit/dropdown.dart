@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class Dropdown extends StatefulWidget {
 
@@ -37,7 +37,7 @@ class _DropdownState extends State<Dropdown> {
         color: grayFreequiz,
       ),
       dropdownColor:
-          DeviceInfo.darkMode ? gray40 : const Color.fromARGB(255, 229, 242, 250),
+          context.darkMode ? gray40 : const Color.fromARGB(255, 229, 242, 250),
       items: widget.items,
       onChanged: (newValue) {
         setState(() {

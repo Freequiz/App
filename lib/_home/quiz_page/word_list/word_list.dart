@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class WordList extends StatelessWidget {
@@ -25,10 +24,10 @@ class WordList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color5 = DeviceInfo.darkMode
+    final color5 = context.darkMode
         ? gray60
         : white225;
-    final color6 = DeviceInfo.darkMode
+    final color6 = context.darkMode
         ? gray55
         : white235;
     return ListView.builder(
@@ -53,12 +52,12 @@ class WordList extends StatelessWidget {
                     : Radius.zero),
             color: i2.remainder(2) == 0 ? color5 : color6,
           ),
-          padding: DeviceInfo.mobileLayout ? const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0) : EdgeInsets.all(context.screenHeight/ 80),
+          padding: context.mobileLayout ? const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0) : EdgeInsets.all(context.screenHeight/ 80),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: DeviceInfo.mobileLayout
+                  width: context.mobileLayout
                       ? (width - 30) / 2 - context.screenHeight/ 30
                       : (width - 30) / 2 - context.screenHeight/ 20 - context.screenHeight/ 80,
                   alignment: Alignment.centerLeft,
@@ -67,12 +66,12 @@ class WordList extends StatelessWidget {
                     child: Text(
                       list[i2].word,
                       style: TextStyle(
-                          fontSize: DeviceInfo.mobileLayout ? context.screenHeight/ 60 : context.screenHeight/ 45),
+                          fontSize: context.mobileLayout ? context.screenHeight/ 60 : context.screenHeight/ 45),
                     ),
                   ),
                 ),
                 Container(
-                  width: DeviceInfo.mobileLayout
+                  width: context.mobileLayout
                       ? (width - 30) / 2 - context.screenHeight/ 30
                       : (width - 30) / 2 - context.screenHeight/ 20 - context.screenHeight/ 80,
                   alignment: Alignment.centerLeft,
@@ -81,7 +80,7 @@ class WordList extends StatelessWidget {
                     child: Text(
                       list[i2].translation,
                       style: TextStyle(
-                          fontSize: DeviceInfo.mobileLayout ? context.screenHeight/ 60 : context.screenHeight/ 45),
+                          fontSize: context.mobileLayout ? context.screenHeight/ 60 : context.screenHeight/ 45),
                     ),
                   ),
                 ),
@@ -95,12 +94,12 @@ class WordList extends StatelessWidget {
                         ? Icon(
                             Icons.star,
                             color: color,
-                            size: DeviceInfo.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
+                            size: context.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
                           )
                         : Icon(
                             Icons.star_border,
                             color: color,
-                            size: DeviceInfo.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
+                            size: context.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
                           ),
                   ),
                 ),

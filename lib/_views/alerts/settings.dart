@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/local_storage/preferences.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
@@ -34,7 +33,7 @@ class _LearningSettingsState extends State<LearningSettings> {
     return AlertDialog(
       title: Text(
         context.tr('settings'),
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
       insetPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
       contentPadding: const EdgeInsets.all(20.0),

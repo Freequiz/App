@@ -8,7 +8,6 @@ import 'package:freequiz/_home/learning/writing/writing.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
@@ -53,7 +52,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
 
   @override
   Widget build(BuildContext context) {
-    final color5 = DeviceInfo.darkMode
+    final color5 = context.darkMode
         ? gray60
         : white225;
     Progress.calculate(Learning.modes[widget.i]);

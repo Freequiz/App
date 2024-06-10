@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_list/list.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/widgets/conditional.dart';
 import 'package:freequiz/utilities/widgets/space.dart';
@@ -14,7 +13,7 @@ class QuizList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Conditional(
-      condition: DeviceInfo.mobileLayout,
+      condition: context.mobileLayout,
       widget: ListQuizzes(data: list, background: background, onDismissed: onDismissed),
       defaultWidget: Conditional(
         condition: list.length > 1,

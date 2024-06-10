@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class Description extends StatelessWidget {
@@ -17,10 +16,10 @@ class Description extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: expanded
-          ? DeviceInfo.mobileLayout
+          ? context.mobileLayout
               ? width - 20
               : width - 40
-          : DeviceInfo.mobileLayout
+          : context.mobileLayout
               ? width / 6 * 5 - 20
               : width / 6 * 5 - 40,
       child: Text(

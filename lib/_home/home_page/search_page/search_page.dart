@@ -8,7 +8,6 @@ import 'package:freequiz/_home/home_page/search_page/user_tile.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/load_search.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/extensions/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
@@ -38,7 +37,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 10 : 30),
+      padding: EdgeInsets.all(context.mobileLayout ? 10 : 30),
       child: Column(
         children: [
           SizedBox(
@@ -72,19 +71,19 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           ),
-          Space.height(DeviceInfo.mobileLayout ? 10 : 25),
+          Space.height(context.mobileLayout ? 10 : 25),
           Expanded(
             child: ListView(
               children: [
                 Search.mode == "Quiz" ? listQuizzes() : listUsers(),
                 SizedBox(
-                  height: DeviceInfo.mobileLayout ? 5 : 15,
+                  height: context.mobileLayout ? 5 : 15,
                 ),
                 Conditional(
                   condition: pressed,
                   widget: Align(
                     child: CircularProgressIndicator(
-                      color: DeviceInfo.darkMode ? Colors.white : grayFreequiz,
+                      color: context.darkMode ? Colors.white : grayFreequiz,
                     ),
                   ),
                   defaultWidget: Align(
@@ -123,13 +122,13 @@ class _SearchPageState extends State<SearchPage> {
           data: Search.data[i],
           uuid: Search.data[i]['id'],
           expanded: false,
-          width: DeviceInfo.mobileLayout
+          width: context.mobileLayout
               ? context.screenWidth - 20
               : context.screenWidth - 60,
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return Space.height(DeviceInfo.mobileLayout ? 10 : 25);
+        return Space.height(context.mobileLayout ? 10 : 25);
       },
     );
   }
@@ -144,13 +143,13 @@ class _SearchPageState extends State<SearchPage> {
       itemBuilder: (BuildContext context, int i) {
         return UserTile(
           data: Search.data[i],
-          width: DeviceInfo.mobileLayout
+          width: context.mobileLayout
               ? context.screenWidth - 20
               : context.screenWidth - 60,
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return Space.height(DeviceInfo.mobileLayout ? 10 : 25);
+        return Space.height(context.mobileLayout ? 10 : 25);
       },
     );
   }

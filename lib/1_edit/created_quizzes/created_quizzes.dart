@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/edit_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
@@ -33,7 +32,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
           ),
         ),
         SizedBox(
-          height: DeviceInfo.mobileLayout ? 5 : 15,
+          height: context.mobileLayout ? 5 : 15,
         ),
         ListView.separated(
           shrinkWrap: true,
@@ -49,18 +48,18 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
           },
           separatorBuilder: (BuildContext context, int i) {
             return SizedBox(
-              height: DeviceInfo.mobileLayout ? 10 : 20,
+              height: context.mobileLayout ? 10 : 20,
             );
           },
         ),
         SizedBox(
-          height: DeviceInfo.mobileLayout ? 5 : 15,
+          height: context.mobileLayout ? 5 : 15,
         ),
         Conditional(
           condition: pressed,
           widget: Align(
             child: CircularProgressIndicator(
-              color: DeviceInfo.darkMode ? Colors.white : grayFreequiz,
+              color: context.darkMode ? Colors.white : grayFreequiz,
             ),
           ),
           defaultWidget: Align(

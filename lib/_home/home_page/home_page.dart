@@ -10,8 +10,6 @@ import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/load_quiz_list.dart';
 import 'package:freequiz/local_storage/database.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/manage.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
@@ -23,7 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final opacityColor = DeviceInfo.darkMode ? gray55 : Colors.white;
   int shownQuizzes = 0;
   int previousShownQuizzes = 0;
 
@@ -66,7 +63,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Padding(
-      padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 10 : 30),
+      padding: EdgeInsets.all(context.mobileLayout ? 10 : 30),
       child: RefreshIndicator(
         onRefresh: () => onRefresh(),
         child: GestureDetector(
@@ -84,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: DeviceInfo.mobileLayout ? 10 : 30,
+                height: context.mobileLayout ? 10 : 30,
               ),
               Switcher(
                 onTap: onTap,
@@ -94,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                 icons: const [Icon(Icons.history), Icon(Icons.star_rounded), Icon(Icons.person)],
               ),
               SizedBox(
-                height: DeviceInfo.mobileLayout ? 10 : 30,
+                height: context.mobileLayout ? 10 : 30,
               ),
               Expanded(
                 child: SizedBox(

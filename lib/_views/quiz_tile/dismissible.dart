@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/dismiss.dart';
 import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class DismissibleQuizTile extends StatefulWidget {
@@ -41,7 +40,7 @@ class _DismissibleQuizTileState extends State<DismissibleQuizTile> {
             uuid: widget.quizData['id'],
             expanded: widget.expanded,
             button: widget.button,
-            width: DeviceInfo.mobileLayout ? context.screenWidth - 20 : (context.screenWidth - 90) / 2,
+            width: context.mobileLayout ? context.screenWidth - 20 : (context.screenWidth - 90) / 2,
           ),
         ),
       ],

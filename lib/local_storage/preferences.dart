@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
   static int answerLanguage = 1;
+  static String theme = "Automatic";
 
   static saveAnswerLanguage(int value) async {
     answerLanguage = value;
@@ -32,5 +33,15 @@ class Preferences {
     return jsonDecode(
       prefs.getString('user') ?? "{\"username\": \"\", \"email\": \"\", \"settings\": {\"multi_amount\": 2, \"write_amount\": 2, \"cards_amount\": 2}}",
     );
+  }
+
+  static setTheme(String theme) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('theme', theme);
+  }
+
+  static getTheme() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    theme = prefs.getString('theme') ?? "Automatic";
   }
 }

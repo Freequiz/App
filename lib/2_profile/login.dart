@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_views/buttons/submit.dart';
 import 'package:freequiz/_views/textfields/password.dart';
 import 'package:freequiz/_views/textfields/username.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/2_profile/profile.dart';
@@ -45,7 +44,7 @@ class _LoginState extends State<Login> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Padding(
-          padding: DeviceInfo.mobileLayout
+          padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
           child: Column(

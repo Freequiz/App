@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/widgets/conditional.dart';
@@ -19,10 +18,10 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
+    final hintColor = context.darkMode ? Colors.white : gray40;
     return Container(
       height: context.screenHeight/ 18,
-      padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 0 : context.screenHeight/ 80),
+      padding: EdgeInsets.all(context.mobileLayout ? 0 : context.screenHeight/ 80),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(context.screenWidth / 30.4),
@@ -38,11 +37,11 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
             onChanged: (value) {
               widget.search(textController.text);
             },
-            keyboardAppearance: DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+            keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
             controller: textController,
             decoration: InputDecoration(
               filled: true,
-              fillColor: DeviceInfo.darkMode
+              fillColor: context.darkMode
                   ? const Color.fromARGB(255, 45, 45, 45)
                   : const Color.fromARGB(255, 245, 245, 245),
               contentPadding: const EdgeInsets.all(10.0),
@@ -89,7 +88,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
           children: [
             const SizedBox(width: 5.0),
             Container(
-              width: DeviceInfo.mobileLayout
+              width: context.mobileLayout
                   ? (context.screenWidth - 30) / 2 - context.screenHeight/ 30
                   : (context.screenWidth - 30) / 2 - context.screenHeight/ 20 - context.screenHeight/ 80,
               alignment: Alignment.centerLeft,
@@ -98,14 +97,14 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 child: Text(
                   context.tr('definition'),
                   style: TextStyle(
-                      fontSize: DeviceInfo.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
+                      fontSize: context.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
               ),
             ),
             Container(
-              width: DeviceInfo.mobileLayout
+              width: context.mobileLayout
                   ? (context.screenWidth - 30) / 2 - context.screenHeight/ 30
                   : (context.screenWidth - 30) / 2 - context.screenHeight/ 20 - context.screenHeight/ 80,
               alignment: Alignment.centerLeft,
@@ -114,7 +113,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 child: Text(
                   context.tr('answer'),
                   style: TextStyle(
-                      fontSize: DeviceInfo.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
+                      fontSize: context.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
@@ -131,7 +130,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 child: Icon(
                   Icons.search,
                   color: Colors.white,
-                  size: DeviceInfo.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
+                  size: context.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
                 ),
               ),
             ),

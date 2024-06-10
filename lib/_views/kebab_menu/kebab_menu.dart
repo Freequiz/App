@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
 import 'package:freequiz/_views/kebab_menu/kebab_menu_item.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:share_plus/share_plus.dart';
 
 class KebabMenuButton extends StatelessWidget {
@@ -65,7 +65,7 @@ class _KebabMenuState extends State<KebabMenu> {
           text: "Share",
         ),
         Container(
-          color: DeviceInfo.darkMode ? gray40 : white205,
+          color: context.darkMode ? gray40 : white205,
           height: 2.0,
         ),
         KebabMenuItem(
@@ -74,7 +74,7 @@ class _KebabMenuState extends State<KebabMenu> {
           text: "Edit",
         ),
         Container(
-          color: DeviceInfo.darkMode ? gray40 : white205,
+          color: context.darkMode ? gray40 : white205,
           height: 2.0,
         ),
         KebabMenuItem(

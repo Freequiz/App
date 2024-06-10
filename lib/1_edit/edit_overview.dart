@@ -7,7 +7,6 @@ import 'package:freequiz/1_edit/edit_create_quiz/create_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/created_quizzes.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/widgets/conditional.dart';
@@ -34,7 +33,7 @@ class _EditOverviewState extends State<EditOverview> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: DeviceInfo.mobileLayout
+      padding: context.mobileLayout
           ? const EdgeInsets.all(10.0)
           : const EdgeInsets.all(30),
       child: Column(
@@ -64,7 +63,7 @@ class _EditOverviewState extends State<EditOverview> {
               ),
             ),
           ),
-          Space.height(DeviceInfo.mobileLayout ? 15 : 45),
+          Space.height(context.mobileLayout ? 15 : 45),
           Conditional(
             condition: QuizHelper.draft.isNotEmpty,
             widget: Draft(

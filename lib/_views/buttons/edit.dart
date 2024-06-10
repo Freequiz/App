@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/_views/quiz_tile/edit_quiz.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class Edit extends StatelessWidget {
   const Edit({super.key, required this.widget});
@@ -15,7 +15,7 @@ class Edit extends StatelessWidget {
       onTap: () => edit(context, widget),
       child: Icon(
         Icons.edit,
-        color: DeviceInfo.darkMode ? Colors.white : gray40,
+        color: context.darkMode ? Colors.white : gray40,
       ),
     );
   }

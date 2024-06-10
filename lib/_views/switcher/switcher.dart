@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/_views/switcher/button.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
@@ -36,7 +35,7 @@ class _SwitcherState extends State<Switcher> {
       width: widget.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-        color: DeviceInfo.darkMode ? gray55 : white235,
+        color: context.darkMode ? gray55 : white235,
       ),
       child: Stack(
         children: [
@@ -45,7 +44,7 @@ class _SwitcherState extends State<Switcher> {
             height: 50,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-                color: DeviceInfo.darkMode ? gray70 : white205),
+                color: context.darkMode ? gray70 : white205),
           )
               .animate(target: onChange ? 1 : 0)
               .moveX(

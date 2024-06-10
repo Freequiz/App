@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
@@ -30,7 +29,7 @@ class KebabMenuItem extends StatelessWidget {
             Icon(
               icon,
               size: context.screenHeight/ 40,
-              color: DeviceInfo.darkMode ? Colors.white : gray40,
+              color: context.darkMode ? Colors.white : gray40,
             )
           ],
         ),

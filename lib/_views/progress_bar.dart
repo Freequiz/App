@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/widgets/conditional.dart';
@@ -19,7 +18,7 @@ class _ProgressBarState extends State<ProgressBar> {
 
   @override
   Widget build(BuildContext context) {
-    final color5 = DeviceInfo.darkMode
+    final color5 = context.darkMode
         ? gray60
         : white225;
     double widthProgress = context.screenWidth /

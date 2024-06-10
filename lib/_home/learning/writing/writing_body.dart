@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/prompt.dart';
 import 'package:freequiz/_views/progress_bar.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:freequiz/utilities/widgets/space.dart';
@@ -45,13 +44,13 @@ class WritingBody extends StatelessWidget {
                   children: [
                     Flexible(
                       child: SizedBox(
-                        height: DeviceInfo.mobileLayout ? context.screenHeight/ 20 : context.screenHeight/ 30,
+                        height: context.mobileLayout ? context.screenHeight/ 20 : context.screenHeight/ 30,
                         child: TextField(
                           autocorrect: false,
                           enableSuggestions: false,
                           keyboardType: TextInputType.text,
                           keyboardAppearance:
-                              DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+                              context.darkMode ? Brightness.dark : Brightness.light,
                           controller: textController,
                           onEditingComplete: () {
                             onPressed();
@@ -80,7 +79,7 @@ class WritingBody extends StatelessWidget {
                     ),
                     Space.width(5),
                     SizedBox(
-                      height: DeviceInfo.mobileLayout ? context.screenHeight/ 20 : context.screenHeight/ 30,
+                      height: context.mobileLayout ? context.screenHeight/ 20 : context.screenHeight/ 30,
                       child: TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: answerRight ? Colors.green : color,

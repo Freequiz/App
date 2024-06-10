@@ -5,7 +5,6 @@ import 'package:freequiz/2_profile/profile_info/dark_mode_switcher.dart';
 import 'package:freequiz/2_profile/profile_info/email.dart';
 import 'package:freequiz/2_profile/profile_info/password.dart';
 import 'package:freequiz/2_profile/profile_info/username.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
@@ -23,7 +22,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
   @override
   Widget build(BuildContext context) {
     final textColor =
-        DeviceInfo.darkMode ? Colors.white : gray40;
+        context.darkMode ? Colors.white : gray40;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {

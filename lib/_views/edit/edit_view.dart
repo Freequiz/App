@@ -3,7 +3,6 @@ import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/_views/edit/add_button.dart';
 import 'package:freequiz/_views/edit/header.dart';
 import 'package:freequiz/_views/edit/list_view.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
@@ -18,11 +17,10 @@ class EditView extends StatefulWidget {
 }
 
 class _EditViewState extends State<EditView> {
-
-   final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
-
   @override
   Widget build(BuildContext context) {
+    final hintColor = context.darkMode ? Colors.white : gray40;
+
     return ListView(
       children: [
         SizedBox(

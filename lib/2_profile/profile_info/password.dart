@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/textfields/password.dart';
 import 'package:freequiz/_views/textfields/password_confirmation.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/style.dart';
@@ -34,11 +33,11 @@ class _PasswordState extends State<Password> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = DeviceInfo.darkMode ? Colors.white : gray40;
+    final textColor = context.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-        color: DeviceInfo.darkMode ? gray55 : white235,
+        color: context.darkMode ? gray55 : white235,
       ),
       child: Padding(
         padding: EdgeInsets.all(context.screenHeight/ 100),
