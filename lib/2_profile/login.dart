@@ -113,7 +113,7 @@ class _LoginState extends State<Login> {
           });
         } else {
           Profile.accessToken = mapLogin["access_token"];
-          Profile.saveData();
+          Profile.saveAccessToken();
           // ignore: use_build_context_synchronously
           Navigator.of(context).pop();
           widget.refresh();

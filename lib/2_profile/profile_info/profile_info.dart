@@ -11,8 +11,7 @@ import 'package:freequiz/others/style.dart';
 
 class ProfileInfo extends StatefulWidget {
   final Function refresh;
-  final Map data;
-  const ProfileInfo({super.key, required this.refresh, required this.data});
+  const ProfileInfo({super.key, required this.refresh});
 
   @override
   State<ProfileInfo> createState() => _ProfileInfoState();
@@ -40,9 +39,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
             child: ListView(
               children: [
                 SizedBox(height: DeviceInfo().height() / 60),
-                Username(data: widget.data, refresh: widget.refresh),
+                Username(refresh: widget.refresh),
                 SizedBox(height: DeviceInfo().height() / 60),
-                EMail(data: widget.data, refresh: widget.refresh),
+                EMail(refresh: widget.refresh),
                 SizedBox(height: DeviceInfo().height() / 60),
                 Password(refresh: widget.refresh),
                 SizedBox(height: DeviceInfo().height() / 60),

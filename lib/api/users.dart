@@ -112,7 +112,7 @@ class APIUsers {
       if (response.statusCode == 200) {
         final decodedResponse = jsonDecode(response.body);
         Profile.accessToken = decodedResponse["access_token"];
-        Profile.saveData();
+        Profile.saveAccessToken();
         newAccessToken = true;
       } else {
         debugPrint("Couldn't refresh Access Token");
@@ -188,6 +188,12 @@ class APIUsers {
                   }
                 },
     );
+
+    return Api.decodeResponse(response);
+  }
+
+  static Future<Map> updateSettings(Map body) async {
+    final response = await Api.httpPatch(path: 'user/settings', body: {"setting": body});
 
     return Api.decodeResponse(response);
   }

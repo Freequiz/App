@@ -5,6 +5,7 @@ import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/progress.dart';
+import 'package:freequiz/user/helper.dart';
 
 class Questionnaire {
   static List<Translation> questions = [];
@@ -68,7 +69,7 @@ class Questionnaire {
   }
 
   static maxScore(String mode) {
-    return Preferences.maxScores[mode];
+    return UserHelper.user?.settings.maxScore(mode) ?? 2;
   }
 
   static definition() {

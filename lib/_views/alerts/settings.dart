@@ -4,6 +4,7 @@ import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/learning.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/conditional.dart';
 
 class LearningSettings extends StatefulWidget {
@@ -22,7 +23,7 @@ class _LearningSettingsState extends State<LearningSettings> {
   @override
   void initState() {
     answerLanguage = widget.languages[Preferences.answerLanguage];
-    maxScore = Preferences.maxScores[widget.mode].toString();
+    maxScore = Questionnaire.maxScore(widget.mode).toString();
 
     super.initState();
   }

@@ -5,12 +5,12 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/user/helper.dart';
 import 'package:freequiz/utilities/conditional.dart';
 
 class Username extends StatefulWidget {
-  final Map data;
   final Function refresh;
-  const Username({super.key, required this.data, required this.refresh});
+  const Username({super.key, required this.refresh});
 
   @override
   State<Username> createState() => _UsernameState();
@@ -36,7 +36,7 @@ class _UsernameState extends State<Username> {
               children: [
                 const Text('username').tr(),
                 const Spacer(),
-                Text(widget.data["data"]["username"]),
+                Text(UserHelper.user!.username),
                 const SizedBox(
                   width: 10,
                 ),

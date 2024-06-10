@@ -5,12 +5,12 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/user/helper.dart';
 import 'package:freequiz/utilities/conditional.dart';
 
 class EMail extends StatefulWidget {
   final Function refresh;
-  final Map data;
-  const EMail({super.key, required this.data, required this.refresh});
+  const EMail({super.key, required this.refresh});
 
   @override
   State<EMail> createState() => _EMailState();
@@ -36,7 +36,7 @@ class _EMailState extends State<EMail> {
               children: [
                 const Text('email').tr(),
                 const Spacer(),
-                Text(widget.data["data"]["email"]),
+                Text(UserHelper.user!.email),
                 const SizedBox(
                   width: 10,
                 ),

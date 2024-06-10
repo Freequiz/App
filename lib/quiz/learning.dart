@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/local_storage/database.dart';
-import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
@@ -89,7 +88,10 @@ class Learning {
     List<String> listLevels = [levels[0]];
     String mode = modes[i];
 
-    for (int n = Preferences.maxScores[mode]!; n >= 1; n--) {
+    for (int n = Questionnaire.maxScore(mode); n >= 1; n--) {
+      if (n > levels.length) {
+        listLevels.add(n.toString());
+      }
       listLevels.add(levels[levels.length - n]);
     }
 

@@ -1,10 +1,9 @@
 import 'dart:convert';
-
+import 'package:freequiz/user/helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
   static int answerLanguage = 1;
-  static Map<String, dynamic> maxScores = {};
 
   static saveAnswerLanguage(int value) async {
     answerLanguage = value;
@@ -18,15 +17,20 @@ class Preferences {
   }
 
   static saveMaxScore(String mode, int n) async {
-    maxScores[mode] = n;
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('max_scores', jsonEncode(maxScores));
+    UserHelper.user!.settings.setScore(mode, n);
+    saveUser();
   }
 
-  static loadMaxScores() async {
+  static saveUser() async {
+    Map map = UserHelper.user!.toMap();
     final prefs = await SharedPreferences.getInstance();
-    maxScores = jsonDecode(
-      prefs.getString('max_scores') ?? "{\"smart\":3,\"write\":2,\"multi\":2,\"cards\":2}",
+    prefs.setString('user', jsonEncode(map));
+  }
+
+  static Future<Map> loadUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    return jsonDecode(
+      prefs.getString('user') ?? "{\"username\": \"\", \"email\": \"\", \"settings\": {\"multi_amount\": 2, \"write_amount\": 2, \"cards_amount\": 2}}",
     );
   }
 }
