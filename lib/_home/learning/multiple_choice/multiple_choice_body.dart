@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/multiple_choice/choices.dart';
 import 'package:freequiz/_home/learning/prompt.dart';
 import 'package:freequiz/_views/progress_bar.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class MultipleChoiceBody extends StatelessWidget {
   final List choices;
@@ -42,7 +42,7 @@ class MultipleChoiceBody extends StatelessWidget {
               children: [
                 TextPromt(text: Questionnaire.definition()),
                 SizedBox(
-                  height: DeviceInfo().height() / 3,
+                  height: context.screenHeight/ 3,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,7 +67,7 @@ class MultipleChoiceBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                Space.height(DeviceInfo().height() / 100),
+                Space.height(context.screenHeight/ 100),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -91,7 +91,7 @@ class MultipleChoiceBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                Space.height(DeviceInfo().height() / 16),
+                Space.height(context.screenHeight/ 16),
               ],
             ),
           ),

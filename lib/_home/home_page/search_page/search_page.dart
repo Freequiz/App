@@ -9,10 +9,11 @@ import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/string_extensions.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/extensions/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/conditional.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class SearchPage extends StatefulWidget {
   final int n;
@@ -41,7 +42,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Column(
         children: [
           SizedBox(
-            height: DeviceInfo().height() / 20,
+            height: context.screenHeight/ 20,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
@@ -97,7 +98,7 @@ class _SearchPageState extends State<SearchPage> {
                         context.tr('load more'),
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: DeviceInfo().height() / 55),
+                            fontSize: context.screenHeight/ 55),
                       ),
                     ),
                   ),
@@ -123,8 +124,8 @@ class _SearchPageState extends State<SearchPage> {
           uuid: Search.data[i]['id'],
           expanded: false,
           width: DeviceInfo.mobileLayout
-              ? DeviceInfo().width() - 20
-              : DeviceInfo().width() - 60,
+              ? context.screenWidth - 20
+              : context.screenWidth - 60,
         );
       },
       separatorBuilder: (BuildContext context, int i) {
@@ -144,8 +145,8 @@ class _SearchPageState extends State<SearchPage> {
         return UserTile(
           data: Search.data[i],
           width: DeviceInfo.mobileLayout
-              ? DeviceInfo().width() - 20
-              : DeviceInfo().width() - 60,
+              ? context.screenWidth - 20
+              : context.screenWidth - 60,
         );
       },
       separatorBuilder: (BuildContext context, int i) {

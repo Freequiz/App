@@ -3,6 +3,7 @@ import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class CardWidget extends StatelessWidget {
   CardWidget({super.key});
@@ -14,12 +15,12 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: DeviceInfo().width() / 1.25,
+      width: context.screenWidth / 1.25,
       height: DeviceInfo.mobileLayout
-          ? DeviceInfo().height() / 4
-          : DeviceInfo().width() / 2.5,
+          ? context.screenHeight/ 4
+          : context.screenWidth / 2.5,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo().height() / 20),
+        borderRadius: BorderRadius.circular(context.screenHeight/ 20),
         color: backgroundColor,
       ),
       alignment: Alignment.center,
@@ -28,7 +29,7 @@ class CardWidget extends StatelessWidget {
             ? Questionnaire.answer()
             : Questionnaire.definition(),
         style: TextStyle(
-            fontSize: DeviceInfo().height() / 24, color: foregroundColor),
+            fontSize: context.screenHeight/ 24, color: foregroundColor),
       ),
     );
   }

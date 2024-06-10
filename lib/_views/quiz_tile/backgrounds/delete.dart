@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class BackgroundDelete extends StatelessWidget {
   const BackgroundDelete({super.key});
@@ -8,7 +8,7 @@ class BackgroundDelete extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
         color: Colors.red,
       ),
       child: const Align(

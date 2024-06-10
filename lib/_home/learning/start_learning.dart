@@ -7,7 +7,7 @@ import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class StartLearning extends StatefulWidget {
   final int i;

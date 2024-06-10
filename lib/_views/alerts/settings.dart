@@ -5,7 +5,8 @@ import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 class LearningSettings extends StatefulWidget {
   final List<String> languages;
@@ -43,7 +44,7 @@ class _LearningSettingsState extends State<LearningSettings> {
           Text(
             context.tr('answer with'),
             style: TextStyle(
-              fontSize: DeviceInfo().height() / 50,
+              fontSize: context.screenHeight/ 50,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -52,7 +53,7 @@ class _LearningSettingsState extends State<LearningSettings> {
             onTap: changeAnswerLanguage,
             texts: widget.languages,
             value: answerLanguage,
-            width: DeviceInfo().width() - 80,
+            width: context.screenWidth - 80,
           ),
           const SizedBox(height: 30),
           Conditional(
@@ -60,7 +61,7 @@ class _LearningSettingsState extends State<LearningSettings> {
             widget: Text(
               context.tr('amount repetition'),
               style: TextStyle(
-                fontSize: DeviceInfo().height() / 50,
+                fontSize: context.screenHeight/ 50,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -75,7 +76,7 @@ class _LearningSettingsState extends State<LearningSettings> {
               onTap: changeMaxScore,
               texts: Learning.maxScoreOptions[widget.mode]!,
               value: maxScore,
-              width: DeviceInfo().width() - 80,
+              width: context.screenWidth - 80,
             ),
           ),
         ],

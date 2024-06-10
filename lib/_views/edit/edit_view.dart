@@ -5,6 +5,7 @@ import 'package:freequiz/_views/edit/header.dart';
 import 'package:freequiz/_views/edit/list_view.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class EditView extends StatefulWidget {
 
@@ -25,15 +26,15 @@ class _EditViewState extends State<EditView> {
     return ListView(
       children: [
         SizedBox(
-          height: DeviceInfo().height() / 60,
+          height: context.screenHeight/ 60,
         ),
         EditHeader(quiz: widget.quiz, save: widget.quiz.save, hintColor: hintColor),
         SizedBox(
-          height: DeviceInfo().height() / 40,
+          height: context.screenHeight/ 40,
         ),
         ListWordPairs(quiz: widget.quiz),
         SizedBox(
-          height: DeviceInfo().height() / 40,
+          height: context.screenHeight/ 40,
         ),
         AddButton(add: add)
       ],

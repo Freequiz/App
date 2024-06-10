@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/_views/edit/word_pair_view.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class ListWordPairs extends StatefulWidget {
   final QuizForm quiz;
@@ -21,7 +21,7 @@ class _ListWordPairsState extends State<ListWordPairs> {
       itemCount: widget.quiz.wordPairs.length,
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(
-          height: DeviceInfo().height() / 60,
+          height: context.screenHeight/ 60,
         );
       },
       itemBuilder: (BuildContext context, int i) {

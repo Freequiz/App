@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/description.dart';
 import 'package:freequiz/_home/quiz_page/search_bar_words.dart';
 import 'package:freequiz/models/translation.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/_home/quiz_page/learning_modes.dart';
 import 'package:freequiz/_home/quiz_page/word_list/nothing_found.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list_taskbar.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 
 class QuizPage extends StatefulWidget {
@@ -106,7 +106,7 @@ class _QuizPageState extends State<QuizPage> {
                   Text(
                     QuizHelper.quiz!.title,
                     style: TextStyle(
-                      fontSize: DeviceInfo().height() / 40,
+                      fontSize: context.screenHeight/ 40,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

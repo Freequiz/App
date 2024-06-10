@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:freequiz/others/string_extensions.dart';
+import 'package:freequiz/utilities/extensions/string_extensions.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';

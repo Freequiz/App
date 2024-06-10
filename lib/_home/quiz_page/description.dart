@@ -5,6 +5,7 @@ import 'package:freequiz/loading/load_user.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class QuizDescription extends StatelessWidget {
   const QuizDescription({super.key});
@@ -14,9 +15,9 @@ class QuizDescription extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: DeviceInfo.darkMode ? gray60 : white235,
-        borderRadius: BorderRadius.circular(DeviceInfo().width() / 30.4),
+        borderRadius: BorderRadius.circular(context.screenWidth / 30.4),
       ),
-      constraints: BoxConstraints(minHeight: DeviceInfo().height() / 15),
+      constraints: BoxConstraints(minHeight: context.screenHeight/ 15),
       child: Column(
         children: [
           const QuizTitle(),
@@ -28,32 +29,32 @@ class QuizDescription extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: (DeviceInfo().width() - 46) / 8 * 7,
+                  width: (context.screenWidth - 46) / 8 * 7,
                   child: Text(
                     QuizHelper.quiz!.description != ""
                         ? QuizHelper.quiz!.description!
                         : context.tr('no description'),
                     style: TextStyle(
                         fontSize: DeviceInfo.mobileLayout
-                            ? DeviceInfo().height() / 55
-                            : DeviceInfo().height() / 45),
+                            ? context.screenHeight/ 55
+                            : context.screenHeight/ 45),
                   ),
                 ),
                 GestureDetector(
                   onTap: () => loadUser(
                       context: context, user: QuizHelper.quiz!.creator),
                   child: Container(
-                    height: DeviceInfo().height() / 35,
-                    width: DeviceInfo().height() / 35,
+                    height: context.screenHeight/ 35,
+                    width: context.screenHeight/ 35,
                     decoration: BoxDecoration(
                       borderRadius:
-                          BorderRadius.circular(DeviceInfo().height() / 70),
+                          BorderRadius.circular(context.screenHeight/ 70),
                       border: Border.all(color: Colors.white, width: 2.0),
                     ),
                     child: Center(
                       child: Icon(
                         Icons.person,
-                        size: DeviceInfo().height() / 45,
+                        size: context.screenHeight/ 45,
                       ),
                     ),
                   ),

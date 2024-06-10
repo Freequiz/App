@@ -12,6 +12,7 @@ import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class SignUp extends StatefulWidget {
   final Function refresh;
@@ -46,16 +47,16 @@ class _SignUpState extends State<SignUp> {
       child: Padding(
         padding: DeviceInfo.mobileLayout
             ? const EdgeInsets.all(10.0)
-            : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+            : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
         child: Column(
           children: [
             SizedBox(
-              height: DeviceInfo().height() / 15,
+              height: context.screenHeight/ 15,
             ),
             Center(
               child: Text(
                 context.tr('sign up'),
-                style: textSize(DeviceInfo().height() / 20),
+                style: textSize(context.screenHeight/ 20),
               ),
             ),
             Row(
@@ -63,20 +64,20 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Text(
                   context.tr('terms 1'),
-                  style: textSize(DeviceInfo().height() / 65),
+                  style: textSize(context.screenHeight/ 65),
                 ),
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {},
                   child: Text(
                     context.tr('terms 2'),
-                    style: TextStyle(fontSize: DeviceInfo().height() / 65, color: Colors.blue),
+                    style: TextStyle(fontSize: context.screenHeight/ 65, color: Colors.blue),
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: DeviceInfo().height() / 40.0,
+              height: context.screenHeight/ 40.0,
             ),
             UsernameTextfield(username: username, focusNode: focusNode),
             const SizedBox(
@@ -109,12 +110,12 @@ class _SignUpState extends State<SignUp> {
               ],
             ),
             SizedBox(
-              height: DeviceInfo().height() / 60,
+              height: context.screenHeight/ 60,
             ),
             Center(
               child: Text(
                 context.tr('already account'),
-                style: textSize(DeviceInfo().height() / 65),
+                style: textSize(context.screenHeight/ 65),
               ),
             ),
             Align(

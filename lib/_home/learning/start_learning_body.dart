@@ -13,8 +13,9 @@ import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/conditional.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 
 class StartLearningBody extends StatefulWidget {
@@ -64,11 +65,11 @@ class _StartLearningBodyState extends State<StartLearningBody> {
         const SizedBox(height: 15),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(DeviceInfo().width() / 30 + 10),
+            borderRadius: BorderRadius.circular(context.screenWidth / 30 + 10),
             color: color5,
           ),
-          height: DeviceInfo().height() / 10,
-          width: DeviceInfo().width() - 20.0,
+          height: context.screenHeight/ 10,
+          width: context.screenWidth - 20.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -86,18 +87,18 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                 },
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
-                  height: DeviceInfo().height() / 10 - 20,
-                  width: widthStartButton(DeviceInfo().width()),
+                  height: context.screenHeight/ 10 - 20,
+                  width: widthStartButton(context.screenWidth),
                   decoration: BoxDecoration(
                     borderRadius:
-                        BorderRadius.circular(DeviceInfo().width() / 30),
+                        BorderRadius.circular(context.screenWidth / 30),
                     color: color[widget.i],
                   ),
                   child: Center(
                     child: Text(
                       context.tr('learn'),
                       style: TextStyle(
-                          fontSize: DeviceInfo().height() / 36,
+                          fontSize: context.screenHeight/ 36,
                           color: Colors.white,
                           fontWeight: FontWeight.w600),
                     ),
@@ -124,11 +125,11 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                   },
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
-                    height: DeviceInfo().height() / 10 - 20,
-                    width: widthStartButton(DeviceInfo().width()),
+                    height: context.screenHeight/ 10 - 20,
+                    width: widthStartButton(context.screenWidth),
                     decoration: BoxDecoration(
                       borderRadius:
-                          BorderRadius.circular(DeviceInfo().width() / 30),
+                          BorderRadius.circular(context.screenWidth / 30),
                       color: color[widget.i],
                     ),
                     child: Row(
@@ -137,7 +138,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                         Text(
                           context.tr('learn only'),
                           style: TextStyle(
-                              fontSize: DeviceInfo().height() / 36,
+                              fontSize: context.screenHeight/ 36,
                               color: Colors.white,
                               fontWeight: FontWeight.w600),
                         ),
@@ -170,15 +171,15 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                     Conditional(
                       condition: progressArray.isNotEmpty,
                       widget: Container(
-                        width: (DeviceInfo().width() - 20),
-                        height: DeviceInfo().height() / 30,
+                        width: (context.screenWidth - 20),
+                        height: context.screenHeight/ 30,
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8),
                           child: Text(
                             i < widget.levels.length ? widget.levels[i] : widget.levels.last,
                             style:
-                                TextStyle(fontSize: DeviceInfo().height() / 40),
+                                TextStyle(fontSize: context.screenHeight/ 40),
                           ),
                         ),
                       ),
@@ -189,11 +190,11 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                       i: i,
                       color: color[widget.i],
                       scrollPhysics: const NeverScrollableScrollPhysics(),
-                      width: DeviceInfo().width(),
+                      width: context.screenWidth,
                     ),
                     Space.height(
                       progressArray.isNotEmpty
-                          ? DeviceInfo().height() / 30
+                          ? context.screenHeight/ 30
                           : 0,
                     ),
                   ],

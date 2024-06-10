@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class SearchBarWords extends StatefulWidget {
   final Function search;
@@ -19,10 +20,10 @@ class _SearchBarWordsState extends State<SearchBarWords> {
     final hintColor = DeviceInfo.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo().width() / 100),
+        borderRadius: BorderRadius.circular(context.screenWidth / 100),
         color: DeviceInfo.darkMode ? gray55 : white235,
       ),
-      width: DeviceInfo().width() / 2,
+      width: context.screenWidth / 2,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(

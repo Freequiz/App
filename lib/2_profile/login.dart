@@ -8,7 +8,8 @@ import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/utilities.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class Login extends StatefulWidget {
   final Function refresh;
@@ -46,16 +47,16 @@ class _LoginState extends State<Login> {
         child: Padding(
           padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.all(10.0)
-              : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+              : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Space.height(DeviceInfo().height() / 60),
+              Space.height(context.screenHeight/ 60),
               Text(
                 context.tr('login'),
-                style: textSize(DeviceInfo().height() / 20),
+                style: textSize(context.screenHeight/ 20),
               ),
-              Space.height(DeviceInfo().height() / 60),
+              Space.height(context.screenHeight/ 60),
               UsernameTextfield(username: username, focusNode: focusNode),
               Space.height(5),
               Row(

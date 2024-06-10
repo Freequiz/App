@@ -5,7 +5,8 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class BugReporter extends StatefulWidget {
   const BugReporter({super.key});
@@ -32,19 +33,19 @@ class _BugReporterState extends State<BugReporter> {
         padding: DeviceInfo.mobileLayout
             ? const EdgeInsets.all(10.0)
             : EdgeInsets.symmetric(
-                horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+                horizontal: context.screenWidth / 5.5, vertical: 10.0),
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(DeviceInfo().height() / 100),
+                    BorderRadius.circular(context.screenHeight/ 100),
                 color: DeviceInfo.darkMode
                     ? gray55
                     : blueFreequiz,
               ),
               child: Padding(
-                padding: EdgeInsets.all(DeviceInfo().height() / 100),
+                padding: EdgeInsets.all(context.screenHeight/ 100),
                 child: Column(
                   children: [
                     TextField(
@@ -150,7 +151,7 @@ class _BugReporterState extends State<BugReporter> {
                 ),
               ),
             ),
-            Space.height(DeviceInfo().height() / 40),
+            Space.height(context.screenHeight/ 40),
             Align(
               child: TextButton(
                 style: TextButton.styleFrom(

@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/badge.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class AdditionalInfo extends StatelessWidget {
   const AdditionalInfo({super.key, required this.data});
@@ -14,7 +14,7 @@ class AdditionalInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: DeviceInfo().height() / 30 + 15,
+      height: context.screenHeight/ 30 + 15,
       padding: const EdgeInsets.only(top: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 class SubmitButton extends StatelessWidget {
 
@@ -13,7 +14,7 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
+      height: DeviceInfo.mobileLayout ? context.screenHeight/ 20 : 40,
       child: TextButton(
         style: TextButton.styleFrom(
           backgroundColor: grayFreequiz,
@@ -25,8 +26,8 @@ class SubmitButton extends StatelessWidget {
         child: Conditional(
           condition: pressed,
           widget: SizedBox(
-            width: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
-            height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
+            width: DeviceInfo.mobileLayout ? context.screenHeight/ 30 : 30,
+            height: DeviceInfo.mobileLayout ? context.screenHeight/ 30 : 30,
             child: const CircularProgressIndicator(
               color: Colors.white,
             ),

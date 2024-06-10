@@ -6,7 +6,8 @@ import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 class CreatedQuizzes extends StatefulWidget {
   final Function refresh;
@@ -28,7 +29,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
           alignment: Alignment.centerLeft,
           child: Text(
             context.tr('created quizzes'),
-            style: textSize(DeviceInfo().height() / 30),
+            style: textSize(context.screenHeight/ 30),
           ),
         ),
         SizedBox(
@@ -72,7 +73,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
               child: Text(
                 context.tr('load more'),
                 style: TextStyle(
-                    color: Colors.white, fontSize: DeviceInfo().height() / 55),
+                    color: Colors.white, fontSize: context.screenHeight/ 55),
               ),
             ),
           ),

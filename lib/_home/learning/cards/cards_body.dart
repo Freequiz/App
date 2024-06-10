@@ -7,7 +7,8 @@ import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class CardsBody extends StatefulWidget {
   final Function wrong;
@@ -55,13 +56,13 @@ class _CardsBodyState extends State<CardsBody> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 20.0),
                       child: Container(
-                        width: DeviceInfo().width() / 1.25 - 40,
+                        width: context.screenWidth / 1.25 - 40,
                         height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().height() / 4
-                            : DeviceInfo().width() / 2.5,
+                            ? context.screenHeight/ 4
+                            : context.screenWidth / 2.5,
                         decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(DeviceInfo().height() / 20),
+                              BorderRadius.circular(context.screenHeight/ 20),
                           color: backgroundColor2,
                         ),
                         alignment: Alignment.center,
@@ -70,13 +71,13 @@ class _CardsBodyState extends State<CardsBody> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: Container(
-                        width: DeviceInfo().width() / 1.25 - 20,
+                        width: context.screenWidth / 1.25 - 20,
                         height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().height() / 4
-                            : DeviceInfo().width() / 2.5,
+                            ? context.screenHeight/ 4
+                            : context.screenWidth / 2.5,
                         decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(DeviceInfo().height() / 20),
+                              BorderRadius.circular(context.screenHeight/ 20),
                           color: backgroundColor1,
                         ),
                         alignment: Alignment.center,
@@ -100,19 +101,19 @@ class _CardsBodyState extends State<CardsBody> {
                     ),
                   ],
                 ),
-                Space.height(DeviceInfo().height() / 16),
+                Space.height(context.screenHeight/ 16),
                 SizedBox(
-                  width: DeviceInfo().width() / 1.25,
+                  width: context.screenWidth / 1.25,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
                         width: DeviceInfo.mobileLayout
-                            ? DeviceInfo().width() / 5
-                            : DeviceInfo().width() / 10,
+                            ? context.screenWidth / 5
+                            : context.screenWidth / 10,
                         height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().width() / 5
-                            : DeviceInfo().width() / 10,
+                            ? context.screenWidth / 5
+                            : context.screenWidth / 10,
                         child: FloatingActionButton(
                           heroTag: "wrong",
                           onPressed: () {
@@ -124,11 +125,11 @@ class _CardsBodyState extends State<CardsBody> {
                       ),
                       SizedBox(
                         width: DeviceInfo.mobileLayout
-                            ? DeviceInfo().width() / 5
-                            : DeviceInfo().width() / 10,
+                            ? context.screenWidth / 5
+                            : context.screenWidth / 10,
                         height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().width() / 5
-                            : DeviceInfo().width() / 10,
+                            ? context.screenWidth / 5
+                            : context.screenWidth / 10,
                         child: FloatingActionButton(
                           heroTag: "right",
                           onPressed: () {
@@ -141,7 +142,7 @@ class _CardsBodyState extends State<CardsBody> {
                     ],
                   ),
                 ),
-                Space.height(DeviceInfo().height() / 32),
+                Space.height(context.screenHeight/ 32),
               ],
             ),
           ),

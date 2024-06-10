@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class BasicTextfield extends StatelessWidget {
   final TextFieldData data;
@@ -23,7 +24,7 @@ class BasicTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
+      height: DeviceInfo.mobileLayout ? context.screenHeight/ 20 : 40,
       child: TextField(
         onSubmitted: (value) => onSubmitted(),
         keyboardAppearance: DeviceInfo.darkMode ? Brightness.dark : Brightness.light,

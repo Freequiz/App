@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class WordList extends StatelessWidget {
   final List<Translation> list;
@@ -52,40 +53,40 @@ class WordList extends StatelessWidget {
                     : Radius.zero),
             color: i2.remainder(2) == 0 ? color5 : color6,
           ),
-          padding: DeviceInfo.mobileLayout ? const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0) : EdgeInsets.all(DeviceInfo().height() / 80),
+          padding: DeviceInfo.mobileLayout ? const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0) : EdgeInsets.all(context.screenHeight/ 80),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   width: DeviceInfo.mobileLayout
-                      ? (width - 30) / 2 - DeviceInfo().height() / 30
-                      : (width - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
+                      ? (width - 30) / 2 - context.screenHeight/ 30
+                      : (width - 30) / 2 - context.screenHeight/ 20 - context.screenHeight/ 80,
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       list[i2].word,
                       style: TextStyle(
-                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 60 : DeviceInfo().height() / 45),
+                          fontSize: DeviceInfo.mobileLayout ? context.screenHeight/ 60 : context.screenHeight/ 45),
                     ),
                   ),
                 ),
                 Container(
                   width: DeviceInfo.mobileLayout
-                      ? (width - 30) / 2 - DeviceInfo().height() / 30
-                      : (width - 30) / 2 - DeviceInfo().height() / 20 - DeviceInfo().height() / 80,
+                      ? (width - 30) / 2 - context.screenHeight/ 30
+                      : (width - 30) / 2 - context.screenHeight/ 20 - context.screenHeight/ 80,
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       list[i2].translation,
                       style: TextStyle(
-                          fontSize: DeviceInfo.mobileLayout ? DeviceInfo().height() / 60 : DeviceInfo().height() / 45),
+                          fontSize: DeviceInfo.mobileLayout ? context.screenHeight/ 60 : context.screenHeight/ 45),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: DeviceInfo().height() / 20,
+                  width: context.screenHeight/ 20,
                   child: TextButton(
                     onPressed: () {
                       markWord(list[i2]);
@@ -94,12 +95,12 @@ class WordList extends StatelessWidget {
                         ? Icon(
                             Icons.star,
                             color: color,
-                            size: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
+                            size: DeviceInfo.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
                           )
                         : Icon(
                             Icons.star_border,
                             color: color,
-                            size: DeviceInfo.mobileLayout ? DeviceInfo().height() / 50 : DeviceInfo().height() / 45,
+                            size: DeviceInfo.mobileLayout ? context.screenHeight/ 50 : context.screenHeight/ 45,
                           ),
                   ),
                 ),

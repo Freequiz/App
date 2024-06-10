@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 class ProgressBar extends StatefulWidget {
   final double amountLeft;
@@ -21,7 +22,7 @@ class _ProgressBarState extends State<ProgressBar> {
     final color5 = DeviceInfo.darkMode
         ? gray60
         : white225;
-    double widthProgress = DeviceInfo().width() /
+    double widthProgress = context.screenWidth /
         widget.amount *
         (widget.amount - widget.amountLeft);
     return GestureDetector(
@@ -34,7 +35,7 @@ class _ProgressBarState extends State<ProgressBar> {
         alignment: expanded ? Alignment.center : Alignment.topCenter,
         duration: const Duration(milliseconds: 100),
         child: Container(
-          width: DeviceInfo().width(),
+          width: context.screenWidth,
           height: expanded ? 21 : 7,
           color: color5,
           alignment: Alignment.centerLeft,

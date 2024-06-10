@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class Description extends StatelessWidget {
   const Description(
@@ -27,7 +28,7 @@ class Description extends StatelessWidget {
         maxLines: expanded ? 2 : 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-          fontSize: DeviceInfo().height() / 60,
+          fontSize: context.screenHeight/ 60,
         ),
       ),
     );

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_list/list.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/utilities/conditional.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class QuizList extends StatelessWidget {
   final List list;
@@ -41,7 +42,7 @@ class QuizList extends StatelessWidget {
         ),
         defaultWidget: Row(
           children: [
-            Space.width((DeviceInfo().width() - 30) / 4 + 15),
+            Space.width((context.screenWidth - 30) / 4 + 15),
             Expanded(
               child: ListQuizzes(
                 data: list,
@@ -50,7 +51,7 @@ class QuizList extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
               ),
             ),
-            Space.width((DeviceInfo().width() - 30) / 4 + 15)
+            Space.width((context.screenWidth - 30) / 4 + 15)
           ],
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/manage.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class EditQuiz extends StatefulWidget {
   final Function refresh;
@@ -71,7 +72,7 @@ class _EditQuizState extends State<EditQuiz> {
         child: Padding(
           padding: DeviceInfo.mobileLayout
               ? const EdgeInsets.all(10.0)
-              : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+              : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
           child: FutureBuilder<Map>(
             future: ManageQuiz.load(widget.uuid, false),
             builder: (context, data) {

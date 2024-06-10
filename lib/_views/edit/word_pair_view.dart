@@ -5,6 +5,7 @@ import 'package:freequiz/_views/edit/answer_textfield.dart';
 import 'package:freequiz/_views/edit/basic_textfield.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class WordPairView extends StatelessWidget {
   final WordPair wordPair;
@@ -28,7 +29,7 @@ class WordPairView extends StatelessWidget {
       onDismissed: (direction) => onDismissed(),
       background: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+          borderRadius: BorderRadius.circular(context.screenHeight/ 100),
           color: Colors.red,
         ),
         child: const Align(
@@ -44,11 +45,11 @@ class WordPairView extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+          borderRadius: BorderRadius.circular(context.screenHeight/ 100),
           color: DeviceInfo.darkMode ? gray55 : blueFreequiz,
         ),
         child: Padding(
-          padding: EdgeInsets.all(DeviceInfo().height() / 100),
+          padding: EdgeInsets.all(context.screenHeight/ 100),
           child: Column(
             children: [
               BasicTextField(

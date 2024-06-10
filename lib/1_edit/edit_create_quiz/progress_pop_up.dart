@@ -5,7 +5,7 @@ import 'package:freequiz/local_storage/draft_storage.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 class ProgressPopUp extends StatefulWidget {
   final String title;

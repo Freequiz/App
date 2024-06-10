@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:freequiz/others/utilities.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class LoadingAnimation extends StatefulWidget {
   final String message;
@@ -24,7 +24,7 @@ class _LoadingAnimationState extends State<LoadingAnimation> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SpinKitRotatingCircle(
-          size: DeviceInfo().width() / 3,
+          size: context.screenWidth / 3,
           itemBuilder: (BuildContext context, int index) {
             return Image.asset(
               "assets/images/icon_transparent.png",
@@ -32,11 +32,11 @@ class _LoadingAnimationState extends State<LoadingAnimation> {
           },
         ),
         Space.height(
-          DeviceInfo().height() / 30,
+          context.screenHeight/ 30,
         ),
         Text(
           widget.message.tr(),
-          style: textSize(DeviceInfo().height() / 45),
+          style: textSize(context.screenHeight/ 45),
         ),
       ],
     )

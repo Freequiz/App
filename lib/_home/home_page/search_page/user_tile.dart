@@ -6,6 +6,7 @@ import 'package:freequiz/loading/load_user.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class UserTile extends StatefulWidget {
   final Map data;
@@ -28,9 +29,9 @@ class _UserTileState extends State<UserTile> {
       behavior: HitTestBehavior.opaque,
       onTap: () => loadUser(context: context, user: widget.data['username']),
       child: Container(
-        width: DeviceInfo().width() - 20,
+        width: context.screenWidth - 20,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+          borderRadius: BorderRadius.circular(context.screenHeight/ 100),
           color: color6,
         ),
         child: Padding(
@@ -41,13 +42,13 @@ class _UserTileState extends State<UserTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: DeviceInfo().height() / 20,
+                height: context.screenHeight/ 20,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       widget.data['username'],
-                      style: textSize(DeviceInfo().height() / 30),
+                      style: textSize(context.screenHeight/ 30),
                     ),
                     ShareButton(
                       url: "https://freequiz.herokuapp.com/user/${widget.data['username']}",
@@ -58,7 +59,7 @@ class _UserTileState extends State<UserTile> {
               ),
               Container(
                 padding: const EdgeInsets.only(top: 15),
-                height: DeviceInfo().height() / 30 + 15,
+                height: context.screenHeight/ 30 + 15,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

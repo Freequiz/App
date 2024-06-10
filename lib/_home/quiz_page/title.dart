@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class QuizTitle extends StatelessWidget {
   const QuizTitle({super.key});
@@ -14,14 +14,14 @@ class QuizTitle extends StatelessWidget {
       decoration: BoxDecoration(
         color: grayFreequiz,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(DeviceInfo().width() / 30.4),
-          topRight: Radius.circular(DeviceInfo().width() / 30.4),
+          topLeft: Radius.circular(context.screenWidth / 30.4),
+          topRight: Radius.circular(context.screenWidth / 30.4),
         ),
       ),
       child: Text(
         QuizHelper.quiz!.title,
         style: TextStyle(
-            fontSize: DeviceInfo().height() / 40,
+            fontSize: context.screenHeight/ 40,
             fontWeight: FontWeight.w600,
             color: Colors.white),
       ),

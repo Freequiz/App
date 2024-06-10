@@ -4,7 +4,8 @@ import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({super.key, required this.focusNode});
@@ -26,8 +27,8 @@ class _SearchBarState extends State<SearchBar> {
         : white235;
     return Container(
       width: DeviceInfo.mobileLayout
-          ? DeviceInfo().width() - 20
-          : DeviceInfo().width() / 2,
+          ? context.screenWidth - 20
+          : context.screenWidth / 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: backgroundColor,
@@ -39,7 +40,7 @@ class _SearchBarState extends State<SearchBar> {
             Flexible(
               child: SizedBox(
                 height:
-                    DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
+                    DeviceInfo.mobileLayout ? context.screenHeight/ 20 : 48,
                 child: TextField(
                   onTap: () => widget.focusNode.requestFocus(),
                   onSubmitted: (value) => loadSearch(
@@ -72,7 +73,7 @@ class _SearchBarState extends State<SearchBar> {
             ),
             Space.width(5),
             SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
+              height: DeviceInfo.mobileLayout ? context.screenHeight/ 20 : 48,
               child: TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: grayFreequiz,

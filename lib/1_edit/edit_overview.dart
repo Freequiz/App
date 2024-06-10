@@ -9,8 +9,9 @@ import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/conditional.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class EditOverview extends StatefulWidget {
   final List data;
@@ -58,7 +59,7 @@ class _EditOverviewState extends State<EditOverview> {
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   context.tr('create new quiz'),
-                  style: textSize(DeviceInfo().height() / 45),
+                  style: textSize(context.screenHeight/ 45),
                 ),
               ),
             ),

@@ -2,7 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/draft.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class Draft extends StatelessWidget {
   final Function refresh;
@@ -17,7 +18,7 @@ class Draft extends StatelessWidget {
           child: Text(
             context.tr('draft'),
             style: TextStyle(
-                fontSize: DeviceInfo().height() / 30, color: Colors.white),
+                fontSize: context.screenHeight/ 30, color: Colors.white),
           ),
         ),
         Space.height(DeviceInfo.mobileLayout ? 5 : 15),

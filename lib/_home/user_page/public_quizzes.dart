@@ -5,8 +5,9 @@ import 'package:freequiz/_home/user_page/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/conditional.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class PublicQuizzes extends StatefulWidget {
   final String user;
@@ -28,7 +29,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
           alignment: Alignment.center,
           child: Text(
             context.tr('quizzes'),
-            style: TextStyle(fontSize: DeviceInfo().height() / 30),
+            style: TextStyle(fontSize: context.screenHeight/ 30),
           ),
         ),
         Space.height(DeviceInfo.mobileLayout ? 10 : 30),
@@ -41,7 +42,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
               data: ListPublicQuizzes.data[i],
               uuid: ListPublicQuizzes.data[i]['id'],
               expanded: false,
-              width: DeviceInfo().width() - 20,
+              width: context.screenWidth - 20,
             );
           },
           separatorBuilder: (BuildContext context, int i) {
@@ -66,7 +67,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
               child: Text(
                 context.tr('load more'),
                 style: TextStyle(
-                    color: Colors.white, fontSize: DeviceInfo().height() / 55),
+                    color: Colors.white, fontSize: context.screenHeight/ 55),
               ),
             ),
           ),

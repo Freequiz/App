@@ -6,7 +6,8 @@ import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/user/helper.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 class Username extends StatefulWidget {
   final Function refresh;
@@ -25,11 +26,11 @@ class _UsernameState extends State<Username> {
     final textColor = DeviceInfo.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
         color: DeviceInfo.darkMode ? gray55 : white235,
       ),
       child: Padding(
-        padding: EdgeInsets.all(DeviceInfo().height() / 100),
+        padding: EdgeInsets.all(context.screenHeight/ 100),
         child: Column(
           children: [
             Row(
@@ -55,7 +56,7 @@ class _UsernameState extends State<Username> {
             ),
             Conditional(
               condition: edit,
-              widget: SizedBox(height: DeviceInfo().height() / 60),
+              widget: SizedBox(height: context.screenHeight/ 60),
             ),
             Conditional(
               condition: edit,
@@ -72,7 +73,7 @@ class _UsernameState extends State<Username> {
                     width: 5,
                   ),
                   SizedBox(
-                    height: DeviceInfo().height() / 20,
+                    height: context.screenHeight/ 20,
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: grayFreequiz,

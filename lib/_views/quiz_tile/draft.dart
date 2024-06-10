@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_draft/edit_draft.dart';
 import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/local_storage/draft_storage.dart';
-import 'package:freequiz/others/string_extensions.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/extensions/string_extensions.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 
 class DraftTile extends StatefulWidget {
@@ -46,7 +47,7 @@ class _DraftTileState extends State<DraftTile> {
           },
           background: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+              borderRadius: BorderRadius.circular(context.screenHeight/ 100),
               color: Colors.red,
             ),
             child: const Align(
@@ -62,11 +63,11 @@ class _DraftTileState extends State<DraftTile> {
           ),
           child: Container(
             height: DeviceInfo.mobileLayout
-                ? DeviceInfo().height() / 30 * 2.5 + 15
-                : DeviceInfo().height() / 30 * 2.5 + 35,
-            width: DeviceInfo().width() - 20,
+                ? context.screenHeight/ 30 * 2.5 + 15
+                : context.screenHeight/ 30 * 2.5 + 35,
+            width: context.screenWidth - 20,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+              borderRadius: BorderRadius.circular(context.screenHeight/ 100),
               color: color6,
             ),
             child: Padding(
@@ -88,7 +89,7 @@ class _DraftTileState extends State<DraftTile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        height: DeviceInfo().height() / 30,
+                        height: context.screenHeight/ 30,
                         child: Text(
                           QuizHelper.draft['description']
                               .toString()
@@ -96,8 +97,8 @@ class _DraftTileState extends State<DraftTile> {
                           style: TextStyle(
                             fontSize:
                                 QuizHelper.draft['description'].length > 50
-                                    ? DeviceInfo().height() / 60
-                                    : DeviceInfo().height() / 50,
+                                    ? context.screenHeight/ 60
+                                    : context.screenHeight/ 50,
                             color: Colors.red,
                           ),
                         ),

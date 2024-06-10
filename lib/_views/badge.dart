@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class InfoBadge extends StatelessWidget {
   const InfoBadge({super.key, required this.color, required this.text});
@@ -16,7 +16,7 @@ class InfoBadge extends StatelessWidget {
           borderRadius: BorderRadius.circular(100)),
       alignment: Alignment.center,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: DeviceInfo().height() / 60),
+        padding: EdgeInsets.symmetric(horizontal: context.screenHeight/ 60),
         child: Text(
           text,
           style: const TextStyle(color: Colors.white),

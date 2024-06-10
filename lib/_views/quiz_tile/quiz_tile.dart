@@ -7,7 +7,8 @@ import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/_views/quiz_tile/description.dart';
-import 'package:freequiz/utilities/conditional.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
 
 class QuizTile extends StatefulWidget {
   final Map data;
@@ -42,9 +43,9 @@ class _QuizTileState extends State<QuizTile> {
         uuid: widget.uuid,
       ),
       child: Container(
-        width: DeviceInfo().width() - 20,
+        width: context.screenWidth - 20,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+          borderRadius: BorderRadius.circular(context.screenHeight/ 100),
           color: color6,
         ),
         child: Padding(
@@ -79,7 +80,7 @@ class _QuizTileState extends State<QuizTile> {
     return Conditional(
       condition: !widget.expanded,
       widget: SizedBox(
-        height: DeviceInfo().height() / 30,
+        height: context.screenHeight/ 30,
         child: GestureDetector(
           onTap: () {
             setState(() {
@@ -88,7 +89,7 @@ class _QuizTileState extends State<QuizTile> {
           },
           child: Text(
             expanded ? "" : context.tr('more'),
-            style: TextStyle(color: grayFreequiz, fontSize: DeviceInfo().height() / 50),
+            style: TextStyle(color: grayFreequiz, fontSize: context.screenHeight/ 50),
           ),
         ),
       ),

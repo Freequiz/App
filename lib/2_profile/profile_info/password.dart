@@ -6,8 +6,9 @@ import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/conditional.dart';
-import 'package:freequiz/utilities/space.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class Password extends StatefulWidget {
   final Function refresh;
@@ -36,11 +37,11 @@ class _PasswordState extends State<Password> {
     final textColor = DeviceInfo.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
         color: DeviceInfo.darkMode ? gray55 : white235,
       ),
       child: Padding(
-        padding: EdgeInsets.all(DeviceInfo().height() / 100),
+        padding: EdgeInsets.all(context.screenHeight/ 100),
         child: Column(
           children: [
             Row(
@@ -66,7 +67,7 @@ class _PasswordState extends State<Password> {
             ),
             Conditional(
               condition: edit,
-              widget: SizedBox(height: DeviceInfo().height() / 60),
+              widget: SizedBox(height: context.screenHeight/ 60),
             ),
             Conditional(
               condition: edit,
@@ -103,7 +104,7 @@ class _PasswordState extends State<Password> {
                     width: 5,
                   ),
                   SizedBox(
-                    height: DeviceInfo().height() / 20,
+                    height: context.screenHeight/ 20,
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: grayFreequiz,

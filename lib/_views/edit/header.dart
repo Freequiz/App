@@ -7,6 +7,7 @@ import 'package:freequiz/_views/edit/dropdown.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class EditHeader extends StatefulWidget {
   final QuizForm quiz;
@@ -24,11 +25,11 @@ class _EditHeaderState extends State<EditHeader> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
+        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
         color: DeviceInfo.darkMode ? gray55 : blueFreequiz,
       ),
       child: Padding(
-        padding: EdgeInsets.all(DeviceInfo().height() / 100),
+        padding: EdgeInsets.all(context.screenHeight/ 100),
         child: Column(
           children: [
             BasicTextField(

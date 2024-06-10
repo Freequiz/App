@@ -8,6 +8,7 @@ import 'package:freequiz/2_profile/profile_info/username.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class ProfileInfo extends StatefulWidget {
   final Function refresh;
@@ -33,20 +34,20 @@ class _ProfileInfoState extends State<ProfileInfo> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: DefaultTextStyle(
             style: TextStyle(
-              fontSize: DeviceInfo().height() / 50,
+              fontSize: context.screenHeight/ 50,
               color: textColor,
             ),
             child: ListView(
               children: [
-                SizedBox(height: DeviceInfo().height() / 60),
+                SizedBox(height: context.screenHeight/ 60),
                 Username(refresh: widget.refresh),
-                SizedBox(height: DeviceInfo().height() / 60),
+                SizedBox(height: context.screenHeight/ 60),
                 EMail(refresh: widget.refresh),
-                SizedBox(height: DeviceInfo().height() / 60),
+                SizedBox(height: context.screenHeight/ 60),
                 Password(refresh: widget.refresh),
-                SizedBox(height: DeviceInfo().height() / 60),
+                SizedBox(height: context.screenHeight/ 60),
                 const DarkModeSwitcher(),
-                SizedBox(height: DeviceInfo().height() / 60),
+                SizedBox(height: context.screenHeight/ 60),
                 Align(
                   child: TextButton(
                     style: TextButton.styleFrom(

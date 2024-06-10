@@ -13,6 +13,7 @@ import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/others/device_info.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/manage.dart';
+import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                 onTap: onTap,
                 texts: const ["history", "favorite", "personal"],
                 value: options[shownQuizzes],
-                width: DeviceInfo().width() / 1.4,
+                width: context.screenWidth / 1.4,
                 icons: const [Icon(Icons.history), Icon(Icons.star_rounded), Icon(Icons.person)],
               ),
               SizedBox(
@@ -108,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                           onDismissed: removeRecent,
                         )
                             .animate(target: onChanged ? 1 : 0)
-                            .moveX(begin: - DeviceInfo().width() * previousShownQuizzes, end: - DeviceInfo().width() * shownQuizzes, duration: const Duration(milliseconds: 200))
+                            .moveX(begin: - context.screenWidth * previousShownQuizzes, end: - context.screenWidth * shownQuizzes, duration: const Duration(milliseconds: 200))
                             .callback(callback: (_) => setState(() {
                               previousShownQuizzes = shownQuizzes;
                               onChanged = false;
@@ -122,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                           onDismissed: removeFavorite,
                         )
                             .animate(target: onChanged ? 1 : 0)
-                            .moveX(begin: DeviceInfo().width() * (1 - previousShownQuizzes), end: DeviceInfo().width() * (1 - shownQuizzes), duration: const Duration(milliseconds: 200)),
+                            .moveX(begin: context.screenWidth * (1 - previousShownQuizzes), end: context.screenWidth * (1 - shownQuizzes), duration: const Duration(milliseconds: 200)),
                       ),
                       Positioned.fill(
                         child: LoadQuizList(
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                           onDismissed: removePersonal,
                         )
                             .animate(target: onChanged ? 1 : 0)
-                            .moveX(begin: DeviceInfo().width() * (2 - previousShownQuizzes), end: DeviceInfo().width() * (2 - shownQuizzes), duration: const Duration(milliseconds: 200)),
+                            .moveX(begin: context.screenWidth * (2 - previousShownQuizzes), end: context.screenWidth * (2 - shownQuizzes), duration: const Duration(milliseconds: 200)),
                       ),
                     ],
                   ),

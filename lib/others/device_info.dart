@@ -22,10 +22,4 @@ class DeviceInfo {
             : brightness == Brightness.dark;
     DeviceInfo.darkMode = darkMode;
   }
-  double height() {
-    return MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
-  }
-  double width() {
-    return MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
-  }
 }
