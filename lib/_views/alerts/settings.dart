@@ -19,11 +19,13 @@ class LearningSettings extends StatefulWidget {
 class _LearningSettingsState extends State<LearningSettings> {
   String answerLanguage = "";
   String maxScore = "";
+  String lengthQuestionnaire = "";
 
   @override
   void initState() {
     answerLanguage = widget.languages[Preferences.answerLanguage];
     maxScore = Questionnaire.maxScore(widget.mode).toString();
+    lengthQuestionnaire = Questionnaire.desiredLength().toString();
 
     super.initState();
   }
@@ -43,7 +45,7 @@ class _LearningSettingsState extends State<LearningSettings> {
           Text(
             context.tr('answer with'),
             style: TextStyle(
-              fontSize: context.screenHeight/ 50,
+              fontSize: context.screenHeight / 50,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -60,7 +62,7 @@ class _LearningSettingsState extends State<LearningSettings> {
             widget: Text(
               context.tr('amount repetition'),
               style: TextStyle(
-                fontSize: context.screenHeight/ 50,
+                fontSize: context.screenHeight / 50,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -77,6 +79,24 @@ class _LearningSettingsState extends State<LearningSettings> {
               value: maxScore,
               width: context.screenWidth - 80,
             ),
+          ),
+          Conditional(
+            condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            widget: const SizedBox(height: 30),
+          ),
+          Text(
+            context.tr('length round'),
+            style: TextStyle(
+              fontSize: context.screenHeight / 50,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 5),
+          Switcher(
+            onTap: changeLengthQuestionnaire,
+            texts: const ["5", "10", "20", "30"],
+            value: lengthQuestionnaire,
+            width: context.screenWidth - 80,
           ),
         ],
       ),
@@ -110,6 +130,13 @@ class _LearningSettingsState extends State<LearningSettings> {
     Preferences.saveMaxScore(widget.mode, int.parse(n));
     setState(() {
       maxScore = n;
+    });
+  }
+
+  changeLengthQuestionnaire(String length) {
+    Preferences.saveLengthQuestionnaire(int.parse(length));
+    setState(() {
+      lengthQuestionnaire = length;
     });
   }
 }

@@ -8,7 +8,9 @@ class Settings {
   int write;
   int smart = 3;
 
-  Settings({required this.settingsData, required this.multi, required this.cards, required this.write});
+  int lengthQuestionnaire;
+
+  Settings({required this.settingsData, required this.multi, required this.cards, required this.write, required this.lengthQuestionnaire});
 
   factory Settings.fromJson(Map settingsData) {
     return switch (settingsData) {
@@ -16,8 +18,9 @@ class Settings {
         "multi_amount": int multi,
         "cards_amount": int cards,
         "write_amount": int write,
+        "round_amount": int lengthQuestionnaire,
       } =>
-        Settings(settingsData: settingsData, multi: multi, cards: cards, write: write),
+        Settings(settingsData: settingsData, multi: multi, cards: cards, write: write, lengthQuestionnaire: lengthQuestionnaire),
       _ => throw const FormatException("Failed to load User."),
     };
   }
@@ -26,7 +29,8 @@ class Settings {
     return {
       "multi_amount": multi,
       "cards_amount": cards,
-      "write_amount": write
+      "write_amount": write,
+      "round_amount": lengthQuestionnaire,
     };
   }
 
@@ -61,5 +65,10 @@ class Settings {
     }
 
     APIUsers.updateSettings({"${mode}_amount": n});
+  }
+
+  setLengthQuestionnaire(int length) {
+    lengthQuestionnaire = length;
+    APIUsers.updateSettings({"round_amount": length});
   }
 }

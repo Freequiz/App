@@ -42,12 +42,14 @@ class Questionnaire {
   }
 
   static randomise(List<Translation> array) {
-    for (var n = 0; n < 10 - Learning.errors.length; n++) {
-      if (array.isEmpty) break;
+    if (Learning.errors.length < Questionnaire.desiredLength()) {
+      for (var n = 0; n < Questionnaire.desiredLength() - Learning.errors.length; n++) {
+        if (array.isEmpty) break;
 
-      final i = Random().nextInt(array.length);
-      questions.add(array[i]);
-      array.removeAt(i);
+        final i = Random().nextInt(array.length);
+        questions.add(array[i]);
+        array.removeAt(i);
+      }
     }
 
     //add previous errors
@@ -70,6 +72,10 @@ class Questionnaire {
 
   static maxScore(String mode) {
     return UserHelper.user?.settings.maxScore(mode) ?? 2;
+  }
+
+  static desiredLength() {
+    return UserHelper.user?.settings.lengthQuestionnaire;
   }
 
   static definition() {

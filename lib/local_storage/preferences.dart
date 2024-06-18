@@ -22,6 +22,11 @@ class Preferences {
     saveUser();
   }
 
+  static saveLengthQuestionnaire(int length) async {
+    UserHelper.user!.settings.setLengthQuestionnaire(length);
+    saveUser();
+  }
+
   static saveUser() async {
     Map map = UserHelper.user!.toMap();
     final prefs = await SharedPreferences.getInstance();
@@ -31,7 +36,7 @@ class Preferences {
   static Future<Map> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     return jsonDecode(
-      prefs.getString('user') ?? "{\"username\": \"\", \"email\": \"\", \"settings\": {\"multi_amount\": 2, \"write_amount\": 2, \"cards_amount\": 2}}",
+      prefs.getString('user') ?? "{\"username\": \"\", \"email\": \"\", \"settings\": {\"multi_amount\": 2, \"write_amount\": 2, \"cards_amount\": 2, \"round_amount\": 10}}",
     );
   }
 
