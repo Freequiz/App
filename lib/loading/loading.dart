@@ -34,7 +34,7 @@ Widget loading({
       }
     }
     return ErrorLoadingView(
-      error: data.data!["message"],
+      error: data.data?["message"] ?? "other error",
       widget: previousWidget,
     );
   }

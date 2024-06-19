@@ -130,7 +130,13 @@ class APIUsers {
       Profile.deleteData();
       return jsonDecode(response.body);
     } else {
-      return jsonDecode(response.body);
+      try {
+        return jsonDecode(response.body);
+      }
+      catch (_) {
+        debugPrint("JSON couldn't be decoded");
+        return Api.responseDefault;
+      }
     }
   }
 

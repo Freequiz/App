@@ -95,32 +95,22 @@ class Api {
   static Map decodeResponse(Response response) {
     switch (response.statusCode) {
       case 200:
-        return jsonDecode(response.body);
       case 201:
-        return jsonDecode(response.body);
       case 202:
-        return jsonDecode(response.body);
       case 400:
-        printError(response);
-        return jsonDecode(response.body);
       case 401:
-        printError(response);
-        return jsonDecode(response.body);
       case 404:
-        printError(response);
-        return jsonDecode(response.body);
       case 500:
-        printError(response);
-        return jsonDecode(response.body);
       case 503:
-        printError(response);
-        return jsonDecode(response.body);
+        try {
+          return jsonDecode(response.body);
+        }
+        catch (_) {
+          debugPrint("JSON couldn't be decoded");
+          return responseDefault;
+        }
       default:
         throw Exception('Unhandled Error');
     }
-  }
-
-  static void printError(Response response) async {
-    debugPrint((await jsonDecode(response.body)).toString());
   }
 }
