@@ -10,6 +10,7 @@ class Progress {
   static reset(String mode, String uuid) {
     for (Translation translation in QuizHelper.quiz!.translations.translations) {
       translation.score[mode] = 0;
+      translation.updated = DateTime.now().millisecondsSinceEpoch;
     }
     
     QuizDatabase.updateQuiz(QuizHelper.quiz!);
@@ -17,24 +18,23 @@ class Progress {
   }
 
   static increase(String uuid, String mode, Translation translation) {
-    translation.score[mode] = translation.score[mode]! + 1;
+    int score = translation.score[mode]! + 1;
 
-    if (translation.score[mode]! > Questionnaire.maxScore(mode)) {
-      translation.score[mode] = Questionnaire.maxScore(mode);
+    if (score > Questionnaire.maxScore(mode)) {
+      score = Questionnaire.maxScore(mode);
     }
 
-
-    APIQuizzes.setScore(uuid, translation.scoreID, mode, translation.score[mode]!);
+    translation.setScore(uuid, mode, score);
   }
 
   static decrease(String uuid, String mode, Translation translation) {
-    translation.score[mode] = translation.score[mode]! - 1;
+    int score = translation.score[mode]! - 1;
 
-    if (translation.score[mode]! < 0) {
-      translation.score[mode] = 0;
+    if (score < 0) {
+      score = 0;
     }
 
-    APIQuizzes.setScore(uuid, translation.scoreID, mode, translation.score[mode]!);
+    translation.setScore(uuid, mode, score);
   }
 
   static calculate(String mode) {

@@ -67,24 +67,6 @@ class Quiz {
     };
   }
 
-  Map toMap() {
-    return {
-      "success": true,
-      "quiz_data": {
-        "id": id,
-        "title": title,
-        "description": description,
-        "visibility": visibility,
-        "created_by": creator,
-        "favorite": favorite,
-        "owner": owner,
-        "from": from.toMap(),
-        "to": to.toMap(),
-        "data": translations.toMap()
-      }
-    };
-  }
-
   Map<String, Object?> toMapDatabase() {
     return {
       "id": id,
@@ -98,6 +80,13 @@ class Quiz {
       "to_language": json.encode(to.toMap()),
       "data": json.encode(translations.toMap()),
       "time": DateTime.now().millisecondsSinceEpoch
+    };
+  }
+
+  Map<String, Object?> toMapSync() {
+    return {
+      "favorite": favorite,
+      "data": translations.toMap(),
     };
   }
 

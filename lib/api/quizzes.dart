@@ -71,6 +71,16 @@ class APIQuizzes {
     return Api.decodeResponse(response);
   }
 
+  static Future<Map> syncScore(String uuid, Map quizData) async {
+    final response = await Api.httpPatch(
+      path: 'quiz/$uuid/score/sync',
+      body:
+        {"quiz": quizData},
+    );
+
+    return Api.decodeResponse(response);
+  }
+
   static Future<Map> resetScore(String uuid, String mode) async {
     final response =
         await Api.httpPatch(path: 'quiz/$uuid/score/reset/$mode', body: "");

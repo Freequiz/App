@@ -6,6 +6,7 @@ class Translation {
   Map<String, dynamic> translationData;
 
   int scoreID;
+  int? updated;
 
   String word;
   String translation;
@@ -21,10 +22,11 @@ class Translation {
     required this.translation,
     required this.favorite,
     required this.score,
+    this.updated
   });
 
   factory Translation.fromJson(Map<String, dynamic> translationData) {
-    return switch (translationData) {
+    Translation translationFromJson = switch (translationData) {
       {
         "score_id": int scoreID,
         "word": String word,
@@ -42,6 +44,12 @@ class Translation {
         ),
       _ => throw const FormatException("Failed to load Translation."),
     };
+    
+    if (translationData.containsKey("updated")) {
+      translationFromJson.updated = translationData["updated"];
+    }
+
+    return translationFromJson;
   }
 
   Map<String, dynamic> toMap() {
@@ -51,16 +59,21 @@ class Translation {
       "translation": translation,
       "favorite": favorite,
       "score": score,
+      "updated": updated
     };
   }
 
   setFavorite(bool state) {
     favorite = state;
+    updated = DateTime.now().millisecondsSinceEpoch;
+    
     APIQuizzes.setFavorite(QuizHelper.quiz!.id, scoreID, state);
   }
 
   toggleFavorite() {
     favorite = !favorite;
+    updated = DateTime.now().millisecondsSinceEpoch;
+
     APIQuizzes.setFavorite(QuizHelper.quiz!.id, scoreID, favorite);
   }
 
@@ -69,5 +82,12 @@ class Translation {
       return word;
     }
     return translation;
+  }
+
+  setScore(String uuid, String mode, int newScore) {
+    score[mode] == newScore;
+    updated = DateTime.now().millisecondsSinceEpoch;
+
+    APIQuizzes.setScore(uuid, scoreID, mode, score[mode]!);
   }
 }

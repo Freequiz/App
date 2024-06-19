@@ -23,7 +23,7 @@ class LoadQuiz extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final futureMap = ManageQuiz.load(uuid, false);
+    final futureMap = ManageQuiz.load(uuid, true);
 
     return FutureBuilder<Map>(
       future: futureMap,

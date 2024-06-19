@@ -5,25 +5,43 @@ import 'package:freequiz/models/quiz.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 
 class ManageQuiz {
-  static Future<Map> load(String uuid, bool preview) async {
-    Map localQuiz = await QuizDatabase.loadQuiz(uuid);
-    final quiz = await APIQuizzes.getQuiz(uuid);
+  static Future<Map> load(String uuid, bool sync) async {
+    Map mapLocalQuiz = await QuizDatabase.loadQuiz(uuid);
 
+    // If the quiz isn't stored locally, load it from the server and store it if request was successful
+    if (mapLocalQuiz.isEmpty) {
+      final quiz = await APIQuizzes.getQuiz(uuid);
+
+      if (quiz['success']) {
+        QuizHelper.quiz = Quiz.fromJson(quiz['quiz_data']);
+        QuizDatabase.insertQuiz(QuizHelper.quiz!);
+      }
+
+      return quiz;
+    }
+
+    final localQuiz = Quiz.fromJson(mapLocalQuiz);
+
+    // sync or get quiz from server
+    Map? quiz;
+    if (sync) {
+      quiz = await APIQuizzes.syncScore(uuid, localQuiz.toMapSync());
+    }
+    else {
+      quiz = await APIQuizzes.getQuiz(uuid);
+    }
+
+    // return quiz if request is successful
     if (quiz['success']) {
       QuizHelper.quiz = Quiz.fromJson(quiz['quiz_data']);
       QuizDatabase.insertQuiz(QuizHelper.quiz!);
       return quiz;
     }
 
-    if (localQuiz.isEmpty) {
-      return quiz;
-    }
-
+    // return localQuiz if request wasn't successful because of the internet connection
     if (quiz.containsKey('message')) {
       if (quiz['message'] == Api.noConnection || quiz['message'] == Api.timeout) {
-        if (!preview) {
-          QuizHelper.quiz = Quiz.fromJson(localQuiz);
-        }
+        QuizHelper.quiz = localQuiz;
 
         quiz['quiz_data'] = localQuiz;
         quiz['offline_data'] = true;
