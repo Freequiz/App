@@ -85,7 +85,7 @@ class Translation {
   }
 
   setScore(String uuid, String mode, int newScore) {
-    score[mode] == newScore;
+    score[mode] = newScore;
     updated = DateTime.now().millisecondsSinceEpoch;
 
     APIQuizzes.setScore(uuid, scoreID, mode, score[mode]!);
