@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:freequiz/local_storage/preferences.dart';
+import 'package:freequiz/models/quiz.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
@@ -17,9 +18,17 @@ class Questionnaire {
     questions.clear();
     mode = quizMode;
 
+    final Quiz quiz = QuizHelper.quiz!;
+
+    //delete the errors, if it is another quiz than previously
+    if (Learning.idQuiz != quiz.id) {
+      Learning.errors.clear();
+      Learning.idQuiz = quiz.id;
+    }
+
     List<Translation> options = [];
 
-    for (Translation translation in QuizHelper.quiz!.translations.translations) {
+    for (Translation translation in quiz.translations.translations) {
       if (onlyFavorite && !translation.favorite) continue;
 
       if (translation.score[mode]! >= Questionnaire.maxScore(mode)) continue;
@@ -28,7 +37,7 @@ class Questionnaire {
     }
 
     if (options.isEmpty) {
-      for (Translation translation in QuizHelper.quiz!.translations.translations) {
+      for (Translation translation in quiz.translations.translations) {
         if (onlyFavorite && !translation.favorite) continue;
 
         options.add(translation);
@@ -38,6 +47,7 @@ class Questionnaire {
     randomise(options);
     
     Learning.errors.clear();
+
     length = questions.length;    
   }
 

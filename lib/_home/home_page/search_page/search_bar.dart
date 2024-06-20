@@ -56,7 +56,7 @@ class _SearchBarState extends State<SearchBar> {
                         : const Color.fromARGB(255, 245, 245, 245),
                     contentPadding: const EdgeInsets.all(10.0),
                     border: const OutlineInputBorder(),
-                    hintText: context.tr('language'),
+                    hintText: context.tr('search'),
                     suffixIcon: IconButton(
                       color: hintColor,
                       onPressed: () {

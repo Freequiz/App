@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/card.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
@@ -29,7 +28,12 @@ class _CardsBodyState extends State<CardsBody> {
   Widget build(BuildContext context) {
     final backgroundColor1 =
         context.darkMode ? const Color.fromARGB(255, 46, 46, 46) : const Color.fromARGB(255, 240, 240, 240);
-    final backgroundColor2 = context.darkMode ? const Color.fromARGB(255, 43, 43, 43) : white235;
+    final backgroundColor2 =
+        context.darkMode ? const Color.fromARGB(255, 43, 43, 43) : const Color.fromARGB(255, 235, 235, 235);
+    final colorCardsFront =
+        context.darkMode ? const Color.fromARGB(255, 50, 50, 50) : const Color.fromARGB(255, 243, 243, 243);
+    final colorCardsBack =
+        context.darkMode ? const Color.fromARGB(255, 54, 54, 54) : const Color.fromARGB(255, 246, 246, 246);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,8 +89,18 @@ class _CardsBodyState extends State<CardsBody> {
                         switchInCurve: Curves.easeInBack,
                         switchOutCurve: Curves.easeInBack.flipped,
                         child: Learning.showAnswer
-                            ? const CardWidget(key: ValueKey(true))
-                            : const CardWidget(key: ValueKey(false)),
+                            ? CardWidget(
+                                key: const ValueKey(true),
+                                right: widget.right,
+                                wrong: widget.wrong,
+                                color: colorCardsBack,
+                              )
+                            : CardWidget(
+                                key: const ValueKey(false),
+                                right: widget.right,
+                                wrong: widget.wrong,
+                                color: colorCardsFront,
+                              ),
                       ),
                     ),
                   ],

@@ -12,6 +12,7 @@ import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/widgets/space.dart';
 
 class SignUp extends StatefulWidget {
   final Function refresh;
@@ -108,13 +109,11 @@ class _SignUpState extends State<SignUp> {
                 SubmitButton(pressed: pressed, onPressed: onPressed)
               ],
             ),
-            SizedBox(
-              height: context.screenHeight/ 60,
-            ),
+            Space.height(100),
             Center(
               child: Text(
                 context.tr('already account'),
-                style: textSize(context.screenHeight/ 65),
+                style: textSize(context.screenHeight/ 55),
               ),
             ),
             Align(

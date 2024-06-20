@@ -27,6 +27,7 @@ class Learning {
   static bool showAnswer = false;
 
   static final List<Translation> errors = [];
+  static String idQuiz = "";
 
   wrongAnswerWriting(TextEditingController textController, BuildContext context, Function rightAnswerW) {
     final givenAnswer = textController.text;

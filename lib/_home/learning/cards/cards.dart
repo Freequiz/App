@@ -17,6 +17,7 @@ class Cards extends StatefulWidget {
 }
 
 class _CardsState extends State<Cards> {
+  Key key = const Key("Card_0");
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class _CardsState extends State<Cards> {
         backgroundColor: blueFreequiz,
       ),
       body: CardsBody(
-        key: const Key('Back'),
+        key: key,
         wrong: wrong,
         right: right,
         color: blueFreequiz,
@@ -46,6 +47,7 @@ class _CardsState extends State<Cards> {
   wrong() {
     Questionnaire.answeredWrong();
     if (Questionnaire.questions.length > 1) {
+      key = Key("Card_${Questionnaire.questions.length}");
       setState(() {
         Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
@@ -60,6 +62,7 @@ class _CardsState extends State<Cards> {
   right() {
     Questionnaire.answeredRight();
     if (Questionnaire.questions.length > 1) {
+      key = Key("Card_${Questionnaire.questions.length}");
       setState(() {
         Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
@@ -73,6 +76,7 @@ class _CardsState extends State<Cards> {
 
   close() {
     QuizDatabase.updateQuiz(QuizHelper.quiz!);
+    Learning.showAnswer = false;
     widget.refresh();
     Navigator.of(context).pop();
   }
