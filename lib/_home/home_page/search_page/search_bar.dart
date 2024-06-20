@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/loading/load_search.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/string_extensions.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+  const SearchBar({super.key, required this.focusNode});
+
+  final FocusNode focusNode;
 
   @override
   State<SearchBar> createState() => _SearchBarState();
@@ -17,14 +17,14 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : textGray;
-    final backgroundColor = DeviceInfo.darkMode
-        ? const Color.fromARGB(255, 55, 55, 55)
-        : const Color.fromARGB(255, 235, 235, 235);
+    final hintColor = context.darkMode ? Colors.white : gray40;
+    final backgroundColor = context.darkMode
+        ? gray55
+        : white235;
     return Container(
-      width: DeviceInfo.mobileLayout
-          ? DeviceInfo().width() - 20
-          : DeviceInfo().width() / 2,
+      width: context.mobileLayout
+          ? context.screenWidth - 20
+          : context.screenWidth / 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: backgroundColor,
@@ -35,20 +35,25 @@ class _SearchBarState extends State<SearchBar> {
           children: [
             Flexible(
               child: SizedBox(
-                height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
+                height:
+                    context.mobileLayout ? context.screenHeight/ 20 : 48,
                 child: TextField(
-                  onSubmitted: (value) => loadSearch(context: context, searchTerm: textController.text),
+                  onTap: () => widget.focusNode.requestFocus(),
+                  onSubmitted: (value) => loadSearch(
+                      context: context, searchTerm: textController.text),
+                  focusNode: widget.focusNode,
                   keyboardAppearance:
-                      DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+                      context.darkMode ? Brightness.dark : Brightness.light,
                   controller: textController,
+                  canRequestFocus: true,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: DeviceInfo.darkMode
+                    fillColor: context.darkMode
                         ? const Color.fromARGB(255, 45, 45, 45)
                         : const Color.fromARGB(255, 245, 245, 245),
                     contentPadding: const EdgeInsets.all(10.0),
                     border: const OutlineInputBorder(),
-                    hintText: "Search".transl(),
+                    hintText: context.tr('search'),
                     suffixIcon: IconButton(
                       color: hintColor,
                       onPressed: () {
@@ -62,14 +67,12 @@ class _SearchBarState extends State<SearchBar> {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 5,
-            ),
+            Space.width(5),
             SizedBox(
-              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 48,
+              height: context.mobileLayout ? context.screenHeight/ 20 : 48,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: color1,
+                  backgroundColor: grayFreequiz,
                   foregroundColor: Colors.white,
                 ),
                 onPressed: () {

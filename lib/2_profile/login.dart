@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/textfield_data.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/buttons/submit.dart';
+import 'package:freequiz/_views/textfields/password.dart';
+import 'package:freequiz/_views/textfields/username.dart';
+import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/initial_loading.dart';
 import 'package:freequiz/2_profile/profile.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class Login extends StatefulWidget {
   final Function refresh;
@@ -15,31 +17,24 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextFieldData username = TextFieldData(hint: "");
-  final password = TextFieldData(hint: "", shown: false);
+  TextFieldData username = TextFieldData(hint: 'username'.tr());
+  final password = TextFieldData(hint: 'password'.tr(), shown: false);
   bool pressed = false;
 
   late Map mapLogin;
-  late FocusNode myFocusNode;
+  late FocusNode focusNode;
 
   @override
   void initState() {
     super.initState();
-    myFocusNode = FocusNode();
-  }
-
-  @override
-  void dispose() {
-    myFocusNode.dispose();
-    super.dispose();
+    focusNode = FocusNode();
   }
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode ? Colors.white : Colors.black;
     return Scaffold(
       appBar: AppBar(
-        title: Text(language["Sign up"]),
+        title: const Text('sign up').tr(),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -47,125 +42,31 @@ class _LoginState extends State<Login> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Padding(
-          padding: DeviceInfo.mobileLayout
+          padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
-              : EdgeInsets.symmetric(horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+              : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: DeviceInfo().height() / 60,
-              ),
+              Space.height(context.screenHeight/ 60),
               Text(
-                language["Login"],
-                style: TextStyle(fontSize: DeviceInfo().height() / 20),
+                context.tr('login'),
+                style: textSize(context.screenHeight/ 20),
               ),
-              SizedBox(
-                height: DeviceInfo().height() / 60,
-              ),
-              SizedBox(
-                height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
-                child: TextField(
-                  onSubmitted: (value) {
-                    setState(() {
-                      myFocusNode.requestFocus();
-                      username.error = false;
-                    });
-                  },
-                  keyboardAppearance:
-                      DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.emailAddress,
-                  controller: username.input,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(10.0),
-                    hintStyle: TextStyle(
-                      color: username.error ? Colors.red : hintColor,
-                    ),
-                    hintText: username.error
-                        ? language["Username not found"]
-                        : language["Username"],
-                    border: const OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: username.error ? Colors.red : color1,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
+              Space.height(context.screenHeight/ 60),
+              UsernameTextfield(username: username, focusNode: focusNode),
+              Space.height(5),
               Row(
                 children: [
                   Flexible(
-                    child: SizedBox(
-                      height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
-                      child: TextField(
-                        onSubmitted: (value) {
-                          onPressed();
-                        },
-                        keyboardAppearance:
-                            DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                        focusNode: myFocusNode,
-                        controller: password.input,
-                        obscureText: !password.shown,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(10.0),
-                          hintStyle: TextStyle(
-                            color: password.error ? Colors.red : hintColor,
-                          ),
-                          hintText: password.error
-                              ? language["Wrong Password"]
-                              : language["Password"],
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              password.shown
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: color1,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                password.shown = !password.shown;
-                              });
-                            },
-                          ),
-                          border: const OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: password.error ? Colors.red : color1,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
+                    child: PasswordTextfield(
+                      password: password,
+                      focusNode: focusNode,
+                      onSubmitted: onPressed,
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  SizedBox(
-                    height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : 40,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: color1,
-                        foregroundColor: Colors.white,
-                      ),
-                      onPressed: () {
-                        pressed ? () {} : onPressed();
-                      },
-                      child: pressed
-                          ? SizedBox(
-                              width: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
-                              height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 30 : 30,
-                              child: const CircularProgressIndicator(
-                                color: Colors.white,
-                              ),
-                            )
-                          : const Icon(Icons.arrow_forward_ios),
-                    ),
-                  ),
+                  Space.width(5),
+                  SubmitButton(pressed: pressed, onPressed: onPressed)
                 ],
               ),
             ],
@@ -179,33 +80,38 @@ class _LoginState extends State<Login> {
     if (password.input.text.isEmpty) {
       setState(() {
         password.error = true;
+        password.color = Colors.red;
+        password.hint = context.tr('wrong password');
       });
     } else if (username.input.text.isEmpty) {
       setState(() {
         username.error = true;
+        username.color = Colors.red;
+        username.hint = context.tr('username error');
       });
     } else {
       setState(() {
         pressed = true;
       });
-      mapLogin = await APIUsers().httpPostSession(
-          username.input.text.trim(), password.input.text.trim());
+      mapLogin = await APIUsers.login(username.input.text.trim(), password.input.text.trim());
       if (mapLogin.isNotEmpty) {
         if (mapLogin["message"] == "User doesn't exist") {
           setState(() {
             username.error = true;
+            username.color = Colors.red;
             pressed = false;
             username.input.clear();
           });
         } else if (mapLogin["message"] == "Wrong password") {
           setState(() {
             password.error = true;
+            password.color = Colors.red;
             pressed = false;
             password.input.clear();
           });
         } else {
           Profile.accessToken = mapLogin["access_token"];
-          Profile().saveData();
+          Profile.saveAccessToken();
           // ignore: use_build_context_synchronously
           Navigator.of(context).pop();
           widget.refresh();

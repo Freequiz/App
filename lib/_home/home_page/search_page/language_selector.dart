@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
+import 'package:freequiz/_views/edit/dropdown.dart';
 import 'package:freequiz/others/languages.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
+
 
 class LanguageSelector extends StatefulWidget {
   final Function refresh;
@@ -26,7 +26,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
     languages.add(
       DropdownMenuItem(
         value: 0,
-        child: Text(language["Any"]),
+        child: const Text('any').tr(),
       ),
     );
     super.initState();
@@ -34,66 +34,45 @@ class _LanguageSelectorState extends State<LanguageSelector> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final hintColor = context.darkMode ? Colors.white : gray40;
+
     return AlertDialog(
       title: Text(
-        language["Language"],
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
+        context.tr('language'),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
       content: Text(
-        language["Choose the desired languages"],
+        context.tr('choose language'),
       ),
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            DropdownButton(
-              value: from,
-              icon: const Icon(
-                Icons.arrow_drop_down_rounded,
-                color: color1,
-              ),
-              underline: Container(
-                height: 2,
-                color: color1,
-              ),
-              dropdownColor: DeviceInfo.darkMode
-                  ? const Color.fromARGB(255, 40, 40, 40)
-                  : const Color.fromARGB(255, 229, 242, 250),
+            Dropdown(
+              initialValue: from,
               items: languages,
               onChanged: (value) {
                 setState(() {
                   from = value!;
                 });
               },
-              style: TextStyle(color: hintColor),
+              hintColor: hintColor,
             ),
             const Icon(
               Icons.arrow_forward_rounded,
-              color: color1,
+              color: grayFreequiz,
             ),
-            DropdownButton(
-              value: to,
-              icon: const Icon(
-                Icons.arrow_drop_down_rounded,
-                color: color1,
-              ),
-              underline: Container(
-                height: 2,
-                color: color1,
-              ),
-              dropdownColor: DeviceInfo.darkMode
-                  ? const Color.fromARGB(255, 40, 40, 40)
-                  : const Color.fromARGB(255, 229, 242, 250),
+            Dropdown(
+              initialValue: to,
               items: languages,
               onChanged: (value) {
                 setState(() {
                   to = value!;
                 });
               },
-              style: TextStyle(color: hintColor),
+              hintColor: hintColor,
             ),
           ],
         ),
@@ -105,7 +84,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
             widget.refresh();
           },
           child: Text(
-            language["Done"],
+            context.tr('done'),
           ),
         ),
       ],

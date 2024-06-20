@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/textfield_data.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/textfields/username.dart';
+import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/user/helper.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class Username extends StatefulWidget {
-  final Map data;
   final Function refresh;
-  const Username({super.key, required this.data, required this.refresh});
+  const Username({super.key, required this.refresh});
 
   @override
   State<Username> createState() => _UsernameState();
@@ -16,26 +15,25 @@ class Username extends StatefulWidget {
 
 class _UsernameState extends State<Username> {
   bool edit = false;
-  TextFieldData newUsername = TextFieldData(hint: language["Username"]);
+  TextFieldData newUsername = TextFieldData(hint: 'username'.tr());
 
   @override
   Widget build(BuildContext context) {
-    final textColor =
-        DeviceInfo.darkMode ? Colors.white : const Color.fromARGB(255, 40, 40, 40);
+    final textColor = context.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(DeviceInfo().height() / 100),
-        color: DeviceInfo.darkMode ? backgroundGray : backgroundWhite,
+        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
+        color: context.darkMode ? gray55 : white235,
       ),
       child: Padding(
-        padding: EdgeInsets.all(DeviceInfo().height() / 100),
+        padding: EdgeInsets.all(context.screenHeight/ 100),
         child: Column(
           children: [
             Row(
               children: [
-                Text(language["Username"]),
+                const Text('username').tr(),
                 const Spacer(),
-                Text(widget.data["data"]["username"]),
+                Text(UserHelper.user!.username),
                 const SizedBox(
                   width: 10,
                 ),
@@ -52,72 +50,41 @@ class _UsernameState extends State<Username> {
                 ),
               ],
             ),
-            edit
-                ? SizedBox(height: DeviceInfo().height() / 60)
-                : const SizedBox(
-                    height: 0,
+            Conditional(
+              condition: edit,
+              widget: SizedBox(height: context.screenHeight/ 60),
+            ),
+            Conditional(
+              condition: edit,
+              widget: Row(
+                children: [
+                  Flexible(
+                    child: UsernameTextfield(
+                      username: newUsername,
+                      focusNode: FocusNode(),
+                      onSubmitted: changeUsername,
+                    ),
                   ),
-            edit
-                ? Row(
-                    children: [
-                      Flexible(
-                        child: SizedBox(
-                          height: DeviceInfo().height() / 20,
-                          child: TextField(
-                            onSubmitted: (value) {
-                              changeUsername();
-                            },
-                            keyboardAppearance:
-                                DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
-                            keyboardType: TextInputType.emailAddress,
-                            autocorrect: false,
-                            controller: newUsername.input,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: DeviceInfo.darkMode
-                                  ? const Color.fromARGB(255, 45, 45, 45)
-                                  : const Color.fromARGB(255, 255, 231, 218),
-                              contentPadding: const EdgeInsets.all(10.0),
-                              hintText: newUsername.hint,
-                              hintStyle: TextStyle(
-                                color: newUsername.error
-                                    ? Colors.red
-                                    : (newUsername.changed
-                                        ? Colors.green
-                                        : textColor),
-                              ),
-                              border: const OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: newUsername.color,
-                                  width: 2.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      SizedBox(
-                        height: DeviceInfo().height() / 20,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: color1,
-                            foregroundColor: Colors.white,
-                          ),
-                          onPressed: () {
-                            changeUsername();
-                          },
-                          child: const Icon(Icons.arrow_forward_ios),
-                        ),
-                      ),
-                    ],
-                  )
-                : const SizedBox(
-                    height: 0,
+                  const SizedBox(
+                    width: 5,
                   ),
+                  SizedBox(
+                    height: context.screenHeight/ 20,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: grayFreequiz,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        changeUsername();
+                      },
+                      child: const Icon(Icons.arrow_forward_ios),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -125,11 +92,12 @@ class _UsernameState extends State<Username> {
   }
 
   changeUsername() async {
-    final Map map = await APIUsers().httpPatchAccount(username: newUsername.input.text);
+    final Map map = await APIUsers.updateAccount(username: newUsername.input.text);
     if (map["success"] == true) {
       setState(() {
+        UserHelper.user!.username = newUsername.input.text;
         newUsername.input.clear();
-        newUsername.hint = language["Username changed successfully"];
+        newUsername.hint = 'username change'.tr();
         newUsername.color = Colors.green;
         newUsername.error = false;
         newUsername.changed = true;
@@ -138,7 +106,7 @@ class _UsernameState extends State<Username> {
     } else if (map["message"] == "Invalid Username") {
       setState(() {
         newUsername.input.clear();
-        newUsername.hint = language["Username is not valid"];
+        newUsername.hint = 'username invalid'.tr();
         newUsername.color = Colors.red;
         newUsername.error = true;
         newUsername.changed = false;
@@ -146,7 +114,7 @@ class _UsernameState extends State<Username> {
     } else if (map["message"] == "Username is taken") {
       setState(() {
         newUsername.input.clear();
-        newUsername.hint = language["Username is taken"];
+        newUsername.hint = 'username taken'.tr();
         newUsername.color = Colors.red;
         newUsername.error = true;
         newUsername.changed = false;

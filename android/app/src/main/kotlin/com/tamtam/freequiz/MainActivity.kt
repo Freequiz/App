@@ -1,4 +1,4 @@
-package com.tamtam.freequiz
+package com.freequiz.freequiz
 
 import io.flutter.embedding.android.FlutterActivity
 

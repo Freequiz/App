@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ErrorPopUp extends StatelessWidget {
   const ErrorPopUp({super.key});
@@ -9,16 +8,16 @@ class ErrorPopUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        language["Not enough words"],
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : Colors.black),
+        context.tr('not enough words'),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
-      content: Text(language["Not enough words description"]),
+      content: const Text('not enough words description').tr(),
       actions: [
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text(language["Close"]),
+          child: const Text('close').tr(),
         )
       ],
     );

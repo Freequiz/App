@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
-import 'package:freequiz/_home/learning/learning.dart';
-import 'package:freequiz/quiz.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/local_storage/database.dart';
+import 'package:freequiz/quiz/learning.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class Cards extends StatefulWidget {
   final Function refresh;
@@ -15,13 +16,13 @@ class Cards extends StatefulWidget {
 }
 
 class _CardsState extends State<Cards> {
-  bool answeredWrong = false;
+  Key key = const Key("Card_0");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(language["Cards"]),
+        title: const Text('cards').tr(),
         leading: TextButton(
           onPressed: () {
             close();
@@ -31,51 +32,50 @@ class _CardsState extends State<Cards> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: color4,
+        backgroundColor: blueFreequiz,
       ),
       body: CardsBody(
-        key: const Key('Back'),
+        key: key,
         wrong: wrong,
         right: right,
-        color: color4,
+        color: blueFreequiz,
       ),
     );
   }
 
   wrong() {
-    answeredWrong = true;
-    Quiz().answeredWrong();
-    if (Quiz.indexArray.length > 1) {
+    Questionnaire.answeredWrong();
+    if (Questionnaire.questions.length > 1) {
+      key = Key("Card_${Questionnaire.questions.length}");
       setState(() {
-        Quiz.indexArray.removeAt(0);
+        Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
       });
     } else {
       widget.refresh();
-      Quiz().saveData("Cards", widget.uuid);
+      QuizDatabase.updateQuiz(QuizHelper.quiz!);
       Navigator.of(context).pop();
     }
   }
 
   right() {
-    if (!answeredWrong) {
-      Quiz().answeredRight("Cards");
-    }
-    if (Quiz.indexArray.length > 1) {
+    Questionnaire.answeredRight();
+    if (Questionnaire.questions.length > 1) {
+      key = Key("Card_${Questionnaire.questions.length}");
       setState(() {
-        answeredWrong = false;
-        Quiz.indexArray.removeAt(0);
+        Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
       });
     } else {
       widget.refresh();
-      Quiz().saveData("Cards", widget.uuid);
+      QuizDatabase.updateQuiz(QuizHelper.quiz!);
       Navigator.of(context).pop();
     }
   }
 
   close() {
-    Quiz().saveData("Writing", widget.uuid);
+    QuizDatabase.updateQuiz(QuizHelper.quiz!);
+    Learning.showAnswer = false;
     widget.refresh();
     Navigator.of(context).pop();
   }

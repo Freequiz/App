@@ -1,11 +1,10 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/card.dart';
-import 'package:freequiz/_home/learning/learning.dart';
-import 'package:freequiz/_home/subviews/progress_bar.dart';
-import 'package:freequiz/quiz.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/quiz/learning.dart';
+import 'package:freequiz/_views/progress_bar.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class CardsBody extends StatefulWidget {
   final Function wrong;
@@ -23,22 +22,25 @@ class CardsBody extends StatefulWidget {
 }
 
 class _CardsBodyState extends State<CardsBody> {
-  final backgroundColor1 = DeviceInfo.darkMode
-      ? const Color.fromARGB(255, 46, 46, 46)
-      : const Color.fromARGB(255, 240, 240, 240);
-  final backgroundColor2 = DeviceInfo.darkMode
-      ? const Color.fromARGB(255, 43, 43, 43)
-      : const Color.fromARGB(255, 235, 235, 235);
   @override
   Widget build(BuildContext context) {
+    final backgroundColor1 =
+        context.darkMode ? const Color.fromARGB(255, 46, 46, 46) : const Color.fromARGB(255, 240, 240, 240);
+    final backgroundColor2 =
+        context.darkMode ? const Color.fromARGB(255, 43, 43, 43) : const Color.fromARGB(255, 235, 235, 235);
+    final colorCardsFront =
+        context.darkMode ? const Color.fromARGB(255, 50, 50, 50) : const Color.fromARGB(255, 243, 243, 243);
+    final colorCardsBack =
+        context.darkMode ? const Color.fromARGB(255, 54, 54, 54) : const Color.fromARGB(255, 246, 246, 246);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 1.0),
           child: ProgressBar(
-            amount: Quiz.amountDefinitions,
-            amountLeft: Quiz.indexArray.length,
+            amount: Questionnaire.length,
+            amountLeft: Questionnaire.questions.length.toDouble(),
           ),
         ),
         Padding(
@@ -53,13 +55,10 @@ class _CardsBodyState extends State<CardsBody> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 20.0),
                       child: Container(
-                        width: DeviceInfo().width() / 1.25 - 40,
-                        height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().height() / 4
-                            : DeviceInfo().width() / 2.5,
+                        width: context.screenWidth / 1.25 - 40,
+                        height: context.mobileLayout ? context.screenHeight / 4 : context.screenWidth / 2.5,
                         decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(DeviceInfo().height() / 20),
+                          borderRadius: BorderRadius.circular(context.screenHeight / 20),
                           color: backgroundColor2,
                         ),
                         alignment: Alignment.center,
@@ -68,13 +67,10 @@ class _CardsBodyState extends State<CardsBody> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: Container(
-                        width: DeviceInfo().width() / 1.25 - 20,
-                        height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().height() / 4
-                            : DeviceInfo().width() / 2.5,
+                        width: context.screenWidth / 1.25 - 20,
+                        height: context.mobileLayout ? context.screenHeight / 4 : context.screenWidth / 2.5,
                         decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(DeviceInfo().height() / 20),
+                          borderRadius: BorderRadius.circular(context.screenHeight / 20),
                           color: backgroundColor1,
                         ),
                         alignment: Alignment.center,
@@ -87,32 +83,35 @@ class _CardsBodyState extends State<CardsBody> {
                       child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 350),
                         transitionBuilder: transitionBuilder,
-                        layoutBuilder: (widget, list) =>
-                            Stack(children: [widget!, ...list]),
+                        layoutBuilder: (widget, list) => Stack(children: [widget!, ...list]),
                         switchInCurve: Curves.easeInBack,
                         switchOutCurve: Curves.easeInBack.flipped,
                         child: Learning.showAnswer
-                            ? CardWidget(key: const ValueKey(true))
-                            : CardWidget(key: const ValueKey(false)),
+                            ? CardWidget(
+                                key: const ValueKey(true),
+                                right: widget.right,
+                                wrong: widget.wrong,
+                                color: colorCardsBack,
+                              )
+                            : CardWidget(
+                                key: const ValueKey(false),
+                                right: widget.right,
+                                wrong: widget.wrong,
+                                color: colorCardsFront,
+                              ),
                       ),
                     ),
                   ],
                 ),
+                Space.height(context.screenHeight / 16),
                 SizedBox(
-                  height: DeviceInfo().height() / 16,
-                ),
-                SizedBox(
-                  width: DeviceInfo().width() / 1.25,
+                  width: context.screenWidth / 1.25,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: DeviceInfo.mobileLayout
-                            ? DeviceInfo().width() / 5
-                            : DeviceInfo().width() / 10,
-                        height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().width() / 5
-                            : DeviceInfo().width() / 10,
+                        width: context.mobileLayout ? context.screenWidth / 5 : context.screenWidth / 10,
+                        height: context.mobileLayout ? context.screenWidth / 5 : context.screenWidth / 10,
                         child: FloatingActionButton(
                           heroTag: "wrong",
                           onPressed: () {
@@ -123,12 +122,8 @@ class _CardsBodyState extends State<CardsBody> {
                         ),
                       ),
                       SizedBox(
-                        width: DeviceInfo.mobileLayout
-                            ? DeviceInfo().width() / 5
-                            : DeviceInfo().width() / 10,
-                        height: DeviceInfo.mobileLayout
-                            ? DeviceInfo().width() / 5
-                            : DeviceInfo().width() / 10,
+                        width: context.mobileLayout ? context.screenWidth / 5 : context.screenWidth / 10,
+                        height: context.mobileLayout ? context.screenWidth / 5 : context.screenWidth / 10,
                         child: FloatingActionButton(
                           heroTag: "right",
                           onPressed: () {
@@ -141,7 +136,7 @@ class _CardsBodyState extends State<CardsBody> {
                     ],
                   ),
                 ),
-                SizedBox(height: DeviceInfo().height() / 32),
+                Space.height(context.screenHeight / 32),
               ],
             ),
           ),
@@ -157,8 +152,7 @@ class _CardsBodyState extends State<CardsBody> {
       child: widget,
       builder: (context, widget) {
         final isUnder = (ValueKey(Learning.showAnswer) != widget!.key);
-        final value =
-            isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
+        final value = isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
         var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
         tilt *= isUnder ? -1.0 : 1.0;
         return Transform(

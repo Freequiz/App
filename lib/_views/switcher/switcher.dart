@@ -1,0 +1,89 @@
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:freequiz/_views/switcher/button.dart';
+import 'package:freequiz/utilities/imports/base.dart';
+
+class Switcher extends StatefulWidget {
+  const Switcher(
+      {super.key, required this.onTap, required this.texts, required this.value, required this.width, this.icons});
+
+  final Function onTap;
+  final List<String> texts;
+  final String value;
+  final List<Icon>? icons;
+  final double width;
+
+  @override
+  State<Switcher> createState() => _SwitcherState();
+}
+
+class _SwitcherState extends State<Switcher> {
+  String previousValue = "";
+  bool onChange = false;
+
+  @override
+  void initState() {
+    previousValue = widget.value;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: widget.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
+        color: context.darkMode ? gray55 : white235,
+      ),
+      child: Stack(
+        children: [
+          Container(
+            width: widget.width / widget.texts.length,
+            height: 50,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(context.screenHeight/ 100),
+                color: context.darkMode ? gray70 : white205),
+          )
+              .animate(target: onChange ? 1 : 0)
+              .moveX(
+                begin: widget.texts.indexOf(previousValue) * widget.width / widget.texts.length,
+                end: widget.texts.indexOf(widget.value) * widget.width / widget.texts.length,
+                duration: const Duration(milliseconds: 200),
+              )
+              .callback(
+                callback: (_) => setState(() {
+                  previousValue = widget.value;
+                  onChange = false;
+                }),
+              ),
+          Row(
+            children: children(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> children() {
+    final List<Widget> children = [];
+    for (int i = 0; i < widget.texts.length; i++) {
+      children.add(
+        SwitcherButton(
+            onTap: onTap,
+            selected: widget.texts[i] == widget.value,
+            text: widget.texts[i],
+            icon: widget.icons?[i],
+            width: widget.width / widget.texts.length),
+      );
+    }
+    return children;
+  }
+
+  onTap(String text) {
+    if (onChange) return; //prevent breaking animation by clicking the buttons too fast
+    setState(() {
+      onChange = true;
+    });
+    widget.onTap(text);
+  }
+}

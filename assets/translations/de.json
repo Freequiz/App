@@ -1,0 +1,185 @@
+{
+    "search": "Suche",
+    "any": "Alle",
+    "language": "Sprache",
+    "choose language": "Wähle die gewünschte Sprache",
+    "done": "Fertig",
+    "results for": "Resultate für \"{}\"",
+    "fromto": "{} \u279C {}",
+    "load more": "Mehr laden",
+    "amount quizzes": {
+        "one": "{} Quiz",
+        "other": "{} Quizze"
+    },
+    "Quiz": "Quiz",
+
+    "settings": "Einstellungen",
+    "both": "Beide",
+    "answer with": "Antworten mit:",
+    "amount repetition": "Anzahl Wiederholungen:",
+
+    "quizzes": "Quizze",
+    "title": "Titel",
+    "description": "Beschreibung",
+
+    "definition": "Definition",
+    "answer": "Antwort",
+    "translation": "Übersetzung",
+
+    "close": "Schliessen",
+    "more": "Mehr",
+
+    "learn": "Lernen",
+    "learn only": "Lerne nur",
+
+    "smart": "Smart",
+    "cards": "Karteikärtchen",
+    "multiple choice": "Multiple Choice",
+    "multi": "Multiple Choice",
+    "write": "Schreiben",
+    "writing": "Schreiben",
+
+    "no description": "Keine Beschreibung",
+    "nothing found": "Nichts gefunden",
+
+    "delete": "Löschen",
+    "delete quiz": "Quiz löschen",
+    "confirmation delete quiz": "Sind Sie sicher, dass Sie Ihr Quiz löschen möchten. Dies kann nicht rückgängig gemacht werden",
+    "delete account": "Konto löschen",
+    "delete account confirmation": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten. Dies kann nicht rückgängig gemacht werden",
+    "delete progress": "Fortschritt löschen",
+    "confirmation delete progress": "Sind Sie sicher, dass Sie Ihren Fortschritt löschen und neu beginnen möchten?",
+
+    "answer wrong": "Ihre Antwort war falsch",
+    "right answer": "Die richtige Antwort war:",
+    "your answer": "Ihre Antwort war aber:",
+    "answer right": "Meine Antwort\nwar richtig",
+
+    "amount questions": {
+        "zero": "Keine Fragen",
+        "one": "1 Frage",
+        "other": "{} Fragen"
+    },
+
+    "empty title": "Leerer Titel",
+
+    "create new quiz": "Neues Quiz kreieren",
+    "created quizzes": "Kreierte Quizze",
+    "create quiz": "Quiz kreieren",
+    "edit quiz": "Quiz bearbeiten",
+
+    "error": "Fehler",
+
+    "answer blank": "Antwort kann nicht leer sein",
+    "title error": "Titel mindestens 3 Zeichen",
+    "description error": "Beschreibung kann nicht leer sein. \n Beschreibung mindestens 5 Zeichen lang",
+    "definition error": "Definition kann nicht leer sein",
+
+    "not enough words": "Nicht genug Wörter",
+    "not enough words description": "Mindestens 3 Wortpaare benötigt",
+
+    "quiz saved": "Quiz gespeichert",
+
+    "Access token is invalid title": "Authentifizierungsfehler",
+    "Access token is invalid description": "Es ist ein Fehler aufgetreten und Sie wurden abgemeldet. Wenn dieser Fehler weiterhin auftritt, verwenden Sie bitte den Bug-Reporter",
+    "Quiz doesn't exist title": "Das Quiz existiert nicht",
+    "Quiz doesn't exist description": "Das Quiz wurde wahrscheinlich gelöscht. Wenn Sie sicher sind, dass dies nicht der Fall ist, melden Sie es bitte mit dem Bug-Reporter.",
+    "other error title": "Es ist ein unbekannter Fehler aufgetreten",
+    "other error description": "Versuchen Sie es später noch einmal. Wenn dieser Fehler weiterhin besteht, melden Sie ihn bitte über den Bugreporter",
+
+    "no connection title": "Keine Internetverbindung",
+    "no connection description": "Sie scheinen keine Internetverbindung zu haben. Sie können aber weiterhin mit Quizzen aus ihrem Verlauf lernen.",
+    "continue": "Fortfahren",
+
+    "draft": "Entwurf",
+
+    "sign up": "Registrierung",
+    "login": "Anmeldung",
+    "log in": "Anmeldung",
+    "logout": "Ausloggen",
+
+    "username": "Benutzername",
+    "username error": "Benutzername nicht gefunden",
+    "password": "Passwort",
+    "confirm password": "Passwort bestätigen",
+    "wrong password": "Falsches Passwort",
+    "old password": "Altes Passwort",
+    "password change": "Passwort erfolgreich",
+    "successfully": "geändert",
+
+    "terms 1": "Mit der Registrierung akzeptieren Sie die ",
+    "terms 2": "AGBs",
+
+    "already account": "Schon ein Konto?",
+
+    "blank": "Kann nicht leer sein",
+    "password dont match": "Passwörter stimmen nicht überein",
+    "password length 1": "Mindestens 8 Charaktere lang, Grossbuchstabe,",
+    "password length 2": "Kleinbuchstabe und Ziffer",
+
+    "email": "E-Mail",
+    "email success": "E-Mail erfolgreich geändert",
+    "email.invalid": "Invalide E-Mail",
+    "email.taken": "E-Mail ist vergeben",
+
+    "username change": "Benutzername erfolgreich geändert",
+    "username.invalid": "Invalides Benutzername",
+    "username.taken": "Benutzername ist vergeben",
+
+    "report bug": "Bug melden",
+    "platform": "Plattform",
+    "bug reporter": "Bugreporter",
+    "submit": "Senden",
+    
+    "new": "Neu",
+    "seen": "Gesehen",
+    "memorized": "Eingeprägt",
+    "learned": "Gelernt",
+    "mastered": "Gemeistert",
+
+    "loading": "Laden",
+
+    "try again": "Nochmals Versuchen",
+
+    "German": "Deutsch",
+    "English": "Englisch",
+    "French": "Französisch",
+    "Italian": "Italienisch",
+    "german": "Deutsch",
+    "english": "Englisch",
+    "french": "Französisch",
+    "italian": "Italienisch",
+    "spanish": "Spanisch",
+    "latin": "Latein",
+    "greek": "Griechisch",
+    "romansh": "Rätoromanisch",
+    "japanese": "Japanisch",
+    "korean": "Koreanisch",
+    "chinese": "Chinesisch",
+    "Any": "Alle",
+
+    "Loading Quizzes": "Quizze laden",
+    "Loading Profile": "Profil laden",
+    "Loading Quiz": "Quiz laden",
+    "Loading Progress": "Fortschritt laden",
+    "Loading Search Results": "Suchresultate laden",
+
+    "Edit Quiz": "Quiz bearbeiten",
+
+    "Dark Mode": "Dunkler Modus",
+    "Automatic": "Automatisch",
+    "Light Mode": "Lichtmodus",
+
+    "Share": "Teilen",
+    "Edit": "Bearbeiten",
+    "Close": "Schliessen",
+
+    "private": "Privat",
+    "hidden": "Versteckt",
+    "public": "Öffentlich",
+
+    "favorite": "Favoriten",
+    "history": "Verlauf",
+    
+    "length round": "Länge Runde"
+}

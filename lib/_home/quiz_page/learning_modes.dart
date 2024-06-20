@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/loading/load_progress.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/loading/load_learning.dart';
+import 'package:freequiz/quiz/learning.dart';
+import 'package:freequiz/quiz/progress.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class LearningModes extends StatefulWidget {
   final Axis scrollDirection;
@@ -19,6 +20,13 @@ class _LearningModesState extends State<LearningModes> {
     Icons.keyboard_alt_outlined,
     Icons.format_list_bulleted_rounded, 
     Icons.quiz_outlined
+  ];
+
+  final List<Color> color = [
+    purpleFreequiz,
+    roseFreequiz,
+    yellowFreequiz,
+    blueFreequiz,
   ];
 
   refresh() {
@@ -43,7 +51,7 @@ class _LearningModesState extends State<LearningModes> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(widget.width / 7)),
             ),
-            onPressed: () => loadProgress(context, widget.uuid, i, reset, refresh),
+            onPressed: () => loadLearning(context, widget.uuid, i, reset, refresh),
             child: Icon(
               icon[i],
               size: widget.width / 2,
@@ -60,11 +68,7 @@ class _LearningModesState extends State<LearningModes> {
 
   reset(i) {
     setState(() {
-      Quiz().deleteData(modes[i], widget.uuid);
-      Quiz.progressArray = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
-      for (var i = 0; i < Quiz.definition.length; i++) {
-        Quiz.progressArray[0].add(i);
-      }
+      Progress.reset(Learning.modes[i], widget.uuid);
     });
   }
 }

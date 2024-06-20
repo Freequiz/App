@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/1_edit/created_quizzes/edit_quiz_tile.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/quiz_tile/edit_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
+
 
 class CreatedQuizzes extends StatefulWidget {
   final Function refresh;
@@ -25,12 +25,12 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            language["Created Quizzes"],
-            style: TextStyle(fontSize: DeviceInfo().height() / 30),
+            context.tr('created quizzes'),
+            style: textSize(context.screenHeight/ 30),
           ),
         ),
         SizedBox(
-          height: DeviceInfo.mobileLayout ? 5 : 15,
+          height: context.mobileLayout ? 5 : 15,
         ),
         ListView.separated(
           shrinkWrap: true,
@@ -46,33 +46,35 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
           },
           separatorBuilder: (BuildContext context, int i) {
             return SizedBox(
-              height: DeviceInfo.mobileLayout ? 10 : 20,
+              height: context.mobileLayout ? 10 : 20,
             );
           },
         ),
         SizedBox(
-          height: DeviceInfo.mobileLayout ? 5 : 15,
+          height: context.mobileLayout ? 5 : 15,
         ),
-        pressed
-            ? Align(
-                child: CircularProgressIndicator(
-                  color: DeviceInfo.darkMode ? Colors.white : color1,
-                ),
-              )
-            : Align(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: color1,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () => onPressed(),
-                  child: Text(
-                    language["Load more"],
-                    style: TextStyle(
-                        color: Colors.white, fontSize: DeviceInfo().height() / 55),
-                  ),
-                ),
+        Conditional(
+          condition: pressed,
+          widget: Align(
+            child: CircularProgressIndicator(
+              color: context.darkMode ? Colors.white : grayFreequiz,
+            ),
+          ),
+          defaultWidget: Align(
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: grayFreequiz,
+                foregroundColor: Colors.white,
               ),
+              onPressed: () => onPressed(),
+              child: Text(
+                context.tr('load more'),
+                style: TextStyle(
+                    color: Colors.white, fontSize: context.screenHeight/ 55),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -81,10 +83,12 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
     setState(() {
       pressed = true;
     });
+
     page++;
     ListQuizzes.data.addAll(
-      (await APIUsers().httpGetCreatedQuizzes(page))['data'],
+      (await APIUsers.getQuizzes(page))['data'],
     );
+
     setState(() {
       pressed = false;
     });

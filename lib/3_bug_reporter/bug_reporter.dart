@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/api/bug_reports.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/others/textfield_data.dart';
+import 'package:freequiz/models/textfield_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class BugReporter extends StatefulWidget {
   const BugReporter({super.key});
@@ -14,36 +12,36 @@ class BugReporter extends StatefulWidget {
 }
 
 class _BugReporterState extends State<BugReporter> {
-  TextFieldData title = TextFieldData(hint: language["Title"]);
-  TextFieldData description = TextFieldData(hint: language["Description"]);
-  TextFieldData platform = TextFieldData(hint: language["Platform"]);
+  TextFieldData title = TextFieldData(hint: 'title'.tr());
+  TextFieldData description = TextFieldData(hint: 'description'.tr());
+  TextFieldData platform = TextFieldData(hint: 'platform'.tr());
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = DeviceInfo.darkMode
+    final hintColor = context.darkMode
         ? Colors.white
-        : const Color.fromARGB(255, 40, 40, 40);
+        : gray40;
     return Scaffold(
       appBar: AppBar(
-        title: Text(language["Bug Reporter"]),
+        title: const Text('bug reporter').tr(),
       ),
       body: Padding(
-        padding: DeviceInfo.mobileLayout
+        padding: context.mobileLayout
             ? const EdgeInsets.all(10.0)
             : EdgeInsets.symmetric(
-                horizontal: DeviceInfo().width() / 5.5, vertical: 10.0),
+                horizontal: context.screenWidth / 5.5, vertical: 10.0),
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(DeviceInfo().height() / 100),
-                color: DeviceInfo.darkMode
-                    ? const Color.fromARGB(255, 55, 55, 55)
-                    : color4,
+                    BorderRadius.circular(context.screenHeight/ 100),
+                color: context.darkMode
+                    ? gray55
+                    : blueFreequiz,
               ),
               child: Padding(
-                padding: EdgeInsets.all(DeviceInfo().height() / 100),
+                padding: EdgeInsets.all(context.screenHeight/ 100),
                 child: Column(
                   children: [
                     TextField(
@@ -60,7 +58,7 @@ class _BugReporterState extends State<BugReporter> {
                       controller: title.input,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: DeviceInfo.darkMode
+                        fillColor: context.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -69,22 +67,20 @@ class _BugReporterState extends State<BugReporter> {
                           fontWeight: FontWeight.w500,
                         ),
                         hintText: title.error
-                            ? language["Title at least 3 characters"]
+                            ? context.tr('title error')
                             : title.hint,
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: title.error
                                 ? Colors.red
-                                : (DeviceInfo.darkMode ? color3 : color1),
+                                : (context.darkMode ? yellowFreequiz : grayFreequiz),
                             width: 3.0,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    Space.height(5),
                     TextField(
                       onSubmitted: (value) {
                         FocusScope.of(context).nextFocus();
@@ -102,12 +98,12 @@ class _BugReporterState extends State<BugReporter> {
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: DeviceInfo.darkMode
+                        fillColor: context.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
                         hintText: description.error
-                            ? language["Description at least 10 characters"]
+                            ? context.tr('description error')
                             : description.hint,
                         hintStyle: TextStyle(
                           color: description.error ? Colors.red : hintColor,
@@ -115,15 +111,13 @@ class _BugReporterState extends State<BugReporter> {
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: description.error ? Colors.red : color1,
+                            color: description.error ? Colors.red : grayFreequiz,
                             width: 2.0,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    Space.height(5),
                     TextField(
                       onSubmitted: (value) {
                         FocusScope.of(context).nextFocus();
@@ -132,7 +126,7 @@ class _BugReporterState extends State<BugReporter> {
                       controller: platform.input,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: DeviceInfo.darkMode
+                        fillColor: context.darkMode
                             ? const Color.fromARGB(255, 45, 45, 45)
                             : const Color.fromARGB(255, 234, 247, 255),
                         contentPadding: const EdgeInsets.all(10.0),
@@ -143,7 +137,7 @@ class _BugReporterState extends State<BugReporter> {
                         border: const OutlineInputBorder(),
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: color1,
+                            color: grayFreequiz,
                             width: 2.0,
                           ),
                         ),
@@ -153,18 +147,16 @@ class _BugReporterState extends State<BugReporter> {
                 ),
               ),
             ),
-            SizedBox(
-              height: DeviceInfo().height() / 40,
-            ),
+            Space.height(context.screenHeight/ 40),
             Align(
               child: TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: color1, foregroundColor: Colors.white),
+                    backgroundColor: grayFreequiz, foregroundColor: Colors.white),
                 onPressed: () {
                   submit();
                 },
                 child: Text(
-                  language["Submit"],
+                  context.tr('submit'),
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/user_page/public_quizzes.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class UserPage extends StatefulWidget {
   final String user;
@@ -14,7 +13,7 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: DeviceInfo.mobileLayout
+      padding: context.mobileLayout
           ? const EdgeInsets.all(10.0)
           : const EdgeInsets.all(20.0),
       child: PublicQuizzes(

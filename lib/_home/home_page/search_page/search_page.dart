@@ -1,16 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/_home/home_page/quiz_tile.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/badge.dart';
+import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/_home/home_page/search_page/language_selector.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
-import 'package:freequiz/_home/home_page/search_page/search_filter.dart';
 import 'package:freequiz/_home/home_page/search_page/user_tile.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/load_search.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/string_extensions.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class SearchPage extends StatefulWidget {
   final int n;
@@ -35,91 +32,71 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(DeviceInfo.mobileLayout ? 10 : 30),
+      padding: EdgeInsets.all(context.mobileLayout ? 10 : 30),
       child: Column(
         children: [
           SizedBox(
-            height: DeviceInfo().height() / 20,
+            height: context.screenHeight/ 20,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                SearchFilter(
-                  color: color2,
-                  child: Text(
-                    "${language["Results for"]} \"${widget.searchTerm.triming(32)}\"",
-                    style: TextStyle(
-                        fontSize: DeviceInfo().height() / 50,
-                        color: Colors.white),
-                  ),
+                InfoBadge(
+                  color: roseFreequiz,
+                  text: 
+                    context.tr('results for', args: [widget.searchTerm.truncate(32)]),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                Space.width(8),
                 GestureDetector(
                   onTap: () => selectLanguage(),
-                  child: SearchFilter(
-                    color: color5,
-                    child: Text(
-                      Search.from == 'Any' && Search.to == 'Any'
-                          ? language["Language"]
-                          : "${language[Search.from] ?? Search.from} $arrow ${language[Search.to] ?? Search.to}",
-                      style: TextStyle(
-                        fontSize: DeviceInfo().height() / 50,
-                        color: Colors.white,
-                      ),
-                    ),
+                  child: InfoBadge(
+                    color: purpleFreequiz,
+                    text: Search.from == 'Any' && Search.to == 'Any'
+                          ? context.tr('language')
+                          : context.tr('fromto', args: [Search.from.tr(), Search.to.tr()]),
                   ),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                Space.width(8),
                 GestureDetector(
                   onTap: () => changeMode(),
-                  child: SearchFilter(
-                    color: color4,
-                    child: Text(
-                      Search.mode.transl(),
-                      style: TextStyle(
-                        fontSize: DeviceInfo().height() / 50,
-                        color: Colors.white,
-                      ),
-                    ),
+                  child: InfoBadge(
+                    color: blueFreequiz,
+                    text: context.tr(Search.mode),
                   ),
                 )
               ],
             ),
           ),
-          SizedBox(
-            height: DeviceInfo.mobileLayout ? 10 : 25,
-          ),
+          Space.height(context.mobileLayout ? 10 : 25),
           Expanded(
             child: ListView(
               children: [
                 Search.mode == "Quiz" ? listQuizzes() : listUsers(),
                 SizedBox(
-                  height: DeviceInfo.mobileLayout ? 5 : 15,
+                  height: context.mobileLayout ? 5 : 15,
                 ),
-                pressed
-                    ? Align(
-                        child: CircularProgressIndicator(
-                          color: DeviceInfo.darkMode ? Colors.white : color1,
-                        ),
-                      )
-                    : Align(
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: color1,
-                            foregroundColor: Colors.white,
-                          ),
-                          onPressed: () => onPressed(),
-                          child: Text(
-                            language["Load more"],
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: DeviceInfo().height() / 55),
-                          ),
-                        ),
+                Conditional(
+                  condition: pressed,
+                  widget: Align(
+                    child: CircularProgressIndicator(
+                      color: context.darkMode ? Colors.white : grayFreequiz,
+                    ),
+                  ),
+                  defaultWidget: Align(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: grayFreequiz,
+                        foregroundColor: Colors.white,
                       ),
+                      onPressed: () => onPressed(),
+                      child: Text(
+                        context.tr('load more'),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: context.screenHeight/ 55),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -140,15 +117,13 @@ class _SearchPageState extends State<SearchPage> {
           data: Search.data[i],
           uuid: Search.data[i]['id'],
           expanded: false,
-          width: DeviceInfo.mobileLayout
-              ? DeviceInfo().width() - 20
-              : DeviceInfo().width() - 60,
+          width: context.mobileLayout
+              ? context.screenWidth - 20
+              : context.screenWidth - 60,
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return SizedBox(
-          height: DeviceInfo.mobileLayout ? 10 : 25,
-        );
+        return Space.height(context.mobileLayout ? 10 : 25);
       },
     );
   }
@@ -163,15 +138,13 @@ class _SearchPageState extends State<SearchPage> {
       itemBuilder: (BuildContext context, int i) {
         return UserTile(
           data: Search.data[i],
-          width: DeviceInfo.mobileLayout
-              ? DeviceInfo().width() - 20
-              : DeviceInfo().width() - 60,
+          width: context.mobileLayout
+              ? context.screenWidth - 20
+              : context.screenWidth - 60,
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return SizedBox(
-          height: DeviceInfo.mobileLayout ? 10 : 25,
-        );
+        return Space.height(context.mobileLayout ? 10 : 25);
       },
     );
   }
@@ -206,8 +179,8 @@ class _SearchPageState extends State<SearchPage> {
     page++;
     Search.data.addAll(
       Search.mode == "Quiz"
-          ? (await APIQuizzes().httpGetSearch(widget.searchTerm, page))['data']
-          : (await APIUsers().httpGetSearch(widget.searchTerm, page))['data'],
+          ? (await APIQuizzes.search(widget.searchTerm, page))['data']
+          : (await APIUsers.search(widget.searchTerm, page))['data'],
     );
     setState(() {
       pressed = false;

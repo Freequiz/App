@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/_home/subviews/progress_bar.dart';
-import 'package:freequiz/quiz.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_home/learning/prompt.dart';
+import 'package:freequiz/_views/progress_bar.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class WritingBody extends StatelessWidget {
   final Function onPressed;
@@ -19,15 +19,14 @@ class WritingBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("done");
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 1.0),
           child: ProgressBar(
-            amount: Quiz.amountDefinitions,
-            amountLeft: Quiz.indexArray.length,
+            amount: Questionnaire.length,
+            amountLeft: Questionnaire.questions.length.toDouble(),
           ),
         ),
         Padding(
@@ -37,24 +36,19 @@ class WritingBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  Quiz.definition[Quiz.indexArray[0]],
-                  style: TextStyle(fontSize: DeviceInfo().height() / 16),
-                ),
-                SizedBox(
-                  height: DeviceInfo().height() / 5,
-                ),
+                TextPromt(text: Questionnaire.definition()),
+                Space.height(context.screenHeight/ 5),
                 Row(
                   children: [
                     Flexible(
                       child: SizedBox(
-                        height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : DeviceInfo().height() / 30,
+                        height: context.mobileLayout ? context.screenHeight/ 20 : context.screenHeight/ 30,
                         child: TextField(
                           autocorrect: false,
                           enableSuggestions: false,
-                          keyboardType: TextInputType.name,
+                          keyboardType: TextInputType.text,
                           keyboardAppearance:
-                              DeviceInfo.darkMode ? Brightness.dark : Brightness.light,
+                              context.darkMode ? Brightness.dark : Brightness.light,
                           controller: textController,
                           onEditingComplete: () {
                             onPressed();
@@ -68,7 +62,7 @@ class WritingBody extends StatelessWidget {
                               ),
                             ),
                             contentPadding: const EdgeInsets.all(10.0),
-                            hintText: language["Translation"],
+                            hintText: context.tr('translation'),
                             border: const OutlineInputBorder(),
                             suffixIcon: IconButton(
                               color: color,
@@ -81,9 +75,9 @@ class WritingBody extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 5),
+                    Space.width(5),
                     SizedBox(
-                      height: DeviceInfo.mobileLayout ? DeviceInfo().height() / 20 : DeviceInfo().height() / 30,
+                      height: context.mobileLayout ? context.screenHeight/ 20 : context.screenHeight/ 30,
                       child: TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: answerRight ? Colors.green : color,

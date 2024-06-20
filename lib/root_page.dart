@@ -5,7 +5,6 @@ import 'package:freequiz/2_profile/profile_page.dart';
 import 'package:freequiz/2_profile/signup.dart';
 import 'package:freequiz/3_bug_reporter/bug_report_page.dart';
 import 'package:freequiz/_home/home_page/home_page.dart';
-import 'package:freequiz/api/users.dart';
 import 'package:freequiz/main_app_bar.dart';
 
 class RootPage extends StatefulWidget {
@@ -32,7 +31,6 @@ class _RootPageState extends State<RootPage> {
   @override
   void initState() {
     currentPage = widget.i;
-    APIUsers().httpPostRefresh();
     super.initState();
   }
 
@@ -41,6 +39,7 @@ class _RootPageState extends State<RootPage> {
     if (Profile.accessToken != "") {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const MainAppBar(),
         ),
         body: pages[currentPage],
@@ -71,7 +70,7 @@ class _RootPageState extends State<RootPage> {
     }
     return Drawer(
       child: Image.asset(
-        "images/icon_transparent.png",
+        "assets/images/icon_transparent.png",
       ),
     );
   }

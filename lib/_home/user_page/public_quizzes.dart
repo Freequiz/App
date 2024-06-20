@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/_home/home_page/quiz_tile.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/_home/user_page/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/string_extensions.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class PublicQuizzes extends StatefulWidget {
   final String user;
@@ -26,13 +23,11 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
         Align(
           alignment: Alignment.center,
           child: Text(
-            "Quizzes".transl(),
-            style: TextStyle(fontSize: DeviceInfo().height() / 30),
+            context.tr('quizzes'),
+            style: TextStyle(fontSize: context.screenHeight/ 30),
           ),
         ),
-        SizedBox(
-          height: DeviceInfo.mobileLayout ? 10 : 30,
-        ),
+        Space.height(context.mobileLayout ? 10 : 30),
         ListView.separated(
           shrinkWrap: true,
           itemCount: ListPublicQuizzes.data.length,
@@ -42,38 +37,36 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
               data: ListPublicQuizzes.data[i],
               uuid: ListPublicQuizzes.data[i]['id'],
               expanded: false,
-              width: DeviceInfo().width() - 20,
+              width: context.screenWidth - 20,
             );
           },
           separatorBuilder: (BuildContext context, int i) {
-            return SizedBox(
-              height: DeviceInfo.mobileLayout ? 10 : 20,
-            );
+            return Space.height(context.mobileLayout ? 10 : 20);
           },
         ),
-        SizedBox(
-          height: DeviceInfo.mobileLayout ? 5 : 15,
-        ),
-        pressed
-            ? Align(
-                child: CircularProgressIndicator(
-                  color: DeviceInfo.darkMode ? Colors.white : color1,
-                ),
-              )
-            : Align(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: color1,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () => onPressed(),
-                  child: Text(
-                    language["Load more"],
-                    style: TextStyle(
-                        color: Colors.white, fontSize: DeviceInfo().height() / 55),
-                  ),
-                ),
+        Space.height(context.mobileLayout ? 5 : 15),
+        Conditional(
+          condition: pressed,
+          widget: Align(
+            child: CircularProgressIndicator(
+              color: context.darkMode ? Colors.white : grayFreequiz,
+            ),
+          ),
+          defaultWidget: Align(
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: grayFreequiz,
+                foregroundColor: Colors.white,
               ),
+              onPressed: () => onPressed(),
+              child: Text(
+                context.tr('load more'),
+                style: TextStyle(
+                    color: Colors.white, fontSize: context.screenHeight/ 55),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -84,7 +77,7 @@ class _PublicQuizzesState extends State<PublicQuizzes> {
     });
     page++;
     ListPublicQuizzes.data.addAll(
-      (await APIUsers().httpGetPublicQuizzes(page, widget.user))['data'],
+      (await APIUsers.getPublicQuizzes(page, widget.user))['data'],
     );
     setState(() {
       pressed = false;

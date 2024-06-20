@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/multiple_choice/choices.dart';
-import 'package:freequiz/_home/subviews/progress_bar.dart';
-import 'package:freequiz/quiz.dart';
-import 'package:freequiz/others/device_info.dart';
+import 'package:freequiz/_home/learning/prompt.dart';
+import 'package:freequiz/_views/progress_bar.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class MultipleChoiceBody extends StatelessWidget {
   final List choices;
@@ -28,8 +28,8 @@ class MultipleChoiceBody extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 1.0),
           child: ProgressBar(
-            amount: Quiz.amountDefinitions,
-            amountLeft: Quiz.indexArray.length,
+            amount: Questionnaire.length,
+            amountLeft: Questionnaire.questions.length.toDouble(),
           ),
         ),
         Padding(
@@ -38,12 +38,9 @@ class MultipleChoiceBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  Quiz.definition[Quiz.indexArray[0]],
-                  style: TextStyle(fontSize: DeviceInfo().height() / 16),
-                ),
+                TextPromt(text: Questionnaire.definition()),
                 SizedBox(
-                  height: DeviceInfo().height() / 3,
+                  height: context.screenHeight/ 3,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -68,9 +65,7 @@ class MultipleChoiceBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: DeviceInfo().height() / 100,
-                ),
+                Space.height(context.screenHeight/ 100),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -94,9 +89,7 @@ class MultipleChoiceBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: DeviceInfo().height() / 16,
-                ),
+                Space.height(context.screenHeight/ 16),
               ],
             ),
           ),

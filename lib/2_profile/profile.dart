@@ -1,22 +1,19 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:freequiz/local_storage/secure_storage.dart';
 
 class Profile {
   static String accessToken = "";
   static bool loaded = false;
 
-  Future<void> saveData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("accessToken", accessToken);
+  static saveAccessToken() async {
+    await SecureStorage.setAccessToken(accessToken);
   }
 
-  Future<void> loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    accessToken = prefs.getString("accessToken") ?? "";
+  static loadAccessToken() async {
+    accessToken = await SecureStorage.readAccessToken();
     loaded = true;
   }
 
-  Future<void> deleteData() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove("accessToken");
+  static deleteData() async {
+    await SecureStorage.removeAccessToken();
   }
 }

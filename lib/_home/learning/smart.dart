@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/_home/learning/learning.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/local_storage/database.dart';
+import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
-import 'package:freequiz/quiz.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/quiz/question.dart';
+import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class Smart extends StatefulWidget {
   final Function refresh;
@@ -22,7 +24,7 @@ class _SmartState extends State<Smart> {
 
   @override
   void initState() {
-    Learning().randomChoices();
+    Question.randomChoices();
     super.initState();
   }
 
@@ -30,38 +32,39 @@ class _SmartState extends State<Smart> {
   Widget build(BuildContext context) {
     final modes = [
       MultipleChoiceBody(
-        choices: Learning.choices,
+        choices: Question.choices,
         wrongAnswer: wrongAnswerMC,
         rightAnswer: rightAnswerMC,
         answerRight: answerRightMC,
-        background: color5,
+        background: purpleFreequiz,
         color: Colors.white,
       ),
       WritingBody(
         onPressed: onPressed,
         answerRight: answerRightW,
         textController: _textController,
-        color: color5,
+        color: purpleFreequiz,
       )
     ];
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: color5,
-          title: Text(language["Smart"]),
-          leading: TextButton(
-            onPressed: () =>
-                Learning().close(context, widget.refresh, widget.uuid, "Smart"),
-            child: const Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.white,
-            ),
+      appBar: AppBar(
+        backgroundColor: purpleFreequiz,
+        title: const Text("Smart").tr(),
+        leading: TextButton(
+          onPressed: () =>
+              Learning.stop(context, widget.refresh, widget.uuid, "Smart"),
+          child: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
           ),
         ),
-        body: modes[Learning().indexMode()]);
+      ),
+      body: modes[Questionnaire.questions[0].score['smart'] > 0 ? 1 : 0],
+    );
   }
 
   onPressed() {
-    if (Learning().correct(_textController.text)) {
+    if (Question.correct(_textController.text)) {
       rightAnswerW();
     } else {
       wrongAnswerW();
@@ -80,19 +83,19 @@ class _SmartState extends State<Smart> {
     });
     Future.delayed(const Duration(milliseconds: 200), () {
       if (!Learning.answeredWrong) {
-        Quiz().answeredRight("Smart");
+        Questionnaire.answeredRight();
       }
-      if (Quiz.indexArray.length > 1) {
+      if (Questionnaire.questions.length > 1) {
         setState(() {
           Learning.answeredWrong = false;
-          Quiz.indexArray.removeAt(0);
+          Questionnaire.questions.removeAt(0);
           _textController.clear();
-          Learning().newChoices();
+          Question.randomChoices();
         });
       } else {
         widget.refresh();
         Navigator.of(context).pop();
-        Quiz().saveData("Smart", widget.uuid);
+        QuizDatabase.updateQuiz(QuizHelper.quiz!);
       }
       answerRightW = false;
     });
@@ -104,16 +107,16 @@ class _SmartState extends State<Smart> {
     });
     Future.delayed(const Duration(milliseconds: 200), () {
       if (!Learning.answeredWrong) {
-        Quiz().answeredRight("Smart");
+        Questionnaire.answeredRight();
       }
-      if (Quiz.indexArray.length > 1) {
+      if (Questionnaire.questions.length > 1) {
         Learning.answeredWrong = false;
-        Quiz.indexArray.removeAt(0);
+        Questionnaire.questions.removeAt(0);
         setState(() {
-          Learning().newChoices();
+          Question.randomChoices();
         });
       } else {
-        Learning().close(context, widget.refresh, widget.uuid, "Smart");
+        Learning.stop(context, widget.refresh, widget.uuid, "Smart");
       }
       answerRightMC = List.filled(4, false);
     });

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class MainAppBar extends StatelessWidget {
   const MainAppBar({super.key});
@@ -19,7 +18,7 @@ class MainAppBar extends StatelessWidget {
                 foreground: Paint()
                   ..style = PaintingStyle.stroke
                   ..strokeWidth = 1.0
-                  ..color = textGray,
+                  ..color = gray40,
               ),
             ),
             const Text(

@@ -1,0 +1,5 @@
+{
+    "cmake.sourceDirectory": "/Users/matthieu/Documents/Coding/Flutter/freequiz/linux",
+    "lldb.library": "/Applications/Programming/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
+    "lldb.launch.expressions": "native"
+}

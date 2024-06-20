@@ -1,13 +1,12 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/1_edit/quiz_draft/draft.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/create_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/created_quizzes.dart';
-import 'package:freequiz/quiz.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/others/utilities.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class EditOverview extends StatefulWidget {
   final List data;
@@ -30,14 +29,16 @@ class _EditOverviewState extends State<EditOverview> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: DeviceInfo.mobileLayout ? const EdgeInsets.all(10.0) : const EdgeInsets.all(30),
+      padding: context.mobileLayout
+          ? const EdgeInsets.all(10.0)
+          : const EdgeInsets.all(30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Center(
             child: TextButton(
               style: TextButton.styleFrom(
-                  backgroundColor: color1, foregroundColor: Colors.white),
+                  backgroundColor: grayFreequiz, foregroundColor: Colors.white),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -52,22 +53,19 @@ class _EditOverviewState extends State<EditOverview> {
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
-                  language["Create a New Quiz"],
-                  style: TextStyle(fontSize: DeviceInfo().height() / 45),
+                  context.tr('create new quiz'),
+                  style: textSize(context.screenHeight/ 45),
                 ),
               ),
             ),
           ),
-          SizedBox(
-            height: DeviceInfo.mobileLayout ? 15 : 45,
+          Space.height(context.mobileLayout ? 15 : 45),
+          Conditional(
+            condition: QuizHelper.draft.isNotEmpty,
+            widget: Draft(
+              refresh: refresh,
+            ),
           ),
-          Quiz.draft.isNotEmpty
-              ? Draft(
-                  refresh: refresh,
-                )
-              : const SizedBox(
-                  height: 0,
-                ),
           Expanded(
             child: CreatedQuizzes(
               key: key,

@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
-import 'package:freequiz/others/device_info.dart';
-import 'package:freequiz/others/initial_loading.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/local_storage/draft_storage.dart';
+import 'package:freequiz/quiz/quiz_helper.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ProgressPopUp extends StatefulWidget {
   final String title;
@@ -26,8 +25,8 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        language[widget.title],
-        style: TextStyle(color: DeviceInfo.darkMode ? Colors.white : textGray),
+        context.tr(widget.title),
+        style: TextStyle(color: context.darkMode ? Colors.white : gray40),
       ),
       content: FutureBuilder(
         future: widget.response,
@@ -37,47 +36,50 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
               closeButton = false;
               close(data);
               return Text(
-                language['Quiz saved'],
+                context.tr('quiz saved'),
                 style: const TextStyle(color: Colors.green),
               );
             }
             return Text(
-              language['${data.data!['message']} description'] ??
-                  language['other error description'],
+              context.tr(data.data!['message'] ?? 'other error description'),
             );
           }
           if (data.hasError) {
             return Text(
-              language['other error description'],
+              context.tr('other error description'),
             );
           }
-          return Row(
+          return const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               CircularProgressIndicator(
-                color: Colors.white,
+                color: roseFreequiz,
               )
             ],
           );
         },
       ),
       actions: [
-        closeButton
-            ? TextButton(
-                onPressed:
-                    closeButton ? () => Navigator.of(context).pop() : () {},
-                child: Text(language['Close']),
-              )
-            : const SizedBox()
+        Conditional(
+          condition: closeButton,
+          widget: TextButton(
+            onPressed: closeButton ? () => Navigator.of(context).pop() : () {},
+            child: const Text('close').tr(),
+          ),
+        ),
       ],
     );
   }
 
   close(data) {
     final quiz = data.data!['quiz_data'];
-    ListQuizzes.data.insert(0, quiz);
-    Quiz().deleteDraft();
-    Quiz.draft.clear();
+
+    if (widget.title == 'Create Quiz') {
+      ListQuizzes.data.insert(0, quiz);
+    }
+    
+    DraftStorage.deleteDraft();
+    QuizHelper.draft.clear();
     Future.delayed(const Duration(milliseconds: 500), () {
       Navigator.of(context).pop();
       Navigator.of(context).pop();

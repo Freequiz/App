@@ -1,33 +1,23 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:freequiz/2_profile/profile.dart';
-import 'package:freequiz/quiz.dart';
+import 'package:freequiz/api/users.dart';
+import 'package:freequiz/local_storage/database.dart';
+import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/others/languages.dart';
-import 'dart:io';
-import 'package:shared_preferences/shared_preferences.dart';
-
-Map language = {};
+import 'package:freequiz/user/manage.dart';
 
 Future<void> initialLoading() async {
-  String defaultLocale = Platform.localeName; 
-  String chosenLanguage = "english";
-  final prefs = await SharedPreferences.getInstance();
-  Quiz.uuids = prefs.getStringList("uuids") ?? ["", "", "", "", ""];
-  defaultLocale = defaultLocale.substring(0, defaultLocale.length - 3);
-  if (defaultLocale == "de") {
-    chosenLanguage = "german";
-  }
-  else if (defaultLocale == "fr") {
-    chosenLanguage = "french";
-  }
-  else if (defaultLocale == "it") {
-    chosenLanguage = "italian";
-  }
-  final String response =
-      await rootBundle.loadString('languages/$chosenLanguage.json');
-  language = json.decode(response);
-  await Languages().get();
-  await Profile().loadData();
+  final List<Function> functions = [
+    QuizDatabase.open,
+    Languages.get,
+    Profile.loadAccessToken,
+    Preferences.loadAnswerLanguage,
+  ];
+
+  await Future.wait(functions.map((functions) => functions())); //run all Functions at the same time and wait for them
+
+  APIUsers.refresh();
+  ManageUser.load();
+
   return;
 }
 
