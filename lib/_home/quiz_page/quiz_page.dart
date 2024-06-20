@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/description.dart';
 import 'package:freequiz/_home/quiz_page/search_bar_words.dart';
 import 'package:freequiz/models/translation.dart';
@@ -7,9 +6,7 @@ import 'package:freequiz/_home/quiz_page/learning_modes.dart';
 import 'package:freequiz/_home/quiz_page/word_list/nothing_found.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list_taskbar.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 
 class QuizPage extends StatefulWidget {

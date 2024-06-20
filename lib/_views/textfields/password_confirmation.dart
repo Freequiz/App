@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/textfields/basic_textfield.dart';
 import 'package:freequiz/models/textfield_data.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class PasswordConfirmationTextfield extends StatefulWidget {
   final TextFieldData passwordConfirmation;

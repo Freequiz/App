@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/2_profile/profile_info/confirmation.dart';
 import 'package:freequiz/2_profile/profile_info/dark_mode_switcher.dart';
 import 'package:freequiz/2_profile/profile_info/email.dart';
 import 'package:freequiz/2_profile/profile_info/password.dart';
 import 'package:freequiz/2_profile/profile_info/username.dart';
 import 'package:freequiz/2_profile/profile.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ProfileInfo extends StatefulWidget {
   final Function refresh;

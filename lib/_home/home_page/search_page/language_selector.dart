@@ -1,10 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/home_page/search_page/search.dart';
 import 'package:freequiz/_views/edit/dropdown.dart';
 import 'package:freequiz/others/languages.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
+
 
 class LanguageSelector extends StatefulWidget {
   final Function refresh;

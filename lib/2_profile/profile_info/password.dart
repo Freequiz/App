@@ -1,13 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/textfields/password.dart';
 import 'package:freequiz/_views/textfields/password_confirmation.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
-import 'package:freequiz/utilities/widgets/space.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class Password extends StatefulWidget {
   final Function refresh;

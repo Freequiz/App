@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class TextFieldData {
   bool shown;

@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/loading/error_loading/alert.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class ErrorLoadingView extends StatelessWidget {
   final String error;

@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class ErrorLoadingAlert extends StatelessWidget {
   final String error;

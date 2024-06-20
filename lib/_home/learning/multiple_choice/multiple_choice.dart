@@ -1,10 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/question.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class MultipleChoice extends StatefulWidget {
   final Function refresh;

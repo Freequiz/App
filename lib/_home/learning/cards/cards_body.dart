@@ -1,12 +1,10 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/card.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/space.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class CardsBody extends StatefulWidget {
   final Function wrong;

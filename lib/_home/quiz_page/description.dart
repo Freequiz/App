@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/title.dart';
 import 'package:freequiz/loading/load_user.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class QuizDescription extends StatelessWidget {
   const QuizDescription({super.key});

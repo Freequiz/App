@@ -1,9 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/badge.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/space.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class AdditionalInfo extends StatelessWidget {
   const AdditionalInfo({super.key, required this.data});

@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice.dart';
 import 'package:freequiz/_views/progress_bar.dart';
@@ -8,13 +7,10 @@ import 'package:freequiz/_home/learning/writing/writing.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/_home/quiz_page/word_list/word_list.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
-import 'package:freequiz/utilities/widgets/space.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 
 class StartLearningBody extends StatefulWidget {

@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/progress_pop_up.dart';
 import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/_views/edit/edit_view.dart';
 import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:freequiz/quiz/manage.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
 
 class EditQuiz extends StatefulWidget {
   final Function refresh;

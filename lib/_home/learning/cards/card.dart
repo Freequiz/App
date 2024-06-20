@@ -1,9 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class CardWidget extends StatefulWidget {
   final Function right;

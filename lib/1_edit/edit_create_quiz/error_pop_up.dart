@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ErrorPopUp extends StatelessWidget {
   const ErrorPopUp({super.key});

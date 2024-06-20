@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/others/style.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class AddButton extends StatelessWidget {
 

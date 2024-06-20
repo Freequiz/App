@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/models/translation.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class WordList extends StatelessWidget {
   final List<Translation> list;

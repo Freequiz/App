@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:freequiz/utilities/extensions/string_extensions.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class VisibilityOptions {
   static List<DropdownMenuItem<String>> visibilites = [

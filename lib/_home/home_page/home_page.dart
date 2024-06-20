@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/_home/home_page/search_page/search_bar.dart' as search;
@@ -11,7 +10,7 @@ import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/load_quiz_list.dart';
 import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/quiz/manage.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

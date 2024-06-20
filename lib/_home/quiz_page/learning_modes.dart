@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/loading/load_learning.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class LearningModes extends StatefulWidget {
   final Axis scrollDirection;

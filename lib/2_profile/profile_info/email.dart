@@ -1,12 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/textfields/email.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/user/helper.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class EMail extends StatefulWidget {
   final Function refresh;

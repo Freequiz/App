@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/dismissible.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class ListQuizzes extends StatefulWidget {
   final ScrollPhysics physics;

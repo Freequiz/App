@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/local_storage/preferences.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:freequiz/utilities/providers/theme.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
 import 'package:provider/provider.dart';
 
 class DarkModeSwitcher extends StatefulWidget {

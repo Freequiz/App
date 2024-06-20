@@ -1,8 +1,7 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:freequiz/others/utilities.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class TextPromt extends StatelessWidget {
   const TextPromt({super.key, required this.text});

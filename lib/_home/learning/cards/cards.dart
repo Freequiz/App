@@ -1,11 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
 import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class Cards extends StatefulWidget {
   final Function refresh;

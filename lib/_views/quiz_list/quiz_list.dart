@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_list/list.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
-import 'package:freequiz/utilities/widgets/space.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class QuizList extends StatelessWidget {
   final List list;

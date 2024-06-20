@@ -1,11 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class LearningSettings extends StatefulWidget {
   final List<String> languages;

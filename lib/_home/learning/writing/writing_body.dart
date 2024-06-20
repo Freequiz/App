@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/learning/prompt.dart';
 import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/space.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class WritingBody extends StatelessWidget {
   final Function onPressed;

@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/_views/edit/add_button.dart';
 import 'package:freequiz/_views/edit/header.dart';
 import 'package:freequiz/_views/edit/list_view.dart';
-import 'package:freequiz/others/style.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class EditView extends StatefulWidget {
 

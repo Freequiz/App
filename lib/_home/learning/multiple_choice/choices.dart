@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class Choices extends StatelessWidget {
   final String choice;

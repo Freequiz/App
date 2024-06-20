@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/dismiss.dart';
 import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class DismissibleQuizTile extends StatefulWidget {
   final Map quizData;

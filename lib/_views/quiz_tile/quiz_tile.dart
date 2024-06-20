@@ -1,13 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/_views/quiz_tile/additional_info.dart';
 import 'package:freequiz/_views/quiz_tile/title.dart';
 import 'package:freequiz/loading/load_quiz.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/_views/quiz_tile/description.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class QuizTile extends StatefulWidget {
   final Map data;

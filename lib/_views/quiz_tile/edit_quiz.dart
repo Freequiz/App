@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/_views/buttons/edit.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/delete.dart';
 import 'package:freequiz/_views/quiz_tile/dismissible.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class EditQuizTile extends StatefulWidget {
   final Map data;

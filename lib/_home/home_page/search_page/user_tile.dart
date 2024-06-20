@@ -1,11 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:freequiz/_views/badge.dart';
 import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/loading/load_user.dart';
-import 'package:freequiz/others/style.dart';
 import 'package:freequiz/others/utilities.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class UserTile extends StatefulWidget {
   final Map data;

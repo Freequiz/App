@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/user_page/public_quizzes.dart';
-import 'package:freequiz/utilities/extensions/context_extensions.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class UserPage extends StatefulWidget {
   final String user;

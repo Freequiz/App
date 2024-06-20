@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:freequiz/api/languages.dart';
-import 'package:freequiz/utilities/extensions/string_extensions.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Languages {
