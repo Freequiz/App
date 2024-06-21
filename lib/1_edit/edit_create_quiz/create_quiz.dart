@@ -22,7 +22,7 @@ class _CreateQuizState extends State<CreateQuiz> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('create quiz').tr(),
-        backgroundColor: context.darkMode ? grayFreequiz : blueFreequiz,
+        backgroundColor: context.darkMode ? grayFreequiz : blueLight,
         leading: TextButton(
           onPressed: () {
             if (changed()) {

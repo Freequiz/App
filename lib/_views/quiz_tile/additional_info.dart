@@ -17,7 +17,7 @@ class AdditionalInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InfoBadge(
-            color: roseFreequiz,
+            color: roseLight,
             text:'amount questions'.plural(data['translations'] ?? data['data'].length),
           ),
 

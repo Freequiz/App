@@ -24,9 +24,9 @@ class _LearningModesState extends State<LearningModes> {
 
   final List<Color> color = [
     purpleFreequiz,
-    roseFreequiz,
-    yellowFreequiz,
-    blueFreequiz,
+    roseLight,
+    beigeLight,
+    blueLight,
   ];
 
   refresh() {

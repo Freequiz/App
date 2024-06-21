@@ -24,7 +24,7 @@ ThemeData lightTheme = ThemeData(
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: grayFreequiz),
     ),
-    focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2, color: roseFreequiz)),
+    focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2, color: roseMiddle)),
     hintStyle: TextStyle(color: Colors.black),
   ),
   fontFamily: 'Inter',

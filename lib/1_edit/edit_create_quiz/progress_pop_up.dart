@@ -53,7 +53,7 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircularProgressIndicator(
-                color: roseFreequiz,
+                color: roseMiddle,
               )
             ],
           );

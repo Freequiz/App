@@ -32,13 +32,13 @@ class _CardsState extends State<Cards> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: blueFreequiz,
+        backgroundColor: context.darkMode ? blueDark : blueLight,
       ),
       body: CardsBody(
         key: key,
         wrong: wrong,
         right: right,
-        color: blueFreequiz,
+        color: blue,
       ),
     );
   }

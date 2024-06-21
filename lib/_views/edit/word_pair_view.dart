@@ -43,7 +43,7 @@ class WordPairView extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-          color: context.darkMode ? gray55 : blueFreequiz,
+          color: context.darkMode ? gray55 : blueLight,
         ),
         child: Padding(
           padding: EdgeInsets.all(context.screenHeight/ 100),

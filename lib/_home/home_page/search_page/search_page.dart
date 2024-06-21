@@ -41,7 +41,7 @@ class _SearchPageState extends State<SearchPage> {
               scrollDirection: Axis.horizontal,
               children: [
                 InfoBadge(
-                  color: roseFreequiz,
+                  color: roseLight,
                   text: 
                     context.tr('results for', args: [widget.searchTerm.truncate(32)]),
                 ),
@@ -59,7 +59,7 @@ class _SearchPageState extends State<SearchPage> {
                 GestureDetector(
                   onTap: () => changeMode(),
                   child: InfoBadge(
-                    color: blueFreequiz,
+                    color: blueLight,
                     text: context.tr(Search.mode),
                   ),
                 )

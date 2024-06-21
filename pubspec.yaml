@@ -47,6 +47,7 @@ dependencies:
   easy_localization: ^3.0.7
   flutter_animate: ^4.5.0
   app_links: ^6.1.1
+  material_symbols_icons: ^4.2762.0
 
 dev_dependencies:
   flutter_test:

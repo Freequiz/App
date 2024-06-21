@@ -1,11 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:freequiz/models/color_family.dart';
 
-// Colorful Colors
+// Colors
 const Color grayFreequiz = Color.fromARGB(255, 152, 141, 145);
-const Color roseFreequiz = Color.fromARGB(255, 230, 148, 150);
-const Color yellowFreequiz = Color.fromARGB(255, 233, 209, 196);
-const Color blueFreequiz = Color.fromARGB(255, 209, 222, 230);
+List<ColorFamily> colors = [purple, rose, beige, blue];
+
+//Purple
 const Color purpleFreequiz = Color.fromARGB(255, 154, 137, 188);
+
+ColorFamily purple = ColorFamily(light: purpleFreequiz, medium: purpleFreequiz, dark: purpleFreequiz);
+
+// Blue
+const Color blueLight = Color.fromARGB(255, 201, 217, 226);
+const Color blueMedium = Color.fromARGB(255, 114, 162, 170);
+const Color blueDark = Color.fromARGB(255, 0, 46, 60);
+
+ColorFamily blue = ColorFamily(light: blueLight, medium: blueMedium, dark: blueDark);
+
+// Beige
+const Color beigeLight = Color.fromARGB(255, 232, 203, 189);
+const Color beigeMedium = Color.fromARGB(255, 213, 162, 134);
+const Color beigeDark = Color.fromARGB(255, 152, 117, 97);
+
+ColorFamily beige = ColorFamily(light: beigeLight, medium: beigeMedium, dark: beigeDark);
+
+// Rose
+const Color roseLight = Color.fromARGB(255, 233, 137, 140);
+const Color roseMiddle = Color.fromARGB(255, 209, 89, 93);
+const Color roseDark = Color.fromARGB(255, 115, 25, 53);
+
+ColorFamily rose = ColorFamily(light: roseLight, medium: roseMiddle, dark: roseDark);
+
+//Green
+const Color greenLight = Color.fromARGB(255, 202, 239, 230);
+const Color greenDark = Color.fromARGB(255, 45, 106, 101);
+
+//Red
+const Color redLight = Color.fromARGB(255, 249, 220, 217);
+const Color redDark = Color.fromARGB(255, 120, 30, 14);
 
 //Gray Tones
 const Color gray40 = Color.fromARGB(255, 40, 40, 40); //used for app background and for text

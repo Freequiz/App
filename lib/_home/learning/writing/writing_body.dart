@@ -8,7 +8,7 @@ class WritingBody extends StatelessWidget {
   final Function onPressed;
   final bool answerRight;
   final TextEditingController textController;
-  final Color color;
+  final ColorFamily color;
   const WritingBody({
     super.key,
     required this.onPressed,
@@ -22,12 +22,10 @@ class WritingBody extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 1.0),
-          child: ProgressBar(
-            amount: Questionnaire.length,
-            amountLeft: Questionnaire.questions.length.toDouble(),
-          ),
+        ProgressBar(
+          amount: Questionnaire.length,
+          amountLeft: Questionnaire.questions.length.toDouble(),
+          color: color
         ),
         Padding(
           padding: const EdgeInsets.only(
@@ -57,7 +55,7 @@ class WritingBody extends StatelessWidget {
                           decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: color,
+                                color: color.light,
                                 width: 2.0,
                               ),
                             ),
@@ -65,7 +63,7 @@ class WritingBody extends StatelessWidget {
                             hintText: context.tr('translation'),
                             border: const OutlineInputBorder(),
                             suffixIcon: IconButton(
-                              color: color,
+                              color: color.light,
                               onPressed: () {
                                 textController.clear();
                               },
@@ -80,7 +78,7 @@ class WritingBody extends StatelessWidget {
                       height: context.mobileLayout ? context.screenHeight/ 20 : context.screenHeight/ 30,
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: answerRight ? Colors.green : color,
+                          backgroundColor: answerRight ? Colors.green : color.light,
                           foregroundColor: Colors.white,
                         ),
                         onPressed: () {

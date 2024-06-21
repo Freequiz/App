@@ -40,7 +40,7 @@ ThemeData darkTheme = ThemeData(
       borderSide: BorderSide(width: 2, color: grayFreequiz),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: 2, color: blueFreequiz),
+      borderSide: BorderSide(width: 2, color: blueMedium),
     ),
     hintStyle: TextStyle(color: Colors.white),
   ),

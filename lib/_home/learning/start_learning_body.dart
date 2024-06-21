@@ -30,7 +30,6 @@ class StartLearningBody extends StatefulWidget {
 }
 
 class _StartLearningBodyState extends State<StartLearningBody> {
-  final List<Color> color = [purpleFreequiz, roseFreequiz, yellowFreequiz, blueFreequiz];
   late final List<Widget> pages = [
     Smart(
       refresh: refresh,
@@ -48,23 +47,18 @@ class _StartLearningBodyState extends State<StartLearningBody> {
 
   @override
   Widget build(BuildContext context) {
-    final color5 = context.darkMode
-        ? gray60
-        : white225;
     Progress.calculate(Learning.modes[widget.i]);
     return Column(
       children: [
         ProgressBar(
             amountLeft: QuizHelper.quiz!.translations.translations.length - Progress.amount,
-            amount: QuizHelper.quiz!.translations.translations.length),
-        const SizedBox(height: 15),
+            amount: QuizHelper.quiz!.translations.translations.length,
+            color: colors[widget.i],),
         Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(context.screenWidth / 30 + 10),
-            color: color5,
-          ),
-          height: context.screenHeight/ 10,
-          width: context.screenWidth - 20.0,
+          height: context.screenHeight / 12,
+          width: context.screenWidth,
+          padding: const EdgeInsets.only(bottom: 20),
+          color: context.darkMode ? colors[widget.i].dark : colors[widget.i].light,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -81,19 +75,17 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                   );
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  height: context.screenHeight/ 10 - 20,
                   width: widthStartButton(context.screenWidth),
                   decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.circular(context.screenWidth / 30),
-                    color: color[widget.i],
+                    color: colors[widget.i].medium,
                   ),
                   child: Center(
                     child: Text(
                       context.tr('learn'),
                       style: TextStyle(
-                          fontSize: context.screenHeight/ 36,
+                          fontSize: context.screenHeight/ 45,
                           color: Colors.white,
                           fontWeight: FontWeight.w600),
                     ),
@@ -119,13 +111,12 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                     );
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(10.0),
                     height: context.screenHeight/ 10 - 20,
                     width: widthStartButton(context.screenWidth),
                     decoration: BoxDecoration(
                       borderRadius:
                           BorderRadius.circular(context.screenWidth / 30),
-                      color: color[widget.i],
+                      color: colors[widget.i].medium,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +124,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                         Text(
                           context.tr('learn only'),
                           style: TextStyle(
-                              fontSize: context.screenHeight/ 36,
+                              fontSize: context.screenHeight/ 45,
                               color: Colors.white,
                               fontWeight: FontWeight.w600),
                         ),
@@ -183,7 +174,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                       list: progressArray,
                       markWord: markWord,
                       i: i,
-                      color: color[widget.i],
+                      color: colors[widget.i].medium,
                       scrollPhysics: const NeverScrollableScrollPhysics(),
                       width: context.screenWidth,
                     ),

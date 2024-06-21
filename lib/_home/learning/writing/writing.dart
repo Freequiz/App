@@ -21,25 +21,26 @@ class _WritingState extends State<Writing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('writing').tr(),
-          leading: TextButton(
-            onPressed: () {
-              close();
-            },
-            child: const Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.white,
-            ),
+      appBar: AppBar(
+        title: const Text('writing').tr(),
+        leading: TextButton(
+          onPressed: () {
+            close();
+          },
+          child: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
           ),
-          backgroundColor: roseFreequiz,
         ),
-        body: WritingBody(
-          onPressed: onPressed,
-          answerRight: answerRight,
-          textController: _textController,
-          color: roseFreequiz,
-        ));
+        backgroundColor: context.darkMode ? roseDark : roseLight,
+      ),
+      body: WritingBody(
+        onPressed: onPressed,
+        answerRight: answerRight,
+        textController: _textController,
+        color: rose,
+      ),
+    );
   }
 
   onPressed() {

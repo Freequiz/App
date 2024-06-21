@@ -61,7 +61,7 @@ class _UserTileState extends State<UserTile> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     InfoBadge(
-                      color: roseFreequiz,
+                      color: roseLight,
                       text: 'amount quizzes'.plural(n),
                     ),
                   ],

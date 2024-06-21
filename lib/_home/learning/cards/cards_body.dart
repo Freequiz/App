@@ -5,11 +5,12 @@ import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class CardsBody extends StatefulWidget {
   final Function wrong;
   final Function right;
-  final Color color;
+  final ColorFamily color;
   const CardsBody({
     super.key,
     required this.wrong,
@@ -36,12 +37,10 @@ class _CardsBodyState extends State<CardsBody> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 1.0),
-          child: ProgressBar(
-            amount: Questionnaire.length,
-            amountLeft: Questionnaire.questions.length.toDouble(),
-          ),
+        ProgressBar(
+          amount: Questionnaire.length,
+          amountLeft: Questionnaire.questions.length.toDouble(),
+          color: widget.color,
         ),
         Padding(
           padding: const EdgeInsets.all(20.0),
@@ -53,10 +52,10 @@ class _CardsBodyState extends State<CardsBody> {
                   alignment: Alignment.bottomCenter,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 20.0),
+                      padding: const EdgeInsets.only(bottom: 30.0),
                       child: Container(
                         width: context.screenWidth / 1.25 - 40,
-                        height: context.mobileLayout ? context.screenHeight / 4 : context.screenWidth / 2.5,
+                        height: context.mobileLayout ? context.screenHeight / 2 : context.screenWidth / 2.5,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(context.screenHeight / 20),
                           color: backgroundColor2,
@@ -65,10 +64,10 @@ class _CardsBodyState extends State<CardsBody> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
+                      padding: const EdgeInsets.only(bottom: 15.0),
                       child: Container(
                         width: context.screenWidth / 1.25 - 20,
-                        height: context.mobileLayout ? context.screenHeight / 4 : context.screenWidth / 2.5,
+                        height: context.mobileLayout ? context.screenHeight / 2 : context.screenWidth / 2.5,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(context.screenHeight / 20),
                           color: backgroundColor1,
@@ -109,29 +108,17 @@ class _CardsBodyState extends State<CardsBody> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: context.mobileLayout ? context.screenWidth / 5 : context.screenWidth / 10,
-                        height: context.mobileLayout ? context.screenWidth / 5 : context.screenWidth / 10,
-                        child: FloatingActionButton(
-                          heroTag: "wrong",
-                          onPressed: () {
-                            widget.wrong();
-                          },
-                          backgroundColor: Colors.red,
-                          child: const Icon(Icons.close),
-                        ),
+                      button(
+                        backgroundColor: context.darkMode ? redDark : redLight,
+                        foregroundColor: context.darkMode ? redLight : redDark,
+                        onTap: () => widget.wrong(),
+                        icon: Symbols.close,
                       ),
-                      SizedBox(
-                        width: context.mobileLayout ? context.screenWidth / 5 : context.screenWidth / 10,
-                        height: context.mobileLayout ? context.screenWidth / 5 : context.screenWidth / 10,
-                        child: FloatingActionButton(
-                          heroTag: "right",
-                          onPressed: () {
-                            widget.right();
-                          },
-                          backgroundColor: Colors.green,
-                          child: const Icon(Icons.check),
-                        ),
+                      button(
+                        backgroundColor: context.darkMode ? greenDark : greenLight,
+                        foregroundColor: context.darkMode ? greenLight : greenDark,
+                        onTap: () => widget.right(),
+                        icon: Symbols.check,
                       ),
                     ],
                   ),
@@ -161,6 +148,32 @@ class _CardsBodyState extends State<CardsBody> {
           child: widget,
         );
       },
+    );
+  }
+
+  Widget button(
+      {required Color backgroundColor,
+      required Color foregroundColor,
+      required Function onTap,
+      required IconData icon}) {
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Container(
+        width: 100,
+        height: 70,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30.0),
+          color: backgroundColor,
+        ),
+        child: Icon(
+          icon,
+          color: foregroundColor,
+          size: 36,
+          weight: 700,
+          grade: 200,
+          opticalSize: 24,
+        ),
+      ),
     );
   }
 }

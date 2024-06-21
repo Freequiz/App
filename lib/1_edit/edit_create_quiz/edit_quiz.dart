@@ -29,7 +29,7 @@ class _EditQuizState extends State<EditQuiz> {
     return Scaffold(
       appBar: AppBar(
         title: widget.owner ? const Text('edit quiz').tr() : const Text('create quiz').tr(),
-        backgroundColor: context.darkMode ? grayFreequiz : blueFreequiz,
+        backgroundColor: context.darkMode ? grayFreequiz : blueLight,
         leading: TextButton(
           onPressed: () {
             if (changed()) {

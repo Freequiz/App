@@ -10,7 +10,7 @@ class MultipleChoiceBody extends StatelessWidget {
   final Function rightAnswer;
   final List answerRight;
   final Color color;
-  final Color background;
+  final ColorFamily background;
   const MultipleChoiceBody(
       {super.key,
       required this.choices,
@@ -25,12 +25,10 @@ class MultipleChoiceBody extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 1.0),
-          child: ProgressBar(
-            amount: Questionnaire.length,
-            amountLeft: Questionnaire.questions.length.toDouble(),
-          ),
+        ProgressBar(
+          amount: Questionnaire.length,
+          amountLeft: Questionnaire.questions.length.toDouble(),
+          color: background
         ),
         Padding(
           padding: const EdgeInsets.all(20.0),
@@ -51,7 +49,7 @@ class MultipleChoiceBody extends StatelessWidget {
                       rightAnswer: rightAnswer,
                       answerRight: answerRight[0],
                       i: 0,
-                      background: background,
+                      background: background.light,
                       color: color,
                     ),
                     Choices(
@@ -60,7 +58,7 @@ class MultipleChoiceBody extends StatelessWidget {
                       rightAnswer: rightAnswer,
                       answerRight: answerRight[1],
                       i: 1,
-                      background: background,
+                      background: background.light,
                       color: color,
                     ),
                   ],
@@ -75,7 +73,7 @@ class MultipleChoiceBody extends StatelessWidget {
                       rightAnswer: rightAnswer,
                       answerRight: answerRight[2],
                       i: 2,
-                      background: background,
+                      background: background.light,
                       color: color,
                     ),
                     Choices(
@@ -84,7 +82,7 @@ class MultipleChoiceBody extends StatelessWidget {
                       rightAnswer: rightAnswer,
                       answerRight: answerRight[3],
                       i: 3,
-                      background: background,
+                      background: background.light,
                       color: color,
                     ),
                   ],

@@ -21,9 +21,9 @@ class StartLearning extends StatefulWidget {
 class _StartLearningState extends State<StartLearning> {
   final List<Color> color = [
     purpleFreequiz,
-    roseFreequiz,
-    yellowFreequiz,
-    blueFreequiz,
+    roseLight,
+    beigeLight,
+    blueLight,
   ];
 
   reset() {
@@ -36,7 +36,7 @@ class _StartLearningState extends State<StartLearning> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: color[widget.i],
+        backgroundColor: context.darkMode ? colors[widget.i].dark : colors[widget.i].light,
         title: Text(Learning.modes[widget.i].tr()),
         actions: [
           IconButton(

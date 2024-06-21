@@ -26,9 +26,9 @@ class _QuizPageState extends State<QuizPage> {
   ];
   final List<Color> color = [
     purpleFreequiz,
-    roseFreequiz,
-    yellowFreequiz,
-    blueFreequiz
+    roseLight,
+    beigeLight,
+    blueLight
   ];
 
   refresh() {
@@ -76,7 +76,7 @@ class _QuizPageState extends State<QuizPage> {
                       : WordList(
                           list: list,
                           markWord: markWord,
-                          color: roseFreequiz,
+                          color: roseLight,
                           width: width,
                           scrollPhysics: const NeverScrollableScrollPhysics(),
                           roundedCornersTop: false,
@@ -116,7 +116,7 @@ class _QuizPageState extends State<QuizPage> {
                   WordList(
                     list: list,
                     markWord: markWord,
-                    color: roseFreequiz,
+                    color: roseLight,
                     width: width - (height - 190) / 4 - 60,
                   ),
                 ],

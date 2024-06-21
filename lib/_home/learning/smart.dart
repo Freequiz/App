@@ -36,14 +36,14 @@ class _SmartState extends State<Smart> {
         wrongAnswer: wrongAnswerMC,
         rightAnswer: rightAnswerMC,
         answerRight: answerRightMC,
-        background: purpleFreequiz,
+        background: purple,
         color: Colors.white,
       ),
       WritingBody(
         onPressed: onPressed,
         answerRight: answerRightW,
         textController: _textController,
-        color: purpleFreequiz,
+        color: purple,
       )
     ];
     return Scaffold(

@@ -44,7 +44,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
               contentPadding: const EdgeInsets.all(10.0),
               border: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: roseFreequiz,
+                  color: roseLight,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(50.0),
@@ -58,7 +58,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: blueFreequiz,
+                  color: blueLight,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(context.screenWidth / 30.4),
