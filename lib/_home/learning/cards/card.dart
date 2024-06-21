@@ -57,8 +57,9 @@ class _CardWidgetState extends State<CardWidget> {
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: min(context.screenHeight / 11 / log(text.length), context.screenHeight / 15),
-                  color: _textColor.value),
+                fontSize: min(context.screenHeight / 9 / log(text.length), context.screenHeight / 15),
+                color: _textColor.value,
+              ),
             ),
           );
         },

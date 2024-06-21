@@ -1,4 +1,3 @@
-import 'package:freequiz/models/color_family.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ProgressBar extends StatefulWidget {

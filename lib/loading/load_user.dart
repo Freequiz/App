@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/user_page/list_quizzes.dart';
+import 'package:freequiz/_home/user_page/user_data.dart';
 import 'package:freequiz/_home/user_page/user_page.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
+import 'package:share_plus/share_plus.dart';
 
 loadUser({required BuildContext context, required String user}) {
-  ListPublicQuizzes.data.clear();
+  PublicUserData.data.clear();
 
   Navigator.of(context).push(
     MaterialPageRoute(
@@ -31,17 +32,29 @@ class LoadUser extends StatelessWidget {
           data: data,
           previousWidget: this,
           widget: LoadingScreen(
-              message: "Loading User",
-              finishedLoading: true,
-              widget: UserPage(
-                user: user,
-              ),
-              appBar: AppBar(
-                title: Text(user),
-              ),
+            message: "Loading User",
+            finishedLoading: true,
+            widget: UserPage(
+              user: user,
             ),
+            appBar: AppBar(
+              actions: [
+                TextButton(
+                  onPressed: () => Share.share('https://freequiz.ch/user/$user'),
+                  child: const Icon(
+                    Icons.ios_share_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
           context: context,
-          onLoad: () => ListPublicQuizzes.data.addAll(data.data!['data'],)
+          onLoad: () {
+            PublicUserData.data.addAll(data.data!['data']);
+            PublicUserData.avatarURL = data.data!['avatar_url'];
+            PublicUserData.name = user;
+          },
         );
       },
     );

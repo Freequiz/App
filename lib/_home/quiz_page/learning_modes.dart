@@ -2,6 +2,7 @@ import 'package:freequiz/loading/load_learning.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/utilities/imports/base.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class LearningModes extends StatefulWidget {
   final Axis scrollDirection;
@@ -16,17 +17,10 @@ class LearningModes extends StatefulWidget {
 
 class _LearningModesState extends State<LearningModes> {
   final List<IconData> icon = const [
-    Icons.star_border_rounded,
-    Icons.keyboard_alt_outlined,
-    Icons.format_list_bulleted_rounded, 
-    Icons.quiz_outlined
-  ];
-
-  final List<Color> color = [
-    purpleFreequiz,
-    roseLight,
-    beigeLight,
-    blueLight,
+    Symbols.magic_button,
+    Symbols.keyboard,
+    Symbols.format_list_bulleted, 
+    Symbols.rectangle_rounded
   ];
 
   refresh() {
@@ -46,15 +40,17 @@ class _LearningModesState extends State<LearningModes> {
           height: widget.width,
           child: TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: color[i],
+              backgroundColor: colors[i].light,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(widget.width / 7)),
+                  borderRadius: BorderRadius.circular(widget.width / 5)),
             ),
             onPressed: () => loadLearning(context, widget.uuid, i, reset, refresh),
             child: Icon(
               icon[i],
               size: widget.width / 2,
+              weight: 600,
+              grade: 200,
             ),
           ),
         );

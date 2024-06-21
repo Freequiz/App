@@ -48,7 +48,7 @@ class _UserTileState extends State<UserTile> {
                       style: textSize(context.screenHeight/ 30),
                     ),
                     ShareButton(
-                      url: "https://freequiz.herokuapp.com/user/${widget.data['username']}",
+                      url: "https://freequiz.ch/user/${widget.data['username']}",
                       color: context.darkMode ? Colors.white : gray40,
                     )
                   ],

@@ -111,13 +111,13 @@ class _CardsBodyState extends State<CardsBody> {
                       button(
                         backgroundColor: context.darkMode ? redDark : redLight,
                         foregroundColor: context.darkMode ? redLight : redDark,
-                        onTap: () => widget.wrong(),
+                        onPressed: () => widget.wrong(),
                         icon: Symbols.close,
                       ),
                       button(
                         backgroundColor: context.darkMode ? greenDark : greenLight,
                         foregroundColor: context.darkMode ? greenLight : greenDark,
-                        onTap: () => widget.right(),
+                        onPressed: () => widget.right(),
                         icon: Symbols.check,
                       ),
                     ],
@@ -154,16 +154,19 @@ class _CardsBodyState extends State<CardsBody> {
   Widget button(
       {required Color backgroundColor,
       required Color foregroundColor,
-      required Function onTap,
+      required Function onPressed,
       required IconData icon}) {
-    return GestureDetector(
-      onTap: () => onTap(),
-      child: Container(
-        width: 100,
-        height: 70,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: backgroundColor,
+    return SizedBox(
+      width: 100,
+      height: 70,
+      child: TextButton(
+        onPressed: () => onPressed(),
+        style: TextButton.styleFrom(
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
         ),
         child: Icon(
           icon,

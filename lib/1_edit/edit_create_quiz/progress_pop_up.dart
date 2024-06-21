@@ -8,11 +8,7 @@ class ProgressPopUp extends StatefulWidget {
   final String title;
   final Future<Map> response;
   final Function refresh;
-  const ProgressPopUp(
-      {super.key,
-      required this.title,
-      required this.response,
-      required this.refresh});
+  const ProgressPopUp({super.key, required this.title, required this.response, required this.refresh});
 
   @override
   State<ProgressPopUp> createState() => _ProgressPopUpState();
@@ -77,12 +73,15 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
     if (widget.title == 'Create Quiz') {
       ListQuizzes.data.insert(0, quiz);
     }
-    
+
     DraftStorage.deleteDraft();
     QuizHelper.draft.clear();
+    
     Future.delayed(const Duration(milliseconds: 500), () {
-      Navigator.of(context).pop();
-      Navigator.of(context).pop();
+      if (mounted) {
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+      }
       widget.refresh();
     });
   }

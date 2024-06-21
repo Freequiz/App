@@ -7,8 +7,7 @@ class Choices extends StatelessWidget {
   final Function rightAnswer;
   final bool answerRight;
   final int i;
-  final Color color;
-  final Color background;
+  final ColorFamily color;
   const Choices({
     super.key,
     required this.choice,
@@ -17,31 +16,38 @@ class Choices extends StatelessWidget {
     required this.answerRight,
     required this.i,
     required this.color,
-    required this.background,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.screenWidth / 2.5,
-      height: context.screenHeight/ 12,
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          backgroundColor: answerRight ? Colors.green : background,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+    return GestureDetector(
+      onTap: () {
+        if (choice != Questionnaire.answer()) {
+          wrongAnswer(choice, i);
+        } else {
+          rightAnswer(i);
+        }
+      },
+      child: Container(
+        width: (context.screenWidth -  50) / 2,
+        height: context.screenHeight / 8,
+        padding: const EdgeInsets.all(10.0),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: context.darkMode
+              ? answerRight
+                  ? greenDark
+                  : color.dark
+              : answerRight
+                  ? greenLight
+                  : color.light,
         ),
-        onPressed: () {
-          if (choice != Questionnaire.answer()) {
-            wrongAnswer(choice, i);
-          } else {
-            rightAnswer(i);
-          }
-        },
         child: Text(
           choice,
+          maxLines: 50,
           style: TextStyle(
-            color: color,
-            fontSize: context.screenHeight/ 70,
+            fontSize: context.screenHeight / 70,
           ),
         ),
       ),

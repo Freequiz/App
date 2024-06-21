@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:freequiz/utilities/imports/base.dart';
 
 class Correction extends StatelessWidget {
   final String givenAnswer;
@@ -19,13 +19,13 @@ class Correction extends StatelessWidget {
           const Text('right answer').tr(),
           Text(
             rightAnswer,
-            style: TextStyle(fontSize: height / 32, color: Colors.green),
+            style: TextStyle(fontSize: height / 32, color: greenMedium),
           ),
           SizedBox(height: height / 32),
           const Text('your answer').tr(),
           Text(
             givenAnswer,
-            style: TextStyle(fontSize: height / 32, color: Colors.red),
+            style: TextStyle(fontSize: height / 32, color: redMedium),
           ),
         ],
       ),

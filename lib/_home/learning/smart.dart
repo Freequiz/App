@@ -36,8 +36,7 @@ class _SmartState extends State<Smart> {
         wrongAnswer: wrongAnswerMC,
         rightAnswer: rightAnswerMC,
         answerRight: answerRightMC,
-        background: purple,
-        color: Colors.white,
+        color: purple,
       ),
       WritingBody(
         onPressed: onPressed,
@@ -94,7 +93,9 @@ class _SmartState extends State<Smart> {
         });
       } else {
         widget.refresh();
-        Navigator.of(context).pop();
+        if (mounted) {
+          Navigator.of(context).pop();
+        }
         QuizDatabase.updateQuiz(QuizHelper.quiz!);
       }
       answerRightW = false;
@@ -116,7 +117,9 @@ class _SmartState extends State<Smart> {
           Question.randomChoices();
         });
       } else {
-        Learning.stop(context, widget.refresh, widget.uuid, "Smart");
+        if (mounted) {
+          Learning.stop(context, widget.refresh, widget.uuid, "Smart");
+        }
       }
       answerRightMC = List.filled(4, false);
     });

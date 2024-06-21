@@ -33,10 +33,12 @@ ColorFamily rose = ColorFamily(light: roseLight, medium: roseMiddle, dark: roseD
 
 //Green
 const Color greenLight = Color.fromARGB(255, 202, 239, 230);
+const Color greenMedium = Color.fromARGB(255, 104, 159, 145);
 const Color greenDark = Color.fromARGB(255, 45, 106, 101);
 
 //Red
 const Color redLight = Color.fromARGB(255, 249, 220, 217);
+const Color redMedium = Color.fromARGB(255, 187, 90, 79);
 const Color redDark = Color.fromARGB(255, 120, 30, 14);
 
 //Gray Tones
