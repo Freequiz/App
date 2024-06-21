@@ -56,18 +56,21 @@ class _LoginState extends State<Login> {
               Space.height(context.screenHeight/ 60),
               UsernameTextfield(username: username, focusNode: focusNode),
               Space.height(5),
-              Row(
-                children: [
-                  Flexible(
-                    child: PasswordTextfield(
-                      password: password,
-                      focusNode: focusNode,
-                      onSubmitted: onPressed,
+              IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Flexible(
+                      child: PasswordTextfield(
+                        password: password,
+                        focusNode: focusNode,
+                        onSubmitted: onPressed,
+                      ),
                     ),
-                  ),
-                  Space.width(5),
-                  SubmitButton(pressed: pressed, onPressed: onPressed)
-                ],
+                    Space.width(5),
+                    SubmitButton(pressed: pressed, onPressed: onPressed)
+                  ],
+                ),
               ),
             ],
           ),

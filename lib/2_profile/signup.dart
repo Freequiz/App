@@ -92,19 +92,22 @@ class _SignUpState extends State<SignUp> {
             const SizedBox(
               height: 5.0,
             ),
-            Row(
-              children: [
-                Flexible(
-                  child: PasswordConfirmationTextfield(
-                    passwordConfirmation: passwordConfirmation,
-                    onSubmitted: onPressed,
+            IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Flexible(
+                    child: PasswordConfirmationTextfield(
+                      passwordConfirmation: passwordConfirmation,
+                      onSubmitted: onPressed,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                SubmitButton(pressed: pressed, onPressed: onPressed)
-              ],
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  SubmitButton(pressed: pressed, onPressed: onPressed)
+                ],
+              ),
             ),
             Space.height(100),
             Center(
@@ -146,6 +149,7 @@ class _SignUpState extends State<SignUp> {
         passwordConfirmation.hint = "";
         password.error = true;
         password.color = Colors.red;
+        passwordConfirmation.color = Colors.red;
       });
     } else if (username.input.text.isEmpty) {
       setState(() {
@@ -183,6 +187,8 @@ class _SignUpState extends State<SignUp> {
           passwordConfirmation.hint = 'password length 2'.tr();
           password.error = true;
           password.color = Colors.red;
+          passwordConfirmation.color = Colors.red;
+          passwordConfirmation.error = true;
           pressed = false;
         });
       } else if (map["token"] == "record.invalid") {

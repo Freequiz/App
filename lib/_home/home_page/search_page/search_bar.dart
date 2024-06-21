@@ -31,12 +31,11 @@ class _SearchBarState extends State<SearchBar> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Row(
-          children: [
-            Flexible(
-              child: SizedBox(
-                height:
-                    context.mobileLayout ? context.screenHeight/ 20 : 48,
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Flexible(
                 child: TextField(
                   onTap: () => widget.focusNode.requestFocus(),
                   onSubmitted: (value) => loadSearch(
@@ -66,11 +65,8 @@ class _SearchBarState extends State<SearchBar> {
                   ),
                 ),
               ),
-            ),
-            Space.width(5),
-            SizedBox(
-              height: context.mobileLayout ? context.screenHeight/ 20 : 48,
-              child: TextButton(
+              Space.width(5),
+              TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: grayFreequiz,
                   foregroundColor: Colors.white,
@@ -81,8 +77,8 @@ class _SearchBarState extends State<SearchBar> {
                 },
                 child: const Icon(Icons.search_rounded),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
