@@ -86,7 +86,7 @@ class Quiz {
   Map<String, Object?> toMapSync() {
     return {
       "favorite": favorite,
-      "data": translations.toMap(),
+      "data": translations.toMapSync(),
     };
   }
 

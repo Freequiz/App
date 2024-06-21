@@ -28,4 +28,14 @@ class Translations {
 
     return map;
   }
+
+  List<Map> toMapSync() {
+    List<Map<String, dynamic>> map = [];
+
+    for (Translation translation in translations) {
+      map.add(translation.toMapSync());
+    }
+
+    return map;
+  }
 }

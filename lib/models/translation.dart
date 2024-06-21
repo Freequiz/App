@@ -63,6 +63,15 @@ class Translation {
     };
   }
 
+  Map<String, dynamic> toMapSync() {
+    return {
+      "score_id": scoreID,
+      "favorite": favorite,
+      "score": score,
+      "updated": updated
+    };
+  }
+
   setFavorite(bool state) {
     favorite = state;
     updated = DateTime.now().millisecondsSinceEpoch;
