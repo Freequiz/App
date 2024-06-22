@@ -4,9 +4,9 @@ import 'package:freequiz/_views/textfields/email.dart';
 import 'package:freequiz/_views/textfields/password.dart';
 import 'package:freequiz/_views/textfields/password_confirmation.dart';
 import 'package:freequiz/_views/textfields/username.dart';
+import 'package:freequiz/main_app_bar.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
-import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -36,105 +36,80 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        FocusScope.of(context).requestFocus(FocusNode());
-      },
-      child: Padding(
-        padding: context.mobileLayout
-            ? const EdgeInsets.all(10.0)
-            : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
-        child: Column(
-          children: [
-            SizedBox(
-              height: context.screenHeight/ 15,
-            ),
-            Center(
-              child: Text(
+    return Scaffold(
+      appBar: AppBar(title: const MainAppBar()),
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Padding(
+          padding: context.mobileLayout
+              ? const EdgeInsets.all(10.0)
+              : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Space.height(context.screenHeight/ 60),
+              Text(
                 context.tr('sign up'),
                 style: textSize(context.screenHeight/ 20),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  context.tr('terms 1'),
-                  style: textSize(context.screenHeight/ 65),
-                ),
-                GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {},
-                  child: Text(
-                    context.tr('terms 2'),
-                    style: TextStyle(fontSize: context.screenHeight/ 65, color: Colors.blue),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: context.screenHeight/ 40.0,
-            ),
-            UsernameTextfield(username: username, focusNode: focusNode),
-            const SizedBox(
-              height: 5.0,
-            ),
-            EmailTextfield(email: email, focusNode: focusNode),
-            const SizedBox(
-              height: 5.0,
-            ),
-            PasswordTextfield(
-              password: password,
-              focusNode: focusNode,
-              textInputAction: TextInputAction.next,
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                    child: PasswordConfirmationTextfield(
-                      passwordConfirmation: passwordConfirmation,
-                      onSubmitted: onPressed,
+                  Text(
+                    context.tr('terms 1'),
+                    style: textSize(context.screenHeight/ 65),
+                  ),
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {},
+                    child: Text(
+                      context.tr('terms 2'),
+                      style: TextStyle(fontSize: context.screenHeight/ 65, color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  SubmitButton(pressed: pressed, onPressed: onPressed)
                 ],
               ),
-            ),
-            Space.height(100),
-            Center(
-              child: Text(
-                context.tr('already account'),
-                style: textSize(context.screenHeight/ 55),
+              SizedBox(
+                height: context.screenHeight/ 40.0,
               ),
-            ),
-            Align(
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: grayFreequiz,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return Login(refresh: widget.refresh);
-                      },
+              UsernameTextfield(username: username, focusNode: focusNode),
+              const SizedBox(
+                height: 5.0,
+              ),
+              EmailTextfield(email: email, focusNode: focusNode),
+              const SizedBox(
+                height: 5.0,
+              ),
+              PasswordTextfield(
+                password: password,
+                focusNode: focusNode,
+                textInputAction: TextInputAction.next,
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Flexible(
+                      child: PasswordConfirmationTextfield(
+                        passwordConfirmation: passwordConfirmation,
+                        onSubmitted: onPressed,
+                      ),
                     ),
-                  );
-                },
-                child: const Text('log in').tr(),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    SubmitButton(pressed: pressed, onPressed: onPressed)
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
