@@ -5,10 +5,10 @@ import 'package:freequiz/_views/edit/list_view.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class EditView extends StatefulWidget {
-
   final QuizForm quiz;
+  final String mode;
 
-  const EditView({super.key, required this.quiz});
+  const EditView({super.key, required this.quiz, required this.mode});
 
   @override
   State<EditView> createState() => _EditViewState();
@@ -22,15 +22,18 @@ class _EditViewState extends State<EditView> {
     return ListView(
       children: [
         SizedBox(
-          height: context.screenHeight/ 60,
+          height: context.screenHeight / 60,
         ),
-        EditHeader(quiz: widget.quiz, save: widget.quiz.save, hintColor: hintColor),
+        EditHeader(quiz: widget.quiz, save: () => widget.quiz.save(mode: widget.mode), hintColor: hintColor),
         SizedBox(
-          height: context.screenHeight/ 40,
+          height: context.screenHeight / 40,
         ),
-        ListWordPairs(quiz: widget.quiz),
+        ListWordPairs(
+          quiz: widget.quiz,
+          mode: widget.mode,
+        ),
         SizedBox(
-          height: context.screenHeight/ 40,
+          height: context.screenHeight / 40,
         ),
         AddButton(add: add)
       ],

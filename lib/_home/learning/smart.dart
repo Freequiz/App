@@ -46,6 +46,7 @@ class _SmartState extends State<Smart> {
         color: purpleFreequiz,
       )
     ];
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: purpleFreequiz,

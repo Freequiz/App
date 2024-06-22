@@ -93,7 +93,7 @@ class _EditQuizState extends State<EditQuiz> {
                     }
                   }
                 }
-                return EditView(quiz: quiz);
+                return EditView(quiz: quiz, mode: widget.owner ? 'edit' : 'create');
               }
               return Center(child: CircularProgressIndicator(color: context.darkMode ? Colors.white : grayFreequiz));
             },

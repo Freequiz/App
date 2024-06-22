@@ -130,7 +130,7 @@
     "platform": "Platform",
     "bug reporter": "Bug Reporter",
     "submit": "Submit",
-    
+
     "new": "New",
     "seen": "Seen",
     "memorized": "Memorized",
@@ -181,5 +181,8 @@
     "favorite": "Favorites",
     "history": "History",
 
-    "length round": "Length Round"
+    "length round": "Length Round",
+
+    "welcome": "welcome",
+    "welcome text": "Freequiz is an app to learn Vocabulary using Cards, Multiple Choice or by writing the Words. Freequiz is completely free and without ads and will always be."
 }
