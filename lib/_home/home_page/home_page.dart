@@ -1,9 +1,9 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
+import 'package:freequiz/_home/home_page/switcher.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/delete.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/dismiss.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/favorite.dart';
-import 'package:freequiz/_views/switcher/switcher.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/load_quiz_list.dart';
@@ -83,36 +83,28 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    return Padding(
-      padding: EdgeInsets.all(context.mobileLayout ? 10 : 30),
-      child: RefreshIndicator(
-        onRefresh: () => onRefresh(),
-        child: Column(
-          children: [
-            Switcher(
-              onTap: onTap,
-              texts: options,
-              value: 'history',
-              width: context.screenWidth / 1.4,
-              icons: const [Icon(Icons.history), Icon(Icons.star_rounded), Icon(Icons.person)],
-            ),
-            SizedBox(
-              height: context.mobileLayout ? 10 : 30,
-            ),
-            Expanded(
-              child: SizedBox(
-                height: double.infinity,
-                child: Stack(
-                  children: [
-                    listQuiz(0),
-                    listQuiz(1),
-                    listQuiz(2),
-                  ],
-                ),
+    return RefreshIndicator(
+      onRefresh: () => onRefresh(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          HomePageSwitcher(onTap: onTap, options: options),
+          SizedBox(
+            height: context.mobileLayout ? 10 : 30,
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10.0 : 30),
+              child: Stack(
+                children: [
+                  listQuiz(0),
+                  listQuiz(1),
+                  listQuiz(2),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

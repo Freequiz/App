@@ -49,7 +49,7 @@ class _SearchPageState extends State<SearchPage> {
                 GestureDetector(
                   onTap: () => selectLanguage(),
                   child: InfoBadge(
-                    color: purpleFreequiz,
+                    color: purpleLight,
                     text: Search.from == 'Any' && Search.to == 'Any'
                           ? context.tr('language')
                           : context.tr('fromto', args: [Search.from.tr(), Search.to.tr()]),

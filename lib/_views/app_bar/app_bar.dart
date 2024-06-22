@@ -1,4 +1,5 @@
 import 'package:freequiz/_home/search_page/search.dart';
+import 'package:freequiz/_views/app_bar/search_button.dart';
 import 'package:freequiz/_views/app_bar/search_field.dart';
 import 'package:freequiz/_views/app_bar/title.dart';
 import 'package:freequiz/loading/load_search.dart';
@@ -13,7 +14,7 @@ class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<MainAppBar> createState() => _MainAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 5);
 }
 
 class _MainAppBarState extends State<MainAppBar> {
@@ -23,24 +24,27 @@ class _MainAppBarState extends State<MainAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: Search.shown
-          ? SearchField(
+      scrolledUnderElevation: 0.0, //remove tint scrolling up
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Conditional(
+            condition: !Search.shown,
+            widget: Space.width(74.0), //Width of Search Button (64) + it's Padding (10)
+          ),
+          Conditional(
+            condition: Search.shown,
+            widget: SearchField(
               focusNode: widget.focusNode,
               dismiss: () => setState(() {
                 Search.shown = false;
               }),
-            )
-          : const AppBarTitle(),
-      actions: [
-        TextButton(
-          style: TextButton.styleFrom(
-            backgroundColor: grayFreequiz,
-            foregroundColor: Colors.white,
+            ),
+            defaultWidget: const AppBarTitle(),
           ),
-          onPressed: () => onPressed(),
-          child: const Icon(Icons.search_rounded),
-        ),
-      ],
+          SearchButton(onPressed: onPressed)
+        ],
+      ),
     );
   }
 

@@ -19,25 +19,39 @@ class _SearchFieldState extends State<SearchField> {
   Widget build(BuildContext context) {
     final hintColor = context.darkMode ? Colors.white : gray40;
 
-    return TextField(
-      onSubmitted: (value) => loadSearch(context: context, searchTerm: textController.text),
-      keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
-      controller: textController,
-      focusNode: widget.focusNode,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : const Color.fromARGB(255, 245, 245, 245),
-        contentPadding: const EdgeInsets.all(10.0),
-        border: const OutlineInputBorder(),
-        hintText: context.tr('search'),
-        suffixIcon: IconButton(
-          color: hintColor,
-          onPressed: () {
-            textController.clear();
-            widget.dismiss();
-          },
-          icon: const Icon(
-            Icons.clear,
+    return Flexible(
+      child: SizedBox(
+        height: 42.0,
+        child: TextField(
+          onSubmitted: (value) => loadSearch(context: context, searchTerm: textController.text),
+          keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
+          controller: textController,
+          focusNode: widget.focusNode,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : const Color.fromARGB(255, 245, 245, 245),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20.0
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(100),
+              borderSide: const BorderSide(width: 3, color: grayFreequiz),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(100),
+              borderSide: const BorderSide(width: 3, color: grayFreequiz),
+            ),
+            hintText: context.tr('search'),
+            suffixIcon: IconButton(
+              color: hintColor,
+              onPressed: () {
+                textController.clear();
+                widget.dismiss();
+              },
+              icon: const Icon(
+                Icons.clear,
+              ),
+            ),
           ),
         ),
       ),

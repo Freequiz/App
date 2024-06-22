@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/1_edit/edit_page.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/2_profile/profile_page.dart';
@@ -7,6 +6,7 @@ import 'package:freequiz/3_bug_reporter/bug_report_page.dart';
 import 'package:freequiz/_home/home_page/home_page.dart';
 import 'package:freequiz/_home/search_page/search.dart';
 import 'package:freequiz/_views/app_bar/app_bar.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class RootPage extends StatefulWidget {
   final int i;
@@ -58,10 +58,10 @@ class _RootPageState extends State<RootPage> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromARGB(255, 152, 141, 145),
           showSelectedLabels: false,
           showUnselectedLabels: false,
           selectedItemColor: Colors.white,
+          unselectedItemColor: gray70,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
             BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),

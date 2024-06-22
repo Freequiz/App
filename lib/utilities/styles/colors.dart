@@ -3,12 +3,15 @@ import 'package:freequiz/models/color_family.dart';
 
 // Colors
 const Color grayFreequiz = Color.fromARGB(255, 152, 141, 145);
+
 List<ColorFamily> colors = [purple, rose, beige, blue];
 
 //Purple
-const Color purpleFreequiz = Color.fromARGB(255, 154, 137, 188);
+const Color purpleLight = Color.fromARGB(255, 144, 126, 177);
+const Color purpleMedium = Color.fromARGB(255, 113, 85, 156);
+const Color purpleDark = Color.fromARGB(255, 66, 37, 88);
 
-ColorFamily purple = ColorFamily(light: purpleFreequiz, medium: purpleFreequiz, dark: purpleFreequiz);
+ColorFamily purple = ColorFamily(light: purpleLight, medium: purpleMedium, dark: purpleDark);
 
 // Blue
 const Color blueLight = Color.fromARGB(255, 201, 217, 226);
@@ -40,6 +43,10 @@ const Color greenDark = Color.fromARGB(255, 45, 106, 101);
 const Color redLight = Color.fromARGB(255, 249, 220, 217);
 const Color redMedium = Color.fromARGB(255, 187, 90, 79);
 const Color redDark = Color.fromARGB(255, 120, 30, 14);
+
+//AppBar Colors
+const Color darkMainColor = Color.fromARGB(255, 22, 23, 32);
+const Color lightMainColor = Color.fromARGB(255, 213, 194, 200);
 
 //Gray Tones
 const Color gray40 = Color.fromARGB(255, 40, 40, 40); //used for app background and for text

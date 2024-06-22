@@ -4,13 +4,16 @@ import 'package:freequiz/utilities/imports/base.dart';
 
 class Switcher extends StatefulWidget {
   const Switcher(
-      {super.key, required this.onTap, required this.texts, required this.value, required this.width, this.icons});
+      {super.key, required this.onTap, required this.texts, required this.value, required this.width, this.icons, this.height = 50, this.color, this.highlightedColor});
 
   final Function onTap;
   final List<String> texts;
   final String value;
   final List<Icon>? icons;
   final double width;
+  final double height;
+  final Color? highlightedColor;
+  final Color? color;
 
   @override
   State<Switcher> createState() => _SwitcherState();
@@ -33,20 +36,20 @@ class _SwitcherState extends State<Switcher> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: widget.height,
       width: widget.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.screenHeight / 100),
-        color: context.darkMode ? gray55 : white235,
+        color: widget.color ?? (context.darkMode ? gray55 : white235),
       ),
       child: Stack(
         children: [
           Container(
             width: widget.width / widget.texts.length,
-            height: 50,
+            height: widget.height,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(context.screenHeight / 100),
-              color: context.darkMode ? gray70 : white205,
+              color: widget.highlightedColor ?? (context.darkMode ? gray70 : white205),
             ),
           )
               .animate(target: onChange ? 1 : 0)

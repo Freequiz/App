@@ -17,7 +17,6 @@ class SwitcherButton extends StatelessWidget {
       onTap: () => onTap(text),
       child: SizedBox(
         width: width,
-        height: 50,
         child: Center(
           child: icon ??
               Text(

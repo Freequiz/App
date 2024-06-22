@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_home/learning/start_learning_body.dart';
 import 'package:freequiz/_views/alerts/confirmation.dart';
 import 'package:freequiz/_views/alerts/settings.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
@@ -20,7 +21,7 @@ class StartLearning extends StatefulWidget {
 
 class _StartLearningState extends State<StartLearning> {
   final List<Color> color = [
-    purpleFreequiz,
+    purpleLight,
     roseLight,
     beigeLight,
     blueLight,
@@ -39,7 +40,11 @@ class _StartLearningState extends State<StartLearning> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
-        title: Text(Learning.modes[widget.i].tr()),
+        foregroundColor: Colors.white,
+        title: Text(
+          Learning.modes[widget.i].tr(),
+          style: textColor(Colors.white),
+        ),
         actions: [
           IconButton(
             onPressed: () {

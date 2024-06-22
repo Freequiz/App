@@ -25,7 +25,7 @@ class _QuizPageState extends State<QuizPage> {
     Icons.quiz_outlined
   ];
   final List<Color> color = [
-    purpleFreequiz,
+    purpleLight,
     roseLight,
     beigeLight,
     blueLight

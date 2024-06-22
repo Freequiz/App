@@ -24,7 +24,7 @@ class AdditionalInfo extends StatelessWidget {
           Space.width(10.0),
 
           InfoBadge(
-            color: purpleFreequiz,
+            color: purpleLight,
             text:
             context.tr("fromto", args: [context.tr(data['from']['name']), context.tr(data['to']['name'])])
           ),

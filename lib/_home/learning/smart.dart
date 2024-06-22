@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/local_storage/database.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
@@ -47,11 +48,13 @@ class _SmartState extends State<Smart> {
     ];
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: purpleFreequiz,
-        title: const Text("Smart").tr(),
+        backgroundColor: context.darkMode ? purpleDark : purpleLight,
+        title: Text(
+          "Smart",
+          style: textColor(Colors.white),
+        ).tr(),
         leading: TextButton(
-          onPressed: () =>
-              Learning.stop(context, widget.refresh, widget.uuid, "Smart"),
+          onPressed: () => Learning.stop(context, widget.refresh, widget.uuid, "Smart"),
           child: const Icon(
             Icons.arrow_back_ios_new,
             color: Colors.white,

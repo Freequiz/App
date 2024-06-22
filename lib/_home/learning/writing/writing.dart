@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
 import 'package:freequiz/quiz/question.dart';
@@ -22,7 +23,10 @@ class _WritingState extends State<Writing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('writing').tr(),
+        title: Text(
+          'writing',
+          style: textColor(Colors.white),
+        ).tr(),
         leading: TextButton(
           onPressed: () {
             close();

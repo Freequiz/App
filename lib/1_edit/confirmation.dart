@@ -28,8 +28,9 @@ class Confirmation extends StatelessWidget {
                     TextButton(
                       onPressed: () async {
                         await APIQuizzes.deleteQuiz(data.data!["token"], uuid);
-                        // ignore: use_build_context_synchronously
-                        Navigator.of(context).pop();
+                        if (context.mounted) {
+                          Navigator.of(context).pop();
+                        }
                         refresh();
                       },
                       child: Text(
