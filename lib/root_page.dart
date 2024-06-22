@@ -17,12 +17,6 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
-  List<Widget> pages = const [
-    HomePage(),
-    EditPage(),
-    BugReportPage(),
-    ProfilePage(),
-  ];
 
   refresh() {
     setState(() {});
@@ -36,6 +30,15 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      const HomePage(),
+      const EditPage(),
+      const BugReportPage(),
+      ProfilePage(
+        refresh: refresh,
+      ),
+    ];
+
     if (Profile.accessToken != "") {
       return Scaffold(
         appBar: AppBar(
