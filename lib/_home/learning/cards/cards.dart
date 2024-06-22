@@ -52,9 +52,7 @@ class _CardsState extends State<Cards> {
         Learning.showAnswer = false;
       });
     } else {
-      widget.refresh();
-      QuizDatabase.updateQuiz(QuizHelper.quiz!);
-      Navigator.of(context).pop();
+      close();
     }
   }
 
@@ -67,9 +65,7 @@ class _CardsState extends State<Cards> {
         Learning.showAnswer = false;
       });
     } else {
-      widget.refresh();
-      QuizDatabase.updateQuiz(QuizHelper.quiz!);
-      Navigator.of(context).pop();
+      close();
     }
   }
 
