@@ -18,11 +18,15 @@ class Switcher extends StatefulWidget {
 
 class _SwitcherState extends State<Switcher> {
   String previousValue = "";
+  String value = "";
+
+  bool deactivated = false;
   bool onChange = false;
 
   @override
   void initState() {
     previousValue = widget.value;
+    value = widget.value;
     super.initState();
   }
 
@@ -32,7 +36,7 @@ class _SwitcherState extends State<Switcher> {
       height: 50,
       width: widget.width,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
+        borderRadius: BorderRadius.circular(context.screenHeight / 100),
         color: context.darkMode ? gray55 : white235,
       ),
       child: Stack(
@@ -41,21 +45,27 @@ class _SwitcherState extends State<Switcher> {
             width: widget.width / widget.texts.length,
             height: 50,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-                color: context.darkMode ? gray70 : white205),
+              borderRadius: BorderRadius.circular(context.screenHeight / 100),
+              color: context.darkMode ? gray70 : white205,
+            ),
           )
               .animate(target: onChange ? 1 : 0)
               .moveX(
                 begin: widget.texts.indexOf(previousValue) * widget.width / widget.texts.length,
-                end: widget.texts.indexOf(widget.value) * widget.width / widget.texts.length,
+                end: widget.texts.indexOf(value) * widget.width / widget.texts.length,
                 duration: const Duration(milliseconds: 200),
               )
               .callback(
-                callback: (_) => setState(() {
-                  previousValue = widget.value;
-                  onChange = false;
-                }),
-              ),
+            callback: (_) {
+              setState(() {
+                previousValue = value; 
+                onChange = false;
+              });
+              Future.delayed(const Duration(milliseconds: 200), (){
+                deactivated = false;
+              });
+            },
+          ),
           Row(
             children: children(),
           ),
@@ -69,21 +79,25 @@ class _SwitcherState extends State<Switcher> {
     for (int i = 0; i < widget.texts.length; i++) {
       children.add(
         SwitcherButton(
-            onTap: onTap,
-            selected: widget.texts[i] == widget.value,
-            text: widget.texts[i],
-            icon: widget.icons?[i],
-            width: widget.width / widget.texts.length),
+          onTap: onTap,
+          text: widget.texts[i],
+          icon: widget.icons?[i],
+          width: widget.width / widget.texts.length,
+        ),
       );
     }
     return children;
   }
 
   onTap(String text) {
-    if (onChange) return; //prevent breaking animation by clicking the buttons too fast
+    if (deactivated) return; //prevent breaking animation by clicking the buttons too fast
+
     setState(() {
+      value = text;
       onChange = true;
     });
+
     widget.onTap(text);
+    deactivated = true;
   }
 }

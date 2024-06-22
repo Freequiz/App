@@ -81,10 +81,6 @@ class _RootPageState extends State<RootPage> {
         child: Welcome(refresh: refresh),
       );
     }
-    return Drawer(
-      child: Image.asset(
-        "assets/images/icon_transparent.png",
-      ),
-    );
+    return const Drawer();
   }
 }
