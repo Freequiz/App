@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/app_bar/title.dart';
 import 'package:freequiz/_views/buttons/submit.dart';
 import 'package:freequiz/_views/textfields/email.dart';
 import 'package:freequiz/_views/textfields/password.dart';
 import 'package:freequiz/_views/textfields/password_confirmation.dart';
 import 'package:freequiz/_views/textfields/username.dart';
-import 'package:freequiz/main_app_bar.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/2_profile/profile.dart';
@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const MainAppBar()),
+      appBar: AppBar(title: const AppBarTitle()),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {

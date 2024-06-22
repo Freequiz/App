@@ -34,9 +34,11 @@ class _StartLearningState extends State<StartLearning> {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = context.darkMode ? colors[widget.i].dark : colors[widget.i].light;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: context.darkMode ? colors[widget.i].dark : colors[widget.i].light,
+        backgroundColor: backgroundColor,
         title: Text(Learning.modes[widget.i].tr()),
         actions: [
           IconButton(

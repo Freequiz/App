@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/home_page/search_page/search.dart';
-import 'package:freequiz/_home/home_page/search_page/search_page.dart';
+import 'package:freequiz/_home/search_page/search.dart';
+import 'package:freequiz/_home/search_page/search_page.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/loading/loading.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
-import 'package:freequiz/_home/home_page/search_page/search_bar.dart' as search;
 import 'package:freequiz/_views/quiz_tile/backgrounds/delete.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/dismiss.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/favorite.dart';
@@ -65,78 +64,62 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.all(context.mobileLayout ? 10 : 30),
       child: RefreshIndicator(
         onRefresh: () => onRefresh(),
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () {
-            Future.delayed(const Duration(milliseconds: 50), () {
-              focusNode.unfocus();
-            });
-          },
-          child: Column(
-            children: [
-              Center(
-                child: search.SearchBar(
-                  focusNode: focusNode,
+        child: Column(
+          children: [
+            Switcher(
+              onTap: onTap,
+              texts: const ["history", "favorite", "personal"],
+              value: options[shownQuizzes],
+              width: context.screenWidth / 1.4,
+              icons: const [Icon(Icons.history), Icon(Icons.star_rounded), Icon(Icons.person)],
+            ),
+            SizedBox(
+              height: context.mobileLayout ? 10 : 30,
+            ),
+            Expanded(
+              child: SizedBox(
+                height: double.infinity,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: LoadQuizList(
+                        key: keyHistory,
+                        future: recent,
+                        background: const BackgroundDismiss(),
+                        onDismissed: removeRecent,
+                      )
+                          .animate(target: onChanged ? 1 : 0)
+                          .moveX(begin: - context.screenWidth * previousShownQuizzes, end: - context.screenWidth * shownQuizzes, duration: const Duration(milliseconds: 200))
+                          .callback(callback: (_) => setState(() {
+                            previousShownQuizzes = shownQuizzes;
+                            onChanged = false;
+                          }),),
+                    ),
+                    Positioned.fill(
+                      child: LoadQuizList(
+                        key: keyFavorites,
+                        future: favorites,
+                        background: const BackgroundFavorite(),
+                        onDismissed: removeFavorite,
+                      )
+                          .animate(target: onChanged ? 1 : 0)
+                          .moveX(begin: context.screenWidth * (1 - previousShownQuizzes), end: context.screenWidth * (1 - shownQuizzes), duration: const Duration(milliseconds: 200)),
+                    ),
+                    Positioned.fill(
+                      child: LoadQuizList(
+                        key: keyPersonal,
+                        future: personal,
+                        background: const BackgroundDelete(),
+                        onDismissed: removePersonal,
+                      )
+                          .animate(target: onChanged ? 1 : 0)
+                          .moveX(begin: context.screenWidth * (2 - previousShownQuizzes), end: context.screenWidth * (2 - shownQuizzes), duration: const Duration(milliseconds: 200)),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: context.mobileLayout ? 10 : 30,
-              ),
-              Switcher(
-                onTap: onTap,
-                texts: const ["history", "favorite", "personal"],
-                value: options[shownQuizzes],
-                width: context.screenWidth / 1.4,
-                icons: const [Icon(Icons.history), Icon(Icons.star_rounded), Icon(Icons.person)],
-              ),
-              SizedBox(
-                height: context.mobileLayout ? 10 : 30,
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: double.infinity,
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: LoadQuizList(
-                          key: keyHistory,
-                          future: recent,
-                          background: const BackgroundDismiss(),
-                          onDismissed: removeRecent,
-                        )
-                            .animate(target: onChanged ? 1 : 0)
-                            .moveX(begin: - context.screenWidth * previousShownQuizzes, end: - context.screenWidth * shownQuizzes, duration: const Duration(milliseconds: 200))
-                            .callback(callback: (_) => setState(() {
-                              previousShownQuizzes = shownQuizzes;
-                              onChanged = false;
-                            }),),
-                      ),
-                      Positioned.fill(
-                        child: LoadQuizList(
-                          key: keyFavorites,
-                          future: favorites,
-                          background: const BackgroundFavorite(),
-                          onDismissed: removeFavorite,
-                        )
-                            .animate(target: onChanged ? 1 : 0)
-                            .moveX(begin: context.screenWidth * (1 - previousShownQuizzes), end: context.screenWidth * (1 - shownQuizzes), duration: const Duration(milliseconds: 200)),
-                      ),
-                      Positioned.fill(
-                        child: LoadQuizList(
-                          key: keyPersonal,
-                          future: personal,
-                          background: const BackgroundDelete(),
-                          onDismissed: removePersonal,
-                        )
-                            .animate(target: onChanged ? 1 : 0)
-                            .moveX(begin: context.screenWidth * (2 - previousShownQuizzes), end: context.screenWidth * (2 - shownQuizzes), duration: const Duration(milliseconds: 200)),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

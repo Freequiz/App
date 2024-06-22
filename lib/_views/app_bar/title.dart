@@ -1,7 +1,7 @@
 import 'package:freequiz/utilities/imports/base.dart';
 
-class MainAppBar extends StatelessWidget {
-  const MainAppBar({super.key});
+class AppBarTitle extends StatelessWidget {
+  const AppBarTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,10 @@ class MainAppBar extends StatelessWidget {
         ),
         const Text(
           "Freequiz",
-          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30.0),
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 30.0,
+          ),
         ),
       ],
     );
