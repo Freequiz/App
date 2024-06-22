@@ -127,6 +127,9 @@ class _EditQuizState extends State<EditQuiz> {
           ),
         );
       } else {
+        for (Map translationAttribute in map['translations_attributes'].values) {
+          translationAttribute.remove('id');
+        }
         final response = APIQuizzes.createQuiz(map);
         showDialog(
           context: context,
