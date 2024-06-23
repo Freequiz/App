@@ -174,9 +174,9 @@
     "Edit": "Edit",
     "Close": "Close",
 
-    "private": "Privat",
-    "hidden": "Versteckt",
-    "public": "Öffentlich",
+    "private": "Private",
+    "hidden": "Hidden",
+    "public": "Public",
 
     "favorite": "Favorites",
     "history": "History",
@@ -184,5 +184,7 @@
     "length round": "Length Round",
 
     "welcome": "welcome",
-    "welcome text": "Freequiz is an app to learn Vocabulary using Cards, Multiple Choice or by writing the Words. Freequiz is completely free and without ads and will always be."
+    "welcome text": "Freequiz is an app to learn Vocabulary using Cards, Multiple Choice or by writing the Words. Freequiz is completely free and without ads and will always be.",
+
+    "Ban error": "This user was banned."
 }
