@@ -61,7 +61,7 @@ class _RootPageState extends State<RootPage> {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           selectedItemColor: Colors.white,
-          unselectedItemColor: gray70,
+          unselectedItemColor: grayFreequiz,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
             BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
