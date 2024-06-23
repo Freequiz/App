@@ -13,10 +13,15 @@ class QuizDatabase {
       join(await getDatabasesPath(), 'quizzes_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE quizzes(id TEXT PRIMARY KEY, title TEXT, description TEXT, visibility TEXT, created_by TEXT, owner TEXT, favorite TEXT, from_language TEXT, to_language TEXT, data TEXT, time INTEGER)',
+          'CREATE TABLE quizzes(id TEXT PRIMARY KEY, title TEXT, description TEXT, visibility TEXT, created_by TEXT, owner TEXT, favorite TEXT, updated TEXT, from_language TEXT, to_language TEXT, data TEXT, time INTEGER)',
         );
       },
-      version: 1,
+      version: 2,
+      onUpgrade: (db, oldVersion, newVersion) {
+        if (oldVersion < newVersion) {
+          db.execute('ALTER TABLE quizzes ADD COLUMN updated TEXT');
+        }
+      }
     );
 
     manageQuizzes();
@@ -72,13 +77,14 @@ class QuizDatabase {
       return {};
     }
 
-    Map<String, Object> map = Map<String, Object>.from(response.first);
+    Map<String, Object?> map = Map<String, Object?>.from(response.first);
 
     map['data'] = json.decode(map['data'] as String);
     map['from'] = json.decode(map['from_language'] as String);
     map['to'] = json.decode(map['to_language'] as String);
     map['owner'] = map['owner'] == "true";
     map['favorite'] = map['favorite'] == "true";
+    map['updated'] = map['updated'] == "true";
 
     return map;
   }
