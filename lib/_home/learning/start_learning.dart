@@ -41,6 +41,7 @@ class _StartLearningState extends State<StartLearning> {
       appBar: AppBar(
         backgroundColor: backgroundColor,
         foregroundColor: Colors.white,
+        scrolledUnderElevation: 0.0,
         title: Text(
           Learning.modes[widget.i].tr(),
           style: textColor(Colors.white),
