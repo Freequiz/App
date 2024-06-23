@@ -4,9 +4,12 @@ ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     color: lightMainColor,
     foregroundColor: gray40,
+    scrolledUnderElevation: 0.0, //remove tint scrolling up
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: lightMainColor,
+    unselectedItemColor: gray70,
+    selectedItemColor: Colors.white,
   ),
   textTheme: const TextTheme(
     titleMedium: TextStyle(color: gray40),

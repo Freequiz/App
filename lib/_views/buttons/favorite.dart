@@ -23,14 +23,11 @@ class _FavoriteState extends State<Favorite> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.white,
-      ),
       onPressed: () => onPressed(),
       child: Icon(
         favorite ? Icons.star_rounded : Icons.star_border_rounded,
         size: 30,
-        color: favorite ? Colors.yellow : Colors.white,
+        color: favorite ? Colors.yellow : null,
       ),
     );
   }

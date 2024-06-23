@@ -24,7 +24,6 @@ class _MainAppBarState extends State<MainAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      scrolledUnderElevation: 0.0, //remove tint scrolling up
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

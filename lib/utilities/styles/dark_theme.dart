@@ -4,9 +4,12 @@ ThemeData darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     color: darkMainColor,
     foregroundColor: Colors.white,
+    scrolledUnderElevation: 0.0, //remove tint scrolling up
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: darkMainColor,
+    unselectedItemColor: grayFreequiz,
+    selectedItemColor: Colors.white,
   ),
   textTheme: const TextTheme(
     titleMedium: TextStyle(color: Colors.white),

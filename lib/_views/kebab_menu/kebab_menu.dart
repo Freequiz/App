@@ -6,20 +6,17 @@ import 'package:share_plus/share_plus.dart';
 
 class KebabMenuButton extends StatelessWidget {
   final String url;
-  final Color color;
+  final Color? color;
   final String uuid;
   const KebabMenuButton(
       {super.key,
       required this.url,
-      this.color = Colors.white,
+      this.color,
       required this.uuid});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.white,
-      ),
       onPressed: () {
         showDialog(
           context: context,

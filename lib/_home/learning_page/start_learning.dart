@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_home/learning/start_learning_body.dart';
+import 'package:freequiz/_home/learning_page/start_learning_body.dart';
 import 'package:freequiz/_views/alerts/confirmation.dart';
 import 'package:freequiz/_views/alerts/settings.dart';
 import 'package:freequiz/others/utilities.dart';
@@ -20,12 +20,6 @@ class StartLearning extends StatefulWidget {
 }
 
 class _StartLearningState extends State<StartLearning> {
-  final List<Color> color = [
-    purpleLight,
-    roseLight,
-    beigeLight,
-    blueLight,
-  ];
 
   reset() {
     setState(() {
@@ -78,7 +72,6 @@ class _StartLearningState extends State<StartLearning> {
         i: widget.i,
         refresh: widget.refresh,
         levels: Learning.getLevels(widget.i),
-        uuid: widget.uuid,
       ),
     );
   }
