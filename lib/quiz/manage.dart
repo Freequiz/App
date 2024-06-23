@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/api/api.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/local_storage/database.dart';
@@ -26,10 +25,7 @@ class ManageQuiz {
     // sync or get quiz from server
     Map? quiz;
     if (sync) {
-      debugPrint(localQuiz.favorite.toString());
-      debugPrint(localQuiz.toMapSync().toString());
       quiz = await APIQuizzes.syncScore(uuid, localQuiz.toMapSync());
-      debugPrint(quiz['quiz_data']['favorite'].toString());
     }
     else {
       quiz = await APIQuizzes.getQuiz(uuid);

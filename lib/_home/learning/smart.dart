@@ -1,18 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
-import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/question.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class Smart extends StatefulWidget {
-  final Function refresh;
-  final String uuid;
-  const Smart({super.key, required this.refresh, required this.uuid});
+  const Smart({super.key});
 
   @override
   State<Smart> createState() => _SmartState();
@@ -53,13 +49,6 @@ class _SmartState extends State<Smart> {
           "Smart",
           style: textColor(Colors.white),
         ).tr(),
-        leading: TextButton(
-          onPressed: () => Learning.stop(context, widget.refresh, widget.uuid, "Smart"),
-          child: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-          ),
-        ),
       ),
       body: modes[Questionnaire.questions[0].score['smart'] > 0 ? 1 : 0],
     );
@@ -95,11 +84,9 @@ class _SmartState extends State<Smart> {
           Question.randomChoices();
         });
       } else {
-        widget.refresh();
         if (mounted) {
           Navigator.of(context).pop();
         }
-        QuizDatabase.updateQuiz(QuizHelper.quiz!);
       }
       answerRightW = false;
     });
@@ -121,7 +108,7 @@ class _SmartState extends State<Smart> {
         });
       } else {
         if (mounted) {
-          Learning.stop(context, widget.refresh, widget.uuid, "Smart");
+          Navigator.of(context).pop();
         }
       }
       answerRightMC = List.filled(4, false);

@@ -7,9 +7,7 @@ import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class Writing extends StatefulWidget {
-  final Function refresh;
-  final String uuid;
-  const Writing({super.key, required this.refresh, required this.uuid});
+  const Writing({super.key});
 
   @override
   State<Writing> createState() => _WritingState();
@@ -27,15 +25,6 @@ class _WritingState extends State<Writing> {
           'writing',
           style: textColor(Colors.white),
         ).tr(),
-        leading: TextButton(
-          onPressed: () {
-            close();
-          },
-          child: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-          ),
-        ),
         backgroundColor: context.darkMode ? roseDark : roseLight,
       ),
       body: WritingBody(
@@ -76,13 +65,9 @@ class _WritingState extends State<Writing> {
           _textController.clear();
         });
       } else {
-        close();
+        if (mounted) Navigator.of(context).pop();
       }
       answerRight = false;
     });
-  }
-
-  close() {
-    Learning.stop(context, widget.refresh, widget.uuid, "Writing");
   }
 }

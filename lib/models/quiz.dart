@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:freequiz/api/quizzes.dart';
 import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/models/language.dart';
@@ -109,8 +108,6 @@ class Quiz {
   toggleFavorite() async {
     favorite = !favorite;
     updated = true;
-
-    debugPrint(favorite.toString());
 
     QuizDatabase.updateQuiz(this);
     final response = await APIQuizzes.setQuizFavorite(id, favorite);

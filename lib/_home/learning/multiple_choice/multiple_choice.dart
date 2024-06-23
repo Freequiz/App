@@ -7,9 +7,7 @@ import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class MultipleChoice extends StatefulWidget {
-  final Function refresh;
-  final String uuid;
-  const MultipleChoice({super.key, required this.refresh, required this.uuid});
+  const MultipleChoice({super.key});
 
   @override
   State<MultipleChoice> createState() => _MultipleChoiceState();
@@ -32,15 +30,6 @@ class _MultipleChoiceState extends State<MultipleChoice> {
           'multiple choice',
           style: textColor(Colors.white),
         ).tr(),
-        leading: TextButton(
-          onPressed: () {
-            close();
-          },
-          child: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-          ),
-        ),
         backgroundColor: context.darkMode ? beigeDark : beigeLight,
       ),
       body: MultipleChoiceBody(
@@ -68,7 +57,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
           Question.randomChoices();
         });
       } else {
-        close();
+        if (mounted) Navigator.of(context).pop();
       }
       answerRight = List.filled(4, false);
     });
@@ -76,9 +65,5 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
   wrongAnswer(String choice, int i) {
     Learning().wrongAnswerMultipleChoice(context, choice, rightAnswer, i);
-  }
-
-  close() {
-    Learning.stop(context, widget.refresh, widget.uuid, "MultipleChoice");
   }
 }

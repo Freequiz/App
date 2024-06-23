@@ -76,11 +76,10 @@ class Learning {
     });
   }
 
-  static stop(BuildContext context, Function refresh, String uuid, String mode) {
+  static stop(Function refresh, String uuid, String mode) {
+    Learning.showAnswer = false;
     QuizDatabase.updateQuiz(QuizHelper.quiz!);
-    FocusScope.of(context).requestFocus(FocusNode());
     refresh();
-    Navigator.of(context).pop();
   }
 
   static List<String> getLevels(int i) {

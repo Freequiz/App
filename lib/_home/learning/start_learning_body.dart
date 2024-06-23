@@ -12,33 +12,20 @@ import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
-
 class StartLearningBody extends StatefulWidget {
   final int i;
   final Function refresh;
   final List<String> levels;
   final String uuid;
   const StartLearningBody(
-      {super.key,
-      required this.i,
-      required this.refresh,
-      required this.levels,
-      required this.uuid});
+      {super.key, required this.i, required this.refresh, required this.levels, required this.uuid});
 
   @override
   State<StartLearningBody> createState() => _StartLearningBodyState();
 }
 
 class _StartLearningBodyState extends State<StartLearningBody> {
-  late final List<Widget> pages = [
-    Smart(
-      refresh: refresh,
-      uuid: widget.uuid,
-    ),
-    Writing(refresh: refresh, uuid: widget.uuid),
-    MultipleChoice(refresh: refresh, uuid: widget.uuid),
-    Cards(refresh: refresh, uuid: widget.uuid)
-  ];
+  late final List<Widget> pages = [const Smart(), const Writing(), const MultipleChoice(), const Cards()];
 
   refresh() {
     Progress.calculate(Learning.modes[widget.i]);
@@ -51,9 +38,10 @@ class _StartLearningBodyState extends State<StartLearningBody> {
     return Column(
       children: [
         ProgressBar(
-            amountLeft: QuizHelper.quiz!.translations.translations.length - Progress.amount,
-            amount: QuizHelper.quiz!.translations.translations.length,
-            color: colors[widget.i],),
+          amountLeft: QuizHelper.quiz!.translations.translations.length - Progress.amount,
+          amount: QuizHelper.quiz!.translations.translations.length,
+          color: colors[widget.i],
+        ),
         Container(
           height: context.screenHeight / 12,
           width: context.screenWidth,
@@ -72,22 +60,25 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                         return pages[widget.i];
                       },
                     ),
+                  ).then(
+                    (context) => Learning.stop(
+                      refresh,
+                      widget.uuid,
+                      Learning.modes[widget.i],
+                    ),
                   );
                 },
                 child: Container(
                   width: widthStartButton(context.screenWidth),
                   decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(context.screenWidth / 30),
+                    borderRadius: BorderRadius.circular(context.screenWidth / 30),
                     color: colors[widget.i].medium,
                   ),
                   child: Center(
                     child: Text(
                       context.tr('learn'),
                       style: TextStyle(
-                          fontSize: context.screenHeight/ 45,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600),
+                          fontSize: context.screenHeight / 45, color: Colors.white, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -111,11 +102,10 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                     );
                   },
                   child: Container(
-                    height: context.screenHeight/ 10 - 20,
+                    height: context.screenHeight / 10 - 20,
                     width: widthStartButton(context.screenWidth),
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(context.screenWidth / 30),
+                      borderRadius: BorderRadius.circular(context.screenWidth / 30),
                       color: colors[widget.i].medium,
                     ),
                     child: Row(
@@ -124,9 +114,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                         Text(
                           context.tr('learn only'),
                           style: TextStyle(
-                              fontSize: context.screenHeight/ 45,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600),
+                              fontSize: context.screenHeight / 45, color: Colors.white, fontWeight: FontWeight.w600),
                         ),
                         Space.width(5.0),
                         const Icon(
@@ -145,8 +133,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
         Flexible(
           fit: FlexFit.loose,
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 30.0),
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 30.0),
             child: ListView.builder(
               itemCount: widget.i == 0 ? 5 : 3,
               itemBuilder: (BuildContext context, int i) {
@@ -158,14 +145,13 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                       condition: progressArray.isNotEmpty,
                       widget: Container(
                         width: (context.screenWidth - 20),
-                        height: context.screenHeight/ 30,
+                        height: context.screenHeight / 30,
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8),
                           child: Text(
                             i < widget.levels.length ? widget.levels[i] : widget.levels.last,
-                            style:
-                                TextStyle(fontSize: context.screenHeight/ 40),
+                            style: TextStyle(fontSize: context.screenHeight / 40),
                           ),
                         ),
                       ),
@@ -179,9 +165,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                       width: context.screenWidth,
                     ),
                     Space.height(
-                      progressArray.isNotEmpty
-                          ? context.screenHeight/ 30
-                          : 0,
+                      progressArray.isNotEmpty ? context.screenHeight / 30 : 0,
                     ),
                   ],
                 );
