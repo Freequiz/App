@@ -72,7 +72,7 @@
 
     "answer blank": "Antwort kann nicht leer sein",
     "title error": "Titel mindestens 3 Zeichen",
-    "description error": "Beschreibung kann nicht leer sein. \n Beschreibung mindestens 5 Zeichen lang",
+    "description error": "Beschreibung kann nicht leer sein. \nBeschreibung mindestens 5 Zeichen lang",
     "definition error": "Definition kann nicht leer sein",
 
     "not enough words": "Nicht genug Wörter",

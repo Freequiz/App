@@ -70,7 +70,7 @@
 
     "answer blank": "Answer can't be blank",
     "title error": "Title at least 3 characters",
-    "description error": "Description can't be blank. \n Description at least 5 characters long",
+    "description error": "Description can't be blank. \nDescription at least 5 characters long",
     "definition error": "Definition can't be blank",
 
     "not enough words": "Not enough words",
