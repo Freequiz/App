@@ -72,7 +72,7 @@
 
     "answer blank": "Antwort kann nicht leer sein",
     "title error": "Titel mindestens 3 Zeichen",
-    "description error": "Beschreibung kann nicht leer sein. \n Beschreibung mindestens 5 Zeichen lang",
+    "description error": "Beschreibung kann nicht leer sein. \nBeschreibung mindestens 5 Zeichen lang",
     "definition error": "Definition kann nicht leer sein",
 
     "not enough words": "Nicht genug Wörter",
@@ -184,5 +184,9 @@
     "length round": "Länge Runde",
 
     "welcome": "Willkommen",
-    "welcome text": "Freequiz ist eine App zum Lernen von Wortschatz mithilfe von Karteikärtchen, Multiple Choice oder in dem man die Wörter schreibt. Die App ist komplett gratis und werbefrei und wird es für immer sein."
+
+    "welcome text": "Freequiz ist eine App zum Lernen von Wortschatz mithilfe von Karteikärtchen, Multiple Choice oder in dem man die Wörter schreibt. Die App ist komplett gratis und werbefrei und wird es für immer sein.",
+
+    "Ban error": "Dieser Benutzer wurde gebannt.",
+    "User": "Benutzer" 
 }

@@ -1,15 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
-import 'package:freequiz/local_storage/database.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
-import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
-import 'package:freequiz/utilities/imports/base.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class Cards extends StatefulWidget {
-  final Function refresh;
-  final String uuid;
-  const Cards({super.key, required this.refresh, required this.uuid});
+  const Cards({super.key});
 
   @override
   State<Cards> createState() => _CardsState();
@@ -22,23 +19,17 @@ class _CardsState extends State<Cards> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('cards').tr(),
-        leading: TextButton(
-          onPressed: () {
-            close();
-          },
-          child: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: blueFreequiz,
+        title: Text(
+          'cards',
+          style: textColor(Colors.white),
+        ).tr(),
+        backgroundColor: context.darkMode ? blueDark : blueLight,
       ),
       body: CardsBody(
         key: key,
         wrong: wrong,
         right: right,
-        color: blueFreequiz,
+        color: blue,
       ),
     );
   }
@@ -51,8 +42,8 @@ class _CardsState extends State<Cards> {
         Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
       });
-    } else {
-      close();
+    } else 
+      Navigator.of(context).pop();
     }
   }
 
@@ -65,14 +56,11 @@ class _CardsState extends State<Cards> {
         Learning.showAnswer = false;
       });
     } else {
-      close();
+      Navigator.of(context).pop();
     }
   }
 
   close() {
-    QuizDatabase.updateQuiz(QuizHelper.quiz!);
-    Learning.showAnswer = false;
-    widget.refresh();
     Navigator.of(context).pop();
   }
 }

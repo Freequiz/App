@@ -44,7 +44,7 @@ class LoadQuiz extends StatelessWidget {
                   toggleFavorite: toggleFavorite,
                 ),
                 KebabMenuButton(
-                  url: "https://freequiz.herokuapp.com/quiz/$uuid",
+                  url: "https://freequiz.ch/quiz/$uuid",
                   uuid: uuid,
                 ),
               ],

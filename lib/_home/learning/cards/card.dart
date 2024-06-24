@@ -47,7 +47,7 @@ class _CardWidgetState extends State<CardWidget> {
         builder: (context, textColor, child) {
           return Container(
             width: context.screenWidth / 1.25,
-            height: context.mobileLayout ? context.screenHeight / 4 : context.screenWidth / 2.5,
+            height: context.mobileLayout ? context.screenHeight / 2 : context.screenWidth / 2.5,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(context.screenHeight / 20),
               color: widget.color,
@@ -57,8 +57,9 @@ class _CardWidgetState extends State<CardWidget> {
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: min(context.screenHeight / 11 / log(text.length), context.screenHeight / 15),
-                  color: _textColor.value),
+                fontSize: min(context.screenHeight / 9 / log(text.length), context.screenHeight / 15),
+                color: _textColor.value,
+              ),
             ),
           );
         },
@@ -72,15 +73,16 @@ class _CardWidgetState extends State<CardWidget> {
     int b = darkMode ? 255 : 40;
 
     if (darkMode) {
-      b -= (details.progress * 205).toInt();
       if (details.direction == DismissDirection.startToEnd) {
         r -= (details.progress * 205).toInt();
       } else {
+        b -= (details.progress * 205).toInt();
         g -= (details.progress * 205).toInt();
       }
     } else {
       if (details.direction == DismissDirection.startToEnd) {
         g += (details.progress * 205).toInt();
+        b += (details.progress * 205).toInt();
       } else {
         r += (details.progress * 205).toInt();
       }

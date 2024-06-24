@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/app_bar/title.dart';
 import 'package:freequiz/_views/buttons/submit.dart';
 import 'package:freequiz/_views/textfields/password.dart';
 import 'package:freequiz/_views/textfields/username.dart';
@@ -33,9 +34,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('sign up').tr(),
-      ),
+      appBar: AppBar(title: const AppBarTitle()),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {

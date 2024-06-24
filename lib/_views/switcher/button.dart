@@ -3,16 +3,9 @@ import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class SwitcherButton extends StatelessWidget {
-  const SwitcherButton(
-      {super.key,
-      required this.onTap,
-      required this.selected,
-      required this.text,
-      required this.width,
-      this.icon});
+  const SwitcherButton({super.key, required this.onTap, required this.text, required this.width, this.icon});
 
   final Function onTap;
-  final bool selected;
   final String text;
   final Icon? icon;
   final double width;
@@ -24,12 +17,11 @@ class SwitcherButton extends StatelessWidget {
       onTap: () => onTap(text),
       child: SizedBox(
         width: width,
-        height: 50,
         child: Center(
           child: icon ??
               Text(
                 context.tr(text),
-                style: textSize(context.screenHeight/ 60),
+                style: textSize(context.screenHeight / 60),
               ),
         ),
       ),

@@ -17,14 +17,14 @@ class AdditionalInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InfoBadge(
-            color: roseFreequiz,
+            color: roseLight,
             text:'amount questions'.plural(data['translations'] ?? data['data'].length),
           ),
 
           Space.width(10.0),
 
           InfoBadge(
-            color: purpleFreequiz,
+            color: purpleLight,
             text:
             context.tr("fromto", args: [context.tr(data['from']['name']), context.tr(data['to']['name'])])
           ),

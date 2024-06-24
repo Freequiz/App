@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/home_page/search_page/search.dart';
-import 'package:freequiz/_home/home_page/search_page/search_page.dart';
-import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/api/users.dart';
+import 'package:freequiz/_home/search_page/search.dart';
+import 'package:freequiz/_home/search_page/search_page.dart';
 import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
 
@@ -29,24 +27,27 @@ class LoadSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map>(
-      future: mode == "Quiz" ? APIQuizzes.search(searchTerm, 1) : APIUsers.search(searchTerm, 1),
+      future: Search.search(searchTerm),
       builder: (context, searchResults) {
         return loading(
           data: searchResults,
           previousWidget: this,
           widget: LoadingScreen(
-              message: "Loading Search Results",
-              finishedLoading: true,
-              widget: SearchPage(
-                searchTerm: searchTerm,
-                mode: mode,
-              ),
-              appBar: AppBar(
-                title: const Text('search').tr(),
-              ),
+            message: "Loading Search Results",
+            finishedLoading: true,
+            widget: SearchPage(
+              searchTerm: searchTerm,
+              mode: mode,
             ),
+            appBar: AppBar(
+              title: const Text('search').tr(),
+            ),
+          ),
           context: context,
-          onLoad: () => Search.data = searchResults.data!['data'],
+          onLoad: () {
+            Search.quizzes = searchResults.data!['quizzes']['data'];
+            Search.users = searchResults.data!['users']['data'];
+          },
         );
       },
     );

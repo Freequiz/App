@@ -7,6 +7,7 @@ extension ScreenSizeExtension on BuildContext {
   double get screenWidth => screenSize.width;
   double get screenHeight => screenSize.height;
   bool get mobileLayout => screenSize.shortestSide < 600;
+  bool get landscape => screenSize.height < screenSize.width;
 }
 
 extension ThemeModeExtension on BuildContext {

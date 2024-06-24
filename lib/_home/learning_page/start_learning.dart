@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_home/learning/start_learning_body.dart';
+import 'package:freequiz/_home/learning_page/start_learning_body.dart';
 import 'package:freequiz/_views/alerts/confirmation.dart';
 import 'package:freequiz/_views/alerts/settings.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
@@ -19,12 +20,6 @@ class StartLearning extends StatefulWidget {
 }
 
 class _StartLearningState extends State<StartLearning> {
-  final List<Color> color = [
-    purpleFreequiz,
-    roseFreequiz,
-    yellowFreequiz,
-    blueFreequiz,
-  ];
 
   reset() {
     setState(() {
@@ -34,10 +29,17 @@ class _StartLearningState extends State<StartLearning> {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = context.darkMode ? colors[widget.i].dark : colors[widget.i].light;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: color[widget.i],
-        title: Text(Learning.modes[widget.i].tr()),
+        backgroundColor: backgroundColor,
+        foregroundColor: Colors.white,
+        scrolledUnderElevation: 0.0,
+        title: Text(
+          Learning.modes[widget.i].tr(),
+          style: textColor(Colors.white),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -70,7 +72,6 @@ class _StartLearningState extends State<StartLearning> {
         i: widget.i,
         refresh: widget.refresh,
         levels: Learning.getLevels(widget.i),
-        uuid: widget.uuid,
       ),
     );
   }

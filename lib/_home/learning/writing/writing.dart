@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
 import 'package:freequiz/quiz/question.dart';
@@ -6,9 +7,7 @@ import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class Writing extends StatefulWidget {
-  final Function refresh;
-  final String uuid;
-  const Writing({super.key, required this.refresh, required this.uuid});
+  const Writing({super.key});
 
   @override
   State<Writing> createState() => _WritingState();
@@ -21,25 +20,20 @@ class _WritingState extends State<Writing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('writing').tr(),
-          leading: TextButton(
-            onPressed: () {
-              close();
-            },
-            child: const Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.white,
-            ),
-          ),
-          backgroundColor: roseFreequiz,
-        ),
-        body: WritingBody(
-          onPressed: onPressed,
-          answerRight: answerRight,
-          textController: _textController,
-          color: roseFreequiz,
-        ));
+      appBar: AppBar(
+        title: Text(
+          'writing',
+          style: textColor(Colors.white),
+        ).tr(),
+        backgroundColor: context.darkMode ? roseDark : roseLight,
+      ),
+      body: WritingBody(
+        onPressed: onPressed,
+        answerRight: answerRight,
+        textController: _textController,
+        color: rose,
+      ),
+    );
   }
 
   onPressed() {
@@ -71,13 +65,9 @@ class _WritingState extends State<Writing> {
           _textController.clear();
         });
       } else {
-        close();
+        if (mounted) Navigator.of(context).pop();
       }
       answerRight = false;
     });
-  }
-
-  close() {
-    Learning.stop(context, widget.refresh, widget.uuid, "Writing");
   }
 }

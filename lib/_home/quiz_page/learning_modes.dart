@@ -2,13 +2,12 @@ import 'package:freequiz/loading/load_learning.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/utilities/imports/base.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class LearningModes extends StatefulWidget {
   final Axis scrollDirection;
-  final double width;
   final String uuid;
-  const LearningModes(
-      {super.key, this.scrollDirection = Axis.vertical, required this.width, required this.uuid});
+  const LearningModes({super.key, this.scrollDirection = Axis.vertical, required this.uuid});
 
   @override
   State<LearningModes> createState() => _LearningModesState();
@@ -16,17 +15,10 @@ class LearningModes extends StatefulWidget {
 
 class _LearningModesState extends State<LearningModes> {
   final List<IconData> icon = const [
-    Icons.star_border_rounded,
-    Icons.keyboard_alt_outlined,
-    Icons.format_list_bulleted_rounded, 
-    Icons.quiz_outlined
-  ];
-
-  final List<Color> color = [
-    purpleFreequiz,
-    roseFreequiz,
-    yellowFreequiz,
-    blueFreequiz,
+    Symbols.magic_button,
+    Symbols.keyboard,
+    Symbols.format_list_bulleted,
+    Symbols.rectangle_rounded
   ];
 
   refresh() {
@@ -35,33 +27,39 @@ class _LearningModesState extends State<LearningModes> {
 
   @override
   Widget build(BuildContext context) {
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool mobileLayout = shortestSide < 600;
-    return ListView.separated(
-      scrollDirection: widget.scrollDirection,
-      itemCount: 4,
-      itemBuilder: (BuildContext context, int i) {
-        return SizedBox(
-          width: widget.width,
-          height: widget.width,
-          child: TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: color[i],
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(widget.width / 7)),
+    double width = context.mobileLayout ? (context.screenWidth - 75) / 4 : (context.screenWidth - 100) / 4;
+
+    return Container(
+      width: context.screenWidth,
+      height: width + 20,
+      color: context.darkMode ? darkMainColor : lightMainColor,
+      padding: const EdgeInsets.only(bottom: 15.0, left: 15.0, right: 15.0, top: 5),
+      child: ListView.separated(
+        scrollDirection: widget.scrollDirection,
+        itemCount: 4,
+        itemBuilder: (BuildContext context, int i) {
+          return SizedBox(
+            width: width,
+            height: width,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: colors[i].light,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(width / 4)),
+              ),
+              onPressed: () => loadLearning(context, widget.uuid, i, reset, refresh),
+              child: Icon(
+                icon[i],
+                size: width / 2,
+                weight: 600,
+                grade: 200,
+              ),
             ),
-            onPressed: () => loadLearning(context, widget.uuid, i, reset, refresh),
-            child: Icon(
-              icon[i],
-              size: widget.width / 2,
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (context, index) => SizedBox(
-        width: mobileLayout ? 10 : 20,
-        height: mobileLayout ? 10 : 20,
+          );
+        },
+        separatorBuilder: (context, index) => SizedBox(
+          width: context.mobileLayout ? 15 : 20,
+        ),
       ),
     );
   }

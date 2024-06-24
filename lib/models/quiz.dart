@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:freequiz/api/quizzes.dart';
+import 'package:freequiz/local_storage/database.dart';
 import 'package:freequiz/models/language.dart';
 import 'package:freequiz/models/translations.dart';
 
@@ -14,6 +15,7 @@ class Quiz {
   String creator;
 
   bool favorite = false;
+  bool updated = false;
 
   bool owner = false;
 
@@ -37,7 +39,7 @@ class Quiz {
   });
 
   factory Quiz.fromJson(Map quizData) {
-    return switch (quizData) {
+    final Quiz quiz = switch (quizData) {
       {
         "id": String id,
         "title": String title,
@@ -65,6 +67,15 @@ class Quiz {
         ),
       _ => throw const FormatException("Failed to load Quiz."),
     };
+
+    if (quizData.containsKey('updated')) {
+      quiz.updated = quizData['updated'];
+    }
+    else {
+      quiz.updated = false;
+    }
+
+    return quiz;
   }
 
   Map<String, Object?> toMapDatabase() {
@@ -75,6 +86,7 @@ class Quiz {
       "visibility": visibility,
       "created_by": creator,
       "favorite": favorite.toString(),
+      "updated": updated.toString(),
       "owner": owner.toString(),
       "from_language": json.encode(from.toMap()),
       "to_language": json.encode(to.toMap()),
@@ -84,14 +96,26 @@ class Quiz {
   }
 
   Map<String, Object?> toMapSync() {
-    return {
-      "favorite": favorite,
-      "data": translations.toMapSync(),
+    final Map<String, Object?> map = {
+      "data": translations.toMapSync()
     };
+
+    if (updated) map["favorite"] = favorite;
+
+    return map;
   }
 
-  toggleFavorite() {
+  toggleFavorite() async {
     favorite = !favorite;
-    APIQuizzes.setQuizFavorite(id, favorite);
+    updated = true;
+
+    QuizDatabase.updateQuiz(this);
+    final response = await APIQuizzes.setQuizFavorite(id, favorite);
+
+    if (response.isEmpty) return;
+    if (!response['success']) return;
+
+    updated = false;
+    QuizDatabase.updateQuiz(this);
   }
 }

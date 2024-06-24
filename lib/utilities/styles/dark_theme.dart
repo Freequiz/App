@@ -2,8 +2,14 @@ import 'package:freequiz/utilities/imports/base.dart';
 
 ThemeData darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
-    color: grayFreequiz,
+    color: darkMainColor,
     foregroundColor: Colors.white,
+    scrolledUnderElevation: 0.0, //remove tint scrolling up
+  ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: darkMainColor,
+    unselectedItemColor: grayFreequiz,
+    selectedItemColor: Colors.white,
   ),
   textTheme: const TextTheme(
     titleMedium: TextStyle(color: Colors.white),
@@ -25,12 +31,13 @@ ThemeData darkTheme = ThemeData(
   iconTheme: const IconThemeData(color: Colors.white),
   scaffoldBackgroundColor: gray40,
   textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-        ),
+    style: TextButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
       ),
+      iconColor: Colors.white,
     ),
+  ),
   drawerTheme: const DrawerThemeData(
     backgroundColor: gray40,
   ),
@@ -40,7 +47,7 @@ ThemeData darkTheme = ThemeData(
       borderSide: BorderSide(width: 2, color: grayFreequiz),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: 2, color: blueFreequiz),
+      borderSide: BorderSide(width: 2, color: blueLight),
     ),
     hintStyle: TextStyle(color: Colors.white),
   ),

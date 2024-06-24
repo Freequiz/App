@@ -23,7 +23,7 @@ class _EditHeaderState extends State<EditHeader> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-        color: context.darkMode ? gray55 : blueFreequiz,
+        color: context.darkMode ? gray55 : blueLight,
       ),
       child: Padding(
         padding: EdgeInsets.all(context.screenHeight/ 100),
@@ -32,7 +32,7 @@ class _EditHeaderState extends State<EditHeader> {
             BasicTextField(
               textFieldData: widget.quiz.title,
               hintError: context.tr('title error'),
-              colorBorder: (context.darkMode ? yellowFreequiz : grayFreequiz),
+              colorBorder: (context.darkMode ? beigeLight : grayFreequiz),
               widthBorder: 3.0,
               save: widget.save,
             ),

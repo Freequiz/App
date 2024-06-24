@@ -70,7 +70,7 @@
 
     "answer blank": "Answer can't be blank",
     "title error": "Title at least 3 characters",
-    "description error": "Description can't be blank. \n Description at least 5 characters long",
+    "description error": "Description can't be blank. \nDescription at least 5 characters long",
     "definition error": "Definition can't be blank",
 
     "not enough words": "Not enough words",
@@ -174,9 +174,9 @@
     "Edit": "Edit",
     "Close": "Close",
 
-    "private": "Privat",
-    "hidden": "Versteckt",
-    "public": "Öffentlich",
+    "private": "Private",
+    "hidden": "Hidden",
+    "public": "Public",
 
     "favorite": "Favorites",
     "history": "History",
@@ -184,5 +184,8 @@
     "length round": "Length Round",
 
     "welcome": "welcome",
-    "welcome text": "Freequiz is an app to learn Vocabulary using Cards, Multiple Choice or by writing the Words. Freequiz is completely free and without ads and will always be."
+    "welcome text": "Freequiz is an app to learn Vocabulary using Cards, Multiple Choice or by writing the Words. Freequiz is completely free and without ads and will always be.",
+
+    "Ban error": "This user was banned.",
+    "User": "User" 
 }

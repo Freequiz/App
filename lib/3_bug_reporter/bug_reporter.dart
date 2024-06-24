@@ -38,7 +38,7 @@ class _BugReporterState extends State<BugReporter> {
                     BorderRadius.circular(context.screenHeight/ 100),
                 color: context.darkMode
                     ? gray55
-                    : blueFreequiz,
+                    : blueMedium,
               ),
               child: Padding(
                 padding: EdgeInsets.all(context.screenHeight/ 100),
@@ -74,7 +74,7 @@ class _BugReporterState extends State<BugReporter> {
                           borderSide: BorderSide(
                             color: title.error
                                 ? Colors.red
-                                : (context.darkMode ? yellowFreequiz : grayFreequiz),
+                                : (context.darkMode ? beigeMedium : grayFreequiz),
                             width: 3.0,
                           ),
                         ),
