@@ -114,8 +114,8 @@
 
     "blank": "Kann nicht leer sein",
     "password dont match": "Passwörter stimmen nicht überein",
-    "password length 1": "Mindestens 8 Charaktere lang, Grossbuchstabe,",
-    "password length 2": "Kleinbuchstabe und Ziffer",
+    "password length 1": "Mind. 8 Charaktere, Gross- und",
+    "password length 2": "Kleinbuchstabe, Ziffer",
 
     "email": "E-Mail",
     "email success": "E-Mail erfolgreich geändert",
@@ -188,5 +188,8 @@
     "welcome text": "Freequiz ist eine App zum Lernen von Wortschatz mithilfe von Karteikärtchen, Multiple Choice oder in dem man die Wörter schreibt. Die App ist komplett gratis und werbefrei und wird es für immer sein.",
 
     "Ban error": "Dieser Benutzer wurde gebannt.",
+    "User doesn't exist title": "Benutzer existiert nicht",
+    "User doesn't exist description": "Dieser Benutzer existiert nicht. Wenn sie sich sicher sind, dass dies nicht zutrifft, können sie es über den Bugreporter melden.",
+    
     "User": "Benutzer" 
 }

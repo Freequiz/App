@@ -88,7 +88,7 @@
     "blank": "Je ne peux pas être vide",
     "password dont match": "Les mots de passe ne correspondent pas",
     "password length 1": "Au moins 8 caractères, lettre majuscule,",
-    "password length 2": "lettre minuscule et chiffre",
+    "password length 2": "et minuscule, chiffre",
     "email": "E-mail",
     "email success": "L'e-mail a été modifié avec succès",
     "invalid email": "Email invalide",
@@ -142,5 +142,9 @@
     "history": "Histoire",
     "length round": "Longueur ronde",
     "welcome": "accueillir",
-    "welcome text": "Freequiz est une application pour apprendre le vocabulaire à l'aide de cartes, de choix multiples ou en écrivant les mots. Freequiz est entièrement gratuit et sans publicité et le sera toujours."
+    "welcome text": "Freequiz est une application pour apprendre le vocabulaire à l'aide de cartes, de choix multiples ou en écrivant les mots. Freequiz est entièrement gratuit et sans publicité et le sera toujours.",
+    "Ban error": "Cet utilisateur a été banni.",
+    "User doesn't exist title": "L'utilisateur n'existe pas",
+    "User doesn't exist description": "Cet utilisateur n'existe pas ou a été supprimé. ",
+    "User": "Utilisateur"
 }

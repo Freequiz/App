@@ -114,8 +114,8 @@
 
     "blank": "Can't be blank",
     "password dont match": "Passwords don't match",
-    "password length 1": "At least 8 characters long, capital letter,",
-    "password length 2": "lowercase letter and number",
+    "password length 1": "> 8 characters, capital and,",
+    "password length 2": "lowercase letter, number",
 
     "email": "E-Mail",
     "email success": "E-Mail changed succesfully",
@@ -187,5 +187,8 @@
     "welcome text": "Freequiz is an app to learn Vocabulary using Cards, Multiple Choice or by writing the Words. Freequiz is completely free and without ads and will always be.",
 
     "Ban error": "This user was banned.",
+    "User doesn't exist title": "User doesn't exist",
+    "User doesn't exist description": "This user doesn't exist or was deleted. If you are sure this isn't the case, report it via the bug reporter.",
+
     "User": "User" 
 }
