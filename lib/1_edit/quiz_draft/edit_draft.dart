@@ -85,7 +85,7 @@ class _EditDraftState extends State<EditDraft> {
           padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
-          child: EditView(quiz: quiz),
+          child: EditView(quiz: quiz, mode: mode),
         ),
       ),
     );

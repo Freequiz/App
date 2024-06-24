@@ -42,7 +42,7 @@ class _CardsState extends State<Cards> {
         Questionnaire.questions.removeAt(0);
         Learning.showAnswer = false;
       });
-    } else {
+    } else 
       Navigator.of(context).pop();
     }
   }

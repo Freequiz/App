@@ -42,6 +42,7 @@ class _SmartState extends State<Smart> {
         color: purple,
       )
     ];
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: context.darkMode ? purpleDark : purpleLight,
