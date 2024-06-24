@@ -7,9 +7,16 @@ class PasswordTextfield extends StatefulWidget {
   final Function? onSubmitted;
   final FocusNode focusNode;
   final TextInputAction? textInputAction;
+  final Iterable<String> autofillHints;
 
-  const PasswordTextfield(
-      {super.key, required this.password, this.onSubmitted, required this.focusNode, this.textInputAction});
+  const PasswordTextfield({
+    super.key,
+    required this.password,
+    this.onSubmitted,
+    required this.focusNode,
+    this.textInputAction,
+    required this.autofillHints,
+  });
 
   @override
   State<PasswordTextfield> createState() => _PasswordTextfieldState();
@@ -29,6 +36,7 @@ class _PasswordTextfieldState extends State<PasswordTextfield> {
       },
       obscureText: !widget.password.shown,
       textInputAction: widget.textInputAction,
+      autofillHints: widget.autofillHints,
       suffixIcon: IconButton(
         icon: Icon(
           widget.password.shown ? Icons.visibility : Icons.visibility_off,

@@ -1,13 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/_home/search_page/lists.dart';
+import 'package:freequiz/_home/search_page/results.dart';
 import 'package:freequiz/_home/search_page/switcher.dart';
 import 'package:freequiz/_views/badge.dart';
 import 'package:freequiz/_home/search_page/language_selector.dart';
 import 'package:freequiz/_home/search_page/search.dart';
-import 'package:freequiz/_views/buttons/load_more.dart';
-import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class SearchPage extends StatefulWidget {
@@ -25,8 +22,6 @@ class _SearchPageState extends State<SearchPage> {
 
   final List<String> options = ['Quiz', 'User'];
 
-  bool pressed = false;
-
   int shownList = 0;
   int previousShownList = 0;
   bool onChanged = false;
@@ -36,6 +31,19 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   bool refreshChildren = false; // variable changes back and forth between true and false to refresh children
+
+  toggleRefreshChildren() {
+    setState(() {
+      refreshChildren = !refreshChildren;
+    });
+  }
+
+  endAnimation() {
+    setState(() {
+      previousShownList = shownList;
+      onChanged = false;
+    });
+  }
 
   onTap(String value) {
     setState(() {
@@ -81,55 +89,35 @@ class _SearchPageState extends State<SearchPage> {
             padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10.0 : 30),
             child: Stack(
               children: [
-                list(
-                  SearchListQuizzes(
+                Results(
+                  i: 0,
+                  onChanged: onChanged,
+                  refreshChildren: toggleRefreshChildren,
+                  searchTerm: widget.searchTerm,
+                  shownList: shownList,
+                  previousShownList: previousShownList,
+                  endAnimation: endAnimation,
+                  child: SearchListQuizzes(
                     refresh: refreshChildren,
                   ),
-                  0,
                 ),
-                list(
-                  SearchListUsers(
+                Results(
+                  i: 1,
+                  onChanged: onChanged,
+                  refreshChildren: toggleRefreshChildren,
+                  searchTerm: widget.searchTerm,
+                  shownList: shownList,
+                  previousShownList: previousShownList,
+                  endAnimation: endAnimation,
+                  child: SearchListUsers(
                     refresh: refreshChildren,
                   ),
-                  1,
                 ),
               ],
             ),
           ),
         ),
       ],
-    );
-  }
-
-  Widget list(Widget child, int i) {
-    return Positioned.fill(
-      child: ListView(
-        children: [
-          child,
-          SizedBox(
-            height: context.mobileLayout ? 5 : 15,
-          ),
-          LoadMoreButton(
-            onPressed: onPressed,
-            pressed: pressed,
-          ),
-        ],
-      )
-          .animate(target: onChanged ? 1 : 0)
-          .moveX(
-            begin: context.screenWidth * (i - previousShownList),
-            end: context.screenWidth * (i - shownList),
-            duration: const Duration(milliseconds: 200),
-          )
-          .callback(
-        callback: (_) {
-          if (i != 0) return; //only call this once
-          setState(() {
-            previousShownList = shownList;
-            onChanged = false;
-          });
-        },
-      ),
     );
   }
 
@@ -140,24 +128,5 @@ class _SearchPageState extends State<SearchPage> {
         refresh: refresh,
       ),
     );
-  }
-
-  onPressed() async {
-    setState(() {
-      pressed = true;
-    });
-
-    Search.page++;
-
-    final newQuizzes = APIQuizzes.search(widget.searchTerm, Search.page);
-    final newUsers = APIUsers.search(widget.searchTerm, Search.page);
-
-    Search.quizzes.addAll((await newQuizzes)['data']);
-    Search.users.addAll((await newUsers)['data']);
-
-    setState(() {
-      refreshChildren = !refreshChildren;
-      pressed = false;
-    });
   }
 }

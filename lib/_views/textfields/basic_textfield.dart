@@ -8,6 +8,7 @@ class BasicTextfield extends StatelessWidget {
   final Widget? suffixIcon;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
+  final Iterable<String>? autofillHints;
 
   const BasicTextfield({
     super.key,
@@ -17,6 +18,7 @@ class BasicTextfield extends StatelessWidget {
     this.suffixIcon,
     this.textInputAction,
     this.textInputType,
+    this.autofillHints
   });
 
   @override
@@ -24,6 +26,7 @@ class BasicTextfield extends StatelessWidget {
     return TextField(
       onSubmitted: (value) => onSubmitted(),
       keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
+      autofillHints: autofillHints,
       textInputAction: textInputAction,
       autocorrect: false,
       enableSuggestions: false,

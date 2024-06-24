@@ -19,6 +19,7 @@ class _PasswordConfirmationTextfieldState extends State<PasswordConfirmationText
       data: widget.passwordConfirmation,
       onSubmitted: widget.onSubmitted,
       obscureText: !widget.passwordConfirmation.shown,
+      autofillHints: const [AutofillHints.newPassword],
       suffixIcon: IconButton(
           icon: Icon(
             widget.passwordConfirmation.shown ? Icons.visibility : Icons.visibility_off,

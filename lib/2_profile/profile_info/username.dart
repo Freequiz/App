@@ -63,6 +63,7 @@ class _UsernameState extends State<Username> {
                       username: newUsername,
                       focusNode: FocusNode(),
                       onSubmitted: changeUsername,
+                      autofillHints: const [AutofillHints.newUsername],
                     ),
                   ),
                   const SizedBox(

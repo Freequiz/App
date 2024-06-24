@@ -38,7 +38,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
         Flexible(
           fit: FlexFit.loose,
           child: Padding(
-            padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 30.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: ListView.builder(
               itemCount: widget.i == 0 ? 5 : 3,
               itemBuilder: (BuildContext context, int i) {

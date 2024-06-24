@@ -11,11 +11,12 @@ class Search {
   static List quizzes = [];
   static List users = [];
 
-  static int page = 1;
+  static int pageQuizzes = 1;
+  static int pageUsers = 1;
 
   static Future<Map> search(String searchTerm) async {
-    final futureQuizzes = APIQuizzes.search(searchTerm, 1);
-    final futureUsers = APIUsers.search(searchTerm, 1);
+    final futureQuizzes = APIQuizzes.search(searchTerm, pageQuizzes);
+    final futureUsers = APIUsers.search(searchTerm, pageUsers);
 
     final quizzes = await futureQuizzes;
     final users = await futureUsers;

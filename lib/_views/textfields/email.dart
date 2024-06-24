@@ -31,6 +31,7 @@ class _EmailTextfieldState extends State<EmailTextfield> {
       },
       textInputAction: TextInputAction.next,
       textInputType: TextInputType.emailAddress,
+      autofillHints: const [AutofillHints.email],
     );
   }
 }

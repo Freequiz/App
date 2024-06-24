@@ -47,68 +47,71 @@ class _SignUpState extends State<SignUp> {
           padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Space.height(context.screenHeight/ 60),
-              Text(
-                context.tr('sign up'),
-                style: textSize(context.screenHeight/ 20),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    context.tr('terms 1'),
-                    style: textSize(context.screenHeight/ 65),
-                  ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () {},
-                    child: Text(
-                      context.tr('terms 2'),
-                      style: TextStyle(fontSize: context.screenHeight/ 65, color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: context.screenHeight/ 40.0,
-              ),
-              UsernameTextfield(username: username, focusNode: focusNode),
-              const SizedBox(
-                height: 5.0,
-              ),
-              EmailTextfield(email: email, focusNode: focusNode),
-              const SizedBox(
-                height: 5.0,
-              ),
-              PasswordTextfield(
-                password: password,
-                focusNode: focusNode,
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(
-                height: 5.0,
-              ),
-              IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: AutofillGroup(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Space.height(context.screenHeight/ 60),
+                Text(
+                  context.tr('sign up'),
+                  style: textSize(context.screenHeight/ 20),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                      child: PasswordConfirmationTextfield(
-                        passwordConfirmation: passwordConfirmation,
-                        onSubmitted: onPressed,
+                    Text(
+                      context.tr('terms 1'),
+                      style: textSize(context.screenHeight/ 65),
+                    ),
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {},
+                      child: Text(
+                        context.tr('terms 2'),
+                        style: TextStyle(fontSize: context.screenHeight/ 65, color: Colors.blue),
                       ),
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    SubmitButton(pressed: pressed, onPressed: onPressed)
                   ],
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: context.screenHeight/ 40.0,
+                ),
+                UsernameTextfield(username: username, focusNode: focusNode, autofillHints: const [AutofillHints.newUsername],),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                EmailTextfield(email: email, focusNode: focusNode),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                PasswordTextfield(
+                  password: password,
+                  focusNode: focusNode,
+                  textInputAction: TextInputAction.next,
+                  autofillHints: const [AutofillHints.newPassword],
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Flexible(
+                        child: PasswordConfirmationTextfield(
+                          passwordConfirmation: passwordConfirmation,
+                          onSubmitted: onPressed,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      SubmitButton(pressed: pressed, onPressed: onPressed)
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

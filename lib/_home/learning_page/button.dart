@@ -77,6 +77,12 @@ class _StartLearningButtonState extends State<StartLearningButton> {
                     return pages[widget.i];
                   },
                 ),
+              ).then(
+                (context) => Learning.stop(
+                  widget.refresh,
+                  QuizHelper.quiz!.id,
+                  Learning.modes[widget.i],
+                ),
               );
             },
             child: Container(

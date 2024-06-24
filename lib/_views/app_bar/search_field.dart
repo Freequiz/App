@@ -5,16 +5,15 @@ import 'package:freequiz/utilities/imports/utilities.dart';
 class SearchField extends StatefulWidget {
   final FocusNode focusNode;
   final Function dismiss;
+  final TextEditingController textController;
 
-  const SearchField({super.key, required this.dismiss, required this.focusNode});
+  const SearchField({super.key, required this.dismiss, required this.focusNode, required this.textController});
 
   @override
   State<SearchField> createState() => _SearchFieldState();
 }
 
 class _SearchFieldState extends State<SearchField> {
-  final textController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final hintColor = context.darkMode ? Colors.white : gray40;
@@ -23,9 +22,9 @@ class _SearchFieldState extends State<SearchField> {
       child: SizedBox(
         height: 42.0,
         child: TextField(
-          onSubmitted: (value) => loadSearch(context: context, searchTerm: textController.text),
+          onSubmitted: (value) => loadSearch(context: context, searchTerm: widget.textController.text),
           keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
-          controller: textController,
+          controller: widget.textController,
           focusNode: widget.focusNode,
           decoration: InputDecoration(
             filled: true,
@@ -45,7 +44,7 @@ class _SearchFieldState extends State<SearchField> {
             suffixIcon: IconButton(
               color: hintColor,
               onPressed: () {
-                textController.clear();
+                widget.textController.clear();
                 widget.dismiss();
               },
               icon: const Icon(

@@ -44,34 +44,41 @@ class _LoginState extends State<Login> {
           padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Space.height(context.screenHeight/ 60),
-              Text(
-                context.tr('login'),
-                style: textSize(context.screenHeight/ 20),
-              ),
-              Space.height(context.screenHeight/ 60),
-              UsernameTextfield(username: username, focusNode: focusNode),
-              Space.height(5),
-              IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Flexible(
-                      child: PasswordTextfield(
-                        password: password,
-                        focusNode: focusNode,
-                        onSubmitted: onPressed,
-                      ),
-                    ),
-                    Space.width(5),
-                    SubmitButton(pressed: pressed, onPressed: onPressed)
-                  ],
+          child: AutofillGroup(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Space.height(context.screenHeight / 60),
+                Text(
+                  context.tr('login'),
+                  style: textSize(context.screenHeight / 20),
                 ),
-              ),
-            ],
+                Space.height(context.screenHeight / 60),
+                UsernameTextfield(
+                  username: username,
+                  focusNode: focusNode,
+                  autofillHints: const [AutofillHints.username],
+                ),
+                Space.height(5),
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Flexible(
+                        child: PasswordTextfield(
+                          password: password,
+                          focusNode: focusNode,
+                          onSubmitted: onPressed,
+                          autofillHints: const [AutofillHints.password],
+                        ),
+                      ),
+                      Space.width(5),
+                      SubmitButton(pressed: pressed, onPressed: onPressed)
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

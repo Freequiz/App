@@ -6,8 +6,9 @@ class UsernameTextfield extends StatefulWidget {
   final TextFieldData username;
   final FocusNode focusNode;
   final Function? onSubmitted;
+  final Iterable<String>? autofillHints;
 
-  const UsernameTextfield({super.key, required this.username, required this.focusNode, this.onSubmitted});
+  const UsernameTextfield({super.key, required this.username, required this.focusNode, this.onSubmitted, required this.autofillHints});
 
   @override
   State<UsernameTextfield> createState() => _UsernameTextfieldState();
@@ -30,7 +31,8 @@ class _UsernameTextfieldState extends State<UsernameTextfield> {
         }
       },
       textInputAction: TextInputAction.next,
-      textInputType: TextInputType.name,
+      textInputType: TextInputType.emailAddress,
+      autofillHints: widget.autofillHints,
     );
   }
 }

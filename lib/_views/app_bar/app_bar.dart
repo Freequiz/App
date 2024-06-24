@@ -34,6 +34,7 @@ class _MainAppBarState extends State<MainAppBar> {
           Conditional(
             condition: Search.shown,
             widget: SearchField(
+              textController: textController,
               focusNode: widget.focusNode,
               dismiss: () => setState(() {
                 Search.shown = false;
@@ -57,7 +58,6 @@ class _MainAppBarState extends State<MainAppBar> {
     setState(() {});
     Future.delayed(const Duration(milliseconds: 100), () {
       if (mounted) {
-        // ignore: use_build_context_synchronously
         FocusScope.of(context).requestFocus(widget.focusNode);
       }
     });

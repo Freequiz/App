@@ -70,6 +70,7 @@ class _PasswordState extends State<Password> {
                 password: oldPassword,
                 focusNode: focusNode,
                 textInputAction: TextInputAction.next,
+                autofillHints: const [AutofillHints.newPassword],
               ),
             ),
             Conditional(condition: edit, widget: Space.height(5.0)),
@@ -79,6 +80,7 @@ class _PasswordState extends State<Password> {
                 password: newPassword,
                 focusNode: focusNode,
                 textInputAction: TextInputAction.next,
+                autofillHints: const [AutofillHints.newPassword],
               ),
             ),
             Conditional(
