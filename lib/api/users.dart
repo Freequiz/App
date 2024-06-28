@@ -126,7 +126,6 @@ class APIUsers {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else if (response.statusCode == 401) {
-      Profile.accessToken = "";
       Profile.deleteData();
       return jsonDecode(response.body);
     } else {

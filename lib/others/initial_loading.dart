@@ -6,17 +6,18 @@ import 'package:freequiz/others/languages.dart';
 import 'package:freequiz/user/manage.dart';
 
 Future<void> initialLoading() async {
+  await Profile.loadAccessToken();
+
   final List<Function> functions = [
     QuizDatabase.open,
     Languages.get,
     Profile.loadAccessToken,
     Preferences.loadAnswerLanguage,
+    ManageUser.load,
+    APIUsers.refresh
   ];
 
   await Future.wait(functions.map((functions) => functions())); //run all Functions at the same time and wait for them
-
-  APIUsers.refresh();
-  ManageUser.load();
 
   return;
 }

@@ -156,6 +156,7 @@ class _SignUpState extends State<SignUp> {
       if (map["success"] == true) {
         Profile.accessToken = map["access_token"];
         Profile.saveAccessToken();
+        if (mounted) Navigator.of(context).pop();
         widget.refresh();
       } else if (map["token"] == "password.invalid") {
         setState(() {

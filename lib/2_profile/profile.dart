@@ -14,6 +14,7 @@ class Profile {
   }
 
   static deleteData() async {
+    accessToken = "";
     await SecureStorage.removeAccessToken();
   }
 }
