@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freequiz/utilities/imports/themes.dart';
 import 'package:app_links/app_links.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -78,7 +80,11 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             theme: lightTheme,
             darkTheme: darkTheme,
-            themeMode: !themeProvider.override ? ThemeMode.system : themeProvider.darkMode ? ThemeMode.dark : ThemeMode.light,
+            themeMode: !themeProvider.override
+                ? ThemeMode.system
+                : themeProvider.darkMode
+                    ? ThemeMode.dark
+                    : ThemeMode.light,
             navigatorKey: _navigatorKey,
             initialRoute: "/",
             onGenerateRoute: (settings) => appRouter(settings),

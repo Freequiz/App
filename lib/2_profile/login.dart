@@ -104,6 +104,13 @@ class _LoginState extends State<Login> {
       });
       mapLogin = await APIUsers.login(username.input.text.trim(), password.input.text.trim());
       if (mapLogin.isNotEmpty) {
+        if (mapLogin['success']) {
+          Profile.accessToken = mapLogin["access_token"];
+          Profile.saveAccessToken();
+          if (mounted) Navigator.of(context).pop();
+          widget.refresh();
+          return;
+        }
         if (mapLogin["message"] == "User doesn't exist") {
           setState(() {
             username.error = true;
@@ -118,12 +125,6 @@ class _LoginState extends State<Login> {
             pressed = false;
             password.input.clear();
           });
-        } else {
-          Profile.accessToken = mapLogin["access_token"];
-          Profile.saveAccessToken();
-          // ignore: use_build_context_synchronously
-          Navigator.of(context).pop();
-          widget.refresh();
         }
       }
     }
