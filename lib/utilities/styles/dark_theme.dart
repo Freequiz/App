@@ -24,7 +24,7 @@ ThemeData darkTheme = ThemeData(
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(5),
       ),
       iconColor: Colors.white,
     ),
@@ -40,7 +40,7 @@ ThemeData darkTheme = ThemeData(
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: blueLight),
     ),
-    hintStyle: TextStyle(color: Colors.white),
+    hintStyle: TextStyle(color: Colors.white, fontSize: FontSize.input, fontWeight: FontWeight.w500),
   ),
   fontFamily: 'Inter',
 );

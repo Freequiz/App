@@ -33,7 +33,7 @@ ThemeData lightTheme = ThemeData(
       borderSide: BorderSide(width: 2, color: grayFreequiz),
     ),
     focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2, color: roseMiddle)),
-    hintStyle: TextStyle(color: Colors.black),
+    hintStyle: TextStyle(color: Colors.black, fontSize: FontSize.input, fontWeight: FontWeight.w500),
   ),
   fontFamily: 'Inter',
 );
