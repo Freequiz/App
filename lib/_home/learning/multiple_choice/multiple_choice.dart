@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/quiz/question.dart';
@@ -26,9 +25,9 @@ class _MultipleChoiceState extends State<MultipleChoice> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'multiple choice',
-          style: textColor(Colors.white),
+          style: TextStyle(color: Colors.white),
         ).tr(),
         backgroundColor: context.darkMode ? beigeDark : beigeLight,
       ),

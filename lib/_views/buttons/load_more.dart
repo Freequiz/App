@@ -9,23 +9,26 @@ class LoadMoreButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Conditional(
-      condition: pressed,
-      widget: Align(
-        child: CircularProgressIndicator(
+    return Align(
+      child: Conditional(
+        condition: pressed,
+        widget: CircularProgressIndicator(
           color: context.darkMode ? Colors.white : grayFreequiz,
         ),
-      ),
-      defaultWidget: Align(
-        child: TextButton(
+        defaultWidget: TextButton(
           style: TextButton.styleFrom(
             backgroundColor: grayFreequiz,
             foregroundColor: Colors.white,
+            padding: const EdgeInsets.all(10.0),
           ),
           onPressed: () => onPressed(),
           child: Text(
             context.tr('load more'),
-            style: TextStyle(color: Colors.white, fontSize: context.screenHeight / 55),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: FontSize.button,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),

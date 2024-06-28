@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_home/user_page/public_quizzes.dart';
 import 'package:freequiz/_home/user_page/user_data.dart';
 import 'package:freequiz/_home/user_page/user_info.dart';
+import 'package:freequiz/_views/buttons/load_more.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
@@ -29,35 +30,15 @@ class _UserPageState extends State<UserPage> {
             alignment: Alignment.center,
             child: Text(
               context.tr('quizzes'),
-              style: TextStyle(fontSize: context.screenHeight / 30),
+              style: titleStyle(),
             ),
           ),
           Space.height(context.mobileLayout ? 10 : 30),
           PublicQuizzes(
             user: widget.user,
           ),
-          Space.height(context.mobileLayout ? 5 : 15),
-          Conditional(
-            condition: pressed,
-            widget: Align(
-              child: CircularProgressIndicator(
-                color: context.darkMode ? Colors.white : grayFreequiz,
-              ),
-            ),
-            defaultWidget: Align(
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: grayFreequiz,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () => onPressed(),
-                child: Text(
-                  context.tr('load more'),
-                  style: TextStyle(color: Colors.white, fontSize: context.screenHeight / 55),
-                ),
-              ),
-            ),
-          ),
+          Space.height(context.mobileLayout ? 10 : 15),
+          LoadMoreButton(pressed: pressed, onPressed: onPressed)
         ],
       ),
     );

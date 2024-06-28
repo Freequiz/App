@@ -43,7 +43,6 @@ class LoadUser extends StatelessWidget {
                   onPressed: () => Share.share('https://freequiz.ch/user/$user'),
                   child: const Icon(
                     Icons.ios_share_rounded,
-                    color: Colors.white,
                   ),
                 ),
               ],

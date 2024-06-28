@@ -22,16 +22,19 @@ class _UsernameState extends State<Username> {
     final textColor = context.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
+        borderRadius: BorderRadius.circular(context.screenHeight / 100),
         color: context.darkMode ? gray55 : white235,
       ),
       child: Padding(
-        padding: EdgeInsets.all(context.screenHeight/ 100),
+        padding: EdgeInsets.all(context.screenHeight / 100),
         child: Column(
           children: [
             Row(
               children: [
-                const Text('username').tr(),
+                const Text(
+                  'username',
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ).tr(),
                 const Spacer(),
                 Text(UserHelper.user!.username),
                 const SizedBox(
@@ -52,7 +55,7 @@ class _UsernameState extends State<Username> {
             ),
             Conditional(
               condition: edit,
-              widget: SizedBox(height: context.screenHeight/ 60),
+              widget: SizedBox(height: context.screenHeight / 60),
             ),
             Conditional(
               condition: edit,
@@ -70,7 +73,7 @@ class _UsernameState extends State<Username> {
                     width: 5,
                   ),
                   SizedBox(
-                    height: context.screenHeight/ 20,
+                    height: context.screenHeight / 20,
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: grayFreequiz,

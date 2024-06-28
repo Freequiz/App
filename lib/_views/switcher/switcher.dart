@@ -85,7 +85,7 @@ class _SwitcherState extends State<Switcher> {
           onTap: onTap,
           text: widget.texts[i],
           icon: widget.icons?[i],
-          width: widget.width / widget.texts.length,
+          selected: widget.texts[i] == value,
         ),
       );
     }

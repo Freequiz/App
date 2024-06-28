@@ -20,7 +20,7 @@ class TileTitle extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: context.screenHeight/ 40,
+                fontSize: FontSize.title,
                 fontWeight: FontWeight.w600,
                 color: color,
               ),

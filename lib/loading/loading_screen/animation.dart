@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class LoadingAnimation extends StatefulWidget {
@@ -34,7 +33,7 @@ class _LoadingAnimationState extends State<LoadingAnimation> {
         ),
         Text(
           widget.message.tr(),
-          style: textSize(context.screenHeight/ 45),
+          style: fontSize(FontSize.text),
         ),
       ],
     )

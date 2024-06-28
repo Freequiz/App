@@ -61,8 +61,8 @@ class _StartLearningButtonState extends State<StartLearningButton> {
                 child: Center(
                   child: Text(
                     context.tr('learn'),
-                    style: TextStyle(
-                        fontSize: context.screenHeight / 45, color: Colors.white, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        fontSize: FontSize.button, color: Colors.white, fontWeight: FontWeight.w600),
                   ),
                 ),
               )),
@@ -97,8 +97,8 @@ class _StartLearningButtonState extends State<StartLearningButton> {
                 children: [
                   Text(
                     context.tr('learn only'),
-                    style: TextStyle(
-                        fontSize: context.screenHeight / 45, color: Colors.white, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        fontSize: FontSize.button, color: Colors.white, fontWeight: FontWeight.w600),
                   ),
                   Space.width(5.0),
                   const Icon(

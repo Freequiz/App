@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_home/learning_page/start_learning_body.dart';
 import 'package:freequiz/_views/alerts/confirmation.dart';
 import 'package:freequiz/_views/alerts/settings.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/progress.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
@@ -38,7 +37,7 @@ class _StartLearningState extends State<StartLearning> {
         scrolledUnderElevation: 0.0,
         title: Text(
           Learning.modes[widget.i].tr(),
-          style: textColor(Colors.white),
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
         ),
         actions: [
           IconButton(

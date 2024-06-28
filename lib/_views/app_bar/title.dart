@@ -8,8 +8,8 @@ class AppBarTitle extends StatelessWidget {
     return const Text(
       "Freequiz",
       style: TextStyle(
-        fontWeight: FontWeight.w700,
-        fontSize: 30.0,
+        fontWeight: FontWeight.w900,
+        fontSize: FontSize.headline,
       ),
     );
   }

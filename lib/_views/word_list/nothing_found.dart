@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class NothingFound extends StatelessWidget {
@@ -27,7 +26,7 @@ class NothingFound extends StatelessWidget {
         child: Center(
           child: Text(
             context.tr('nothing found'),
-            style: textSize(mobileLayout ? context.screenHeight / 50 : context.screenHeight / 45),
+            style: fontSize(FontSize.text),
           ),
         ),
       ),

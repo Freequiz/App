@@ -14,8 +14,7 @@ class Draft extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             context.tr('draft'),
-            style: TextStyle(
-                fontSize: context.screenHeight/ 30, color: Colors.white),
+            style: titleStyle(),
           ),
         ),
         Space.height(context.mobileLayout ? 5 : 15),

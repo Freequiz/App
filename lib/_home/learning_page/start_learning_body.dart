@@ -62,7 +62,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                         ),
                         child: Text(
                               i < widget.levels.length ? widget.levels[i] : widget.levels.last,
-                              style: TextStyle(fontSize: context.screenHeight / 40),
+                              style: titleStyle(),
                             ),
                       ),
                     ),

@@ -16,11 +16,8 @@ class ProfileInfo extends StatefulWidget {
 }
 
 class _ProfileInfoState extends State<ProfileInfo> {
-
   @override
   Widget build(BuildContext context) {
-    final textColor =
-        context.darkMode ? Colors.white : gray40;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -29,50 +26,48 @@ class _ProfileInfoState extends State<ProfileInfo> {
       child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: DefaultTextStyle(
-            style: TextStyle(
-              fontSize: context.screenHeight/ 50,
-              color: textColor,
-            ),
-            child: ListView(
-              children: [
-                SizedBox(height: context.screenHeight/ 60),
-                Username(refresh: widget.refresh),
-                SizedBox(height: context.screenHeight/ 60),
-                EMail(refresh: widget.refresh),
-                SizedBox(height: context.screenHeight/ 60),
-                Password(refresh: widget.refresh),
-                SizedBox(height: context.screenHeight/ 60),
-                const DarkModeSwitcher(),
-                SizedBox(height: context.screenHeight/ 60),
-                Align(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                        backgroundColor: grayFreequiz, foregroundColor: Colors.white),
-                    onPressed: () async {
-                      Profile.accessToken = "";
-                      widget.refresh();
-                      Profile.deleteData();
-                    },
-                    child: const Text('logout').tr(),
-                  ),
+          child: ListView(
+            children: [
+              SizedBox(height: context.screenHeight / 60),
+              Username(refresh: widget.refresh),
+              SizedBox(height: context.screenHeight / 60),
+              EMail(refresh: widget.refresh),
+              SizedBox(height: context.screenHeight / 60),
+              Password(refresh: widget.refresh),
+              SizedBox(height: context.screenHeight / 60),
+              const DarkModeSwitcher(),
+              SizedBox(height: context.screenHeight / 5),
+              Align(
+                child: TextButton(
+                  style: TextButton.styleFrom(backgroundColor: grayFreequiz, foregroundColor: Colors.white),
+                  onPressed: () async {
+                    Profile.accessToken = "";
+                    widget.refresh();
+                    Profile.deleteData();
+                  },
+                  child: Text(
+                    'logout',
+                    style: buttonStyle(),
+                  ).tr(),
                 ),
-                const SizedBox(height: 20.0,),
-                Align(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white),
-                    onPressed: () async {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => Confirmation(refresh: widget.refresh));
-                    },
-                    child: const Text('delete account').tr(),
-                  ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Align(
+                child: TextButton(
+                  style: TextButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+                  onPressed: () async {
+                    showDialog(
+                        context: context, builder: (BuildContext context) => Confirmation(refresh: widget.refresh));
+                  },
+                  child: Text(
+                    'delete account',
+                    style: buttonStyle(),
+                  ).tr(),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

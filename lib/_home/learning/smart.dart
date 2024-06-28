@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_home/learning/writing/writing_body.dart';
@@ -46,9 +45,9 @@ class _SmartState extends State<Smart> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: context.darkMode ? purpleDark : purpleLight,
-        title: Text(
+        title: const Text(
           "Smart",
-          style: textColor(Colors.white),
+          style: TextStyle(color: Colors.white),
         ).tr(),
       ),
       body: modes[Questionnaire.questions[0].score['smart'] > 0 ? 1 : 0],

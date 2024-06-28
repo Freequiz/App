@@ -6,7 +6,6 @@ import 'package:freequiz/_views/textfields/username.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/2_profile/profile.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class Login extends StatefulWidget {
@@ -51,7 +50,7 @@ class _LoginState extends State<Login> {
                 Space.height(context.screenHeight / 60),
                 Text(
                   context.tr('login'),
-                  style: textSize(context.screenHeight / 20),
+                  style: fontSize(FontSize.headline),
                 ),
                 Space.height(context.screenHeight / 60),
                 UsernameTextfield(

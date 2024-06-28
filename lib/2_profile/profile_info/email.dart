@@ -22,16 +22,19 @@ class _EMailState extends State<EMail> {
     final textColor = context.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
+        borderRadius: BorderRadius.circular(context.screenHeight / 100),
         color: context.darkMode ? gray55 : white235,
       ),
       child: Padding(
-        padding: EdgeInsets.all(context.screenHeight/ 100),
+        padding: EdgeInsets.all(context.screenHeight / 100),
         child: Column(
           children: [
             Row(
               children: [
-                const Text('email').tr(),
+                const Text(
+                  'email',
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ).tr(),
                 const Spacer(),
                 Text(UserHelper.user!.email),
                 const SizedBox(
@@ -52,7 +55,7 @@ class _EMailState extends State<EMail> {
             ),
             Conditional(
               condition: edit,
-              widget: SizedBox(height: context.screenHeight/ 60),
+              widget: SizedBox(height: context.screenHeight / 60),
             ),
             Conditional(
               condition: edit,
@@ -69,7 +72,7 @@ class _EMailState extends State<EMail> {
                     width: 5,
                   ),
                   SizedBox(
-                    height: context.screenHeight/ 20,
+                    height: context.screenHeight / 20,
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: grayFreequiz,

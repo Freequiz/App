@@ -22,10 +22,7 @@ class UserInfo extends StatelessWidget {
           Space.width(20.0),
           Text(
             PublicUserData.name,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: titleStyle(),
           ),
         ],
       ),

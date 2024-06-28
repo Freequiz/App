@@ -16,11 +16,14 @@ void main() async {
   await Preferences.getTheme();
 
   runApp(
-    EasyLocalization(
-      supportedLocales: const [Locale('en'), Locale('de'), Locale('fr'), Locale('it')],
-      path: 'assets/translations',
-      fallbackLocale: const Locale('en'),
-      child: const MyApp(),
+    DevicePreview(
+      enabled: !kReleaseMode && true,
+      builder: (context) => EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('de'), Locale('fr'), Locale('it')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('en'),
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -74,6 +77,7 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<ThemeProvider>(
         builder: (BuildContext context, themeProvider, child) {
           return MaterialApp(
+            builder: DevicePreview.appBuilder,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,

@@ -5,6 +5,7 @@ ThemeData lightTheme = ThemeData(
     color: lightMainColor,
     foregroundColor: gray40,
     scrolledUnderElevation: 0.0, //remove tint scrolling up
+    titleTextStyle: TextStyle(fontSize: FontSize.title, fontWeight: FontWeight.w600),
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: lightMainColor,
@@ -12,11 +13,11 @@ ThemeData lightTheme = ThemeData(
     selectedItemColor: Colors.white,
   ),
   textTheme: const TextTheme(
-    titleMedium: TextStyle(color: gray40),
-    displayLarge: TextStyle(color: gray40),
-    displayMedium: TextStyle(color: gray40),
-    bodyLarge: TextStyle(color: gray40),
-    bodyMedium: TextStyle(color: gray40),
+    titleMedium: TextStyle(color: gray40, fontSize: FontSize.title, fontWeight: FontWeight.w600),
+    displayLarge: TextStyle(color: gray40, fontSize: FontSize.text, fontWeight: FontWeight.w500),
+    displayMedium: TextStyle(color: gray40, fontSize: FontSize.text, fontWeight: FontWeight.w500),
+    bodyLarge: TextStyle(color: gray40, fontSize: FontSize.text),
+    bodyMedium: TextStyle(color: gray40, fontSize: FontSize.text),
   ),
   scaffoldBackgroundColor: Colors.white,
   textButtonTheme: TextButtonThemeData(

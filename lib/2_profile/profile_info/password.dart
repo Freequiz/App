@@ -32,16 +32,19 @@ class _PasswordState extends State<Password> {
     final textColor = context.darkMode ? Colors.white : gray40;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
+        borderRadius: BorderRadius.circular(context.screenHeight / 100),
         color: context.darkMode ? gray55 : white235,
       ),
       child: Padding(
-        padding: EdgeInsets.all(context.screenHeight/ 100),
+        padding: EdgeInsets.all(context.screenHeight / 100),
         child: Column(
           children: [
             Row(
               children: [
-                const Text('password').tr(),
+                const Text(
+                  'password',
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ).tr(),
                 const Spacer(),
                 const Text("· · · · · · · ·"),
                 const SizedBox(
@@ -62,7 +65,7 @@ class _PasswordState extends State<Password> {
             ),
             Conditional(
               condition: edit,
-              widget: SizedBox(height: context.screenHeight/ 60),
+              widget: SizedBox(height: context.screenHeight / 60),
             ),
             Conditional(
               condition: edit,
@@ -101,7 +104,7 @@ class _PasswordState extends State<Password> {
                     width: 5,
                   ),
                   SizedBox(
-                    height: context.screenHeight/ 20,
+                    height: context.screenHeight / 20,
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: grayFreequiz,

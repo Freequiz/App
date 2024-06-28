@@ -46,9 +46,7 @@ class Choices extends StatelessWidget {
         child: Text(
           choice,
           maxLines: 50,
-          style: TextStyle(
-            fontSize: context.screenHeight / 70,
-          ),
+          style: fontSize(FontSize.text),
         ),
       ),
     );

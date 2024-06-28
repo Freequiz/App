@@ -55,7 +55,7 @@ class WordList extends StatelessWidget {
                   child: Text(
                     list[i2].word,
                     style: TextStyle(
-                      fontSize: context.mobileLayout ? context.screenHeight / 60 : context.screenHeight / 45,
+                      fontSize: FontSize.text,
                       color: Learning.errors.contains(list[i2]) ? Colors.red : null
                     ),
                   ),
@@ -71,7 +71,7 @@ class WordList extends StatelessWidget {
                   child: Text(
                     list[i2].translation,
                     style: TextStyle(
-                      fontSize: context.mobileLayout ? context.screenHeight / 60 : context.screenHeight / 45,
+                      fontSize: FontSize.text,
                       color: Learning.errors.contains(list[i2]) ? Colors.red : null
                     ),
                   ),

@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_home/learning/cards/cards_body.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/learning.dart';
 import 'package:freequiz/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -19,9 +18,9 @@ class _CardsState extends State<Cards> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'cards',
-          style: textColor(Colors.white),
+          style: TextStyle(color: Colors.white),
         ).tr(),
         backgroundColor: context.darkMode ? blueDark : blueLight,
       ),

@@ -18,10 +18,7 @@ class QuizTitle extends StatelessWidget {
       ),
       child: Text(
         QuizHelper.quiz!.title,
-        style: TextStyle(
-          fontSize: context.screenHeight / 40,
-          fontWeight: FontWeight.w600,
-        ),
+        style: titleStyle(),
       ),
     );
   }

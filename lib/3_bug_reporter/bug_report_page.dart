@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/3_bug_reporter/bug_reporter.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
-import 'package:freequiz/others/utilities.dart';
 
 class BugReportPage extends StatefulWidget {
   const BugReportPage({super.key});
@@ -15,11 +14,10 @@ class _BugReportPageState extends State<BugReportPage> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        height: context.screenHeight/ 6,
+        height: context.screenHeight / 6,
         width: context.screenWidth / 1.5,
         child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: grayFreequiz, foregroundColor: Colors.white),
+          style: TextButton.styleFrom(backgroundColor: grayFreequiz, foregroundColor: Colors.white),
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -29,7 +27,10 @@ class _BugReportPageState extends State<BugReportPage> {
               ),
             );
           },
-          child: Text(context.tr('report bug'), style: textSize(context.screenHeight/ 40),),
+          child: Text(
+            context.tr('report bug'),
+            style: buttonStyle(),
+          ),
         ),
       ),
     );

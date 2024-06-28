@@ -42,10 +42,7 @@ class _LearningSettingsState extends State<LearningSettings> {
           const SizedBox(height: 20),
           Text(
             context.tr('answer with'),
-            style: TextStyle(
-              fontSize: context.screenHeight / 50,
-              fontWeight: FontWeight.bold,
-            ),
+            style: titleStyle(),
           ),
           const SizedBox(height: 5),
           Switcher(
@@ -59,10 +56,7 @@ class _LearningSettingsState extends State<LearningSettings> {
             condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
             widget: Text(
               context.tr('amount repetition'),
-              style: TextStyle(
-                fontSize: context.screenHeight / 50,
-                fontWeight: FontWeight.bold,
-              ),
+              style: titleStyle(),
             ),
           ),
           Conditional(
@@ -84,10 +78,7 @@ class _LearningSettingsState extends State<LearningSettings> {
           ),
           Text(
             context.tr('length round'),
-            style: TextStyle(
-              fontSize: context.screenHeight / 50,
-              fontWeight: FontWeight.bold,
-            ),
+            style: titleStyle(),
           ),
           const SizedBox(height: 5),
           Switcher(

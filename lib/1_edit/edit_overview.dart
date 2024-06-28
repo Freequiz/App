@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/1_edit/quiz_draft/draft.dart';
 import 'package:freequiz/1_edit/edit_create_quiz/create_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/created_quizzes.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
@@ -54,7 +53,7 @@ class _EditOverviewState extends State<EditOverview> {
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   context.tr('create new quiz'),
-                  style: textSize(context.screenHeight/ 45),
+                  style: buttonStyle(),
                 ),
               ),
             ),

@@ -4,8 +4,7 @@ import 'package:freequiz/utilities/imports/base.dart';
 class Correction extends StatelessWidget {
   final String givenAnswer;
   final String rightAnswer;
-  const Correction(
-      {super.key, required this.givenAnswer, required this.rightAnswer});
+  const Correction({super.key, required this.givenAnswer, required this.rightAnswer});
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +18,13 @@ class Correction extends StatelessWidget {
           const Text('right answer').tr(),
           Text(
             rightAnswer,
-            style: TextStyle(fontSize: height / 32, color: greenMedium),
+            style: const TextStyle(fontSize: FontSize.title, color: greenMedium, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: height / 32),
           const Text('your answer').tr(),
           Text(
             givenAnswer,
-            style: TextStyle(fontSize: height / 32, color: redMedium),
+            style: const TextStyle(fontSize: FontSize.title, color: redMedium, fontWeight: FontWeight.w600),
           ),
         ],
       ),

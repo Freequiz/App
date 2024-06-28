@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class TextPromt extends StatelessWidget {
@@ -12,7 +11,7 @@ class TextPromt extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: textSize(
+      style: fontSize(
         min(
           context.screenHeight / 9 / log(text.length),
           context.screenHeight / 15,

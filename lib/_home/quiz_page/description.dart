@@ -31,10 +31,7 @@ class QuizDescription extends StatelessWidget {
                     QuizHelper.quiz!.description != ""
                         ? QuizHelper.quiz!.description!
                         : context.tr('no description'),
-                    style: TextStyle(
-                        fontSize: context.mobileLayout
-                            ? context.screenHeight/ 55
-                            : context.screenHeight/ 45),
+                    style: fontSize(FontSize.text),
                   ),
                 ),
                 GestureDetector(

@@ -89,8 +89,8 @@ class _QuizPageState extends State<QuizPage> {
               children: [
                 Text(
                   QuizHelper.quiz!.title,
-                  style: TextStyle(
-                    fontSize: context.screenHeight/ 40,
+                  style: const TextStyle(
+                    fontSize: FontSize.text,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

@@ -25,9 +25,7 @@ class Description extends StatelessWidget {
         description,
         maxLines: expanded ? 2 : 1,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontSize: context.screenHeight/ 60,
-        ),
+        style: fontSize(FontSize.text)
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class KebabMenuItem extends StatelessWidget {
@@ -22,7 +21,7 @@ class KebabMenuItem extends StatelessWidget {
           children: [
             Text(
               context.tr(text),
-              style: textSize(context.screenHeight/ 40),
+              style: fontSize(FontSize.button)
             ),
             Icon(
               icon,

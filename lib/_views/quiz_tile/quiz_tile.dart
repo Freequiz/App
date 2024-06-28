@@ -12,7 +12,8 @@ class QuizTile extends StatefulWidget {
   final String uuid;
   final Widget? button;
   final double width;
-  const QuizTile({super.key, required this.data, required this.uuid, this.expanded = true, this.button, required this.width});
+  const QuizTile(
+      {super.key, required this.data, required this.uuid, this.expanded = true, this.button, required this.width});
 
   @override
   State<QuizTile> createState() => _QuizTileState();
@@ -30,8 +31,7 @@ class _QuizTileState extends State<QuizTile> {
 
   @override
   Widget build(BuildContext context) {
-    final color6 =
-        context.darkMode ? gray55 : white235;
+    final color6 = context.darkMode ? gray55 : white235;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => loadQuiz(
@@ -41,7 +41,7 @@ class _QuizTileState extends State<QuizTile> {
       child: Container(
         width: context.screenWidth - 20,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(context.screenHeight/ 100),
+          borderRadius: BorderRadius.circular(context.screenHeight / 100),
           color: color6,
         ),
         child: Padding(
@@ -53,9 +53,10 @@ class _QuizTileState extends State<QuizTile> {
             children: [
               TileTitle(
                 title: widget.data['title'],
-                button: widget.button ?? ShareButton(
-                    url: "https://www.freequiz.ch/quiz/${widget.uuid}",
-                    color: context.darkMode ? Colors.white : gray40),
+                button: widget.button ??
+                    ShareButton(
+                        url: "https://www.freequiz.ch/quiz/${widget.uuid}",
+                        color: context.darkMode ? Colors.white : gray40),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,7 +77,7 @@ class _QuizTileState extends State<QuizTile> {
     return Conditional(
       condition: !widget.expanded,
       widget: SizedBox(
-        height: context.screenHeight/ 30,
+        height: context.screenHeight / 30,
         child: GestureDetector(
           onTap: () {
             setState(() {
@@ -85,7 +86,11 @@ class _QuizTileState extends State<QuizTile> {
           },
           child: Text(
             expanded ? "" : context.tr('more'),
-            style: TextStyle(color: grayFreequiz, fontSize: context.screenHeight/ 50),
+            style: const TextStyle(
+              color: grayFreequiz,
+              fontSize: FontSize.button,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),

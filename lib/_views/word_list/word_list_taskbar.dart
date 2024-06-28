@@ -90,10 +90,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   context.tr('definition'),
-                  style: TextStyle(
-                    fontSize: context.mobileLayout ? context.screenHeight / 50 : context.screenHeight / 45,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: titleStyle(),
                 ),
               ),
             ),
@@ -106,10 +103,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   context.tr('answer'),
-                  style: TextStyle(
-                    fontSize: context.mobileLayout ? context.screenHeight / 50 : context.screenHeight / 45,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: titleStyle(),
                 ),
               ),
             ),

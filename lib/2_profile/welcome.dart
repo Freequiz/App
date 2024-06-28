@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/2_profile/login.dart';
 import 'package:freequiz/2_profile/signup.dart';
-import 'package:freequiz/others/utilities.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class Welcome extends StatelessWidget {
@@ -26,13 +25,13 @@ class Welcome extends StatelessWidget {
             Space.height(10.0),
             Text(
               context.tr('welcome'),
-              style: textSize(context.screenHeight / 20),
+              style: fontSize(FontSize.headline),
             ),
             Space.height(5.0),
             Text(
               context.tr('welcome text'),
               textAlign: TextAlign.center,
-              style: textSize(context.screenHeight / 55),
+              style: fontSize(FontSize.text),
             ),
             Space.height(50.0),
             Image.asset(
@@ -81,10 +80,7 @@ class Welcome extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
         child: Text(
           text,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+          style: buttonStyle(),
         ).tr(),
       ),
     );

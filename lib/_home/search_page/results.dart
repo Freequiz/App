@@ -41,7 +41,7 @@ class _ResultsState extends State<Results> {
         children: [
           widget.child,
           SizedBox(
-            height: context.mobileLayout ? 5 : 15,
+            height: context.mobileLayout ? 10 : 15,
           ),
           LoadMoreButton(
             onPressed: () => onPressed(widget.i),

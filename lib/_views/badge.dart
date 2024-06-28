@@ -10,15 +10,17 @@ class InfoBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
-      decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(100)),
+      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(100)),
       alignment: Alignment.center,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.screenHeight/ 60),
+        padding: EdgeInsets.symmetric(horizontal: context.screenHeight / 60),
         child: Text(
           text,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            fontSize: FontSize.item,
+          ),
         ),
       ),
     );
