@@ -5,11 +5,12 @@ class AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
+    return Text(
       "Freequiz",
       style: TextStyle(
         fontWeight: FontWeight.w900,
         fontSize: FontSize.headline,
+        color: context.darkMode ? Colors.white : gray40
       ),
     );
   }

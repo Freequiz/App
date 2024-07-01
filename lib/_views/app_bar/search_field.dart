@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_home/search_page/search.dart';
+import 'package:freequiz/_views/app_bar/title.dart';
 import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
@@ -18,8 +20,9 @@ class _SearchFieldState extends State<SearchField> {
   Widget build(BuildContext context) {
     final hintColor = context.darkMode ? Colors.white : gray40;
 
-    return Flexible(
-      child: SizedBox(
+    return Conditional(
+      condition: Search.shown,
+      widget: SizedBox(
         height: 42.0,
         child: TextField(
           onSubmitted: (value) => loadSearch(context: context, searchTerm: widget.textController.text),
@@ -54,6 +57,7 @@ class _SearchFieldState extends State<SearchField> {
           ),
         ),
       ),
+      defaultWidget: const AppBarTitle(),
     );
   }
 }

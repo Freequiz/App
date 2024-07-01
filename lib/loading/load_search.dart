@@ -15,7 +15,7 @@ loadSearch({required BuildContext context, required String searchTerm, mode = "Q
         );
       },
     ),
-  );
+  ).then((context) => Search.shown = false);
 }
 
 class LoadSearch extends StatelessWidget {

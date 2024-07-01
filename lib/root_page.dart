@@ -47,7 +47,19 @@ class _RootPageState extends State<RootPage> {
 
     if (Profile.accessToken != "") {
       return Scaffold(
-        appBar: MainAppBar(focusNode: focusNode),
+        appBar: context.darkMode
+            ? MainAppBar(
+                focusNode: focusNode,
+                key: const Key("Dark Mode"),
+                switchPage: switchPage,
+                indexPage: currentPage,
+              )
+            : MainAppBar(
+                focusNode: focusNode,
+                key: const Key("Light Mode"),
+                switchPage: switchPage,
+                indexPage: currentPage,
+              ),
         body: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
@@ -56,23 +68,21 @@ class _RootPageState extends State<RootPage> {
           },
           child: pages[currentPage],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.bug_report_rounded), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
-          ],
-          currentIndex: currentPage,
-          onTap: (int index) {
-            setState(() {
-              currentPage = index;
-            });
-          },
-        ),
+        bottomNavigationBar: context.mobileLayout
+            ? BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                items: const [
+                  BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+                  BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
+                  BottomNavigationBarItem(icon: Icon(Icons.bug_report_rounded), label: ""),
+                  BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+                ],
+                currentIndex: currentPage,
+                onTap: switchPage,
+              )
+            : null,
       );
     } else if (Profile.loaded) {
       return Drawer(
@@ -80,5 +90,11 @@ class _RootPageState extends State<RootPage> {
       );
     }
     return const Drawer();
+  }
+
+  switchPage(int index) {
+    setState(() {
+      currentPage = index;
+    });
   }
 }

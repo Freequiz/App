@@ -40,7 +40,7 @@ ThemeData darkTheme = ThemeData(
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: blueLight),
     ),
-    hintStyle: TextStyle(color: Colors.white, fontSize: FontSize.input, fontWeight: FontWeight.w500),
+    hintStyle: TextStyle(color: Colors.white, fontSize: FontSize.text, fontWeight: FontWeight.w500),
   ),
   fontFamily: 'Inter',
 );

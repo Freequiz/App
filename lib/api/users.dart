@@ -189,7 +189,7 @@ class APIUsers {
                   "user": {
                     "password": password,
                     "password_confirmation": passwordConfirmation,
-                    "old_password": oldPassword
+                    "password_challenge": oldPassword
                   }
                 },
     );
