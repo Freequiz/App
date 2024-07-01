@@ -13,7 +13,7 @@ class InfoBadge extends StatelessWidget {
       decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(100)),
       alignment: Alignment.center,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.screenHeight / 60),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Text(
           text,
           style: const TextStyle(

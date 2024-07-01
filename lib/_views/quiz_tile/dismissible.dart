@@ -39,7 +39,7 @@ class _DismissibleQuizTileState extends State<DismissibleQuizTile> {
             uuid: widget.quizData['id'],
             expanded: widget.expanded,
             button: widget.button,
-            width: context.mobileLayout ? context.screenWidth - 20 : (context.screenWidth - 90) / 2,
+            width: context.screenWidth - 20,
           ),
         ),
       ],

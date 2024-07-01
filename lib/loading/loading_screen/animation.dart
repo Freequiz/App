@@ -21,7 +21,7 @@ class _LoadingAnimationState extends State<LoadingAnimation> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SpinKitRotatingCircle(
-          size: context.screenWidth / 3,
+          size: 100,
           itemBuilder: (BuildContext context, int index) {
             return Image.asset(
               "assets/images/icon_transparent.png",

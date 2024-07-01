@@ -12,8 +12,15 @@ class QuizTile extends StatefulWidget {
   final String uuid;
   final Widget? button;
   final double width;
+  final double? height;
   const QuizTile(
-      {super.key, required this.data, required this.uuid, this.expanded = true, this.button, required this.width});
+      {super.key,
+      required this.data,
+      required this.uuid,
+      this.expanded = true,
+      this.button,
+      required this.width,
+      this.height});
 
   @override
   State<QuizTile> createState() => _QuizTileState();
@@ -39,7 +46,8 @@ class _QuizTileState extends State<QuizTile> {
         uuid: widget.uuid,
       ),
       child: Container(
-        width: context.screenWidth - 20,
+        width: widget.width,
+        height: widget.height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(context.screenHeight / 100),
           color: color6,
@@ -47,16 +55,18 @@ class _QuizTileState extends State<QuizTile> {
         child: Padding(
           padding: context.mobileLayout
               ? const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 3.0)
-              : const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0, top: 15.0),
+              : const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0, top: 5.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TileTitle(
                 title: widget.data['title'],
                 button: widget.button ??
                     ShareButton(
-                        url: "https://www.freequiz.ch/quiz/${widget.uuid}",
-                        color: context.darkMode ? Colors.white : gray40),
+                      url: "https://www.freequiz.ch/quiz/${widget.uuid}",
+                      color: context.darkMode ? Colors.white : gray40,
+                    ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

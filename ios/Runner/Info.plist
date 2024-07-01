@@ -44,9 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-  	<string>$(FLUTTER_BUILD_NUMBER)</string>
-  	<key>CFBundleShortVersionString</key>
-  	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FlutterDeepLinkingEnabled</key>
 	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -63,6 +61,8 @@
 	<string>LaunchScreen.storyboard</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -1,6 +1,7 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/_home/home_page/switcher.dart';
+import 'package:freequiz/_views/quiz_list/label.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/delete.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/dismiss.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/favorite.dart';
@@ -55,9 +56,9 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    Widget listQuiz(int i) {
-      final List<Function> functions = [removeRecent, removeFavorite, removePersonal];
+    final List<Function> functions = [removeRecent, removeFavorite, removePersonal];
 
+    Widget listQuizMobile(int i) {
       return Positioned.fill(
         child: LoadQuizList(
           key: keys[i],
@@ -83,28 +84,56 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    Widget listQuizTablet(int i) {
+      return Container(
+        height: 172,
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: LoadQuizList(
+          key: keys[i],
+          future: listQuizzes[i],
+          onDismissed: functions[i],
+          background: backgrounds[i],
+        ),
+      );
+    }
+
     return RefreshIndicator(
       onRefresh: () => onRefresh(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          HomePageSwitcher(onTap: onTap, options: options),
-          SizedBox(
-            height: context.mobileLayout ? 10 : 30,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10.0 : 30),
-              child: Stack(
-                children: [
-                  listQuiz(0),
-                  listQuiz(1),
-                  listQuiz(2),
-                ],
+      child: LayoutWidget(
+        mobile: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            HomePageSwitcher(onTap: onTap, options: options),
+            SizedBox(
+              height: context.mobileLayout ? 10 : 30,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Stack(
+                  children: [
+                    listQuizMobile(0),
+                    listQuizMobile(1),
+                    listQuizMobile(2),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+        tablet: ListView(
+          padding: const EdgeInsets.all(15.0),
+          children: [
+            const QuizListLabel(text: 'history', icon: Icons.history),
+            listQuizTablet(0),
+            const SizedBox(height: 15.0),
+            const QuizListLabel(text: 'favorite', icon: Icons.star_rounded),
+            listQuizTablet(1),
+            const SizedBox(height: 15.0),
+            const QuizListLabel(text: 'created quizzes', icon: Icons.person),
+            listQuizTablet(2),
+          ],
+        ),
       ),
     );
   }

@@ -11,7 +11,8 @@ class ShareButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Share.share(url);
+        final RenderBox box = context.findRenderObject() as RenderBox;
+        Share.share(url, sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,);
       },
       child: Icon(
         Icons.ios_share,

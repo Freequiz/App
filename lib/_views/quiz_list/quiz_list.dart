@@ -9,47 +9,18 @@ class QuizList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Conditional(
-      condition: context.mobileLayout,
-      widget: ListQuizzes(data: list, background: background, onDismissed: onDismissed),
-      defaultWidget: Conditional(
-        condition: list.length > 1,
-        widget: Row(
-          children: [
-            Expanded(
-              child: ListQuizzes(
-                data: list,
-                onDismissed: onDismissed,
-                background: background,
-                physics: const NeverScrollableScrollPhysics(),
-              ),
-            ),
-            Space.width(30),
-            Expanded(
-              child: ListQuizzes(
-                data: list,
-                onDismissed: onDismissed,
-                background: background,
-                physics: const NeverScrollableScrollPhysics(),
-                n: 1,
-              ),
-            )
-          ],
-        ),
-        defaultWidget: Row(
-          children: [
-            Space.width((context.screenWidth - 30) / 4 + 15),
-            Expanded(
-              child: ListQuizzes(
-                data: list,
-                background: background,
-                onDismissed: onDismissed,
-                physics: const NeverScrollableScrollPhysics(),
-              ),
-            ),
-            Space.width((context.screenWidth - 30) / 4 + 15)
-          ],
-        ),
+    return LayoutWidget(
+      mobile: ListQuizzes(
+        data: list,
+        background: background,
+        onDismissed: onDismissed,
+      ),
+      tablet: ListQuizzes(
+        data: list,
+        background: background,
+        onDismissed: onDismissed,
+        scrollDirection: Axis.horizontal,
+        dismissible: false,
       ),
     );
   }

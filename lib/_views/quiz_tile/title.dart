@@ -10,7 +10,7 @@ class TileTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.screenHeight/ 20,
+      height: 40,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

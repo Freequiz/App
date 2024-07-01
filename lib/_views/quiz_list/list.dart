@@ -1,5 +1,6 @@
 import 'package:freequiz/_views/quiz_tile/dismissible.dart';
-import 'package:freequiz/utilities/imports/base.dart';
+import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ListQuizzes extends StatefulWidget {
   final ScrollPhysics physics;
@@ -7,13 +8,18 @@ class ListQuizzes extends StatefulWidget {
   final List data;
   final Function onDismissed;
   final Widget background;
-  const ListQuizzes(
-      {super.key,
-      required this.data,
-      required this.onDismissed,
-      this.physics = const AlwaysScrollableScrollPhysics(),
-      required this.background,
-      this.n = 0});
+  final Axis scrollDirection;
+  final bool dismissible;
+  const ListQuizzes({
+    super.key,
+    required this.data,
+    required this.onDismissed,
+    this.physics = const AlwaysScrollableScrollPhysics(),
+    required this.background,
+    this.n = 0,
+    this.scrollDirection = Axis.vertical,
+    this.dismissible = true,
+  });
 
   @override
   State<ListQuizzes> createState() => _ListQuizzesState();
@@ -33,18 +39,34 @@ class _ListQuizzesState extends State<ListQuizzes> {
   Widget build(BuildContext context) {
     return ListView.separated(
       physics: widget.physics,
-      itemCount: context.mobileLayout ? data.length : half(data.length),
+      itemCount: data.length,
+      scrollDirection: widget.scrollDirection,
       itemBuilder: (BuildContext context, int i) {
-        final quizData = data[context.mobileLayout ? i : i * 2 + widget.n];
-        return DismissibleQuizTile(
-          quizData: quizData,
-          background: widget.background,
-          onDismissed: (uuid) => onDismissed(i, uuid),
+        if (widget.dismissible) {
+          return DismissibleQuizTile(
+            quizData: data[i],
+            background: widget.background,
+            onDismissed: (uuid) => onDismissed(i, uuid),
+          );
+        }
+        return Align(
+          alignment: Alignment.topCenter,
+          child: QuizTile(
+            data: data[i],
+            uuid: data[i]['id'],
+            width: 400,
+            height: 152,
+          ),
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return SizedBox(
-          height: context.mobileLayout ? 10 : 30,
+        return const LayoutWidget(
+          mobile: SizedBox(
+            height: 10,
+          ),
+          tablet: SizedBox(
+            width: 15.0,
+          ),
         );
       },
     );

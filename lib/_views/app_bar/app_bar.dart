@@ -4,7 +4,6 @@ import 'package:freequiz/_views/app_bar/search_field.dart';
 import 'package:freequiz/_views/app_bar/navigation_bar.dart';
 import 'package:freequiz/loading/load_search.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
-import 'package:freequiz/utilities/widgets/layout_widget.dart';
 
 class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
   final FocusNode focusNode;

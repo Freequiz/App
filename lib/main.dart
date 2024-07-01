@@ -17,7 +17,7 @@ void main() async {
 
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode && true,
+      enabled: !kReleaseMode && false,
       builder: (context) => EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('de'), Locale('fr'), Locale('it')],
         path: 'assets/translations',

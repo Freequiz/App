@@ -11,7 +11,7 @@ class AdditionalInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.screenHeight/ 30 + 15,
+      height: 50,
       padding: const EdgeInsets.only(top: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
