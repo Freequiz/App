@@ -1,6 +1,5 @@
 import 'package:freequiz/_home/quiz_page/learning_mode.dart';
 import 'package:freequiz/utilities/imports/base.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class LearningModes extends StatefulWidget {
   final Axis scrollDirection;
@@ -12,13 +11,6 @@ class LearningModes extends StatefulWidget {
 }
 
 class _LearningModesState extends State<LearningModes> {
-  final List<IconData> icon = const [
-    Symbols.magic_button,
-    Symbols.keyboard,
-    Symbols.format_list_bulleted,
-    Symbols.rectangle_rounded
-  ];
-
   refresh() {
     setState(() {});
   }

@@ -18,7 +18,8 @@ class QuizListPlaceholder extends StatelessWidget {
             color: color6,
           ),
           alignment: Alignment.center,
-          width: context.mobileLayout ? context.screenWidth - 100 : 400,
+          width: context.mobileLayout ? context.screenWidth - 20 : 400,
+          height: 152,
           child: Text(
             context.tr("quizzes will be added here"),
             style: titleStyle(),

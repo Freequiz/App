@@ -10,7 +10,10 @@ class Correction extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return AlertDialog(
-      title: const Text('answer wrong').tr(),
+      title: Text(
+        context.tr('answer wrong'),
+        style: TextStyle(color: context.darkMode ? Colors.white : gray40),
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

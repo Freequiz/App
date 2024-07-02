@@ -1,4 +1,4 @@
-import 'package:freequiz/_home/learning_page/button.dart';
+import 'package:freequiz/_home/learning_page/buttons.dart';
 import 'package:freequiz/_views/progress_bar.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
@@ -33,7 +33,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
           amount: QuizHelper.quiz!.translations.translations.length,
           color: colors[widget.i],
         ),
-        StartLearningButton(i: widget.i, refresh: refresh),
+        StartLearningButtons(i: widget.i, refresh: refresh),
         Space.height(15),
         Flexible(
           fit: FlexFit.loose,

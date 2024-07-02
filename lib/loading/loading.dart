@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freequiz/api/api.dart';
 import 'package:freequiz/loading/error_loading/view.dart';
@@ -47,8 +46,6 @@ Widget loading({
   return LoadingScreen(
     message: "Loading Quiz",
     finishedLoading: false,
-    appBar: AppBar(
-      title: const Text('loading').tr(),
-    ),
+    appBar: AppBar(),
   );
 }
