@@ -18,13 +18,11 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
   Widget build(BuildContext context) {
     final hintColor = context.darkMode ? Colors.white : gray40;
     return Container(
-      padding: EdgeInsets.all(
-        context.mobileLayout ? 5 : context.screenHeight / 80,
-      ),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(context.screenWidth / 30.4),
-          topRight: Radius.circular(context.screenWidth / 30.4),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
         ),
         color: context.darkMode ? darkMainColor : lightMainColor,
       ),
@@ -53,14 +51,14 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 color: grayFreequiz,
                 width: 2,
               ),
-              borderRadius: BorderRadius.circular(context.screenWidth / 30.4),
+              borderRadius: BorderRadius.circular(20),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: blueLight,
                 width: 2,
               ),
-              borderRadius: BorderRadius.circular(context.screenWidth / 30.4),
+              borderRadius: BorderRadius.circular(20),
             ),
             hintText: context.tr('search'),
             suffixIcon: IconButton(
@@ -120,7 +118,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                   weight: 700,
                   grade: 200,
                   opticalSize: 24,
-                  size: context.mobileLayout ? context.screenHeight / 50 : context.screenHeight / 45,
+                  size: context.mobileLayout ? context.screenHeight / 50 : context.screenHeight / 70,
                 ),
               ),
             ),

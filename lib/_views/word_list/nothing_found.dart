@@ -15,9 +15,9 @@ class NothingFound extends StatelessWidget {
       width: context.screenWidth - 20,
       height: context.screenHeight / 18,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(context.screenWidth / 30.4),
-          bottomRight: Radius.circular(context.screenWidth / 30.4),
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(13),
+          bottomRight: Radius.circular(13),
         ),
         color: color5,
       ),

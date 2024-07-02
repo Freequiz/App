@@ -11,9 +11,9 @@ class QuizTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 12.0),
       decoration: BoxDecoration(
         color: context.darkMode ? darkMainColor : lightMainColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(context.screenWidth / 30.4),
-          topRight: Radius.circular(context.screenWidth / 30.4),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(13),
+          topRight: Radius.circular(13),
         ),
       ),
       child: Text(

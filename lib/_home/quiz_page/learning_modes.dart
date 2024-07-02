@@ -1,6 +1,4 @@
-import 'package:freequiz/loading/load_learning.dart';
-import 'package:freequiz/quiz/learning.dart';
-import 'package:freequiz/quiz/progress.dart';
+import 'package:freequiz/_home/quiz_page/learning_mode.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -28,45 +26,23 @@ class _LearningModesState extends State<LearningModes> {
   @override
   Widget build(BuildContext context) {
     double width = context.mobileLayout ? (context.screenWidth - 75) / 4 : (context.screenWidth - 100) / 4;
+    double height = context.mobileLayout ? width : 80 ;
 
     return Container(
       width: context.screenWidth,
-      height: width + 20,
+      height: height + 20,
       color: context.darkMode ? darkMainColor : lightMainColor,
       padding: const EdgeInsets.only(bottom: 15.0, left: 15.0, right: 15.0, top: 5),
       child: ListView.separated(
         scrollDirection: widget.scrollDirection,
         itemCount: 4,
         itemBuilder: (BuildContext context, int i) {
-          return SizedBox(
-            width: width,
-            height: width,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: colors[i].light,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(width / 4)),
-              ),
-              onPressed: () => loadLearning(context, widget.uuid, i, reset, refresh),
-              child: Icon(
-                icon[i],
-                size: width / 2,
-                weight: 600,
-                grade: 200,
-              ),
-            ),
-          );
+          return LearningMode(height: height, width: width, i: i, refresh: refresh);
         },
         separatorBuilder: (context, index) => SizedBox(
           width: context.mobileLayout ? 15 : 20,
         ),
       ),
     );
-  }
-
-  reset(i) {
-    setState(() {
-      Progress.reset(Learning.modes[i], widget.uuid);
-    });
   }
 }

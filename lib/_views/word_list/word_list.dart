@@ -33,22 +33,18 @@ class WordList extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                topLeft: i2 == 0 && roundedCornersTop ? Radius.circular(width / 30.4) : Radius.zero,
-                topRight: i2 == 0 && roundedCornersTop ? Radius.circular(width / 30.4) : Radius.zero,
-                bottomLeft: i2 == list.length - 1 ? Radius.circular(width / 30.4) : Radius.zero,
-                bottomRight: i2 == list.length - 1 ? Radius.circular(width / 30.4) : Radius.zero),
+                topLeft: i2 == 0 && roundedCornersTop ? const Radius.circular(13) : Radius.zero,
+                topRight: i2 == 0 && roundedCornersTop ? const Radius.circular(13) : Radius.zero,
+                bottomLeft: i2 == list.length - 1 ? const Radius.circular(13) : Radius.zero,
+                bottomRight: i2 == list.length - 1 ? const Radius.circular(13) : Radius.zero),
             color: i2.remainder(2) == 0 ? color5 : color6,
           ),
-          padding: context.mobileLayout
-              ? const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0)
-              : EdgeInsets.all(context.screenHeight / 80),
+          padding: const EdgeInsets.all(5.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: context.mobileLayout
-                    ? (width - 30) / 2 - context.screenHeight / 30
-                    : (width - 30) / 2 - context.screenHeight / 20 - context.screenHeight / 80,
+                width: (width - 30) / 2 - context.screenHeight / 30,
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8),
@@ -62,9 +58,7 @@ class WordList extends StatelessWidget {
                 ),
               ),
               Container(
-                width: context.mobileLayout
-                    ? (width - 30) / 2 - context.screenHeight / 30
-                    : (width - 30) / 2 - context.screenHeight / 20 - context.screenHeight / 80,
+                width: (width - 30) / 2 - context.screenHeight / 30,
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8),

@@ -12,7 +12,7 @@ class QuizDescription extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: context.darkMode ? gray60 : white235,
-        borderRadius: BorderRadius.circular(context.screenWidth / 30.4),
+        borderRadius: BorderRadius.circular(13),
       ),
       constraints: BoxConstraints(minHeight: context.screenHeight/ 15),
       child: Column(
@@ -26,7 +26,7 @@ class QuizDescription extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: (context.screenWidth - 46) / 8 * 7,
+                  width: (context.screenWidth - 46) - 42,
                   child: Text(
                     QuizHelper.quiz!.description != ""
                         ? QuizHelper.quiz!.description!
@@ -38,17 +38,17 @@ class QuizDescription extends StatelessWidget {
                   onTap: () => loadUser(
                       context: context, user: QuizHelper.quiz!.creator),
                   child: Container(
-                    height: context.screenHeight/ 35,
-                    width: context.screenHeight/ 35,
+                    height: 32,
+                    width: 32,
                     decoration: BoxDecoration(
                       borderRadius:
-                          BorderRadius.circular(context.screenHeight/ 70),
+                          BorderRadius.circular(100),
                       border: Border.all(color: Colors.white, width: 2.0),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Icon(
                         Icons.person,
-                        size: context.screenHeight/ 45,
+                        size: 24,
                       ),
                     ),
                   ),

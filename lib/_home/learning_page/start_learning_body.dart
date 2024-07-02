@@ -54,9 +54,9 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                         ),
                         width: context.screenWidth,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(context.screenWidth / 30.4),
-                            topRight: Radius.circular(context.screenWidth / 30.4),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(13),
+                            topRight: Radius.circular(13),
                           ),
                           color: context.darkMode ? colors[widget.i].dark : colors[widget.i].light,
                         ),
