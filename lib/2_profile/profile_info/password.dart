@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/buttons/submit.dart';
 import 'package:freequiz/_views/textfields/password.dart';
 import 'package:freequiz/_views/textfields/password_confirmation.dart';
 import 'package:freequiz/models/textfield_data.dart';
@@ -18,6 +19,7 @@ class _PasswordState extends State<Password> {
   TextFieldData newPasswordConfirmation = TextFieldData(hint: 'confirm password'.tr(), shown: false);
   TextFieldData oldPassword = TextFieldData(hint: 'old password'.tr(), shown: false);
   bool edit = false;
+  bool pressed = false;
 
   late FocusNode focusNode;
 
@@ -92,32 +94,28 @@ class _PasswordState extends State<Password> {
             ),
             Conditional(
               condition: edit,
-              widget: Row(
-                children: [
-                  Flexible(
-                    child: PasswordConfirmationTextfield(
-                      passwordConfirmation: newPasswordConfirmation,
-                      onSubmitted: () => changePassword,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  SizedBox(
-                    height: context.screenHeight / 20,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: grayFreequiz,
-                        foregroundColor: Colors.white,
+              widget: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Flexible(
+                      child: PasswordConfirmationTextfield(
+                        passwordConfirmation: newPasswordConfirmation,
+                        onSubmitted: () => changePassword,
                       ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    SubmitButton(
+                      pressed: pressed,
                       onPressed: () {
                         FocusScope.of(context).unfocus();
                         changePassword();
                       },
-                      child: const Icon(Icons.arrow_forward_ios),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -127,6 +125,7 @@ class _PasswordState extends State<Password> {
   }
 
   changePassword() async {
+    pressed = true;
     final Map map = await APIUsers.updateAccount(
         password: newPassword.input.text,
         passwordConfirmation: newPasswordConfirmation.input.text,
@@ -166,5 +165,6 @@ class _PasswordState extends State<Password> {
         newPasswordConfirmation.error = true;
       });
     }
+    pressed = false;
   }
 }

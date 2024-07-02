@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/buttons/submit.dart';
 import 'package:freequiz/_views/textfields/username.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
@@ -15,6 +16,7 @@ class Username extends StatefulWidget {
 
 class _UsernameState extends State<Username> {
   bool edit = false;
+  bool pressed = false;
   TextFieldData newUsername = TextFieldData(hint: 'username'.tr());
 
   @override
@@ -59,34 +61,30 @@ class _UsernameState extends State<Username> {
             ),
             Conditional(
               condition: edit,
-              widget: Row(
-                children: [
-                  Flexible(
-                    child: UsernameTextfield(
-                      username: newUsername,
-                      focusNode: FocusNode(),
-                      onSubmitted: changeUsername,
-                      autofillHints: const [AutofillHints.newUsername],
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  SizedBox(
-                    height: context.screenHeight / 20,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: grayFreequiz,
-                        foregroundColor: Colors.white,
+              widget: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Flexible(
+                      child: UsernameTextfield(
+                        username: newUsername,
+                        focusNode: FocusNode(),
+                        onSubmitted: changeUsername,
+                        autofillHints: const [AutofillHints.newUsername],
                       ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    SubmitButton(
+                      pressed: pressed,
                       onPressed: () {
                         FocusScope.of(context).unfocus();
                         changeUsername();
                       },
-                      child: const Icon(Icons.arrow_forward_ios),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -96,6 +94,7 @@ class _UsernameState extends State<Username> {
   }
 
   changeUsername() async {
+    pressed = true;
     final Map map = await APIUsers.updateAccount(username: newUsername.input.text);
     if (map["success"] == true) {
       setState(() {
@@ -124,5 +123,6 @@ class _UsernameState extends State<Username> {
         newUsername.changed = false;
       });
     }
+    pressed = false;
   }
 }

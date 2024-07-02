@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/buttons/submit.dart';
 import 'package:freequiz/_views/textfields/email.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
@@ -16,6 +17,7 @@ class EMail extends StatefulWidget {
 class _EMailState extends State<EMail> {
   TextFieldData newEmail = TextFieldData(hint: 'email'.tr());
   bool edit = false;
+  bool pressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,33 +61,29 @@ class _EMailState extends State<EMail> {
             ),
             Conditional(
               condition: edit,
-              widget: Row(
-                children: [
-                  Flexible(
-                    child: EmailTextfield(
-                      email: newEmail,
-                      focusNode: FocusNode(),
-                      onSubmitted: changeEmail,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  SizedBox(
-                    height: context.screenHeight / 20,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: grayFreequiz,
-                        foregroundColor: Colors.white,
+              widget: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Flexible(
+                      child: EmailTextfield(
+                        email: newEmail,
+                        focusNode: FocusNode(),
+                        onSubmitted: changeEmail,
                       ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    SubmitButton(
+                      pressed: pressed,
                       onPressed: () {
                         FocusScope.of(context).unfocus();
                         changeEmail();
                       },
-                      child: const Icon(Icons.arrow_forward_ios),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -95,6 +93,7 @@ class _EMailState extends State<EMail> {
   }
 
   changeEmail() async {
+    pressed = true;
     if (newEmail.input.text.isEmpty) {
       newEmail.hint = 'blank'.tr();
     } else {
@@ -127,5 +126,6 @@ class _EMailState extends State<EMail> {
         });
       }
     }
+    pressed = false;
   }
 }
