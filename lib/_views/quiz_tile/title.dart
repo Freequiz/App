@@ -1,10 +1,11 @@
-import 'package:freequiz/utilities/imports/base.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class TileTitle extends StatelessWidget {
-  const TileTitle({super.key, required this.title, this.button = const SizedBox(), this.color});
+  const TileTitle({super.key, required this.title, this.button = const SizedBox(), this.dismissButton = const SizedBox(), this.color});
 
   final String title;
   final Widget button;
+  final Widget dismissButton;
   final Color? color;
 
   @override
@@ -14,19 +15,23 @@ class TileTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Flexible(
-            child: Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: FontSize.title,
-                fontWeight: FontWeight.w600,
-                color: color,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: FontSize.title,
+                  fontWeight: FontWeight.w600,
+                  color: color,
+                ),
               ),
             ),
           ),
-          button
+          button,
+          LayoutWidget(tablet: dismissButton)
         ],
       ),
     );

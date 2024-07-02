@@ -190,5 +190,6 @@
     "User doesn't exist title": "User doesn't exist",
     "User doesn't exist description": "This user doesn't exist or was deleted. If you are sure this isn't the case, report it via the bug reporter.",
 
-    "User": "User" 
+    "User": "User",
+    "quizzes will be added here": "Quizzes will be added here as you use the app" 
 }

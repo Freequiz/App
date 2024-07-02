@@ -18,13 +18,13 @@ class LoadQuizList extends StatelessWidget {
           if (data.data!['success']) {
             final List list = data.data!['data'] as List;
 
-            return QuizList(list: list, onDismissed: onDismissed, background: background,);
+            return QuizList(list: list, onDismissed: onDismissed, background: background);
           }
           if (data.data!['message'] == Api.noConnection || data.data!['message'] == Api.timeout) {
             if (data.data!.containsKey('offline_data')) {
               final List list = data.data!['data'] as List;
 
-              return QuizList(list: list, onDismissed: onDismissed, background: background,);
+              return QuizList(list: list, onDismissed: onDismissed, background: background);
             }
             return const NoConnectionAlert(backgroundColor: gray55, showButton: false,);
           }

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/buttons/dismiss.dart';
 import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/_views/quiz_tile/additional_info.dart';
 import 'package:freequiz/_views/quiz_tile/title.dart';
@@ -13,6 +14,7 @@ class QuizTile extends StatefulWidget {
   final Widget? button;
   final double width;
   final double? height;
+  final Function? onDismissed;
   const QuizTile(
       {super.key,
       required this.data,
@@ -20,6 +22,7 @@ class QuizTile extends StatefulWidget {
       this.expanded = true,
       this.button,
       required this.width,
+      this.onDismissed,
       this.height});
 
   @override
@@ -52,32 +55,33 @@ class _QuizTileState extends State<QuizTile> {
           borderRadius: BorderRadius.circular(context.screenHeight / 100),
           color: color6,
         ),
-        child: Padding(
-          padding: context.mobileLayout
-              ? const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 3.0)
-              : const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0, top: 5.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TileTitle(
-                title: widget.data['title'],
-                button: widget.button ??
-                    ShareButton(
-                      url: "https://www.freequiz.ch/quiz/${widget.uuid}",
-                      color: context.darkMode ? Colors.white : gray40,
-                    ),
+        padding: context.mobileLayout
+            ? const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 3.0)
+            : const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0, top: 5.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TileTitle(
+              title: widget.data['title'],
+              button: widget.button ??
+                  ShareButton(
+                    url: "https://www.freequiz.ch/quiz/${widget.uuid}",
+                    color: context.darkMode ? Colors.white : gray40,
+                  ),
+              dismissButton: DismissButton(
+                onDismissed: widget.onDismissed != null ? () => widget.onDismissed!(widget.data['id']) : () {},
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Description(expanded: expanded, width: widget.width, description: widget.data['description']),
-                  moreButton()
-                ],
-              ),
-              Conditional(condition: expanded, widget: AdditionalInfo(data: widget.data)),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Description(expanded: expanded, width: widget.width, description: widget.data['description']),
+                moreButton()
+              ],
+            ),
+            Conditional(condition: expanded, widget: AdditionalInfo(data: widget.data)),
+          ],
         ),
       ),
     );

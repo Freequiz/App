@@ -1,10 +1,9 @@
+import 'package:freequiz/_views/quiz_list/placeholder.dart';
 import 'package:freequiz/_views/quiz_tile/dismissible.dart';
 import 'package:freequiz/_views/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ListQuizzes extends StatefulWidget {
-  final ScrollPhysics physics;
-  final int n;
   final List data;
   final Function onDismissed;
   final Widget background;
@@ -14,9 +13,7 @@ class ListQuizzes extends StatefulWidget {
     super.key,
     required this.data,
     required this.onDismissed,
-    this.physics = const AlwaysScrollableScrollPhysics(),
     required this.background,
-    this.n = 0,
     this.scrollDirection = Axis.vertical,
     this.dismissible = true,
   });
@@ -26,7 +23,6 @@ class ListQuizzes extends StatefulWidget {
 }
 
 class _ListQuizzesState extends State<ListQuizzes> {
-  get color6 => null;
   List data = [];
 
   @override
@@ -37,8 +33,9 @@ class _ListQuizzesState extends State<ListQuizzes> {
 
   @override
   Widget build(BuildContext context) {
+    if (data.isEmpty) return const QuizListPlaceholder();
+
     return ListView.separated(
-      physics: widget.physics,
       itemCount: data.length,
       scrollDirection: widget.scrollDirection,
       itemBuilder: (BuildContext context, int i) {
@@ -56,6 +53,7 @@ class _ListQuizzesState extends State<ListQuizzes> {
             uuid: data[i]['id'],
             width: 400,
             height: 152,
+            onDismissed: (uuid) => onDismissed(i, uuid),
           ),
         );
       },
@@ -77,16 +75,5 @@ class _ListQuizzesState extends State<ListQuizzes> {
       data.removeAt(i);
     });
     widget.onDismissed(i, uuid);
-  }
-
-  half(int amount) {
-    double half = amount / 2;
-    if (half.remainder(1) != 0) {
-      if (widget.n == 0) {
-        return (half + 0.5).toInt();
-      }
-      return (half - 0.5).toInt();
-    }
-    return half.toInt();
   }
 }
