@@ -58,8 +58,8 @@ class APIUsers {
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> deleteAccount(deleteToken) async {
-    final response = await Api.httpDelete(path: 'user/delete/$deleteToken');
+  static Future<Map> deleteAccount(deleteToken, destroyQuizzes) async {
+    final response = await Api.httpDelete(path: 'user/delete/$deleteToken?destroy_quizzes=$destroyQuizzes');
 
     if (response.statusCode == 200) {
       Profile.accessToken = "";

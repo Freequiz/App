@@ -118,7 +118,7 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                   weight: 700,
                   grade: 200,
                   opticalSize: 24,
-                  size: context.mobileLayout ? context.screenHeight / 50 : context.screenHeight / 70,
+                  size: context.mobileLayout ? context.screenHeight / 50 : 20,
                 ),
               ),
             ),

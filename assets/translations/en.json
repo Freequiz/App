@@ -191,5 +191,6 @@
     "User doesn't exist description": "This user doesn't exist or was deleted. If you are sure this isn't the case, report it via the bug reporter.",
 
     "User": "User",
-    "quizzes will be added here": "Quizzes will be added here as you use the app" 
+    "quizzes will be added here": "Quizzes will be added here as you use the app",
+    "delete all quizzes": "Delete all of my Quizzes:"
 }

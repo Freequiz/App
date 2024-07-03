@@ -7,6 +7,7 @@ ThemeData lightTheme = ThemeData(
     scrolledUnderElevation: 0.0, //remove tint scrolling up
     titleTextStyle: TextStyle(fontSize: FontSize.title, fontWeight: FontWeight.w600),
   ),
+  colorScheme: ColorScheme.fromSeed(seedColor: lightMainColor),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: lightMainColor,
     unselectedItemColor: gray70,

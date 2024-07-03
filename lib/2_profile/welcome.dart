@@ -36,8 +36,8 @@ class Welcome extends StatelessWidget {
             Space.height(50.0),
             Image.asset(
               'assets/images/icon_transparent.png',
-              width: context.screenWidth / 2,
-              height: context.screenWidth / 2,
+              width: context.screenHeight / 4,
+              height: context.screenHeight / 4,
             )
                 .animate(
                   onPlay: (controller) => controller.repeat(),

@@ -2,12 +2,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
-class Confirmation extends StatelessWidget {
+class Confirmation extends StatefulWidget {
   final Function refresh;
   const Confirmation({super.key, required this.refresh});
 
   @override
+  State<Confirmation> createState() => _ConfirmationState();
+}
+
+class _ConfirmationState extends State<Confirmation> {
+  bool destroyQuizzes = false;
+
+  @override
   Widget build(BuildContext context) {
+
     return AlertDialog(
       title: Text(
         context.tr('delete account'),
@@ -15,6 +23,19 @@ class Confirmation extends StatelessWidget {
       ),
       content: const Text('delete account confirmation').tr(),
       actions: [
+        Row(
+          children: [
+            const Text('delete all quizzes').tr(),
+            Checkbox(
+                value: destroyQuizzes,
+                onChanged: (value) {
+                  setState(() {
+                    destroyQuizzes = value ?? false;
+                  });
+                },
+              ),
+          ],
+        ),
         FutureBuilder<Map>(
           future: APIUsers.getDeleteToken(),
           builder: (context, data) {
@@ -26,10 +47,9 @@ class Confirmation extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () async {
-                        await APIUsers.deleteAccount(data.data!["token"]);
-                        // ignore: use_build_context_synchronously
-                        Navigator.of(context).pop();
-                        refresh();
+                        await APIUsers.deleteAccount(data.data!["token"], destroyQuizzes);
+                        if (context.mounted) Navigator.of(context).pop();
+                        widget.refresh();
                       },
                       child: Text(
                         context.tr('delete account'),
@@ -48,7 +68,8 @@ class Confirmation extends StatelessWidget {
             } else if (data.hasError) {
               return Text('${data.error}');
             } else {
-              return const Center(child: Padding(
+              return const Center(
+                  child: Padding(
                 padding: EdgeInsets.only(bottom: 10.0),
                 child: CircularProgressIndicator(),
               ));
