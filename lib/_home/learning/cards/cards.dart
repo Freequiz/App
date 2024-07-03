@@ -23,6 +23,7 @@ class _CardsState extends State<Cards> {
           style: TextStyle(color: Colors.white),
         ).tr(),
         backgroundColor: context.darkMode ? blueDark : blueLight,
+        foregroundColor: Colors.white,
       ),
       body: CardsBody(
         key: key,

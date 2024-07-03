@@ -25,7 +25,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
       },
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10.0 : context.screenWidth / 5.5),
           child: ListView(
             children: [
               SizedBox(height: context.screenHeight / 60),

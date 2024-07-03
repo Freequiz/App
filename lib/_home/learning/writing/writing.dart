@@ -24,6 +24,7 @@ class _WritingState extends State<Writing> {
           'writing',
           style: TextStyle(color: Colors.white),
         ).tr(),
+        foregroundColor: Colors.white,
         backgroundColor: context.darkMode ? roseDark : roseLight,
       ),
       body: WritingBody(

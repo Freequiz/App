@@ -45,6 +45,7 @@ class _SmartState extends State<Smart> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: context.darkMode ? purpleDark : purpleLight,
+        foregroundColor: Colors.white,
         title: const Text(
           "Smart",
           style: TextStyle(color: Colors.white),

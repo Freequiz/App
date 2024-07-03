@@ -18,7 +18,7 @@ class _DarkModeSwitcherState extends State<DarkModeSwitcher> {
       onTap: onTap,
       texts: const ["Dark Mode", "Automatic", "Light Mode"],
       value: Preferences.theme,
-      width: context.screenWidth - 20,
+      width: context.mobileLayout ? context.screenWidth - 20 : context.screenWidth / 5.5 * 3.5,
     );
   }
 

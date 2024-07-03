@@ -40,7 +40,14 @@ class LearningMode extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: icon(),
               ),
-              Text(context.tr(Learning.modes[i]), style: titleStyle()),
+              SizedBox(
+                width: width - height / 2 - 44,
+                child: Text(
+                  context.tr(Learning.modes[i]),
+                  style: context.screenWidth > 900 ? titleStyle() : fontSize(FontSize.secondary),
+                  maxLines: 2,
+                ),
+              ),
             ],
           ),
         ),

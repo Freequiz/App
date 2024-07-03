@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class DismissButton extends StatelessWidget {
   final Function onDismissed;
-  final Color color;
 
-  const DismissButton({super.key, required this.onDismissed, this.color = Colors.white});
+  const DismissButton({super.key, required this.onDismissed});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +11,8 @@ class DismissButton extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10.0),
       child: GestureDetector(
         onTap: () => onDismissed(),
-        child: Icon(
+        child: const Icon(
           Icons.close_rounded,
-          color: color,
         ),
       ),
     );

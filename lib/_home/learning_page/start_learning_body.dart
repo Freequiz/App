@@ -61,9 +61,13 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                           color: context.darkMode ? colors[widget.i].dark : colors[widget.i].light,
                         ),
                         child: Text(
-                              i < widget.levels.length ? widget.levels[i] : widget.levels.last,
-                              style: titleStyle(),
-                            ),
+                          i < widget.levels.length ? widget.levels[i] : widget.levels.last,
+                          style: const TextStyle(
+                            fontSize: FontSize.title,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     WordList(

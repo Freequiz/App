@@ -1,11 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
+import 'package:freequiz/_views/buttons/edit_text.dart';
 import 'package:freequiz/_views/buttons/favorite.dart';
+import 'package:freequiz/_views/buttons/share_text.dart';
 import 'package:freequiz/_views/kebab_menu/kebab_menu.dart';
 import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/quiz/manage.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 void loadQuiz({required BuildContext context, required String uuid}) {
   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -38,16 +40,27 @@ class LoadQuiz extends StatelessWidget {
               uuid: uuid,
             ),
             appBar: AppBar(
-              actions: [
-                Favorite(
-                  favorite: QuizHelper.quiz?.favorite ?? false,
-                  toggleFavorite: toggleFavorite,
-                ),
-                KebabMenuButton(
-                  url: "https://freequiz.ch/quiz/$uuid",
-                  uuid: uuid,
-                ),
-              ],
+              actions: context.mobileLayout
+                  ? [
+                      Favorite(
+                        favorite: QuizHelper.quiz?.favorite ?? false,
+                        toggleFavorite: toggleFavorite,
+                      ),
+                      KebabMenuButton(
+                        url: "https://freequiz.ch/quiz/$uuid",
+                        uuid: uuid,
+                      ),
+                    ]
+                  : [
+                      Favorite(
+                        favorite: QuizHelper.quiz?.favorite ?? false,
+                        toggleFavorite: toggleFavorite,
+                      ),
+                      EditTextButton(uuid: uuid),
+                      ShareTextButton(
+                        url: "https://freequiz.ch/quiz/$uuid",
+                      ),
+                    ],
             ),
           ),
           context: context,

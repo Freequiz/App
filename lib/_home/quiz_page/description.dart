@@ -43,7 +43,7 @@ class QuizDescription extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius:
                           BorderRadius.circular(100),
-                      border: Border.all(color: Colors.white, width: 2.0),
+                      border: Border.all(color: context.darkMode ? Colors.white : gray40, width: 2.0),
                     ),
                     child: const Center(
                       child: Icon(

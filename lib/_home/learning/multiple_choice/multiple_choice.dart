@@ -30,6 +30,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
           style: TextStyle(color: Colors.white),
         ).tr(),
         backgroundColor: context.darkMode ? beigeDark : beigeLight,
+        foregroundColor: Colors.white,
       ),
       body: MultipleChoiceBody(
         choices: Question.choices,

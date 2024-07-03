@@ -74,7 +74,6 @@ class WritingBody extends StatelessWidget {
                       ),
                       Space.width(5),
                       SizedBox(
-                        height: context.mobileLayout ? context.screenHeight / 20 : context.screenHeight / 30,
                         child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: context.darkMode
@@ -89,7 +88,10 @@ class WritingBody extends StatelessWidget {
                           onPressed: () {
                             onPressed();
                           },
-                          child: const Icon(Icons.arrow_forward_ios),
+                          child: const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],
