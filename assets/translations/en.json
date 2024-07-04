@@ -192,5 +192,8 @@
 
     "User": "User",
     "quizzes will be added here": "Quizzes will be added here as you use the app",
-    "delete all quizzes": "Delete all of my Quizzes:"
+    "delete all quizzes": "Delete all of my Quizzes:",
+
+    "account": "Account",
+    "appearance": "Appearance"
 }

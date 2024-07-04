@@ -193,5 +193,8 @@
     
     "User": "Benutzer",
     "quizzes will be added here": "Quizze werden hier hinzugefügt, wenn Sie die App benutzen",
-    "delete all quizzes": "Alle meine Quizze löschen:"
+    "delete all quizzes": "Alle meine Quizze löschen:",
+
+    "account": "Konto",
+    "appearance": "Erscheinungsbild"
 }

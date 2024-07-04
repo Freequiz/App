@@ -1,11 +1,13 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/2_profile/profile_info/confirmation.dart';
 import 'package:freequiz/2_profile/profile_info/dark_mode_switcher.dart';
 import 'package:freequiz/2_profile/profile_info/email.dart';
 import 'package:freequiz/2_profile/profile_info/password.dart';
 import 'package:freequiz/2_profile/profile_info/username.dart';
 import 'package:freequiz/2_profile/profile.dart';
+import 'package:freequiz/_views/buttons/long_button.dart';
+import 'package:freequiz/_views/category_title.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class ProfileInfo extends StatefulWidget {
   final Function refresh;
@@ -29,44 +31,39 @@ class _ProfileInfoState extends State<ProfileInfo> {
           child: ListView(
             children: [
               SizedBox(height: context.screenHeight / 60),
-              Username(refresh: widget.refresh),
-              SizedBox(height: context.screenHeight / 60),
-              EMail(refresh: widget.refresh),
-              SizedBox(height: context.screenHeight / 60),
-              Password(refresh: widget.refresh),
-              SizedBox(height: context.screenHeight / 60),
+              CategoryTitle(icon: Symbols.dark_mode_rounded, color: rose, title: 'appearance'),
               const DarkModeSwitcher(),
-              SizedBox(height: context.screenHeight / 5),
-              Align(
-                child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: grayFreequiz, foregroundColor: Colors.white),
-                  onPressed: () async {
-                    Profile.accessToken = "";
-                    widget.refresh();
-                    Profile.deleteData();
-                  },
-                  child: Text(
-                    'logout',
-                    style: buttonStyle(),
-                  ).tr(),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Align(
-                child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
-                  onPressed: () async {
-                    showDialog(
-                        context: context, builder: (BuildContext context) => Confirmation(refresh: widget.refresh));
-                  },
-                  child: Text(
-                    'delete account',
-                    style: buttonStyle(),
-                  ).tr(),
-                ),
-              ),
+              SizedBox(height: context.screenHeight / 60),
+              CategoryTitle(icon: Symbols.person, color: purple, title: 'account'),
+              Username(refresh: widget.refresh),
+              const SizedBox(height: 10.0),
+              EMail(refresh: widget.refresh),
+              const SizedBox(height: 10.0),
+              Password(refresh: widget.refresh),
+              const SizedBox(height: 10.0),
+              Row(
+                children: [
+                  LongButton(
+                    onPressed: () async {
+                      showDialog(
+                          context: context, builder: (BuildContext context) => Confirmation(refresh: widget.refresh));
+                    },
+                    text: 'delete account',
+                    color: context.darkMode ? redDark : redMedium,
+                  ),
+                  const SizedBox(
+                    width: 15.0,
+                  ),
+                  LongButton(
+                    onPressed: () async {
+                      Profile.accessToken = "";
+                      widget.refresh();
+                      Profile.deleteData();
+                    },
+                    text: 'logout',
+                  ),
+                ],
+              )
             ],
           ),
         ),
