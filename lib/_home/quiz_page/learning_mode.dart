@@ -27,7 +27,7 @@ class LearningMode extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
           backgroundColor: colors[i].light,
-          foregroundColor: context.darkMode ? Colors.white : gray40,
+          foregroundColor: colors[i].dark,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(height / 4)),
         ),
         onPressed: () => loadLearning(context, i, refresh),
@@ -61,6 +61,7 @@ class LearningMode extends StatelessWidget {
       size: height / 2,
       weight: 600,
       grade: 200,
+      color: colors[i].dark,
     );
   }
 }

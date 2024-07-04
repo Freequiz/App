@@ -48,6 +48,9 @@ const Color redDark = Color.fromARGB(255, 120, 30, 14);
 const Color darkMainColor = Color.fromARGB(255, 22, 23, 32);
 const Color lightMainColor = Color.fromARGB(255, 213, 194, 200);
 
+//Light Blue
+const Color lightBlue = Color.fromARGB(255, 214, 225, 252);
+
 //Gray Tones
 const Color gray40 = Color.fromARGB(255, 40, 40, 40); //used for app background and for text
 const Color gray55 = Color.fromARGB(255, 55, 55, 55); //used for background elements

@@ -7,15 +7,7 @@ class QuizTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 12.0),
-      decoration: BoxDecoration(
-        color: context.darkMode ? darkMainColor : lightMainColor,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(13),
-          topRight: Radius.circular(13),
-        ),
-      ),
+      alignment: Alignment.topLeft,
       child: Text(
         QuizHelper.quiz!.title,
         style: titleStyle(),

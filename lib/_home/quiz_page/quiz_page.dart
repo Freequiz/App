@@ -1,4 +1,5 @@
 import 'package:freequiz/_home/quiz_page/description.dart';
+import 'package:freequiz/_views/buttons/user.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/_home/quiz_page/learning_modes.dart';
@@ -45,7 +46,19 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: ListView(
               children: [
-                const QuizDescription(),
+                const LayoutWidget(
+                  mobile: QuizDescription(),
+                  tablet: IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Flexible(flex: 3, child: QuizDescription()),
+                        SizedBox(width: 10.0),
+                        Flexible(flex: 1, child: UserButton()),
+                      ],
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 15),
                 WordListTaskbar(
                   search: search,
