@@ -23,77 +23,75 @@ class WordList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color5 = context.darkMode ? gray60 : white225;
-    final color6 = context.darkMode ? gray55 : white235;
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: scrollPhysics,
-      itemCount: list.length,
-      itemBuilder: (BuildContext context, int i2) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: i2 == 0 && roundedCornersTop ? const Radius.circular(13) : Radius.zero,
-                topRight: i2 == 0 && roundedCornersTop ? const Radius.circular(13) : Radius.zero,
-                bottomLeft: i2 == list.length - 1 ? const Radius.circular(13) : Radius.zero,
-                bottomRight: i2 == list.length - 1 ? const Radius.circular(13) : Radius.zero),
-            color: i2.remainder(2) == 0 ? color5 : color6,
-          ),
-          padding: const EdgeInsets.all(5.0),
-          child: Row(
+    final color5 = context.darkMode ? gray60 : white235;
+    final color6 = context.darkMode ? gray55 : white225;
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: roundedCornersTop ? const Radius.circular(13) : Radius.zero,
+          topRight: roundedCornersTop ? const Radius.circular(13) : Radius.zero,
+          bottomLeft: const Radius.circular(13),
+          bottomRight: const Radius.circular(13),
+        ),
+        color: color5,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 13.0),
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: scrollPhysics,
+        itemCount: list.length,
+        itemBuilder: (BuildContext context, int i2) {
+          return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: (width - 30) / 2 - context.screenHeight / 30,
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8),
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  alignment: Alignment.centerLeft,
                   child: Text(
                     list[i2].word,
                     style: TextStyle(
-                      fontSize: FontSize.text,
-                      color: Learning.errors.contains(list[i2]) ? Colors.red : null
-                    ),
+                        fontSize: FontSize.text, color: Learning.errors.contains(list[i2]) ? Colors.red : null),
                   ),
                 ),
               ),
-              Container(
-                width: (width - 30) / 2 - context.screenHeight / 30,
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8),
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  alignment: Alignment.centerLeft,
                   child: Text(
                     list[i2].translation,
                     style: TextStyle(
-                      fontSize: FontSize.text,
-                      color: Learning.errors.contains(list[i2]) ? Colors.red : null
-                    ),
+                        fontSize: FontSize.text, color: Learning.errors.contains(list[i2]) ? Colors.red : null),
                   ),
                 ),
               ),
-              SizedBox(
-                width: context.screenHeight / 20,
-                child: TextButton(
-                  onPressed: () {
-                    markWord(list[i2]);
-                  },
-                  child: list[i2].favorite
-                      ? Icon(
-                          Icons.star,
-                          color: color,
-                          size: context.mobileLayout ? context.screenHeight / 50 : context.screenHeight / 45,
-                        )
-                      : Icon(
-                          Icons.star_border,
-                          color: color,
-                          size: context.mobileLayout ? context.screenHeight / 50 : context.screenHeight / 45,
-                        ),
-                ),
+              IconButton(
+                onPressed: () {
+                  markWord(list[i2]);
+                },
+                icon: list[i2].favorite
+                    ? Icon(
+                        Icons.star,
+                        color: color,
+                        size: 20,
+                      )
+                    : Icon(
+                        Icons.star_border,
+                        color: color,
+                        size: 20,
+                      ),
               ),
             ],
-          ),
-        );
-      },
+          );
+        },
+        separatorBuilder: (BuildContext context, int _) {
+          return Container(
+            height: 1.5,
+            color: color6,
+          );
+        },
+      ),
     );
   }
 }

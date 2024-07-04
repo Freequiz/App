@@ -52,9 +52,9 @@ class _QuizPageState extends State<QuizPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Flexible(flex: 3, child: QuizDescription()),
-                        SizedBox(width: 10.0),
                         Flexible(flex: 1, child: UserButton()),
+                        SizedBox(width: 10.0),
+                        Flexible(flex: 3, child: QuizDescription()),
                       ],
                     ),
                   ),
@@ -63,6 +63,7 @@ class _QuizPageState extends State<QuizPage> {
                 WordListTaskbar(
                   search: search,
                 ),
+                const SizedBox(height: 5),
                 list.isEmpty
                     ? const NothingFound()
                     : WordList(
@@ -71,7 +72,6 @@ class _QuizPageState extends State<QuizPage> {
                         color: roseLight,
                         width: context.screenWidth,
                         scrollPhysics: const NeverScrollableScrollPhysics(),
-                        roundedCornersTop: false,
                       ),
               ],
             ),

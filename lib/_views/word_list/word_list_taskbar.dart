@@ -18,11 +18,13 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
   Widget build(BuildContext context) {
     final hintColor = context.darkMode ? Colors.white : gray40;
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: search ? 5 : 13),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
+          topLeft: Radius.circular(13),
+          topRight: Radius.circular(13),
+          bottomLeft: Radius.circular(13),
+          bottomRight: Radius.circular(13),
         ),
         color: context.darkMode ? darkMainColor : lightMainColor,
       ),
@@ -44,21 +46,21 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
                 color: roseLight,
                 width: 2,
               ),
-              borderRadius: BorderRadius.circular(50.0),
+              borderRadius: BorderRadius.circular(7),
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: grayFreequiz,
                 width: 2,
               ),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(7),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: blueLight,
                 width: 2,
               ),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(7),
             ),
             hintText: context.tr('search'),
             suffixIcon: IconButton(
@@ -79,47 +81,36 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
         defaultWidget: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: context.mobileLayout
-                  ? (context.screenWidth - 30) / 2 - context.screenHeight / 30
-                  : (context.screenWidth - 30) / 2 - context.screenHeight / 20 - context.screenHeight / 80,
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8),
+            Flexible(
+              child: Align(
+                alignment: Alignment.centerLeft,
                 child: Text(
                   context.tr('definition'),
                   style: titleStyle(),
                 ),
               ),
             ),
-            Container(
-              width: context.mobileLayout
-                  ? (context.screenWidth - 30) / 2 - context.screenHeight / 30
-                  : (context.screenWidth - 30) / 2 - context.screenHeight / 20 - context.screenHeight / 80,
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8),
+            Flexible(
+              child: Align(
+                alignment: Alignment.centerLeft,
                 child: Text(
                   context.tr('answer'),
                   style: titleStyle(),
                 ),
               ),
             ),
-            SizedBox(
-              width: context.screenHeight / 20,
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    search = !search;
-                  });
-                },
-                child: Icon(
-                  Symbols.search,
-                  weight: 700,
-                  grade: 200,
-                  opticalSize: 24,
-                  size: context.mobileLayout ? context.screenHeight / 50 : 20,
-                ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  search = !search;
+                });
+              },
+              icon: const Icon(
+                Symbols.search,
+                weight: 700,
+                grade: 200,
+                opticalSize: 24,
+                size: 20,
               ),
             ),
           ],
