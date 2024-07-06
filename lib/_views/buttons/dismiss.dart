@@ -13,6 +13,7 @@ class DismissButton extends StatelessWidget {
         onTap: () => onDismissed(),
         child: const Icon(
           Icons.close_rounded,
+          size: 32,
         ),
       ),
     );

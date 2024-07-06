@@ -1,7 +1,7 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/1_edit/confirmation.dart';
 import 'package:freequiz/_home/home_page/switcher.dart';
-import 'package:freequiz/_views/quiz_list/label.dart';
+import 'package:freequiz/_views/category_title.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/delete.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/dismiss.dart';
 import 'package:freequiz/_views/quiz_tile/backgrounds/favorite.dart';
@@ -85,9 +85,8 @@ class _HomePageState extends State<HomePage> {
     }
 
     Widget listQuizTablet(int i) {
-      return Container(
-        height: 172,
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+      return SizedBox(
+        height: 152,
         child: LoadQuizList(
           key: keys[i],
           future: listQuizzes[i],
@@ -124,13 +123,13 @@ class _HomePageState extends State<HomePage> {
         tablet: ListView(
           padding: const EdgeInsets.all(15.0),
           children: [
-            const QuizListLabel(text: 'history', icon: Icons.history),
+            CategoryTitle(icon: Icons.history, color: rose, title: 'history'),
             listQuizTablet(0),
             const SizedBox(height: 15.0),
-            const QuizListLabel(text: 'favorite', icon: Icons.star_rounded),
+            CategoryTitle(icon: Icons.star_rounded, color: purple, title: 'favorite'),
             listQuizTablet(1),
             const SizedBox(height: 15.0),
-            const QuizListLabel(text: 'created quizzes', icon: Icons.person),
+            CategoryTitle(icon: Icons.person, color: beige, title: 'created quizzes'),
             listQuizTablet(2),
           ],
         ),
