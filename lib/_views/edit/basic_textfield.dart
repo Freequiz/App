@@ -65,6 +65,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
             color: widget.textFieldData.error ? Colors.red : widget.colorBorder,
             width: widget.widthBorder,
           ),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0))
         ),
       ),
     );

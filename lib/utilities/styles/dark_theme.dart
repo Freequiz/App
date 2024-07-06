@@ -35,13 +35,27 @@ ThemeData darkTheme = ThemeData(
   ),
   dialogTheme: const DialogTheme(backgroundColor: gray40),
   inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderSide: BorderSide(width: 2, color: grayFreequiz),
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 2, color: grayFreequiz),
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: grayFreequiz),
+      borderRadius: BorderRadius.all(Radius.circular(10)),
     ),
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: blueLight),
+      borderRadius: BorderRadius.all(Radius.circular(10)),
     ),
-    hintStyle: TextStyle(color: Colors.white, fontSize: FontSize.text, fontWeight: FontWeight.w500),
+    hintStyle: TextStyle(
+      color: Colors.white,
+      fontSize: FontSize.text,
+      fontWeight: FontWeight.w500,
+    ),
   ),
   fontFamily: 'Inter',
 );

@@ -44,6 +44,7 @@ class BasicTextfield extends StatelessWidget {
             color: data.color,
             width: 2.0,
           ),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0))
         ),
       ),
     );

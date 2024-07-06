@@ -32,9 +32,17 @@ ThemeData lightTheme = ThemeData(
   inputDecorationTheme: const InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: grayFreequiz),
+      borderRadius: BorderRadius.all(Radius.circular(10)),
     ),
-    focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2, color: roseMiddle)),
-    hintStyle: TextStyle(color: Colors.black, fontSize: FontSize.text, fontWeight: FontWeight.w500),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 2, color: roseMiddle),
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+    hintStyle: TextStyle(
+      color: Colors.black,
+      fontSize: FontSize.text,
+      fontWeight: FontWeight.w500,
+    ),
   ),
   fontFamily: 'Inter',
 );

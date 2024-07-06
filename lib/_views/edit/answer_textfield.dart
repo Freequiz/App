@@ -57,6 +57,7 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
             color: widget.textFieldData.error ? Colors.red : grayFreequiz,
             width: widget.widthBorder,
           ),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0))
         ),
       ),
     );
