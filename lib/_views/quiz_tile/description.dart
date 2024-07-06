@@ -13,14 +13,7 @@ class Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: expanded
-          ? context.mobileLayout
-              ? width - 20
-              : width - 40
-          : context.mobileLayout
-              ? width / 6 * 5 - 20
-              : width / 6 * 5 - 40,
+    return Flexible(
       child: Text(
         description,
         maxLines: expanded ? 2 : 1,

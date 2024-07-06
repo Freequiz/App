@@ -48,7 +48,6 @@ class _UserTileState extends State<UserTile> {
                     ),
                     ShareButton(
                       url: "https://freequiz.ch/user/${widget.data['username']}",
-                      color: context.darkMode ? Colors.white : gray40,
                     )
                   ],
                 ),

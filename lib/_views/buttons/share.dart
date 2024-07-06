@@ -1,22 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareButton extends StatelessWidget {
-  const ShareButton({super.key, required this.url, this.color = Colors.white});
+  const ShareButton({super.key, required this.url});
 
   final String url;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return IconButton(
+      onPressed: () {
         final RenderBox box = context.findRenderObject() as RenderBox;
         Share.share(url, sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,);
       },
-      child: Icon(
+      icon: Icon(
         Icons.ios_share,
-        color: color,
+        color: context.darkMode ? Colors.white : gray40,
       ),
     );
   }

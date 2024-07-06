@@ -1,5 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/buttons/dismiss.dart';
+import 'package:freequiz/_views/buttons/expand.dart';
 import 'package:freequiz/_views/buttons/share.dart';
 import 'package:freequiz/_views/quiz_tile/additional_info.dart';
 import 'package:freequiz/_views/quiz_tile/title.dart';
@@ -67,7 +67,6 @@ class _QuizTileState extends State<QuizTile> {
               button: widget.button ??
                   ShareButton(
                     url: "https://www.freequiz.ch/quiz/${widget.uuid}",
-                    color: context.darkMode ? Colors.white : gray40,
                   ),
               dismissButton: DismissButton(
                 onDismissed: widget.onDismissed != null ? () => widget.onDismissed!(widget.data['id']) : () {},
@@ -77,35 +76,18 @@ class _QuizTileState extends State<QuizTile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Description(expanded: expanded, width: widget.width, description: widget.data['description']),
-                moreButton()
+                ExpandButton(
+                  shown: !widget.expanded,
+                  onPressed: () {
+                    setState(() {
+                      expanded = !expanded;
+                    });
+                  },
+                ),
               ],
             ),
             Conditional(condition: expanded, widget: AdditionalInfo(data: widget.data)),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget moreButton() {
-    return Conditional(
-      condition: !widget.expanded,
-      widget: SizedBox(
-        height: context.screenHeight / 30,
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              expanded = true;
-            });
-          },
-          child: Text(
-            expanded ? "" : context.tr('more'),
-            style: const TextStyle(
-              color: grayFreequiz,
-              fontSize: FontSize.button,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
         ),
       ),
     );

@@ -7,14 +7,10 @@ class DismissButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10.0),
-      child: GestureDetector(
-        onTap: () => onDismissed(),
-        child: const Icon(
-          Icons.close_rounded,
-          size: 32,
-        ),
+    return IconButton(
+      onPressed: () => onDismissed(),
+      icon: const Icon(
+        Icons.close_rounded,
       ),
     );
   }

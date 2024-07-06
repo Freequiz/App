@@ -17,17 +17,17 @@ class LoadMoreButton extends StatelessWidget {
         ),
         defaultWidget: TextButton(
           style: TextButton.styleFrom(
-            backgroundColor: grayFreequiz,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.all(10.0),
+            backgroundColor: context.darkMode ? gray60 : white235,
+            foregroundColor: context.darkMode ? Colors.white : gray40,
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
           ),
           onPressed: () => onPressed(),
           child: Text(
-            context.tr('load more'),
+            context.tr('more'),
             style: const TextStyle(
-              color: Colors.white,
               fontSize: FontSize.button,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w800,
             ),
           ),
         ),

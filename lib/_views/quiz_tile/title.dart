@@ -13,23 +13,20 @@ class TileTitle extends StatelessWidget {
     return SizedBox(
       height: 40,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10.0),
-              child: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: FontSize.title,
-                  fontWeight: FontWeight.w600,
-                  color: color,
-                ),
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: FontSize.title,
+                fontWeight: FontWeight.w600,
+                color: color,
               ),
             ),
           ),
+          const SizedBox(width: 10.0),
           button,
           LayoutWidget(tablet: dismissButton)
         ],

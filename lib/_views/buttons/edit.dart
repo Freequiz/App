@@ -9,9 +9,9 @@ class Edit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => edit(context, widget),
-      child: Icon(
+    return IconButton(
+      onPressed: () => edit(context, widget),
+      icon: Icon(
         Icons.edit,
         color: context.darkMode ? Colors.white : gray40,
       ),
