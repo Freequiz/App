@@ -31,6 +31,6 @@ class Search {
       }
     }
 
-    return {'success': false, 'error': users['message']};
+    return {'success': false, 'error': users['message'], 'token': quizzes['token'], 'reason': quizzes['reason']};
   }
 }
