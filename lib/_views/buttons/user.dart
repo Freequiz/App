@@ -1,3 +1,4 @@
+import 'package:freequiz/_home/user_page/user_avatar.dart';
 import 'package:freequiz/loading/load_user.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -21,7 +22,7 @@ class UserButton extends StatelessWidget {
           padding: const EdgeInsets.all(13.0),
           child: Row(
             children: [
-              userBadge(context),
+              UserAvatar(url: QuizHelper.quiz!.avatarURL, size: 60,),
               const SizedBox(width: 20.0),
               Flexible(
                 child: Text(

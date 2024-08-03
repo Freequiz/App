@@ -3,6 +3,7 @@ import 'package:freequiz/_views/app_bar/title.dart';
 import 'package:freequiz/_views/buttons/submit.dart';
 import 'package:freequiz/_views/textfields/password.dart';
 import 'package:freequiz/_views/textfields/username.dart';
+import 'package:freequiz/loading/error_loading/alert.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/2_profile/profile.dart';
@@ -67,12 +68,12 @@ class _LoginState extends State<Login> {
                         child: PasswordTextfield(
                           password: password,
                           focusNode: focusNode,
-                          onSubmitted: onPressed,
+                          onSubmitted: () => onPressed(widget.refresh),
                           autofillHints: const [AutofillHints.password],
                         ),
                       ),
                       Space.width(5),
-                      SubmitButton(pressed: pressed, onPressed: onPressed)
+                      SubmitButton(pressed: pressed, onPressed: () => onPressed(widget.refresh))
                     ],
                   ),
                 ),
@@ -84,7 +85,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  onPressed() async {
+  onPressed(Function refresh) async {
     if (password.input.text.isEmpty) {
       setState(() {
         password.error = true;
@@ -124,6 +125,14 @@ class _LoginState extends State<Login> {
             pressed = false;
             password.input.clear();
           });
+        } else if (mounted) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => ErrorLoadingAlert(
+              previousWidget: Login(refresh: refresh),
+              error: mapLogin["error"] ?? "other error",
+            ),
+          );
         }
       }
     }

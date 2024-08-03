@@ -13,6 +13,7 @@ class Quiz {
 
   String visibility;
   String creator;
+  String avatarURL;
 
   bool favorite = false;
   bool updated = false;
@@ -36,6 +37,7 @@ class Quiz {
     required this.from,
     required this.to,
     required this.translations,
+    required this.avatarURL,
   });
 
   factory Quiz.fromJson(Map quizData) {
@@ -47,6 +49,7 @@ class Quiz {
         "visibility": String visibility,
         "created_by": String creator,
         "owner": bool owner,
+        "avatar_url": String? avatarURL,
         "favorite": bool favorite,
         "from": Map from,
         "to": Map to,
@@ -61,6 +64,7 @@ class Quiz {
           creator: creator,
           favorite: favorite,
           owner: owner,
+          avatarURL: avatarURL ?? "",
           from: Language.fromJson(from),
           to: Language.fromJson(to),
           translations: Translations.fromJson(translations),
@@ -88,6 +92,7 @@ class Quiz {
       "favorite": favorite.toString(),
       "updated": updated.toString(),
       "owner": owner.toString(),
+      "avatar_url": avatarURL,
       "from_language": json.encode(from.toMap()),
       "to_language": json.encode(to.toMap()),
       "data": json.encode(translations.toMap()),

@@ -13,13 +13,14 @@ class QuizDatabase {
       join(await getDatabasesPath(), 'quizzes_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE quizzes(id TEXT PRIMARY KEY, title TEXT, description TEXT, visibility TEXT, created_by TEXT, owner TEXT, favorite TEXT, updated TEXT, from_language TEXT, to_language TEXT, data TEXT, time INTEGER)',
+          'CREATE TABLE quizzes(id TEXT PRIMARY KEY, title TEXT, description TEXT, visibility TEXT, created_by TEXT, owner TEXT, favorite TEXT, avatar_url TEXT, updated TEXT, from_language TEXT, to_language TEXT, data TEXT, time INTEGER)',
         );
       },
-      version: 2,
+      version: 3,
       onUpgrade: (db, oldVersion, newVersion) {
         if (oldVersion < newVersion) {
-          db.execute('ALTER TABLE quizzes ADD COLUMN updated TEXT');
+          if (oldVersion < 2) db.execute('ALTER TABLE quizzes ADD COLUMN updated TEXT');
+          db.execute('ALTER TABLE quizzes ADD COLUMN avatar_url TEXT');
         }
       }
     );
