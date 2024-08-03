@@ -24,7 +24,7 @@ class SearchListUsers extends StatelessWidget {
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return Space.height(context.mobileLayout ? 10 : 25);
+        return Space.height(10);
       },
     );
   }
@@ -52,7 +52,7 @@ class SearchListQuizzes extends StatelessWidget {
         );
       },
       separatorBuilder: (BuildContext context, int i) {
-        return Space.height(context.mobileLayout ? 10 : 25);
+        return Space.height(10);
       },
     );
   }

@@ -58,11 +58,11 @@ class _SearchPageState extends State<SearchPage> {
       children: [
         SearchSwitcher(onTap: onTap, options: options),
         SizedBox(
-          height: context.mobileLayout ? 10 : 30,
+          height: context.mobileLayout ? 10 : 20,
         ),
         Container(
           height: context.screenHeight / 20,
-          padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10.0 : 30),
+          padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10 : 20),
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
@@ -83,10 +83,10 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
-        Space.height(context.mobileLayout ? 10 : 25),
+        Space.height(context.mobileLayout ? 10 : 20),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10.0 : 30),
+            padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10.0 : 20),
             child: Stack(
               children: [
                 Results(
