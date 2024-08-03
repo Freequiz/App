@@ -5,7 +5,8 @@ import 'package:freequiz/utilities/imports/base.dart';
 class ErrorLoadingView extends StatelessWidget {
   final String error;
   final Widget widget;
-  const ErrorLoadingView({super.key, required this.error, required this.widget});
+  final List<String>? argument;
+  const ErrorLoadingView({super.key, required this.error, required this.widget, this.argument});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +15,12 @@ class ErrorLoadingView extends StatelessWidget {
         title: const Text('loading').tr(),
       ),
       body: Container(
-        color: const Color.fromARGB(255, 30, 30, 30),
+        color: context.darkMode ? const Color.fromARGB(255, 30, 30, 30) : null,
         child: ErrorLoadingAlert(
           error: error,
           previousWidget: widget,
-          backgroundColor: gray40,
+          backgroundColor: context.darkMode ? gray40 : null,
+          argument: argument,
         ),
       ),
     );

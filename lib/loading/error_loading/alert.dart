@@ -5,9 +5,10 @@ import 'package:freequiz/utilities/imports/base.dart';
 class ErrorLoadingAlert extends StatelessWidget {
   final String error;
   final Widget previousWidget;
-  final Color backgroundColor;
+  final Color? backgroundColor;
+  final List<String>? argument;
   const ErrorLoadingAlert(
-      {super.key, required this.error, required this.previousWidget, this.backgroundColor = gray55});
+      {super.key, required this.error, required this.previousWidget, this.backgroundColor, this.argument});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ErrorLoadingAlert extends StatelessWidget {
         style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
       backgroundColor: backgroundColor,
-      content: Text('$error description').tr(),
+      content: Text('$error description').tr(args: argument),
       actions: [
         TextButton(
           onPressed: () {

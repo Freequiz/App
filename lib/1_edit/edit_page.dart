@@ -34,8 +34,10 @@ class _EditPageState extends State<EditPage> {
             return Navigator(
               onGenerateRoute: (settings) => MaterialPageRoute(
                 builder: (context) => ErrorLoadingAlert(
-                    error: data.data!["message"],
-                    previousWidget: const EditPage()),
+                    error: data.data?["message"] ?? data.data!["token"] ,
+                    previousWidget: const EditPage(),
+                    argument: data.data?["reason"] != null ? [data.data!["reason"]] : null,
+                    ),
               ),
             );
           } else if (data.hasError) {

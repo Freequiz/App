@@ -186,9 +186,11 @@
     "welcome": "welcome",
     "welcome text": "Freequiz is an app to learn Vocabulary using Cards, Multiple Choice or by writing the Words. Freequiz is completely free and without ads and will always be.",
 
-    "Ban error": "This user was banned.",
     "User doesn't exist title": "User doesn't exist",
     "User doesn't exist description": "This user doesn't exist or was deleted. If you are sure this isn't the case, report it via the bug reporter.",
+    "user.banned": "You were banned from Freequiz",
+    "user.banned title": "You were banned from Freequiz",
+    "user.banned description": "You were banned for the following reason: {}. Do you think it was an error? Write us an e-mail at: admin@freequiz.ch",
 
     "User": "User",
     "quizzes will be added here": "Quizzes will be added here as you use the app",

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/quiz_list/quiz_list.dart';
 import 'package:freequiz/api/api.dart';
 import 'package:freequiz/loading/no_connection/no_connection.dart';
@@ -26,12 +27,21 @@ class LoadQuizList extends StatelessWidget {
 
               return QuizList(list: list, onDismissed: onDismissed, background: background);
             }
-            return const NoConnectionAlert(backgroundColor: gray55, showButton: false,);
+            return const NoConnectionAlert(
+              backgroundColor: gray55,
+              showButton: false,
+            );
           }
-          return Drawer(child: Text('${data.error}'));
+          return Text(
+              context.tr('${data.error ?? data.data?["token"] ?? "other error"}'),
+              style: titleStyle(),
+          );
         }
         if (data.hasError) {
-          return Drawer(child: Text('${data.error}'));
+          return Text(
+              context.tr('${data.error ?? "other error"}'),
+              style: titleStyle(),
+          );
         }
         return const SizedBox();
       },

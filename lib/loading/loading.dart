@@ -33,8 +33,9 @@ Widget loading({
       }
     }
     return ErrorLoadingView(
-      error: data.data?["message"] ?? "other error",
+      error: data.data?["message"] ?? data.data?["token"] ?? "other error",
       widget: previousWidget,
+      argument: data.data?["reason"] != null ? [data.data!["reason"]] : null,
     );
   }
   if (data.hasError) {

@@ -187,9 +187,11 @@
 
     "welcome text": "Freequiz ist eine App zum Lernen von Wortschatz mithilfe von Karteikärtchen, Multiple Choice oder in dem man die Wörter schreibt. Die App ist komplett gratis und werbefrei und wird es für immer sein.",
 
-    "Ban error": "Dieser Benutzer wurde gebannt.",
     "User doesn't exist title": "Benutzer existiert nicht",
     "User doesn't exist description": "Dieser Benutzer existiert nicht. Wenn sie sich sicher sind, dass dies nicht zutrifft, können sie es über den Bugreporter melden.",
+    "user.banned": "Du wurdest von Freequiz ausgeschlossen",
+    "user.banned title": "Du wurdest von Freequiz ausgeschlossen",
+    "user.banned description": "Du wurdest aus folgendem Grund von Freequiz ausgeschlossen: {}. Denkst du wir haben dich fälschlicherweise ausgeschlossen? Schreibe uns eine E-Mail an: admin@freequiz.ch",
     
     "User": "Benutzer",
     "quizzes will be added here": "Quizze werden hier hinzugefügt, wenn Sie die App benutzen",
