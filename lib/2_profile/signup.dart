@@ -171,7 +171,7 @@ class _SignUpState extends State<SignUp> {
         });
       } else if (map["token"] == "record.invalid") {
         map["errors"].forEach((object, error) {
-          String errorMessage = "$object.${error[0]['error']!}".tr();
+          String errorMessage = "$object ${error[0]['error']!}".tr();
 
           switch (object) {
             case "username":

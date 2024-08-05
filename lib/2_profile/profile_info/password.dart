@@ -141,19 +141,10 @@ class _PasswordState extends State<Password> {
         oldPassword.color = Colors.green;
         newPassword.color = Colors.green;
         newPasswordConfirmation.color = Colors.green;
+        oldPassword.error = false;
       });
-    } else if (map["message"] == "Something went wrong whilst updating the user") {
-      setState(() {
-        newPassword.input.clear();
-        newPasswordConfirmation.input.clear();
-        newPassword.hint = 'password dont match'.tr();
-        newPasswordConfirmation.hint = "";
-        newPassword.color = Colors.red;
-        newPassword.error = true;
-        newPasswordConfirmation.color = Colors.red;
-        newPasswordConfirmation.error = true;
-      });
-    } else if (map["message"] == "Password doesn't meet requirements") {
+    }
+    else if (map["message"] == "Password doesn't meet requirements") {
       setState(() {
         newPassword.input.clear();
         newPasswordConfirmation.input.clear();
@@ -165,6 +156,26 @@ class _PasswordState extends State<Password> {
         newPasswordConfirmation.error = true;
       });
     }
+    else if (map["errors"].containsKey("password_challenge")) {
+      setState(() {
+        oldPassword.input.clear();
+        oldPassword.hint = 'wrong password'.tr();
+        oldPassword.color = Colors.red;
+        oldPassword.error = true;
+      });
+    }
+    else if (map["errors"].containsKey("password_confirmation")) {
+      setState(() {
+        newPassword.input.clear();
+        newPasswordConfirmation.input.clear();
+        newPassword.hint = 'password dont match'.tr();
+        newPasswordConfirmation.hint = "";
+        newPassword.color = Colors.red;
+        newPassword.error = true;
+        newPasswordConfirmation.color = Colors.red;
+        newPasswordConfirmation.error = true;
+      });
+    } 
     pressed = false;
   }
 }

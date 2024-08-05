@@ -108,7 +108,7 @@ class _EMailState extends State<EMail> {
           newEmail.changed = true;
         });
         widget.refresh();
-      } else if (map["message"] == "Invalid email") {
+      } else if (map["token"] == "record.invalid") {
         setState(() {
           newEmail.input.clear();
           newEmail.hint = 'invalid email'.tr();

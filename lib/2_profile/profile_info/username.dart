@@ -106,7 +106,8 @@ class _UsernameState extends State<Username> {
         newUsername.changed = true;
       });
       widget.refresh();
-    } else if (map["message"] == "Invalid Username") {
+    } 
+    else if (map["errors"]["username"][0]["error"] == "invalid") {
       setState(() {
         newUsername.input.clear();
         newUsername.hint = 'username invalid'.tr();
@@ -114,7 +115,7 @@ class _UsernameState extends State<Username> {
         newUsername.error = true;
         newUsername.changed = false;
       });
-    } else if (map["message"] == "Username is taken") {
+    } else if (map["errors"]["username"][0]["error"] == "taken") {
       setState(() {
         newUsername.input.clear();
         newUsername.hint = 'username taken'.tr();
