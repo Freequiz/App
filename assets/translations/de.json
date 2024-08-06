@@ -119,12 +119,12 @@
 
     "email": "E-Mail",
     "email success": "E-Mail erfolgreich geändert",
-    "email.invalid": "Invalide E-Mail",
-    "email.taken": "E-Mail ist vergeben",
+    "invalid email": "Invalide E-Mail",
+    "email taken": "E-Mail ist vergeben",
 
     "username change": "Benutzername erfolgreich geändert",
-    "username.invalid": "Invalides Benutzername",
-    "username.taken": "Benutzername ist vergeben",
+    "username invalid": "Invalides Benutzername",
+    "username taken": "Benutzername ist vergeben",
 
     "report bug": "Bug melden",
     "platform": "Plattform",

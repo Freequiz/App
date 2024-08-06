@@ -22,73 +22,77 @@ class _EditHeaderState extends State<EditHeader> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-        color: context.darkMode ? gray55 : blueLight,
+        borderRadius: BorderRadius.circular(20),
+        color: context.darkMode ? gray60 : blueLight,
       ),
-      child: Padding(
-        padding: EdgeInsets.all(context.screenHeight/ 100),
-        child: Column(
-          children: [
-            BasicTextField(
-              textFieldData: widget.quiz.title,
-              hintError: context.tr('title error'),
-              colorBorder: (context.darkMode ? beigeLight : grayFreequiz),
-              widthBorder: 3.0,
-              save: widget.save,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            BasicTextField(
-              textFieldData: widget.quiz.description,
-              hintError: context.tr('description error'),
-              maxLines: 4,
-              keyboardType: TextInputType.multiline,
-              save: widget.save,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Dropdown(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          BasicTextField(
+            textFieldData: widget.quiz.title,
+            hintError: context.tr('title error'),
+            save: widget.save,
+            textFieldColor:
+                context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : const Color.fromARGB(255, 234, 247, 255),
+            bottomRadius: true,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          BasicTextField(
+            textFieldData: widget.quiz.description,
+            hintError: context.tr('description error'),
+            maxLines: 4,
+            keyboardType: TextInputType.multiline,
+            save: widget.save,
+            textFieldColor:
+                context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : const Color.fromARGB(255, 234, 247, 255),
+            bottomRadius: true,
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Flexible(
+                child: Dropdown(
                   initialValue: widget.quiz.definitionLanguage,
                   items: Languages.languages,
                   onChanged: (int definitionLanguage) => widget.quiz.definitionLanguage = definitionLanguage,
-                  hintColor: widget.hintColor,
+                  color: rose,
                 ),
-                const Icon(
-                  Icons.arrow_forward_rounded,
-                  color: grayFreequiz,
-                ),
-                Dropdown(
+              ),
+              const SizedBox(width: 10),
+              Icon(
+                Icons.arrow_forward_rounded,
+                color: context.darkMode ? rose.light : rose.dark,
+              ),
+              const SizedBox(width: 10),
+              Flexible(
+                child: Dropdown(
                   initialValue: widget.quiz.answerLanguage,
                   items: Languages.languages,
                   onChanged: (int answerLanguage) => widget.quiz.answerLanguage = answerLanguage,
-                  hintColor: widget.hintColor,
+                  color: rose,
                 ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Dropdown(
+            leadingIcon: Icon(
+              VisibilityOptions.icons[widget.quiz.visibility],
+              color: context.darkMode ? blue.light : blue.dark,
+              size: 24,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  VisibilityOptions.icons[widget.quiz.visibility],
-                  color: grayFreequiz,
-                  size: 24,
-                ),
-                const SizedBox(width: 15),
-                Dropdown(
-                  initialValue: widget.quiz.visibility,
-                  items: VisibilityOptions.visibilites,
-                  onChanged: (String visibility) => setState(() {
-                    widget.quiz.visibility = visibility;
-                  }),
-                  hintColor: widget.hintColor,
-                ),
-                const SizedBox(width: 39),
-              ],
-            ),
-          ],
-        ),
+            initialValue: widget.quiz.visibility,
+            items: VisibilityOptions.visibilites,
+            onChanged: (String visibility) => setState(() {
+              widget.quiz.visibility = visibility;
+            }),
+            color: blue,
+            width: 150,
+          ),
+        ],
       ),
     );
   }

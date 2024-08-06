@@ -27,52 +27,56 @@ class _EditOverviewState extends State<EditOverview> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: context.mobileLayout
-          ? const EdgeInsets.all(10.0)
-          : const EdgeInsets.all(30),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Center(
-            child: TextButton(
-              style: TextButton.styleFrom(
-                  backgroundColor: grayFreequiz, foregroundColor: Colors.white),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return CreateQuiz(
-                        refresh: refresh,
-                      );
-                    },
-                  ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  context.tr('create new quiz'),
-                  style: buttonStyle(),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          color: context.darkMode? darkMainColor : lightMainColor,
+          width: double.maxFinite,
+          padding: const EdgeInsets.only(right: 50.0, left: 50.0, top: 10, bottom: 15.0),
+          child: TextButton(
+            style: TextButton.styleFrom(
+                backgroundColor: grayFreequiz, foregroundColor: Colors.white),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return CreateQuiz(
+                      refresh: refresh,
+                    );
+                  },
                 ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                context.tr('create new quiz'),
+                style: buttonStyle(),
               ),
             ),
           ),
-          Space.height(context.mobileLayout ? 15 : 45),
-          Conditional(
+        ),
+        Space.height(context.mobileLayout ? 15 : 45),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Conditional(
             condition: QuizHelper.draft.isNotEmpty,
             widget: Draft(
               refresh: refresh,
             ),
           ),
-          Expanded(
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: CreatedQuizzes(
               key: key,
               refresh: refresh,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

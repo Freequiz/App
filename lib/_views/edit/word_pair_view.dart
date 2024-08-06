@@ -40,31 +40,19 @@ class WordPairView extends StatelessWidget {
           ),
         ),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(context.screenHeight/ 100),
-          color: context.darkMode ? gray55 : blueLight,
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(context.screenHeight/ 100),
-          child: Column(
-            children: [
-              BasicTextField(
-                textFieldData: wordPair.definition,
-                hintError: context.tr('definition error'),
-                save: save,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              AnswerTextField(
-                textFieldData: wordPair.answer,
-                onSubmitted: onSubmitted,
-                save: save,
-              ),
-            ],
+      child: Column(
+        children: [
+          BasicTextField(
+            textFieldData: wordPair.definition,
+            hintError: context.tr('definition error'),
+            save: save,
           ),
-        ),
+          AnswerTextField(
+            textFieldData: wordPair.answer,
+            onSubmitted: onSubmitted,
+            save: save,
+          ),
+        ],
       ),
     );
   }

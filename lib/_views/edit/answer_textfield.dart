@@ -8,11 +8,7 @@ class AnswerTextField extends StatefulWidget {
   final Function onSubmitted;
   final Function save;
   const AnswerTextField(
-      {super.key,
-      required this.textFieldData,
-      this.widthBorder = 2.0,
-      required this.onSubmitted,
-      required this.save});
+      {super.key, required this.textFieldData, this.widthBorder = 2.0, required this.onSubmitted, required this.save});
 
   @override
   State<AnswerTextField> createState() => _AnswerTextFieldState();
@@ -21,9 +17,8 @@ class AnswerTextField extends StatefulWidget {
 class _AnswerTextFieldState extends State<AnswerTextField> {
   @override
   Widget build(BuildContext context) {
-    final hintColor = context.darkMode
-        ? Colors.white
-        : gray40;
+    final hintColor = context.darkMode ? Colors.white : gray40;
+    final textfieldColor = context.darkMode ? const Color.fromARGB(255, 65, 65, 65) : blueLight;
     return TextField(
       onSubmitted: (value) {
         widget.save();
@@ -36,28 +31,28 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
       },
       onEditingComplete: () {},
       controller: widget.textFieldData.input,
-      keyboardAppearance:
-          context.darkMode ? Brightness.dark : Brightness.light,
+      keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
       decoration: InputDecoration(
         filled: true,
-        fillColor: context.darkMode
-            ? const Color.fromARGB(255, 45, 45, 45)
-            : const Color.fromARGB(255, 234, 247, 255),
-        contentPadding: const EdgeInsets.all(10.0),
+        fillColor: textfieldColor,
+        contentPadding: const EdgeInsets.all(15.0),
         hintStyle: TextStyle(
           color: widget.textFieldData.error ? Colors.red : hintColor,
           fontWeight: FontWeight.w500,
+          fontSize: FontSize.text,
         ),
-        hintText: widget.textFieldData.error
-            ? context.tr('answer blank')
-            : widget.textFieldData.hint,
+        hintText: widget.textFieldData.error ? context.tr('answer blank') : widget.textFieldData.hint,
         border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: widget.textFieldData.error ? Colors.red : grayFreequiz,
+            color: widget.textFieldData.error ? Colors.red : textfieldColor,
             width: widget.widthBorder,
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(10.0))
+          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: Theme.of(context).inputDecorationTheme.focusedBorder!.borderSide,
+          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
         ),
       ),
     );

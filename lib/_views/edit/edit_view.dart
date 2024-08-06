@@ -1,5 +1,6 @@
 import 'package:freequiz/1_edit/quiz_form.dart';
 import 'package:freequiz/_views/edit/add_button.dart';
+import 'package:freequiz/_views/edit/counter.dart';
 import 'package:freequiz/_views/edit/header.dart';
 import 'package:freequiz/_views/edit/list_view.dart';
 import 'package:freequiz/utilities/imports/base.dart';
@@ -31,11 +32,19 @@ class _EditViewState extends State<EditView> {
         ListWordPairs(
           quiz: widget.quiz,
           mode: widget.mode,
+          refresh: () => setState(() {}),
         ),
         SizedBox(
           height: context.screenHeight / 40,
         ),
-        AddButton(add: add)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 70),
+            AddButton(add: add),
+            Counter(amount: widget.quiz.wordPairs.length)
+          ],
+        )
       ],
     );
   }

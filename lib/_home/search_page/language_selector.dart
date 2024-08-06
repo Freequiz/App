@@ -34,8 +34,6 @@ class _LanguageSelectorState extends State<LanguageSelector> {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = context.darkMode ? Colors.white : gray40;
-
     return AlertDialog(
       title: Text(
         context.tr('language'),
@@ -50,29 +48,35 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Dropdown(
-              initialValue: from,
-              items: languages,
-              onChanged: (value) {
-                setState(() {
-                  from = value!;
-                });
-              },
-              hintColor: hintColor,
+            Flexible(
+              child: Dropdown(
+                initialValue: from,
+                items: languages,
+                onChanged: (value) {
+                  setState(() {
+                    from = value!;
+                  });
+                },
+                color: rose,
+              ),
             ),
+            const SizedBox(width: 10),
             const Icon(
               Icons.arrow_forward_rounded,
-              color: grayFreequiz,
+              color: roseMiddle,
             ),
-            Dropdown(
-              initialValue: to,
-              items: languages,
-              onChanged: (value) {
-                setState(() {
-                  to = value!;
-                });
-              },
-              hintColor: hintColor,
+            const SizedBox(width: 10),
+            Flexible(
+              child: Dropdown(
+                initialValue: to,
+                items: languages,
+                onChanged: (value) {
+                  setState(() {
+                    to = value!;
+                  });
+                },
+                color: rose,
+              ),
             ),
           ],
         ),

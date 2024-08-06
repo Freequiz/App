@@ -5,7 +5,6 @@ import 'package:freequiz/_views/quiz_tile/edit_quiz.dart';
 import 'package:freequiz/1_edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/api/users.dart';
 
-
 class CreatedQuizzes extends StatefulWidget {
   final Function refresh;
   const CreatedQuizzes({super.key, required this.refresh});
@@ -45,9 +44,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
             );
           },
           separatorBuilder: (BuildContext context, int i) {
-            return SizedBox(
-              height: context.mobileLayout ? 10 : 20,
-            );
+            return const SizedBox(height: 10);
           },
         ),
         SizedBox(

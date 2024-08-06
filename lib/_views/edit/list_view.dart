@@ -5,8 +5,9 @@ import 'package:freequiz/utilities/imports/base.dart';
 class ListWordPairs extends StatefulWidget {
   final QuizForm quiz;
   final String mode;
+  final Function refresh;
 
-  const ListWordPairs({super.key, required this.quiz, required this.mode});
+  const ListWordPairs({super.key, required this.quiz, required this.mode, required this.refresh});
 
   @override
   State<ListWordPairs> createState() => _ListWordPairsState();
@@ -31,6 +32,7 @@ class _ListWordPairsState extends State<ListWordPairs> {
           wordPair: wordPair,
           onDismissed: () => setState(() {
             widget.quiz.removeWordPair(i);
+            widget.refresh();
           }),
           save: () => widget.quiz.save(mode: widget.mode),
           onSubmitted: () => onSubmitted(i),
@@ -48,5 +50,6 @@ class _ListWordPairsState extends State<ListWordPairs> {
         FocusScope.of(context).nextFocus();
       }
     });
+    widget.refresh();
   }
 }
