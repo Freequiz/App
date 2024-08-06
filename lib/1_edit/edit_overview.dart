@@ -31,12 +31,16 @@ class _EditOverviewState extends State<EditOverview> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          color: context.darkMode? darkMainColor : lightMainColor,
+          color: context.darkMode ? darkMainColor : lightMainColor,
           width: double.maxFinite,
-          padding: const EdgeInsets.only(right: 50.0, left: 50.0, top: 10, bottom: 15.0),
+          padding: EdgeInsets.only(
+            right: context.mobileLayout ? 50.0 :20,
+            left: context.mobileLayout ? 50.0 : 20,
+            top: 10,
+            bottom: 15.0,
+          ),
           child: TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: grayFreequiz, foregroundColor: Colors.white),
+            style: TextButton.styleFrom(backgroundColor: grayFreequiz, foregroundColor: Colors.white),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
