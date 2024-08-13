@@ -107,7 +107,7 @@ class APIUsers {
 
   static refresh() async {
     if (!newAccessToken && Profile.accessToken != "") {
-      final response = await Api.httpPost(path: 'user/refresh');
+      final response = await Api.httpPost(path: 'user/refresh', body: '');
 
       if (response.statusCode == 200) {
         final decodedResponse = jsonDecode(response.body);

@@ -1,4 +1,5 @@
 import 'package:freequiz/1_edit/edit_create_quiz/edit_quiz.dart';
+import 'package:freequiz/_views/alerts/report.dart';
 import 'package:freequiz/_views/kebab_menu/kebab_menu_item.dart';
 import 'package:freequiz/quiz/quiz_helper.dart';
 import 'package:freequiz/utilities/imports/base.dart';
@@ -8,11 +9,7 @@ class KebabMenuButton extends StatelessWidget {
   final String url;
   final Color? color;
   final String uuid;
-  const KebabMenuButton(
-      {super.key,
-      required this.url,
-      this.color,
-      required this.uuid});
+  const KebabMenuButton({super.key, required this.url, this.color, required this.uuid});
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +70,15 @@ class _KebabMenuState extends State<KebabMenu> {
           height: 2.0,
         ),
         KebabMenuItem(
+          onTap: () => report,
+          icon: Icons.report,
+          text: "report",
+        ),
+        Container(
+          color: context.darkMode ? gray40 : white205,
+          height: 2.0,
+        ),
+        KebabMenuItem(
           onTap: () => close,
           icon: Icons.close,
           text: "Close",
@@ -89,9 +95,20 @@ class _KebabMenuState extends State<KebabMenu> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return EditQuiz(refresh: refresh, uuid: widget.uuid, owner: QuizHelper.quiz!.owner,);
+          return EditQuiz(
+            refresh: refresh,
+            uuid: widget.uuid,
+            owner: QuizHelper.quiz!.owner,
+          );
         },
       ),
+    );
+  }
+
+  report() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => const ReportAlert(),
     );
   }
 

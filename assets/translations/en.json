@@ -196,5 +196,15 @@
     "quizzes will be added here": "Quizzes will be added here as you use the app",
     "delete all quizzes": "Delete all of my Quizzes:",
     "account": "Account",
-    "appearance": "Appearance"
+    "appearance": "Appearance",
+
+    "report": "Report",
+    "choose report option": "Choose the reason for your report:",
+    "reason": "Reason",
+    "sexual": "Sexual content",
+    "violence": "Violence",
+    "hate": "Hate speech",
+    "spam": "Spam",
+    "child_abuse": "Child Abuse",
+    "mobbing": "Mobbing"
 }

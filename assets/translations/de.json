@@ -180,7 +180,7 @@
 
     "favorite": "Favoriten",
     "history": "Verlauf",
-    
+
     "length round": "Länge Runde",
 
     "welcome": "Willkommen",
@@ -192,10 +192,20 @@
     "user.banned": "Du wurdest von Freequiz ausgeschlossen",
     "user.banned title": "Du wurdest von Freequiz ausgeschlossen",
     "user.banned description": "Du wurdest aus folgendem Grund von Freequiz ausgeschlossen: {}. Denkst du wir haben dich fälschlicherweise ausgeschlossen? Schreibe uns eine E-Mail an: admin@freequiz.ch",
-    
+
     "User": "Benutzer",
     "quizzes will be added here": "Quizze werden hier hinzugefügt, wenn Sie die App benutzen",
     "delete all quizzes": "Alle meine Quizze löschen:",
     "account": "Konto",
-    "appearance": "Erscheinungsbild"
+    "appearance": "Erscheinungsbild",
+
+    "report": "Melden",
+    "choose report option": "Wähle Sie den Grund für das Melden:",
+    "reason": "Grund",
+    "sexual": "Sexueller Inhalt",
+    "violence": "Gewalt",
+    "hate": "Hassreden",
+    "spam": "Spam",
+    "child_abuse": "Kindermissbrauch",
+    "mobbing": "Mobbing"
 }

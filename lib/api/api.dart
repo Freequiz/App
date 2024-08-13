@@ -68,12 +68,14 @@ class Api {
     );
   }
 
-  static Future<Response> httpPost({required String path}) async {
+  static Future<Response> httpPost({required String path, required Object body}) async {
     return requestHandler(
       request: () {
         return post(
           uri(path),
-          headers: {"Authorization": Profile.accessToken},
+          headers: {"Authorization": Profile.accessToken, HttpHeaders.contentTypeHeader: "application/json"},
+          encoding: Encoding.getByName('utf-8'),
+          body: json.encode(body),
         ).timeout(const Duration(seconds: 10));
       },
     );

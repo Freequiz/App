@@ -10,80 +10,85 @@ class APIQuizzes {
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> getDeleteToken(String uuid) async {
-    final response = await Api.httpGet(path: 'quiz/$uuid/delete_token');
+  static Future<Map> getDeleteToken(String id) async {
+    final response = await Api.httpGet(path: 'quiz/$id/delete_token');
 
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> deleteQuiz(String deleteToken, String uuid) async {
-    final response =
-        await Api.httpDelete(path: 'quiz/$uuid/delete/$deleteToken');
+  static Future<Map> deleteQuiz(String deleteToken, String id) async {
+    final response = await Api.httpDelete(path: 'quiz/$id/delete/$deleteToken');
 
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> getQuiz(String uuid) async {
-    final response = await Api.httpGet(path: 'quiz/$uuid/data');
+  static Future<Map> getQuiz(String id) async {
+    final response = await Api.httpGet(path: 'quiz/$id/data');
 
     return Api.decodeResponse(response);
   }
 
   static Future<Map> search(String searchTerm, int page) async {
-    final response =
-        await Api.httpGet(path: 'quiz/search/$page?query=$searchTerm');
+    final response = await Api.httpGet(path: 'quiz/search/$page?query=$searchTerm');
 
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> updateQuiz(Map map, String uuid) async {
+  static Future<Map> updateQuiz(Map map, String id) async {
     final response = await Api.httpPatch(
-      path: 'quiz/$uuid/update',
-      body:
-        {"quiz": map},
+      path: 'quiz/$id/update',
+      body: {"quiz": map},
     );
 
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> setFavorite(String uuid, int scoreID, bool favorite) async {
-    final response = await Api.httpPatch(
-      path: 'quiz/$uuid/score/$scoreID/favorite',
-      body: {"favorite": favorite}
-    );
+  static Future<Map> setFavorite(String id, int scoreID, bool favorite) async {
+    final response = await Api.httpPatch(path: 'quiz/$id/score/$scoreID/favorite', body: {"favorite": favorite});
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> setQuizFavorite(String uuid, bool favorite) async {
-    final response = await Api.httpPatch(
-      path: 'quiz/$uuid/favorite',
-      body: {"favorite": favorite}
-    );
+  static Future<Map> setQuizFavorite(String id, bool favorite) async {
+    final response = await Api.httpPatch(path: 'quiz/$id/favorite', body: {"favorite": favorite});
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> setScore(String uuid, int scoreID, String mode, int score) async {
+  static Future<Map> setScore(String id, int scoreID, String mode, int score) async {
     final response = await Api.httpPatch(
-      path: 'quiz/$uuid/score/$scoreID/$mode',
+      path: 'quiz/$id/score/$scoreID/$mode',
       body: {"score": score},
     );
 
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> syncScore(String uuid, Map quizData) async {
+  static Future<Map> syncScore(String id, Map quizData) async {
     final response = await Api.httpPatch(
-      path: 'quiz/$uuid/score/sync',
-      body:
-        {"quiz": quizData},
+      path: 'quiz/$id/score/sync',
+      body: {"quiz": quizData},
     );
 
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> resetScore(String uuid, String mode) async {
-    final response =
-        await Api.httpPatch(path: 'quiz/$uuid/score/reset/$mode', body: "");
+  static Future<Map> resetScore(String id, String mode) async {
+    final response = await Api.httpPatch(path: 'quiz/$id/score/reset/$mode', body: "");
+
+    return Api.decodeResponse(response);
+  }
+
+  static Future<Map> report(String id, String type) async {
+    Object body = {
+      "quiz_report": {
+        "sexual": "sexual" == type,
+        "violence": "violence" == type,
+        "hate": "hate" == type,
+        "spam": "spam" == type,
+        "child_abuse": "child_abuse" == type,
+        "mobbing": "mobbing" == type,
+      }
+    };
+    final response = await Api.httpPost(path: 'quiz/$id/report', body: body);
 
     return Api.decodeResponse(response);
   }
