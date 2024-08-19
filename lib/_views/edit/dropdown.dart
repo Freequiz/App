@@ -30,7 +30,7 @@ class _DropdownState extends State<Dropdown> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1000),
-        color: context.darkMode ? widget.color.dark : widget.color.medium,
+        color: context.darkMode ? widget.color.dark : widget.color.light,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Row(
@@ -51,7 +51,7 @@ class _DropdownState extends State<Dropdown> {
               isDense: true,
               isExpanded: true,
               menuWidth: widget.width,
-              dropdownColor: context.darkMode ? gray40 : const Color.fromARGB(255, 229, 242, 250),
+              dropdownColor: context.darkMode ? widget.color.dark : widget.color.light,
               underline: const SizedBox(),
               items: widget.items,
               onChanged: (newValue) {
@@ -60,7 +60,7 @@ class _DropdownState extends State<Dropdown> {
                   widget.onChanged(value!);
                 });
               },
-              style: const TextStyle(fontSize: FontSize.item),
+              style: TextStyle(fontSize: FontSize.item, color: context.darkMode ? Colors.white : gray55, fontWeight: FontWeight.w600),
               borderRadius: BorderRadius.circular(10),
             ),
           ),

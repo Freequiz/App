@@ -18,7 +18,7 @@ class Welcome extends StatelessWidget {
       child: Padding(
         padding: context.mobileLayout
             ? const EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0)
-            : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
+            : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

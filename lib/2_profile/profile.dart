@@ -1,4 +1,6 @@
+import 'package:freequiz/local_storage/preferences.dart';
 import 'package:freequiz/local_storage/secure_storage.dart';
+import 'package:freequiz/user/helper.dart';
 
 class Profile {
   static String accessToken = "";
@@ -15,6 +17,8 @@ class Profile {
 
   static deleteData() async {
     accessToken = "";
-    await SecureStorage.removeAccessToken();
+    UserHelper.user = null;
+    Preferences.deleteUser();
+    SecureStorage.removeAccessToken();
   }
 }

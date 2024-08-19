@@ -47,7 +47,7 @@ class _UserTileState extends State<UserTile> {
                       style: titleStyle(),
                     ),
                     ShareButton(
-                      url: "https://freequiz.ch/user/${widget.data['username']}",
+                      url: "https://www.freequiz.ch/user/${widget.data['username']}",
                     )
                   ],
                 ),

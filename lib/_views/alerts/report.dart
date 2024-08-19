@@ -43,7 +43,7 @@ class _ReportAlertState extends State<ReportAlert> {
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
+          padding: const EdgeInsets.only(bottom: 20.0),
           child: Dropdown(
             initialValue: reason,
             items: items,
@@ -52,7 +52,7 @@ class _ReportAlertState extends State<ReportAlert> {
                 reason = value!;
               });
             },
-            color: rose,
+            color: blue,
           ),
         ),
         Row(

@@ -6,6 +6,7 @@
 	<array>
 		<string>applinks:freequiz.ch</string>
 		<string>applinks:dev.freequiz.ch</string>
+		<string>applinks:www.freequiz.ch</string>
 	</array>
 </dict>
 </plist>

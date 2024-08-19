@@ -58,6 +58,7 @@ const Color gray60 = Color.fromARGB(255, 60, 60, 60); //middle gray
 const Color gray70 = Color.fromARGB(255, 70, 70, 70); //used for highlights
 
 //White Tones
-const Color white235 = Color.fromARGB(255, 235, 235, 235); //used for app background and for text
-const Color white225 = Color.fromARGB(255, 225, 225, 225); //middle white
-const Color white205 = Color.fromARGB(255, 205, 205, 205); //used for highlights
+const Color white245 = Color.fromARGB(255, 245, 245, 245);
+const Color white235 = Color.fromARGB(255, 235, 235, 235); 
+const Color white225 = Color.fromARGB(255, 225, 225, 225);
+const Color white205 = Color.fromARGB(255, 205, 205, 205); 

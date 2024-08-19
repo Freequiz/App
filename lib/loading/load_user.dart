@@ -40,7 +40,7 @@ class LoadUser extends StatelessWidget {
             appBar: AppBar(
               actions: [
                 TextButton(
-                  onPressed: () => Share.share('https://freequiz.ch/user/$user'),
+                  onPressed: () => Share.share('https://www.freequiz.ch/user/$user'),
                   child: const Icon(
                     Icons.ios_share_rounded,
                   ),

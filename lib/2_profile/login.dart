@@ -8,6 +8,7 @@ import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Login extends StatefulWidget {
   final Function refresh;
@@ -48,18 +49,18 @@ class _LoginState extends State<Login> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Space.height(context.screenHeight / 60),
+                SizedBox(height: context.screenHeight / 60),
                 Text(
                   context.tr('login'),
                   style: fontSize(FontSize.headline),
                 ),
-                Space.height(context.screenHeight / 60),
+                SizedBox(height: context.screenHeight / 60),
                 UsernameTextfield(
                   username: username,
                   focusNode: focusNode,
                   autofillHints: const [AutofillHints.username],
                 ),
-                Space.height(5),
+                const SizedBox(height: 5),
                 IntrinsicHeight(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -77,6 +78,11 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () => resetPassword(),
+                  child: Text(context.tr('reset password')),
+                ),
               ],
             ),
           ),
@@ -85,18 +91,29 @@ class _LoginState extends State<Login> {
     );
   }
 
+  resetPassword() async {
+    final Uri url = Uri.parse('https://www.freequiz.ch/password/reset');
+    if (!await launchUrl(url)) {
+        throw Exception('Could not launch $url');
+    }
+  }
+
   onPressed(Function refresh) async {
     if (password.input.text.isEmpty) {
       setState(() {
         password.error = true;
         password.color = Colors.red;
         password.hint = context.tr('wrong password');
+        pressed = false;
+        FocusScope.of(context).requestFocus(FocusNode());
       });
     } else if (username.input.text.isEmpty) {
       setState(() {
         username.error = true;
         username.color = Colors.red;
         username.hint = context.tr('username error');
+        pressed = false;
+        FocusScope.of(context).requestFocus(FocusNode());
       });
     } else {
       setState(() {
@@ -115,22 +132,27 @@ class _LoginState extends State<Login> {
           setState(() {
             username.error = true;
             username.color = Colors.red;
+            username.hint = context.tr('username error');
             pressed = false;
             username.input.clear();
+            FocusScope.of(context).requestFocus(FocusNode());
           });
         } else if (mapLogin["message"] == "Wrong password") {
           setState(() {
             password.error = true;
             password.color = Colors.red;
+            password.hint = context.tr('wrong password');
             pressed = false;
             password.input.clear();
+            FocusScope.of(context).requestFocus(FocusNode());
           });
         } else if (mounted) {
           showDialog(
             context: context,
             builder: (BuildContext context) => ErrorLoadingAlert(
               previousWidget: Login(refresh: refresh),
-              error: mapLogin["error"] ?? "other error",
+              error: mapLogin["error"] ?? mapLogin["token"] ?? "other error",
+              argument: mapLogin["reason"] != null ? [mapLogin["reason"]] : null,
             ),
           );
         }

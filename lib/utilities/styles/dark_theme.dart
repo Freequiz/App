@@ -28,6 +28,8 @@ ThemeData darkTheme = ThemeData(
         borderRadius: BorderRadius.circular(10),
       ),
       iconColor: Colors.white,
+      foregroundColor: blueLight,
+      textStyle: buttonStyle(),
     ),
   ),
   drawerTheme: const DrawerThemeData(

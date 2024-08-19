@@ -33,6 +33,11 @@ class Preferences {
     prefs.setString('user', jsonEncode(map));
   }
 
+  static deleteUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('user');
+  }
+
   static Future<Map> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     return jsonDecode(

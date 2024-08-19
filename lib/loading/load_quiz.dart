@@ -1,6 +1,7 @@
 import 'package:freequiz/_home/quiz_page/quiz_page.dart';
 import 'package:freequiz/_views/buttons/edit_text.dart';
 import 'package:freequiz/_views/buttons/favorite.dart';
+import 'package:freequiz/_views/buttons/report.dart';
 import 'package:freequiz/_views/buttons/share_text.dart';
 import 'package:freequiz/_views/kebab_menu/kebab_menu.dart';
 import 'package:freequiz/loading/loading.dart';
@@ -47,18 +48,19 @@ class LoadQuiz extends StatelessWidget {
                         toggleFavorite: toggleFavorite,
                       ),
                       KebabMenuButton(
-                        url: "https://freequiz.ch/quiz/$uuid",
+                        url: "https://www.freequiz.ch/quiz/$uuid",
                         uuid: uuid,
                       ),
                     ]
                   : [
+                      const ReportButton(),
                       Favorite(
                         favorite: QuizHelper.quiz?.favorite ?? false,
                         toggleFavorite: toggleFavorite,
                       ),
                       EditTextButton(uuid: uuid),
                       ShareTextButton(
-                        url: "https://freequiz.ch/quiz/$uuid",
+                        url: "https://www.freequiz.ch/quiz/$uuid",
                       ),
                     ],
             ),

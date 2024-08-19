@@ -22,8 +22,8 @@ class _EditHeaderState extends State<EditHeader> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: context.darkMode ? gray60 : blueLight,
+        borderRadius: BorderRadius.circular(26),
+        color: context.darkMode ? gray60 : white225,
       ),
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -33,7 +33,7 @@ class _EditHeaderState extends State<EditHeader> {
             hintError: context.tr('title error'),
             save: widget.save,
             textFieldColor:
-                context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : const Color.fromARGB(255, 234, 247, 255),
+                context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : white245,
             bottomRadius: true,
           ),
           const SizedBox(
@@ -46,7 +46,7 @@ class _EditHeaderState extends State<EditHeader> {
             keyboardType: TextInputType.multiline,
             save: widget.save,
             textFieldColor:
-                context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : const Color.fromARGB(255, 234, 247, 255),
+                context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : white245,
             bottomRadius: true,
           ),
           const SizedBox(height: 10),

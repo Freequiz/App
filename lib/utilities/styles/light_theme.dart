@@ -27,6 +27,8 @@ ThemeData lightTheme = ThemeData(
         borderRadius: BorderRadius.circular(10),
       ),
       iconColor: gray40,
+      foregroundColor: blueMedium,
+      textStyle: buttonStyle(),
     ),
   ),
   inputDecorationTheme: const InputDecorationTheme(

@@ -6,7 +6,7 @@ import 'package:freequiz/2_profile/profile.dart';
 import 'package:http/http.dart';
 
 class Api {
-  static const basePath = "https://dev.freequiz.ch/api/";
+  static const basePath = "https://www.freequiz.ch/api/";
 
   static String noConnection = 'no connection';
   static String timeout = 'request timed out';

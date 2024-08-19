@@ -32,7 +32,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
 
     Color? textfieldColor = widget.textFieldColor;
     if (widget.textFieldColor == null) {
-      textfieldColor = context.darkMode ? gray55 : const Color.fromARGB(255, 234, 247, 255);
+      textfieldColor = context.darkMode ? gray55 : white245;
     }
 
     return TextField(
