@@ -11,6 +11,9 @@ class Search {
   static List quizzes = [];
   static List users = [];
 
+  static bool moreQuizzes = true;
+  static bool moreUsers = true;
+
   static int pageQuizzes = 1;
   static int pageUsers = 1;
 

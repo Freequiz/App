@@ -50,7 +50,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
         SizedBox(
           height: context.mobileLayout ? 10 : 15,
         ),
-        LoadMoreButton(pressed: pressed, onPressed: onPressed),
+        LoadMoreButton(pressed: pressed, onPressed: onPressed, more: ListQuizzes.more),
       ],
     );
   }
@@ -61,9 +61,9 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
     });
 
     page++;
-    ListQuizzes.data.addAll(
-      (await APIUsers.getQuizzes(page))['data'],
-    );
+    final data = await APIUsers.getQuizzes(page);
+    ListQuizzes.data.addAll(data['data']);
+    ListQuizzes.more = data['next_page'];
 
     setState(() {
       pressed = false;

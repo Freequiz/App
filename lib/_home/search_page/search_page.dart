@@ -97,6 +97,7 @@ class _SearchPageState extends State<SearchPage> {
                   shownList: shownList,
                   previousShownList: previousShownList,
                   endAnimation: endAnimation,
+                  more: Search.moreQuizzes,
                   child: SearchListQuizzes(
                     refresh: refreshChildren,
                   ),
@@ -109,6 +110,7 @@ class _SearchPageState extends State<SearchPage> {
                   shownList: shownList,
                   previousShownList: previousShownList,
                   endAnimation: endAnimation,
+                  more: Search.moreUsers,
                   child: SearchListUsers(
                     refresh: refreshChildren,
                   ),

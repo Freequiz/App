@@ -9,6 +9,7 @@ import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/api/users.dart';
 import 'package:freequiz/2_profile/profile.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUp extends StatefulWidget {
   final Function refresh;
@@ -64,7 +65,12 @@ class _SignUpState extends State<SignUp> {
                     ),
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
-                      onTap: () {},
+                      onTap: () async {
+                        final Uri url = Uri.parse('https://www.freequiz.ch/terms-of-service');
+                        if (!await launchUrl(url)) {
+                            throw Exception('Could not launch $url');
+                        }
+                      },
                       child: Text(
                         context.tr('terms 2'),
                         style: const TextStyle(fontSize: FontSize.secondary, color: Colors.blue),

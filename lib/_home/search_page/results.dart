@@ -14,6 +14,7 @@ class Results extends StatefulWidget {
   final String searchTerm;
   final Function refreshChildren;
   final Function endAnimation;
+  final bool more;
 
   const Results({
     super.key,
@@ -25,6 +26,7 @@ class Results extends StatefulWidget {
     required this.searchTerm,
     required this.refreshChildren,
     required this.endAnimation,
+    required this.more
   });
 
   @override
@@ -46,6 +48,7 @@ class _ResultsState extends State<Results> {
           LoadMoreButton(
             onPressed: () => onPressed(widget.i),
             pressed: pressed,
+            more: widget.more,
           ),
         ],
       )
@@ -71,11 +74,13 @@ class _ResultsState extends State<Results> {
       Search.pageQuizzes++;
       final newQuizzes = await APIQuizzes.search(widget.searchTerm, Search.pageQuizzes);
       Search.quizzes.addAll(newQuizzes['data']);
+      Search.moreQuizzes = newQuizzes['next_page'];
     }
     else {
       Search.pageUsers++;
       final newUsers = await APIUsers.search(widget.searchTerm, Search.pageUsers);
       Search.users.addAll(newUsers['data']);
+      Search.moreUsers = newUsers['next_page'];
     }
 
     widget.refreshChildren();

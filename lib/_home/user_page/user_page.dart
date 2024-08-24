@@ -38,7 +38,7 @@ class _UserPageState extends State<UserPage> {
             user: widget.user,
           ),
           Space.height(context.mobileLayout ? 10 : 15),
-          LoadMoreButton(pressed: pressed, onPressed: onPressed)
+          LoadMoreButton(pressed: pressed, onPressed: onPressed, more: PublicUserData.more),
         ],
       ),
     );
@@ -49,9 +49,9 @@ class _UserPageState extends State<UserPage> {
       pressed = true;
     });
     page++;
-    PublicUserData.data.addAll(
-      (await APIUsers.getPublicQuizzes(page, widget.user))['data'],
-    );
+    final data = await APIUsers.getPublicQuizzes(page, widget.user);
+    PublicUserData.data.addAll(data['data']);
+    PublicUserData.more = data['next_page'];
     setState(() {
       pressed = false;
     });

@@ -98,12 +98,6 @@ class QuizForm {
       title.input.clear();
       error = true;
     }
-
-    if (description.input.text.replaceAll(' ', '').length < 5) {
-      description.error = true;
-      description.input.clear();
-      error = true;
-    }
   }
 
   addWordPair() {

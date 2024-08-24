@@ -46,7 +46,9 @@ class LoadSearch extends StatelessWidget {
           context: context,
           onLoad: () {
             Search.quizzes = searchResults.data!['quizzes']['data'];
+            Search.moreQuizzes = searchResults.data!['quizzes']['next_page'];
             Search.users = searchResults.data!['users']['data'];
+            Search.moreUsers = searchResults.data!['users']['next_page'];
           },
         );
       },

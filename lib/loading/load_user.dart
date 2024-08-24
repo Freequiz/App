@@ -51,6 +51,7 @@ class LoadUser extends StatelessWidget {
           context: context,
           onLoad: () {
             PublicUserData.data.addAll(data.data!['data']);
+            PublicUserData.more = data.data!['next_page'];
             PublicUserData.avatarURL = data.data!['avatar_url'];
             PublicUserData.name = user;
           },

@@ -23,6 +23,7 @@ class _EditPageState extends State<EditPage> {
           if (data.hasData) {
             if (data.data!["success"]) {
               ListQuizzes.data = data.data!['data'];
+              ListQuizzes.more = data.data!['next_page'];
               return LoadingAnimation(
                 message: "Loading Quizzes",
                 finishedLoading: true,
