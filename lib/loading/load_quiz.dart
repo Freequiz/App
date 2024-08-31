@@ -1,13 +1,13 @@
-import 'package:freequiz/_home/quiz_page/quiz_page.dart';
-import 'package:freequiz/_views/buttons/edit_text.dart';
-import 'package:freequiz/_views/buttons/favorite.dart';
-import 'package:freequiz/_views/buttons/report.dart';
-import 'package:freequiz/_views/buttons/share_text.dart';
-import 'package:freequiz/_views/kebab_menu/kebab_menu.dart';
+import 'package:freequiz/_views/_home/quiz_page/quiz_page.dart';
+import 'package:freequiz/_views/subviews/buttons/edit_text.dart';
+import 'package:freequiz/_views/subviews/buttons/favorite.dart';
+import 'package:freequiz/_views/subviews/buttons/report.dart';
+import 'package:freequiz/_views/subviews/buttons/share_text.dart';
+import 'package:freequiz/_views/subviews/kebab_menu/kebab_menu.dart';
 import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
-import 'package:freequiz/quiz/quiz_helper.dart';
-import 'package:freequiz/quiz/manage.dart';
+import 'package:freequiz/controllers/quiz/quiz_helper.dart';
+import 'package:freequiz/controllers/quiz/manage.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 void loadQuiz({required BuildContext context, required String uuid}) {

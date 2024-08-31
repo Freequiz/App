@@ -1,4 +1,4 @@
-import 'package:freequiz/api/users.dart';
+import 'package:freequiz/services/api/users.dart';
 
 class Settings {
   Map settingsData;

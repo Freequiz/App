@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:freequiz/api/quizzes.dart';
-import 'package:freequiz/local_storage/database.dart';
+import 'package:freequiz/services/api/quizzes.dart';
+import 'package:freequiz/services/local_storage/database.dart';
 import 'package:freequiz/models/language.dart';
 import 'package:freequiz/models/translations.dart';
 

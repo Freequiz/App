@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/api/api.dart';
+import 'package:freequiz/services/api/api.dart';
 import 'package:freequiz/loading/error_loading/view.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
 import 'package:freequiz/loading/no_connection/no_connection.dart';

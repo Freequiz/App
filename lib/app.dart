@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/root_page.dart';
-import 'others/initial_loading.dart';
+import 'package:freequiz/_views/root_page.dart';
+import 'controllers/others/initial_loading.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

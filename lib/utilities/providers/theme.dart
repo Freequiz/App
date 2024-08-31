@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:freequiz/local_storage/preferences.dart';
+import 'package:freequiz/services/local_storage/preferences.dart';
 
 class ThemeProvider with ChangeNotifier {
   String? theme;

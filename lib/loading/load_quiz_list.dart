@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_views/quiz_list/quiz_list.dart';
-import 'package:freequiz/api/api.dart';
+import 'package:freequiz/_views/subviews/quiz_list/quiz_list.dart';
+import 'package:freequiz/services/api/api.dart';
 import 'package:freequiz/loading/no_connection/no_connection.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 

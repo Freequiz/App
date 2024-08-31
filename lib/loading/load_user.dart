@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freequiz/_home/user_page/user_data.dart';
-import 'package:freequiz/_home/user_page/user_page.dart';
-import 'package:freequiz/api/users.dart';
+import 'package:freequiz/_views/_home/user_page/user_data.dart';
+import 'package:freequiz/_views/_home/user_page/user_page.dart';
+import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
 import 'package:share_plus/share_plus.dart';
