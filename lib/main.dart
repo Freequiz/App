@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:freequiz/utilities/imports/themes.dart';
 import 'package:app_links/app_links.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -76,22 +77,27 @@ class _MyAppState extends State<MyApp> {
       create: (context) => themeChangeProvider,
       child: Consumer<ThemeProvider>(
         builder: (BuildContext context, themeProvider, child) {
-          return MaterialApp(
-            builder: DevicePreview.appBuilder,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            debugShowCheckedModeBanner: false,
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: !themeProvider.override
-                ? ThemeMode.system
-                : themeProvider.darkMode
-                    ? ThemeMode.dark
-                    : ThemeMode.light,
-            navigatorKey: _navigatorKey,
-            initialRoute: "/",
-            onGenerateRoute: (settings) => appRouter(settings),
+          return AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.light.copyWith(
+              systemNavigationBarColor: context.darkMode ? darkMainColor : lightMainColor,
+            ),
+            child: MaterialApp(
+              builder: DevicePreview.appBuilder,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              debugShowCheckedModeBanner: false,
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: !themeProvider.override
+                  ? ThemeMode.system
+                  : themeProvider.darkMode
+                      ? ThemeMode.dark
+                      : ThemeMode.light,
+              navigatorKey: _navigatorKey,
+              initialRoute: "/",
+              onGenerateRoute: (settings) => appRouter(settings),
+            ),
           );
         },
       ),
