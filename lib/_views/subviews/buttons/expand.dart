@@ -1,5 +1,4 @@
 import 'package:freequiz/utilities/imports/base.dart';
-import 'package:freequiz/utilities/widgets/conditional.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class ExpandButton extends StatefulWidget {
@@ -16,9 +15,9 @@ class _ExpandButtonState extends State<ExpandButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Conditional(
-      condition: widget.shown,
-      widget: IconButton(
+    return Visibility(
+      visible: widget.shown,
+      child: IconButton(
         onPressed: () {
           setState(() {
             expanded = !expanded;

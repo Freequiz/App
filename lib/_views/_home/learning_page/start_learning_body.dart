@@ -46,9 +46,9 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Conditional(
-                      condition: progressArray.isNotEmpty,
-                      widget: Container(
+                    Visibility(
+                      visible: progressArray.isNotEmpty,
+                      child: Container(
                         padding: EdgeInsets.all(
                           context.mobileLayout ? 13 : context.screenHeight / 80,
                         ),

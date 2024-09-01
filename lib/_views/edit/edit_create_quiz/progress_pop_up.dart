@@ -56,9 +56,9 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
         },
       ),
       actions: [
-        Conditional(
-          condition: closeButton,
-          widget: TextButton(
+        Visibility(
+          visible: closeButton,
+          child: TextButton(
             onPressed: closeButton ? () => Navigator.of(context).pop() : () {},
             child: const Text('close').tr(),
           ),

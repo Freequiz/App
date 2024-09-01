@@ -55,13 +55,13 @@ class _EMailState extends State<EMail> {
                 ),
               ],
             ),
-            Conditional(
-              condition: edit,
-              widget: SizedBox(height: context.screenHeight / 60),
+            Visibility(
+              visible: edit,
+              child: SizedBox(height: context.screenHeight / 60),
             ),
-            Conditional(
-              condition: edit,
-              widget: IntrinsicHeight(
+            Visibility(
+              visible: edit,
+              child: IntrinsicHeight(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

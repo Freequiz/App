@@ -52,29 +52,29 @@ class _LearningSettingsState extends State<LearningSettings> {
             width: context.screenWidth - 80,
           ),
           const SizedBox(height: 30),
-          Conditional(
-            condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
-            widget: Text(
+          Visibility(
+            visible: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            child: Text(
               context.tr('amount repetition'),
               style: titleStyle(),
             ),
           ),
-          Conditional(
-            condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
-            widget: const SizedBox(height: 5),
+          Visibility(
+            visible: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            child: const SizedBox(height: 5),
           ),
-          Conditional(
-            condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
-            widget: Switcher(
+          Visibility(
+            visible: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            child: Switcher(
               onTap: changeMaxScore,
               texts: Learning.maxScoreOptions[widget.mode]!,
               value: maxScore,
               width: context.screenWidth - 80,
             ),
           ),
-          Conditional(
-            condition: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
-            widget: const SizedBox(height: 30),
+          Visibility(
+            visible: Learning.maxScoreOptions[widget.mode]!.isNotEmpty,
+            child: const SizedBox(height: 30),
           ),
           Text(
             context.tr('length round'),

@@ -54,13 +54,13 @@ class StartLearningButton extends StatelessWidget {
             context.tr(text),
             style: const TextStyle(fontSize: FontSize.button, color: Colors.white, fontWeight: FontWeight.w600),
           ),
-          Conditional(
-            condition: icon != null,
-            widget: const SizedBox(width: 5.0),
+          Visibility(
+            visible: icon != null,
+            child: const SizedBox(width: 5.0),
           ),
-          Conditional(
-            condition: icon != null,
-            widget: Icon(
+          Visibility(
+            visible: icon != null,
+            child: Icon(
               icon,
               color: Colors.white,
             ),

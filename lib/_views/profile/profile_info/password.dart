@@ -65,36 +65,36 @@ class _PasswordState extends State<Password> {
                 ),
               ],
             ),
-            Conditional(
-              condition: edit,
-              widget: SizedBox(height: context.screenHeight / 60),
+            Visibility(
+              visible: edit,
+              child: SizedBox(height: context.screenHeight / 60),
             ),
-            Conditional(
-              condition: edit,
-              widget: PasswordTextfield(
+            Visibility(
+              visible: edit,
+              child: PasswordTextfield(
                 password: oldPassword,
                 focusNode: focusNode,
                 textInputAction: TextInputAction.next,
                 autofillHints: const [AutofillHints.newPassword],
               ),
             ),
-            Conditional(condition: edit, widget: Space.height(5.0)),
-            Conditional(
-              condition: edit,
-              widget: PasswordTextfield(
+            Visibility(visible: edit, child: Space.height(5.0)),
+            Visibility(
+              visible: edit,
+              child: PasswordTextfield(
                 password: newPassword,
                 focusNode: focusNode,
                 textInputAction: TextInputAction.next,
                 autofillHints: const [AutofillHints.newPassword],
               ),
             ),
-            Conditional(
-              condition: edit,
-              widget: Space.height(5.0),
+            Visibility(
+              visible: edit,
+              child: Space.height(5.0),
             ),
-            Conditional(
-              condition: edit,
-              widget: IntrinsicHeight(
+            Visibility(
+              visible: edit,
+              child: IntrinsicHeight(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

@@ -24,9 +24,9 @@ class _DraftTileState extends State<DraftTile> {
       onTap: () {
         onTap();
       },
-      child: Conditional(
-        condition: shown,
-        widget: Dismissible(
+      child: Visibility(
+        visible: shown,
+        child: Dismissible(
           key: const Key('Draft'),
           direction: DismissDirection.endToStart,
           onDismissed: (direction) async {

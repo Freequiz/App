@@ -34,9 +34,9 @@ class _EditQuizTileState extends State<EditQuizTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Conditional(
-      condition: shown,
-      widget: DismissibleQuizTile(
+    return Visibility(
+      visible: shown,
+      child: DismissibleQuizTile(
         quizData: widget.data,
         background: const BackgroundDelete(),
         expanded: expanded,

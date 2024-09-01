@@ -30,9 +30,9 @@ class _MainAppBarState extends State<MainAppBar> {
         mobile: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Conditional(
-              condition: !Search.shown,
-              widget: Space.width(74.0), //Width of Search Button (64) + it's Padding (10)
+            Visibility(
+              visible: !Search.shown,
+              child: Space.width(74.0), //Width of Search Button (64) + it's Padding (10)
             ),
             Flexible(
               child: SearchField(

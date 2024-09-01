@@ -64,9 +64,9 @@ class _EditOverviewState extends State<EditOverview> {
         Space.height(context.mobileLayout ? 15 : 45),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Conditional(
-            condition: QuizHelper.draft.isNotEmpty,
-            widget: Draft(
+          child: Visibility(
+            visible: QuizHelper.draft.isNotEmpty,
+            child: Draft(
               refresh: refresh,
             ),
           ),

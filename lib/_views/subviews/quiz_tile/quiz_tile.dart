@@ -86,7 +86,7 @@ class _QuizTileState extends State<QuizTile> {
                 ),
               ],
             ),
-            Conditional(condition: expanded, widget: AdditionalInfo(data: widget.data)),
+            Visibility(visible: expanded, child: AdditionalInfo(data: widget.data)),
           ],
         ),
       ),

@@ -6,7 +6,7 @@ class Conditional extends StatelessWidget {
   final Widget widget;
   final Widget defaultWidget;
 
-  const Conditional({super.key, required this.condition, required this.widget, this.defaultWidget = const SizedBox()});
+  const Conditional({super.key, required this.condition, required this.widget, required this.defaultWidget});
 
   @override
   Widget build(BuildContext context) {

@@ -34,13 +34,13 @@ class _StartLearningButtonsState extends State<StartLearningButtons> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           StartLearningButton(i: widget.i, refresh: widget.refresh, text: 'learn'),
-          Conditional(
-            condition: QuizHelper.marked,
-            widget: SizedBox(width: context.mobileLayout ? 10 : 15),
+          Visibility(
+            visible: QuizHelper.marked,
+            child: SizedBox(width: context.mobileLayout ? 10 : 15),
           ),
-          Conditional(
-            condition: QuizHelper.marked,
-            widget: StartLearningButton(
+          Visibility(
+            visible: QuizHelper.marked,
+            child: StartLearningButton(
               i: widget.i,
               refresh: widget.refresh,
               text: 'learn only',

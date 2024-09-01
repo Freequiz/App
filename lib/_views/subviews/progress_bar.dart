@@ -49,19 +49,16 @@ class _ProgressBarState extends State<ProgressBar> {
                 ),
                 width: widthProgress,
                 alignment: Alignment.centerRight,
-                child: Conditional(
-                  condition: widthProgress > 35,
-                  widget: Conditional(
-                    condition: expanded,
-                    widget: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 3.0,
-                      ),
-                      child: Text(
-                        widget.amount == 0
-                            ? "0%"
-                            : "${(100 / widget.amount * (widget.amount - widget.amountLeft)).round()}%",
-                      ),
+                child: Visibility(
+                  visible: widthProgress > 35 && expanded,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 3.0,
+                    ),
+                    child: Text(
+                      widget.amount == 0
+                          ? "0%"
+                          : "${(100 / widget.amount * (widget.amount - widget.amountLeft)).round()}%",
                     ),
                   ),
                 ),
