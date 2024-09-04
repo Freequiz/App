@@ -1,4 +1,5 @@
 import 'package:freequiz/_views/edit/edit_create_quiz/edit_quiz.dart';
+import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class EditTextButton extends StatelessWidget {
@@ -22,8 +23,13 @@ class EditTextButton extends StatelessWidget {
       MaterialPageRoute(
         builder: (BuildContext context) {
           return EditQuiz(
-            refresh: () {},
+            refresh: (id) {
+              if (id == null) return;
+              Navigator.of(context).pop();
+              loadQuiz(context: context, uuid: id);
+            },
             uuid: uuid,
+            openQuiz: true,
           );
         },
       ),

@@ -11,7 +11,8 @@ class EditQuiz extends StatefulWidget {
   final Function refresh;
   final String uuid;
   final bool owner;
-  const EditQuiz({super.key, required this.refresh, required this.uuid, this.owner = true});
+  final bool openQuiz;
+  const EditQuiz({super.key, required this.refresh, required this.uuid, this.openQuiz = false, this.owner = true});
 
   @override
   State<EditQuiz> createState() => _EditQuizState();
@@ -35,7 +36,7 @@ class _EditQuizState extends State<EditQuiz> {
               quiz.save(mode: widget.owner ? 'edit' : 'create', id: widget.uuid);
             }
             Navigator.of(context).pop();
-            widget.refresh();
+            widget.refresh(null);
           },
           child: const Icon(
             Icons.arrow_back_ios,
@@ -122,7 +123,9 @@ class _EditQuizState extends State<EditQuiz> {
           builder: (context) => ProgressPopUp(
             title: 'Edit Quiz',
             response: response,
-            refresh: widget.refresh,
+            refresh: (_) {
+              widget.refresh(widget.uuid);
+            },
           ),
         );
       } else {
@@ -135,7 +138,9 @@ class _EditQuizState extends State<EditQuiz> {
           builder: (context) => ProgressPopUp(
             title: 'Create Quiz',
             response: response,
-            refresh: widget.refresh,
+            refresh: (id) {
+              widget.refresh(id);
+            },
           ),
         );
       }

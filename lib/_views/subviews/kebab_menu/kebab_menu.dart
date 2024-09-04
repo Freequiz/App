@@ -2,6 +2,7 @@ import 'package:freequiz/_views/edit/edit_create_quiz/edit_quiz.dart';
 import 'package:freequiz/_views/subviews/alerts/report.dart';
 import 'package:freequiz/_views/subviews/kebab_menu/kebab_menu_item.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
+import 'package:freequiz/loading/load_quiz.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -41,8 +42,11 @@ class KebabMenu extends StatefulWidget {
 }
 
 class _KebabMenuState extends State<KebabMenu> {
-  refresh() {
-    setState(() {});
+  refresh(id) {
+    Navigator.of(context).pop();
+    if (id == null) return;
+    Navigator.of(context).pop();
+    loadQuiz(context: context, uuid: id);
   }
 
   @override
@@ -99,6 +103,7 @@ class _KebabMenuState extends State<KebabMenu> {
             refresh: refresh,
             uuid: widget.uuid,
             owner: QuizHelper.quiz!.owner,
+            openQuiz: true,
           );
         },
       ),

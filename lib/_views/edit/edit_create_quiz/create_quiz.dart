@@ -86,7 +86,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         builder: (context) => ProgressPopUp(
           title: 'Create Quiz',
           response: response,
-          refresh: widget.refresh,
+          refresh: (_) => widget.refresh(),
         ),
       );
     }

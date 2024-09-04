@@ -82,7 +82,7 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
         Navigator.of(context).pop();
         Navigator.of(context).pop();
       }
-      widget.refresh();
+      widget.refresh(quiz['id']);
     });
   }
 }

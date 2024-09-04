@@ -23,7 +23,7 @@ class Edit extends StatelessWidget {
       MaterialPageRoute(
         builder: (BuildContext context) {
           return EditQuiz(
-            refresh: widget.refresh,
+            refresh: (_) => widget.refresh(),
             uuid: widget.uuid,
           );
         },
