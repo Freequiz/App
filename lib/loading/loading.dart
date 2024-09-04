@@ -5,6 +5,7 @@ import 'package:freequiz/loading/loading_screen/view.dart';
 import 'package:freequiz/loading/no_connection/no_connection.dart';
 
 void nothing() {}
+bool shownDialog = false;
 
 Widget loading({
   required AsyncSnapshot<Map<dynamic, dynamic>> data,
@@ -21,12 +22,15 @@ Widget loading({
     if (data.data!["message"] == Api.noConnection || data.data!["message"] == Api.timeout) {
       if (data.data!.containsKey('offline_data')) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return const NoConnectionAlert();
-            },
-          );
+          if (!shownDialog) {
+            shownDialog = true;
+            showDialog(
+              context: context,
+              builder: (context) {
+                return const NoConnectionAlert();
+              },
+            );
+          }
         });
         onLoad();
         return widget;
