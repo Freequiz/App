@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/edit/created_quizzes/list_quizzes.dart';
+import 'package:freequiz/models/quiz.dart';
+import 'package:freequiz/services/local_storage/database.dart';
 import 'package:freequiz/services/local_storage/draft_storage.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -68,21 +70,24 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
   }
 
   close(data) {
-    final quiz = data.data!['quiz_data'];
+    final quizData = data.data!['quiz_data'];
 
     if (widget.title == 'Create Quiz') {
-      ListQuizzes.data.insert(0, quiz);
+      ListQuizzes.data.insert(0, quizData);
     }
 
     DraftStorage.deleteDraft();
     QuizHelper.draft.clear();
+
+    final quiz = Quiz.fromJson(quizData);
+    QuizDatabase.insertQuiz(quiz); // updated the quiz in the local database
     
     Future.delayed(const Duration(milliseconds: 500), () {
       if (mounted) {
         Navigator.of(context).pop();
         Navigator.of(context).pop();
       }
-      widget.refresh(quiz['id']);
+      widget.refresh(quizData['id']);
     });
   }
 }
