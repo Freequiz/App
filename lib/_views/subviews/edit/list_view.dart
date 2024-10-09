@@ -6,16 +6,12 @@ class ListWordPairs extends StatefulWidget {
   final QuizForm quiz;
   final String mode;
   final Function refresh;
-  final String definitionLanguage;
-  final String answerLanguage;
 
   const ListWordPairs({
     super.key,
     required this.quiz,
     required this.mode,
     required this.refresh,
-    required this.definitionLanguage,
-    required this.answerLanguage,
   });
 
   @override
@@ -46,8 +42,7 @@ class _ListWordPairsState extends State<ListWordPairs> {
           save: () => widget.quiz.save(mode: widget.mode),
           onSubmitted: () => onSubmitted(i),
           i: i,
-          definitionLanguage: widget.definitionLanguage,
-          answerLanguage: widget.answerLanguage,
+          quiz: widget.quiz,
         );
       },
     );
@@ -55,11 +50,11 @@ class _ListWordPairsState extends State<ListWordPairs> {
 
   onSubmitted(int i) {
     setState(() {
-      if (widget.quiz.wordPairs[i].definition.input.text != "" && widget.quiz.wordPairs[i].answer.input.text != "") {
-        if (i + 2 >= widget.quiz.wordPairs.length) {
+      if (widget.quiz.wordPairs[i].answer.input.text != "") {
+        if (i + 1 >= widget.quiz.wordPairs.length) {
           widget.quiz.addWordPair();
         }
-        Future.delayed(const Duration(milliseconds: 1000), () {
+        Future.delayed(const Duration(milliseconds: 50), () {
           if (mounted) FocusScope.of(context).nextFocus();
         });
       }

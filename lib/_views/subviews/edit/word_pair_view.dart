@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/edit/quiz_form.dart';
 import 'package:freequiz/_views/subviews/edit/answer_textfield.dart';
 import 'package:freequiz/_views/subviews/edit/basic_textfield.dart';
+import 'package:freequiz/controllers/others/languages.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class WordPairView extends StatelessWidget {
@@ -10,8 +11,7 @@ class WordPairView extends StatelessWidget {
   final Function save;
   final Function onSubmitted;
   final int i;
-  final String answerLanguage;
-  final String definitionLanguage;
+  final QuizForm quiz;
 
   const WordPairView({
     super.key,
@@ -20,12 +20,13 @@ class WordPairView extends StatelessWidget {
     required this.save,
     required this.onSubmitted,
     required this.i,
-    required this.answerLanguage,
-    required this.definitionLanguage,
+    required this.quiz,
   });
 
   @override
   Widget build(BuildContext context) {
+    WordPair wordPair = quiz.wordPairs[i];
+
     return Dismissible(
       key: Key(wordPair.definition.id),
       direction: DismissDirection.endToStart,
@@ -52,13 +53,13 @@ class WordPairView extends StatelessWidget {
             textFieldData: wordPair.definition,
             hintError: context.tr('definition error'),
             save: save,
-            language: i == 0 ? " ($definitionLanguage)" : "",
+            language: i == 0 ? " (${context.tr(Languages().idToName(quiz.definitionLanguage))})" : "",
           ),
           AnswerTextField(
             textFieldData: wordPair.answer,
             onSubmitted: onSubmitted,
             save: save,
-            language: i == 0 ? " ($answerLanguage)" : "",
+            language: i == 0 ? " (${context.tr(Languages().idToName(quiz.answerLanguage))})" : "",
           ),
         ],
       ),
