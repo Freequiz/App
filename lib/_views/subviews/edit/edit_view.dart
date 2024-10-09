@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/edit/quiz_form.dart';
 import 'package:freequiz/_views/subviews/edit/add_button.dart';
 import 'package:freequiz/_views/subviews/edit/counter.dart';
 import 'package:freequiz/_views/subviews/edit/header.dart';
 import 'package:freequiz/_views/subviews/edit/list_view.dart';
+import 'package:freequiz/controllers/others/languages.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class EditView extends StatefulWidget {
@@ -25,13 +27,20 @@ class _EditViewState extends State<EditView> {
         SizedBox(
           height: context.screenHeight / 60,
         ),
-        EditHeader(quiz: widget.quiz, save: () => widget.quiz.save(mode: widget.mode), hintColor: hintColor),
+        EditHeader(
+          quiz: widget.quiz,
+          save: () => widget.quiz.save(mode: widget.mode),
+          hintColor: hintColor,
+          refresh: () => setState(() {}),
+        ),
         SizedBox(
           height: context.screenHeight / 40,
         ),
         ListWordPairs(
           quiz: widget.quiz,
           mode: widget.mode,
+          definitionLanguage: context.tr(Languages().idToName(widget.quiz.definitionLanguage)),
+          answerLanguage: context.tr(Languages().idToName(widget.quiz.answerLanguage)),
           refresh: () => setState(() {}),
         ),
         SizedBox(
@@ -39,11 +48,7 @@ class _EditViewState extends State<EditView> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(width: 70),
-            AddButton(add: add),
-            Counter(amount: widget.quiz.wordPairs.length)
-          ],
+          children: [const SizedBox(width: 70), AddButton(add: add), Counter(amount: widget.quiz.wordPairs.length)],
         )
       ],
     );

@@ -7,8 +7,15 @@ class AnswerTextField extends StatefulWidget {
   final double widthBorder;
   final Function onSubmitted;
   final Function save;
-  const AnswerTextField(
-      {super.key, required this.textFieldData, this.widthBorder = 2.0, required this.onSubmitted, required this.save});
+  final String language;
+  const AnswerTextField({
+    super.key,
+    required this.textFieldData,
+    this.widthBorder = 2.0,
+    required this.onSubmitted,
+    required this.save,
+    this.language = "",
+  });
 
   @override
   State<AnswerTextField> createState() => _AnswerTextFieldState();
@@ -41,7 +48,7 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
           fontWeight: FontWeight.w500,
           fontSize: FontSize.text,
         ),
-        hintText: widget.textFieldData.error ? context.tr('answer blank') : widget.textFieldData.hint,
+        hintText: widget.textFieldData.error ? context.tr('answer blank') : widget.textFieldData.hint + widget.language,
         border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(

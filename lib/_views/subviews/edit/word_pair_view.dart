@@ -9,6 +9,9 @@ class WordPairView extends StatelessWidget {
   final Function onDismissed;
   final Function save;
   final Function onSubmitted;
+  final int i;
+  final String answerLanguage;
+  final String definitionLanguage;
 
   const WordPairView({
     super.key,
@@ -16,6 +19,9 @@ class WordPairView extends StatelessWidget {
     required this.onDismissed,
     required this.save,
     required this.onSubmitted,
+    required this.i,
+    required this.answerLanguage,
+    required this.definitionLanguage,
   });
 
   @override
@@ -46,11 +52,13 @@ class WordPairView extends StatelessWidget {
             textFieldData: wordPair.definition,
             hintError: context.tr('definition error'),
             save: save,
+            language: i == 0 ? " ($definitionLanguage)" : "",
           ),
           AnswerTextField(
             textFieldData: wordPair.answer,
             onSubmitted: onSubmitted,
             save: save,
+            language: i == 0 ? " ($answerLanguage)" : "",
           ),
         ],
       ),

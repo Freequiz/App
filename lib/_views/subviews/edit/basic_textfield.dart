@@ -10,6 +10,7 @@ class BasicTextField extends StatefulWidget {
   final Function save;
   final Color? textFieldColor;
   final bool bottomRadius;
+  final String language;
   const BasicTextField(
       {super.key,
       required this.textFieldData,
@@ -19,7 +20,9 @@ class BasicTextField extends StatefulWidget {
       this.textInputAction = TextInputAction.next,
       this.maxLines = 1,
       this.bottomRadius = false,
-      required this.save});
+      required this.save,
+      this.language = "",
+      });
 
   @override
   State<BasicTextField> createState() => _BasicTextFieldState();
@@ -60,7 +63,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
           fontWeight: FontWeight.w500,
           fontSize: FontSize.text,
         ),
-        hintText: widget.textFieldData.error ? widget.hintError : widget.textFieldData.hint,
+        hintText: widget.textFieldData.error ? widget.hintError : widget.textFieldData.hint + widget.language,
         border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(

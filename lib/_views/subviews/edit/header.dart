@@ -10,8 +10,9 @@ class EditHeader extends StatefulWidget {
   final QuizForm quiz;
   final Function save;
   final Color hintColor;
+  final Function refresh;
 
-  const EditHeader({super.key, required this.quiz, required this.save, required this.hintColor});
+  const EditHeader({super.key, required this.quiz, required this.save, required this.hintColor, required this.refresh});
 
   @override
   State<EditHeader> createState() => _EditHeaderState();
@@ -32,8 +33,7 @@ class _EditHeaderState extends State<EditHeader> {
             textFieldData: widget.quiz.title,
             hintError: context.tr('title error'),
             save: widget.save,
-            textFieldColor:
-                context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : white245,
+            textFieldColor: context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : white245,
             bottomRadius: true,
           ),
           const SizedBox(
@@ -45,8 +45,7 @@ class _EditHeaderState extends State<EditHeader> {
             maxLines: 4,
             keyboardType: TextInputType.multiline,
             save: widget.save,
-            textFieldColor:
-                context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : white245,
+            textFieldColor: context.darkMode ? const Color.fromARGB(255, 45, 45, 45) : white245,
             bottomRadius: true,
           ),
           const SizedBox(height: 10),
@@ -57,7 +56,10 @@ class _EditHeaderState extends State<EditHeader> {
                 child: Dropdown(
                   initialValue: widget.quiz.definitionLanguage,
                   items: Languages.languages,
-                  onChanged: (int definitionLanguage) => widget.quiz.definitionLanguage = definitionLanguage,
+                  onChanged: (int definitionLanguage) {
+                    widget.quiz.definitionLanguage = definitionLanguage;
+                    widget.refresh();
+                  },
                   color: rose,
                 ),
               ),
@@ -71,7 +73,10 @@ class _EditHeaderState extends State<EditHeader> {
                 child: Dropdown(
                   initialValue: widget.quiz.answerLanguage,
                   items: Languages.languages,
-                  onChanged: (int answerLanguage) => widget.quiz.answerLanguage = answerLanguage,
+                  onChanged: (int answerLanguage) {
+                    widget.quiz.answerLanguage = answerLanguage;
+                    widget.refresh();
+                  },
                   color: rose,
                 ),
               ),
