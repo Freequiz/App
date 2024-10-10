@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/edit/quiz_form.dart';
 import 'package:freequiz/_views/subviews/edit/add_button.dart';
 import 'package:freequiz/_views/subviews/edit/counter.dart';
@@ -22,8 +23,13 @@ class _EditViewState extends State<EditView> {
 
     return ListView(
       children: [
-        SizedBox(
-          height: context.screenHeight / 60,
+        Container(
+          padding: EdgeInsets.only(bottom: 8, top: context.screenHeight / 100),
+          alignment: Alignment.center,
+          child: Text(
+            context.tr("quiz automatically saved"),
+            style: const TextStyle(fontSize: FontSize.secondary),
+          ),
         ),
         EditHeader(
           quiz: widget.quiz,
