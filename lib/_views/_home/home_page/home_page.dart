@@ -2,52 +2,17 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/_views/edit/confirmation.dart';
 import 'package:freequiz/_views/_home/home_page/switcher.dart';
 import 'package:freequiz/_views/subviews/category_title.dart';
-import 'package:freequiz/_views/subviews/quiz_tile/backgrounds/delete.dart';
-import 'package:freequiz/_views/subviews/quiz_tile/backgrounds/dismiss.dart';
-import 'package:freequiz/_views/subviews/quiz_tile/backgrounds/favorite.dart';
-import 'package:freequiz/services/api/quizzes.dart';
-import 'package:freequiz/services/api/users.dart';
+import 'package:freequiz/controllers/home/home_page.dart';
 import 'package:freequiz/loading/load_quiz_list.dart';
-import 'package:freequiz/services/local_storage/database.dart';
-import 'package:freequiz/controllers/quiz/manage.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int shownQuizzes = 0;
-  int previousShownQuizzes = 0;
-
-  bool onChanged = false;
-
-  final List<Future<Map>> listQuizzes = [ManageQuiz.loadRecent(), APIUsers.getFavorites(), APIUsers.getQuizzes(1)];
-  final List<String> options = ['history', 'favorite', 'personal'];
-  final List<Widget> backgrounds = [const BackgroundDismiss(), const BackgroundFavorite(), const BackgroundDelete()];
-  final List<Key> keys = [const Key("h"), const Key("f"), const Key("p")];
-
-  FocusNode focusNode = FocusNode();
-
-  @override
   Widget build(BuildContext context) {
-    onTap(String value) {
-      setState(() {
-        onChanged = true;
-        shownQuizzes = options.indexOf(value);
-      });
-    }
-
-    removeRecent(int i, String uuid) {
-      QuizDatabase.deleteQuiz(uuid);
-    }
-
-    removeFavorite(int i, String uuid) async {
-      APIQuizzes.setQuizFavorite(uuid, false);
-    }
+    final controller = Provider.of<HomePageController>(context); // Access controller
 
     removePersonal(int i, String uuid) {
       showDialog(
@@ -56,30 +21,24 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    final List<Function> functions = [removeRecent, removeFavorite, removePersonal];
+    final List<Function> functions = [HomePageController.removeRecent, HomePageController.removeFavorite, removePersonal];
 
     Widget listQuizMobile(int i) {
       return Positioned.fill(
         child: LoadQuizList(
-          key: keys[i],
-          future: listQuizzes[i],
-          background: backgrounds[i],
+          key: HomePageController.keys[i],
+          future: HomePageController.listQuizzes[i],
+          background: HomePageController.backgrounds[i],
           onDismissed: functions[i],
         )
-            .animate(target: onChanged ? 1 : 0)
+            .animate(target: HomePageController.onChanged ? 1 : 0)
             .moveX(
-              begin: context.screenWidth * (i - previousShownQuizzes),
-              end: context.screenWidth * (i - shownQuizzes),
+              begin: context.screenWidth * (i - HomePageController.previousShownQuizzes),
+              end: context.screenWidth * (i - HomePageController.shownQuizzes),
               duration: const Duration(milliseconds: 200),
             )
             .callback(
-          callback: (_) {
-            if (i != 0) return; //only call this once
-            setState(() {
-              previousShownQuizzes = shownQuizzes;
-              onChanged = false;
-            });
-          },
+          callback: (_) => controller.callback(i),
         ),
       );
     }
@@ -88,21 +47,21 @@ class _HomePageState extends State<HomePage> {
       return SizedBox(
         height: 152,
         child: LoadQuizList(
-          key: keys[i],
-          future: listQuizzes[i],
+          key: HomePageController.keys[i],
+          future: HomePageController.listQuizzes[i],
           onDismissed: functions[i],
-          background: backgrounds[i],
+          background: HomePageController.backgrounds[i],
         ),
       );
     }
 
     return RefreshIndicator(
-      onRefresh: () => onRefresh(),
+      onRefresh: () => controller.onRefresh(),
       child: LayoutWidget(
         mobile: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            HomePageSwitcher(onTap: onTap, options: options),
+            HomePageSwitcher(onTap: controller.onTap, options: HomePageController.options),
             SizedBox(
               height: context.mobileLayout ? 10 : 30,
             ),
@@ -135,23 +94,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  Future<void> onRefresh() async {
-    listQuizzes[0] = ManageQuiz.loadRecent();
-    listQuizzes[1] = APIUsers.getFavorites();
-    listQuizzes[2] = APIUsers.getQuizzes(1);
-
-    for (Future<Map> quizzes in listQuizzes) {
-      await quizzes;
-    }
-
-    setState(() {
-      keys[0] = keys[0] == const Key("h") ? const Key("h1") : const Key("h");
-      keys[1] = keys[1] == const Key("f") ? const Key("f1") : const Key("f");
-      keys[2] = keys[2] == const Key("p") ? const Key("p1") : const Key("p");
-    });
-
-    return;
   }
 }

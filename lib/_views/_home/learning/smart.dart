@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/controllers/quiz/learning.dart';
 import 'package:freequiz/_views/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_views/_home/learning/writing/writing_body.dart';
+import 'package:freequiz/controllers/home/learning/smart.dart';
 import 'package:freequiz/controllers/quiz/question.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';
+import 'package:provider/provider.dart';
 
 class Smart extends StatefulWidget {
   const Smart({super.key});
@@ -14,10 +15,6 @@ class Smart extends StatefulWidget {
 }
 
 class _SmartState extends State<Smart> {
-  List answerRightMC = List.filled(4, false);
-  bool answerRightW = false;
-  final _textController = TextEditingController();
-
   @override
   void initState() {
     Question.randomChoices();
@@ -26,22 +23,24 @@ class _SmartState extends State<Smart> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<SmartController>(context);
+
     final modes = [
       MultipleChoiceBody(
         choices: Question.choices,
-        wrongAnswer: wrongAnswerMC,
-        rightAnswer: rightAnswerMC,
-        answerRight: answerRightMC,
+        wrongAnswer: (choice, i) => controller.wrongAnswerMC(context, choice, i),
+        rightAnswer: (i) => controller.rightAnswerMC(context, i),
+        answerRight: controller.answerRightMC,
         color: purple,
       ),
       WritingBody(
-        onPressed: onPressed,
-        answerRight: answerRightW,
-        textController: _textController,
+        onPressed: () => controller.onPressed(context),
+        answerRight: controller.answerRightW,
+        textController: controller.textController,
         color: purple,
       )
     ];
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: context.darkMode ? purpleDark : purpleLight,
@@ -53,70 +52,5 @@ class _SmartState extends State<Smart> {
       ),
       body: modes[Questionnaire.questions[0].score['smart'] > 0 ? 1 : 0],
     );
-  }
-
-  onPressed() {
-    if (Question.correct(_textController.text)) {
-      rightAnswerW();
-    } else {
-      wrongAnswerW();
-    }
-  }
-
-  wrongAnswerW() {
-    setState(() {
-      Learning().wrongAnswerWriting(_textController, context, rightAnswerW);
-    });
-  }
-
-  rightAnswerW() {
-    setState(() {
-      answerRightW = true;
-    });
-    Future.delayed(const Duration(milliseconds: 200), () {
-      if (!Learning.answeredWrong) {
-        Questionnaire.answeredRight();
-      }
-      if (Questionnaire.questions.length > 1) {
-        setState(() {
-          Learning.answeredWrong = false;
-          Questionnaire.questions.removeAt(0);
-          _textController.clear();
-          Question.randomChoices();
-        });
-      } else {
-        if (mounted) {
-          Navigator.of(context).pop();
-        }
-      }
-      answerRightW = false;
-    });
-  }
-
-  rightAnswerMC(i) {
-    setState(() {
-      answerRightMC[i] = true;
-    });
-    Future.delayed(const Duration(milliseconds: 200), () {
-      if (!Learning.answeredWrong) {
-        Questionnaire.answeredRight();
-      }
-      if (Questionnaire.questions.length > 1) {
-        Learning.answeredWrong = false;
-        Questionnaire.questions.removeAt(0);
-        setState(() {
-          Question.randomChoices();
-        });
-      } else {
-        if (mounted) {
-          Navigator.of(context).pop();
-        }
-      }
-      answerRightMC = List.filled(4, false);
-    });
-  }
-
-  wrongAnswerMC(String choice, int i) {
-    Learning().wrongAnswerMultipleChoice(context, choice, rightAnswerMC, i);
   }
 }

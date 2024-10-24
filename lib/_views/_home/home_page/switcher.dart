@@ -11,12 +11,7 @@ class HomePageSwitcher extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: context.darkMode ? darkMainColor : lightMainColor,
-      padding: const EdgeInsets.only(
-        left: 20,
-        right: 20,
-        top: 10,
-        bottom: 20,
-      ),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 20),
       child: Switcher(
         onTap: onTap,
         texts: options,

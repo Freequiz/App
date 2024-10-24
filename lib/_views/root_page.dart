@@ -6,7 +6,9 @@ import 'package:freequiz/_views/bug_reporter/bug_report_page.dart';
 import 'package:freequiz/_views/_home/home_page/home_page.dart';
 import 'package:freequiz/_views/_home/search_page/search.dart';
 import 'package:freequiz/_views/subviews/app_bar/app_bar.dart';
+import 'package:freequiz/controllers/home/home_page.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
 class RootPage extends StatefulWidget {
   final int i;
@@ -39,7 +41,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      const HomePage(),
+      ChangeNotifierProvider(create: (_) => HomePageController(), child: const HomePage()),
       const EditPage(),
       const BugReportPage(),
       ProfilePage(refresh: refresh),

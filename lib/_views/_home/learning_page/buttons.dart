@@ -3,8 +3,10 @@ import 'package:freequiz/_views/_home/learning/multiple_choice/multiple_choice.d
 import 'package:freequiz/_views/_home/learning/smart.dart';
 import 'package:freequiz/_views/_home/learning/writing/writing.dart';
 import 'package:freequiz/_views/_home/learning_page/button.dart';
+import 'package:freequiz/controllers/home/learning/smart.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
 class StartLearningButtons extends StatefulWidget {
   final int i;
@@ -17,7 +19,12 @@ class StartLearningButtons extends StatefulWidget {
 }
 
 class _StartLearningButtonsState extends State<StartLearningButtons> {
-  late final List<Widget> pages = [const Smart(), const Writing(), const MultipleChoice(), const Cards()];
+  late final List<Widget> pages = [
+      ChangeNotifierProvider(create: (_) => SmartController(), child: const Smart()),
+      const Writing(),
+      const MultipleChoice(),
+      const Cards(),
+    ];
 
   double width = 0;
   double previousWidth = 0;
