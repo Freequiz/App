@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freequiz/_views/edit/created_quizzes/list_quizzes.dart';
 import 'package:freequiz/_views/edit/edit_overview.dart';
+import 'package:freequiz/loading/error_loading/view.dart';
 import 'package:freequiz/services/api/users.dart';
-import 'package:freequiz/loading/error_loading/alert.dart';
 import 'package:freequiz/loading/loading_screen/animation.dart';
 
 class EditPage extends StatefulWidget {
@@ -13,7 +13,6 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,19 +33,22 @@ class _EditPageState extends State<EditPage> {
             }
             return Navigator(
               onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => ErrorLoadingAlert(
-                    error: data.data?["message"] ?? data.data!["token"] ,
-                    previousWidget: const EditPage(),
-                    argument: data.data?["reason"] != null ? [data.data!["reason"]] : null,
-                    ),
+                builder: (context) => ErrorLoadingView(
+                  error: data.data?["message"] ?? data.data!["token"],
+                  widget: const EditPage(),
+                  argument: data.data?["reason"] != null ? [data.data!["reason"]] : null,
+                  appBar: false,
+                ),
               ),
             );
           } else if (data.hasError) {
             return Navigator(
               onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => ErrorLoadingAlert(
-                    error: data.data!["message"],
-                    previousWidget: const EditPage()),
+                builder: (context) => ErrorLoadingView(
+                  error: data.data!["message"],
+                  widget: const EditPage(),
+                  appBar: false,
+                ),
               ),
             );
           }

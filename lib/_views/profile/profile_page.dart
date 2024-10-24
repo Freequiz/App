@@ -1,5 +1,5 @@
 import 'package:freequiz/_views/profile/profile_info/profile_info.dart';
-import 'package:freequiz/loading/error_loading/alert.dart';
+import 'package:freequiz/loading/error_loading/view.dart';
 import 'package:freequiz/loading/loading_screen/animation.dart';
 import 'package:freequiz/controllers/user/manage.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -24,15 +24,21 @@ class ProfilePage extends StatelessWidget {
             }
             return Navigator(
               onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) =>
-                    ErrorLoadingAlert(error: data.data!["message"], previousWidget: ProfilePage(refresh: refresh,)),
+                builder: (context) => ErrorLoadingView(
+                  error: data.data!["message"],
+                  widget: ProfilePage(refresh: refresh),
+                  appBar: false,
+                ),
               ),
             );
           } else if (data.hasError) {
             return Navigator(
               onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) =>
-                    ErrorLoadingAlert(error: data.data!["message"], previousWidget: ProfilePage(refresh: refresh,)),
+                builder: (context) => ErrorLoadingView(
+                  error: data.data!["message"],
+                  widget: ProfilePage(refresh: refresh),
+                  appBar: false,
+                ),
               ),
             );
           }

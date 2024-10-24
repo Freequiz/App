@@ -6,14 +6,15 @@ class ErrorLoadingView extends StatelessWidget {
   final String error;
   final Widget widget;
   final List<String>? argument;
-  const ErrorLoadingView({super.key, required this.error, required this.widget, this.argument});
+  final bool appBar;
+  const ErrorLoadingView({super.key, required this.error, required this.widget, this.argument, this.appBar = true});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: appBar ? AppBar(
         title: const Text('loading').tr(),
-      ),
+      ) : null,
       body: Container(
         color: context.darkMode ? const Color.fromARGB(255, 30, 30, 30) : null,
         child: ErrorLoadingAlert(
