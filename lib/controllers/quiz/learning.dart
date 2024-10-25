@@ -40,8 +40,8 @@ class Learning {
       ),
     ).then((answerRight) {
       if (answerRight != null) {
-        if (answerRight) {
-          rightAnswerW();
+        if (answerRight && context.mounted) {
+          rightAnswerW(context);
         } else {
           answeredWrong = true;
           Questionnaire.answeredWrong();
@@ -63,8 +63,8 @@ class Learning {
       ),
     ).then((answerRight) {
       if (answerRight != null) {
-        if (answerRight) {
-          rightAnswerMC(i);
+        if (answerRight && context.mounted) {
+          rightAnswerMC(context, i);
         } else {
           answeredWrong = true;
           Questionnaire.answeredWrong();

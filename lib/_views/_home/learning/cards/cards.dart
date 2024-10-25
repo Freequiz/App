@@ -1,21 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/_home/learning/cards/cards_body.dart';
-import 'package:freequiz/controllers/quiz/learning.dart';
-import 'package:freequiz/controllers/quiz/questionnaire.dart';
+import 'package:freequiz/controllers/home/learning/cards.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
-class Cards extends StatefulWidget {
+class Cards extends StatelessWidget {
   const Cards({super.key});
 
   @override
-  State<Cards> createState() => _CardsState();
-}
-
-class _CardsState extends State<Cards> {
-  Key key = const Key("Card_0");
-
-  @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<CardsController>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -26,41 +21,11 @@ class _CardsState extends State<Cards> {
         foregroundColor: Colors.white,
       ),
       body: CardsBody(
-        key: key,
-        wrong: wrong,
-        right: right,
+        key: controller.key,
+        wrong: () => controller.wrong(context),
+        right: () => controller.right(context),
         color: blue,
       ),
     );
-  }
-
-  wrong() {
-    Questionnaire.answeredWrong();
-    if (Questionnaire.questions.length > 1) {
-      key = Key("Card_${Questionnaire.questions.length}");
-      setState(() {
-        Questionnaire.questions.removeAt(0);
-        Learning.showAnswer = false;
-      });
-    } else {
-      Navigator.of(context).pop();
-    }
-  }
-
-  right() {
-    Questionnaire.answeredRight();
-    if (Questionnaire.questions.length > 1) {
-      key = Key("Card_${Questionnaire.questions.length}");
-      setState(() {
-        Questionnaire.questions.removeAt(0);
-        Learning.showAnswer = false;
-      });
-    } else {
-      Navigator.of(context).pop();
-    }
-  }
-
-  close() {
-    Navigator.of(context).pop();
   }
 }

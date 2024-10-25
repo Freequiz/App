@@ -38,7 +38,7 @@ class _WritingState extends State<Writing> {
 
   onPressed() {
     if (Question.correct(_textController.text)) {
-      rightAnswer();
+      rightAnswer(context);
     } else {
       wrongAnswer();
     }
@@ -50,7 +50,7 @@ class _WritingState extends State<Writing> {
     });
   }
 
-  rightAnswer() {
+  rightAnswer(BuildContext context) {
     if (!Learning.answeredWrong) {
       Questionnaire.answeredRight();
     }

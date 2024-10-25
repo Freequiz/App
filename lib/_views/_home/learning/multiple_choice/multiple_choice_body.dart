@@ -1,22 +1,20 @@
 import 'package:freequiz/_views/_home/learning/multiple_choice/choices.dart';
 import 'package:freequiz/_views/_home/learning/prompt.dart';
 import 'package:freequiz/_views/subviews/progress_bar.dart';
+import 'package:freequiz/controllers/home/learning/learning.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
-class MultipleChoiceBody extends StatelessWidget {
+class MultipleChoiceBody<T> extends StatelessWidget {
   final List choices;
-  final Function wrongAnswer;
-  final Function rightAnswer;
-  final List answerRight;
   final ColorFamily color;
-  const MultipleChoiceBody(
-      {super.key,
-      required this.choices,
-      required this.wrongAnswer,
-      required this.rightAnswer,
-      required this.answerRight,
-      required this.color});
+  final BaseLearningController controller;
+  const MultipleChoiceBody({
+    super.key,
+    required this.choices,
+    required this.color,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +33,16 @@ class MultipleChoiceBody extends StatelessWidget {
           children: [
             Choices(
               choice: choices[0],
-              wrongAnswer: wrongAnswer,
-              rightAnswer: rightAnswer,
-              answerRight: answerRight[0],
               i: 0,
               color: color,
+              controller: controller,
             ),
             Space.width(10),
             Choices(
               choice: choices[1],
-              wrongAnswer: wrongAnswer,
-              rightAnswer: rightAnswer,
-              answerRight: answerRight[1],
               i: 1,
               color: color,
+              controller: controller,
             ),
           ],
         ),
@@ -58,20 +52,16 @@ class MultipleChoiceBody extends StatelessWidget {
           children: [
             Choices(
               choice: choices[2],
-              wrongAnswer: wrongAnswer,
-              rightAnswer: rightAnswer,
-              answerRight: answerRight[2],
               i: 2,
               color: color,
+              controller: controller,
             ),
             Space.width(10),
             Choices(
               choice: choices[3],
-              wrongAnswer: wrongAnswer,
-              rightAnswer: rightAnswer,
-              answerRight: answerRight[3],
               i: 3,
               color: color,
+              controller: controller,
             ),
           ],
         ),

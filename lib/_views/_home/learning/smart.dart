@@ -28,10 +28,8 @@ class _SmartState extends State<Smart> {
     final modes = [
       MultipleChoiceBody(
         choices: Question.choices,
-        wrongAnswer: (choice, i) => controller.wrongAnswerMC(context, choice, i),
-        rightAnswer: (i) => controller.rightAnswerMC(context, i),
-        answerRight: controller.answerRightMC,
         color: purple,
+        controller: controller,
       ),
       WritingBody(
         onPressed: () => controller.onPressed(context),

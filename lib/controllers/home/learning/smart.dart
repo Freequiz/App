@@ -1,12 +1,15 @@
+import 'package:freequiz/controllers/home/learning/learning.dart';
 import 'package:freequiz/controllers/quiz/learning.dart';
 import 'package:freequiz/controllers/quiz/question.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/themes.dart';
 
-class SmartController extends ChangeNotifier {
-  bool answerRightW = false;
-  List answerRightMC = List.filled(4, false);
+class SmartController with ChangeNotifier implements BaseLearningController {
   final textController = TextEditingController();
+  bool answerRightW = false;
+
+  @override
+  List answerRightMC = List.filled(4, false);
 
   onPressed(BuildContext context) {
     if (Question.correct(textController.text)) {
@@ -44,6 +47,7 @@ class SmartController extends ChangeNotifier {
     notifyListeners();
   }
 
+  @override
   rightAnswerMC(BuildContext context, int i) {
     answerRightMC[i] = true;
     notifyListeners();
@@ -66,7 +70,8 @@ class SmartController extends ChangeNotifier {
     });
   }
 
-  wrongAnswerMC(BuildContext context, String choice, int i) {
+  @override
+  void wrongAnswerMC(BuildContext context, String choice, int i) {
     Learning().wrongAnswerMultipleChoice(context, choice, rightAnswerMC, i);
   }
 }

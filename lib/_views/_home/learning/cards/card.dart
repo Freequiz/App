@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:freequiz/controllers/home/learning/cards.dart';
 import 'package:freequiz/controllers/quiz/learning.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';
+import 'package:provider/provider.dart';
 
 class CardWidget extends StatefulWidget {
   final Function right;
@@ -15,7 +17,6 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  bool darkMode = false;
   final ValueNotifier<Color> _textColor = ValueNotifier(Colors.white);
 
   @override
@@ -28,6 +29,7 @@ class _CardWidgetState extends State<CardWidget> {
   Widget build(BuildContext context) {
     final text = Learning.showAnswer ? Questionnaire.answer() : Questionnaire.definition();
     final darkMode = context.darkMode;
+    final controller = Provider.of<CardsController>(context);
 
     _textColor.value =
         context.darkMode ? const Color.fromARGB(255, 255, 255, 255) : const Color.fromARGB(255, 40, 40, 40);
@@ -41,7 +43,7 @@ class _CardWidgetState extends State<CardWidget> {
           widget.wrong();
         }
       },
-      onUpdate: (details) => onUpdate(details, darkMode),
+      onUpdate: (details) => _textColor.value = controller.onUpdate(details, darkMode),
       child: ValueListenableBuilder(
         valueListenable: _textColor,
         builder: (context, textColor, child) {
@@ -65,29 +67,5 @@ class _CardWidgetState extends State<CardWidget> {
         },
       ),
     );
-  }
-
-  void onUpdate(DismissUpdateDetails details, bool darkMode) {
-    int r = darkMode ? 255 : 40;
-    int g = darkMode ? 255 : 40;
-    int b = darkMode ? 255 : 40;
-
-    if (darkMode) {
-      if (details.direction == DismissDirection.startToEnd) {
-        r -= (details.progress * 205).toInt();
-      } else {
-        b -= (details.progress * 205).toInt();
-        g -= (details.progress * 205).toInt();
-      }
-    } else {
-      if (details.direction == DismissDirection.startToEnd) {
-        g += (details.progress * 205).toInt();
-        b += (details.progress * 205).toInt();
-      } else {
-        r += (details.progress * 205).toInt();
-      }
-    }
-
-    _textColor.value = Color.fromARGB(255, r, g, b);
   }
 }
