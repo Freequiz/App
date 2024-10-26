@@ -5,7 +5,7 @@ import 'package:freequiz/_views/_home/learning/smart.dart';
 import 'package:freequiz/_views/_home/learning/writing/writing.dart';
 import 'package:freequiz/controllers/home/learning/cards.dart';
 import 'package:freequiz/controllers/home/learning/multiple_choice.dart';
-import 'package:freequiz/controllers/home/learning/smart.dart';
+import 'package:freequiz/controllers/home/learning/writing.dart';
 import 'package:freequiz/controllers/quiz/learning.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
@@ -25,8 +25,11 @@ class StartLearningButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      ChangeNotifierProvider(create: (_) => SmartController(), child: const Smart()),
-      const Writing(),
+      MultiProvider(providers: [
+        ChangeNotifierProvider(create: (_) => WritingController()),
+        ChangeNotifierProvider(create: (_) => MultipleChoiceController()),
+      ], child: const Smart()),
+      ChangeNotifierProvider(create: (_) => WritingController(), child: const Writing()),
       ChangeNotifierProvider(create: (_) => MultipleChoiceController(), child: const MultipleChoice()),
       ChangeNotifierProvider(create: (_) => CardsController(), child: const Cards()),
     ];

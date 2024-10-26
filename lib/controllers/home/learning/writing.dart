@@ -1,13 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:freequiz/controllers/quiz/learning.dart';
 import 'package:freequiz/controllers/quiz/question.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
+import 'package:freequiz/utilities/imports/themes.dart';
 
-class MultipleChoiceController extends ChangeNotifier {
-  List answerRight = List.filled(4, false);
+class WritingController extends ChangeNotifier {
+  final textController = TextEditingController();
+  bool answerRight = false;
 
-  void rightAnswer(BuildContext context, int i) {
-    answerRight[i] = true;
+  void onPressed(BuildContext context) {
+    if (Question.correct(textController.text)) {
+      rightAnswer(context);
+    } else {
+      wrongAnswer(context);
+    }
+  }
+
+  void rightAnswer(BuildContext context) {
+    answerRight = true;
     notifyListeners();
 
     Future.delayed(const Duration(milliseconds: 300), () {
@@ -17,16 +26,18 @@ class MultipleChoiceController extends ChangeNotifier {
       if (Questionnaire.questions.length > 1) {
         Learning.answeredWrong = false;
         Questionnaire.questions.removeAt(0);
+        textController.clear();
         Question.randomChoices();
         notifyListeners();
       } else {
         if (context.mounted) Navigator.of(context).pop();
       }
-      answerRight = List.filled(4, false);
+      answerRight = false;
     });
   }
 
-  void wrongAnswer(BuildContext context, String choice, int i) {
-    Learning().wrongAnswerMultipleChoice(context, choice, rightAnswer, i);
+  void wrongAnswer(BuildContext context) {
+    Learning().wrongAnswerWriting(textController, context, rightAnswer);
+    notifyListeners();
   }
 }

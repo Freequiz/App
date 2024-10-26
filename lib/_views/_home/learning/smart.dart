@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/_home/learning/multiple_choice/multiple_choice_body.dart';
 import 'package:freequiz/_views/_home/learning/writing/writing_body.dart';
-import 'package:freequiz/controllers/home/learning/smart.dart';
+import 'package:freequiz/controllers/home/learning/multiple_choice.dart';
+import 'package:freequiz/controllers/home/learning/writing.dart';
 import 'package:freequiz/controllers/quiz/question.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';
@@ -23,18 +24,14 @@ class _SmartState extends State<Smart> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<SmartController>(context);
+    Provider.of<WritingController>(context);
+    Provider.of<MultipleChoiceController>(context);
 
     final modes = [
       MultipleChoiceBody(
-        choices: Question.choices,
         color: purple,
-        controller: controller,
       ),
       WritingBody(
-        onPressed: () => controller.onPressed(context),
-        answerRight: controller.answerRightW,
-        textController: controller.textController,
         color: purple,
       )
     ];

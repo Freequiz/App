@@ -1,28 +1,29 @@
-import 'package:freequiz/controllers/home/learning/learning.dart';
+import 'package:freequiz/controllers/home/learning/multiple_choice.dart';
+import 'package:freequiz/controllers/quiz/question.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';
+import 'package:provider/provider.dart';
 
 class Choices extends StatelessWidget {
-  final String choice;
   final int i;
   final ColorFamily color;
-  final BaseLearningController controller;
   const Choices({
     super.key,
-    required this.choice,
     required this.i,
     required this.color,
-    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<MultipleChoiceController>(context);
+    final choice = Question.choices[i];
+
     return GestureDetector(
       onTap: () {
         if (choice != Questionnaire.answer()) {
-          controller.wrongAnswerMC(context, choice, i);
+          controller.wrongAnswer(context, choice, i);
         } else {
-          controller.rightAnswerMC(context, i);
+          controller.rightAnswer(context, i);
         }
       },
       child: Container(
@@ -33,10 +34,10 @@ class Choices extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: context.darkMode
-              ? controller.answerRightMC[i]
+              ? controller.answerRight[i]
                   ? greenDark
                   : color.dark
-              : controller.answerRightMC[i]
+              : controller.answerRight[i]
                   ? greenLight
                   : color.light,
         ),

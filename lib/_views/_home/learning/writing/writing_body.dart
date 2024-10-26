@@ -1,25 +1,23 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/_home/learning/prompt.dart';
 import 'package:freequiz/_views/subviews/progress_bar.dart';
+import 'package:freequiz/controllers/home/learning/writing.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:provider/provider.dart';
 
 class WritingBody extends StatelessWidget {
-  final Function onPressed;
-  final bool answerRight;
-  final TextEditingController textController;
   final ColorFamily color;
   const WritingBody({
     super.key,
-    required this.onPressed,
-    required this.answerRight,
-    required this.textController,
     required this.color,
   });
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<WritingController>(context);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -42,9 +40,9 @@ class WritingBody extends StatelessWidget {
                           enableSuggestions: false,
                           keyboardType: TextInputType.text,
                           keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
-                          controller: textController,
+                          controller: controller.textController,
                           onEditingComplete: () {
-                            onPressed();
+                            controller.onPressed(context);
                           },
                           autofocus: true,
                           decoration: InputDecoration(
@@ -60,7 +58,7 @@ class WritingBody extends StatelessWidget {
                             suffixIcon: IconButton(
                               color: context.darkMode ? color.dark : color.light,
                               onPressed: () {
-                                textController.clear();
+                                controller.textController.clear();
                               },
                               icon: const Icon(
                                 Symbols.close,
@@ -77,16 +75,16 @@ class WritingBody extends StatelessWidget {
                         child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: context.darkMode
-                                ? answerRight
+                                ? controller.answerRight
                                     ? greenDark
                                     : color.dark
-                                : answerRight
+                                : controller.answerRight
                                     ? greenLight
                                     : color.light,
                             foregroundColor: Colors.white,
                           ),
                           onPressed: () {
-                            onPressed();
+                            controller.onPressed(context);
                           },
                           child: const Icon(
                             Icons.arrow_forward_ios,
