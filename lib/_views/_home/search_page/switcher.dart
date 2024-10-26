@@ -1,13 +1,15 @@
 import 'package:freequiz/_views/subviews/switcher/switcher.dart';
+import 'package:freequiz/controllers/home/search.dart';
 import 'package:freequiz/utilities/imports/base.dart';
+import 'package:provider/provider.dart';
 
 class SearchSwitcher extends StatelessWidget {
-  final Function onTap;
-  final List<String> options;
-  const SearchSwitcher({super.key, required this.onTap, required this.options});
+  const SearchSwitcher({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<Search>(context);
+
     return Container(
       width: double.infinity,
       color: context.darkMode ? darkMainColor : lightMainColor,
@@ -18,8 +20,8 @@ class SearchSwitcher extends StatelessWidget {
         bottom: 20,
       ),
       child: Switcher(
-        onTap: onTap,
-        texts: options,
+        onTap: controller.onTap,
+        texts: controller.options,
         value: 'Quiz',
         height: 42,
         highlightedColor: context.darkMode ? grayFreequiz : const Color.fromARGB(255, 208, 168, 179),

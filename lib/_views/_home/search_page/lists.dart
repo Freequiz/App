@@ -1,17 +1,15 @@
-import 'package:freequiz/_views/_home/search_page/search.dart';
+import 'package:freequiz/controllers/home/search.dart';
 import 'package:freequiz/_views/_home/search_page/user_tile.dart';
 import 'package:freequiz/_views/subviews/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 import 'package:freequiz/utilities/widgets/space.dart';
 
 class SearchListUsers extends StatelessWidget {
-  final bool refresh;
-
-  const SearchListUsers({super.key, required this.refresh});
+  const SearchListUsers({super.key});
 
   @override
   Widget build(BuildContext context) {
-     return ListView.separated(
+    return ListView.separated(
       addAutomaticKeepAlives: false,
       addRepaintBoundaries: false,
       shrinkWrap: true,
@@ -31,9 +29,7 @@ class SearchListUsers extends StatelessWidget {
 }
 
 class SearchListQuizzes extends StatelessWidget {
-  final bool refresh;
-
-  const SearchListQuizzes({super.key, required this.refresh});
+  const SearchListQuizzes({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/_views/_home/search_page/search.dart';
+import 'package:freequiz/controllers/home/search.dart';
 import 'package:freequiz/_views/_home/search_page/search_page.dart';
 import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
+import 'package:provider/provider.dart';
 
 loadSearch({required BuildContext context, required String searchTerm, mode = "Quiz"}) {
+  Search.searchTerm = searchTerm;
+
   return Navigator.of(context).push(
     MaterialPageRoute(
       builder: (BuildContext context) {
@@ -35,9 +38,9 @@ class LoadSearch extends StatelessWidget {
           widget: LoadingScreen(
             message: "Loading Search Results",
             finishedLoading: true,
-            widget: SearchPage(
-              searchTerm: searchTerm,
-              mode: mode,
+            widget: ChangeNotifierProvider(
+              create: (_) => Search(),
+              child: SearchPage(mode: mode),
             ),
             appBar: AppBar(
               title: const Text('search').tr(),

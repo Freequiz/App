@@ -4,14 +4,9 @@ import 'package:freequiz/controllers/home/learning/writing.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 import 'package:provider/provider.dart';
 
-class Writing extends StatefulWidget {
+class Writing extends StatelessWidget {
   const Writing({super.key});
 
-  @override
-  State<Writing> createState() => _WritingState();
-}
-
-class _WritingState extends State<Writing> {
   @override
   Widget build(BuildContext context) {
     Provider.of<WritingController>(context);

@@ -4,14 +4,14 @@ import 'package:freequiz/_views/_home/search_page/results.dart';
 import 'package:freequiz/_views/_home/search_page/switcher.dart';
 import 'package:freequiz/_views/subviews/badge.dart';
 import 'package:freequiz/_views/_home/search_page/language_selector.dart';
-import 'package:freequiz/_views/_home/search_page/search.dart';
+import 'package:freequiz/controllers/home/search.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   final int n;
-  final String searchTerm;
   final String mode;
-  const SearchPage({super.key, this.n = 0, required this.searchTerm, this.mode = "Quiz"});
+  const SearchPage({super.key, this.n = 0, this.mode = "Quiz"});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -20,43 +20,17 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final arrow = '\u279C';
 
-  final List<String> options = ['Quiz', 'User'];
-
-  int shownList = 0;
-  int previousShownList = 0;
-  bool onChanged = false;
-
   refresh() {
     setState(() {});
   }
 
-  bool refreshChildren = false; // variable changes back and forth between true and false to refresh children
-
-  toggleRefreshChildren() {
-    setState(() {
-      refreshChildren = !refreshChildren;
-    });
-  }
-
-  endAnimation() {
-    setState(() {
-      previousShownList = shownList;
-      onChanged = false;
-    });
-  }
-
-  onTap(String value) {
-    setState(() {
-      onChanged = true;
-      shownList = options.indexOf(value);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    Provider.of<Search>(context);
+
     return Column(
       children: [
-        SearchSwitcher(onTap: onTap, options: options),
+        const SearchSwitcher(),
         SizedBox(
           height: context.mobileLayout ? 10 : 20,
         ),
@@ -68,7 +42,7 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               InfoBadge(
                 color: roseLight,
-                text: context.tr('results for', args: [widget.searchTerm.truncate(32)]),
+                text: context.tr('results for', args: [Search.searchTerm.truncate(32)]),
               ),
               Space.width(8),
               GestureDetector(
@@ -91,29 +65,13 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Results(
                   i: 0,
-                  onChanged: onChanged,
-                  refreshChildren: toggleRefreshChildren,
-                  searchTerm: widget.searchTerm,
-                  shownList: shownList,
-                  previousShownList: previousShownList,
-                  endAnimation: endAnimation,
                   more: Search.moreQuizzes,
-                  child: SearchListQuizzes(
-                    refresh: refreshChildren,
-                  ),
+                  child: const SearchListQuizzes(),
                 ),
                 Results(
                   i: 1,
-                  onChanged: onChanged,
-                  refreshChildren: toggleRefreshChildren,
-                  searchTerm: widget.searchTerm,
-                  shownList: shownList,
-                  previousShownList: previousShownList,
-                  endAnimation: endAnimation,
                   more: Search.moreUsers,
-                  child: SearchListUsers(
-                    refresh: refreshChildren,
-                  ),
+                  child: const SearchListUsers(),
                 ),
               ],
             ),
