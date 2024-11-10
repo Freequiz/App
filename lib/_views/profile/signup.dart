@@ -5,6 +5,7 @@ import 'package:freequiz/_views/subviews/textfields/email.dart';
 import 'package:freequiz/_views/subviews/textfields/password.dart';
 import 'package:freequiz/_views/subviews/textfields/password_confirmation.dart';
 import 'package:freequiz/_views/subviews/textfields/username.dart';
+import 'package:freequiz/controllers/user/manage.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/_views/profile/profile.dart';
@@ -163,6 +164,7 @@ class _SignUpState extends State<SignUp> {
         Profile.saveAccessToken();
         if (mounted) Navigator.of(context).pop();
         widget.refresh();
+        ManageUser.load();
       } else if (map["token"] == "password.invalid") {
         setState(() {
           password.input.clear();

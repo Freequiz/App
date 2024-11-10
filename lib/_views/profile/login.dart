@@ -3,6 +3,7 @@ import 'package:freequiz/_views/subviews/app_bar/title.dart';
 import 'package:freequiz/_views/subviews/buttons/submit.dart';
 import 'package:freequiz/_views/subviews/textfields/password.dart';
 import 'package:freequiz/_views/subviews/textfields/username.dart';
+import 'package:freequiz/controllers/user/manage.dart';
 import 'package:freequiz/loading/error_loading/alert.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/services/api/users.dart';
@@ -126,6 +127,7 @@ class _LoginState extends State<Login> {
           Profile.saveAccessToken();
           if (mounted) Navigator.of(context).pop();
           widget.refresh();
+          ManageUser.load();
           return;
         }
         if (mapLogin["message"] == "User doesn't exist") {

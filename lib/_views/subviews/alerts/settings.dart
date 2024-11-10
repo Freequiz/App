@@ -15,13 +15,21 @@ class LearningSettings extends StatefulWidget {
 }
 
 class _LearningSettingsState extends State<LearningSettings> {
+  List<String> languages = [];
   String answerLanguage = "";
   String maxScore = "";
   String lengthQuestionnaire = "";
 
   @override
   void initState() {
-    answerLanguage = widget.languages[Preferences.answerLanguage];
+    if (widget.languages[0] == widget.languages[1]) {
+      languages = ["definition", "answer"];
+    }
+    else {
+      languages = widget.languages;
+    }
+
+    answerLanguage = languages[Preferences.answerLanguage];
     maxScore = Questionnaire.maxScore(widget.mode).toString();
     lengthQuestionnaire = Questionnaire.desiredLength().toString();
 
@@ -47,7 +55,7 @@ class _LearningSettingsState extends State<LearningSettings> {
           const SizedBox(height: 5),
           Switcher(
             onTap: changeAnswerLanguage,
-            texts: widget.languages,
+            texts: languages,
             value: answerLanguage,
             width: context.screenWidth - 80,
           ),
@@ -109,7 +117,7 @@ class _LearningSettingsState extends State<LearningSettings> {
   }
 
   changeAnswerLanguage(String text) {
-    Preferences.saveAnswerLanguage(widget.languages.indexOf(text));
+    Preferences.saveAnswerLanguage(languages.indexOf(text));
     setState(() {
       answerLanguage = text;
     });
