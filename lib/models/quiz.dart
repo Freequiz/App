@@ -123,4 +123,8 @@ class Quiz {
     updated = false;
     QuizDatabase.updateQuiz(this);
   }
+
+  int length() {
+    return translations.translations.length;
+  }
 }

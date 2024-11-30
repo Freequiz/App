@@ -10,12 +10,15 @@ import 'package:freequiz/controllers/user/helper.dart';
 
 class Questionnaire {
   static List<Translation> questions = [];
+  static List<Translation> pastQuestions = [];
   static int length = 0;
+  static List<String> lengths = ["10", "20", "30"];
 
   static String mode = "";
 
   static create(bool onlyFavorite, String quizMode) {
     questions.clear();
+    pastQuestions.clear();
     mode = quizMode;
 
     final Quiz quiz = QuizHelper.quiz!;
@@ -80,12 +83,32 @@ class Questionnaire {
     Progress.increase(QuizHelper.quiz!.id, mode, questions[0]);
   }
 
+  static next() {
+    pastQuestions.add(questions[0]);
+    questions.removeAt(0);
+  }
+
+  static back() {
+    if (pastQuestions.isEmpty) return;
+    questions.insert(0, pastQuestions.last);
+    pastQuestions.removeLast();
+
+    if (!Learning.errors.contains(questions[0])) return;
+    Learning.errors.remove(questions[0]);
+  }
+
   static maxScore(String mode) {
     return UserHelper.user?.settings.maxScore(mode) ?? 2;
   }
 
   static desiredLength() {
-    return UserHelper.user?.settings.lengthQuestionnaire;
+    int? lengthQuestionnaire = UserHelper.user?.settings.lengthQuestionnaire;
+    if (lengthQuestionnaire == null) return lengthQuestionnaire;
+    if (Questionnaire.lengths.contains(lengthQuestionnaire.toString())) {
+      return lengthQuestionnaire;
+    }
+    lengthQuestionnaire = QuizHelper.quiz!.length();
+    return lengthQuestionnaire;
   }
 
   static definition() {
@@ -93,6 +116,15 @@ class Questionnaire {
       return questions[0].translation;
     }
     return questions[0].word;
+  }
+
+  static nextDefinition() {
+    if (questions.length < 2) return "";
+
+    if (Preferences.answerLanguage == 0) {
+      return questions[1].translation;
+    }
+    return questions[1].word;
   }
 
   static answer() {

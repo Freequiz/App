@@ -29,8 +29,8 @@ class _StartLearningBodyState extends State<StartLearningBody> {
     return Column(
       children: [
         ProgressBar(
-          amountLeft: QuizHelper.quiz!.translations.translations.length - Progress.amount,
-          amount: QuizHelper.quiz!.translations.translations.length,
+          amountLeft: QuizHelper.quiz!.length() - Progress.amount,
+          amount: QuizHelper.quiz!.length(),
           color: colors[widget.i],
         ),
         StartLearningButtons(i: widget.i, refresh: refresh),

@@ -43,6 +43,11 @@ class _CardWidgetState extends State<CardWidget> {
           widget.wrong();
         }
       },
+      dismissThresholds: const {
+        DismissDirection.endToStart: 0.3,
+        DismissDirection.startToEnd: 0.3
+      },
+      movementDuration: const Duration(milliseconds: 0),
       onUpdate: (details) => _textColor.value = controller.onUpdate(details, darkMode),
       child: ValueListenableBuilder(
         valueListenable: _textColor,

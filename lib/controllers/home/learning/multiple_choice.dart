@@ -16,7 +16,7 @@ class MultipleChoiceController extends ChangeNotifier {
       }
       if (Questionnaire.questions.length > 1) {
         Learning.answeredWrong = false;
-        Questionnaire.questions.removeAt(0);
+        Questionnaire.next();
         Question.randomChoices();
         notifyListeners();
       } else {

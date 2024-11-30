@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/subviews/switcher/switcher.dart';
+import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 import 'package:freequiz/services/local_storage/preferences.dart';
 import 'package:freequiz/controllers/quiz/learning.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
@@ -32,6 +33,10 @@ class _LearningSettingsState extends State<LearningSettings> {
     answerLanguage = languages[Preferences.answerLanguage];
     maxScore = Questionnaire.maxScore(widget.mode).toString();
     lengthQuestionnaire = Questionnaire.desiredLength().toString();
+
+    if (!Questionnaire.lengths.contains(lengthQuestionnaire)) {
+      lengthQuestionnaire = QuizHelper.quiz!.length().toString();
+    }
 
     super.initState();
   }
@@ -91,7 +96,7 @@ class _LearningSettingsState extends State<LearningSettings> {
           const SizedBox(height: 5),
           Switcher(
             onTap: changeLengthQuestionnaire,
-            texts: const ["5", "10", "20", "30"],
+            texts: ["10", "20", "30", QuizHelper.quiz!.length().toString()],
             value: lengthQuestionnaire,
             width: context.screenWidth - 80,
           ),

@@ -24,6 +24,7 @@ class Cards extends StatelessWidget {
         key: controller.key,
         wrong: () => controller.wrong(context),
         right: () => controller.right(context),
+        back: () => controller.back(),
         color: blue,
       ),
     );

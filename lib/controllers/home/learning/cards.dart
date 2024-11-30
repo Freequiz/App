@@ -9,7 +9,7 @@ class CardsController extends ChangeNotifier {
     Questionnaire.answeredWrong();
     if (Questionnaire.questions.length > 1) {
       key = Key("Card_${Questionnaire.questions.length}");
-      Questionnaire.questions.removeAt(0);
+      Questionnaire.next();
       Learning.showAnswer = false;
       notifyListeners();
     } else {
@@ -21,12 +21,17 @@ class CardsController extends ChangeNotifier {
     Questionnaire.answeredRight();
     if (Questionnaire.questions.length > 1) {
       key = Key("Card_${Questionnaire.questions.length}");
-      Questionnaire.questions.removeAt(0);
+      Questionnaire.next();
       Learning.showAnswer = false;
       notifyListeners();
     } else {
       Navigator.of(context).pop();
     }
+  }
+
+  void back() {
+    Questionnaire.back();
+    notifyListeners();
   }
 
   void close(BuildContext context) {
