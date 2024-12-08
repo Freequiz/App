@@ -1,4 +1,5 @@
 import 'package:freequiz/_views/_home/learning_page/buttons.dart';
+import 'package:freequiz/_views/_home/learning_page/completion.dart';
 import 'package:freequiz/_views/subviews/progress_bar.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
@@ -10,8 +11,10 @@ import 'package:freequiz/utilities/imports/utilities.dart';
 class StartLearningBody extends StatefulWidget {
   final int i;
   final Function refresh;
+  final Function reset;
   final List<String> levels;
-  const StartLearningBody({super.key, required this.i, required this.refresh, required this.levels});
+  const StartLearningBody(
+      {super.key, required this.i, required this.refresh, required this.levels, required this.reset});
 
   @override
   State<StartLearningBody> createState() => _StartLearningBodyState();
@@ -35,6 +38,10 @@ class _StartLearningBodyState extends State<StartLearningBody> {
         ),
         StartLearningButtons(i: widget.i, refresh: refresh),
         Space.height(15),
+        Visibility(
+          visible: Progress.amount == QuizHelper.quiz!.length(),
+          child: Completion(color: colors[widget.i], reset: widget.reset),
+        ),
         Flexible(
           fit: FlexFit.loose,
           child: Padding(
@@ -79,9 +86,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
                       roundedCornersTop: false,
                       width: context.screenWidth,
                     ),
-                    Space.height(
-                      progressArray.isNotEmpty ? context.screenHeight / 30 : 0,
-                    ),
+                    Space.height(progressArray.isNotEmpty ? 15 : 0),
                   ],
                 );
               },

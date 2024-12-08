@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:freequiz/utilities/imports/themes.dart';
 
 class Confirmation extends StatelessWidget {
   final Function reset;
@@ -8,12 +8,10 @@ class Confirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    bool darkMode = brightness == Brightness.dark;
     return AlertDialog(
       title: Text(
         context.tr('delete progress'),
-        style: TextStyle(color: darkMode ? Colors.white : Colors.black),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
       ),
       content: const Text('confirmation delete progress').tr(),
       actions: [

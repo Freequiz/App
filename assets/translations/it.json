@@ -168,5 +168,8 @@
     "mobbing": "Bullismo",
     "reset password": "Reimposta la password",
     "Create Quiz": "Crea quiz",
-    "quiz automatically saved": "Il quiz verrà salvato automaticamente"
+    "quiz automatically saved": "Il quiz verrà salvato automaticamente",
+    "completed": "Congratulazioni, hai completato il 100% del quiz!",
+    "restart": "Vuoi ricominciare da capo?",
+    "start over": "Ricominciare"
   }

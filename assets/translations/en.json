@@ -212,5 +212,9 @@
     "reset password": "Reset password",
 
     "Create Quiz": "Create Quiz",
-    "quiz automatically saved": "Quiz is automatically saved"
+    "quiz automatically saved": "Quiz is automatically saved",
+
+    "completed": "Congratulations, You completed 100% of the quiz!",
+    "restart": "Do you want to start over?",
+    "start over": "Start over"
 }

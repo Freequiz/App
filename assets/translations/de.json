@@ -213,5 +213,9 @@
     "reset password": "Passwort zurücksetzen",
 
     "Create Quiz": "Quiz kreieren",
-    "quiz automatically saved": "Quiz wird automatisch gespeichert"
+    "quiz automatically saved": "Quiz wird automatisch gespeichert",
+
+    "completed": "Gratulation, du hast 100% vom Quiz gelernt!",
+    "restart": "Willst du von neu anfangen?",
+    "start over": "Neu anfangen"
 }

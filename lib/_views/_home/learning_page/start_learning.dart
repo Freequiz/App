@@ -70,6 +70,7 @@ class _StartLearningState extends State<StartLearning> {
       body: StartLearningBody(
         i: widget.i,
         refresh: widget.refresh,
+        reset: reset,
         levels: Learning.getLevels(widget.i),
       ),
     );

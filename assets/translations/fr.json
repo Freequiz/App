@@ -168,5 +168,8 @@
     "mobbing": "Intimidation",
     "reset password": "Réinitialiser le mot de passe",
     "Create Quiz": "Créer des quiz",
-    "quiz automatically saved": "Le quiz sera enregistré automatiquement"
+    "quiz automatically saved": "Le quiz sera enregistré automatiquement",
+    "completed": "Félicitations, vous avez répondu à 100% du quiz!",
+    "restart": "Voulez-vous recommencer?",
+    "start over": "Recommencer"
   }
