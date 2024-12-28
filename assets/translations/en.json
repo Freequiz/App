@@ -216,5 +216,8 @@
 
     "completed": "Congratulations, You completed 100% of the quiz!",
     "restart": "Do you want to start over?",
-    "start over": "Start over"
+    "start over": "Start over",
+
+    "no connection": "No internet connection",
+    "request timed out": "No internet connection"
 }

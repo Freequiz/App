@@ -52,7 +52,7 @@ class Api {
         return get(
           uri(path),
           headers: {"Authorization": Profile.accessToken},
-        ).timeout(const Duration(seconds: 10));
+        ).timeout(const Duration(seconds: 5));
       },
     );
   }
@@ -76,7 +76,7 @@ class Api {
           headers: {"Authorization": Profile.accessToken, HttpHeaders.contentTypeHeader: "application/json"},
           encoding: Encoding.getByName('utf-8'),
           body: json.encode(body),
-        ).timeout(const Duration(seconds: 10));
+        ).timeout(const Duration(seconds: 5));
       },
     );
   }

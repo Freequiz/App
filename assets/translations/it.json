@@ -171,5 +171,7 @@
     "quiz automatically saved": "Il quiz verrà salvato automaticamente",
     "completed": "Congratulazioni, hai completato il 100% del quiz!",
     "restart": "Vuoi ricominciare da capo?",
-    "start over": "Ricominciare"
+    "start over": "Ricominciare",
+    "no connection": "Nessuna connessione Internet",
+    "request timed out": "Nessuna connessione Internet"
   }

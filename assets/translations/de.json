@@ -217,5 +217,8 @@
 
     "completed": "Gratulation, du hast 100% vom Quiz gelernt!",
     "restart": "Willst du von neu anfangen?",
-    "start over": "Neu anfangen"
+    "start over": "Neu anfangen",
+
+    "no connection": "Keine Internetverbindung",
+    "request timed out": "Keine Internetverbindung"
 }
