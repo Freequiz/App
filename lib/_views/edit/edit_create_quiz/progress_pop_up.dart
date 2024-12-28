@@ -30,7 +30,7 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
         future: widget.response,
         builder: (context, data) {
           if (data.hasData) {
-            if (data.data!['success']) {
+            if (data.data?['success'] ?? false) {
               closeButton = false;
               close(data);
               return Text(
