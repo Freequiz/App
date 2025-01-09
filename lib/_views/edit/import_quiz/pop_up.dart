@@ -12,16 +12,17 @@ class ImportPopUp extends StatelessWidget {
     final textController = TextEditingController();
 
     return AlertDialog(
-      title: const Text("import quiz").tr(),
+      title: Text(
+        context.tr("import quiz"),
+        style: TextStyle(color: context.darkMode ? Colors.white : Colors.black),
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text("import quiz text").tr(),
           const SizedBox(height: 20),
           ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxHeight: 200
-            ),
+            constraints: const BoxConstraints(maxHeight: 200),
             child: TextField(
               controller: textController,
               keyboardType: TextInputType.multiline,
