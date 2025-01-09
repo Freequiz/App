@@ -219,5 +219,8 @@
     "start over": "Start over",
 
     "no connection": "No internet connection",
-    "request timed out": "No internet connection"
+    "request timed out": "No internet connection",
+
+    "import quiz": "Import Quiz",
+    "import quiz text": "To import a quiz you can paste text in the textfield. The words and the translations should be seperated by a tab and the wordpairs should be seperated by a line break."
 }

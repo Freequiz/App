@@ -173,5 +173,7 @@
     "restart": "Vuoi ricominciare da capo?",
     "start over": "Ricominciare",
     "no connection": "Nessuna connessione Internet",
-    "request timed out": "Nessuna connessione Internet"
+    "request timed out": "Nessuna connessione Internet",
+    "import quiz": "Importa Quiz",
+    "import quiz text": "Per importare un quiz puoi incollare il testo nel campo di testo. Le parole e le traduzioni devono essere separate da una tabulazione e le coppie di parole devono essere separate da un'interruzione di riga."
   }

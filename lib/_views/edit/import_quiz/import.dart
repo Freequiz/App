@@ -2,21 +2,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/edit/edit_create_quiz/error_pop_up.dart';
 import 'package:freequiz/_views/edit/edit_create_quiz/progress_pop_up.dart';
 import 'package:freequiz/_views/subviews/edit/edit_view.dart';
-import 'package:freequiz/controllers/edit/quiz_form.dart';
+import 'package:freequiz/controllers/edit/import.dart';
 import 'package:freequiz/services/api/quizzes.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
-class CreateQuiz extends StatefulWidget {
+class ImportQuiz extends StatefulWidget {
   final Function refresh;
-  const CreateQuiz({super.key, required this.refresh});
+  const ImportQuiz({super.key, required this.refresh});
 
   @override
-  State<CreateQuiz> createState() => _CreateQuizState();
+  State<ImportQuiz> createState() => _ImportQuizState();
 }
 
-class _CreateQuizState extends State<CreateQuiz> {
-  QuizForm quiz = QuizForm();
-
+class _ImportQuizState extends State<ImportQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +22,9 @@ class _CreateQuizState extends State<CreateQuiz> {
         title: const Text('create quiz').tr(),
         leading: TextButton(
           onPressed: () {
-            if (changed()) {
-              quiz.save(mode: 'create');
-            }
+            Import.quiz.save(mode: 'create');
             Navigator.of(context).pop();
-            widget.refresh();
+            widget.refresh(null);
           },
           child: const Icon(
             Icons.arrow_back_ios,
@@ -38,9 +34,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         automaticallyImplyLeading: false,
         actions: [
           TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.white,
-            ),
+            style: TextButton.styleFrom(foregroundColor: Colors.white),
             onPressed: () => onPressed(),
             child: Text(
               context.tr('done'),
@@ -52,33 +46,31 @@ class _CreateQuizState extends State<CreateQuiz> {
         behavior: HitTestBehavior.opaque,
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
-          if (changed()) {
-            quiz.save(mode: 'create');
-          }
+          Import.quiz.save(mode: 'create');
         },
         child: Padding(
           padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
-          child: EditView(quiz: quiz, mode: 'create'),
+          child: EditView(quiz: Import.quiz, mode: 'create'),
         ),
       ),
     );
   }
 
   onPressed() async {
-    quiz.checkForErrors();
+    Import.quiz.checkForErrors();
 
-    if (quiz.error) {
+    if (Import.quiz.error) {
       setState(() {});
     }
 
-    if (quiz.counter < 3) {
+    if (Import.quiz.counter < 3) {
       showDialog(context: context, builder: (BuildContext context) => const ErrorPopUp());
     }
 
-    if (!quiz.error) {
-      final map = quiz.createMap();
+    if (!Import.quiz.error) {
+      final map = Import.quiz.createMap();
       final response = APIQuizzes.createQuiz(map);
 
       showDialog(
@@ -90,23 +82,5 @@ class _CreateQuizState extends State<CreateQuiz> {
         ),
       );
     }
-  }
-
-  changed() {
-    if (quiz.title.input.text.isNotEmpty) {
-      return true;
-    }
-    if (quiz.description.input.text.isNotEmpty) {
-      return true;
-    }
-    for (var i = 0; i < quiz.wordPairs.length; i++) {
-      if (quiz.wordPairs[i].definition.input.text.isNotEmpty) {
-        return true;
-      }
-      if (quiz.wordPairs[i].answer.input.text.isNotEmpty) {
-        return true;
-      }
-    }
-    return false;
   }
 }

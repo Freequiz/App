@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:freequiz/_views/edit/buttons/create.dart';
+import 'package:freequiz/_views/edit/buttons/import.dart';
 import 'package:freequiz/_views/edit/quiz_draft/draft.dart';
-import 'package:freequiz/_views/edit/edit_create_quiz/create_quiz.dart';
 import 'package:freequiz/_views/edit/created_quizzes/created_quizzes.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -39,27 +39,17 @@ class _EditOverviewState extends State<EditOverview> {
             top: 10,
             bottom: 15.0,
           ),
-          child: TextButton(
-            style: TextButton.styleFrom(backgroundColor: grayFreequiz, foregroundColor: Colors.white),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return CreateQuiz(
-                      refresh: refresh,
-                    );
-                  },
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Text(
-                context.tr('create new quiz'),
-                style: buttonStyle(),
-              ),
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CreateButton(refresh: refresh),
+                const SizedBox(width: 10),
+                ImportButton(refresh: refresh)
+              ],
             ),
-          ),
+          )
         ),
         Space.height(context.mobileLayout ? 15 : 45),
         Padding(

@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_views/edit/quiz_form.dart';
 import 'package:freequiz/_views/subviews/edit/add_button.dart';
 import 'package:freequiz/_views/subviews/edit/counter.dart';
 import 'package:freequiz/_views/subviews/edit/header.dart';
 import 'package:freequiz/_views/subviews/edit/list_view.dart';
+import 'package:freequiz/controllers/edit/quiz_form.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class EditView extends StatefulWidget {
