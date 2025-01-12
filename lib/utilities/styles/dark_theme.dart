@@ -7,7 +7,7 @@ ThemeData darkTheme = ThemeData(
     scrolledUnderElevation: 0.0, //remove tint scrolling up
     titleTextStyle: TextStyle(fontSize: FontSize.title, fontWeight: FontWeight.w600),
   ),
-  colorScheme: ColorScheme.fromSeed(seedColor: darkMainColor),
+  brightness: Brightness.dark,
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: darkMainColor,
     unselectedItemColor: grayFreequiz,

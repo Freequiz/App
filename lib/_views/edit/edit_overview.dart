@@ -34,8 +34,8 @@ class _EditOverviewState extends State<EditOverview> {
           color: context.darkMode ? darkMainColor : lightMainColor,
           width: double.maxFinite,
           padding: EdgeInsets.only(
-            right: context.mobileLayout ? 50.0 :20,
-            left: context.mobileLayout ? 50.0 : 20,
+            right: context.mobileLayout ? 0.0 : 20,
+            left: context.mobileLayout ? 0.0 : 20,
             top: 10,
             bottom: 15.0,
           ),
