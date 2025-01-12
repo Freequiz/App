@@ -38,7 +38,6 @@ class _AnswerTextFieldState extends State<AnswerTextField> {
       },
       onEditingComplete: () {},
       controller: widget.textFieldData.input,
-      keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
       decoration: InputDecoration(
         filled: true,
         fillColor: textfieldColor,

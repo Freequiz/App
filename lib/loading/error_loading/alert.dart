@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_views/bug_reporter/bug_reporter.dart';
+import 'package:freequiz/_views/bug_reporter/bug_report.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class ErrorLoadingAlert extends StatelessWidget {

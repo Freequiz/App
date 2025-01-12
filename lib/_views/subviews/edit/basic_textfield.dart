@@ -52,7 +52,6 @@ class _BasicTextFieldState extends State<BasicTextField> {
       onEditingComplete: () {},
       controller: widget.textFieldData.input,
       keyboardType: widget.keyboardType,
-      keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
       maxLines: widget.maxLines,
       decoration: InputDecoration(
         filled: true,

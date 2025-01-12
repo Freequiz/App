@@ -26,7 +26,6 @@ class _SearchFieldState extends State<SearchField> {
         height: 42.0,
         child: TextField(
           onSubmitted: (value) => loadSearch(context: context, searchTerm: widget.textController.text),
-          keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
           controller: widget.textController,
           focusNode: widget.focusNode,
           decoration: InputDecoration(
