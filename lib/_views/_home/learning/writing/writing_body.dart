@@ -39,6 +39,7 @@ class WritingBody extends StatelessWidget {
                           autocorrect: false,
                           enableSuggestions: false,
                           keyboardType: TextInputType.text,
+                          keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
                           controller: controller.textController,
                           onEditingComplete: () {
                             controller.onPressed(context);

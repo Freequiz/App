@@ -20,9 +20,9 @@ class ImportPopUp extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text("import quiz text").tr(),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 75),
+            constraints: const BoxConstraints(maxHeight: 200),
             child: TextField(
               controller: textController,
               keyboardType: TextInputType.multiline,

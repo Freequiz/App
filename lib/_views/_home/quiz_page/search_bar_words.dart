@@ -32,6 +32,8 @@ class _SearchBarWordsState extends State<SearchBarWords> {
                   onChanged: (value) {
                     widget.search(textController.text);
                   },
+                  keyboardAppearance:
+                      context.darkMode ? Brightness.dark : Brightness.light,
                   controller: textController,
                   decoration: InputDecoration(
                     filled: true,

@@ -25,6 +25,7 @@ class BasicTextfield extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onSubmitted: (value) => onSubmitted(),
+      keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
       autofillHints: autofillHints,
       textInputAction: textInputAction,
       autocorrect: false,
