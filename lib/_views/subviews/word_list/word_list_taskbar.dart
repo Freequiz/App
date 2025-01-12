@@ -34,7 +34,6 @@ class _WordListTaskbarState extends State<WordListTaskbar> {
           onChanged: (value) {
             widget.search(textController.text);
           },
-          keyboardAppearance: context.darkMode ? Brightness.dark : Brightness.light,
           controller: textController,
           decoration: InputDecoration(
             filled: true,
