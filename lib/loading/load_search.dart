@@ -6,7 +6,7 @@ import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
 import 'package:provider/provider.dart';
 
-loadSearch({required BuildContext context, required String searchTerm, mode = "Quiz"}) {
+Future<bool> loadSearch({required BuildContext context, required String searchTerm, mode = "Quiz"}) {
   Search.searchTerm = searchTerm;
 
   return Navigator.of(context).push(

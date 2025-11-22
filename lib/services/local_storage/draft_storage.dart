@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DraftStorage {
-  static saveDraft(Map map) async {
+  static Future<void> saveDraft(Map map) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('draft', jsonEncode(map));
   }
@@ -12,7 +12,7 @@ class DraftStorage {
     return jsonDecode(prefs.getString('draft') ?? "{}");
   }
 
-  static deleteDraft() async {
+  static Future<void> deleteDraft() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('draft');
   }

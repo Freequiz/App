@@ -6,16 +6,16 @@ class Profile {
   static String accessToken = "";
   static bool loaded = false;
 
-  static saveAccessToken() async {
+  static void saveAccessToken() async {
     await SecureStorage.setAccessToken(accessToken);
   }
 
-  static loadAccessToken() async {
+  static Future<void> loadAccessToken() async {
     accessToken = await SecureStorage.readAccessToken();
     loaded = true;
   }
 
-  static deleteData() async {
+  static void deleteData() async {
     accessToken = "";
     UserHelper.user = null;
     Preferences.deleteUser();

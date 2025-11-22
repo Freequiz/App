@@ -66,7 +66,7 @@ class _CreateQuizState extends State<CreateQuiz> {
     );
   }
 
-  onPressed() async {
+  void onPressed() async {
     quiz.checkForErrors();
 
     if (quiz.error) {
@@ -92,7 +92,7 @@ class _CreateQuizState extends State<CreateQuiz> {
     }
   }
 
-  changed() {
+  bool changed() {
     if (quiz.title.input.text.isNotEmpty) {
       return true;
     }

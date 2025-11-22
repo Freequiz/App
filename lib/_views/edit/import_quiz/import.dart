@@ -58,7 +58,7 @@ class _ImportQuizState extends State<ImportQuiz> {
     );
   }
 
-  onPressed() async {
+  void onPressed() async {
     Import.quiz.checkForErrors();
 
     if (Import.quiz.error) {

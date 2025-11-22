@@ -124,7 +124,7 @@ class _PasswordState extends State<Password> {
     );
   }
 
-  changePassword() async {
+  void changePassword() async {
     pressed = true;
     final Map map = await APIUsers.updateAccount(
         password: newPassword.input.text,

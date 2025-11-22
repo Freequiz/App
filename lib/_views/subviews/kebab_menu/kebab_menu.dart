@@ -42,7 +42,7 @@ class KebabMenu extends StatefulWidget {
 }
 
 class _KebabMenuState extends State<KebabMenu> {
-  refresh(id) {
+  void refresh(String? id) {
     Navigator.of(context).pop();
     if (id == null) return;
     Navigator.of(context).pop();
@@ -91,11 +91,11 @@ class _KebabMenuState extends State<KebabMenu> {
     );
   }
 
-  close() {
+  void close() {
     Navigator.of(context).pop();
   }
 
-  edit() {
+  void edit() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
@@ -110,14 +110,16 @@ class _KebabMenuState extends State<KebabMenu> {
     );
   }
 
-  report() {
+  void report() {
     showDialog(
       context: context,
       builder: (BuildContext context) => const ReportAlert(),
     );
   }
 
-  share() {
-    Share.share(widget.url);
+  void share() {
+    SharePlus.instance.share(
+      ShareParams(text: widget.url),
+    );
   }
 }

@@ -50,7 +50,7 @@ class Settings {
     }
   }
 
-  setScore(String mode, int n) {
+  void setScore(String mode, int n) {
     switch (mode) {
       case "multi":
         multi = n;
@@ -68,7 +68,7 @@ class Settings {
     APIUsers.updateSettings({"${mode}_amount": n});
   }
 
-  setLengthQuestionnaire(int length) {
+  void setLengthQuestionnaire(int length) {
     debugPrint(length.toString());
     lengthQuestionnaire = length;
     APIUsers.updateSettings({"round_amount": length});

@@ -2,7 +2,7 @@ import 'package:freequiz/utilities/imports/base.dart';
 
 ThemeData darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
-    color: darkMainColor,
+    backgroundColor: darkMainColor,
     foregroundColor: Colors.white,
     scrolledUnderElevation: 0.0, //remove tint scrolling up
     titleTextStyle: TextStyle(fontSize: FontSize.title, fontWeight: FontWeight.w600),
@@ -35,7 +35,7 @@ ThemeData darkTheme = ThemeData(
   drawerTheme: const DrawerThemeData(
     backgroundColor: gray40,
   ),
-  dialogTheme: const DialogTheme(backgroundColor: gray40),
+  dialogTheme: const DialogThemeData(backgroundColor: gray40),
   inputDecorationTheme: const InputDecorationTheme(
     border: OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: grayFreequiz),

@@ -18,7 +18,7 @@ class Edit extends StatelessWidget {
     );
   }
 
-  edit(BuildContext context, EditQuizTile widget) {
+  void edit(BuildContext context, EditQuizTile widget) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {

@@ -1,0 +1,2 @@
+/Users/matthieu/Documents/Coding/Flutter/Freequiz/android/app/.cxx/RelWithDebInfo/5h3b5m32/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/matthieu/Documents/Coding/Flutter/Freequiz/android/app/.cxx/RelWithDebInfo/5h3b5m32/armeabi-v7a/CMakeFiles/edit_cache.dir

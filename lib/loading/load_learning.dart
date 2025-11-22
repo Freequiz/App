@@ -3,7 +3,7 @@ import 'package:freequiz/_views/_home/learning_page/start_learning.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 
 
-loadLearning(BuildContext context, int i, Function refresh) {
+void loadLearning(BuildContext context, int i, Function refresh) {
   if (QuizHelper.quiz!.translations.translations.isEmpty) return;
 
   Navigator.of(context).push(

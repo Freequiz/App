@@ -124,7 +124,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  onPressed() async {
+  void onPressed() async {
     if (password.input.text != passwordConfirmation.input.text) {
       setState(() {
         password.input.clear();

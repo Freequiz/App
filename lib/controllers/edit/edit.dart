@@ -5,7 +5,7 @@ import 'package:freequiz/utilities/imports/utilities.dart';
 class EditController extends ChangeNotifier {
   Key key = Key(Random().toString());
 
-  refresh() {
+  void refresh() {
     key = Key(Random().toString());
     notifyListeners();
   }

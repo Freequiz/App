@@ -91,7 +91,7 @@ class _EditDraftState extends State<EditDraft> {
     );
   }
 
-  onPressed() async {
+  void onPressed() async {
     quiz.checkForErrors();
 
     if (quiz.error) {

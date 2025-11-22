@@ -56,7 +56,7 @@ class _EditViewState extends State<EditView> {
     );
   }
 
-  add() {
+  void add() {
     setState(() {
       widget.quiz.addWordPair();
     });

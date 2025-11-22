@@ -2,7 +2,7 @@ import 'package:freequiz/utilities/imports/base.dart';
 
 ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
-    color: lightMainColor,
+    backgroundColor: lightMainColor,
     foregroundColor: gray40,
     scrolledUnderElevation: 0.0, //remove tint scrolling up
     titleTextStyle: TextStyle(fontSize: FontSize.title, fontWeight: FontWeight.w600),

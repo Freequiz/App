@@ -29,7 +29,7 @@ class Learning {
   static final List<Translation> errors = [];
   static String idQuiz = "";
 
-  wrongAnswerWriting(TextEditingController textController, BuildContext context, Function rightAnswerW) {
+  void wrongAnswerWriting(TextEditingController textController, BuildContext context, Function rightAnswerW) {
     final givenAnswer = textController.text;
 
     showDialog(
@@ -54,7 +54,7 @@ class Learning {
     textController.clear();
   }
 
-  wrongAnswerMultipleChoice(BuildContext context, String choice, Function rightAnswerMC, int i) {
+  void wrongAnswerMultipleChoice(BuildContext context, String choice, Function rightAnswerMC, int i) {
     showDialog(
       context: context,
       builder: (BuildContext context) => Correction(
@@ -76,7 +76,7 @@ class Learning {
     });
   }
 
-  static stop(Function refresh, String uuid, String mode) {
+  static void stop(Function refresh, String uuid, String mode) {
     Learning.showAnswer = false;
     QuizDatabase.updateQuiz(QuizHelper.quiz!);
     refresh();

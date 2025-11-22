@@ -66,7 +66,7 @@ class _MainAppBarState extends State<MainAppBar> {
     );
   }
 
-  onPressed() {
+  void onPressed() {
     if (Search.shown) {
       Search.mode == "Quiz";
       loadSearch(context: context, searchTerm: textController.text);

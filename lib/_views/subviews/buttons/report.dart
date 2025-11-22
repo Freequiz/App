@@ -15,7 +15,7 @@ class ReportButton extends StatelessWidget {
     );
   }
 
-  report(context) {
+  void report(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) => const ReportAlert(),

@@ -121,21 +121,21 @@ class _LearningSettingsState extends State<LearningSettings> {
     );
   }
 
-  changeAnswerLanguage(String text) {
+  void changeAnswerLanguage(String text) {
     Preferences.saveAnswerLanguage(languages.indexOf(text));
     setState(() {
       answerLanguage = text;
     });
   }
 
-  changeMaxScore(String n) {
+  void changeMaxScore(String n) {
     Preferences.saveMaxScore(widget.mode, int.parse(n));
     setState(() {
       maxScore = n;
     });
   }
 
-  changeLengthQuestionnaire(String length) {
+  void changeLengthQuestionnaire(String length) {
     Preferences.saveLengthQuestionnaire(int.parse(length));
     setState(() {
       lengthQuestionnaire = length;

@@ -22,7 +22,7 @@ class _RootPageState extends State<RootPage> {
   final FocusNode focusNode = FocusNode();
   int currentPage = 0;
 
-  refresh() {
+  void refresh() {
     setState(() {});
   }
 
@@ -94,7 +94,7 @@ class _RootPageState extends State<RootPage> {
     return const Drawer();
   }
 
-  switchPage(int index) {
+  void switchPage(int index) {
     setState(() {
       currentPage = index;
     });

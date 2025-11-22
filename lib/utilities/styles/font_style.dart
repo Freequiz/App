@@ -12,6 +12,6 @@ class FontSize {
   static const double tabBar = 10;
 }
 
-TextStyle fontSize(size) => TextStyle(fontSize: size);
+TextStyle fontSize(double? size) => TextStyle(fontSize: size);
 TextStyle buttonStyle() => const TextStyle(fontSize: FontSize.button, fontWeight: FontWeight.w600);
 TextStyle titleStyle() => const TextStyle(fontSize: FontSize.title, fontWeight: FontWeight.w600);

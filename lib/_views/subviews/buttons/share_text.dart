@@ -11,7 +11,9 @@ class ShareTextButton extends StatelessWidget {
     return TextButton(
       onPressed: () {
         final RenderBox box = context.findRenderObject() as RenderBox;
-        Share.share(url, sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,);
+        SharePlus.instance.share(
+          ShareParams(text: url, sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size),
+        );
       },
       child: const Icon(
         Icons.ios_share,

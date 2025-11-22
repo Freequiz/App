@@ -25,7 +25,7 @@ class _EditQuizTileState extends State<EditQuizTile> {
     expanded = widget.expanded;
   }
 
-  show() {
+  void show() {
     widget.refresh();
     setState(() {
       shown = false;

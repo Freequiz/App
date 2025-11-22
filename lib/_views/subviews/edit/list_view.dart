@@ -48,7 +48,7 @@ class _ListWordPairsState extends State<ListWordPairs> {
     );
   }
 
-  onSubmitted(int i) {
+  void onSubmitted(int i) {
     setState(() {
       if (widget.quiz.wordPairs[i].answer.input.text != "") {
         if (i + 1 >= widget.quiz.wordPairs.length) {

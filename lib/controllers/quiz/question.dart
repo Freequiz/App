@@ -7,7 +7,7 @@ import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 class Question {
   static List<String> choices = [];
 
-  static randomChoices() {
+  static List<String> randomChoices() {
     List<String> options = [];
     for (Translation translation in QuizHelper.quiz!.translations.translations) {
       options.add(translation.answer());

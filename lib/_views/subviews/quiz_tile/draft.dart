@@ -95,7 +95,7 @@ class _DraftTileState extends State<DraftTile> {
     );
   }
 
-  onTap() {
+  void onTap() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {

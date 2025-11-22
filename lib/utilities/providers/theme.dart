@@ -21,7 +21,7 @@ class ThemeProvider with ChangeNotifier {
     return true;
   }
 
-  void toggleTheme(value) {
+  void toggleTheme(String value) {
     Preferences.setTheme(value);
     theme = value;
     notifyListeners();

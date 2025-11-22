@@ -25,7 +25,7 @@ class _QuizPageState extends State<QuizPage> {
   ];
   final List<Color> color = [purpleLight, roseLight, beigeLight, blueLight];
 
-  refresh() {
+  void refresh() {
     setState(() {});
   }
 
@@ -81,7 +81,7 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  search(String searchTerm) {
+  void search(String searchTerm) {
     list.clear();
 
     for (Translation translation in QuizHelper.quiz!.translations.translations) {
@@ -96,7 +96,7 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {});
   }
 
-  markWord(Translation translation) {
+  void markWord(Translation translation) {
     setState(() {
       translation.toggleFavorite();
     });

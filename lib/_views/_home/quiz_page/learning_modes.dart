@@ -11,7 +11,7 @@ class LearningModes extends StatefulWidget {
 }
 
 class _LearningModesState extends State<LearningModes> {
-  refresh() {
+  void refresh() {
     setState(() {});
   }
 

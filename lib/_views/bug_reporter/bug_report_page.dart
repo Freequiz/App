@@ -138,7 +138,7 @@ class _BugReportPageState extends State<BugReportPage> {
     );
   }
 
-  submit() async {
+  void submit() async {
     if (title.input.text.length < 3) {
       setState(() {
         title.input.clear();

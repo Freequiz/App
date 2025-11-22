@@ -1,0 +1,2 @@
+/Users/matthieu/Documents/Coding/Flutter/Freequiz/android/app/.cxx/Debug/3b6k3v60/x86/CMakeFiles/rebuild_cache.dir
+/Users/matthieu/Documents/Coding/Flutter/Freequiz/android/app/.cxx/Debug/3b6k3v60/x86/CMakeFiles/edit_cache.dir

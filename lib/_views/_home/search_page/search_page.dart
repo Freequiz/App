@@ -20,7 +20,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final arrow = '\u279C';
 
-  refresh() {
+  void refresh() {
     setState(() {});
   }
 
@@ -81,7 +81,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  selectLanguage() {
+  void selectLanguage() {
     showDialog(
       context: context,
       builder: (BuildContext context) => LanguageSelector(

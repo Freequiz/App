@@ -20,7 +20,7 @@ class StartLearning extends StatefulWidget {
 
 class _StartLearningState extends State<StartLearning> {
 
-  reset() {
+  void reset() {
     setState(() {
       Progress.reset(Learning.modes[widget.i], widget.uuid);
     });

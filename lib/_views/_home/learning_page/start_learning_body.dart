@@ -21,7 +21,7 @@ class StartLearningBody extends StatefulWidget {
 }
 
 class _StartLearningBodyState extends State<StartLearningBody> {
-  refresh() {
+  void refresh() {
     Progress.calculate(Learning.modes[widget.i]);
     setState(() {});
   }
@@ -97,7 +97,7 @@ class _StartLearningBodyState extends State<StartLearningBody> {
     );
   }
 
-  markWord(Translation translation) {
+  void markWord(Translation translation) {
     setState(() {
       translation.toggleFavorite();
     });

@@ -6,34 +6,34 @@ class Preferences {
   static int answerLanguage = 1;
   static String theme = "Automatic";
 
-  static saveAnswerLanguage(int value) async {
+  static Future<void> saveAnswerLanguage(int value) async {
     answerLanguage = value;
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('answer_language', value);
   }
 
-  static loadAnswerLanguage() async {
+  static Future<void> loadAnswerLanguage() async {
     final prefs = await SharedPreferences.getInstance();
     answerLanguage = prefs.getInt('answer_language') ?? 1;
   }
 
-  static saveMaxScore(String mode, int n) async {
+  static Future<void> saveMaxScore(String mode, int n) async {
     UserHelper.user!.settings.setScore(mode, n);
     saveUser();
   }
 
-  static saveLengthQuestionnaire(int length) async {
+  static Future<void> saveLengthQuestionnaire(int length) async {
     UserHelper.user!.settings.setLengthQuestionnaire(length);
     saveUser();
   }
 
-  static saveUser() async {
+  static Future<void> saveUser() async {
     Map map = UserHelper.user!.toMap();
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('user', jsonEncode(map));
   }
 
-  static deleteUser() async {
+  static Future<void> deleteUser() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('user');
   }
@@ -45,12 +45,12 @@ class Preferences {
     );
   }
 
-  static setTheme(String theme) async {
+  static Future<void> setTheme(String theme) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('theme', theme);
   }
 
-  static getTheme() async {
+  static Future<void> getTheme() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     theme = prefs.getString('theme') ?? "Automatic";
   }

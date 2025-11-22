@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class SecureStorage {
   static const storage = FlutterSecureStorage();
 
-  static setAccessToken(String accessToken) async {
+  static Future<void> setAccessToken(String accessToken) async {
     await storage.write(key: "access_token", value: accessToken);
   }
 
@@ -12,7 +12,7 @@ class SecureStorage {
     return accessToken;
   }
 
-  static removeAccessToken() async {
+  static Future<void> removeAccessToken() async {
     await storage.delete(key: "access_token");
   }
 }

@@ -20,7 +20,7 @@ class LoadQuiz extends StatelessWidget {
   final String uuid;
   const LoadQuiz({super.key, required this.uuid});
 
-  toggleFavorite() {
+  void toggleFavorite() {
     QuizHelper.quiz!.toggleFavorite();
   }
 

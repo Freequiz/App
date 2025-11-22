@@ -52,25 +52,25 @@ class QuizForm {
     return map;
   }
 
-  bool emptyDefinition(i) {
+  bool emptyDefinition(int i) {
     if (wordPairs[i].definition.input.text.replaceAll(' ', '') != "") return false;
     if (wordPairs[i].answer.input.text.replaceAll(' ', '') == "") return false;
     return true;
   }
 
-  bool emptyAnswer(i) {
+  bool emptyAnswer(int i) {
     if (wordPairs[i].answer.input.text.replaceAll(' ', '') != "") return false;
     if (wordPairs[i].definition.input.text.replaceAll(' ', '') == "") return false;
     return true;
   }
 
-  bool empty(i) {
+  bool empty(int i) {
     if (wordPairs[i].answer.input.text.replaceAll(' ', '') != "") return false;
     if (wordPairs[i].definition.input.text.replaceAll(' ', '') != "") return false;
     return true;
   }
 
-  checkForErrors() {
+  void checkForErrors() {
     error = false;
     counter = 0;
 
@@ -100,17 +100,17 @@ class QuizForm {
     }
   }
 
-  addWordPair() {
+  void addWordPair() {
     wordPairs
         .add(WordPair(key: wordPairs.length.toString()));
   }
 
-  removeWordPair(int i) {
+  void removeWordPair(int i) {
     destroyed.add(wordPairs[i]);
     wordPairs.removeAt(i);
   }
 
-  save({required String mode, String? id}) {
+  void save({required String mode, String? id}) {
     final map = createMap();
     map['mode'] = mode;
     map['id'] = id;
@@ -130,7 +130,7 @@ class WordPair {
 
   WordPair({required this.key});
 
-  toMap() {
+  Map<String, Map> toMap() {
     Map<String, Map> map = {
       key: {
         "word": definition.input.text,

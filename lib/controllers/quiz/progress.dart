@@ -7,7 +7,7 @@ import 'package:freequiz/controllers/quiz/questionnaire.dart';
 class Progress {
   static double amount = 0;
 
-  static reset(String mode, String uuid) {
+  static void reset(String mode, String uuid) {
     for (Translation translation in QuizHelper.quiz!.translations.translations) {
       translation.score[mode] = 0;
       translation.updated = DateTime.now().millisecondsSinceEpoch;
@@ -17,7 +17,7 @@ class Progress {
     APIQuizzes.resetScore(uuid, mode);
   }
 
-  static increase(String uuid, String mode, Translation translation) {
+  static void increase(String uuid, String mode, Translation translation) {
     int score = translation.score[mode]! + 1;
 
     if (score > Questionnaire.maxScore(mode)) {
@@ -27,7 +27,7 @@ class Progress {
     translation.setScore(uuid, mode, score);
   }
 
-  static decrease(String uuid, String mode, Translation translation) {
+  static void decrease(String uuid, String mode, Translation translation) {
     int score = translation.score[mode]! - 1;
 
     if (score < 0) {
@@ -37,7 +37,7 @@ class Progress {
     translation.setScore(uuid, mode, score);
   }
 
-  static calculate(String mode) {
+  static void calculate(String mode) {
     amount = 0;
     for (Translation translation in QuizHelper.quiz!.translations.translations) {
       amount += translation.score[mode]! as int;

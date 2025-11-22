@@ -92,7 +92,7 @@ class _SwitcherState extends State<Switcher> {
     return children;
   }
 
-  onTap(String text) {
+  void onTap(String text) {
     if (deactivated) return; //prevent breaking animation by clicking the buttons too fast
 
     setState(() {

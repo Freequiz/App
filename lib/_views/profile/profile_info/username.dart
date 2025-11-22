@@ -93,7 +93,7 @@ class _UsernameState extends State<Username> {
     );
   }
 
-  changeUsername() async {
+  void changeUsername() async {
     pressed = true;
     final Map map = await APIUsers.updateAccount(username: newUsername.input.text);
     if (map["success"] == true) {

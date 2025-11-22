@@ -69,7 +69,7 @@ class _ProgressPopUpState extends State<ProgressPopUp> {
     );
   }
 
-  close(data) {
+  void close(AsyncSnapshot<Map<dynamic, dynamic>> data) {
     final quizData = data.data!['quiz_data'];
 
     if (widget.title == 'Create Quiz') {

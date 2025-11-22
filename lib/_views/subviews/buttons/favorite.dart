@@ -32,7 +32,7 @@ class _FavoriteState extends State<Favorite> {
     );
   }
 
-  onPressed() {
+  void onPressed() {
     widget.toggleFavorite();
     setState(() {
       favorite = !favorite;

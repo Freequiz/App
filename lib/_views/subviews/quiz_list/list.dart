@@ -70,7 +70,7 @@ class _ListQuizzesState extends State<ListQuizzes> {
     );
   }
 
-  onDismissed(int i, String uuid) {
+  void onDismissed(int i, String uuid) {
     setState(() {
       data.removeAt(i);
     });

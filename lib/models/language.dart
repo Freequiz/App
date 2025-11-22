@@ -29,7 +29,7 @@ class Language {
     };
   }
 
-  toMap() {
+  Map toMap() {
     return {
       'id': id,
       'name': name,

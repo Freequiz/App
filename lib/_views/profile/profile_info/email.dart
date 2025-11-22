@@ -92,7 +92,7 @@ class _EMailState extends State<EMail> {
     );
   }
 
-  changeEmail() async {
+  void changeEmail() async {
     pressed = true;
     if (newEmail.input.text.isEmpty) {
       newEmail.hint = 'blank'.tr();

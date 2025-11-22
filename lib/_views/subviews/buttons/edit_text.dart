@@ -18,7 +18,7 @@ class EditTextButton extends StatelessWidget {
     );
   }
 
-  edit(BuildContext context) {
+  void edit(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {

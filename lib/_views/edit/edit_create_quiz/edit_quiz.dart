@@ -103,7 +103,7 @@ class _EditQuizState extends State<EditQuiz> {
     );
   }
 
-  onPressed() async {
+  void onPressed() async {
     quiz.checkForErrors();
 
     if (quiz.error) {

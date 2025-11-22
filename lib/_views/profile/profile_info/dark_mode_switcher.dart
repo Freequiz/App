@@ -22,7 +22,7 @@ class _DarkModeSwitcherState extends State<DarkModeSwitcher> {
     );
   }
 
-  onTap(String value) {
+  void onTap(String value) {
     setState(() {
       Preferences.theme = value;
     });

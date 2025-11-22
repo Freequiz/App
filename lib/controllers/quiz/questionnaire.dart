@@ -16,7 +16,7 @@ class Questionnaire {
 
   static String mode = "";
 
-  static create(bool onlyFavorite, String quizMode) {
+  static void create(bool onlyFavorite, String quizMode) {
     questions.clear();
     pastQuestions.clear();
     mode = quizMode;
@@ -54,7 +54,7 @@ class Questionnaire {
     length = questions.length;    
   }
 
-  static randomise(List<Translation> array) {
+  static void randomise(List<Translation> array) {
     if (Learning.errors.length < Questionnaire.desiredLength()) {
       for (var n = 0; n < Questionnaire.desiredLength() - Learning.errors.length; n++) {
         if (array.isEmpty) break;
@@ -73,22 +73,22 @@ class Questionnaire {
     }
   }
 
-  static answeredWrong() {
+  static void answeredWrong() {
     Progress.decrease(QuizHelper.quiz!.id, mode, questions[0]);
     if (Learning.errors.contains(questions[0])) return;
     Learning.errors.add(questions[0]);
   }
 
-  static answeredRight() {
+  static void answeredRight() {
     Progress.increase(QuizHelper.quiz!.id, mode, questions[0]);
   }
 
-  static next() {
+  static void next() {
     pastQuestions.add(questions[0]);
     questions.removeAt(0);
   }
 
-  static back() {
+  static void back() {
     if (pastQuestions.isEmpty) return;
     questions.insert(0, pastQuestions.last);
     pastQuestions.removeLast();
@@ -97,13 +97,13 @@ class Questionnaire {
     Learning.errors.remove(questions[0]);
   }
 
-  static maxScore(String mode) {
+  static int maxScore(String mode) {
     return UserHelper.user?.settings.maxScore(mode) ?? 2;
   }
 
-  static desiredLength() {
+  static int desiredLength() {
     int? lengthQuestionnaire = UserHelper.user?.settings.lengthQuestionnaire;
-    if (lengthQuestionnaire == null) return lengthQuestionnaire;
+    if (lengthQuestionnaire == null) return 20;
     if (Questionnaire.lengths.contains(lengthQuestionnaire.toString())) {
       return lengthQuestionnaire;
     }
@@ -111,14 +111,14 @@ class Questionnaire {
     return lengthQuestionnaire;
   }
 
-  static definition() {
+  static String definition() {
     if (Preferences.answerLanguage == 0) {
       return questions[0].translation;
     }
     return questions[0].word;
   }
 
-  static nextDefinition() {
+  static String nextDefinition() {
     if (questions.length < 2) return "";
 
     if (Preferences.answerLanguage == 0) {
@@ -127,7 +127,7 @@ class Questionnaire {
     return questions[1].word;
   }
 
-  static answer() {
+  static String answer() {
     if (Preferences.answerLanguage == 0) {
       return questions[0].word;
     }

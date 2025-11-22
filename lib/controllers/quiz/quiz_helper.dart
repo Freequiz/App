@@ -8,7 +8,7 @@ class QuizHelper {
 
   static Map draft = {};
 
-  static checkedIfMarkedWords() {
+  static void checkedIfMarkedWords() {
     QuizHelper.marked = false;
     for (Translation translation in quiz!.translations.translations) {
       if (!translation.favorite) continue;

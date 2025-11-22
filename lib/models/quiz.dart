@@ -110,7 +110,7 @@ class Quiz {
     return map;
   }
 
-  toggleFavorite() async {
+  Future<void> toggleFavorite() async {
     favorite = !favorite;
     updated = true;
 

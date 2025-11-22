@@ -6,7 +6,7 @@ import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';
 import 'package:share_plus/share_plus.dart';
 
-loadUser({required BuildContext context, required String user}) {
+void loadUser({required BuildContext context, required String user}) {
   PublicUserData.data.clear();
 
   Navigator.of(context).push(
@@ -40,7 +40,9 @@ class LoadUser extends StatelessWidget {
             appBar: AppBar(
               actions: [
                 TextButton(
-                  onPressed: () => Share.share('https://www.freequiz.ch/user/$user'),
+                  onPressed: () => SharePlus.instance.share(
+                    ShareParams(text: 'https://www.freequiz.ch/user/$user'),
+                  ),
                   child: const Icon(
                     Icons.ios_share_rounded,
                   ),

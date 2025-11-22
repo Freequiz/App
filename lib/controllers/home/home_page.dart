@@ -25,11 +25,11 @@ class HomePageController extends ChangeNotifier {
     const BackgroundDelete()
   ];
 
-  static removeRecent(int i, String uuid) {
+  static void removeRecent(int i, String uuid) {
     QuizDatabase.deleteQuiz(uuid);
   }
 
-  static removeFavorite(int i, String uuid) async {
+  static void removeFavorite(int i, String uuid) async {
     APIQuizzes.setQuizFavorite(uuid, false);
   }
 
@@ -56,7 +56,7 @@ class HomePageController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void callback(i) {
+  void callback(int i) {
     if (i != 0) return; //only call this once
     previousShownQuizzes = shownQuizzes;
     onChanged = false;

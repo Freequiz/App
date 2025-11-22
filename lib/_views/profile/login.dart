@@ -92,14 +92,14 @@ class _LoginState extends State<Login> {
     );
   }
 
-  resetPassword() async {
+  void resetPassword() async {
     final Uri url = Uri.parse('https://www.freequiz.ch/password/reset');
     if (!await launchUrl(url)) {
         throw Exception('Could not launch $url');
     }
   }
 
-  onPressed(Function refresh) async {
+  void onPressed(Function refresh) async {
     if (password.input.text.isEmpty) {
       setState(() {
         password.error = true;

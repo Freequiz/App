@@ -19,7 +19,7 @@ class _EditOverviewState extends State<EditOverview> {
   bool draft = false;
   Key key = Key(Random().toString());
 
-  refresh() {
+  void refresh() {
     setState(() {
       key = Key(Random().toString());
     });

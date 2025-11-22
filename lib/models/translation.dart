@@ -72,14 +72,14 @@ class Translation {
     };
   }
 
-  setFavorite(bool state) {
+  void setFavorite(bool state) {
     favorite = state;
     updated = DateTime.now().millisecondsSinceEpoch;
     
     APIQuizzes.setFavorite(QuizHelper.quiz!.id, scoreID, state);
   }
 
-  toggleFavorite() {
+  void toggleFavorite() {
     favorite = !favorite;
     updated = DateTime.now().millisecondsSinceEpoch;
 
@@ -93,7 +93,7 @@ class Translation {
     return translation;
   }
 
-  setScore(String uuid, String mode, int newScore) {
+  void setScore(String uuid, String mode, int newScore) {
     score[mode] = newScore;
     updated = DateTime.now().millisecondsSinceEpoch;
 

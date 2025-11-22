@@ -11,7 +11,9 @@ class ShareButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         final RenderBox box = context.findRenderObject() as RenderBox;
-        Share.share(url, sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,);
+        SharePlus.instance.share(
+          ShareParams(text: url, sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size),
+        );
       },
       icon: Icon(
         Icons.ios_share,

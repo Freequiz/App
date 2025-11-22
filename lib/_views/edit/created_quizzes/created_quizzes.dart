@@ -55,7 +55,7 @@ class _CreatedQuizzesState extends State<CreatedQuizzes> {
     );
   }
 
-  onPressed() async {
+  void onPressed() async {
     setState(() {
       pressed = true;
     });
