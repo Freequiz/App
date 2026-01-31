@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:freequiz/_views/edit/buttons/create.dart';
 import 'package:freequiz/_views/edit/buttons/import.dart';
+import 'package:freequiz/_views/edit/buttons/scan.dart';
 import 'package:freequiz/_views/edit/quiz_draft/draft.dart';
 import 'package:freequiz/_views/edit/created_quizzes/created_quizzes.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
@@ -46,7 +47,9 @@ class _EditOverviewState extends State<EditOverview> {
               children: [
                 CreateButton(refresh: refresh),
                 const SizedBox(width: 10),
-                ImportButton(refresh: refresh)
+                ImportButton(refresh: refresh),
+                const SizedBox(width: 10),
+                ScanButton(refresh: refresh),
               ],
             ),
           )
