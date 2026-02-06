@@ -1,7 +1,7 @@
 import 'package:freequiz/utilities/imports/base.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
-void sanitize(RecognizedText recognizedText, int width) {
+List<Map> sanitize(RecognizedText recognizedText, int width) {
   List<Map> wordPairs = [];
 
   debugPrint(width.toString());
@@ -34,6 +34,7 @@ void sanitize(RecognizedText recognizedText, int width) {
   }
   match(wordPairs);
   debugPrint(wordPairs.toString()); 
+  return wordPairs;
 }
 
 void match(List<Map> wordPairs) {

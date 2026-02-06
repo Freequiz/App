@@ -175,5 +175,7 @@
     "no connection": "Pas de connection internet",
     "request timed out": "Pas de connection internet",
     "import quiz": "Importer un Quiz",
-    "import quiz text": "Pour importer un quiz, vous pouvez coller du texte dans le champ de texte. Les mots et les traductions doivent être séparés par une tabulation et les paires de mots doivent être séparées par un saut de ligne."
+    "import quiz text": "Pour importer un quiz, vous pouvez coller du texte dans le champ de texte. Les mots et les traductions doivent être séparés par une tabulation et les paires de mots doivent être séparées par un saut de ligne.",
+
+    "scan quiz": "Scanner un Quiz"
   }

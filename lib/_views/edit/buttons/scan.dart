@@ -1,4 +1,4 @@
-import 'package:freequiz/services/scan/scan.dart';
+import 'package:freequiz/_views/edit/scan.dart/pop_up.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ScanButton extends StatelessWidget {
@@ -12,7 +12,10 @@ class ScanButton extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(backgroundColor: grayFreequiz, foregroundColor: Colors.white),
         onPressed: () {
-          scan();
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => ScanPopUp(refresh: refresh),
+          );
         },
         child: const Icon(
           Icons.camera_alt_outlined,
