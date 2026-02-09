@@ -225,5 +225,8 @@
     "import quiz": "Quiz importieren",
     "import quiz text": "Um ein Quiz zu importieren, können Sie Text in das Textfeld einfügen. Die Wörter und die Übersetzungen sollten durch einen Tabulator und die Wortpaare durch einen Zeilenumbruch getrennt werden.",
 
-    "scan quiz": "Quiz scannen"
+    "scan quiz": "Quiz scannen",
+    "scan quiz text": "Wählen Sie ein Bild des Wortschatzes aus ihrer Fotomediathek aus. Der Text wird dann automatisch erkannt und zu einem Quiz gemacht. \nAchtung: Die Texterkennung ist nicht perfekt und es kommt öfters zu Fehlern. Überprüfen sie nach dem Scannen die Wörter.",
+
+    "okay": "Okay"
 }

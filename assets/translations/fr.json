@@ -177,5 +177,8 @@
     "import quiz": "Importer un Quiz",
     "import quiz text": "Pour importer un quiz, vous pouvez coller du texte dans le champ de texte. Les mots et les traductions doivent être séparés par une tabulation et les paires de mots doivent être séparées par un saut de ligne.",
 
-    "scan quiz": "Scanner un Quiz"
+    "scan quiz": "Scanner un Quiz",
+    "scan quiz text": "Sélectionnez une image de vocabulaire dans votre photothèque. Le texte sera automatiquement reconnu et transformé en quiz. \nAttention : la reconnaissance de texte n'est pas parfaite et des erreurs peuvent se produire. Vérifiez les mots après la numérisation.",
+
+    "okay": "Ok"
   }
