@@ -52,7 +52,7 @@ class _ScanQuizState extends State<ScanQuiz> {
           padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
-          child: EditView(quiz: Scan.quiz, mode: 'create'),
+          child: EditView(quiz: Scan.quiz, mode: 'create', scanning: true,),
         ),
       ),
     );

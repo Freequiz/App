@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/edit/scan.dart/scan.dart';
 import 'package:freequiz/controllers/edit/scan.dart';
-import 'package:freequiz/utilities/imports/base.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ScanPopUp extends StatefulWidget {
   final Function refresh;
-  const ScanPopUp({super.key, required this.refresh});
+  final bool addToExisting;
+  const ScanPopUp({super.key, required this.refresh, this.addToExisting = false});
 
   @override
   State<ScanPopUp> createState() => _ScanPopUpState();
@@ -48,10 +48,16 @@ class _ScanPopUpState extends State<ScanPopUp> {
                 if (!context.mounted) return;
 
                 Navigator.of(context).pop();
-                Navigator.of(context).push(MaterialPageRoute(
+
+                if (!widget.addToExisting) {
+                  Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) =>
                       ScanQuiz(refresh: widget.refresh),
-                ));
+                  ));
+                  return;
+                }
+
+                widget.refresh();
               },
               child: Visibility(visible: !processing, child: const Text("okay").tr()),
             ),

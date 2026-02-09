@@ -7,13 +7,19 @@ class Scan {
   static Future<void> main() async {
     final wordPairs = await scan();
 
+    int offset = 0;
+    while (quiz.wordPairs[offset].definition.input.text.isNotEmpty || quiz.wordPairs[offset].answer.input.text.isNotEmpty) {
+      offset += 1;
+      if (offset >= quiz.wordPairs.length) break;
+    }
+
     for (var i = 0; i < wordPairs.length; i++) {
-      if (i >= quiz.wordPairs.length) {
+      if (i+offset >= quiz.wordPairs.length) {
         quiz.addWordPair();
       }
 
-      quiz.wordPairs[i].definition.input.text = wordPairs[i]["definition"];
-      quiz.wordPairs[i].answer.input.text = wordPairs[i]["answer"];
+      quiz.wordPairs[i+offset].definition.input.text = wordPairs[i]["definition"];
+      quiz.wordPairs[i+offset].answer.input.text = wordPairs[i]["answer"];
     }
   }
 }
