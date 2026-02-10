@@ -5,7 +5,6 @@ import 'package:freequiz/_views/subviews/edit/header.dart';
 import 'package:freequiz/_views/subviews/edit/list_view.dart';
 import 'package:freequiz/_views/subviews/edit/scan_button.dart';
 import 'package:freequiz/controllers/edit/quiz_form.dart';
-import 'package:freequiz/utilities/imports/base.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class EditView extends StatefulWidget {
@@ -13,12 +12,12 @@ class EditView extends StatefulWidget {
   final String mode;
   final bool scanning;
 
-  const EditView(
-      {super.key,
-      required this.quiz,
-      required this.mode,
-      this.scanning =
-          false}); //TODO: Fix this to work without scanning parameter
+  const EditView({
+    super.key,
+    required this.quiz,
+    required this.mode,
+    this.scanning = false,
+  }); //TODO: Fix this to work without scanning parameter
 
   @override
   State<EditView> createState() => _EditViewState();
