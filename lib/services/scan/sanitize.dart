@@ -71,21 +71,21 @@ void match(List<Map> wordPairs) {
 }  
 
 bool filter(TextElement element) {
-  final invalidCharacters = RegExp(r'[0-9\[\]ɛſə|æãā]');
+  final invalidCharacters = RegExp(r'[0-9\[\]ɛſə|æãā►]');
   if (invalidCharacters.hasMatch(element.text)) {
     debugPrint("INVALID (invalid character): ${element.text}");
     return false;
   }
 
-  final capitalizedLetterInside = RegExp(r'^.{1,}[A-Z].*$');
+  final capitalizedLetterInside = RegExp(r'.*[a-z][A-Z].*');
   if (capitalizedLetterInside.hasMatch(element.text)) {
     debugPrint("INVALID (capitalized letter inside): ${element.text}");
     return false;
   }
 
-  final unbalancedParenthesis = RegExp(r'\((?!.*\))');
-  if (unbalancedParenthesis.hasMatch(element.text)) {
-    debugPrint("INVALID (unbalanced paranthesis): ${element.text}");
+  final invalidWords = ["n", "v", "f"];
+  if (invalidWords.contains(element.text)) {
+    debugPrint("INVALID (invalid word): ${element.text}");
     return false;
   }
 
