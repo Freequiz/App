@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_views/edit/edit_create_quiz/error_pop_up.dart';
-import 'package:freequiz/_views/edit/edit_create_quiz/progress_pop_up.dart';
-import 'package:freequiz/_views/subviews/edit/edit_view.dart';
+import 'package:freequiz/_views/edit/pop_ups/error.dart';
+import 'package:freequiz/_views/edit/pop_ups/progress.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/edit_view.dart';
 import 'package:freequiz/controllers/edit/quiz_form.dart';
 import 'package:freequiz/services/api/quizzes.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';

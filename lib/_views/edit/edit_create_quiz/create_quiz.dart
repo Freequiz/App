@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_views/edit/edit_create_quiz/error_pop_up.dart';
-import 'package:freequiz/_views/edit/edit_create_quiz/progress_pop_up.dart';
-import 'package:freequiz/_views/subviews/edit/edit_view.dart';
+import 'package:freequiz/_views/edit/pop_ups/error.dart';
+import 'package:freequiz/_views/edit/pop_ups/progress.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/edit_view.dart';
+import 'package:freequiz/controllers/edit/edit.dart';
 import 'package:freequiz/controllers/edit/quiz_form.dart';
 import 'package:freequiz/services/api/quizzes.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -15,7 +16,7 @@ class CreateQuiz extends StatefulWidget {
 }
 
 class _CreateQuizState extends State<CreateQuiz> {
-  QuizForm quiz = QuizForm();
+  QuizForm quiz = EditController.quiz;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         title: const Text('create quiz').tr(),
         leading: TextButton(
           onPressed: () {
-            if (changed()) {
-              quiz.save(mode: 'create');
-            }
+            if (quiz.changed()) quiz.save(mode: 'create');
             Navigator.of(context).pop();
             widget.refresh();
           },
@@ -52,15 +51,13 @@ class _CreateQuizState extends State<CreateQuiz> {
         behavior: HitTestBehavior.opaque,
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
-          if (changed()) {
-            quiz.save(mode: 'create');
-          }
+          if (quiz.changed()) quiz.save(mode: 'create');
         },
         child: Padding(
           padding: context.mobileLayout
               ? const EdgeInsets.all(10.0)
               : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 10.0),
-          child: EditView(quiz: quiz, mode: 'create'),
+          child: EditView(quiz: quiz, mode: 'create', scanning: true),
         ),
       ),
     );
@@ -90,23 +87,5 @@ class _CreateQuizState extends State<CreateQuiz> {
         ),
       );
     }
-  }
-
-  bool changed() {
-    if (quiz.title.input.text.isNotEmpty) {
-      return true;
-    }
-    if (quiz.description.input.text.isNotEmpty) {
-      return true;
-    }
-    for (var i = 0; i < quiz.wordPairs.length; i++) {
-      if (quiz.wordPairs[i].definition.input.text.isNotEmpty) {
-        return true;
-      }
-      if (quiz.wordPairs[i].answer.input.text.isNotEmpty) {
-        return true;
-      }
-    }
-    return false;
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:freequiz/_views/edit/confirmation.dart';
+import 'package:freequiz/_views/edit/pop_ups/confirmation.dart';
 import 'package:freequiz/_views/_home/home_page/switcher.dart';
 import 'package:freequiz/_views/subviews/category_title.dart';
 import 'package:freequiz/controllers/home/home_page.dart';

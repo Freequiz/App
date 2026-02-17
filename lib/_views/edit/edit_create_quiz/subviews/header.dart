@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/edit/visibility_options.dart';
-import 'package:freequiz/_views/subviews/edit/basic_textfield.dart';
-import 'package:freequiz/_views/subviews/edit/dropdown.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/subviews/basic_textfield.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/subviews/dropdown.dart';
 import 'package:freequiz/controllers/edit/quiz_form.dart';
 import 'package:freequiz/controllers/others/languages.dart';
 import 'package:freequiz/utilities/imports/base.dart';

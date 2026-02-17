@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_views/edit/import_quiz/import.dart';
-import 'package:freequiz/controllers/edit/import.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/create_quiz.dart';
+import 'package:freequiz/controllers/edit/edit.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
 class ImportPopUp extends StatelessWidget {
@@ -41,10 +41,10 @@ class ImportPopUp extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Import.main(textController.value.text);
+                EditController.import(textController.value.text);
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => ImportQuiz(refresh: refresh),
+                  builder: (BuildContext context) => CreateQuiz(refresh: refresh),
                 ));
               },
               child: const Text("done").tr(),

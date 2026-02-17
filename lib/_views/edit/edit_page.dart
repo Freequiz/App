@@ -43,9 +43,9 @@ class _EditPageState extends State<EditPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                CreateButton(refresh: refresh),
-                const SizedBox(width: 10),
                 ImportButton(refresh: refresh),
+                const SizedBox(width: 10),
+                CreateButton(refresh: refresh),
                 const SizedBox(width: 10),
                 ScanButton(refresh: refresh),
               ],

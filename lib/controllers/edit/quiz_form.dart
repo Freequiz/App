@@ -118,6 +118,24 @@ class QuizForm {
     DraftStorage.saveDraft(map);
     QuizHelper.draft = map;
   }
+
+  bool changed() {
+    if (title.input.text.isNotEmpty) {
+      return true;
+    }
+    if (description.input.text.isNotEmpty) {
+      return true;
+    }
+    for (var i = 0; i < wordPairs.length; i++) {
+      if (wordPairs[i].definition.input.text.isNotEmpty) {
+        return true;
+      }
+      if (wordPairs[i].answer.input.text.isNotEmpty) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 class WordPair {

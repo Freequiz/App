@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_views/subviews/edit/add_button.dart';
-import 'package:freequiz/_views/subviews/edit/counter.dart';
-import 'package:freequiz/_views/subviews/edit/header.dart';
-import 'package:freequiz/_views/subviews/edit/list_view.dart';
-import 'package:freequiz/_views/subviews/edit/scan_button.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/subviews/add_button.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/subviews/counter.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/subviews/header.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/subviews/list_view.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/subviews/scan_button.dart';
 import 'package:freequiz/controllers/edit/quiz_form.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
@@ -17,7 +17,7 @@ class EditView extends StatefulWidget {
     required this.quiz,
     required this.mode,
     this.scanning = false,
-  }); //TODO: Fix this to work without scanning parameter
+  });
 
   @override
   State<EditView> createState() => _EditViewState();

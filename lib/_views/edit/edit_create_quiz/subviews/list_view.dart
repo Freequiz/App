@@ -1,4 +1,4 @@
-import 'package:freequiz/_views/subviews/edit/word_pair_view.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/subviews/word_pair_view.dart';
 import 'package:freequiz/controllers/edit/quiz_form.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 

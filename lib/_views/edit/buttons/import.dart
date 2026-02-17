@@ -1,4 +1,4 @@
-import 'package:freequiz/_views/edit/import_quiz/pop_up.dart';
+import 'package:freequiz/_views/edit/pop_ups/import.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ImportButton extends StatelessWidget {

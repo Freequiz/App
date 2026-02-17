@@ -1,4 +1,4 @@
-import 'package:freequiz/_views/edit/confirmation.dart';
+import 'package:freequiz/_views/edit/pop_ups/confirmation.dart';
 import 'package:freequiz/_views/subviews/buttons/edit.dart';
 import 'package:freequiz/_views/subviews/quiz_tile/backgrounds/delete.dart';
 import 'package:freequiz/_views/subviews/quiz_tile/dismissible.dart';

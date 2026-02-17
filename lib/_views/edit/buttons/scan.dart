@@ -1,4 +1,4 @@
-import 'package:freequiz/_views/edit/scan.dart/pop_up.dart';
+import 'package:freequiz/_views/edit/pop_ups/scan.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ScanButton extends StatelessWidget {

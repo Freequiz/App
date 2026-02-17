@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/_views/edit/scan.dart/scan.dart';
-import 'package:freequiz/controllers/edit/scan.dart';
+import 'package:freequiz/_views/edit/edit_create_quiz/create_quiz.dart';
+import 'package:freequiz/controllers/edit/edit.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 
 class ScanPopUp extends StatefulWidget {
@@ -44,7 +44,7 @@ class _ScanPopUpState extends State<ScanPopUp> {
                 setState(() {
                   processing = true;
                 });
-                await Scan.main();
+                await EditController.scan();
                 if (!context.mounted) return;
 
                 Navigator.of(context).pop();
@@ -52,7 +52,7 @@ class _ScanPopUpState extends State<ScanPopUp> {
                 if (!widget.addToExisting) {
                   Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      ScanQuiz(refresh: widget.refresh),
+                      CreateQuiz(refresh: widget.refresh),
                   ));
                   return;
                 }
