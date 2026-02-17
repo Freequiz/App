@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:freequiz/_views/edit/created_quizzes/list_quizzes.dart';
-import 'package:freequiz/_views/edit/edit_overview.dart';
-import 'package:freequiz/loading/error_loading/view.dart';
-import 'package:freequiz/services/api/users.dart';
-import 'package:freequiz/loading/loading_screen/animation.dart';
+import 'dart:math';
+import 'package:freequiz/_views/edit/buttons/create.dart';
+import 'package:freequiz/_views/edit/buttons/import.dart';
+import 'package:freequiz/_views/edit/buttons/scan.dart';
+import 'package:freequiz/loading/load_draft.dart';
+import 'package:freequiz/loading/load_edit.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
+
 
 class EditPage extends StatefulWidget {
   const EditPage({super.key});
@@ -13,50 +15,55 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
+  bool draft = false;
+  Key key = Key(Random().toString());
+
+  void refresh() {
+    setState(() {
+      key = Key(Random().toString());
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FutureBuilder<Map>(
-        future: APIUsers.getQuizzesAndDraft(1),
-        builder: (context, data) {
-          if (data.hasData) {
-            if (data.data!["success"]) {
-              ListQuizzes.data = data.data!['data'];
-              ListQuizzes.more = data.data!['next_page'];
-              return LoadingAnimation(
-                message: "Loading Quizzes",
-                finishedLoading: true,
-                widget: EditOverview(
-                  data: data.data!['data'],
-                ),
-              );
-            }
-            return Navigator(
-              onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => ErrorLoadingView(
-                  error: data.data?["message"] ?? data.data!["token"],
-                  widget: const EditPage(),
-                  argument: data.data?["reason"] != null ? [data.data!["reason"]] : null,
-                  appBar: false,
-                ),
-              ),
-            );
-          } else if (data.hasError) {
-            return Navigator(
-              onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => ErrorLoadingView(
-                  error: data.data!["message"],
-                  widget: const EditPage(),
-                  appBar: false,
-                ),
-              ),
-            );
-          }
-          return const LoadingAnimation(
-            message: "Loading Quizzes",
-          );
-        },
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          color: context.darkMode ? darkMainColor : lightMainColor,
+          width: double.maxFinite,
+          padding: EdgeInsets.only(
+            right: context.mobileLayout ? 0.0 : 20,
+            left: context.mobileLayout ? 0.0 : 20,
+            top: 10,
+            bottom: 15.0,
+          ),
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CreateButton(refresh: refresh),
+                const SizedBox(width: 10),
+                ImportButton(refresh: refresh),
+                const SizedBox(width: 10),
+                ScanButton(refresh: refresh),
+              ],
+            ),
+          )
+        ),
+        SizedBox(height: context.mobileLayout ? 15 : 45),
+        LoadDraft(refresh: refresh),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: LoadEdit(
+              keyChild: key,
+              refresh: refresh,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
