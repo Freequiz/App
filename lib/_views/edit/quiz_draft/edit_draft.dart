@@ -50,7 +50,6 @@ class _EditDraftState extends State<EditDraft> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('draft').tr(),
-        backgroundColor: context.darkMode ? grayFreequiz : blueLight,
         leading: TextButton(
           onPressed: () {
             quiz.save(mode: mode, id: id);

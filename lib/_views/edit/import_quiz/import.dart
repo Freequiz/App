@@ -24,7 +24,7 @@ class _ImportQuizState extends State<ImportQuiz> {
           onPressed: () {
             Import.quiz.save(mode: 'create');
             Navigator.of(context).pop();
-            widget.refresh(null);
+            widget.refresh();
           },
           child: const Icon(
             Icons.arrow_back_ios,

@@ -151,10 +151,9 @@ class APIUsers {
     return Api.decodeResponse(response);
   }
 
-  static Future<Map> getQuizzesAndDraft(int page) async {
-    final map = getQuizzes(page);
+  static Future<Map> getDraft() async {
     QuizHelper.draft = await DraftStorage.loadDraft();
-    return map;
+    return {"success": true};
   }
 
   static Future<Map> getQuizzes(int page) async {

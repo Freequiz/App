@@ -222,5 +222,10 @@
     "request timed out": "No internet connection",
 
     "import quiz": "Import Quiz",
-    "import quiz text": "To import a quiz you can paste text in the textfield. The words and the translations should be seperated by a tab and the wordpairs should be seperated by a line break."
+    "import quiz text": "To import a quiz you can paste text in the textfield. The words and the translations should be seperated by a tab and the wordpairs should be seperated by a line break.",
+
+    "scan quiz": "Scan Quiz",
+    "scan quiz text": "Select a vocabulary image from your photo library. Only the vocabulary should be visible and the vocabulary should be centered. The text will then be automatically recognized and turned into a quiz. \nPlease note: Text recognition is not perfect and errors often occur. Check the words after scanning.",
+
+    "okay": "Okay"
 }

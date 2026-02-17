@@ -3,14 +3,21 @@ import 'package:freequiz/_views/subviews/edit/add_button.dart';
 import 'package:freequiz/_views/subviews/edit/counter.dart';
 import 'package:freequiz/_views/subviews/edit/header.dart';
 import 'package:freequiz/_views/subviews/edit/list_view.dart';
+import 'package:freequiz/_views/subviews/edit/scan_button.dart';
 import 'package:freequiz/controllers/edit/quiz_form.dart';
-import 'package:freequiz/utilities/imports/base.dart';
+import 'package:freequiz/utilities/imports/utilities.dart';
 
 class EditView extends StatefulWidget {
   final QuizForm quiz;
   final String mode;
+  final bool scanning;
 
-  const EditView({super.key, required this.quiz, required this.mode});
+  const EditView({
+    super.key,
+    required this.quiz,
+    required this.mode,
+    this.scanning = false,
+  }); //TODO: Fix this to work without scanning parameter
 
   @override
   State<EditView> createState() => _EditViewState();
@@ -50,7 +57,15 @@ class _EditViewState extends State<EditView> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [const SizedBox(width: 70), AddButton(add: add), Counter(amount: widget.quiz.wordPairs.length)],
+          children: [
+            Conditional(
+              condition: widget.scanning,
+              widget: ScanButton(refresh: () => setState(() {})),
+              defaultWidget: SizedBox(width: 70),
+            ),
+            AddButton(add: add),
+            Counter(amount: widget.quiz.wordPairs.length)
+          ],
         )
       ],
     );
