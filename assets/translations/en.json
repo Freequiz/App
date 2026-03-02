@@ -227,5 +227,8 @@
     "scan quiz": "Scan Quiz",
     "scan quiz text": "Select a vocabulary image from your photo library. Only the vocabulary should be visible and the vocabulary should be centered. The text will then be automatically recognized and turned into a quiz. \nPlease note: Text recognition is not perfect and errors often occur. Check the words after scanning.",
 
-    "okay": "Okay"
+    "okay": "Okay",
+
+    "user.notverified title": "E-Mail not verified",
+    "user.notverified description": "Your e-mail is not verified. You need to verify your e-mail to be able to do this action."
 }

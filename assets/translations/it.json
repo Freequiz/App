@@ -180,5 +180,8 @@
     "scan quiz": "Scansiona Quiz",
     "scan quiz text": "Seleziona un'immagine di vocabolario dalla tua libreria fotografica. Il testo verrà automaticamente riconosciuto e trasformato in un quiz. \nNota: il riconoscimento del testo non è perfetto e spesso si verificano errori. Controlla le parole dopo la scansione.",
     
-    "okay": "Ok"
+    "okay": "Ok",
+
+    "user.notverified title": "E-mail non verificata",
+    "user.notverified description": "La tua e-mail non è verificata. Devi verificare la tua e-mail per poter eseguire questa azione."
   }

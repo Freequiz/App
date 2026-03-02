@@ -180,5 +180,8 @@
     "scan quiz": "Scanner un Quiz",
     "scan quiz text": "Sélectionnez une image de vocabulaire dans votre photothèque. Seulement le vocabulaire doit être visible et le vocabulaire doit être centré. Le texte sera automatiquement reconnu et transformé en quiz. \nAttention : la reconnaissance de texte n'est pas parfaite et des erreurs peuvent se produire. Vérifiez les mots après la numérisation.",
 
-    "okay": "Ok"
+    "okay": "Ok",
+
+    "user.notverified title": "E-Mail non vérifiée",
+    "user.notverified description": "Votre adresse e-mail n'est pas vérifiée. Vous devez la vérifier pour pouvoir effectuer cette action."
   }
