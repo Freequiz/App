@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  flutter_test:
+    name: Run Flutter Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - uses: nanasess/setup-chromedriver@v2.2.2
+          
+
+      - name: Initialize repository
+        run: flutter pub get
+      - run: flutter --version
+      - run: flutter analyze
+
+      - name: Enable Web Development
+        run: flutter  config --enable-web
+
+      - run: flutter create .
+
+      - name: Start Chrome Driver
+        run: |
+          sudo chromedriver --enable
+          chromedriver --port 4444 &
+
+      - name: Run Tests
+        run: flutter test integration_test
