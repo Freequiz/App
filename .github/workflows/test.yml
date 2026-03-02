@@ -31,6 +31,9 @@ jobs:
       - name: Analyze App
         run: flutter analyze
 
+      - name: Build Android debug APK
+        run: flutter build apk --debug
+
       - name: Run integration tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -45,7 +48,7 @@ jobs:
             -no-audio
             -no-boot-anim
             -gpu swiftshader_indirect
-            -memory 2048
+            -memory 1536
             -cores 2
             -no-metrics
           script: |
@@ -53,4 +56,4 @@ jobs:
             adb start-server
             adb wait-for-device
             adb devices
-            flutter test integration_test
+            flutter test integration_test --verbose
