@@ -31,9 +31,7 @@ jobs:
       - run: flutter create .
 
       - name: Start Chrome Driver
-        run: |
-          sudo chromedriver --enable
-          chromedriver --port 4444 &
+        run: sudo chromedriver --enable
 
       - name: Run Tests
         run: flutter test integration_test
