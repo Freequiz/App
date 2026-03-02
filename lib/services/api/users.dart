@@ -105,6 +105,11 @@ class APIUsers {
     }
   }
 
+  static Future<void> logout() async {
+    final response = await Api.httpDelete(path: 'user/logout');
+    debugPrint(response.toString());
+  }
+
   static Future<void> refresh() async {
     if (!newAccessToken && Profile.accessToken != "") {
       final response = await Api.httpPost(path: 'user/refresh', body: '');

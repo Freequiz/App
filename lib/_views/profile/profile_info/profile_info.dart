@@ -6,6 +6,7 @@ import 'package:freequiz/_views/profile/profile_info/username.dart';
 import 'package:freequiz/_views/profile/profile.dart';
 import 'package:freequiz/_views/subviews/buttons/long_button.dart';
 import 'package:freequiz/_views/subviews/category_title.dart';
+import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -56,6 +57,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   ),
                   LongButton(
                     onPressed: () async {
+                      APIUsers.logout();
                       Profile.accessToken = "";
                       widget.refresh();
                       Profile.deleteData();
