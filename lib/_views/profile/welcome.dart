@@ -60,6 +60,7 @@ class Welcome extends StatelessWidget {
 
   Widget button(BuildContext context, Widget widget, String text, Color backgroundColor) {
     return TextButton(
+      key: ValueKey(text),
       style: TextButton.styleFrom(
         backgroundColor: backgroundColor,
         foregroundColor: gray55,

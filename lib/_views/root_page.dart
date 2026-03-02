@@ -79,7 +79,7 @@ class _RootPageState extends State<RootPage> {
                   BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
                   BottomNavigationBarItem(icon: Icon(Icons.edit), label: ""),
                   BottomNavigationBarItem(icon: Icon(Icons.bug_report_rounded), label: ""),
-                  BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+                  BottomNavigationBarItem(key: ValueKey("profilePageButton"), icon: Icon(Icons.person), label: ""),
                 ],
                 currentIndex: currentPage,
                 onTap: switchPage,

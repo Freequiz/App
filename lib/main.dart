@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:freequiz/root.dart';
 import 'package:freequiz/utilities/imports/themes.dart';
 import 'package:app_links/app_links.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -16,17 +16,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await Preferences.getTheme();
 
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode && false,
-      builder: (context) => EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('de'), Locale('fr'), Locale('it')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        child: const MyApp(),
-      ),
-    ),
-  );
+  runApp(AppRoot());
 }
 
 class MyApp extends StatefulWidget {

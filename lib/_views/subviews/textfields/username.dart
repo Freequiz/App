@@ -8,7 +8,13 @@ class UsernameTextfield extends StatefulWidget {
   final Function? onSubmitted;
   final Iterable<String>? autofillHints;
 
-  const UsernameTextfield({super.key, required this.username, required this.focusNode, this.onSubmitted, required this.autofillHints});
+  const UsernameTextfield({
+    super.key,
+    required this.username,
+    required this.focusNode,
+    this.onSubmitted,
+    required this.autofillHints,
+  });
 
   @override
   State<UsernameTextfield> createState() => _UsernameTextfieldState();

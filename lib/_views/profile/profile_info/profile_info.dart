@@ -28,14 +28,20 @@ class _ProfileInfoState extends State<ProfileInfo> {
       },
       child: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.mobileLayout ? 10.0 : context.screenWidth / 5.5),
+          padding: EdgeInsets.symmetric(
+              horizontal:
+                  context.mobileLayout ? 10.0 : context.screenWidth / 5.5),
           child: ListView(
             children: [
               SizedBox(height: context.screenHeight / 60),
-              CategoryTitle(icon: Symbols.dark_mode_rounded, color: rose, title: 'appearance'),
+              CategoryTitle(
+                  icon: Symbols.dark_mode_rounded,
+                  color: rose,
+                  title: 'appearance'),
               const DarkModeSwitcher(),
               SizedBox(height: context.screenHeight / 60),
-              CategoryTitle(icon: Symbols.person, color: purple, title: 'account'),
+              CategoryTitle(
+                  icon: Symbols.person, color: purple, title: 'account'),
               Username(refresh: widget.refresh),
               const SizedBox(height: 10.0),
               EMail(refresh: widget.refresh),
@@ -45,9 +51,13 @@ class _ProfileInfoState extends State<ProfileInfo> {
               Row(
                 children: [
                   LongButton(
+                    key: ValueKey('deleteAccountButton'),
                     onPressed: () async {
                       showDialog(
-                          context: context, builder: (BuildContext context) => Confirmation(refresh: widget.refresh));
+                        context: context,
+                        builder: (BuildContext context) =>
+                            Confirmation(refresh: widget.refresh),
+                      );
                     },
                     text: 'delete account',
                     color: context.darkMode ? redDark : redMedium,

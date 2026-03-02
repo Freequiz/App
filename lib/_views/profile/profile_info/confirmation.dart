@@ -46,6 +46,7 @@ class _ConfirmationState extends State<Confirmation> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
+                      key: ValueKey("confirmDeletionButton"),
                       onPressed: () async {
                         await APIUsers.deleteAccount(data.data!["token"], destroyQuizzes);
                         if (context.mounted) Navigator.of(context).pop();
