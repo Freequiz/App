@@ -58,9 +58,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   LongButton(
                     onPressed: () async {
                       APIUsers.logout();
-                      Profile.accessToken = "";
-                      widget.refresh();
                       Profile.deleteData();
+                      widget.refresh();
                     },
                     text: 'logout',
                   ),
