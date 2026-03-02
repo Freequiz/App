@@ -31,6 +31,9 @@ jobs:
       - name: Analyze App
         run: flutter analyze
 
+      - name: Set Architecture
+        run: flutter config --android-abi=x86
+
       - name: Build Android debug APK
         run: flutter build apk --debug
 
