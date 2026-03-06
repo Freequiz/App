@@ -13,10 +13,10 @@ void main() {
   binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
 
   testWidgets(
-    'Test Login',
+    'Test Sign up',
     (WidgetTester tester) async {
       app.main();
-      await tester.pump(const Duration(seconds: 5));
+      await tester.pump(const Duration(seconds: 10));
 
       WelcomeScreen welcomeScreen = WelcomeScreen(tester);
       await welcomeScreen.navigateToSignup();

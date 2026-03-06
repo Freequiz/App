@@ -56,6 +56,9 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        // Needed for Android Device Testing
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -72,6 +75,14 @@ android {
            signingConfig signingConfigs.release
        }
    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+
+    // https://developer.android.com/jetpack/androidx/releases/test/#1.2.0
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
