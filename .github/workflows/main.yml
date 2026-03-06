@@ -1,0 +1,66 @@
+name: Integration Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    
+jobs:
+  integration-test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: "17"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.38.9"
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build debug APK
+        run: flutter build apk --debug
+        
+      - name: Build androidTest APK
+        run: |
+            pushd android
+            ./gradlew app:assembleAndroidTest
+            ./gradlew app:assembleDebug -Ptarget="integration_test/app_test.dart"
+            popd   
+            
+      - uses: google-github-actions/setup-gcloud@v2.1.0
+        with:
+          project_id: "freequiz-firebase"
+          
+      - name: Download gcloud config json file
+        id: gcloud_config
+        uses: timheuer/base64-to-file@v1.0.3
+        with:
+            fileName: integration_test_gcloud.json
+            encodedString: ${{  secrets.INTEGRATION_TEST_GCLOUD  }}      
+        
+      - name: Configure the gcloud account
+        run: |
+           gcloud auth activate-service-account --key-file="${{  steps.gcloud_config.outputs.filePath  }}"
+           pushd build
+           gcloud firebase test android run --type=instrumentation \
+           --app "app/outputs/apk/debug/app-debug.apk" \
+           --test "app/outputs/apk/androidTest/debug/app-debug-androidTest.apk" \
+           --device-ids=MediumPhone.arm \
+           --os-version-ids=33 \
+           --orientations=portrait \
+           --use-orchestrator \
+           --timeout 3m \
