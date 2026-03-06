@@ -18,7 +18,7 @@ class _LearningModesState extends State<LearningModes> {
   @override
   Widget build(BuildContext context) {
     double width = context.mobileLayout ? (context.screenWidth - 75) / 4 : (context.screenWidth - 100) / 4;
-    double height = context.mobileLayout ? width : 80 ;
+    double height = context.mobileLayout ? width + 20 : 80 ;
 
     return Container(
       width: context.screenWidth,

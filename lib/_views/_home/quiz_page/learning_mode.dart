@@ -10,7 +10,12 @@ class LearningMode extends StatelessWidget {
   final int i;
   final Function refresh;
 
-  const LearningMode({super.key, required this.height, required this.width, required this.i, required this.refresh});
+  const LearningMode(
+      {super.key,
+      required this.height,
+      required this.width,
+      required this.i,
+      required this.refresh});
 
   final List<IconData> icons = const [
     Symbols.magic_button,
@@ -28,11 +33,25 @@ class LearningMode extends StatelessWidget {
         style: TextButton.styleFrom(
           backgroundColor: colors[i].light,
           foregroundColor: colors[i].dark,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(height / 4)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(height / 5.5)),
         ),
         onPressed: () => loadLearning(context, i, refresh),
         child: LayoutWidget(
-          mobile: icon(),
+          mobile: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: icon(),
+              ),
+              Text(
+                context.tr(Learning.modes[i]),
+                style: fontSize(FontSize.secondary),
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
           tablet: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -44,7 +63,9 @@ class LearningMode extends StatelessWidget {
                 width: width - height / 2 - 44,
                 child: Text(
                   context.tr(Learning.modes[i]),
-                  style: context.screenWidth > 900 ? titleStyle() : fontSize(FontSize.secondary),
+                  style: context.screenWidth > 900
+                      ? titleStyle()
+                      : fontSize(FontSize.secondary),
                   maxLines: 2,
                 ),
               ),
