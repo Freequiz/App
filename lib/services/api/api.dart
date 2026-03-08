@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freequiz/_views/profile/profile.dart';
 import 'package:http/http.dart';
 
 class Api {
-  static const basePath = "https://www.freequiz.ch/api/";
+  static const basePath = kReleaseMode ? "https://www.freequiz.ch/api/" : "https://test.freequiz.ch/api/";
 
   static String noConnection = 'no connection';
   static String timeout = 'request timed out';
