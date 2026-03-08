@@ -1,6 +1,9 @@
 name: Integration Test
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -36,27 +39,25 @@ jobs:
             pushd android
             ./gradlew app:assembleAndroidTest
             ./gradlew app:assembleDebug -Ptarget="integration_test/app_test.dart"
-            popd   
-            
-      - uses: google-github-actions/setup-gcloud@v2.1.0
+            popd
+
+      - name: Authenticate to GCLOUD
+        uses: 'google-github-actions/auth@v3'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: Setup GCLOUD
+        uses: google-github-actions/setup-gcloud@v2.1.0
         with:
           project_id: "freequiz-firebase"
-          
-      - name: Download gcloud config json file
-        id: gcloud_config
-        uses: timheuer/base64-to-file@v1.0.3
-        with:
-            fileName: integration_test_gcloud.json
-            encodedString: ${{  secrets.INTEGRATION_TEST_GCLOUD  }}      
         
-      - name: Configure the gcloud account
+      - name: Firebase Integration Test
         run: |
-           gcloud auth activate-service-account --key-file="${{  steps.gcloud_config.outputs.filePath  }}"
            pushd build
            gcloud firebase test android run --type=instrumentation \
            --app "app/outputs/apk/debug/app-debug.apk" \
            --test "app/outputs/apk/androidTest/debug/app-debug-androidTest.apk" \
-           --device-ids=MediumPhone.arm \
+           --device-ids=panther,MediumPhone.arm,SmallPhone.arm \
            --os-version-ids=33 \
            --orientations=portrait \
            --use-orchestrator \
