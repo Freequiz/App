@@ -119,7 +119,7 @@
 
     "email": "E-Mail",
     "email success": "E-Mail erfolgreich geändert",
-    "invalid email": "Invalide E-Mail",
+    "email invalid": "Invalide E-Mail",
     "email taken": "E-Mail ist vergeben",
 
     "username change": "Benutzername erfolgreich geändert",

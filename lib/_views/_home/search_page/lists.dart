@@ -1,4 +1,4 @@
-import 'package:freequiz/controllers/home/search.dart';
+import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/_views/_home/search_page/user_tile.dart';
 import 'package:freequiz/_views/subviews/quiz_tile/quiz_tile.dart';
 import 'package:freequiz/utilities/imports/base.dart';

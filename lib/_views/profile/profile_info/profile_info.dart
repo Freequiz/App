@@ -3,7 +3,7 @@ import 'package:freequiz/_views/profile/profile_info/dark_mode_switcher.dart';
 import 'package:freequiz/_views/profile/profile_info/email.dart';
 import 'package:freequiz/_views/profile/profile_info/password.dart';
 import 'package:freequiz/_views/profile/profile_info/username.dart';
-import 'package:freequiz/_views/profile/profile.dart';
+import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:freequiz/_views/subviews/buttons/long_button.dart';
 import 'package:freequiz/_views/subviews/category_title.dart';
 import 'package:freequiz/services/api/users.dart';

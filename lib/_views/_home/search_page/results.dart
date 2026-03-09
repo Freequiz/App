@@ -1,5 +1,5 @@
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:freequiz/controllers/home/search.dart';
+import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/_views/subviews/buttons/load_more.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:provider/provider.dart';

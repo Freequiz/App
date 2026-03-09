@@ -2,7 +2,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/_views/edit/pop_ups/confirmation.dart';
 import 'package:freequiz/_views/_home/home_page/switcher.dart';
 import 'package:freequiz/_views/subviews/category_title.dart';
-import 'package:freequiz/controllers/home/home_page.dart';
+import 'package:freequiz/controllers/_home/home_page.dart';
 import 'package:freequiz/loading/load_quiz_list.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:provider/provider.dart';

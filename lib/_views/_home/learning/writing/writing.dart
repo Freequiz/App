@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/_home/learning/writing/writing_body.dart';
-import 'package:freequiz/controllers/home/learning/writing.dart';
+import 'package:freequiz/controllers/_home/learning/writing.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 import 'package:provider/provider.dart';
 

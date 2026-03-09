@@ -1,4 +1,4 @@
-import 'package:freequiz/_views/profile/profile.dart';
+import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/services/local_storage/database.dart';
 import 'package:freequiz/services/local_storage/preferences.dart';

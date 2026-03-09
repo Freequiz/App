@@ -17,7 +17,7 @@ class _AppState extends State<App> {
       future: initialLoading(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return const RootPage();
+          return RootPage();
         } else {
           return const Drawer();
         }

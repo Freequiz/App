@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:freequiz/_views/profile/profile.dart';
+import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:http/http.dart';
 
 class Api {

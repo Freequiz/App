@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freequiz/services/local_storage/draft_storage.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 import 'package:http/http.dart' as http;
-import 'package:freequiz/_views/profile/profile.dart';
+import 'package:freequiz/controllers/profile/profile.dart';
 
 import 'api.dart';
 

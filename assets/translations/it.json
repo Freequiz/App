@@ -94,7 +94,7 @@
     "password length 2": "Lettera minuscola, cifra",
     "email": "e-mail",
     "email success": "L'e-mail è stata modificata correttamente",
-    "invalid email": "E-mail non valida",
+    "email invalid": "E-mail non valida",
     "email taken": "L'e-mail è stata presa",
     "username change": "Il nome utente è stato modificato correttamente",
     "username invalid": "Nome utente non valido",

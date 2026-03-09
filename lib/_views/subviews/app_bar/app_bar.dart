@@ -1,4 +1,4 @@
-import 'package:freequiz/controllers/home/search.dart';
+import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/_views/subviews/app_bar/search_button.dart';
 import 'package:freequiz/_views/subviews/app_bar/search_field.dart';
 import 'package:freequiz/_views/subviews/app_bar/navigation_bar.dart';

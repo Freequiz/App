@@ -1,5 +1,5 @@
 import 'package:freequiz/_views/subviews/switcher/switcher.dart';
-import 'package:freequiz/controllers/home/search.dart';
+import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 import 'package:provider/provider.dart';
 

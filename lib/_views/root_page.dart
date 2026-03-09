@@ -1,12 +1,12 @@
 import 'package:freequiz/_views/bug_reporter/bug_report_page.dart';
 import 'package:freequiz/_views/edit/edit_page.dart';
-import 'package:freequiz/_views/profile/profile.dart';
+import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:freequiz/_views/profile/profile_page.dart';
 import 'package:freequiz/_views/profile/welcome.dart';
 import 'package:freequiz/_views/_home/home_page/home_page.dart';
-import 'package:freequiz/controllers/home/search.dart';
+import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/_views/subviews/app_bar/app_bar.dart';
-import 'package:freequiz/controllers/home/home_page.dart';
+import 'package:freequiz/controllers/_home/home_page.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:provider/provider.dart';
 
