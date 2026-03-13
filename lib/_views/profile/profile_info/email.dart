@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/subviews/buttons/submit.dart';
 import 'package:freequiz/_views/subviews/textfields/email.dart';
-import 'package:freequiz/models/textfield_data.dart';
-import 'package:freequiz/services/api/users.dart';
+import 'package:freequiz/controllers/profile/profile_info.dart';
 import 'package:freequiz/controllers/user/helper.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
 class EMail extends StatefulWidget {
   final Function refresh;
@@ -15,13 +15,10 @@ class EMail extends StatefulWidget {
 }
 
 class _EMailState extends State<EMail> {
-  TextFieldData newEmail = TextFieldData(hint: 'email'.tr());
-  bool edit = false;
-  bool pressed = false;
-
   @override
   Widget build(BuildContext context) {
-    final textColor = context.darkMode ? Colors.white : gray40;
+    final controller = Provider.of<ProfileInfoController>(context);
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.screenHeight / 100),
@@ -39,47 +36,36 @@ class _EMailState extends State<EMail> {
                 ).tr(),
                 const Spacer(),
                 Text(UserHelper.user!.email),
-                const SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10),
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      edit = !edit;
-                    });
-                  },
-                  child: Icon(
-                    edit ? Icons.clear : Icons.edit,
-                    color: textColor,
-                  ),
+                  onTap: () => controller.toggleEditEmail(),
+                  child: Icon(controller.icon(controller.editEmail)),
                 ),
               ],
             ),
             Visibility(
-              visible: edit,
+              visible: controller.editEmail,
               child: SizedBox(height: context.screenHeight / 60),
             ),
             Visibility(
-              visible: edit,
+              visible: controller.editEmail,
               child: IntrinsicHeight(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Flexible(
                       child: EmailTextfield(
-                        email: newEmail,
+                        email: controller.newEmail,
                         focusNode: FocusNode(),
-                        onSubmitted: changeEmail,
+                        onSubmitted: controller.changeEmail,
                       ),
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
+                    const SizedBox(width: 5),
                     SubmitButton(
-                      pressed: pressed,
+                      pressed: controller.pressedEmail,
                       onPressed: () {
                         FocusScope.of(context).unfocus();
-                        changeEmail();
+                        controller.changeEmail();
                       },
                     ),
                   ],
@@ -90,42 +76,5 @@ class _EMailState extends State<EMail> {
         ),
       ),
     );
-  }
-
-  void changeEmail() async {
-    pressed = true;
-    if (newEmail.input.text.isEmpty) {
-      newEmail.hint = 'blank'.tr();
-    } else {
-      final Map map = await APIUsers.updateAccount(email: newEmail.input.text);
-      if (map["success"] == true) {
-        setState(() {
-          UserHelper.user!.email = newEmail.input.text;
-          newEmail.input.clear();
-          newEmail.hint = 'email success'.tr();
-          newEmail.color = Colors.green;
-          newEmail.error = false;
-          newEmail.changed = true;
-        });
-        widget.refresh();
-      } else if (map["token"] == "record.invalid") {
-        setState(() {
-          newEmail.input.clear();
-          newEmail.hint = 'invalid email'.tr();
-          newEmail.color = Colors.red;
-          newEmail.error = true;
-          newEmail.changed = false;
-        });
-      } else if (map["message"] == "Email is taken") {
-        setState(() {
-          newEmail.input.clear();
-          newEmail.hint = 'email taken'.tr();
-          newEmail.color = Colors.red;
-          newEmail.error = true;
-          newEmail.changed = false;
-        });
-      }
-    }
-    pressed = false;
   }
 }

@@ -1,8 +1,10 @@
 import 'package:freequiz/_views/profile/profile_info/profile_info.dart';
+import 'package:freequiz/controllers/profile/profile_info.dart';
 import 'package:freequiz/loading/error_loading/view.dart';
 import 'package:freequiz/loading/loading_screen/animation.dart';
 import 'package:freequiz/controllers/user/manage.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   final Function refresh;
@@ -19,7 +21,10 @@ class ProfilePage extends StatelessWidget {
               return LoadingAnimation(
                 message: "Loading Profile",
                 finishedLoading: true,
-                widget: ProfileInfo(refresh: refresh),
+                widget: ChangeNotifierProvider(
+                  create: (_) => ProfileInfoController(),
+                  child: ProfileInfo(refresh: refresh),
+                ),
               );
             }
             return Navigator(

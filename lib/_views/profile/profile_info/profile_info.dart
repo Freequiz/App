@@ -6,9 +6,11 @@ import 'package:freequiz/_views/profile/profile_info/username.dart';
 import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:freequiz/_views/subviews/buttons/long_button.dart';
 import 'package:freequiz/_views/subviews/category_title.dart';
+import 'package:freequiz/controllers/profile/profile_info.dart';
 import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:provider/provider.dart';
 
 class ProfileInfo extends StatefulWidget {
   final Function refresh;
@@ -21,6 +23,7 @@ class ProfileInfo extends StatefulWidget {
 class _ProfileInfoState extends State<ProfileInfo> {
   @override
   Widget build(BuildContext context) {
+    Provider.of<ProfileInfoController>(context);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {

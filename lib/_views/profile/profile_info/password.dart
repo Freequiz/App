@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/subviews/buttons/submit.dart';
 import 'package:freequiz/_views/subviews/textfields/password.dart';
 import 'package:freequiz/_views/subviews/textfields/password_confirmation.dart';
-import 'package:freequiz/models/textfield_data.dart';
-import 'package:freequiz/services/api/users.dart';
+import 'package:freequiz/controllers/profile/profile_info.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
 class Password extends StatefulWidget {
   final Function refresh;
@@ -15,12 +15,6 @@ class Password extends StatefulWidget {
 }
 
 class _PasswordState extends State<Password> {
-  TextFieldData newPassword = TextFieldData(hint: 'password'.tr(), shown: false);
-  TextFieldData newPasswordConfirmation = TextFieldData(hint: 'confirm password'.tr(), shown: false);
-  TextFieldData oldPassword = TextFieldData(hint: 'old password'.tr(), shown: false);
-  bool edit = false;
-  bool pressed = false;
-
   late FocusNode focusNode;
 
   @override
@@ -31,7 +25,8 @@ class _PasswordState extends State<Password> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = context.darkMode ? Colors.white : gray40;
+    final controller = Provider.of<ProfileInfoController>(context);
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.screenHeight / 100),
@@ -49,69 +44,60 @@ class _PasswordState extends State<Password> {
                 ).tr(),
                 const Spacer(),
                 const Text("· · · · · · · ·"),
-                const SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10),
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      edit = !edit;
-                    });
-                  },
-                  child: Icon(
-                    edit ? Icons.clear : Icons.edit,
-                    color: textColor,
-                  ),
+                  onTap: () => controller.toggleEditPassword(),
+                  child: Icon(controller.icon(controller.editPassword)),
                 ),
               ],
             ),
             Visibility(
-              visible: edit,
+              visible: controller.editPassword,
               child: SizedBox(height: context.screenHeight / 60),
             ),
             Visibility(
-              visible: edit,
+              visible: controller.editPassword,
               child: PasswordTextfield(
-                password: oldPassword,
-                focusNode: focusNode,
-                textInputAction: TextInputAction.next,
-                autofillHints: const [AutofillHints.newPassword],
-              ),
-            ),
-            Visibility(visible: edit, child: Space.height(5.0)),
-            Visibility(
-              visible: edit,
-              child: PasswordTextfield(
-                password: newPassword,
+                password: controller.oldPassword,
                 focusNode: focusNode,
                 textInputAction: TextInputAction.next,
                 autofillHints: const [AutofillHints.newPassword],
               ),
             ),
             Visibility(
-              visible: edit,
+                visible: controller.editPassword, child: Space.height(5.0)),
+            Visibility(
+              visible: controller.editPassword,
+              child: PasswordTextfield(
+                password: controller.newPassword,
+                focusNode: focusNode,
+                textInputAction: TextInputAction.next,
+                autofillHints: const [AutofillHints.newPassword],
+              ),
+            ),
+            Visibility(
+              visible: controller.editPassword,
               child: Space.height(5.0),
             ),
             Visibility(
-              visible: edit,
+              visible: controller.editPassword,
               child: IntrinsicHeight(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Flexible(
                       child: PasswordConfirmationTextfield(
-                        passwordConfirmation: newPasswordConfirmation,
-                        onSubmitted: () => changePassword,
+                        passwordConfirmation:
+                            controller.newPasswordConfirmation,
+                        onSubmitted: () => controller.changePassword,
                       ),
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
+                    const SizedBox(width: 5),
                     SubmitButton(
-                      pressed: pressed,
+                      pressed: controller.pressedPassword,
                       onPressed: () {
                         FocusScope.of(context).unfocus();
-                        changePassword();
+                        controller.changePassword();
                       },
                     ),
                   ],
@@ -122,60 +108,5 @@ class _PasswordState extends State<Password> {
         ),
       ),
     );
-  }
-
-  void changePassword() async {
-    pressed = true;
-    final Map map = await APIUsers.updateAccount(
-        password: newPassword.input.text,
-        passwordConfirmation: newPasswordConfirmation.input.text,
-        oldPassword: oldPassword.input.text);
-    if (map["success"] == true) {
-      setState(() {
-        newPassword.input.clear();
-        newPasswordConfirmation.input.clear();
-        oldPassword.input.clear();
-        oldPassword.hint = 'password change'.tr();
-        newPassword.hint = 'successfully'.tr();
-        newPasswordConfirmation.hint = "";
-        oldPassword.color = Colors.green;
-        newPassword.color = Colors.green;
-        newPasswordConfirmation.color = Colors.green;
-        oldPassword.error = false;
-      });
-    }
-    else if (map["message"] == "Password doesn't meet requirements") {
-      setState(() {
-        newPassword.input.clear();
-        newPasswordConfirmation.input.clear();
-        newPassword.hint = 'password length 1'.tr();
-        newPasswordConfirmation.hint = 'password length 2'.tr();
-        newPassword.color = Colors.red;
-        newPassword.error = true;
-        newPasswordConfirmation.color = Colors.red;
-        newPasswordConfirmation.error = true;
-      });
-    }
-    else if (map["errors"].containsKey("password_challenge")) {
-      setState(() {
-        oldPassword.input.clear();
-        oldPassword.hint = 'wrong password'.tr();
-        oldPassword.color = Colors.red;
-        oldPassword.error = true;
-      });
-    }
-    else if (map["errors"].containsKey("password_confirmation")) {
-      setState(() {
-        newPassword.input.clear();
-        newPasswordConfirmation.input.clear();
-        newPassword.hint = 'password dont match'.tr();
-        newPasswordConfirmation.hint = "";
-        newPassword.color = Colors.red;
-        newPassword.error = true;
-        newPasswordConfirmation.color = Colors.red;
-        newPasswordConfirmation.error = true;
-      });
-    } 
-    pressed = false;
   }
 }

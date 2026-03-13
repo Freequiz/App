@@ -12,7 +12,7 @@ class TextFieldData {
   TextEditingController input = TextEditingController();
   bool error = false;
   Color color = grayFreequiz;
-  bool changed = false;
+
   String id = createId();
 
   void setError(String text) {
@@ -20,6 +20,13 @@ class TextFieldData {
     hint = text.tr();
     error = true;
     color = Colors.red;
+  }
+
+  void setSuccess(String text) {
+    input.clear();
+    hint = text.tr();
+    error = false;
+    color = Colors.green;
   }
 
   void unsetError() {
