@@ -1,29 +1,32 @@
-import 'package:freequiz/_views/profile/profile_info/confirmation.dart';
-import 'package:freequiz/_views/profile/profile_info/dark_mode_switcher.dart';
-import 'package:freequiz/_views/profile/profile_info/email.dart';
-import 'package:freequiz/_views/profile/profile_info/password.dart';
-import 'package:freequiz/_views/profile/profile_info/username.dart';
+import 'package:freequiz/_views/profile/profile_page/confirmation.dart';
+import 'package:freequiz/_views/profile/profile_page/dark_mode_switcher.dart';
+import 'package:freequiz/_views/profile/profile_page/email.dart';
+import 'package:freequiz/_views/profile/profile_page/password.dart';
+import 'package:freequiz/_views/profile/profile_page/username.dart';
 import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:freequiz/_views/subviews/buttons/long_button.dart';
 import 'package:freequiz/_views/subviews/category_title.dart';
-import 'package:freequiz/controllers/profile/profile_info.dart';
+import 'package:freequiz/controllers/profile/profile_page.dart';
+import 'package:freequiz/controllers/profile/user.dart';
 import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
 
-class ProfileInfo extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   final Function refresh;
-  const ProfileInfo({super.key, required this.refresh});
+  const ProfilePage({super.key, required this.refresh});
 
   @override
-  State<ProfileInfo> createState() => _ProfileInfoState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfileInfoState extends State<ProfileInfo> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    Provider.of<ProfileInfoController>(context);
+    Provider.of<ProfilePageController>(context);
+    UserHelper.load();
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -45,11 +48,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
               SizedBox(height: context.screenHeight / 60),
               CategoryTitle(
                   icon: Symbols.person, color: purple, title: 'account'),
-              Username(refresh: widget.refresh),
+              Username(),
               const SizedBox(height: 10.0),
-              EMail(refresh: widget.refresh),
+              EMail(),
               const SizedBox(height: 10.0),
-              Password(refresh: widget.refresh),
+              Password(),
               const SizedBox(height: 10.0),
               Row(
                 children: [

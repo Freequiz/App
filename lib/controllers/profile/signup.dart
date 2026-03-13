@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/controllers/profile/profile.dart';
-import 'package:freequiz/controllers/user/manage.dart';
+import 'package:freequiz/controllers/profile/user.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -69,7 +69,7 @@ class SignupController extends ChangeNotifier {
 
       if (context.mounted) Navigator.of(context).pop();
       refresh();
-      ManageUser.load();
+      UserHelper.sync();
 
       return;
     }

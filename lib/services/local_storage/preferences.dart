@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:freequiz/controllers/user/helper.dart';
+import 'package:freequiz/controllers/profile/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {

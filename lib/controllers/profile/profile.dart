@@ -1,6 +1,6 @@
+import 'package:freequiz/controllers/profile/user.dart';
 import 'package:freequiz/services/local_storage/preferences.dart';
 import 'package:freequiz/services/local_storage/secure_storage.dart';
-import 'package:freequiz/controllers/user/helper.dart';
 
 class Profile {
   static String accessToken = "";

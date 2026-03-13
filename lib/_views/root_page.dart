@@ -1,12 +1,13 @@
 import 'package:freequiz/_views/bug_reporter/bug_report_page.dart';
 import 'package:freequiz/_views/edit/edit_page.dart';
+import 'package:freequiz/_views/profile/profile_page/profile_page.dart';
 import 'package:freequiz/controllers/profile/profile.dart';
-import 'package:freequiz/_views/profile/profile_page.dart';
 import 'package:freequiz/_views/profile/welcome.dart';
 import 'package:freequiz/_views/_home/home_page/home_page.dart';
 import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/_views/subviews/app_bar/app_bar.dart';
 import 'package:freequiz/controllers/_home/home_page.dart';
+import 'package:freequiz/controllers/profile/profile_page.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +45,7 @@ class _RootPageState extends State<RootPage> {
       ChangeNotifierProvider(create: (_) => HomePageController(), child: const HomePage()),
       const EditPage(),
       const BugReportPage(),
-      ProfilePage(refresh: refresh),
+      ChangeNotifierProvider(create: (_) => ProfilePageController(), child: ProfilePage(refresh: refresh)),
     ];
 
     if (Profile.accessToken != "") {

@@ -1,23 +1,23 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/subviews/buttons/submit.dart';
-import 'package:freequiz/_views/subviews/textfields/username.dart';
-import 'package:freequiz/controllers/profile/profile_info.dart';
-import 'package:freequiz/controllers/user/helper.dart';
+import 'package:freequiz/_views/subviews/textfields/email.dart';
+import 'package:freequiz/controllers/profile/profile_page.dart';
+import 'package:freequiz/controllers/profile/user.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:provider/provider.dart';
 
-class Username extends StatefulWidget {
-  final Function refresh;
-  const Username({super.key, required this.refresh});
+class EMail extends StatefulWidget {
+  const EMail({super.key});
 
   @override
-  State<Username> createState() => _UsernameState();
+  State<EMail> createState() => _EMailState();
 }
 
-class _UsernameState extends State<Username> {
+class _EMailState extends State<EMail> {
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<ProfileInfoController>(context);
+    final controller = Provider.of<ProfilePageController>(context);
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(context.screenHeight / 100),
@@ -30,42 +30,41 @@ class _UsernameState extends State<Username> {
             Row(
               children: [
                 const Text(
-                  'username',
+                  'email',
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ).tr(),
                 const Spacer(),
-                Text(UserHelper.user!.username),
+                Text(UserHelper.user!.email),
                 const SizedBox(width: 10),
                 GestureDetector(
-                  onTap: () => controller.toggleEditUsername(),
-                  child: Icon(controller.icon(controller.editUsername)),
+                  onTap: () => controller.toggleEditEmail(),
+                  child: Icon(controller.icon(controller.editEmail)),
                 ),
               ],
             ),
             Visibility(
-              visible: controller.editUsername,
+              visible: controller.editEmail,
               child: SizedBox(height: context.screenHeight / 60),
             ),
             Visibility(
-              visible: controller.editUsername,
+              visible: controller.editEmail,
               child: IntrinsicHeight(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Flexible(
-                      child: UsernameTextfield(
-                        username: controller.newUsername,
+                      child: EmailTextfield(
+                        email: controller.newEmail,
                         focusNode: FocusNode(),
-                        onSubmitted: controller.changeUsername,
-                        autofillHints: const [AutofillHints.newUsername],
+                        onSubmitted: controller.changeEmail,
                       ),
                     ),
                     const SizedBox(width: 5),
                     SubmitButton(
-                      pressed: controller.pressedUsername,
+                      pressed: controller.pressedEmail,
                       onPressed: () {
                         FocusScope.of(context).unfocus();
-                        controller.changeUsername();
+                        controller.changeEmail();
                       },
                     ),
                   ],

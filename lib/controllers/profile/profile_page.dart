@@ -1,19 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/controllers/user/helper.dart';
+import 'package:freequiz/controllers/profile/user.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/utilities/imports/base.dart';
 
-class ProfileInfoController extends ChangeNotifier {
+class ProfilePageController extends ChangeNotifier {
   TextFieldData newUsername = TextFieldData(hint: 'username'.tr());
   bool editUsername = false;
   bool pressedUsername = false;
-  late IconData iconUsername = icon(editUsername);
 
   TextFieldData newEmail = TextFieldData(hint: 'email'.tr());
   bool editEmail = false;
   bool pressedEmail = false;
-  late IconData iconEmail = icon(editEmail);
 
   TextFieldData newPassword =
       TextFieldData(hint: 'password'.tr(), shown: false);
@@ -23,7 +21,6 @@ class ProfileInfoController extends ChangeNotifier {
       TextFieldData(hint: 'old password'.tr(), shown: false);
   bool editPassword = false;
   bool pressedPassword = false;
-  late IconData iconPassword = icon(editPassword);
 
   void toggleEditUsername() {
     editUsername = !editUsername;
@@ -40,9 +37,14 @@ class ProfileInfoController extends ChangeNotifier {
     notifyListeners();
   }
 
-  IconData icon(bool edit) {
+  IconData icon(bool edit) {  
     if (edit) return Icons.clear;
     return Icons.edit;
+  }
+
+  void loadData() async {
+    await UserHelper.load(waitForSync: true);
+    notifyListeners();
   }
 
   void changeUsername() async {

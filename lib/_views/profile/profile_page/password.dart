@@ -2,13 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/subviews/buttons/submit.dart';
 import 'package:freequiz/_views/subviews/textfields/password.dart';
 import 'package:freequiz/_views/subviews/textfields/password_confirmation.dart';
-import 'package:freequiz/controllers/profile/profile_info.dart';
+import 'package:freequiz/controllers/profile/profile_page.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:provider/provider.dart';
 
 class Password extends StatefulWidget {
-  final Function refresh;
-  const Password({super.key, required this.refresh});
+  const Password({super.key});
 
   @override
   State<Password> createState() => _PasswordState();
@@ -25,7 +24,7 @@ class _PasswordState extends State<Password> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<ProfileInfoController>(context);
+    final controller = Provider.of<ProfilePageController>(context);
 
     return Container(
       decoration: BoxDecoration(
