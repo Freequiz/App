@@ -7,12 +7,14 @@ class QuizListPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color6 = context.darkMode ? gray55 : white235;
-    return Align(
-        alignment: Alignment.topLeft,
-        child: Container(
+    return ListView(
+      children: [
+        Container(
           padding: context.mobileLayout
-              ? const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 3.0)
-              : const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0, top: 5.0),
+              ? const EdgeInsets.only(
+                  left: 10.0, right: 10.0, bottom: 10.0, top: 3.0)
+              : const EdgeInsets.only(
+                  left: 15.0, right: 15.0, bottom: 15.0, top: 5.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(context.screenHeight / 100),
             color: color6,
@@ -25,6 +27,7 @@ class QuizListPlaceholder extends StatelessWidget {
             style: titleStyle(),
           ),
         ),
-      );
+      ],
+    );
   }
 }
