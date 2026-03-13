@@ -1,5 +1,4 @@
 import 'package:freequiz/services/api/users.dart';
-import 'package:freequiz/utilities/imports/utilities.dart';
 
 class Settings {
   Map settingsData;
@@ -69,7 +68,6 @@ class Settings {
   }
 
   void setLengthQuestionnaire(int length) {
-    debugPrint(length.toString());
     lengthQuestionnaire = length;
     APIUsers.updateSettings({"round_amount": length});
   }

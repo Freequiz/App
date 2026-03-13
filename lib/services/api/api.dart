@@ -108,7 +108,6 @@ class Api {
           return jsonDecode(response.body);
         }
         catch (_) {
-          debugPrint("JSON couldn't be decoded");
           return responseDefault;
         }
       default:
