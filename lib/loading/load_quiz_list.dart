@@ -27,8 +27,8 @@ class LoadQuizList extends StatelessWidget {
 
               return QuizList(list: list, onDismissed: onDismissed, background: background);
             }
-            return const NoConnectionAlert(
-              backgroundColor: gray55,
+            return NoConnectionAlert(
+              backgroundColor: context.darkMode ? gray55 : null,
               showButton: false,
             );
           }

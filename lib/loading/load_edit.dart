@@ -23,8 +23,8 @@ class LoadEdit extends StatelessWidget {
             return CreatedQuizzes(key: keyChild, refresh: refresh);
           }
           if (data.data!['message'] == Api.noConnection || data.data!['message'] == Api.timeout) {
-            return const NoConnectionAlert(
-              backgroundColor: gray55,
+            return NoConnectionAlert(
+              backgroundColor: context.darkMode ? gray55 : null,
               showButton: false,
             );
           }

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:freequiz/controllers/profile/user.dart';
+import 'package:freequiz/loading/no_connection/no_connection.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -101,9 +102,19 @@ class SignupController extends ChangeNotifier {
             throw Exception("No matching Error");
         }
       });
-    } else {
-      throw Exception("Error not handled");
+      return;
     }
+    if (map["message"] == "request timed out") {
+      if (!context.mounted) return;
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const NoConnectionAlert();
+        },
+      );
+      return;
+    }
+    throw Exception("Error not handled");
   }
 
   void openTerms() async {

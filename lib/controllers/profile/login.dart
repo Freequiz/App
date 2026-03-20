@@ -4,6 +4,7 @@ import 'package:freequiz/_views/profile/login.dart';
 import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:freequiz/controllers/profile/user.dart';
 import 'package:freequiz/loading/error_loading/alert.dart';
+import 'package:freequiz/loading/no_connection/no_connection.dart';
 import 'package:freequiz/models/textfield_data.dart';
 import 'package:freequiz/services/api/users.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
@@ -15,7 +16,7 @@ class LoginController extends ChangeNotifier {
 
   bool pressed = false;
 
-  late Map mapLogin;
+  late Map map;
 
   void resetPassword() async {
     final Uri url = Uri.parse('https://www.freequiz.ch/password/reset');
@@ -31,14 +32,14 @@ class LoginController extends ChangeNotifier {
     pressed = true;
     notifyListeners();
 
-    mapLogin = await APIUsers.login(
+    map = await APIUsers.login(
       username.input.text.trim(),
       password.input.text.trim(),
     );
 
-    if (mapLogin.isNotEmpty) {
-      if (mapLogin['success']) {
-        Profile.accessToken = mapLogin["access_token"];
+    if (map.isNotEmpty) {
+      if (map['success']) {
+        Profile.accessToken = map["access_token"];
         Profile.saveAccessToken();
 
         UserHelper.sync();
@@ -51,7 +52,7 @@ class LoginController extends ChangeNotifier {
 
       if (!context.mounted) return;
 
-      if (mapLogin["message"] == "User doesn't exist") {
+      if (map["message"] == "User doesn't exist") {
         username.setError('username error');
         pressed = false;
 
@@ -59,7 +60,7 @@ class LoginController extends ChangeNotifier {
         notifyListeners();
         return;
       }
-      if (mapLogin["message"] == "Wrong password") {
+      if (map["message"] == "Wrong password") {
         password.setError('wrong password');
         pressed = false;
 
@@ -67,15 +68,25 @@ class LoginController extends ChangeNotifier {
         notifyListeners();
         return;
       }
-    } else if (context.mounted) {
+    }
+
+    if (!context.mounted) return;
+
+    if (map["message"] == "request timed out") {
       showDialog(
         context: context,
-        builder: (BuildContext context) => ErrorLoadingAlert(
-          previousWidget: Login(refresh: refresh),
-          error: mapLogin["error"] ?? mapLogin["token"] ?? "other error",
-          argument: mapLogin["reason"] != null ? [mapLogin["reason"]] : null,
-        ),
+        builder: (context) => const NoConnectionAlert(),
       );
+      return;
     }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => ErrorLoadingAlert(
+        previousWidget: Login(refresh: refresh),
+        error: map["error"] ?? map["token"] ?? "other error",
+        argument: map["reason"] != null ? [map["reason"]] : null,
+      ),
+    );
   }
 }
