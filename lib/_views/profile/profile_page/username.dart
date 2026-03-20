@@ -33,7 +33,7 @@ class _UsernameState extends State<Username> {
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ).tr(),
                 const Spacer(),
-                Text(UserHelper.user!.username),
+                Text(UserHelper.user?.username ?? ""),
                 const SizedBox(width: 10),
                 GestureDetector(
                   onTap: () => controller.toggleEditUsername(),

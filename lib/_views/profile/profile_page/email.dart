@@ -34,7 +34,7 @@ class _EMailState extends State<EMail> {
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ).tr(),
                 const Spacer(),
-                Text(UserHelper.user!.email),
+                Text(UserHelper.user?.email ?? ""),
                 const SizedBox(width: 10),
                 GestureDetector(
                   onTap: () => controller.toggleEditEmail(),

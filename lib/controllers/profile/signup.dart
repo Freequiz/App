@@ -67,9 +67,10 @@ class SignupController extends ChangeNotifier {
       Profile.accessToken = map["access_token"];
       Profile.saveAccessToken();
 
+      UserHelper.sync();
+
       if (context.mounted) Navigator.of(context).pop();
       refresh();
-      UserHelper.sync();
 
       return;
     }

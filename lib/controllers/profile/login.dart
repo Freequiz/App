@@ -40,9 +40,12 @@ class LoginController extends ChangeNotifier {
       if (mapLogin['success']) {
         Profile.accessToken = mapLogin["access_token"];
         Profile.saveAccessToken();
+
+        UserHelper.sync();
+
         if (context.mounted) Navigator.of(context).pop();
         refresh();
-        UserHelper.load();
+
         return;
       }
 
