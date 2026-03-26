@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:freequiz/controllers/home/search.dart';
+import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/_views/edit/edit_create_quiz/subviews/dropdown.dart';
 import 'package:freequiz/controllers/others/languages.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';

@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:freequiz/_views/profile/profile.dart';
+import 'package:flutter/foundation.dart';
+import 'package:freequiz/controllers/profile/profile.dart';
 import 'package:http/http.dart';
 
 class Api {
-  static const basePath = "https://www.freequiz.ch/api/";
+  static const basePath = kReleaseMode ? "https://www.freequiz.ch/api/" : "http://test.freequiz.ch:8080/api/";
 
   static String noConnection = 'no connection';
   static String timeout = 'request timed out';
@@ -108,7 +108,6 @@ class Api {
           return jsonDecode(response.body);
         }
         catch (_) {
-          debugPrint("JSON couldn't be decoded");
           return responseDefault;
         }
       default:

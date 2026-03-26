@@ -2,7 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freequiz/_views/profile/login.dart';
 import 'package:freequiz/_views/profile/signup.dart';
+import 'package:freequiz/controllers/profile/login.dart';
+import 'package:freequiz/controllers/profile/signup.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
+import 'package:provider/provider.dart';
 
 class Welcome extends StatelessWidget {
   final Function refresh;
@@ -18,7 +21,8 @@ class Welcome extends StatelessWidget {
       child: Padding(
         padding: context.mobileLayout
             ? const EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0)
-            : EdgeInsets.symmetric(horizontal: context.screenWidth / 5.5, vertical: 20.0),
+            : EdgeInsets.symmetric(
+                horizontal: context.screenWidth / 5.5, vertical: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -48,8 +52,23 @@ class Welcome extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                button(context, Login(refresh: refresh), 'log in', roseLight),
-                button(context, SignUp(refresh: refresh), 'sign up', blueLight),
+                button(
+                  context,
+                  ChangeNotifierProvider(
+                    create: (_) => LoginController(),
+                    child: Login(refresh: refresh),
+                  ),
+                  'log in',
+                  roseLight,
+                ),
+                button(
+                  context,
+                  ChangeNotifierProvider(
+                      create: (_) => SignupController(),
+                      child: SignUp(refresh: refresh)),
+                  'sign up',
+                  blueLight,
+                ),
               ],
             )
           ],
@@ -58,7 +77,8 @@ class Welcome extends StatelessWidget {
     );
   }
 
-  Widget button(BuildContext context, Widget widget, String text, Color backgroundColor) {
+  Widget button(
+      BuildContext context, Widget widget, String text, Color backgroundColor) {
     return TextButton(
       key: ValueKey(text),
       style: TextButton.styleFrom(

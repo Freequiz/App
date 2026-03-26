@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:freequiz/services/local_storage/draft_storage.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 import 'package:http/http.dart' as http;
-import 'package:freequiz/_views/profile/profile.dart';
+import 'package:freequiz/controllers/profile/profile.dart';
 
 import 'api.dart';
 
@@ -106,8 +105,7 @@ class APIUsers {
   }
 
   static Future<void> logout() async {
-    final response = await Api.httpDelete(path: 'user/logout');
-    debugPrint(response.toString());
+     await Api.httpDelete(path: 'user/logout');
   }
 
   static Future<void> refresh() async {
@@ -119,8 +117,6 @@ class APIUsers {
         Profile.accessToken = decodedResponse["access_token"];
         Profile.saveAccessToken();
         newAccessToken = true;
-      } else {
-        debugPrint("Couldn't refresh Access Token");
       }
     }
   }
@@ -138,7 +134,6 @@ class APIUsers {
         return jsonDecode(response.body);
       }
       catch (_) {
-        debugPrint("JSON couldn't be decoded");
         return Api.responseDefault;
       }
     }

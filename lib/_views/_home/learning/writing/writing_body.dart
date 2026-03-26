@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/_home/learning/prompt.dart';
 import 'package:freequiz/_views/subviews/progress_bar.dart';
-import 'package:freequiz/controllers/home/learning/writing.dart';
+import 'package:freequiz/controllers/_home/learning/writing.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:material_symbols_icons/symbols.dart';

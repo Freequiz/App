@@ -3,13 +3,9 @@ import 'package:freequiz/_views/subviews/app_bar/title.dart';
 import 'package:freequiz/_views/subviews/buttons/submit.dart';
 import 'package:freequiz/_views/subviews/textfields/password.dart';
 import 'package:freequiz/_views/subviews/textfields/username.dart';
-import 'package:freequiz/controllers/user/manage.dart';
-import 'package:freequiz/loading/error_loading/alert.dart';
-import 'package:freequiz/models/textfield_data.dart';
-import 'package:freequiz/services/api/users.dart';
-import 'package:freequiz/_views/profile/profile.dart';
+import 'package:freequiz/controllers/profile/login.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   final Function refresh;
@@ -20,11 +16,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextFieldData username = TextFieldData(hint: 'username'.tr());
-  final password = TextFieldData(hint: 'password'.tr(), shown: false);
-  bool pressed = false;
-
-  late Map mapLogin;
   late FocusNode focusNode;
 
   @override
@@ -35,6 +26,8 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<LoginController>(context);
+
     return Scaffold(
       appBar: AppBar(title: const AppBarTitle()),
       body: GestureDetector(
@@ -57,7 +50,7 @@ class _LoginState extends State<Login> {
                 ),
                 SizedBox(height: context.screenHeight / 60),
                 UsernameTextfield(
-                  username: username,
+                  username: controller.username,
                   focusNode: focusNode,
                   autofillHints: const [AutofillHints.username],
                 ),
@@ -68,20 +61,20 @@ class _LoginState extends State<Login> {
                     children: [
                       Flexible(
                         child: PasswordTextfield(
-                          password: password,
+                          password: controller.password,
                           focusNode: focusNode,
-                          onSubmitted: () => onPressed(widget.refresh),
+                          onSubmitted: () => controller.login(context, widget.refresh),
                           autofillHints: const [AutofillHints.password],
                         ),
                       ),
                       Space.width(5),
-                      SubmitButton(pressed: pressed, onPressed: () => onPressed(widget.refresh))
+                      SubmitButton(pressed: controller.pressed, onPressed: () => controller.login(context, widget.refresh))
                     ],
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextButton(
-                  onPressed: () => resetPassword(),
+                  onPressed: () => controller.resetPassword(),
                   child: Text(context.tr('reset password')),
                 ),
               ],
@@ -90,75 +83,5 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
-  }
-
-  void resetPassword() async {
-    final Uri url = Uri.parse('https://www.freequiz.ch/password/reset');
-    if (!await launchUrl(url)) {
-        throw Exception('Could not launch $url');
-    }
-  }
-
-  void onPressed(Function refresh) async {
-    if (password.input.text.isEmpty) {
-      setState(() {
-        password.error = true;
-        password.color = Colors.red;
-        password.hint = context.tr('wrong password');
-        pressed = false;
-        FocusScope.of(context).requestFocus(FocusNode());
-      });
-    } else if (username.input.text.isEmpty) {
-      setState(() {
-        username.error = true;
-        username.color = Colors.red;
-        username.hint = context.tr('username error');
-        pressed = false;
-        FocusScope.of(context).requestFocus(FocusNode());
-      });
-    } else {
-      setState(() {
-        pressed = true;
-      });
-      mapLogin = await APIUsers.login(username.input.text.trim(), password.input.text.trim());
-      if (mapLogin.isNotEmpty) {
-        if (mapLogin['success']) {
-          Profile.accessToken = mapLogin["access_token"];
-          Profile.saveAccessToken();
-          if (mounted) Navigator.of(context).pop();
-          widget.refresh();
-          ManageUser.load();
-          return;
-        }
-        if (mapLogin["message"] == "User doesn't exist") {
-          setState(() {
-            username.error = true;
-            username.color = Colors.red;
-            username.hint = context.tr('username error');
-            pressed = false;
-            username.input.clear();
-            FocusScope.of(context).requestFocus(FocusNode());
-          });
-        } else if (mapLogin["message"] == "Wrong password") {
-          setState(() {
-            password.error = true;
-            password.color = Colors.red;
-            password.hint = context.tr('wrong password');
-            pressed = false;
-            password.input.clear();
-            FocusScope.of(context).requestFocus(FocusNode());
-          });
-        } else if (mounted) {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => ErrorLoadingAlert(
-              previousWidget: Login(refresh: refresh),
-              error: mapLogin["error"] ?? mapLogin["token"] ?? "other error",
-              argument: mapLogin["reason"] != null ? [mapLogin["reason"]] : null,
-            ),
-          );
-        }
-      }
-    }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:freequiz/controllers/home/learning/multiple_choice.dart';
+import 'package:freequiz/controllers/_home/learning/multiple_choice.dart';
 import 'package:freequiz/controllers/quiz/question.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';

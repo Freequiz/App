@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freequiz/_views/_home/learning/cards/cards_body.dart';
-import 'package:freequiz/controllers/home/learning/cards.dart';
+import 'package:freequiz/controllers/_home/learning/cards.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:provider/provider.dart';
 

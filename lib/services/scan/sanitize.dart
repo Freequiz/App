@@ -1,10 +1,7 @@
-import 'package:freequiz/utilities/imports/base.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 List<Map> sanitize(RecognizedText recognizedText, int width) {
   List<Map> wordPairs = [];
-
-  debugPrint(width.toString());
 
   for (int i = 0; i < recognizedText.blocks.length; i++) {
     TextBlock block = recognizedText.blocks[i];
@@ -16,7 +13,6 @@ List<Map> sanitize(RecognizedText recognizedText, int width) {
       };
 
       for (TextElement element in  line.elements) {
-        debugPrint("${element.text} -> ${element.recognizedLanguages.toString()} \n${element.cornerPoints[0]}");
         if (filter(element)) {
           if (element.cornerPoints.first.x > width / 2 - 200) {
             wordPair["answer"] += "${element.text} ";
@@ -33,7 +29,6 @@ List<Map> sanitize(RecognizedText recognizedText, int width) {
     }
   }
   match(wordPairs);
-  debugPrint(wordPairs.toString()); 
   return wordPairs;
 }
 
@@ -72,22 +67,13 @@ void match(List<Map> wordPairs) {
 
 bool filter(TextElement element) {
   final invalidCharacters = RegExp(r'[0-9\[\]ɛſə|æãā►]');
-  if (invalidCharacters.hasMatch(element.text)) {
-    debugPrint("INVALID (invalid character): ${element.text}");
-    return false;
-  }
+  if (invalidCharacters.hasMatch(element.text)) return false;
 
   final capitalizedLetterInside = RegExp(r'.*[a-z][A-Z].*');
-  if (capitalizedLetterInside.hasMatch(element.text)) {
-    debugPrint("INVALID (capitalized letter inside): ${element.text}");
-    return false;
-  }
+  if (capitalizedLetterInside.hasMatch(element.text)) return false;
 
   final invalidWords = ["n", "v", "f"];
-  if (invalidWords.contains(element.text)) {
-    debugPrint("INVALID (invalid word): ${element.text}");
-    return false;
-  }
+  if (invalidWords.contains(element.text)) return false;
 
   return true;
 }

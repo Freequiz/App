@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:freequiz/controllers/home/learning/cards.dart';
+import 'package:freequiz/controllers/_home/learning/cards.dart';
 import 'package:freequiz/controllers/quiz/learning.dart';
 import 'package:freequiz/controllers/quiz/questionnaire.dart';
 import 'package:freequiz/utilities/imports/base.dart';

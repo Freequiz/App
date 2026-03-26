@@ -7,8 +7,6 @@ import 'package:image_picker/image_picker.dart';
 
 
 Future<List<Map>> scan() async {
-  debugPrint("Scanning...");
-
   final InputImage? inputImage = await pickImage();
   if (inputImage == null) return [];
 
@@ -25,10 +23,7 @@ Future<InputImage?> pickImage() async {
   final picker = ImagePicker();
   final picked = await picker.pickImage(source: ImageSource.gallery);
 
-  if (picked == null) {
-    debugPrint('No image selected');
-    return null;
-  }
+  if (picked == null) return null;
 
   return InputImage.fromFilePath(picked.path);
 }

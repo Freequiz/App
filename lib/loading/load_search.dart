@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:freequiz/controllers/home/search.dart';
+import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/_views/_home/search_page/search_page.dart';
 import 'package:freequiz/loading/loading.dart';
 import 'package:freequiz/loading/loading_screen/view.dart';

@@ -1,12 +1,12 @@
 import 'dart:math';
 
+import 'package:freequiz/controllers/profile/user.dart';
 import 'package:freequiz/services/local_storage/preferences.dart';
 import 'package:freequiz/models/quiz.dart';
 import 'package:freequiz/models/translation.dart';
 import 'package:freequiz/controllers/quiz/learning.dart';
 import 'package:freequiz/controllers/quiz/quiz_helper.dart';
 import 'package:freequiz/controllers/quiz/progress.dart';
-import 'package:freequiz/controllers/user/helper.dart';
 
 class Questionnaire {
   static List<Translation> questions = [];

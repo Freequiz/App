@@ -4,7 +4,7 @@ import 'package:freequiz/_views/_home/search_page/results.dart';
 import 'package:freequiz/_views/_home/search_page/switcher.dart';
 import 'package:freequiz/_views/subviews/badge.dart';
 import 'package:freequiz/_views/_home/search_page/language_selector.dart';
-import 'package:freequiz/controllers/home/search.dart';
+import 'package:freequiz/controllers/_home/search.dart';
 import 'package:freequiz/utilities/imports/utilities.dart';
 import 'package:provider/provider.dart';
 
