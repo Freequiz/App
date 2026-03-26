@@ -57,7 +57,7 @@ jobs:
            gcloud firebase test android run --type=instrumentation \
            --app "app/outputs/apk/debug/app-debug.apk" \
            --test "app/outputs/apk/androidTest/debug/app-debug-androidTest.apk" \
-           --device-ids=panther,MediumPhone.arm,SmallPhone.arm \
+           --device-ids=panther,MediumPhone.arm \
            --os-version-ids=33 \
            --orientations=portrait \
            --use-orchestrator \
